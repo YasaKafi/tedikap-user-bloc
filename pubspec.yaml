@@ -44,11 +44,12 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   shimmer: ^3.0.0
   dio: ^5.4.3+1
-  flutter_svg: ^2.0.10+1
+  flutter_svg:
   image_picker: ^1.1.1
   chips_choice: ^3.0.1
   rflutter_alert: ^2.0.7
   intl: any
+
 
 dev_dependencies:
   flutter_test:
