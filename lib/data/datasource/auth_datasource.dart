@@ -40,7 +40,7 @@ class AuthDatasource {
         return const Left('Failed to register');
       }
     } catch (e) {
-      throw Exception(e);
+      return Left('Failed to login: ${e.toString()}');
     }
   }
 }
