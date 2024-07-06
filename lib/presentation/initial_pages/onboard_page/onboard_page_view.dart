@@ -39,7 +39,7 @@ class OnboardPage extends StatelessWidget {
                             onPressed: () {
                               context
                                   .read<OnboardBloc>()
-                                  .add(SkipOnboardEvent());
+                                  .add(OnboardEvent.skipOnboard());
                             },
                             child: Text(
                               'Skip',
@@ -49,9 +49,9 @@ class OnboardPage extends StatelessWidget {
                             ));
                       },
                       listener: (context, state) {
-                        if (state is OnboardSkipped) {
+                        state.maybeWhen(orElse: (){}, finished: (){
                           context.goNamed('register');
-                        }
+                        });
                       },
                     ),
                     Row(
@@ -80,7 +80,7 @@ class OnboardPage extends StatelessWidget {
                       onPageChanged: (index) {
                         context
                             .read<OnboardBloc>()
-                            .add(PageChangedEvent(index));
+                            .add(OnboardEvent.pageChanged(index: index));
                       },
                       itemCount: onboard_data.length,
                       controller:
@@ -112,21 +112,31 @@ class OnboardPage extends StatelessWidget {
               SizedBox(height: 20),
               BlocConsumer<OnboardBloc, OnboardState>(
                   builder: (context, state) {
-                    String buttonText = 'Continue';
-                    if (state is OnboardInitial && state.pageIndex == 2) {
-                      buttonText = 'Get Started';
-                    }
-                    return CommonButton(
-                      text: buttonText,
-                      onPressed: () => context.read<OnboardBloc>().add(OnPressedButtonEvent()),
-                      borderRadius: 10,
-                      height: 50,
+                    return state.maybeWhen(
+                        orElse: (){
+                          String buttonText = 'Continue';
+                          if(OnboardState.initial(pageIndex: 2) == state){
+                            buttonText = 'Get Started';
+                          }
+                          return CommonButton(
+                            text: buttonText,
+                            onPressed: () => context.read<OnboardBloc>().add(OnboardEvent.onPressedButton()),
+                            borderRadius: 10,
+                            height: 50,
+                          );
+                        }
+
                     );
+
+                    // if (state is OnboardInitial && state.pageIndex == 2) {
+                    //   buttonText = 'Get Started';
+                    // }
+
                   },
                   listener: (context, state) {
-                    if (state is OnboardSkipped){
+                    state.maybeWhen(orElse: (){}, finished: (){
                       context.goNamed('register');
-                    }
+                    });
                   },),
               SizedBox(
                 height: 20,
