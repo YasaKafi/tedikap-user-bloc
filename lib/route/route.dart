@@ -1,5 +1,6 @@
 
 import 'package:go_router/go_router.dart';
+import 'package:tedikap_user_bloc/presentation/initial_pages/login_page/login_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/onboard_page/onboard_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/register_page/register_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/splash_page/splash_page_view.dart';
@@ -7,7 +8,7 @@ import 'package:tedikap_user_bloc/presentation/initial_pages/splash_page/splash_
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: '/register',
+    initialLocation: '/login',
     debugLogDiagnostics: true,
     routes: [
       GoRoute(
@@ -24,6 +25,11 @@ class AppRouter {
         name: 'register',
         path: '/register',
         builder: (context, state) => RegisterPage(),
+      ),
+      GoRoute(
+        name: 'login',
+        path: '/login',
+        builder: (context, state) => LoginPage(),
       ),
     ],
   );

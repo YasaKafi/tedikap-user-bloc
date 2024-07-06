@@ -3,32 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tedikap_user_bloc/presentation/initial_pages/register_page/bloc/register_bloc.dart';
+import 'package:tedikap_user_bloc/data/models/request/login_request_model.dart';
+import 'package:tedikap_user_bloc/presentation/initial_pages/login_page/bloc/login_bloc.dart';
 
 import '../../../common/constant.dart';
 import '../../../common/dimensions.dart';
 import '../../../common/theme.dart';
-import '../../../data/models/request/register_request_model.dart';
 import '../../global_components/common_button.dart';
 import '../../global_components/textfield_auth_custom.dart';
 
-class RegisterPage extends StatelessWidget {
-  RegisterPage({Key? key}) : super(key: key);
+class LoginPage extends StatelessWidget {
+  LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController usernameController = TextEditingController();
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
-    final TextEditingController confirmpasswordController =
-        TextEditingController();
 
     final List<Map<String, dynamic>> fields = [
-      {
-        'label': 'Username',
-        'hint': 'Enter your username',
-        'controller': usernameController
-      },
       {
         'label': 'Email',
         'hint': 'Enter your email',
@@ -39,20 +31,15 @@ class RegisterPage extends StatelessWidget {
         'hint': 'Enter your password',
         'controller': passwordController
       },
-      {
-        'label': 'Confirm Password',
-        'hint': 'Enter your confirm password',
-        'controller': confirmpasswordController
-      },
     ];
-
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: Dimensions.paddingSizeLarge,
-                vertical: Dimensions.paddingSizeLarge),
+              horizontal: Dimensions.paddingSizeLarge,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -60,8 +47,12 @@ class RegisterPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Create \nAccount', style: txtHeadingTitleAuth),
-                    SvgPicture.asset(icLogoPrimary, height: 100, width: 100),
+                    Text('Welcome \nBack', style: txtHeadingTitleAuth),
+                    SvgPicture.asset(
+                      icLogoPrimary,
+                      height: 100,
+                      width: 100,
+                    ),
                   ],
                 ),
                 SizedBox(height: Dimensions.marginSizeSuperExtraLarge),
@@ -75,43 +66,47 @@ class RegisterPage extends StatelessWidget {
                     title: field['hint'],
                     controller: field['controller'],
                   ),
-                  SizedBox(height: Dimensions.marginSizeLarge),
+                  SizedBox(height: Dimensions.marginSizeSmall),
                 ],
-                BlocConsumer<RegisterBloc, RegisterState>(
+                TextButton(
+                    onPressed: () => {},
+                    child: Text(
+                      'Forgot Password ?',
+                      style: txtSecondaryTitle.copyWith(
+                        fontWeight: FontWeight.w500,
+                        color: primaryColor,
+                      ),
+                    )),
+                SizedBox(height: Dimensions.marginSizeSmall),
+                BlocConsumer<LoginBloc, LoginState>(
                   listener: (context, state) {
-                    if (state is RegisterError) {
+
+                    if(state is LoginError){
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message, style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w500, color: baseColor),), backgroundColor: redMedium,));
                     }
-
-                    if(state is RegisterLoaded) {
+                    if(state is LoginLoaded){
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.model.message!, style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w500, color: baseColor),), backgroundColor: greenMedium,));
-                      context.goNamed('login');
+                      context.goNamed('register');
                     }
+
                   },
                   builder: (context, state) {
-                    if (state is RegisterLoading) {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
+                    if (state is LoginLoading) {
+                      return Center(child: CircularProgressIndicator());
                     }
-
                     return CommonButton(
-                      text: 'Register',
+                      text: 'Login',
                       onPressed: () {
-
-                        if (usernameController.text.isEmpty || emailController.text.isEmpty || passwordController.text.isEmpty || confirmpasswordController.text.isEmpty) {
+                        if(emailController.text.isEmpty || passwordController.text.isEmpty){
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please fill all fields', style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w500, color: baseColor),), backgroundColor: redMedium,));
-
                         } else {
-                          final requestModel = RegisterRequestModel(
-                              name: usernameController.text,
+                          final requestModel = LoginRequestModel(
                               email: emailController.text,
                               password: passwordController.text);
-                          context
-                              .read<RegisterBloc>()
-                              .add(DoRegisterEvent(requestModel));
+                          context.read<LoginBloc>().add(
+                              DoLoginEvent(requestModel));
                         }
-                        },
+                        } ,
                       borderRadius: 10,
                       height: 55,
                       fontSize: 18,
@@ -122,20 +117,21 @@ class RegisterPage extends StatelessWidget {
                 Center(
                   child: RichText(
                     text: TextSpan(
-                      text: "Have an account? ",
+                      text: "Don’t have an account? ",
                       style: txtSecondaryTitle.copyWith(
                           fontWeight: FontWeight.w500, color: blackColor),
                       children: <TextSpan>[
                         TextSpan(
-                          text: "Login",
+                          text: "Register",
                           style: txtSecondaryTitle.copyWith(
                             fontWeight: FontWeight.w500,
                             color: primaryColor,
                             decoration: TextDecoration.underline,
                           ),
-                          recognizer: TapGestureRecognizer()..onTap = () {
-                            context.goNamed('login');
-                          },
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              context.goNamed('register');
+                            },
                         ),
                       ],
                     ),
