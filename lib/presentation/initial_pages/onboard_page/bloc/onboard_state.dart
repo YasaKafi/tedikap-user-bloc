@@ -1,18 +1,7 @@
 part of 'onboard_bloc.dart';
 
-abstract class OnboardState extends Equatable {
-  @override
-  List<Object?> get props => [];
+@freezed
+class OnboardState with _$OnboardState {
+  const factory OnboardState.initial({int? pageIndex}) = _Initial;
+  const factory OnboardState.finished() = _Finished;
 }
-
-class OnboardInitial extends OnboardState {
-  final int pageIndex;
-
-  OnboardInitial(this.pageIndex);
-
-  @override
-  List<Object?> get props => [pageIndex];
-}
-
-class OnboardSkipped extends OnboardState {}
-

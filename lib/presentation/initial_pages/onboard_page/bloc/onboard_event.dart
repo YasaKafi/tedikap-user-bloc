@@ -1,21 +1,8 @@
 part of 'onboard_bloc.dart';
 
-
-abstract class OnboardEvent extends Equatable {
-  @override
-  List<Object?> get props => [];
+@freezed
+class OnboardEvent with _$OnboardEvent {
+  const factory OnboardEvent.pageChanged({int? index}) = _PageChanged;
+  const factory OnboardEvent.skipOnboard() = _SkipOnboard;
+  const factory OnboardEvent.onPressedButton() = _OnPressedButton;
 }
-
-class PageChangedEvent extends OnboardEvent {
-  final int index;
-
-  PageChangedEvent(this.index);
-
-  @override
-  List<Object?> get props => [index];
-}
-
-class SkipOnboardEvent extends OnboardEvent {}
-
-class OnPressedButtonEvent extends OnboardEvent {}
-

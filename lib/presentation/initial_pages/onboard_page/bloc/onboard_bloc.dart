@@ -1,34 +1,34 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'onboard_event.dart';
 part 'onboard_state.dart';
+part 'onboard_bloc.freezed.dart';
 
 class OnboardBloc extends Bloc<OnboardEvent, OnboardState> {
   late PageController pageController;
-
-  OnboardBloc() : super(OnboardInitial(0)) {
+  OnboardBloc() : super(const OnboardState.initial(pageIndex: 0)) {
     pageController = PageController(initialPage: 0);
 
-    on<PageChangedEvent>((event, emit) {
-      emit(OnboardInitial(event.index));
+    on<_PageChanged>((event, emit) {
+      emit(OnboardState.initial(pageIndex: event.index));
     });
 
-    on<SkipOnboardEvent>((event, emit) {
-      emit(OnboardSkipped());
+    on<_SkipOnboard>((event, emit) {
+      emit(OnboardState.finished());
     });
 
-    on<OnPressedButtonEvent>((event, emit) {
-      final state = this.state;
-      if (state is OnboardInitial && state.pageIndex == 2) {
-        emit(OnboardSkipped());
+    on<_OnPressedButton>((event, emit) {
+      if (OnboardState.initial(pageIndex: 2) == state){
+        emit(OnboardState.finished());
       } else {
         pageController.nextPage(
-          duration: Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut,
         );
       }
     });
+
   }
 }
