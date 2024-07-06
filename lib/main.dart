@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tedikap_user_bloc/data/datasource/auth_datasource.dart';
-import 'package:tedikap_user_bloc/presentation/initial_pages/onboard_page/bloc/onboard_bloc.dart';
-import 'package:tedikap_user_bloc/presentation/initial_pages/register_page/bloc/register_bloc.dart';
+import 'package:tedikap_user_bloc/data/bloc_providers.dart';
 import 'package:tedikap_user_bloc/route/route.dart';
 
 void main() {
@@ -15,14 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider<OnboardBloc>(
-          create: (context) => OnboardBloc(),
-        ),
-        BlocProvider<RegisterBloc>(
-          create: (context) => RegisterBloc(AuthDatasource()),
-        ),
-      ],
+      providers: AppProviders().providers,
       child: MaterialApp.router(
         theme: ThemeData.light(),
         routeInformationParser: AppRouter.router.routeInformationParser,
