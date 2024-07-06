@@ -50,7 +50,7 @@ class OnboardPage extends StatelessWidget {
                       },
                       listener: (context, state) {
                         if (state is OnboardSkipped) {
-                          context.goNamed('splash');
+                          context.goNamed('register');
                         }
                       },
                     ),
@@ -125,7 +125,7 @@ class OnboardPage extends StatelessWidget {
                   },
                   listener: (context, state) {
                     if (state is OnboardSkipped){
-                      context.goNamed('splash');
+                      context.goNamed('register');
                     }
                   },),
               SizedBox(
