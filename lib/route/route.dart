@@ -1,12 +1,13 @@
 
 import 'package:go_router/go_router.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/onboard_page/onboard_page_view.dart';
+import 'package:tedikap_user_bloc/presentation/initial_pages/register_page/register_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/splash_page/splash_page_view.dart';
 
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: '/splash',
+    initialLocation: '/register',
     debugLogDiagnostics: true,
     routes: [
       GoRoute(
@@ -18,6 +19,11 @@ class AppRouter {
         name: 'onboard',
         path: '/onboard',
         builder: (context, state) => OnboardPage(),
+      ),
+      GoRoute(
+        name: 'register',
+        path: '/register',
+        builder: (context, state) => RegisterPage(),
       ),
     ],
   );
