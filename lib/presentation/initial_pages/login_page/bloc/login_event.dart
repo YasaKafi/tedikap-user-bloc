@@ -1,9 +1,7 @@
 part of 'login_bloc.dart';
 
-abstract class LoginEvent {}
-
-class DoLoginEvent extends LoginEvent {
-  final LoginRequestModel model;
-
-  DoLoginEvent(this.model);
+@freezed
+class LoginEvent with _$LoginEvent {
+  const factory LoginEvent.started() = _Started;
+  const factory LoginEvent.doLogin(LoginRequestModel? data) = _DoLogin;
 }

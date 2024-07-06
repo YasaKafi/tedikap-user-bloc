@@ -80,37 +80,67 @@ class LoginPage extends StatelessWidget {
                 SizedBox(height: Dimensions.marginSizeSmall),
                 BlocConsumer<LoginBloc, LoginState>(
                   listener: (context, state) {
-
-                    if(state is LoginError){
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message, style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w500, color: baseColor),), backgroundColor: redMedium,));
-                    }
-                    if(state is LoginLoaded){
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.model.message!, style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w500, color: baseColor),), backgroundColor: greenMedium,));
-                      context.goNamed('register');
-                    }
-
+                    state.maybeWhen(
+                      orElse: () {},
+                      error: (message) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                            message!,
+                            style: txtSecondaryTitle.copyWith(
+                                fontWeight: FontWeight.w500, color: baseColor),
+                          ),
+                          backgroundColor: redMedium,
+                        ));
+                      },
+                      success: (model) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                            model!.message!,
+                            style: txtSecondaryTitle.copyWith(
+                                fontWeight: FontWeight.w500, color: baseColor),
+                          ),
+                          backgroundColor: greenMedium,
+                        ));
+                        context.goNamed('register');
+                      },
+                    );
                   },
                   builder: (context, state) {
-                    if (state is LoginLoading) {
-                      return Center(child: CircularProgressIndicator());
-                    }
-                    return CommonButton(
-                      text: 'Login',
-                      onPressed: () {
-                        if(emailController.text.isEmpty || passwordController.text.isEmpty){
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please fill all fields', style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w500, color: baseColor),), backgroundColor: redMedium,));
-                        } else {
-                          final requestModel = LoginRequestModel(
-                              email: emailController.text,
-                              password: passwordController.text);
-                          context.read<LoginBloc>().add(
-                              DoLoginEvent(requestModel));
-                        }
-                        } ,
-                      borderRadius: 10,
-                      height: 55,
-                      fontSize: 18,
+                    return state.maybeWhen(
+                        orElse: (){
+                          return CommonButton(
+                            text: 'Login',
+                            onPressed: () {
+                              if (emailController.text.isEmpty ||
+                                  passwordController.text.isEmpty) {
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                  content: Text(
+                                    'Please fill all fields',
+                                    style: txtSecondaryTitle.copyWith(
+                                        fontWeight: FontWeight.w500,
+                                        color: baseColor),
+                                  ),
+                                  backgroundColor: redMedium,
+                                ));
+                              } else {
+                                final requestModel = LoginRequestModel(
+                                    email: emailController.text,
+                                    password: passwordController.text);
+                                context
+                                    .read<LoginBloc>()
+                                    .add(LoginEvent.doLogin(requestModel));
+                              }
+                            },
+                            borderRadius: 10,
+                            height: 55,
+                            fontSize: 18,
+                          );
+                        },
+                        loading: () {
+                          return Center(child: CircularProgressIndicator());
+                        },
                     );
+
                   },
                 ),
                 SizedBox(height: Dimensions.marginSizeLarge),

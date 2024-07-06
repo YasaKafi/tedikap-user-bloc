@@ -1,19 +1,9 @@
 part of 'login_bloc.dart';
 
-abstract class LoginState {}
-
-final class LoginInitial extends LoginState {}
-
-final class LoginLoading extends LoginState {}
-
-final class LoginLoaded extends LoginState {
-  final LoginResponseModel model;
-
-  LoginLoaded({required this.model});
-}
-
-final class LoginError extends LoginState {
-  final String message;
-
-  LoginError({this.message = "Failed to Login"});
+@freezed
+class LoginState with _$LoginState {
+  const factory LoginState.initial() = _Initial;
+  const factory LoginState.loading() = _Loading;
+  const factory LoginState.success({LoginResponseModel? model}) = _Success;
+  const factory LoginState.error({String? message}) = _Error;
 }
