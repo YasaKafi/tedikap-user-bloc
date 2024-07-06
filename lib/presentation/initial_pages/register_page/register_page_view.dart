@@ -79,43 +79,57 @@ class RegisterPage extends StatelessWidget {
                 ],
                 BlocConsumer<RegisterBloc, RegisterState>(
                   listener: (context, state) {
-                    if (state is RegisterError) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message, style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w500, color: baseColor),), backgroundColor: redMedium,));
-                    }
+                    state.maybeWhen(
+                      orElse: (){},
+                      error: (message) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(message!, style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w500, color: baseColor),),
+                          backgroundColor: redMedium,
+                        ));
+                      },
+                      success: (model) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(model!.message!, style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w500, color: baseColor),),
+                          backgroundColor: greenMedium,
+                        ));
+                        context.goNamed('login');
+                      },
 
-                    if(state is RegisterLoaded) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.model.message!, style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w500, color: baseColor),), backgroundColor: greenMedium,));
-                      context.goNamed('login');
-                    }
+                    );
                   },
                   builder: (context, state) {
-                    if (state is RegisterLoading) {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
+                    return state.maybeWhen(
+                      orElse: (){
+                        return CommonButton(
+                          text: 'Register',
+                          onPressed: () {
 
-                    return CommonButton(
-                      text: 'Register',
-                      onPressed: () {
+                            if (usernameController.text.isEmpty || emailController.text.isEmpty || passwordController.text.isEmpty || confirmpasswordController.text.isEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please fill all fields', style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w500, color: baseColor),), backgroundColor: redMedium,));
 
-                        if (usernameController.text.isEmpty || emailController.text.isEmpty || passwordController.text.isEmpty || confirmpasswordController.text.isEmpty) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please fill all fields', style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w500, color: baseColor),), backgroundColor: redMedium,));
-
-                        } else {
-                          final requestModel = RegisterRequestModel(
-                              name: usernameController.text,
-                              email: emailController.text,
-                              password: passwordController.text);
-                          context
-                              .read<RegisterBloc>()
-                              .add(DoRegisterEvent(requestModel));
-                        }
-                        },
-                      borderRadius: 10,
-                      height: 55,
-                      fontSize: 18,
+                            } else {
+                              final requestModel = RegisterRequestModel(
+                                  name: usernameController.text,
+                                  email: emailController.text,
+                                  password: passwordController.text);
+                              context
+                                  .read<RegisterBloc>()
+                                  .add(RegisterEvent.doRegister(requestModel));
+                            }
+                          },
+                          borderRadius: 10,
+                          height: 55,
+                          fontSize: 18,
+                        );
+                      },
+                      loading: () {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      },
                     );
+
+
                   },
                 ),
                 SizedBox(height: Dimensions.marginSizeLarge),

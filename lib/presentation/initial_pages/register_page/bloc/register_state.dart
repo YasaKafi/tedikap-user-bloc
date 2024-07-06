@@ -1,19 +1,9 @@
 part of 'register_bloc.dart';
 
-abstract class RegisterState {}
-
-final class RegisterInitial extends RegisterState {}
-
-final class RegisterLoading extends RegisterState {}
-
-final class RegisterLoaded extends RegisterState {
-  final RegisterResponseModel model;
-
-  RegisterLoaded({required this.model});
-}
-
-final class RegisterError extends RegisterState {
-  final String message;
-
-  RegisterError({this.message = "Failed to Register"});
+@freezed
+class RegisterState with _$RegisterState {
+  const factory RegisterState.initial() = _Initial;
+  const factory RegisterState.loading() = _Loading;
+  const factory RegisterState.success({RegisterResponseModel? model}) = _Success;
+  const factory RegisterState.error({String? message}) = _Error;
 }
