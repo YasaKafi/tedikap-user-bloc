@@ -1,24 +1,21 @@
 import 'package:bloc/bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:tedikap_user_bloc/data/models/request/register_request_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/register_response_model.dart';
 
 import '../../../../data/datasource/auth_datasource.dart';
-import '../../../../data/models/request/register_request_model.dart';
-import '../../../../data/models/response/register_response_model.dart';
 
 part 'register_event.dart';
 part 'register_state.dart';
+part 'register_bloc.freezed.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final AuthDatasource datasource;
-
-  RegisterBloc(this.datasource) : super(RegisterInitial()) {
-    on<DoRegisterEvent>((event, emit) async {
-      emit(RegisterLoading());
-      final result = await datasource.postRegister(event.model);
-      result.fold((error) {
-        emit(RegisterError());
-      }, (success) {
-        emit(RegisterLoaded(model: success));
-      });
+  RegisterBloc(this.datasource) : super(const RegisterState.initial()) {
+    on<_DoRegister>((event, emit) async {
+      emit(const RegisterState.loading());
+      final result = await datasource.postRegister(event.data!);
+      result.fold((l) => emit(RegisterState.error(message: 'Failed to login')), (r) => emit(RegisterState.success(model: r)));
     });
   }
 }

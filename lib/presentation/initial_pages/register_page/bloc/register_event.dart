@@ -1,9 +1,7 @@
 part of 'register_bloc.dart';
 
-abstract class RegisterEvent {}
-
-class DoRegisterEvent extends RegisterEvent {
-  final RegisterRequestModel model;
-
-  DoRegisterEvent(this.model);
+@freezed
+class RegisterEvent with _$RegisterEvent {
+  const factory RegisterEvent.started() = _Started;
+  const factory RegisterEvent.doRegister(RegisterRequestModel? data) = _DoRegister;
 }
