@@ -1,5 +1,6 @@
 
 import 'package:go_router/go_router.dart';
+import 'package:tedikap_user_bloc/presentation/dashboard/dashboard_page.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/login_page/login_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/onboard_page/onboard_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/register_page/register_page_view.dart';
@@ -30,6 +31,11 @@ class AppRouter {
         name: 'login',
         path: '/login',
         builder: (context, state) => LoginPage(),
+      ),
+      GoRoute(
+        name: 'dashboard',
+        path: '/dashboard',
+        builder: (context, state) => DashboardPage(),
       ),
     ],
   );

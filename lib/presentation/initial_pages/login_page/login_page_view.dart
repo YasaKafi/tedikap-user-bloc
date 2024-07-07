@@ -101,7 +101,7 @@ class LoginPage extends StatelessWidget {
                           ),
                           backgroundColor: greenMedium,
                         ));
-                        context.goNamed('register');
+                        context.goNamed('dashboard');
                       },
                     );
                   },
