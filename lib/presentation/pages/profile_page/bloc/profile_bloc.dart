@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tedikap_user_bloc/data/models/response/current_user_response_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/logout_response_model.dart';
 
 import '../../../../data/datasource/user_datasource.dart';
 
@@ -15,8 +16,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<_GetUser>((event, emit) async {
       emit(const _Loading());
       final result = await datasource.getCurrentUser();
-      result.fold((l) => emit(const _Error('Failed to get data user')), (r) => emit(_Loaded(r)));
+      result.fold((l) => emit(const _Error('Failed to get data user')), (r) => emit(_Loaded(model: r,)));
+    });
 
+    on<_DoLogout>((event, emit) async {
+      emit(const _Loading());
+      final result = await datasource.postLogout();
+      result.fold((l) => emit(const _Error('Failed to logout')), (r) => emit(_Loaded(logModel:  r)));
     });
   }
 }

@@ -4,6 +4,6 @@ part of 'profile_bloc.dart';
 class ProfileState with _$ProfileState {
   const factory ProfileState.initial() = _Initial;
   const factory ProfileState.loading() = _Loading;
-  const factory ProfileState.loaded(CurrentUserModel model) = _Loaded;
+  const factory ProfileState.loaded({CurrentUserModel? model, LogoutResponseModel? logModel}) = _Loaded;
   const factory ProfileState.error(String message) = _Error;
 }

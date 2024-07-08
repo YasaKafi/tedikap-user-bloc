@@ -63,7 +63,7 @@ class SectionBaseProfile extends StatelessWidget {
                           error: (message) {
                             return Center(child: Text(message));
                           },
-                          loaded: (user) {
+                          loaded: (user, _) {
                             return Column(
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +74,7 @@ class SectionBaseProfile extends StatelessWidget {
                                     },
                                     child: CircleAvatar(
                                       radius: 28,
-                                      backgroundImage: NetworkImage(TedikapApiRepository.getAvatarProfile + user.data!.avatar!),
+                                      backgroundImage: NetworkImage(TedikapApiRepository.getAvatarProfile + user!.data!.avatar!),
                                     ),
                                   ),
                                   const SizedBox(

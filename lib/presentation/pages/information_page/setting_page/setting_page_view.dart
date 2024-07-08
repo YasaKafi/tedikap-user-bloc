@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tedikap_user_bloc/presentation/pages/profile_page/bloc/profile_bloc.dart';
 import '../../../../../common/theme.dart';
 import '../../../../common/dimensions.dart';
-
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
@@ -38,10 +39,11 @@ class SettingPage extends StatelessWidget {
                   icon: const Icon(Icons.arrow_back_ios),
                   onPressed: () {
                     context.pop();
-
                   },
                 ),
-                Text('Pengaturan', style: txtSecondaryHeader.copyWith(fontWeight: FontWeight.w600, color: blackColor)),
+                Text('Pengaturan',
+                    style: txtSecondaryHeader.copyWith(
+                        fontWeight: FontWeight.w600, color: blackColor)),
                 Container(
                   width: 40,
                   height: 5,
@@ -66,16 +68,16 @@ class SettingPage extends StatelessWidget {
                     children: [
                       Text(
                         'Profil Saya',
-                        style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor),
+                        style: txtSecondaryTitle.copyWith(
+                            fontWeight: FontWeight.w500, color: blackColor),
                       ),
                       InkWell(
-                          onTap: () {
-                          },
+                          onTap: () {},
                           child: const Icon(
-                        Icons.arrow_forward_ios,
-                        size: 24,
-                        color: grey,
-                      )),
+                            Icons.arrow_forward_ios,
+                            size: 24,
+                            color: grey,
+                          )),
                     ],
                   ),
                 ),
@@ -88,17 +90,20 @@ class SettingPage extends StatelessWidget {
                     children: [
                       Text(
                         'Informasi',
-                        style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor),
+                        style: txtSecondaryTitle.copyWith(
+                            fontWeight: FontWeight.w500, color: blackColor),
                       ),
                       Text(
                         'Version 1.1',
-                        style: txtPrimarySubTitle.copyWith(fontWeight: FontWeight.w400, color: blackColor),
+                        style: txtPrimarySubTitle.copyWith(
+                            fontWeight: FontWeight.w400, color: blackColor),
                       ),
                     ],
                   ),
                 ),
                 const Divider(),
                 const SizedBox(height: 20),
+
                 InkWell(
                   onTap: () {},
                   child: Row(
@@ -113,34 +118,76 @@ class SettingPage extends StatelessWidget {
                       ),
                       Text(
                         'Hapus Akun',
-                        style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor),
+                        style: txtSecondaryTitle.copyWith(
+                            fontWeight: FontWeight.w500, color: blackColor),
                       ),
                     ],
                   ),
                 ),
                 const Divider(),
                 const SizedBox(height: 20),
-                InkWell(
-                  onTap: () {
+                BlocConsumer<ProfileBloc, ProfileState>(
+                  listener: (context, state) {
+                    state.maybeWhen(
+                      orElse: () {},
+                      error: (message) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                            message!,
+                            style: txtSecondaryTitle.copyWith(
+                                fontWeight: FontWeight.w500, color: baseColor),
+                          ),
+                          backgroundColor: redMedium,
+                        ));
+                      },
+                      loaded: (_, logModel) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                            logModel!.message!,
+                            style: txtSecondaryTitle.copyWith(
+                                fontWeight: FontWeight.w500, color: baseColor),
+                          ),
+                          backgroundColor: greenMedium,
+                        ));
+                        context.goNamed('login');
+                      },
+                    );
+                  },
+                  builder: (context, state) {
+                    return state.maybeWhen(
+                      orElse: (){
+                        return InkWell(
+                          onTap: () {
+                            context.read<ProfileBloc>().add(const ProfileEvent.doLogout());
+                          },
+                          child: Row(
+                            children: [
+                              const Icon(
+                                Icons.logout_rounded,
+                                size: 24,
+                                color: redMedium,
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                'Keluar',
+                                style: txtSecondaryTitle.copyWith(
+                                    fontWeight: FontWeight.w500, color: redMedium),
+                              ),
+                            ],
+                          ),
+                        );
+
+                      },
+                      loading: () {
+                        return const Center(child: CircularProgressIndicator());
+                      },
+                    );
 
                   },
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.logout_rounded,
-                        size: 24,
-                        color: redMedium,
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        'Keluar',
-                        style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w500, color: redMedium),
-                      ),
-                    ],
-                  ),
                 ),
+
               ],
             ),
           ),
