@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tedikap_user_bloc/data/repository/tedikap_repository.dart';
 import 'package:tedikap_user_bloc/presentation/pages/profile_page/bloc/profile_bloc.dart';
 
@@ -68,7 +69,9 @@ class SectionBaseProfile extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      context.pushNamed('edit_profile');
+                                    },
                                     child: CircleAvatar(
                                       radius: 28,
                                       backgroundImage: NetworkImage(TedikapApiRepository.getAvatarProfile + user.data!.avatar!),

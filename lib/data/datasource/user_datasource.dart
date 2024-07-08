@@ -1,6 +1,10 @@
 
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:tedikap_user_bloc/data/models/response/current_user_response_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/edit_current_user_response_model.dart';
 
 import '../dio_instance.dart';
 import '../repository/tedikap_repository.dart';
@@ -21,6 +25,37 @@ class UserDatasource {
       }
     } catch (e) {
       return Left('Failed to access data: ${e.toString()}');
+    }
+  }
+
+  Future<Either<String, EditProfileResponseModel>> updateCurrentUser(
+      {
+        required String name,
+        required String email,
+        required String gender,
+        File? imageFile,
+}) async {
+    try {
+      FormData formData = FormData.fromMap({
+        'name': name,
+        'email': email,
+        'gender': gender,
+        if (imageFile != null)
+          'avatar': await MultipartFile.fromFile(imageFile.path, filename: imageFile.path.split('/').last),
+      });
+
+      final response = await _dioInstance.postRequest(
+        endpoint: TedikapApiRepository.postProfile,
+        data: formData,
+        isAuthorize: true
+      );
+      if (response.statusCode == 200) {
+        return Right(EditProfileResponseModel.fromMap(response.data));
+      } else {
+        return const Left('Failed to update profile');
+      }
+    } catch (e) {
+      return Left('Failed to update profile: ${e.toString()}');
     }
   }
 }
