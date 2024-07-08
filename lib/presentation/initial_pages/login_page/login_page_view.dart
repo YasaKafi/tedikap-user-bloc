@@ -13,7 +13,7 @@ import '../../global_components/common_button.dart';
 import '../../global_components/textfield_auth_custom.dart';
 
 class LoginPage extends StatelessWidget {
-  LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,17 +37,17 @@ class LoginPage extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: Dimensions.paddingSizeLarge,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: Dimensions.marginSizeLarge),
+                const SizedBox(height: Dimensions.marginSizeLarge),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Welcome \nBack', style: txtHeadingTitleAuth),
+                    const Text('Welcome \nBack', style: txtHeadingTitleAuth),
                     SvgPicture.asset(
                       icLogoPrimary,
                       height: 100,
@@ -55,18 +55,18 @@ class LoginPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: Dimensions.marginSizeSuperExtraLarge),
+                const SizedBox(height: Dimensions.marginSizeSuperExtraLarge),
                 for (var field in fields) ...[
                   Text(field['label'],
                       style: txtSecondaryTitle.copyWith(
                           fontWeight: FontWeight.w600, color: blackColor)),
-                  SizedBox(height: Dimensions.marginSizeSmall),
+                  const SizedBox(height: Dimensions.marginSizeSmall),
                   CustomTextFieldAuth(
                     key: UniqueKey(),
                     title: field['hint'],
                     controller: field['controller'],
                   ),
-                  SizedBox(height: Dimensions.marginSizeSmall),
+                  const SizedBox(height: Dimensions.marginSizeSmall),
                 ],
                 TextButton(
                     onPressed: () => {},
@@ -77,7 +77,7 @@ class LoginPage extends StatelessWidget {
                         color: primaryColor,
                       ),
                     )),
-                SizedBox(height: Dimensions.marginSizeSmall),
+                const SizedBox(height: Dimensions.marginSizeSmall),
                 BlocConsumer<LoginBloc, LoginState>(
                   listener: (context, state) {
                     state.maybeWhen(
@@ -137,13 +137,13 @@ class LoginPage extends StatelessWidget {
                           );
                         },
                         loading: () {
-                          return Center(child: CircularProgressIndicator());
+                          return const Center(child: CircularProgressIndicator());
                         },
                     );
 
                   },
                 ),
-                SizedBox(height: Dimensions.marginSizeLarge),
+                const SizedBox(height: Dimensions.marginSizeLarge),
                 Center(
                   child: RichText(
                     text: TextSpan(
