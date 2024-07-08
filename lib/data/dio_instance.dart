@@ -15,6 +15,7 @@ class DioInstance {
     initializeInterceptors();
   }
 
+
   // All Method of Requests
   Future<Response> getRequest({required String endpoint, bool? isAuthorize, Map<String, dynamic>? queryParameters}) async {
     Response response;
@@ -51,6 +52,12 @@ class DioInstance {
                 if (isAuthorize ?? false) "Authorization": "Bearer $token"
               })
       );
+      if (response.statusCode == 200) {
+        final newToken = response.data['token'];
+        if (newToken != null) {
+          await prefs.setString('token', newToken);
+        }
+      }
     } on DioException catch (e) {
       print(e.message);
       throw Exception(e.message);
@@ -74,6 +81,7 @@ class DioInstance {
                 if (isAuthorize ?? false) "Authorization": "Bearer $token"
               })
       );
+
     } on DioException catch (e) {
       print(e.message);
       throw Exception(e.message);

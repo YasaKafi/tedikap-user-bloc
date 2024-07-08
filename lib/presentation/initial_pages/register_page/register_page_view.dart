@@ -13,7 +13,7 @@ import '../../global_components/common_button.dart';
 import '../../global_components/textfield_auth_custom.dart';
 
 class RegisterPage extends StatelessWidget {
-  RegisterPage({Key? key}) : super(key: key);
+  const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -50,32 +50,32 @@ class RegisterPage extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
                 horizontal: Dimensions.paddingSizeLarge,
                 vertical: Dimensions.paddingSizeLarge),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: Dimensions.marginSizeLarge),
+                const SizedBox(height: Dimensions.marginSizeLarge),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Create \nAccount', style: txtHeadingTitleAuth),
+                    const Text('Create \nAccount', style: txtHeadingTitleAuth),
                     SvgPicture.asset(icLogoPrimary, height: 100, width: 100),
                   ],
                 ),
-                SizedBox(height: Dimensions.marginSizeSuperExtraLarge),
+                const SizedBox(height: Dimensions.marginSizeSuperExtraLarge),
                 for (var field in fields) ...[
                   Text(field['label'],
                       style: txtSecondaryTitle.copyWith(
                           fontWeight: FontWeight.w600, color: blackColor)),
-                  SizedBox(height: Dimensions.marginSizeSmall),
+                  const SizedBox(height: Dimensions.marginSizeSmall),
                   CustomTextFieldAuth(
                     key: UniqueKey(),
                     title: field['hint'],
                     controller: field['controller'],
                   ),
-                  SizedBox(height: Dimensions.marginSizeLarge),
+                  const SizedBox(height: Dimensions.marginSizeLarge),
                 ],
                 BlocConsumer<RegisterBloc, RegisterState>(
                   listener: (context, state) {
@@ -123,7 +123,7 @@ class RegisterPage extends StatelessWidget {
                         );
                       },
                       loading: () {
-                        return Center(
+                        return const Center(
                           child: CircularProgressIndicator(),
                         );
                       },
@@ -132,7 +132,7 @@ class RegisterPage extends StatelessWidget {
 
                   },
                 ),
-                SizedBox(height: Dimensions.marginSizeLarge),
+                const SizedBox(height: Dimensions.marginSizeLarge),
                 Center(
                   child: RichText(
                     text: TextSpan(

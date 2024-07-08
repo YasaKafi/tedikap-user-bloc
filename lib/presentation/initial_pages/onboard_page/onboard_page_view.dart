@@ -27,7 +27,7 @@ class OnboardPage extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
+              SizedBox(
                 width: screenWidth,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -39,7 +39,7 @@ class OnboardPage extends StatelessWidget {
                             onPressed: () {
                               context
                                   .read<OnboardBloc>()
-                                  .add(OnboardEvent.skipOnboard());
+                                  .add(const OnboardEvent.skipOnboard());
                             },
                             child: Text(
                               'Skip',
@@ -60,7 +60,7 @@ class OnboardPage extends StatelessWidget {
                             style: txtSecondaryTitle.copyWith(
                                 fontWeight: FontWeight.w600,
                                 color: blackColor)),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         SvgPicture.asset(
@@ -109,18 +109,18 @@ class OnboardPage extends StatelessWidget {
                     activeDotColor: primaryColor,
                     dotColor: primaryColor.withOpacity(0.3)),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               BlocConsumer<OnboardBloc, OnboardState>(
                   builder: (context, state) {
                     return state.maybeWhen(
                         orElse: (){
                           String buttonText = 'Continue';
-                          if(OnboardState.initial(pageIndex: 2) == state){
+                          if(const OnboardState.initial(pageIndex: 2) == state){
                             buttonText = 'Get Started';
                           }
                           return CommonButton(
                             text: buttonText,
-                            onPressed: () => context.read<OnboardBloc>().add(OnboardEvent.onPressedButton()),
+                            onPressed: () => context.read<OnboardBloc>().add(const OnboardEvent.onPressedButton()),
                             borderRadius: 10,
                             height: 50,
                           );
@@ -138,7 +138,7 @@ class OnboardPage extends StatelessWidget {
                       context.goNamed('register');
                     });
                   },),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
             ],
