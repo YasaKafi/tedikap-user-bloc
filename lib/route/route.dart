@@ -5,6 +5,7 @@ import 'package:tedikap_user_bloc/presentation/initial_pages/login_page/login_pa
 import 'package:tedikap_user_bloc/presentation/initial_pages/onboard_page/onboard_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/register_page/register_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/splash_page/splash_page_view.dart';
+import 'package:tedikap_user_bloc/presentation/pages/information_page/edit_profile_page/view/edit_profile_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/help_center_page/view/help_center_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/language_setting_page/language_setting_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/setting_page/setting_page_view.dart';
@@ -68,6 +69,11 @@ class AppRouter {
         name: 'setting',
         path: '/setting',
         builder: (context, state) => const SettingPage(),
+      ),
+      GoRoute(
+        name: 'edit_profile',
+        path: '/edit_profile',
+        builder: (context, state) => EditProfilePage(),
       ),
     ],
   );
