@@ -20,18 +20,21 @@ mixin _$ProfileEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getUser,
+    required TResult Function() doLogout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getUser,
+    TResult? Function()? doLogout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getUser,
+    TResult Function()? doLogout,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$ProfileEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetUser value) getUser,
+    required TResult Function(_DoLogout value) doLogout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetUser value)? getUser,
+    TResult? Function(_DoLogout value)? doLogout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetUser value)? getUser,
+    TResult Function(_DoLogout value)? doLogout,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -114,6 +120,7 @@ class _$StartedImpl implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getUser,
+    required TResult Function() doLogout,
   }) {
     return started();
   }
@@ -123,6 +130,7 @@ class _$StartedImpl implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getUser,
+    TResult? Function()? doLogout,
   }) {
     return started?.call();
   }
@@ -132,6 +140,7 @@ class _$StartedImpl implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getUser,
+    TResult Function()? doLogout,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -145,6 +154,7 @@ class _$StartedImpl implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetUser value) getUser,
+    required TResult Function(_DoLogout value) doLogout,
   }) {
     return started(this);
   }
@@ -154,6 +164,7 @@ class _$StartedImpl implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetUser value)? getUser,
+    TResult? Function(_DoLogout value)? doLogout,
   }) {
     return started?.call(this);
   }
@@ -163,6 +174,7 @@ class _$StartedImpl implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetUser value)? getUser,
+    TResult Function(_DoLogout value)? doLogout,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -216,6 +228,7 @@ class _$GetUserImpl implements _GetUser {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getUser,
+    required TResult Function() doLogout,
   }) {
     return getUser();
   }
@@ -225,6 +238,7 @@ class _$GetUserImpl implements _GetUser {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getUser,
+    TResult? Function()? doLogout,
   }) {
     return getUser?.call();
   }
@@ -234,6 +248,7 @@ class _$GetUserImpl implements _GetUser {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getUser,
+    TResult Function()? doLogout,
     required TResult orElse(),
   }) {
     if (getUser != null) {
@@ -247,6 +262,7 @@ class _$GetUserImpl implements _GetUser {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetUser value) getUser,
+    required TResult Function(_DoLogout value) doLogout,
   }) {
     return getUser(this);
   }
@@ -256,6 +272,7 @@ class _$GetUserImpl implements _GetUser {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetUser value)? getUser,
+    TResult? Function(_DoLogout value)? doLogout,
   }) {
     return getUser?.call(this);
   }
@@ -265,6 +282,7 @@ class _$GetUserImpl implements _GetUser {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetUser value)? getUser,
+    TResult Function(_DoLogout value)? doLogout,
     required TResult orElse(),
   }) {
     if (getUser != null) {
@@ -279,12 +297,122 @@ abstract class _GetUser implements ProfileEvent {
 }
 
 /// @nodoc
+abstract class _$$DoLogoutImplCopyWith<$Res> {
+  factory _$$DoLogoutImplCopyWith(
+          _$DoLogoutImpl value, $Res Function(_$DoLogoutImpl) then) =
+      __$$DoLogoutImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$DoLogoutImplCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res, _$DoLogoutImpl>
+    implements _$$DoLogoutImplCopyWith<$Res> {
+  __$$DoLogoutImplCopyWithImpl(
+      _$DoLogoutImpl _value, $Res Function(_$DoLogoutImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$DoLogoutImpl implements _DoLogout {
+  const _$DoLogoutImpl();
+
+  @override
+  String toString() {
+    return 'ProfileEvent.doLogout()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$DoLogoutImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() getUser,
+    required TResult Function() doLogout,
+  }) {
+    return doLogout();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? getUser,
+    TResult? Function()? doLogout,
+  }) {
+    return doLogout?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? getUser,
+    TResult Function()? doLogout,
+    required TResult orElse(),
+  }) {
+    if (doLogout != null) {
+      return doLogout();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetUser value) getUser,
+    required TResult Function(_DoLogout value) doLogout,
+  }) {
+    return doLogout(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetUser value)? getUser,
+    TResult? Function(_DoLogout value)? doLogout,
+  }) {
+    return doLogout?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetUser value)? getUser,
+    TResult Function(_DoLogout value)? doLogout,
+    required TResult orElse(),
+  }) {
+    if (doLogout != null) {
+      return doLogout(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DoLogout implements ProfileEvent {
+  const factory _DoLogout() = _$DoLogoutImpl;
+}
+
+/// @nodoc
 mixin _$ProfileState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CurrentUserModel model) loaded,
+    required TResult Function(
+            CurrentUserModel? model, LogoutResponseModel? logModel)
+        loaded,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -292,7 +420,8 @@ mixin _$ProfileState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(CurrentUserModel model)? loaded,
+    TResult? Function(CurrentUserModel? model, LogoutResponseModel? logModel)?
+        loaded,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -300,7 +429,8 @@ mixin _$ProfileState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CurrentUserModel model)? loaded,
+    TResult Function(CurrentUserModel? model, LogoutResponseModel? logModel)?
+        loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -390,7 +520,9 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CurrentUserModel model) loaded,
+    required TResult Function(
+            CurrentUserModel? model, LogoutResponseModel? logModel)
+        loaded,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -401,7 +533,8 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(CurrentUserModel model)? loaded,
+    TResult? Function(CurrentUserModel? model, LogoutResponseModel? logModel)?
+        loaded,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -412,7 +545,8 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CurrentUserModel model)? loaded,
+    TResult Function(CurrentUserModel? model, LogoutResponseModel? logModel)?
+        loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -504,7 +638,9 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CurrentUserModel model) loaded,
+    required TResult Function(
+            CurrentUserModel? model, LogoutResponseModel? logModel)
+        loaded,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -515,7 +651,8 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(CurrentUserModel model)? loaded,
+    TResult? Function(CurrentUserModel? model, LogoutResponseModel? logModel)?
+        loaded,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -526,7 +663,8 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CurrentUserModel model)? loaded,
+    TResult Function(CurrentUserModel? model, LogoutResponseModel? logModel)?
+        loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -584,7 +722,7 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({CurrentUserModel model});
+  $Res call({CurrentUserModel? model, LogoutResponseModel? logModel});
 }
 
 /// @nodoc
@@ -598,13 +736,18 @@ class __$$LoadedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? model = null,
+    Object? model = freezed,
+    Object? logModel = freezed,
   }) {
     return _then(_$LoadedImpl(
-      null == model
+      model: freezed == model
           ? _value.model
           : model // ignore: cast_nullable_to_non_nullable
-              as CurrentUserModel,
+              as CurrentUserModel?,
+      logModel: freezed == logModel
+          ? _value.logModel
+          : logModel // ignore: cast_nullable_to_non_nullable
+              as LogoutResponseModel?,
     ));
   }
 }
@@ -612,14 +755,16 @@ class __$$LoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadedImpl implements _Loaded {
-  const _$LoadedImpl(this.model);
+  const _$LoadedImpl({this.model, this.logModel});
 
   @override
-  final CurrentUserModel model;
+  final CurrentUserModel? model;
+  @override
+  final LogoutResponseModel? logModel;
 
   @override
   String toString() {
-    return 'ProfileState.loaded(model: $model)';
+    return 'ProfileState.loaded(model: $model, logModel: $logModel)';
   }
 
   @override
@@ -627,11 +772,13 @@ class _$LoadedImpl implements _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadedImpl &&
-            (identical(other.model, model) || other.model == model));
+            (identical(other.model, model) || other.model == model) &&
+            (identical(other.logModel, logModel) ||
+                other.logModel == logModel));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, model);
+  int get hashCode => Object.hash(runtimeType, model, logModel);
 
   @JsonKey(ignore: true)
   @override
@@ -644,10 +791,12 @@ class _$LoadedImpl implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CurrentUserModel model) loaded,
+    required TResult Function(
+            CurrentUserModel? model, LogoutResponseModel? logModel)
+        loaded,
     required TResult Function(String message) error,
   }) {
-    return loaded(model);
+    return loaded(model, logModel);
   }
 
   @override
@@ -655,10 +804,11 @@ class _$LoadedImpl implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(CurrentUserModel model)? loaded,
+    TResult? Function(CurrentUserModel? model, LogoutResponseModel? logModel)?
+        loaded,
     TResult? Function(String message)? error,
   }) {
-    return loaded?.call(model);
+    return loaded?.call(model, logModel);
   }
 
   @override
@@ -666,12 +816,13 @@ class _$LoadedImpl implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CurrentUserModel model)? loaded,
+    TResult Function(CurrentUserModel? model, LogoutResponseModel? logModel)?
+        loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(model);
+      return loaded(model, logModel);
     }
     return orElse();
   }
@@ -715,9 +866,12 @@ class _$LoadedImpl implements _Loaded {
 }
 
 abstract class _Loaded implements ProfileState {
-  const factory _Loaded(final CurrentUserModel model) = _$LoadedImpl;
+  const factory _Loaded(
+      {final CurrentUserModel? model,
+      final LogoutResponseModel? logModel}) = _$LoadedImpl;
 
-  CurrentUserModel get model;
+  CurrentUserModel? get model;
+  LogoutResponseModel? get logModel;
   @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -789,7 +943,9 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CurrentUserModel model) loaded,
+    required TResult Function(
+            CurrentUserModel? model, LogoutResponseModel? logModel)
+        loaded,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -800,7 +956,8 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(CurrentUserModel model)? loaded,
+    TResult? Function(CurrentUserModel? model, LogoutResponseModel? logModel)?
+        loaded,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -811,7 +968,8 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CurrentUserModel model)? loaded,
+    TResult Function(CurrentUserModel? model, LogoutResponseModel? logModel)?
+        loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {

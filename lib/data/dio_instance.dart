@@ -38,7 +38,7 @@ class DioInstance {
     return response;
   }
 
-  Future<Response> postRequest({required String endpoint, bool? isAuthorize, Object? data, Map<String, dynamic>? queryParameters}) async {
+  Future<Response> postRequest({required String endpoint, bool? isAuthorize, Object? data, Map<String, dynamic>? queryParameters, bool? isMultipart}) async {
     Response response;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
@@ -49,7 +49,7 @@ class DioInstance {
           options: Options(
               headers: {
                 "Accept": "application/json",
-                'Content-Type': 'multipart/form-data',
+                if (isMultipart ?? false) 'Content-Type': 'multipart/form-data',
                 if (isAuthorize ?? false) "Authorization": "Bearer $token"
               })
       );
