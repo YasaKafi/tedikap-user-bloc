@@ -2,17 +2,37 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tedikap_user_bloc/data/models/response/history_order_response_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/history_order_reward_response_model.dart';
 import '../../../../common/constant.dart';
 import '../../../../common/dimensions.dart';
 import '../../../../common/theme.dart';
+import 'package:intl/intl.dart';
 
 class ListBoxMenuStatus extends StatelessWidget {
-  ListBoxMenuStatus({Key? key, required this.status, required this.totalItem, required this.totalPrice, required this.orderItems, }) : super(key: key);
+  ListBoxMenuStatus({Key? key, required this.status, required this.totalItem, required this.totalPrice,  this.orderItems,  this.orderItemsReward, required this.createdAt, }) : super(key: key);
 
   final String status;
   final String totalItem ;
   final String totalPrice;
-  final List<String> orderItems;
+  final List<OrderItem>? orderItems;
+  final List<OrderRewardItem>? orderItemsReward;
+  final String createdAt;
+
+  String getTimeDifference() {
+    DateTime createdTime = DateFormat('yyyy-MM-dd HH:mm:ss').parse(createdAt);
+    Duration difference = DateTime.now().difference(createdTime);
+
+    if (difference.inMinutes < 1) {
+      return 'Just now';
+    } else if (difference.inMinutes < 60) {
+      return '${difference.inMinutes} mnt yg lalu';
+    } else if (difference.inHours < 24) {
+      return '${difference.inHours} jam yg lalu';
+    } else {
+      return '${difference.inDays} hari yg lalu';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +103,7 @@ class ListBoxMenuStatus extends StatelessWidget {
                     Text('Pick Up', style: txtPrimarySubTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor)),
                   ],
                 ),
-                Text('5 mnt lalu', style: txtSecondarySubTitle.copyWith(fontWeight: FontWeight.w400, color: blackColor),),
+                Text(getTimeDifference(), style: txtSecondarySubTitle.copyWith(fontWeight: FontWeight.w400, color: blackColor),),
               ],
             ),
           ),
@@ -104,15 +124,26 @@ class ListBoxMenuStatus extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                  Row(
+                Row(
+                  children: [
+                    if (orderItems != null)
+                      for (var item in orderItems!)
+                        Text(
+                          "${item.productName}, ",
+                          style: txtSecondarySubTitle.copyWith(
+                              fontWeight: FontWeight.w400, color: blackColor),
+                        ),
+                    if (orderItemsReward != null)
+                      for (var item in orderItemsReward!)
+                        Text(
+                          "${item.productName}, ",
+                          style: txtSecondarySubTitle.copyWith(
+                              fontWeight: FontWeight.w400, color: blackColor),
+                        ),
+                  ],
+                ),
 
-                    children: [
-                      for (var item in orderItems)
-                      Text("${item}, ",
-                        style: txtSecondarySubTitle.copyWith(
-                            fontWeight: FontWeight.w400, color: blackColor),),
-                    ],
-                  ),
+
                 SizedBox(height: 6),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

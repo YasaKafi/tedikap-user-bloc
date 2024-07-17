@@ -1,10 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tedikap_user_bloc/data/datasource/order_datasource.dart';
 import 'package:tedikap_user_bloc/data/datasource/product_datasource.dart';
 import 'package:tedikap_user_bloc/data/datasource/user_datasource.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/login_page/bloc/login_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/edit_profile_page/bloc/edit_profile_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/help_center_page/bloc/help_center_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/menu_page/bloc/menu_bloc.dart';
+import 'package:tedikap_user_bloc/presentation/pages/order_page/bloc/order_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/profile_page/bloc/profile_bloc.dart';
 
 import '../presentation/initial_pages/onboard_page/bloc/onboard_bloc.dart';
@@ -34,6 +36,9 @@ class AppProviders{
     ),
     BlocProvider<MenuBloc>(
       create: (context) => MenuBloc(ProductDatasource()),
+    ),
+    BlocProvider<OrderBloc>(
+      create: (context) => OrderBloc(OrderDatasource()),
     ),
   ];
 

@@ -9,7 +9,9 @@ class TedikapApiRepository {
   static String getAllProductFavorite = '$mainUrl/api/product/favorite';
   static String getCheckoutProduct = '$mainUrl/api/cart';
   static String getCheckoutRewardProduct = '$mainUrl/api/cart-reward';
-  static String getCheckoutOrder = '$mainUrl/api/order';
+  static String getAllOrder = '$mainUrl/api/order/history';
+  static String getOrderReward = '$mainUrl/api/order-reward';
+  static String getOrderByID = '$mainUrl/api/order';
   static String getUserPoin = '$mainUrl/api/point';
   static String getFilterProduct = '$mainUrl/api/filter/product';
   static String getFilterRewardProduct = '$mainUrl/api/filter/reward-product';
