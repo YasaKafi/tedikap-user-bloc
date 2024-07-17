@@ -111,6 +111,7 @@ class OrderPage extends StatelessWidget {
                                               totalPrice: order.totalPrice!
                                                   .toString(),
                                               orderItems: order.orderItems,
+                                              createdAt: order.createdAt.toString(),
                                             ),
                                           );
 
@@ -126,6 +127,7 @@ class OrderPage extends StatelessWidget {
                                               totalPrice: order.totalPoint!
                                                   .toString(),
                                               orderItemsReward: order.orderRewardItems,
+                                              createdAt: order.createdAt.toString(),
                                             ),
                                           );
                                         }
