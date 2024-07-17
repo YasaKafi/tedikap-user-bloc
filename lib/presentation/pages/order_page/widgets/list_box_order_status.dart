@@ -2,17 +2,20 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tedikap_user_bloc/data/models/response/history_order_response_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/history_order_reward_response_model.dart';
 import '../../../../common/constant.dart';
 import '../../../../common/dimensions.dart';
 import '../../../../common/theme.dart';
 
 class ListBoxMenuStatus extends StatelessWidget {
-  ListBoxMenuStatus({Key? key, required this.status, required this.totalItem, required this.totalPrice, required this.orderItems, }) : super(key: key);
+  ListBoxMenuStatus({Key? key, required this.status, required this.totalItem, required this.totalPrice,  this.orderItems,  this.orderItemsReward, }) : super(key: key);
 
   final String status;
   final String totalItem ;
   final String totalPrice;
-  final List<String> orderItems;
+  final List<OrderItem>? orderItems;
+  final List<OrderRewardItem>? orderItemsReward;
 
   @override
   Widget build(BuildContext context) {
@@ -104,15 +107,26 @@ class ListBoxMenuStatus extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                  Row(
+                Row(
+                  children: [
+                    if (orderItems != null)
+                      for (var item in orderItems!)
+                        Text(
+                          "${item.productName}, ",
+                          style: txtSecondarySubTitle.copyWith(
+                              fontWeight: FontWeight.w400, color: blackColor),
+                        ),
+                    if (orderItemsReward != null)
+                      for (var item in orderItemsReward!)
+                        Text(
+                          "${item.productName}, ",
+                          style: txtSecondarySubTitle.copyWith(
+                              fontWeight: FontWeight.w400, color: blackColor),
+                        ),
+                  ],
+                ),
 
-                    children: [
-                      for (var item in orderItems)
-                      Text("${item}, ",
-                        style: txtSecondarySubTitle.copyWith(
-                            fontWeight: FontWeight.w400, color: blackColor),),
-                    ],
-                  ),
+
                 SizedBox(height: 6),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
