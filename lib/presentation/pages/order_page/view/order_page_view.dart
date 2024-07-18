@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tedikap_user_bloc/presentation/pages/order_page/bloc/order_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/order_page/widgets/order_filter.dart';
 
@@ -101,9 +102,10 @@ class OrderPage extends StatelessWidget {
                                       itemBuilder: (context, index) {
                                         if(filterIndex == 0){
                                           final order = model!.orders![index];
-                                          final orderItem = order.orderItems![index];
                                           return InkWell(
-                                            onTap: () {},
+                                            onTap: () {
+                                              context.pushNamed('detail_order_common', pathParameters: {'orderId': order.id!});
+                                            },
                                             child: ListBoxMenuStatus(
                                               status: order.status!,
                                               totalItem: order.orderItems!.length
@@ -117,9 +119,9 @@ class OrderPage extends StatelessWidget {
 
                                         } else {
                                           final order = modelReward!.orders![index];
-                                          final orderItem = order.orderRewardItems![index];
                                           return InkWell(
-                                            onTap: () {},
+                                            onTap: () {
+                                              context.pushNamed('detail_order_reward', pathParameters: {'orderRewardId': order.id!});},
                                             child: ListBoxMenuStatus(
                                               status: order.status!,
                                               totalItem: order.orderRewardItems!.length
