@@ -29,7 +29,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     });
 
     on<_GetProduct>((event, emit) async {
-      if (state is _Success) { // Allow product fetch even if user is loaded
+      if (state is _Success) {
+        // Allow product fetch even if user is loaded
         final result = await productDatasource.getAllProduct();
         result.fold(
                 (l) => emit(_Error(message: 'Failed to access data product')),
