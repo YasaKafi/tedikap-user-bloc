@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../common/constant.dart';
 import '../../../../../common/theme.dart';
@@ -31,6 +32,7 @@ class PoinSection extends StatelessWidget {
         const EdgeInsets.only(top: 12, bottom: 12, left: 16, right: 16),
         child: InkWell(
           onTap: () {
+            context.pushNamed('point');
 
           },
           child: Column(

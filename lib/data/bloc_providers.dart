@@ -9,6 +9,7 @@ import 'package:tedikap_user_bloc/presentation/pages/information_page/edit_profi
 import 'package:tedikap_user_bloc/presentation/pages/information_page/help_center_page/bloc/help_center_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/menu_page/bloc/menu_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/order_page/bloc/order_bloc.dart';
+import 'package:tedikap_user_bloc/presentation/pages/point_page/bloc/point_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/profile_page/bloc/profile_bloc.dart';
 
 import '../presentation/initial_pages/onboard_page/bloc/onboard_bloc.dart';
@@ -44,6 +45,9 @@ class AppProviders{
     ),
     BlocProvider<DetailOrderBloc>(
       create: (context) => DetailOrderBloc(OrderDatasource()),
+    ),
+    BlocProvider<PointBloc>(
+      create: (context) => PointBloc(ProductDatasource()),
     ),
     BlocProvider<HomeBloc>(
       create: (context) => HomeBloc(datasource: UserDatasource(), productDatasource: ProductDatasource()),
