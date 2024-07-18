@@ -6,11 +6,13 @@ import 'package:tedikap_user_bloc/presentation/initial_pages/onboard_page/onboar
 import 'package:tedikap_user_bloc/presentation/initial_pages/register_page/register_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/splash_page/splash_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/detail_order_page_view.dart';
+import 'package:tedikap_user_bloc/presentation/pages/information_page/detail_point_page/detail_point_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/edit_profile_page/view/edit_profile_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/help_center_page/view/help_center_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/language_setting_page/language_setting_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/setting_page/setting_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/terms_of_serive_page/terms_of_serive_view.dart';
+import 'package:tedikap_user_bloc/presentation/pages/point_page/point_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/profile_page/profile_page_view.dart';
 
 import '../presentation/pages/information_page/privacy_policy_page/privacy_policy_view.dart';
@@ -18,7 +20,7 @@ import '../presentation/pages/information_page/privacy_policy_page/privacy_polic
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: '/dashboard',
+    initialLocation: '/point',
     debugLogDiagnostics: true,
     routes: [
       GoRoute(
@@ -75,6 +77,16 @@ class AppRouter {
         name: 'edit_profile',
         path: '/edit_profile',
         builder: (context, state) => EditProfilePage(),
+      ),
+      GoRoute(
+        name: 'detail_point',
+        path: '/detail_point',
+        builder: (context, state) => DetailPoinPage(),
+      ),
+      GoRoute(
+        name: 'point',
+        path: '/point',
+        builder: (context, state) => PointPage(),
       ),
       GoRoute(
         name: 'detail_order_common',
