@@ -5,6 +5,7 @@ import 'package:tedikap_user_bloc/presentation/initial_pages/login_page/login_pa
 import 'package:tedikap_user_bloc/presentation/initial_pages/onboard_page/onboard_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/register_page/register_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/splash_page/splash_page_view.dart';
+import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/detail_order_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/edit_profile_page/view/edit_profile_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/help_center_page/view/help_center_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/language_setting_page/language_setting_view.dart';
@@ -75,6 +76,23 @@ class AppRouter {
         path: '/edit_profile',
         builder: (context, state) => EditProfilePage(),
       ),
+      GoRoute(
+        name: 'detail_order_common',
+        path: '/detail_order/:orderId',
+        builder: (context, state) {
+          final orderId = state.pathParameters['orderId'];
+          return DetailOrderPage(orderId: orderId);
+        },
+      ),
+      GoRoute(
+        name: 'detail_order_reward',
+        path: '/detail_order_reward/:orderRewardId',
+        builder: (context, state) {
+          final orderRewardId = state.pathParameters['orderRewardId'];
+          return DetailOrderPage(orderRewardId: orderRewardId);
+        },
+      ),
+
     ],
   );
 }

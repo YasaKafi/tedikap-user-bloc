@@ -56,6 +56,9 @@ String icCheckListRounded = '${svgImages}ic_circle_checklist.svg';
 String icOnboardingOne = '${svgImages}onboarding_one.svg';
 String icOnboardingTwo = '${svgImages}onboarding_two.svg';
 String icOnboardingThree = '${svgImages}onboarding_three.svg';
+String icStatusOrder = '${svgImages}ic_status_order.svg';
+String icOutlet = '${svgImages}ic_outlet.svg';
+String icClockPrimaryColor = '${svgImages}ic_clock_primary.svg';
 
 
 

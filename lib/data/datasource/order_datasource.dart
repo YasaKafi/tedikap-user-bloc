@@ -1,5 +1,7 @@
 
 import 'package:dartz/dartz.dart';
+import 'package:tedikap_user_bloc/data/models/response/detail_history_order_response_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/detail_history_order_reward_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/history_order_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/history_order_reward_response_model.dart';
 
@@ -30,6 +32,34 @@ class OrderDatasource{
           endpoint: TedikapApiRepository.getOrderReward, isAuthorize: true);
       if (response.statusCode == 200) {
         return Right(HistoryOrderRewardResponseModel.fromMap(response.data));
+      } else {
+        return const Left('Failed to access data order');
+      }
+    } catch (e) {
+      return Left('Failed to access data: ${e.toString()}');
+    }
+  }
+
+
+  Future<Either<String, DetailHistoryOrderResponseModel>> getDetailHistoryOrder(String id) async {
+    try {
+      final response = await _dioInstance.getRequest(
+          endpoint: '${TedikapApiRepository.getOrderByID}/$id', isAuthorize: true);
+      if (response.statusCode == 200) {
+        return Right(DetailHistoryOrderResponseModel.fromMap(response.data));
+      } else {
+        return const Left('Failed to access data order');
+      }
+    } catch (e) {
+      return Left('Failed to access data: ${e.toString()}');
+    }
+  }
+  Future<Either<String, DetailHistoryOrderRewardResponseModel>> getDetailHistoryOrderReward(String id) async {
+    try {
+      final response = await _dioInstance.getRequest(
+          endpoint: '${TedikapApiRepository.getOrderReward}/$id', isAuthorize: true);
+      if (response.statusCode == 200) {
+        return Right(DetailHistoryOrderRewardResponseModel.fromMap(response.data));
       } else {
         return const Left('Failed to access data order');
       }
