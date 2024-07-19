@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:tedikap_user_bloc/presentation/pages/detail_product_page/bloc/detail_product_bloc.dart';
 
 import '../../../../../common/dimensions.dart';
 import '../../../../../common/theme.dart';
-
 
 class BoxBottomPrice extends StatelessWidget {
   const BoxBottomPrice({
@@ -33,75 +33,81 @@ class BoxBottomPrice extends StatelessWidget {
             ],
             color: baseColor,
             borderRadius: BorderRadius.only(
-                topRight: Radius.circular(20),
-                topLeft: Radius.circular(20)),
+                topRight: Radius.circular(20), topLeft: Radius.circular(20)),
           ),
           child: Column(
             children: [
-               Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-
-                          Text(
-                            'Rp',
-                            style: txtSecondarySubTitle.copyWith(
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black38),
-                          ) ,
-                          const SizedBox(
-                            width: 5,
-                          ),
-
-                          Text(
-                              '5000',
-                              style: txtPrimaryHeader.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  color: blackColor ),
-                            )
-                        ],
+                      Text(
+                        'Rp',
+                        style: txtSecondarySubTitle.copyWith(
+                            fontWeight: FontWeight.w500, color: Colors.black38),
                       ),
-
-                      Row(
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              // controller.decrementQuantity();
-                            },
-                            icon: Icon(
-                              Icons.remove_circle_outline,
-                              size: 28,
-                            ),
-                            color: grey,
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                           Text(
-                                '1',
-                                style: txtSecondaryTitle.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    color: blackColor)),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              // controller.incrementQuantity();
-                            },
-                            icon: Icon(
-                              Icons.add_circle,
-                              size: 28,
-                            ),
-                            color: navyColor,
-                          ),
-                        ],
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        '5000',
+                        style: txtPrimaryHeader.copyWith(
+                            fontWeight: FontWeight.w600, color: blackColor),
                       )
-
                     ],
                   ),
+                  BlocBuilder<DetailProductBloc, DetailProductState>(
+                    builder: (context, state) {
+                      return state.maybeWhen(
+                          orElse: () => Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                        success: (a,b,c,d,e,f,g,h,i,k, qty){
+                          return Row(
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  context.read<DetailProductBloc>().add(DetailProductEvent.decrement());
+                                },
+                                icon: Icon(
+                                  Icons.remove_circle_outline,
+                                  size: 28,
+                                ),
+                                color: grey,
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                  qty.toString(),
+                                  style: txtSecondaryTitle.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: blackColor)),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  context.read<DetailProductBloc>().add(DetailProductEvent.increment());
+                                },
+                                icon: Icon(
+                                  Icons.add_circle,
+                                  size: 28,
+                                ),
+                                color: navyColor,
+                              ),
+                            ],
+                          );
+
+                        }
+                      );
+
+                    },
+                  )
+                ],
+              ),
               SizedBox(
                 height: 20,
               ),
@@ -123,12 +129,11 @@ class BoxBottomPrice extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                   ),
                   child: Center(
-
-                      child: Text( 'Add to Cart' ,
-
-                        style: txtPrimaryTitle.copyWith(
-                            fontWeight: FontWeight.w600, color: baseColor),
-                      )),
+                      child: Text(
+                    'Add to Cart',
+                    style: txtPrimaryTitle.copyWith(
+                        fontWeight: FontWeight.w600, color: baseColor),
+                  )),
                 ),
               ),
             ],

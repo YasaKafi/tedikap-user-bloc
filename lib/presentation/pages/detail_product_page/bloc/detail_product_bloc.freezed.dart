@@ -23,6 +23,8 @@ mixin _$DetailProductEvent {
     required TResult Function() toggleSize,
     required TResult Function() toggleIce,
     required TResult Function() toggleSugar,
+    required TResult Function() decrement,
+    required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
     required TResult Function(int productRewardId) getDetailProductReward,
   }) =>
@@ -34,6 +36,8 @@ mixin _$DetailProductEvent {
     TResult? Function()? toggleSize,
     TResult? Function()? toggleIce,
     TResult? Function()? toggleSugar,
+    TResult? Function()? decrement,
+    TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
     TResult? Function(int productRewardId)? getDetailProductReward,
   }) =>
@@ -45,6 +49,8 @@ mixin _$DetailProductEvent {
     TResult Function()? toggleSize,
     TResult Function()? toggleIce,
     TResult Function()? toggleSugar,
+    TResult Function()? decrement,
+    TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
     TResult Function(int productRewardId)? getDetailProductReward,
     required TResult orElse(),
@@ -57,6 +63,8 @@ mixin _$DetailProductEvent {
     required TResult Function(_ToggleSize value) toggleSize,
     required TResult Function(_ToggleIce value) toggleIce,
     required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_Decrement value) decrement,
+    required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
     required TResult Function(_GetDetailProductReward value)
         getDetailProductReward,
@@ -69,6 +77,8 @@ mixin _$DetailProductEvent {
     TResult? Function(_ToggleSize value)? toggleSize,
     TResult? Function(_ToggleIce value)? toggleIce,
     TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_Decrement value)? decrement,
+    TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
     TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
   }) =>
@@ -80,6 +90,8 @@ mixin _$DetailProductEvent {
     TResult Function(_ToggleSize value)? toggleSize,
     TResult Function(_ToggleIce value)? toggleIce,
     TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_Decrement value)? decrement,
+    TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
     TResult Function(_GetDetailProductReward value)? getDetailProductReward,
     required TResult orElse(),
@@ -148,6 +160,8 @@ class _$StartedImpl implements _Started {
     required TResult Function() toggleSize,
     required TResult Function() toggleIce,
     required TResult Function() toggleSugar,
+    required TResult Function() decrement,
+    required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
     required TResult Function(int productRewardId) getDetailProductReward,
   }) {
@@ -162,6 +176,8 @@ class _$StartedImpl implements _Started {
     TResult? Function()? toggleSize,
     TResult? Function()? toggleIce,
     TResult? Function()? toggleSugar,
+    TResult? Function()? decrement,
+    TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
     TResult? Function(int productRewardId)? getDetailProductReward,
   }) {
@@ -176,6 +192,8 @@ class _$StartedImpl implements _Started {
     TResult Function()? toggleSize,
     TResult Function()? toggleIce,
     TResult Function()? toggleSugar,
+    TResult Function()? decrement,
+    TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
     TResult Function(int productRewardId)? getDetailProductReward,
     required TResult orElse(),
@@ -194,6 +212,8 @@ class _$StartedImpl implements _Started {
     required TResult Function(_ToggleSize value) toggleSize,
     required TResult Function(_ToggleIce value) toggleIce,
     required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_Decrement value) decrement,
+    required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
     required TResult Function(_GetDetailProductReward value)
         getDetailProductReward,
@@ -209,6 +229,8 @@ class _$StartedImpl implements _Started {
     TResult? Function(_ToggleSize value)? toggleSize,
     TResult? Function(_ToggleIce value)? toggleIce,
     TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_Decrement value)? decrement,
+    TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
     TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
   }) {
@@ -223,6 +245,8 @@ class _$StartedImpl implements _Started {
     TResult Function(_ToggleSize value)? toggleSize,
     TResult Function(_ToggleIce value)? toggleIce,
     TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_Decrement value)? decrement,
+    TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
     TResult Function(_GetDetailProductReward value)? getDetailProductReward,
     required TResult orElse(),
@@ -281,6 +305,8 @@ class _$ToggleTemperatureImpl implements _ToggleTemperature {
     required TResult Function() toggleSize,
     required TResult Function() toggleIce,
     required TResult Function() toggleSugar,
+    required TResult Function() decrement,
+    required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
     required TResult Function(int productRewardId) getDetailProductReward,
   }) {
@@ -295,6 +321,8 @@ class _$ToggleTemperatureImpl implements _ToggleTemperature {
     TResult? Function()? toggleSize,
     TResult? Function()? toggleIce,
     TResult? Function()? toggleSugar,
+    TResult? Function()? decrement,
+    TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
     TResult? Function(int productRewardId)? getDetailProductReward,
   }) {
@@ -309,6 +337,8 @@ class _$ToggleTemperatureImpl implements _ToggleTemperature {
     TResult Function()? toggleSize,
     TResult Function()? toggleIce,
     TResult Function()? toggleSugar,
+    TResult Function()? decrement,
+    TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
     TResult Function(int productRewardId)? getDetailProductReward,
     required TResult orElse(),
@@ -327,6 +357,8 @@ class _$ToggleTemperatureImpl implements _ToggleTemperature {
     required TResult Function(_ToggleSize value) toggleSize,
     required TResult Function(_ToggleIce value) toggleIce,
     required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_Decrement value) decrement,
+    required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
     required TResult Function(_GetDetailProductReward value)
         getDetailProductReward,
@@ -342,6 +374,8 @@ class _$ToggleTemperatureImpl implements _ToggleTemperature {
     TResult? Function(_ToggleSize value)? toggleSize,
     TResult? Function(_ToggleIce value)? toggleIce,
     TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_Decrement value)? decrement,
+    TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
     TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
   }) {
@@ -356,6 +390,8 @@ class _$ToggleTemperatureImpl implements _ToggleTemperature {
     TResult Function(_ToggleSize value)? toggleSize,
     TResult Function(_ToggleIce value)? toggleIce,
     TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_Decrement value)? decrement,
+    TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
     TResult Function(_GetDetailProductReward value)? getDetailProductReward,
     required TResult orElse(),
@@ -414,6 +450,8 @@ class _$ToggleSizeImpl implements _ToggleSize {
     required TResult Function() toggleSize,
     required TResult Function() toggleIce,
     required TResult Function() toggleSugar,
+    required TResult Function() decrement,
+    required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
     required TResult Function(int productRewardId) getDetailProductReward,
   }) {
@@ -428,6 +466,8 @@ class _$ToggleSizeImpl implements _ToggleSize {
     TResult? Function()? toggleSize,
     TResult? Function()? toggleIce,
     TResult? Function()? toggleSugar,
+    TResult? Function()? decrement,
+    TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
     TResult? Function(int productRewardId)? getDetailProductReward,
   }) {
@@ -442,6 +482,8 @@ class _$ToggleSizeImpl implements _ToggleSize {
     TResult Function()? toggleSize,
     TResult Function()? toggleIce,
     TResult Function()? toggleSugar,
+    TResult Function()? decrement,
+    TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
     TResult Function(int productRewardId)? getDetailProductReward,
     required TResult orElse(),
@@ -460,6 +502,8 @@ class _$ToggleSizeImpl implements _ToggleSize {
     required TResult Function(_ToggleSize value) toggleSize,
     required TResult Function(_ToggleIce value) toggleIce,
     required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_Decrement value) decrement,
+    required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
     required TResult Function(_GetDetailProductReward value)
         getDetailProductReward,
@@ -475,6 +519,8 @@ class _$ToggleSizeImpl implements _ToggleSize {
     TResult? Function(_ToggleSize value)? toggleSize,
     TResult? Function(_ToggleIce value)? toggleIce,
     TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_Decrement value)? decrement,
+    TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
     TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
   }) {
@@ -489,6 +535,8 @@ class _$ToggleSizeImpl implements _ToggleSize {
     TResult Function(_ToggleSize value)? toggleSize,
     TResult Function(_ToggleIce value)? toggleIce,
     TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_Decrement value)? decrement,
+    TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
     TResult Function(_GetDetailProductReward value)? getDetailProductReward,
     required TResult orElse(),
@@ -547,6 +595,8 @@ class _$ToggleIceImpl implements _ToggleIce {
     required TResult Function() toggleSize,
     required TResult Function() toggleIce,
     required TResult Function() toggleSugar,
+    required TResult Function() decrement,
+    required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
     required TResult Function(int productRewardId) getDetailProductReward,
   }) {
@@ -561,6 +611,8 @@ class _$ToggleIceImpl implements _ToggleIce {
     TResult? Function()? toggleSize,
     TResult? Function()? toggleIce,
     TResult? Function()? toggleSugar,
+    TResult? Function()? decrement,
+    TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
     TResult? Function(int productRewardId)? getDetailProductReward,
   }) {
@@ -575,6 +627,8 @@ class _$ToggleIceImpl implements _ToggleIce {
     TResult Function()? toggleSize,
     TResult Function()? toggleIce,
     TResult Function()? toggleSugar,
+    TResult Function()? decrement,
+    TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
     TResult Function(int productRewardId)? getDetailProductReward,
     required TResult orElse(),
@@ -593,6 +647,8 @@ class _$ToggleIceImpl implements _ToggleIce {
     required TResult Function(_ToggleSize value) toggleSize,
     required TResult Function(_ToggleIce value) toggleIce,
     required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_Decrement value) decrement,
+    required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
     required TResult Function(_GetDetailProductReward value)
         getDetailProductReward,
@@ -608,6 +664,8 @@ class _$ToggleIceImpl implements _ToggleIce {
     TResult? Function(_ToggleSize value)? toggleSize,
     TResult? Function(_ToggleIce value)? toggleIce,
     TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_Decrement value)? decrement,
+    TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
     TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
   }) {
@@ -622,6 +680,8 @@ class _$ToggleIceImpl implements _ToggleIce {
     TResult Function(_ToggleSize value)? toggleSize,
     TResult Function(_ToggleIce value)? toggleIce,
     TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_Decrement value)? decrement,
+    TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
     TResult Function(_GetDetailProductReward value)? getDetailProductReward,
     required TResult orElse(),
@@ -680,6 +740,8 @@ class _$ToggleSugarImpl implements _ToggleSugar {
     required TResult Function() toggleSize,
     required TResult Function() toggleIce,
     required TResult Function() toggleSugar,
+    required TResult Function() decrement,
+    required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
     required TResult Function(int productRewardId) getDetailProductReward,
   }) {
@@ -694,6 +756,8 @@ class _$ToggleSugarImpl implements _ToggleSugar {
     TResult? Function()? toggleSize,
     TResult? Function()? toggleIce,
     TResult? Function()? toggleSugar,
+    TResult? Function()? decrement,
+    TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
     TResult? Function(int productRewardId)? getDetailProductReward,
   }) {
@@ -708,6 +772,8 @@ class _$ToggleSugarImpl implements _ToggleSugar {
     TResult Function()? toggleSize,
     TResult Function()? toggleIce,
     TResult Function()? toggleSugar,
+    TResult Function()? decrement,
+    TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
     TResult Function(int productRewardId)? getDetailProductReward,
     required TResult orElse(),
@@ -726,6 +792,8 @@ class _$ToggleSugarImpl implements _ToggleSugar {
     required TResult Function(_ToggleSize value) toggleSize,
     required TResult Function(_ToggleIce value) toggleIce,
     required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_Decrement value) decrement,
+    required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
     required TResult Function(_GetDetailProductReward value)
         getDetailProductReward,
@@ -741,6 +809,8 @@ class _$ToggleSugarImpl implements _ToggleSugar {
     TResult? Function(_ToggleSize value)? toggleSize,
     TResult? Function(_ToggleIce value)? toggleIce,
     TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_Decrement value)? decrement,
+    TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
     TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
   }) {
@@ -755,6 +825,8 @@ class _$ToggleSugarImpl implements _ToggleSugar {
     TResult Function(_ToggleSize value)? toggleSize,
     TResult Function(_ToggleIce value)? toggleIce,
     TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_Decrement value)? decrement,
+    TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
     TResult Function(_GetDetailProductReward value)? getDetailProductReward,
     required TResult orElse(),
@@ -768,6 +840,296 @@ class _$ToggleSugarImpl implements _ToggleSugar {
 
 abstract class _ToggleSugar implements DetailProductEvent {
   const factory _ToggleSugar() = _$ToggleSugarImpl;
+}
+
+/// @nodoc
+abstract class _$$DecrementImplCopyWith<$Res> {
+  factory _$$DecrementImplCopyWith(
+          _$DecrementImpl value, $Res Function(_$DecrementImpl) then) =
+      __$$DecrementImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$DecrementImplCopyWithImpl<$Res>
+    extends _$DetailProductEventCopyWithImpl<$Res, _$DecrementImpl>
+    implements _$$DecrementImplCopyWith<$Res> {
+  __$$DecrementImplCopyWithImpl(
+      _$DecrementImpl _value, $Res Function(_$DecrementImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$DecrementImpl implements _Decrement {
+  const _$DecrementImpl();
+
+  @override
+  String toString() {
+    return 'DetailProductEvent.decrement()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$DecrementImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() toggleTemp,
+    required TResult Function() toggleSize,
+    required TResult Function() toggleIce,
+    required TResult Function() toggleSugar,
+    required TResult Function() decrement,
+    required TResult Function() increment,
+    required TResult Function(int productId) getDetailProduct,
+    required TResult Function(int productRewardId) getDetailProductReward,
+  }) {
+    return decrement();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? toggleTemp,
+    TResult? Function()? toggleSize,
+    TResult? Function()? toggleIce,
+    TResult? Function()? toggleSugar,
+    TResult? Function()? decrement,
+    TResult? Function()? increment,
+    TResult? Function(int productId)? getDetailProduct,
+    TResult? Function(int productRewardId)? getDetailProductReward,
+  }) {
+    return decrement?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? toggleTemp,
+    TResult Function()? toggleSize,
+    TResult Function()? toggleIce,
+    TResult Function()? toggleSugar,
+    TResult Function()? decrement,
+    TResult Function()? increment,
+    TResult Function(int productId)? getDetailProduct,
+    TResult Function(int productRewardId)? getDetailProductReward,
+    required TResult orElse(),
+  }) {
+    if (decrement != null) {
+      return decrement();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_ToggleTemperature value) toggleTemp,
+    required TResult Function(_ToggleSize value) toggleSize,
+    required TResult Function(_ToggleIce value) toggleIce,
+    required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_Decrement value) decrement,
+    required TResult Function(_Increment value) increment,
+    required TResult Function(_GetDetailProduct value) getDetailProduct,
+    required TResult Function(_GetDetailProductReward value)
+        getDetailProductReward,
+  }) {
+    return decrement(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_ToggleTemperature value)? toggleTemp,
+    TResult? Function(_ToggleSize value)? toggleSize,
+    TResult? Function(_ToggleIce value)? toggleIce,
+    TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_Decrement value)? decrement,
+    TResult? Function(_Increment value)? increment,
+    TResult? Function(_GetDetailProduct value)? getDetailProduct,
+    TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
+  }) {
+    return decrement?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_ToggleTemperature value)? toggleTemp,
+    TResult Function(_ToggleSize value)? toggleSize,
+    TResult Function(_ToggleIce value)? toggleIce,
+    TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_Decrement value)? decrement,
+    TResult Function(_Increment value)? increment,
+    TResult Function(_GetDetailProduct value)? getDetailProduct,
+    TResult Function(_GetDetailProductReward value)? getDetailProductReward,
+    required TResult orElse(),
+  }) {
+    if (decrement != null) {
+      return decrement(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Decrement implements DetailProductEvent {
+  const factory _Decrement() = _$DecrementImpl;
+}
+
+/// @nodoc
+abstract class _$$IncrementImplCopyWith<$Res> {
+  factory _$$IncrementImplCopyWith(
+          _$IncrementImpl value, $Res Function(_$IncrementImpl) then) =
+      __$$IncrementImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$IncrementImplCopyWithImpl<$Res>
+    extends _$DetailProductEventCopyWithImpl<$Res, _$IncrementImpl>
+    implements _$$IncrementImplCopyWith<$Res> {
+  __$$IncrementImplCopyWithImpl(
+      _$IncrementImpl _value, $Res Function(_$IncrementImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$IncrementImpl implements _Increment {
+  const _$IncrementImpl();
+
+  @override
+  String toString() {
+    return 'DetailProductEvent.increment()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$IncrementImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() toggleTemp,
+    required TResult Function() toggleSize,
+    required TResult Function() toggleIce,
+    required TResult Function() toggleSugar,
+    required TResult Function() decrement,
+    required TResult Function() increment,
+    required TResult Function(int productId) getDetailProduct,
+    required TResult Function(int productRewardId) getDetailProductReward,
+  }) {
+    return increment();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? toggleTemp,
+    TResult? Function()? toggleSize,
+    TResult? Function()? toggleIce,
+    TResult? Function()? toggleSugar,
+    TResult? Function()? decrement,
+    TResult? Function()? increment,
+    TResult? Function(int productId)? getDetailProduct,
+    TResult? Function(int productRewardId)? getDetailProductReward,
+  }) {
+    return increment?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? toggleTemp,
+    TResult Function()? toggleSize,
+    TResult Function()? toggleIce,
+    TResult Function()? toggleSugar,
+    TResult Function()? decrement,
+    TResult Function()? increment,
+    TResult Function(int productId)? getDetailProduct,
+    TResult Function(int productRewardId)? getDetailProductReward,
+    required TResult orElse(),
+  }) {
+    if (increment != null) {
+      return increment();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_ToggleTemperature value) toggleTemp,
+    required TResult Function(_ToggleSize value) toggleSize,
+    required TResult Function(_ToggleIce value) toggleIce,
+    required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_Decrement value) decrement,
+    required TResult Function(_Increment value) increment,
+    required TResult Function(_GetDetailProduct value) getDetailProduct,
+    required TResult Function(_GetDetailProductReward value)
+        getDetailProductReward,
+  }) {
+    return increment(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_ToggleTemperature value)? toggleTemp,
+    TResult? Function(_ToggleSize value)? toggleSize,
+    TResult? Function(_ToggleIce value)? toggleIce,
+    TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_Decrement value)? decrement,
+    TResult? Function(_Increment value)? increment,
+    TResult? Function(_GetDetailProduct value)? getDetailProduct,
+    TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
+  }) {
+    return increment?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_ToggleTemperature value)? toggleTemp,
+    TResult Function(_ToggleSize value)? toggleSize,
+    TResult Function(_ToggleIce value)? toggleIce,
+    TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_Decrement value)? decrement,
+    TResult Function(_Increment value)? increment,
+    TResult Function(_GetDetailProduct value)? getDetailProduct,
+    TResult Function(_GetDetailProductReward value)? getDetailProductReward,
+    required TResult orElse(),
+  }) {
+    if (increment != null) {
+      return increment(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Increment implements DetailProductEvent {
+  const factory _Increment() = _$IncrementImpl;
 }
 
 /// @nodoc
@@ -841,6 +1203,8 @@ class _$GetDetailProductImpl implements _GetDetailProduct {
     required TResult Function() toggleSize,
     required TResult Function() toggleIce,
     required TResult Function() toggleSugar,
+    required TResult Function() decrement,
+    required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
     required TResult Function(int productRewardId) getDetailProductReward,
   }) {
@@ -855,6 +1219,8 @@ class _$GetDetailProductImpl implements _GetDetailProduct {
     TResult? Function()? toggleSize,
     TResult? Function()? toggleIce,
     TResult? Function()? toggleSugar,
+    TResult? Function()? decrement,
+    TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
     TResult? Function(int productRewardId)? getDetailProductReward,
   }) {
@@ -869,6 +1235,8 @@ class _$GetDetailProductImpl implements _GetDetailProduct {
     TResult Function()? toggleSize,
     TResult Function()? toggleIce,
     TResult Function()? toggleSugar,
+    TResult Function()? decrement,
+    TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
     TResult Function(int productRewardId)? getDetailProductReward,
     required TResult orElse(),
@@ -887,6 +1255,8 @@ class _$GetDetailProductImpl implements _GetDetailProduct {
     required TResult Function(_ToggleSize value) toggleSize,
     required TResult Function(_ToggleIce value) toggleIce,
     required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_Decrement value) decrement,
+    required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
     required TResult Function(_GetDetailProductReward value)
         getDetailProductReward,
@@ -902,6 +1272,8 @@ class _$GetDetailProductImpl implements _GetDetailProduct {
     TResult? Function(_ToggleSize value)? toggleSize,
     TResult? Function(_ToggleIce value)? toggleIce,
     TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_Decrement value)? decrement,
+    TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
     TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
   }) {
@@ -916,6 +1288,8 @@ class _$GetDetailProductImpl implements _GetDetailProduct {
     TResult Function(_ToggleSize value)? toggleSize,
     TResult Function(_ToggleIce value)? toggleIce,
     TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_Decrement value)? decrement,
+    TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
     TResult Function(_GetDetailProductReward value)? getDetailProductReward,
     required TResult orElse(),
@@ -1009,6 +1383,8 @@ class _$GetDetailProductRewardImpl implements _GetDetailProductReward {
     required TResult Function() toggleSize,
     required TResult Function() toggleIce,
     required TResult Function() toggleSugar,
+    required TResult Function() decrement,
+    required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
     required TResult Function(int productRewardId) getDetailProductReward,
   }) {
@@ -1023,6 +1399,8 @@ class _$GetDetailProductRewardImpl implements _GetDetailProductReward {
     TResult? Function()? toggleSize,
     TResult? Function()? toggleIce,
     TResult? Function()? toggleSugar,
+    TResult? Function()? decrement,
+    TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
     TResult? Function(int productRewardId)? getDetailProductReward,
   }) {
@@ -1037,6 +1415,8 @@ class _$GetDetailProductRewardImpl implements _GetDetailProductReward {
     TResult Function()? toggleSize,
     TResult Function()? toggleIce,
     TResult Function()? toggleSugar,
+    TResult Function()? decrement,
+    TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
     TResult Function(int productRewardId)? getDetailProductReward,
     required TResult orElse(),
@@ -1055,6 +1435,8 @@ class _$GetDetailProductRewardImpl implements _GetDetailProductReward {
     required TResult Function(_ToggleSize value) toggleSize,
     required TResult Function(_ToggleIce value) toggleIce,
     required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_Decrement value) decrement,
+    required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
     required TResult Function(_GetDetailProductReward value)
         getDetailProductReward,
@@ -1070,6 +1452,8 @@ class _$GetDetailProductRewardImpl implements _GetDetailProductReward {
     TResult? Function(_ToggleSize value)? toggleSize,
     TResult? Function(_ToggleIce value)? toggleIce,
     TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_Decrement value)? decrement,
+    TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
     TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
   }) {
@@ -1084,6 +1468,8 @@ class _$GetDetailProductRewardImpl implements _GetDetailProductReward {
     TResult Function(_ToggleSize value)? toggleSize,
     TResult Function(_ToggleIce value)? toggleIce,
     TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_Decrement value)? decrement,
+    TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
     TResult Function(_GetDetailProductReward value)? getDetailProductReward,
     required TResult orElse(),
@@ -1121,7 +1507,8 @@ mixin _$DetailProductState {
             bool isIceSelected,
             String selectedIce,
             bool isSugarSelected,
-            String selectedSugar)
+            String selectedSugar,
+            int quantityCount)
         success,
     required TResult Function(String? message) error,
   }) =>
@@ -1140,7 +1527,8 @@ mixin _$DetailProductState {
             bool isIceSelected,
             String selectedIce,
             bool isSugarSelected,
-            String selectedSugar)?
+            String selectedSugar,
+            int quantityCount)?
         success,
     TResult? Function(String? message)? error,
   }) =>
@@ -1159,7 +1547,8 @@ mixin _$DetailProductState {
             bool isIceSelected,
             String selectedIce,
             bool isSugarSelected,
-            String selectedSugar)?
+            String selectedSugar,
+            int quantityCount)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -1260,7 +1649,8 @@ class _$InitialImpl implements _Initial {
             bool isIceSelected,
             String selectedIce,
             bool isSugarSelected,
-            String selectedSugar)
+            String selectedSugar,
+            int quantityCount)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -1282,7 +1672,8 @@ class _$InitialImpl implements _Initial {
             bool isIceSelected,
             String selectedIce,
             bool isSugarSelected,
-            String selectedSugar)?
+            String selectedSugar,
+            int quantityCount)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -1304,7 +1695,8 @@ class _$InitialImpl implements _Initial {
             bool isIceSelected,
             String selectedIce,
             bool isSugarSelected,
-            String selectedSugar)?
+            String selectedSugar,
+            int quantityCount)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -1407,7 +1799,8 @@ class _$LoadingImpl implements _Loading {
             bool isIceSelected,
             String selectedIce,
             bool isSugarSelected,
-            String selectedSugar)
+            String selectedSugar,
+            int quantityCount)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -1429,7 +1822,8 @@ class _$LoadingImpl implements _Loading {
             bool isIceSelected,
             String selectedIce,
             bool isSugarSelected,
-            String selectedSugar)?
+            String selectedSugar,
+            int quantityCount)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -1451,7 +1845,8 @@ class _$LoadingImpl implements _Loading {
             bool isIceSelected,
             String selectedIce,
             bool isSugarSelected,
-            String selectedSugar)?
+            String selectedSugar,
+            int quantityCount)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -1520,7 +1915,8 @@ abstract class _$$SuccessImplCopyWith<$Res> {
       bool isIceSelected,
       String selectedIce,
       bool isSugarSelected,
-      String selectedSugar});
+      String selectedSugar,
+      int quantityCount});
 }
 
 /// @nodoc
@@ -1544,6 +1940,7 @@ class __$$SuccessImplCopyWithImpl<$Res>
     Object? selectedIce = null,
     Object? isSugarSelected = null,
     Object? selectedSugar = null,
+    Object? quantityCount = null,
   }) {
     return _then(_$SuccessImpl(
       freezed == model
@@ -1586,6 +1983,10 @@ class __$$SuccessImplCopyWithImpl<$Res>
           ? _value.selectedSugar
           : selectedSugar // ignore: cast_nullable_to_non_nullable
               as String,
+      quantityCount: null == quantityCount
+          ? _value.quantityCount
+          : quantityCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -1601,7 +2002,8 @@ class _$SuccessImpl implements _Success {
       this.isIceSelected = false,
       this.selectedIce = 'normal',
       this.isSugarSelected = false,
-      this.selectedSugar = 'normal'});
+      this.selectedSugar = 'normal',
+      this.quantityCount = 1});
 
   @override
   final DetailProductResponseModel? model;
@@ -1631,10 +2033,13 @@ class _$SuccessImpl implements _Success {
   @override
   @JsonKey()
   final String selectedSugar;
+  @override
+  @JsonKey()
+  final int quantityCount;
 
   @override
   String toString() {
-    return 'DetailProductState.success(model: $model, modelReward: $modelReward, isTempSelected: $isTempSelected, selectedTemp: $selectedTemp, isSizeSelected: $isSizeSelected, selectedSize: $selectedSize, isIceSelected: $isIceSelected, selectedIce: $selectedIce, isSugarSelected: $isSugarSelected, selectedSugar: $selectedSugar)';
+    return 'DetailProductState.success(model: $model, modelReward: $modelReward, isTempSelected: $isTempSelected, selectedTemp: $selectedTemp, isSizeSelected: $isSizeSelected, selectedSize: $selectedSize, isIceSelected: $isIceSelected, selectedIce: $selectedIce, isSugarSelected: $isSugarSelected, selectedSugar: $selectedSugar, quantityCount: $quantityCount)';
   }
 
   @override
@@ -1660,7 +2065,9 @@ class _$SuccessImpl implements _Success {
             (identical(other.isSugarSelected, isSugarSelected) ||
                 other.isSugarSelected == isSugarSelected) &&
             (identical(other.selectedSugar, selectedSugar) ||
-                other.selectedSugar == selectedSugar));
+                other.selectedSugar == selectedSugar) &&
+            (identical(other.quantityCount, quantityCount) ||
+                other.quantityCount == quantityCount));
   }
 
   @override
@@ -1675,7 +2082,8 @@ class _$SuccessImpl implements _Success {
       isIceSelected,
       selectedIce,
       isSugarSelected,
-      selectedSugar);
+      selectedSugar,
+      quantityCount);
 
   @JsonKey(ignore: true)
   @override
@@ -1698,7 +2106,8 @@ class _$SuccessImpl implements _Success {
             bool isIceSelected,
             String selectedIce,
             bool isSugarSelected,
-            String selectedSugar)
+            String selectedSugar,
+            int quantityCount)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -1712,7 +2121,8 @@ class _$SuccessImpl implements _Success {
         isIceSelected,
         selectedIce,
         isSugarSelected,
-        selectedSugar);
+        selectedSugar,
+        quantityCount);
   }
 
   @override
@@ -1730,7 +2140,8 @@ class _$SuccessImpl implements _Success {
             bool isIceSelected,
             String selectedIce,
             bool isSugarSelected,
-            String selectedSugar)?
+            String selectedSugar,
+            int quantityCount)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -1744,7 +2155,8 @@ class _$SuccessImpl implements _Success {
         isIceSelected,
         selectedIce,
         isSugarSelected,
-        selectedSugar);
+        selectedSugar,
+        quantityCount);
   }
 
   @override
@@ -1762,7 +2174,8 @@ class _$SuccessImpl implements _Success {
             bool isIceSelected,
             String selectedIce,
             bool isSugarSelected,
-            String selectedSugar)?
+            String selectedSugar,
+            int quantityCount)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -1778,7 +2191,8 @@ class _$SuccessImpl implements _Success {
           isIceSelected,
           selectedIce,
           isSugarSelected,
-          selectedSugar);
+          selectedSugar,
+          quantityCount);
     }
     return orElse();
   }
@@ -1831,7 +2245,8 @@ abstract class _Success implements DetailProductState {
       final bool isIceSelected,
       final String selectedIce,
       final bool isSugarSelected,
-      final String selectedSugar}) = _$SuccessImpl;
+      final String selectedSugar,
+      final int quantityCount}) = _$SuccessImpl;
 
   DetailProductResponseModel? get model;
   DetailProductRewardResponseModel? get modelReward;
@@ -1843,6 +2258,7 @@ abstract class _Success implements DetailProductState {
   String get selectedIce;
   bool get isSugarSelected;
   String get selectedSugar;
+  int get quantityCount;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1924,7 +2340,8 @@ class _$ErrorImpl implements _Error {
             bool isIceSelected,
             String selectedIce,
             bool isSugarSelected,
-            String selectedSugar)
+            String selectedSugar,
+            int quantityCount)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -1946,7 +2363,8 @@ class _$ErrorImpl implements _Error {
             bool isIceSelected,
             String selectedIce,
             bool isSugarSelected,
-            String selectedSugar)?
+            String selectedSugar,
+            int quantityCount)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -1968,7 +2386,8 @@ class _$ErrorImpl implements _Error {
             bool isIceSelected,
             String selectedIce,
             bool isSugarSelected,
-            String selectedSugar)?
+            String selectedSugar,
+            int quantityCount)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),

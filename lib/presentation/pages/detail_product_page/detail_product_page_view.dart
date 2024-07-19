@@ -16,6 +16,8 @@ class DetailProductPage extends StatelessWidget {
   int? productId;
   int? productRewardId;
 
+
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -84,8 +86,8 @@ class DetailProductPage extends StatelessWidget {
 
                         const SizedBox(height: 20),
                         BoxOptionProduct(),
-                        // const SizedBox(height: 20),
-                        // InputNotes(),
+                        const SizedBox(height: 20),
+                        InputNotes(),
                         const SizedBox(height: 120),
                       ],
                     ),
