@@ -19,6 +19,10 @@ mixin _$DetailProductEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
+    required TResult Function() toggleTemp,
+    required TResult Function() toggleSize,
+    required TResult Function() toggleIce,
+    required TResult Function() toggleSugar,
     required TResult Function(int productId) getDetailProduct,
     required TResult Function(int productRewardId) getDetailProductReward,
   }) =>
@@ -26,6 +30,10 @@ mixin _$DetailProductEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
+    TResult? Function()? toggleTemp,
+    TResult? Function()? toggleSize,
+    TResult? Function()? toggleIce,
+    TResult? Function()? toggleSugar,
     TResult? Function(int productId)? getDetailProduct,
     TResult? Function(int productRewardId)? getDetailProductReward,
   }) =>
@@ -33,6 +41,10 @@ mixin _$DetailProductEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
+    TResult Function()? toggleTemp,
+    TResult Function()? toggleSize,
+    TResult Function()? toggleIce,
+    TResult Function()? toggleSugar,
     TResult Function(int productId)? getDetailProduct,
     TResult Function(int productRewardId)? getDetailProductReward,
     required TResult orElse(),
@@ -41,6 +53,10 @@ mixin _$DetailProductEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
+    required TResult Function(_ToggleTemperature value) toggleTemp,
+    required TResult Function(_ToggleSize value) toggleSize,
+    required TResult Function(_ToggleIce value) toggleIce,
+    required TResult Function(_ToggleSugar value) toggleSugar,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
     required TResult Function(_GetDetailProductReward value)
         getDetailProductReward,
@@ -49,6 +65,10 @@ mixin _$DetailProductEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
+    TResult? Function(_ToggleTemperature value)? toggleTemp,
+    TResult? Function(_ToggleSize value)? toggleSize,
+    TResult? Function(_ToggleIce value)? toggleIce,
+    TResult? Function(_ToggleSugar value)? toggleSugar,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
     TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
   }) =>
@@ -56,6 +76,10 @@ mixin _$DetailProductEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
+    TResult Function(_ToggleTemperature value)? toggleTemp,
+    TResult Function(_ToggleSize value)? toggleSize,
+    TResult Function(_ToggleIce value)? toggleIce,
+    TResult Function(_ToggleSugar value)? toggleSugar,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
     TResult Function(_GetDetailProductReward value)? getDetailProductReward,
     required TResult orElse(),
@@ -120,6 +144,10 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
+    required TResult Function() toggleTemp,
+    required TResult Function() toggleSize,
+    required TResult Function() toggleIce,
+    required TResult Function() toggleSugar,
     required TResult Function(int productId) getDetailProduct,
     required TResult Function(int productRewardId) getDetailProductReward,
   }) {
@@ -130,6 +158,10 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
+    TResult? Function()? toggleTemp,
+    TResult? Function()? toggleSize,
+    TResult? Function()? toggleIce,
+    TResult? Function()? toggleSugar,
     TResult? Function(int productId)? getDetailProduct,
     TResult? Function(int productRewardId)? getDetailProductReward,
   }) {
@@ -140,6 +172,10 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
+    TResult Function()? toggleTemp,
+    TResult Function()? toggleSize,
+    TResult Function()? toggleIce,
+    TResult Function()? toggleSugar,
     TResult Function(int productId)? getDetailProduct,
     TResult Function(int productRewardId)? getDetailProductReward,
     required TResult orElse(),
@@ -154,6 +190,10 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
+    required TResult Function(_ToggleTemperature value) toggleTemp,
+    required TResult Function(_ToggleSize value) toggleSize,
+    required TResult Function(_ToggleIce value) toggleIce,
+    required TResult Function(_ToggleSugar value) toggleSugar,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
     required TResult Function(_GetDetailProductReward value)
         getDetailProductReward,
@@ -165,6 +205,10 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
+    TResult? Function(_ToggleTemperature value)? toggleTemp,
+    TResult? Function(_ToggleSize value)? toggleSize,
+    TResult? Function(_ToggleIce value)? toggleIce,
+    TResult? Function(_ToggleSugar value)? toggleSugar,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
     TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
   }) {
@@ -175,6 +219,10 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
+    TResult Function(_ToggleTemperature value)? toggleTemp,
+    TResult Function(_ToggleSize value)? toggleSize,
+    TResult Function(_ToggleIce value)? toggleIce,
+    TResult Function(_ToggleSugar value)? toggleSugar,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
     TResult Function(_GetDetailProductReward value)? getDetailProductReward,
     required TResult orElse(),
@@ -188,6 +236,538 @@ class _$StartedImpl implements _Started {
 
 abstract class _Started implements DetailProductEvent {
   const factory _Started() = _$StartedImpl;
+}
+
+/// @nodoc
+abstract class _$$ToggleTemperatureImplCopyWith<$Res> {
+  factory _$$ToggleTemperatureImplCopyWith(_$ToggleTemperatureImpl value,
+          $Res Function(_$ToggleTemperatureImpl) then) =
+      __$$ToggleTemperatureImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ToggleTemperatureImplCopyWithImpl<$Res>
+    extends _$DetailProductEventCopyWithImpl<$Res, _$ToggleTemperatureImpl>
+    implements _$$ToggleTemperatureImplCopyWith<$Res> {
+  __$$ToggleTemperatureImplCopyWithImpl(_$ToggleTemperatureImpl _value,
+      $Res Function(_$ToggleTemperatureImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ToggleTemperatureImpl implements _ToggleTemperature {
+  const _$ToggleTemperatureImpl();
+
+  @override
+  String toString() {
+    return 'DetailProductEvent.toggleTemp()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ToggleTemperatureImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() toggleTemp,
+    required TResult Function() toggleSize,
+    required TResult Function() toggleIce,
+    required TResult Function() toggleSugar,
+    required TResult Function(int productId) getDetailProduct,
+    required TResult Function(int productRewardId) getDetailProductReward,
+  }) {
+    return toggleTemp();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? toggleTemp,
+    TResult? Function()? toggleSize,
+    TResult? Function()? toggleIce,
+    TResult? Function()? toggleSugar,
+    TResult? Function(int productId)? getDetailProduct,
+    TResult? Function(int productRewardId)? getDetailProductReward,
+  }) {
+    return toggleTemp?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? toggleTemp,
+    TResult Function()? toggleSize,
+    TResult Function()? toggleIce,
+    TResult Function()? toggleSugar,
+    TResult Function(int productId)? getDetailProduct,
+    TResult Function(int productRewardId)? getDetailProductReward,
+    required TResult orElse(),
+  }) {
+    if (toggleTemp != null) {
+      return toggleTemp();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_ToggleTemperature value) toggleTemp,
+    required TResult Function(_ToggleSize value) toggleSize,
+    required TResult Function(_ToggleIce value) toggleIce,
+    required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_GetDetailProduct value) getDetailProduct,
+    required TResult Function(_GetDetailProductReward value)
+        getDetailProductReward,
+  }) {
+    return toggleTemp(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_ToggleTemperature value)? toggleTemp,
+    TResult? Function(_ToggleSize value)? toggleSize,
+    TResult? Function(_ToggleIce value)? toggleIce,
+    TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_GetDetailProduct value)? getDetailProduct,
+    TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
+  }) {
+    return toggleTemp?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_ToggleTemperature value)? toggleTemp,
+    TResult Function(_ToggleSize value)? toggleSize,
+    TResult Function(_ToggleIce value)? toggleIce,
+    TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_GetDetailProduct value)? getDetailProduct,
+    TResult Function(_GetDetailProductReward value)? getDetailProductReward,
+    required TResult orElse(),
+  }) {
+    if (toggleTemp != null) {
+      return toggleTemp(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ToggleTemperature implements DetailProductEvent {
+  const factory _ToggleTemperature() = _$ToggleTemperatureImpl;
+}
+
+/// @nodoc
+abstract class _$$ToggleSizeImplCopyWith<$Res> {
+  factory _$$ToggleSizeImplCopyWith(
+          _$ToggleSizeImpl value, $Res Function(_$ToggleSizeImpl) then) =
+      __$$ToggleSizeImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ToggleSizeImplCopyWithImpl<$Res>
+    extends _$DetailProductEventCopyWithImpl<$Res, _$ToggleSizeImpl>
+    implements _$$ToggleSizeImplCopyWith<$Res> {
+  __$$ToggleSizeImplCopyWithImpl(
+      _$ToggleSizeImpl _value, $Res Function(_$ToggleSizeImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ToggleSizeImpl implements _ToggleSize {
+  const _$ToggleSizeImpl();
+
+  @override
+  String toString() {
+    return 'DetailProductEvent.toggleSize()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ToggleSizeImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() toggleTemp,
+    required TResult Function() toggleSize,
+    required TResult Function() toggleIce,
+    required TResult Function() toggleSugar,
+    required TResult Function(int productId) getDetailProduct,
+    required TResult Function(int productRewardId) getDetailProductReward,
+  }) {
+    return toggleSize();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? toggleTemp,
+    TResult? Function()? toggleSize,
+    TResult? Function()? toggleIce,
+    TResult? Function()? toggleSugar,
+    TResult? Function(int productId)? getDetailProduct,
+    TResult? Function(int productRewardId)? getDetailProductReward,
+  }) {
+    return toggleSize?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? toggleTemp,
+    TResult Function()? toggleSize,
+    TResult Function()? toggleIce,
+    TResult Function()? toggleSugar,
+    TResult Function(int productId)? getDetailProduct,
+    TResult Function(int productRewardId)? getDetailProductReward,
+    required TResult orElse(),
+  }) {
+    if (toggleSize != null) {
+      return toggleSize();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_ToggleTemperature value) toggleTemp,
+    required TResult Function(_ToggleSize value) toggleSize,
+    required TResult Function(_ToggleIce value) toggleIce,
+    required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_GetDetailProduct value) getDetailProduct,
+    required TResult Function(_GetDetailProductReward value)
+        getDetailProductReward,
+  }) {
+    return toggleSize(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_ToggleTemperature value)? toggleTemp,
+    TResult? Function(_ToggleSize value)? toggleSize,
+    TResult? Function(_ToggleIce value)? toggleIce,
+    TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_GetDetailProduct value)? getDetailProduct,
+    TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
+  }) {
+    return toggleSize?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_ToggleTemperature value)? toggleTemp,
+    TResult Function(_ToggleSize value)? toggleSize,
+    TResult Function(_ToggleIce value)? toggleIce,
+    TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_GetDetailProduct value)? getDetailProduct,
+    TResult Function(_GetDetailProductReward value)? getDetailProductReward,
+    required TResult orElse(),
+  }) {
+    if (toggleSize != null) {
+      return toggleSize(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ToggleSize implements DetailProductEvent {
+  const factory _ToggleSize() = _$ToggleSizeImpl;
+}
+
+/// @nodoc
+abstract class _$$ToggleIceImplCopyWith<$Res> {
+  factory _$$ToggleIceImplCopyWith(
+          _$ToggleIceImpl value, $Res Function(_$ToggleIceImpl) then) =
+      __$$ToggleIceImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ToggleIceImplCopyWithImpl<$Res>
+    extends _$DetailProductEventCopyWithImpl<$Res, _$ToggleIceImpl>
+    implements _$$ToggleIceImplCopyWith<$Res> {
+  __$$ToggleIceImplCopyWithImpl(
+      _$ToggleIceImpl _value, $Res Function(_$ToggleIceImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ToggleIceImpl implements _ToggleIce {
+  const _$ToggleIceImpl();
+
+  @override
+  String toString() {
+    return 'DetailProductEvent.toggleIce()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ToggleIceImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() toggleTemp,
+    required TResult Function() toggleSize,
+    required TResult Function() toggleIce,
+    required TResult Function() toggleSugar,
+    required TResult Function(int productId) getDetailProduct,
+    required TResult Function(int productRewardId) getDetailProductReward,
+  }) {
+    return toggleIce();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? toggleTemp,
+    TResult? Function()? toggleSize,
+    TResult? Function()? toggleIce,
+    TResult? Function()? toggleSugar,
+    TResult? Function(int productId)? getDetailProduct,
+    TResult? Function(int productRewardId)? getDetailProductReward,
+  }) {
+    return toggleIce?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? toggleTemp,
+    TResult Function()? toggleSize,
+    TResult Function()? toggleIce,
+    TResult Function()? toggleSugar,
+    TResult Function(int productId)? getDetailProduct,
+    TResult Function(int productRewardId)? getDetailProductReward,
+    required TResult orElse(),
+  }) {
+    if (toggleIce != null) {
+      return toggleIce();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_ToggleTemperature value) toggleTemp,
+    required TResult Function(_ToggleSize value) toggleSize,
+    required TResult Function(_ToggleIce value) toggleIce,
+    required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_GetDetailProduct value) getDetailProduct,
+    required TResult Function(_GetDetailProductReward value)
+        getDetailProductReward,
+  }) {
+    return toggleIce(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_ToggleTemperature value)? toggleTemp,
+    TResult? Function(_ToggleSize value)? toggleSize,
+    TResult? Function(_ToggleIce value)? toggleIce,
+    TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_GetDetailProduct value)? getDetailProduct,
+    TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
+  }) {
+    return toggleIce?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_ToggleTemperature value)? toggleTemp,
+    TResult Function(_ToggleSize value)? toggleSize,
+    TResult Function(_ToggleIce value)? toggleIce,
+    TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_GetDetailProduct value)? getDetailProduct,
+    TResult Function(_GetDetailProductReward value)? getDetailProductReward,
+    required TResult orElse(),
+  }) {
+    if (toggleIce != null) {
+      return toggleIce(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ToggleIce implements DetailProductEvent {
+  const factory _ToggleIce() = _$ToggleIceImpl;
+}
+
+/// @nodoc
+abstract class _$$ToggleSugarImplCopyWith<$Res> {
+  factory _$$ToggleSugarImplCopyWith(
+          _$ToggleSugarImpl value, $Res Function(_$ToggleSugarImpl) then) =
+      __$$ToggleSugarImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ToggleSugarImplCopyWithImpl<$Res>
+    extends _$DetailProductEventCopyWithImpl<$Res, _$ToggleSugarImpl>
+    implements _$$ToggleSugarImplCopyWith<$Res> {
+  __$$ToggleSugarImplCopyWithImpl(
+      _$ToggleSugarImpl _value, $Res Function(_$ToggleSugarImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ToggleSugarImpl implements _ToggleSugar {
+  const _$ToggleSugarImpl();
+
+  @override
+  String toString() {
+    return 'DetailProductEvent.toggleSugar()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ToggleSugarImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() toggleTemp,
+    required TResult Function() toggleSize,
+    required TResult Function() toggleIce,
+    required TResult Function() toggleSugar,
+    required TResult Function(int productId) getDetailProduct,
+    required TResult Function(int productRewardId) getDetailProductReward,
+  }) {
+    return toggleSugar();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? toggleTemp,
+    TResult? Function()? toggleSize,
+    TResult? Function()? toggleIce,
+    TResult? Function()? toggleSugar,
+    TResult? Function(int productId)? getDetailProduct,
+    TResult? Function(int productRewardId)? getDetailProductReward,
+  }) {
+    return toggleSugar?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? toggleTemp,
+    TResult Function()? toggleSize,
+    TResult Function()? toggleIce,
+    TResult Function()? toggleSugar,
+    TResult Function(int productId)? getDetailProduct,
+    TResult Function(int productRewardId)? getDetailProductReward,
+    required TResult orElse(),
+  }) {
+    if (toggleSugar != null) {
+      return toggleSugar();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_ToggleTemperature value) toggleTemp,
+    required TResult Function(_ToggleSize value) toggleSize,
+    required TResult Function(_ToggleIce value) toggleIce,
+    required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_GetDetailProduct value) getDetailProduct,
+    required TResult Function(_GetDetailProductReward value)
+        getDetailProductReward,
+  }) {
+    return toggleSugar(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_ToggleTemperature value)? toggleTemp,
+    TResult? Function(_ToggleSize value)? toggleSize,
+    TResult? Function(_ToggleIce value)? toggleIce,
+    TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_GetDetailProduct value)? getDetailProduct,
+    TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
+  }) {
+    return toggleSugar?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_ToggleTemperature value)? toggleTemp,
+    TResult Function(_ToggleSize value)? toggleSize,
+    TResult Function(_ToggleIce value)? toggleIce,
+    TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_GetDetailProduct value)? getDetailProduct,
+    TResult Function(_GetDetailProductReward value)? getDetailProductReward,
+    required TResult orElse(),
+  }) {
+    if (toggleSugar != null) {
+      return toggleSugar(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ToggleSugar implements DetailProductEvent {
+  const factory _ToggleSugar() = _$ToggleSugarImpl;
 }
 
 /// @nodoc
@@ -257,6 +837,10 @@ class _$GetDetailProductImpl implements _GetDetailProduct {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
+    required TResult Function() toggleTemp,
+    required TResult Function() toggleSize,
+    required TResult Function() toggleIce,
+    required TResult Function() toggleSugar,
     required TResult Function(int productId) getDetailProduct,
     required TResult Function(int productRewardId) getDetailProductReward,
   }) {
@@ -267,6 +851,10 @@ class _$GetDetailProductImpl implements _GetDetailProduct {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
+    TResult? Function()? toggleTemp,
+    TResult? Function()? toggleSize,
+    TResult? Function()? toggleIce,
+    TResult? Function()? toggleSugar,
     TResult? Function(int productId)? getDetailProduct,
     TResult? Function(int productRewardId)? getDetailProductReward,
   }) {
@@ -277,6 +865,10 @@ class _$GetDetailProductImpl implements _GetDetailProduct {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
+    TResult Function()? toggleTemp,
+    TResult Function()? toggleSize,
+    TResult Function()? toggleIce,
+    TResult Function()? toggleSugar,
     TResult Function(int productId)? getDetailProduct,
     TResult Function(int productRewardId)? getDetailProductReward,
     required TResult orElse(),
@@ -291,6 +883,10 @@ class _$GetDetailProductImpl implements _GetDetailProduct {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
+    required TResult Function(_ToggleTemperature value) toggleTemp,
+    required TResult Function(_ToggleSize value) toggleSize,
+    required TResult Function(_ToggleIce value) toggleIce,
+    required TResult Function(_ToggleSugar value) toggleSugar,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
     required TResult Function(_GetDetailProductReward value)
         getDetailProductReward,
@@ -302,6 +898,10 @@ class _$GetDetailProductImpl implements _GetDetailProduct {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
+    TResult? Function(_ToggleTemperature value)? toggleTemp,
+    TResult? Function(_ToggleSize value)? toggleSize,
+    TResult? Function(_ToggleIce value)? toggleIce,
+    TResult? Function(_ToggleSugar value)? toggleSugar,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
     TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
   }) {
@@ -312,6 +912,10 @@ class _$GetDetailProductImpl implements _GetDetailProduct {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
+    TResult Function(_ToggleTemperature value)? toggleTemp,
+    TResult Function(_ToggleSize value)? toggleSize,
+    TResult Function(_ToggleIce value)? toggleIce,
+    TResult Function(_ToggleSugar value)? toggleSugar,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
     TResult Function(_GetDetailProductReward value)? getDetailProductReward,
     required TResult orElse(),
@@ -401,6 +1005,10 @@ class _$GetDetailProductRewardImpl implements _GetDetailProductReward {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
+    required TResult Function() toggleTemp,
+    required TResult Function() toggleSize,
+    required TResult Function() toggleIce,
+    required TResult Function() toggleSugar,
     required TResult Function(int productId) getDetailProduct,
     required TResult Function(int productRewardId) getDetailProductReward,
   }) {
@@ -411,6 +1019,10 @@ class _$GetDetailProductRewardImpl implements _GetDetailProductReward {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
+    TResult? Function()? toggleTemp,
+    TResult? Function()? toggleSize,
+    TResult? Function()? toggleIce,
+    TResult? Function()? toggleSugar,
     TResult? Function(int productId)? getDetailProduct,
     TResult? Function(int productRewardId)? getDetailProductReward,
   }) {
@@ -421,6 +1033,10 @@ class _$GetDetailProductRewardImpl implements _GetDetailProductReward {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
+    TResult Function()? toggleTemp,
+    TResult Function()? toggleSize,
+    TResult Function()? toggleIce,
+    TResult Function()? toggleSugar,
     TResult Function(int productId)? getDetailProduct,
     TResult Function(int productRewardId)? getDetailProductReward,
     required TResult orElse(),
@@ -435,6 +1051,10 @@ class _$GetDetailProductRewardImpl implements _GetDetailProductReward {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
+    required TResult Function(_ToggleTemperature value) toggleTemp,
+    required TResult Function(_ToggleSize value) toggleSize,
+    required TResult Function(_ToggleIce value) toggleIce,
+    required TResult Function(_ToggleSugar value) toggleSugar,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
     required TResult Function(_GetDetailProductReward value)
         getDetailProductReward,
@@ -446,6 +1066,10 @@ class _$GetDetailProductRewardImpl implements _GetDetailProductReward {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
+    TResult? Function(_ToggleTemperature value)? toggleTemp,
+    TResult? Function(_ToggleSize value)? toggleSize,
+    TResult? Function(_ToggleIce value)? toggleIce,
+    TResult? Function(_ToggleSugar value)? toggleSugar,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
     TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
   }) {
@@ -456,6 +1080,10 @@ class _$GetDetailProductRewardImpl implements _GetDetailProductReward {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
+    TResult Function(_ToggleTemperature value)? toggleTemp,
+    TResult Function(_ToggleSize value)? toggleSize,
+    TResult Function(_ToggleIce value)? toggleIce,
+    TResult Function(_ToggleSugar value)? toggleSugar,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
     TResult Function(_GetDetailProductReward value)? getDetailProductReward,
     required TResult orElse(),
@@ -483,8 +1111,17 @@ mixin _$DetailProductState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)
+    required TResult Function(
+            DetailProductResponseModel? model,
+            DetailProductRewardResponseModel? modelReward,
+            bool isTempSelected,
+            String selectedTemp,
+            bool isSizeSelected,
+            String selectedSize,
+            bool isIceSelected,
+            String selectedIce,
+            bool isSugarSelected,
+            String selectedSugar)
         success,
     required TResult Function(String? message) error,
   }) =>
@@ -493,8 +1130,17 @@ mixin _$DetailProductState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)?
+    TResult? Function(
+            DetailProductResponseModel? model,
+            DetailProductRewardResponseModel? modelReward,
+            bool isTempSelected,
+            String selectedTemp,
+            bool isSizeSelected,
+            String selectedSize,
+            bool isIceSelected,
+            String selectedIce,
+            bool isSugarSelected,
+            String selectedSugar)?
         success,
     TResult? Function(String? message)? error,
   }) =>
@@ -503,8 +1149,17 @@ mixin _$DetailProductState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)?
+    TResult Function(
+            DetailProductResponseModel? model,
+            DetailProductRewardResponseModel? modelReward,
+            bool isTempSelected,
+            String selectedTemp,
+            bool isSizeSelected,
+            String selectedSize,
+            bool isIceSelected,
+            String selectedIce,
+            bool isSugarSelected,
+            String selectedSugar)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -595,8 +1250,17 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)
+    required TResult Function(
+            DetailProductResponseModel? model,
+            DetailProductRewardResponseModel? modelReward,
+            bool isTempSelected,
+            String selectedTemp,
+            bool isSizeSelected,
+            String selectedSize,
+            bool isIceSelected,
+            String selectedIce,
+            bool isSugarSelected,
+            String selectedSugar)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -608,8 +1272,17 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)?
+    TResult? Function(
+            DetailProductResponseModel? model,
+            DetailProductRewardResponseModel? modelReward,
+            bool isTempSelected,
+            String selectedTemp,
+            bool isSizeSelected,
+            String selectedSize,
+            bool isIceSelected,
+            String selectedIce,
+            bool isSugarSelected,
+            String selectedSugar)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -621,8 +1294,17 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)?
+    TResult Function(
+            DetailProductResponseModel? model,
+            DetailProductRewardResponseModel? modelReward,
+            bool isTempSelected,
+            String selectedTemp,
+            bool isSizeSelected,
+            String selectedSize,
+            bool isIceSelected,
+            String selectedIce,
+            bool isSugarSelected,
+            String selectedSugar)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -715,8 +1397,17 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)
+    required TResult Function(
+            DetailProductResponseModel? model,
+            DetailProductRewardResponseModel? modelReward,
+            bool isTempSelected,
+            String selectedTemp,
+            bool isSizeSelected,
+            String selectedSize,
+            bool isIceSelected,
+            String selectedIce,
+            bool isSugarSelected,
+            String selectedSugar)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -728,8 +1419,17 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)?
+    TResult? Function(
+            DetailProductResponseModel? model,
+            DetailProductRewardResponseModel? modelReward,
+            bool isTempSelected,
+            String selectedTemp,
+            bool isSizeSelected,
+            String selectedSize,
+            bool isIceSelected,
+            String selectedIce,
+            bool isSugarSelected,
+            String selectedSugar)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -741,8 +1441,17 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)?
+    TResult Function(
+            DetailProductResponseModel? model,
+            DetailProductRewardResponseModel? modelReward,
+            bool isTempSelected,
+            String selectedTemp,
+            bool isSizeSelected,
+            String selectedSize,
+            bool isIceSelected,
+            String selectedIce,
+            bool isSugarSelected,
+            String selectedSugar)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -803,7 +1512,15 @@ abstract class _$$SuccessImplCopyWith<$Res> {
   @useResult
   $Res call(
       {DetailProductResponseModel? model,
-      DetailProductRewardResponseModel? modelReward});
+      DetailProductRewardResponseModel? modelReward,
+      bool isTempSelected,
+      String selectedTemp,
+      bool isSizeSelected,
+      String selectedSize,
+      bool isIceSelected,
+      String selectedIce,
+      bool isSugarSelected,
+      String selectedSugar});
 }
 
 /// @nodoc
@@ -819,6 +1536,14 @@ class __$$SuccessImplCopyWithImpl<$Res>
   $Res call({
     Object? model = freezed,
     Object? modelReward = freezed,
+    Object? isTempSelected = null,
+    Object? selectedTemp = null,
+    Object? isSizeSelected = null,
+    Object? selectedSize = null,
+    Object? isIceSelected = null,
+    Object? selectedIce = null,
+    Object? isSugarSelected = null,
+    Object? selectedSugar = null,
   }) {
     return _then(_$SuccessImpl(
       freezed == model
@@ -829,6 +1554,38 @@ class __$$SuccessImplCopyWithImpl<$Res>
           ? _value.modelReward
           : modelReward // ignore: cast_nullable_to_non_nullable
               as DetailProductRewardResponseModel?,
+      isTempSelected: null == isTempSelected
+          ? _value.isTempSelected
+          : isTempSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
+      selectedTemp: null == selectedTemp
+          ? _value.selectedTemp
+          : selectedTemp // ignore: cast_nullable_to_non_nullable
+              as String,
+      isSizeSelected: null == isSizeSelected
+          ? _value.isSizeSelected
+          : isSizeSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
+      selectedSize: null == selectedSize
+          ? _value.selectedSize
+          : selectedSize // ignore: cast_nullable_to_non_nullable
+              as String,
+      isIceSelected: null == isIceSelected
+          ? _value.isIceSelected
+          : isIceSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
+      selectedIce: null == selectedIce
+          ? _value.selectedIce
+          : selectedIce // ignore: cast_nullable_to_non_nullable
+              as String,
+      isSugarSelected: null == isSugarSelected
+          ? _value.isSugarSelected
+          : isSugarSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
+      selectedSugar: null == selectedSugar
+          ? _value.selectedSugar
+          : selectedSugar // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -836,16 +1593,48 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl(this.model, this.modelReward);
+  const _$SuccessImpl(this.model, this.modelReward,
+      {this.isTempSelected = false,
+      this.selectedTemp = 'ice',
+      this.isSizeSelected = false,
+      this.selectedSize = 'regular',
+      this.isIceSelected = false,
+      this.selectedIce = 'normal',
+      this.isSugarSelected = false,
+      this.selectedSugar = 'normal'});
 
   @override
   final DetailProductResponseModel? model;
   @override
   final DetailProductRewardResponseModel? modelReward;
+  @override
+  @JsonKey()
+  final bool isTempSelected;
+  @override
+  @JsonKey()
+  final String selectedTemp;
+  @override
+  @JsonKey()
+  final bool isSizeSelected;
+  @override
+  @JsonKey()
+  final String selectedSize;
+  @override
+  @JsonKey()
+  final bool isIceSelected;
+  @override
+  @JsonKey()
+  final String selectedIce;
+  @override
+  @JsonKey()
+  final bool isSugarSelected;
+  @override
+  @JsonKey()
+  final String selectedSugar;
 
   @override
   String toString() {
-    return 'DetailProductState.success(model: $model, modelReward: $modelReward)';
+    return 'DetailProductState.success(model: $model, modelReward: $modelReward, isTempSelected: $isTempSelected, selectedTemp: $selectedTemp, isSizeSelected: $isSizeSelected, selectedSize: $selectedSize, isIceSelected: $isIceSelected, selectedIce: $selectedIce, isSugarSelected: $isSugarSelected, selectedSugar: $selectedSugar)';
   }
 
   @override
@@ -855,11 +1644,38 @@ class _$SuccessImpl implements _Success {
             other is _$SuccessImpl &&
             (identical(other.model, model) || other.model == model) &&
             (identical(other.modelReward, modelReward) ||
-                other.modelReward == modelReward));
+                other.modelReward == modelReward) &&
+            (identical(other.isTempSelected, isTempSelected) ||
+                other.isTempSelected == isTempSelected) &&
+            (identical(other.selectedTemp, selectedTemp) ||
+                other.selectedTemp == selectedTemp) &&
+            (identical(other.isSizeSelected, isSizeSelected) ||
+                other.isSizeSelected == isSizeSelected) &&
+            (identical(other.selectedSize, selectedSize) ||
+                other.selectedSize == selectedSize) &&
+            (identical(other.isIceSelected, isIceSelected) ||
+                other.isIceSelected == isIceSelected) &&
+            (identical(other.selectedIce, selectedIce) ||
+                other.selectedIce == selectedIce) &&
+            (identical(other.isSugarSelected, isSugarSelected) ||
+                other.isSugarSelected == isSugarSelected) &&
+            (identical(other.selectedSugar, selectedSugar) ||
+                other.selectedSugar == selectedSugar));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, model, modelReward);
+  int get hashCode => Object.hash(
+      runtimeType,
+      model,
+      modelReward,
+      isTempSelected,
+      selectedTemp,
+      isSizeSelected,
+      selectedSize,
+      isIceSelected,
+      selectedIce,
+      isSugarSelected,
+      selectedSugar);
 
   @JsonKey(ignore: true)
   @override
@@ -872,12 +1688,31 @@ class _$SuccessImpl implements _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)
+    required TResult Function(
+            DetailProductResponseModel? model,
+            DetailProductRewardResponseModel? modelReward,
+            bool isTempSelected,
+            String selectedTemp,
+            bool isSizeSelected,
+            String selectedSize,
+            bool isIceSelected,
+            String selectedIce,
+            bool isSugarSelected,
+            String selectedSugar)
         success,
     required TResult Function(String? message) error,
   }) {
-    return success(model, modelReward);
+    return success(
+        model,
+        modelReward,
+        isTempSelected,
+        selectedTemp,
+        isSizeSelected,
+        selectedSize,
+        isIceSelected,
+        selectedIce,
+        isSugarSelected,
+        selectedSugar);
   }
 
   @override
@@ -885,12 +1720,31 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)?
+    TResult? Function(
+            DetailProductResponseModel? model,
+            DetailProductRewardResponseModel? modelReward,
+            bool isTempSelected,
+            String selectedTemp,
+            bool isSizeSelected,
+            String selectedSize,
+            bool isIceSelected,
+            String selectedIce,
+            bool isSugarSelected,
+            String selectedSugar)?
         success,
     TResult? Function(String? message)? error,
   }) {
-    return success?.call(model, modelReward);
+    return success?.call(
+        model,
+        modelReward,
+        isTempSelected,
+        selectedTemp,
+        isSizeSelected,
+        selectedSize,
+        isIceSelected,
+        selectedIce,
+        isSugarSelected,
+        selectedSugar);
   }
 
   @override
@@ -898,14 +1752,33 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)?
+    TResult Function(
+            DetailProductResponseModel? model,
+            DetailProductRewardResponseModel? modelReward,
+            bool isTempSelected,
+            String selectedTemp,
+            bool isSizeSelected,
+            String selectedSize,
+            bool isIceSelected,
+            String selectedIce,
+            bool isSugarSelected,
+            String selectedSugar)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(model, modelReward);
+      return success(
+          model,
+          modelReward,
+          isTempSelected,
+          selectedTemp,
+          isSizeSelected,
+          selectedSize,
+          isIceSelected,
+          selectedIce,
+          isSugarSelected,
+          selectedSugar);
     }
     return orElse();
   }
@@ -950,10 +1823,26 @@ class _$SuccessImpl implements _Success {
 
 abstract class _Success implements DetailProductState {
   const factory _Success(final DetailProductResponseModel? model,
-      final DetailProductRewardResponseModel? modelReward) = _$SuccessImpl;
+      final DetailProductRewardResponseModel? modelReward,
+      {final bool isTempSelected,
+      final String selectedTemp,
+      final bool isSizeSelected,
+      final String selectedSize,
+      final bool isIceSelected,
+      final String selectedIce,
+      final bool isSugarSelected,
+      final String selectedSugar}) = _$SuccessImpl;
 
   DetailProductResponseModel? get model;
   DetailProductRewardResponseModel? get modelReward;
+  bool get isTempSelected;
+  String get selectedTemp;
+  bool get isSizeSelected;
+  String get selectedSize;
+  bool get isIceSelected;
+  String get selectedIce;
+  bool get isSugarSelected;
+  String get selectedSugar;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1025,8 +1914,17 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)
+    required TResult Function(
+            DetailProductResponseModel? model,
+            DetailProductRewardResponseModel? modelReward,
+            bool isTempSelected,
+            String selectedTemp,
+            bool isSizeSelected,
+            String selectedSize,
+            bool isIceSelected,
+            String selectedIce,
+            bool isSugarSelected,
+            String selectedSugar)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -1038,8 +1936,17 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)?
+    TResult? Function(
+            DetailProductResponseModel? model,
+            DetailProductRewardResponseModel? modelReward,
+            bool isTempSelected,
+            String selectedTemp,
+            bool isSizeSelected,
+            String selectedSize,
+            bool isIceSelected,
+            String selectedIce,
+            bool isSugarSelected,
+            String selectedSugar)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -1051,8 +1958,17 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)?
+    TResult Function(
+            DetailProductResponseModel? model,
+            DetailProductRewardResponseModel? modelReward,
+            bool isTempSelected,
+            String selectedTemp,
+            bool isSizeSelected,
+            String selectedSize,
+            bool isIceSelected,
+            String selectedIce,
+            bool isSugarSelected,
+            String selectedSugar)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
