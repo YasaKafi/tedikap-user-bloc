@@ -27,5 +27,32 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
             (r) => emit(_Success(null, r)),
       );
     });
+    on<_ToggleTemperature>((event, emit){
+      if(state is _Success){
+        emit((state as _Success).copyWith(isTempSelected: !(state as _Success).isTempSelected));
+        emit((state as _Success).copyWith(selectedTemp: (state as _Success).isTempSelected ? 'hot' : 'ice'));
+      }
+    });
+
+    on<_ToggleSize>((event, emit){
+      if(state is _Success){
+        emit((state as _Success).copyWith(isSizeSelected: !(state as _Success).isSizeSelected));
+        emit((state as _Success).copyWith(selectedSize: (state as _Success).isSizeSelected ? 'large' : 'regular'));
+      }
+    });
+
+    on<_ToggleIce>((event, emit){
+      if(state is _Success){
+        emit((state as _Success).copyWith(isIceSelected: !(state as _Success).isIceSelected));
+        emit((state as _Success).copyWith(selectedIce: (state as _Success).isIceSelected ? 'less' : 'normal'));
+      }
+    });
+
+    on<_ToggleSugar>((event, emit){
+      if(state is _Success){
+        emit((state as _Success).copyWith(isSugarSelected: !(state as _Success).isSugarSelected));
+        emit((state as _Success).copyWith(selectedSugar: (state as _Success).isSugarSelected ? 'less' : 'normal'));
+      }
+    });
   }
 }

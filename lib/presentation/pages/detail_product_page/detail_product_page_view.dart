@@ -82,8 +82,8 @@ class DetailProductPage extends StatelessWidget {
                       children: [
                         BoxInfoProduct(screenWidth: screenWidth, productId: productId, productRewardId: productRewardId,),
 
-                        // const SizedBox(height: 20),
-                        // BoxOptionProduct(),
+                        const SizedBox(height: 20),
+                        BoxOptionProduct(),
                         // const SizedBox(height: 20),
                         // InputNotes(),
                         const SizedBox(height: 120),
