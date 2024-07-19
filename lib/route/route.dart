@@ -6,6 +6,7 @@ import 'package:tedikap_user_bloc/presentation/initial_pages/onboard_page/onboar
 import 'package:tedikap_user_bloc/presentation/initial_pages/register_page/register_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/splash_page/splash_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/detail_order_page_view.dart';
+import 'package:tedikap_user_bloc/presentation/pages/detail_product_page/detail_product_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/detail_point_page/detail_point_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/edit_profile_page/view/edit_profile_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/help_center_page/view/help_center_view.dart';
@@ -20,7 +21,7 @@ import '../presentation/pages/information_page/privacy_policy_page/privacy_polic
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: '/point',
+    initialLocation: '/dashboard',
     debugLogDiagnostics: true,
     routes: [
       GoRoute(
@@ -102,6 +103,22 @@ class AppRouter {
         builder: (context, state) {
           final orderRewardId = state.pathParameters['orderRewardId'];
           return DetailOrderPage(orderRewardId: orderRewardId);
+        },
+      ),
+      GoRoute(
+        name: 'detail_product_common',
+        path: '/detail_product/:productId',
+        builder: (context, state) {
+          final productId = int.parse(state.pathParameters['productId']!);
+          return DetailProductPage(productId: productId);
+        },
+      ),
+      GoRoute(
+        name: 'detail_product_reward',
+        path: '/detail_product_reward/:productRewardId',
+        builder: (context, state) {
+          final productRewardId = int.parse(state.pathParameters['productRewardId']!) ;
+          return DetailProductPage(productRewardId: productRewardId);
         },
       ),
 

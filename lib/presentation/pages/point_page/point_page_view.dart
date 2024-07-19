@@ -207,7 +207,7 @@ class PointPage extends StatelessWidget {
                 // rewardProduct.image!;
                 return InkWell(
                   onTap: () {
-                    // Get.toNamed(Routes.DETAIL_PRODUCT_PAGE, arguments: {'source': 'point', 'productId': rewardProduct.id});
+                    context.pushNamed('detail_product_reward', pathParameters: {'productRewardId': rewardProduct.id!.toString()});
                   },
                   child: ListBoxProductPoin(
                     screenHeight: screenHeight,

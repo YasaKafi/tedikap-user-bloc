@@ -4,6 +4,7 @@ import 'package:tedikap_user_bloc/data/datasource/product_datasource.dart';
 import 'package:tedikap_user_bloc/data/datasource/user_datasource.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/login_page/bloc/login_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/bloc/detail_order_bloc.dart';
+import 'package:tedikap_user_bloc/presentation/pages/detail_product_page/bloc/detail_product_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/home_page/bloc/home_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/edit_profile_page/bloc/edit_profile_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/help_center_page/bloc/help_center_bloc.dart';
@@ -48,6 +49,9 @@ class AppProviders{
     ),
     BlocProvider<PointBloc>(
       create: (context) => PointBloc(ProductDatasource()),
+    ),
+    BlocProvider<DetailProductBloc>(
+      create: (context) => DetailProductBloc(ProductDatasource()),
     ),
     BlocProvider<HomeBloc>(
       create: (context) => HomeBloc(datasource: UserDatasource(), productDatasource: ProductDatasource()),

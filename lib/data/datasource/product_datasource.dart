@@ -1,6 +1,8 @@
 
 
 import 'package:dartz/dartz.dart';
+import 'package:tedikap_user_bloc/data/models/response/detail_product_response_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/detail_product_reward_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/products_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/products_reward_response_model.dart';
 
@@ -32,6 +34,34 @@ class ProductDatasource {
         return Right(ProductsRewardResponseModel.fromMap(response.data));
       } else {
         return const Left('Failed to access data reward product');
+      }
+    } catch (e) {
+      return Left('Failed to access data: ${e.toString()}');
+    }
+  }
+
+  Future<Either<String, DetailProductResponseModel>> getDetailProductByID(int id) async {
+    try {
+      final response = await _dioInstance.getRequest(
+          endpoint: '${TedikapApiRepository.getProductByID}/$id', isAuthorize: true);
+      if (response.statusCode == 200) {
+        return Right(DetailProductResponseModel.fromMap(response.data));
+      } else {
+        return const Left('Failed to access data detail product');
+      }
+    } catch (e) {
+      return Left('Failed to access data: ${e.toString()}');
+    }
+  }
+
+  Future<Either<String, DetailProductRewardResponseModel>> getDetailProductRewardByID(int id) async {
+    try {
+      final response = await _dioInstance.getRequest(
+          endpoint: '${TedikapApiRepository.getProductByID}/$id', isAuthorize: true);
+      if (response.statusCode == 200) {
+        return Right(DetailProductRewardResponseModel.fromMap(response.data));
+      } else {
+        return const Left('Failed to access data detail product reward');
       }
     } catch (e) {
       return Left('Failed to access data: ${e.toString()}');

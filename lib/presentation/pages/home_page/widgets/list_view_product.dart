@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tedikap_user_bloc/common/constant.dart';
 import 'package:tedikap_user_bloc/presentation/pages/home_page/bloc/home_bloc.dart';
 import '../../../../../common/dimensions.dart';
@@ -43,7 +44,7 @@ class ListViewProduct extends StatelessWidget {
                         // final imageUrl = TedikapApiRepository.getImage + bestSeller.image!;
                         return InkWell(
                           onTap: () {
-                            // Get.toNamed(Routes.DETAIL_PRODUCT_PAGE, arguments: {'source': 'other', 'productId': bestSeller.id},);
+                            context.pushNamed('detail_product_common', pathParameters: {'productId': bestSeller.id!.toString()});
                           },
                           child: ListBoxProduct(
                             image: bestSeller.image!,
