@@ -1,0 +1,121 @@
+import 'dart:convert';
+
+class CartResponseModel {
+  Cart? cart;
+
+  CartResponseModel({
+    this.cart,
+  });
+
+  factory CartResponseModel.fromJson(String str) => CartResponseModel.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory CartResponseModel.fromMap(Map<String, dynamic> json) => CartResponseModel(
+    cart: json["cart"] == null ? null : Cart.fromMap(json["cart"]),
+  );
+
+  Map<String, dynamic> toMap() => {
+    "cart": cart?.toMap(),
+  };
+}
+
+class Cart {
+  int? id;
+  int? userId;
+  int? voucherId;
+  int? totalPrice;
+  int? discountAmount;
+  int? originalPrice;
+  List<CartItem>? cartItems;
+
+  Cart({
+    this.id,
+    this.userId,
+    this.voucherId,
+    this.totalPrice,
+    this.discountAmount,
+    this.originalPrice,
+    this.cartItems,
+  });
+
+  factory Cart.fromJson(String str) => Cart.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory Cart.fromMap(Map<String, dynamic> json) => Cart(
+    id: json["id"],
+    userId: json["user_id"],
+    voucherId: json["voucher_id"],
+    totalPrice: json["total_price"],
+    discountAmount: json["discount_amount"],
+    originalPrice: json["original_price"],
+    cartItems: json["cart_items"] == null ? [] : List<CartItem>.from(json["cart_items"]!.map((x) => CartItem.fromMap(x))),
+  );
+
+  Map<String, dynamic> toMap() => {
+    "id": id,
+    "user_id": userId,
+    "voucher_id": voucherId,
+    "total_price": totalPrice,
+    "discount_amount": discountAmount,
+    "original_price": originalPrice,
+    "cart_items": cartItems == null ? [] : List<dynamic>.from(cartItems!.map((x) => x.toMap())),
+  };
+}
+
+class CartItem {
+  int? id;
+  int? productId;
+  String? temperatur;
+  String? size;
+  String? ice;
+  String? sugar;
+  String? note;
+  int? quantity;
+  int? price;
+  int? totalPrice;
+
+  CartItem({
+    this.id,
+    this.productId,
+    this.temperatur,
+    this.size,
+    this.ice,
+    this.sugar,
+    this.note,
+    this.quantity,
+    this.price,
+    this.totalPrice,
+  });
+
+  factory CartItem.fromJson(String str) => CartItem.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory CartItem.fromMap(Map<String, dynamic> json) => CartItem(
+    id: json["id"],
+    productId: json["product_id"],
+    temperatur: json["temperatur"],
+    size: json["size"],
+    ice: json["ice"],
+    sugar: json["sugar"],
+    note: json["note"],
+    quantity: json["quantity"],
+    price: json["price"],
+    totalPrice: json["total_price"],
+  );
+
+  Map<String, dynamic> toMap() => {
+    "id": id,
+    "product_id": productId,
+    "temperatur": temperatur,
+    "size": size,
+    "ice": ice,
+    "sugar": sugar,
+    "note": note,
+    "quantity": quantity,
+    "price": price,
+    "total_price": totalPrice,
+  };
+}
