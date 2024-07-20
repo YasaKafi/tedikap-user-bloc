@@ -5,6 +5,7 @@ import 'package:tedikap_user_bloc/data/models/response/cart_response_model.dart'
 import 'package:tedikap_user_bloc/data/models/response/detail_product_response_model.dart';
 
 import '../../../../data/datasource/cart_datasource.dart';
+import '../../../../data/models/response/patch_qty_response_model.dart';
 import '../../../../data/models/response/products_response_model.dart';
 
 part 'cart_event.dart';
@@ -28,17 +29,17 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               return productResult.fold((l) => null, (product) => product);
             }).toList(),
           );
-          emit(_Success(cartModel: cartModel, productDetails: productDetails));
+          emit(_Success(cartModel: cartModel, productDetails: productDetails, patchQtyModel: null));
         } else {
           emit(_Error(message: 'No items in cart'));
         }
       });
     });
     
-    // on<_GetProductByID>((event, emit) async {
-    //   emit(const _Loading());
-    //   final result = await productDatasource.getDetailProductByID(event.productId!);
-    //   result.fold((l) => emit(const _Error(message: 'Failed to access data order')), (r) => emit(_Success(cartModel: null, productDetails: r)));
-    // });
+    on<_PatchQty>((event, emit) async {
+      emit(const _Loading());
+      final result = await cartDatasource.patchQty(event.action!, event.cartItem!);
+      result.fold((l) => emit(const _Error(message: 'Failed to access data order')), (r) => emit(_Success(cartModel: null, productDetails: null, patchQtyModel: r)));
+    });
   }
 }

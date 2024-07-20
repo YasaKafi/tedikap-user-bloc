@@ -36,7 +36,7 @@ class BoxPaymentDetail extends StatelessWidget {
               return state.when(
                   initial: () => Center(child: CircularProgressIndicator()),
                   loading: () => Center(child: CircularProgressIndicator()),
-                  success: (cartModel, productModel){
+                  success: (cartModel, productModel, modelQty){
                     if(cartModel != null){
                       final itemCart = cartModel.cart;
                       return Column(

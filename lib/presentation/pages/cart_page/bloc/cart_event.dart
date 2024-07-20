@@ -4,5 +4,5 @@ part of 'cart_bloc.dart';
 class CartEvent with _$CartEvent {
   const factory CartEvent.started() = _Started;
   const factory CartEvent.getCart() = _GetCart;
-  const factory CartEvent.getProductByID(int? productId) = _GetProductByID;
+  const factory CartEvent.patchQty({required int? cartItem, required String? action}) = _PatchQty;
 }

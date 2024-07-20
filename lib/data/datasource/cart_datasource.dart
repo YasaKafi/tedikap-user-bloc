@@ -4,6 +4,7 @@ import 'package:tedikap_user_bloc/data/dio_instance.dart';
 import 'package:tedikap_user_bloc/data/models/request/post_cart_request_model.dart';
 import 'package:tedikap_user_bloc/data/models/request/post_cart_reward_request_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/cart_response_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/patch_qty_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/post_cart_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/post_cart_reward_response_model.dart';
 
@@ -60,6 +61,22 @@ class CartDatasource{
       }
     } catch (e) {
       return Left('Failed to Add/Updated to Cart Reward: ${e.toString()}');
+    }
+  }
+
+  Future<Either<String, PatchQtyResponseModel>> patchQty(String query, int id) async {
+    try {
+      final response = await _dioInstance.patchRequest(
+        endpoint: '${TedikapApiRepository.patchUpdateQty}/$id?action=$query',
+        isAuthorize: true,
+      );
+      if (response.statusCode == 200) {
+        return Right(PatchQtyResponseModel.fromMap(response.data));
+      } else {
+        return const Left('Failed to update quantity');
+      }
+    } catch (e) {
+      return Left('Failed to access data: ${e.toString()}');
     }
   }
 }

@@ -61,7 +61,7 @@ class BoxCheckoutDetail extends StatelessWidget {
                 return state.when(
                   initial: () => Center(child: CircularProgressIndicator()),
                   loading: () => Center(child: CircularProgressIndicator()),
-                  success: (cartModel, productDetails) {
+                  success: (cartModel, productDetails, modelQty) {
                     if (cartModel?.cart != null && productDetails != null) {
                       final itemCart = cartModel!.cart;
                       return Column(
@@ -125,8 +125,9 @@ class BoxCheckoutDetail extends StatelessWidget {
                                         children: [
                                           InkWell(
                                             onTap: () {
-                                              // controller.patchUpdateQty('decrement',
-                                              //     productItemsCheckout.id!);
+                                              context.read<CartBloc>().add(CartEvent.patchQty(cartItem: productItemsCheckout.id, action: 'decrement'));
+                                              Future.delayed(Duration(milliseconds: 500), ()=>context.read<CartBloc>().add(CartEvent.getCart())
+                                              );
                                             },
                                             child: Icon(
                                               Icons.remove_circle_outline,
@@ -146,8 +147,9 @@ class BoxCheckoutDetail extends StatelessWidget {
                                           ),
                                           InkWell(
                                             onTap: () {
-                                              // controller.patchUpdateQty('increment',
-                                              //     productItemsCheckout.id!);
+                                              context.read<CartBloc>().add(CartEvent.patchQty(cartItem: productItemsCheckout.id, action: 'increment'));
+                                              Future.delayed(Duration(milliseconds: 500), ()=>context.read<CartBloc>().add(CartEvent.getCart())
+                                              );
                                             },
                                             child: Icon(
                                               Icons.add_circle,
@@ -166,7 +168,7 @@ class BoxCheckoutDetail extends StatelessWidget {
                         }),
                       );
                     } else {
-                      return Center(child: Text('Data not found'));
+                      return Center(child: CircularProgressIndicator());
                     }
                   },
                   error: (message) => Center(child: Text(message!)),
