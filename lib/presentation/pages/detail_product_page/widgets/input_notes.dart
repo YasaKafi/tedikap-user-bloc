@@ -6,9 +6,10 @@ import '../../../../../common/theme.dart';
 class InputNotes extends StatelessWidget {
    InputNotes({
     super.key,
+     required this.notesController
   });
 
-   TextEditingController notesController = TextEditingController();
+   TextEditingController notesController ;
 
   @override
   Widget build(BuildContext context) {

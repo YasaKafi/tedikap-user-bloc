@@ -15,8 +15,8 @@ class DetailProductPage extends StatelessWidget {
 
   int? productId;
   int? productRewardId;
-
-
+  
+  TextEditingController notesController = TextEditingController(); 
 
   @override
   Widget build(BuildContext context) {
@@ -82,12 +82,12 @@ class DetailProductPage extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        BoxInfoProduct(screenWidth: screenWidth, productId: productId, productRewardId: productRewardId,),
+                        BoxInfoProduct(screenWidth: screenWidth, productId: productId, productRewardId: productRewardId, ),
 
                         const SizedBox(height: 20),
                         BoxOptionProduct(),
                         const SizedBox(height: 20),
-                        InputNotes(),
+                        InputNotes(notesController: notesController,),
                         const SizedBox(height: 120),
                       ],
                     ),
@@ -98,7 +98,7 @@ class DetailProductPage extends StatelessWidget {
             Positioned(
               bottom: 0,
               child: BoxBottomPrice(
-                  screenWidth: screenWidth, ),
+                  screenWidth: screenWidth,  noteController: notesController),
             )
           ],
         ),

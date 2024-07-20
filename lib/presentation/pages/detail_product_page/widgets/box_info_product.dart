@@ -21,6 +21,7 @@ class BoxInfoProduct extends StatelessWidget {
   int? productId;
   int? productRewardId;
 
+
   @override
   Widget build(BuildContext context) {
     if (productId != null) {
@@ -69,13 +70,24 @@ class BoxInfoProduct extends StatelessWidget {
                     loading: () => Center(
                       child: CircularProgressIndicator(),
                     ),
-                    success: (model, modelReward, a, b, c, d, e, f, g, h, i, j) {
-                      final itemProduct = model?.data;
-                      final itemProductReward = modelReward?.data;
-                      final imageUrl = itemProduct?.image ?? itemProductReward?.image ?? '';
-                      final name = itemProduct?.name ?? itemProductReward?.name ?? 'Unknown';
-                      final category = itemProduct?.category ?? itemProductReward?.category ?? 'Unknown';
-                      final description = itemProduct?.description ?? itemProductReward?.description ?? 'No description';
+                    success: (modelProduct, modelProductReward, modelCartPost, modelCartPostReward, isTempSelected, selectedTemp, isSizeSelected ,selectedSize,isIceSelected, selectedIce, isSugarSelected, selectedSugar, qty, totalPrice, note) {
+
+                      String? name;
+                      String? imageUrl;
+                      String? category;
+                      String? description;
+
+                      if(modelProduct != null){
+                        imageUrl = modelProduct.data!.image!;
+                         name = modelProduct.data!.name!;
+                         category = modelProduct.data!.category!;
+                         description = modelProduct.data!.description!;
+                      } else if (modelProductReward != null){
+                        imageUrl = modelProductReward.data!.image!;
+                        name = modelProductReward.data!.name!;
+                        category = modelProductReward.data!.category!;
+                        description = modelProductReward.data!.description!;
+                      }
 
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,14 +107,14 @@ class BoxInfoProduct extends StatelessWidget {
                                 ],
                               ),
                               child: CircleAvatar(
-                                backgroundImage: NetworkImage(imageUrl),
+                                backgroundImage: NetworkImage(TedikapApiRepository.getImage + imageUrl!),
                                 radius: 80,
                               ),
                             ),
                           ),
                           const SizedBox(height: 20),
                           Text(
-                            name,
+                            name!,
                             style: txtSecondaryHeader.copyWith(
                                 fontWeight: FontWeight.w700, color: blackColor),
                           ),
@@ -125,7 +137,7 @@ class BoxInfoProduct extends StatelessWidget {
                           ),
                           const SizedBox(height: 5),
                           Text(
-                            description,
+                            description!,
                             style: txtPrimarySubTitle.copyWith(
                                 fontWeight: FontWeight.w400, color: Colors.black38),
                           ),
