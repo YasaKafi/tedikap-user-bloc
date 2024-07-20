@@ -5,6 +5,7 @@ import 'package:tedikap_user_bloc/presentation/initial_pages/login_page/login_pa
 import 'package:tedikap_user_bloc/presentation/initial_pages/onboard_page/onboard_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/register_page/register_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/splash_page/splash_page_view.dart';
+import 'package:tedikap_user_bloc/presentation/pages/cart_page/cart_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/detail_order_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_product_page/detail_product_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/detail_point_page/detail_point_page_view.dart';
@@ -104,6 +105,16 @@ class AppRouter {
           final orderRewardId = state.pathParameters['orderRewardId'];
           return DetailOrderPage(orderRewardId: orderRewardId);
         },
+      ),
+      GoRoute(
+        name: 'cart_common',
+        path: '/cart_common',
+        builder: (context, state) => const CartPage(),
+      ),
+      GoRoute(
+        name: 'cart_reward',
+        path: '/cart_reward',
+        builder: (context, state) => const CartPage(),
       ),
       GoRoute(
         name: 'detail_product_common',

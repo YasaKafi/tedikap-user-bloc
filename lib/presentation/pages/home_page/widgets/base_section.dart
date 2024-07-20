@@ -78,7 +78,7 @@ class BaseSection extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   ButtonCircleIcon(
-                    routes: 'cart-page',
+                    routes: 'cart_common',
                     icon: icCart,
                   ),
                   const SizedBox(
