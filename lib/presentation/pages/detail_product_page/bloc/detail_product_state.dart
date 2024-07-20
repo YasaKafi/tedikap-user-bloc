@@ -15,6 +15,7 @@ class DetailProductState with _$DetailProductState {
     @Default(false) bool isSugarSelected,
     @Default('normal') String selectedSugar,
     @Default(1) int quantityCount,
+    @Default(0) int totalPrice,
       }
       ) = _Success;
   const factory DetailProductState.error({String? message}) = _Error;

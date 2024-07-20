@@ -1508,7 +1508,8 @@ mixin _$DetailProductState {
             String selectedIce,
             bool isSugarSelected,
             String selectedSugar,
-            int quantityCount)
+            int quantityCount,
+            int totalPrice)
         success,
     required TResult Function(String? message) error,
   }) =>
@@ -1528,7 +1529,8 @@ mixin _$DetailProductState {
             String selectedIce,
             bool isSugarSelected,
             String selectedSugar,
-            int quantityCount)?
+            int quantityCount,
+            int totalPrice)?
         success,
     TResult? Function(String? message)? error,
   }) =>
@@ -1548,7 +1550,8 @@ mixin _$DetailProductState {
             String selectedIce,
             bool isSugarSelected,
             String selectedSugar,
-            int quantityCount)?
+            int quantityCount,
+            int totalPrice)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -1650,7 +1653,8 @@ class _$InitialImpl implements _Initial {
             String selectedIce,
             bool isSugarSelected,
             String selectedSugar,
-            int quantityCount)
+            int quantityCount,
+            int totalPrice)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -1673,7 +1677,8 @@ class _$InitialImpl implements _Initial {
             String selectedIce,
             bool isSugarSelected,
             String selectedSugar,
-            int quantityCount)?
+            int quantityCount,
+            int totalPrice)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -1696,7 +1701,8 @@ class _$InitialImpl implements _Initial {
             String selectedIce,
             bool isSugarSelected,
             String selectedSugar,
-            int quantityCount)?
+            int quantityCount,
+            int totalPrice)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -1800,7 +1806,8 @@ class _$LoadingImpl implements _Loading {
             String selectedIce,
             bool isSugarSelected,
             String selectedSugar,
-            int quantityCount)
+            int quantityCount,
+            int totalPrice)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -1823,7 +1830,8 @@ class _$LoadingImpl implements _Loading {
             String selectedIce,
             bool isSugarSelected,
             String selectedSugar,
-            int quantityCount)?
+            int quantityCount,
+            int totalPrice)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -1846,7 +1854,8 @@ class _$LoadingImpl implements _Loading {
             String selectedIce,
             bool isSugarSelected,
             String selectedSugar,
-            int quantityCount)?
+            int quantityCount,
+            int totalPrice)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -1916,7 +1925,8 @@ abstract class _$$SuccessImplCopyWith<$Res> {
       String selectedIce,
       bool isSugarSelected,
       String selectedSugar,
-      int quantityCount});
+      int quantityCount,
+      int totalPrice});
 }
 
 /// @nodoc
@@ -1941,6 +1951,7 @@ class __$$SuccessImplCopyWithImpl<$Res>
     Object? isSugarSelected = null,
     Object? selectedSugar = null,
     Object? quantityCount = null,
+    Object? totalPrice = null,
   }) {
     return _then(_$SuccessImpl(
       freezed == model
@@ -1987,6 +1998,10 @@ class __$$SuccessImplCopyWithImpl<$Res>
           ? _value.quantityCount
           : quantityCount // ignore: cast_nullable_to_non_nullable
               as int,
+      totalPrice: null == totalPrice
+          ? _value.totalPrice
+          : totalPrice // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -2003,7 +2018,8 @@ class _$SuccessImpl implements _Success {
       this.selectedIce = 'normal',
       this.isSugarSelected = false,
       this.selectedSugar = 'normal',
-      this.quantityCount = 1});
+      this.quantityCount = 1,
+      this.totalPrice = 0});
 
   @override
   final DetailProductResponseModel? model;
@@ -2036,10 +2052,13 @@ class _$SuccessImpl implements _Success {
   @override
   @JsonKey()
   final int quantityCount;
+  @override
+  @JsonKey()
+  final int totalPrice;
 
   @override
   String toString() {
-    return 'DetailProductState.success(model: $model, modelReward: $modelReward, isTempSelected: $isTempSelected, selectedTemp: $selectedTemp, isSizeSelected: $isSizeSelected, selectedSize: $selectedSize, isIceSelected: $isIceSelected, selectedIce: $selectedIce, isSugarSelected: $isSugarSelected, selectedSugar: $selectedSugar, quantityCount: $quantityCount)';
+    return 'DetailProductState.success(model: $model, modelReward: $modelReward, isTempSelected: $isTempSelected, selectedTemp: $selectedTemp, isSizeSelected: $isSizeSelected, selectedSize: $selectedSize, isIceSelected: $isIceSelected, selectedIce: $selectedIce, isSugarSelected: $isSugarSelected, selectedSugar: $selectedSugar, quantityCount: $quantityCount, totalPrice: $totalPrice)';
   }
 
   @override
@@ -2067,7 +2086,9 @@ class _$SuccessImpl implements _Success {
             (identical(other.selectedSugar, selectedSugar) ||
                 other.selectedSugar == selectedSugar) &&
             (identical(other.quantityCount, quantityCount) ||
-                other.quantityCount == quantityCount));
+                other.quantityCount == quantityCount) &&
+            (identical(other.totalPrice, totalPrice) ||
+                other.totalPrice == totalPrice));
   }
 
   @override
@@ -2083,7 +2104,8 @@ class _$SuccessImpl implements _Success {
       selectedIce,
       isSugarSelected,
       selectedSugar,
-      quantityCount);
+      quantityCount,
+      totalPrice);
 
   @JsonKey(ignore: true)
   @override
@@ -2107,7 +2129,8 @@ class _$SuccessImpl implements _Success {
             String selectedIce,
             bool isSugarSelected,
             String selectedSugar,
-            int quantityCount)
+            int quantityCount,
+            int totalPrice)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -2122,7 +2145,8 @@ class _$SuccessImpl implements _Success {
         selectedIce,
         isSugarSelected,
         selectedSugar,
-        quantityCount);
+        quantityCount,
+        totalPrice);
   }
 
   @override
@@ -2141,7 +2165,8 @@ class _$SuccessImpl implements _Success {
             String selectedIce,
             bool isSugarSelected,
             String selectedSugar,
-            int quantityCount)?
+            int quantityCount,
+            int totalPrice)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -2156,7 +2181,8 @@ class _$SuccessImpl implements _Success {
         selectedIce,
         isSugarSelected,
         selectedSugar,
-        quantityCount);
+        quantityCount,
+        totalPrice);
   }
 
   @override
@@ -2175,7 +2201,8 @@ class _$SuccessImpl implements _Success {
             String selectedIce,
             bool isSugarSelected,
             String selectedSugar,
-            int quantityCount)?
+            int quantityCount,
+            int totalPrice)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -2192,7 +2219,8 @@ class _$SuccessImpl implements _Success {
           selectedIce,
           isSugarSelected,
           selectedSugar,
-          quantityCount);
+          quantityCount,
+          totalPrice);
     }
     return orElse();
   }
@@ -2246,7 +2274,8 @@ abstract class _Success implements DetailProductState {
       final String selectedIce,
       final bool isSugarSelected,
       final String selectedSugar,
-      final int quantityCount}) = _$SuccessImpl;
+      final int quantityCount,
+      final int totalPrice}) = _$SuccessImpl;
 
   DetailProductResponseModel? get model;
   DetailProductRewardResponseModel? get modelReward;
@@ -2259,6 +2288,7 @@ abstract class _Success implements DetailProductState {
   bool get isSugarSelected;
   String get selectedSugar;
   int get quantityCount;
+  int get totalPrice;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -2341,7 +2371,8 @@ class _$ErrorImpl implements _Error {
             String selectedIce,
             bool isSugarSelected,
             String selectedSugar,
-            int quantityCount)
+            int quantityCount,
+            int totalPrice)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -2364,7 +2395,8 @@ class _$ErrorImpl implements _Error {
             String selectedIce,
             bool isSugarSelected,
             String selectedSugar,
-            int quantityCount)?
+            int quantityCount,
+            int totalPrice)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -2387,7 +2419,8 @@ class _$ErrorImpl implements _Error {
             String selectedIce,
             bool isSugarSelected,
             String selectedSugar,
-            int quantityCount)?
+            int quantityCount,
+            int totalPrice)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),

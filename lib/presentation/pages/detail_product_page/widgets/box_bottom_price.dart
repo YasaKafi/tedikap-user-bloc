@@ -40,23 +40,71 @@ class BoxBottomPrice extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Rp',
-                        style: txtSecondarySubTitle.copyWith(
-                            fontWeight: FontWeight.w500, color: Colors.black38),
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        '5000',
-                        style: txtPrimaryHeader.copyWith(
-                            fontWeight: FontWeight.w600, color: blackColor),
-                      )
-                    ],
+                  BlocBuilder<DetailProductBloc, DetailProductState>(
+                    builder: (context, state) {
+                      return state.maybeWhen(
+                        orElse: () => Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        success: (model, modelReward, c, d, e, selectedSize,
+                            g, h, i, k, qty, totalPrice) {
+
+                          int itemPrice;
+
+                          if (model != null) {
+                            itemPrice = selectedSize == 'regular'
+                                ? model.data?.regularPrice ?? 0
+                                : model.data?.largePrice ?? 0;
+                          } else {
+                            itemPrice = selectedSize == 'regular'
+                                ? modelReward?.data?.regularPoint ?? 0
+                                : modelReward?.data?.largePoint ?? 0;
+                          }
+                          totalPrice = itemPrice * qty;
+
+                          return Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              model != null
+                                  ? Row(
+                                children: [
+                                  Text(
+                                    'Rp',
+                                    style: txtSecondarySubTitle.copyWith(
+                                        fontWeight: FontWeight.w500, color: Colors.black38),
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    totalPrice.toString(),
+                                    style: txtPrimaryHeader.copyWith(
+                                        fontWeight: FontWeight.w600, color: blackColor),
+                                  )
+                                ],
+                              )
+                                  : Row(
+                                children: [
+                                  Text(
+                                    totalPrice.toString(),
+                                    style: txtPrimaryHeader.copyWith(
+                                        fontWeight: FontWeight.w600, color: blackColor),
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    'Poin',
+                                    style: txtSecondarySubTitle.copyWith(
+                                        fontWeight: FontWeight.w500, color: Colors.black38),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
                   ),
                   BlocBuilder<DetailProductBloc, DetailProductState>(
                     builder: (context, state) {
@@ -64,46 +112,47 @@ class BoxBottomPrice extends StatelessWidget {
                           orElse: () => Center(
                                 child: CircularProgressIndicator(),
                               ),
-                        success: (a,b,c,d,e,f,g,h,i,k, qty){
-                          return Row(
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  context.read<DetailProductBloc>().add(DetailProductEvent.decrement());
-                                },
-                                icon: Icon(
-                                  Icons.remove_circle_outline,
-                                  size: 28,
+                          success:
+                              (a, b, c, d, e, f, g, h, i, k, qty, totalPrice) {
+                            return Row(
+                              children: [
+                                IconButton(
+                                  onPressed: () {
+                                    context
+                                        .read<DetailProductBloc>()
+                                        .add(DetailProductEvent.decrement());
+                                  },
+                                  icon: Icon(
+                                    Icons.remove_circle_outline,
+                                    size: 28,
+                                  ),
+                                  color: grey,
                                 ),
-                                color: grey,
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                  qty.toString(),
-                                  style: txtSecondaryTitle.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      color: blackColor)),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  context.read<DetailProductBloc>().add(DetailProductEvent.increment());
-                                },
-                                icon: Icon(
-                                  Icons.add_circle,
-                                  size: 28,
+                                const SizedBox(
+                                  width: 10,
                                 ),
-                                color: navyColor,
-                              ),
-                            ],
-                          );
-
-                        }
-                      );
-
+                                Text(qty.toString(),
+                                    style: txtSecondaryTitle.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                        color: blackColor)),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    context
+                                        .read<DetailProductBloc>()
+                                        .add(DetailProductEvent.increment());
+                                  },
+                                  icon: Icon(
+                                    Icons.add_circle,
+                                    size: 28,
+                                  ),
+                                  color: navyColor,
+                                ),
+                              ],
+                            );
+                          });
                     },
                   )
                 ],

@@ -69,7 +69,7 @@ class BoxInfoProduct extends StatelessWidget {
                     loading: () => Center(
                       child: CircularProgressIndicator(),
                     ),
-                    success: (model, modelReward, a, b, c, d, e, f, g, h, i,) {
+                    success: (model, modelReward, a, b, c, d, e, f, g, h, i, j) {
                       final itemProduct = model?.data;
                       final itemProductReward = modelReward?.data;
                       final imageUrl = itemProduct?.image ?? itemProductReward?.image ?? '';

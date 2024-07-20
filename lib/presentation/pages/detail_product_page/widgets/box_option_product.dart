@@ -30,7 +30,7 @@ class BoxOptionProduct extends StatelessWidget {
                       return state.when(
                         initial: () => Center(child: CircularProgressIndicator(),),
                         loading: () => Center(child: CircularProgressIndicator(),),
-                        success: (m, mr, isTempSelected ,selectedTemp, isSizeSelected, selectedSize, isIceSelected, selectedIce, isSugarSelected, selectedSugar, i ) {
+                        success: (m, mr, isTempSelected ,selectedTemp, isSizeSelected, selectedSize, isIceSelected, selectedIce, isSugarSelected, selectedSugar, i , j) {
                           print(selectedTemp);
                           print('ini adalah $selectedSize');
                           return OptionRow(
@@ -63,7 +63,7 @@ class BoxOptionProduct extends StatelessWidget {
                       return state.when(
                           initial: () => Center(child: CircularProgressIndicator(),),
                           loading: () => Center(child: CircularProgressIndicator(),),
-                          success: (m, mr, isTempSelected,selectedTemp, isSizeSelected ,selectedSize,isIceSelected, selectedIce, isSugarSelected, selectedSugar, i ) {
+                          success: (m, mr, isTempSelected,selectedTemp, isSizeSelected ,selectedSize,isIceSelected, selectedIce, isSugarSelected, selectedSugar, i , j) {
                             return OptionRow(
                               label: 'Size',
                               option1: 'Large',
@@ -94,7 +94,7 @@ class BoxOptionProduct extends StatelessWidget {
                       return state.when(
                           initial: () => Center(child: CircularProgressIndicator(),),
                           loading: () => Center(child: CircularProgressIndicator(),),
-                          success: (m, mr, isTempSelected,selectedTemp, isSizeSelected ,selectedSize,isIceSelected, selectedIce, isSugarSelected, selectedSugar, i ) {
+                          success: (m, mr, isTempSelected,selectedTemp, isSizeSelected ,selectedSize,isIceSelected, selectedIce, isSugarSelected, selectedSugar, i , j) {
                             return OptionRow(
                               label: 'Ice',
                               option1: 'Less',
@@ -125,7 +125,7 @@ class BoxOptionProduct extends StatelessWidget {
                       return state.when(
                           initial: () => Center(child: CircularProgressIndicator(),),
                           loading: () => Center(child: CircularProgressIndicator(),),
-                          success: (m, mr, isTempSelected,selectedTemp, isSizeSelected ,selectedSize,isIceSelected, selectedIce, isSugarSelected, selectedSugar, i,  ) {
+                          success: (m, mr, isTempSelected,selectedTemp, isSizeSelected ,selectedSize,isIceSelected, selectedIce, isSugarSelected, selectedSugar, i, j ) {
                             return OptionRow(
                               label: 'Sugar',
                               option1: 'Less',

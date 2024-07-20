@@ -57,7 +57,7 @@ class ProductDatasource {
   Future<Either<String, DetailProductRewardResponseModel>> getDetailProductRewardByID(int id) async {
     try {
       final response = await _dioInstance.getRequest(
-          endpoint: '${TedikapApiRepository.getProductByID}/$id', isAuthorize: true);
+          endpoint: '${TedikapApiRepository.getRewardProductByID}/$id', isAuthorize: true);
       if (response.statusCode == 200) {
         return Right(DetailProductRewardResponseModel.fromMap(response.data));
       } else {
