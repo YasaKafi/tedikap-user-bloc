@@ -54,5 +54,23 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
         emit((state as _Success).copyWith(selectedSugar: (state as _Success).isSugarSelected ? 'less' : 'normal'));
       }
     });
+
+    on<_Increment>((event, emit){
+      if(state is _Success){
+        emit((state as _Success).copyWith(quantityCount: (state as _Success).quantityCount + 1));
+      }
+    });
+
+    on<_Decrement>((event, emit) {
+      if (state is _Success) {
+        final currentState = state as _Success;
+        if (currentState.quantityCount > 1) {
+          emit(currentState.copyWith(
+            quantityCount: currentState.quantityCount - 1,
+          ));
+        }
+      }
+    });
+
   }
 }
