@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tedikap_user_bloc/data/datasource/cart_datasource.dart';
 import 'package:tedikap_user_bloc/data/datasource/order_datasource.dart';
 import 'package:tedikap_user_bloc/data/datasource/product_datasource.dart';
 import 'package:tedikap_user_bloc/data/datasource/user_datasource.dart';
@@ -51,7 +52,7 @@ class AppProviders{
       create: (context) => PointBloc(ProductDatasource()),
     ),
     BlocProvider<DetailProductBloc>(
-      create: (context) => DetailProductBloc(ProductDatasource()),
+      create: (context) => DetailProductBloc(datasource: ProductDatasource(), cartDatasource: CartDatasource()),
     ),
     BlocProvider<HomeBloc>(
       create: (context) => HomeBloc(datasource: UserDatasource(), productDatasource: ProductDatasource()),

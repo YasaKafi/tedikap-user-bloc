@@ -4,11 +4,16 @@ part of 'detail_product_bloc.dart';
 class DetailProductState with _$DetailProductState {
   const factory DetailProductState.initial() = _Initial;
   const factory DetailProductState.loading() = _Loading;
-  const factory DetailProductState.success(
-      DetailProductResponseModel? model,
-      DetailProductRewardResponseModel? modelReward,
+  const factory DetailProductState.success({
+      required DetailProductResponseModel? model,
+    required DetailProductRewardResponseModel? modelReward,
+    required PostCartResponseModel? modelCartPost,
+    required PostCartRewardResponseModel? modelCartRewardPost,
 
-      {@Default(false) bool isTempSelected, @Default('ice') String selectedTemp, @Default(false) bool isSizeSelected,
+
+    @Default(false) bool isTempSelected,
+    @Default('ice') String selectedTemp,
+    @Default(false) bool isSizeSelected,
     @Default('regular') String selectedSize,
     @Default(false) bool isIceSelected,
     @Default('normal') String selectedIce,
@@ -16,6 +21,7 @@ class DetailProductState with _$DetailProductState {
     @Default('normal') String selectedSugar,
     @Default(1) int quantityCount,
     @Default(0) int totalPrice,
+    @Default('') String note,
       }
       ) = _Success;
   const factory DetailProductState.error({String? message}) = _Error;
