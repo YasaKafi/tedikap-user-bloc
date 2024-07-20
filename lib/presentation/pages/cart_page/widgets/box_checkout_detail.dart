@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_page/bloc/cart_bloc.dart';
 
 import '../../../../../common/dimensions.dart';
@@ -61,7 +62,7 @@ class BoxCheckoutDetail extends StatelessWidget {
                 return state.when(
                   initial: () => Center(child: CircularProgressIndicator()),
                   loading: () => Center(child: CircularProgressIndicator()),
-                  success: (cartModel, productDetails, modelQty) {
+                  success: (cartModel, productDetails, modelQty, deleteModel) {
                     if (cartModel?.cart != null && productDetails != null) {
                       final itemCart = cartModel!.cart;
                       return Column(
@@ -95,9 +96,9 @@ class BoxCheckoutDetail extends StatelessWidget {
                                     children: [
                                       InkWell(
                                         onTap: () {
-                                          // Get.offNamed(Routes.DETAIL_PRODUCT_PAGE,
-                                          //     arguments: {'source': 'cart', 'id': productItemsCheckout.id}
-                                          // );
+                                          context.pushNamed('detail_product_common', extra: {
+                                            'cartItemId': productItemsCheckout.id!.toString(),
+                                          } ,pathParameters: {'productId': productItemsCheckout.productId!.toString()});
                                         },
                                         child: Icon(
                                           Icons.mode_edit_outlined,
@@ -110,7 +111,9 @@ class BoxCheckoutDetail extends StatelessWidget {
                                       ),
                                       InkWell(
                                         onTap: () {
-                                          // controller.deleteProductById(productItemsCheckout.id!);
+                                          context.read<CartBloc>().add(CartEvent.deleteItem(cartItem: productItemsCheckout.id));
+                                          Future.delayed(Duration(milliseconds: 500), ()=>context.read<CartBloc>().add(CartEvent.getCart())
+                                          );
                                         },
                                         child: Icon(
                                           Icons.delete_forever_outlined,

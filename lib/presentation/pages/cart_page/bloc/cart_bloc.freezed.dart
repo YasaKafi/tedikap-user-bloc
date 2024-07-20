@@ -21,6 +21,7 @@ mixin _$CartEvent {
     required TResult Function() started,
     required TResult Function() getCart,
     required TResult Function(int? cartItem, String? action) patchQty,
+    required TResult Function(int? cartItem) deleteItem,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$CartEvent {
     TResult? Function()? started,
     TResult? Function()? getCart,
     TResult? Function(int? cartItem, String? action)? patchQty,
+    TResult? Function(int? cartItem)? deleteItem,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$CartEvent {
     TResult Function()? started,
     TResult Function()? getCart,
     TResult Function(int? cartItem, String? action)? patchQty,
+    TResult Function(int? cartItem)? deleteItem,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$CartEvent {
     required TResult Function(_Started value) started,
     required TResult Function(_GetCart value) getCart,
     required TResult Function(_PatchQty value) patchQty,
+    required TResult Function(_DeleteItem value) deleteItem,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$CartEvent {
     TResult? Function(_Started value)? started,
     TResult? Function(_GetCart value)? getCart,
     TResult? Function(_PatchQty value)? patchQty,
+    TResult? Function(_DeleteItem value)? deleteItem,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$CartEvent {
     TResult Function(_Started value)? started,
     TResult Function(_GetCart value)? getCart,
     TResult Function(_PatchQty value)? patchQty,
+    TResult Function(_DeleteItem value)? deleteItem,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -120,6 +126,7 @@ class _$StartedImpl implements _Started {
     required TResult Function() started,
     required TResult Function() getCart,
     required TResult Function(int? cartItem, String? action) patchQty,
+    required TResult Function(int? cartItem) deleteItem,
   }) {
     return started();
   }
@@ -130,6 +137,7 @@ class _$StartedImpl implements _Started {
     TResult? Function()? started,
     TResult? Function()? getCart,
     TResult? Function(int? cartItem, String? action)? patchQty,
+    TResult? Function(int? cartItem)? deleteItem,
   }) {
     return started?.call();
   }
@@ -140,6 +148,7 @@ class _$StartedImpl implements _Started {
     TResult Function()? started,
     TResult Function()? getCart,
     TResult Function(int? cartItem, String? action)? patchQty,
+    TResult Function(int? cartItem)? deleteItem,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -154,6 +163,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(_Started value) started,
     required TResult Function(_GetCart value) getCart,
     required TResult Function(_PatchQty value) patchQty,
+    required TResult Function(_DeleteItem value) deleteItem,
   }) {
     return started(this);
   }
@@ -164,6 +174,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(_Started value)? started,
     TResult? Function(_GetCart value)? getCart,
     TResult? Function(_PatchQty value)? patchQty,
+    TResult? Function(_DeleteItem value)? deleteItem,
   }) {
     return started?.call(this);
   }
@@ -174,6 +185,7 @@ class _$StartedImpl implements _Started {
     TResult Function(_Started value)? started,
     TResult Function(_GetCart value)? getCart,
     TResult Function(_PatchQty value)? patchQty,
+    TResult Function(_DeleteItem value)? deleteItem,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -228,6 +240,7 @@ class _$GetCartImpl implements _GetCart {
     required TResult Function() started,
     required TResult Function() getCart,
     required TResult Function(int? cartItem, String? action) patchQty,
+    required TResult Function(int? cartItem) deleteItem,
   }) {
     return getCart();
   }
@@ -238,6 +251,7 @@ class _$GetCartImpl implements _GetCart {
     TResult? Function()? started,
     TResult? Function()? getCart,
     TResult? Function(int? cartItem, String? action)? patchQty,
+    TResult? Function(int? cartItem)? deleteItem,
   }) {
     return getCart?.call();
   }
@@ -248,6 +262,7 @@ class _$GetCartImpl implements _GetCart {
     TResult Function()? started,
     TResult Function()? getCart,
     TResult Function(int? cartItem, String? action)? patchQty,
+    TResult Function(int? cartItem)? deleteItem,
     required TResult orElse(),
   }) {
     if (getCart != null) {
@@ -262,6 +277,7 @@ class _$GetCartImpl implements _GetCart {
     required TResult Function(_Started value) started,
     required TResult Function(_GetCart value) getCart,
     required TResult Function(_PatchQty value) patchQty,
+    required TResult Function(_DeleteItem value) deleteItem,
   }) {
     return getCart(this);
   }
@@ -272,6 +288,7 @@ class _$GetCartImpl implements _GetCart {
     TResult? Function(_Started value)? started,
     TResult? Function(_GetCart value)? getCart,
     TResult? Function(_PatchQty value)? patchQty,
+    TResult? Function(_DeleteItem value)? deleteItem,
   }) {
     return getCart?.call(this);
   }
@@ -282,6 +299,7 @@ class _$GetCartImpl implements _GetCart {
     TResult Function(_Started value)? started,
     TResult Function(_GetCart value)? getCart,
     TResult Function(_PatchQty value)? patchQty,
+    TResult Function(_DeleteItem value)? deleteItem,
     required TResult orElse(),
   }) {
     if (getCart != null) {
@@ -371,6 +389,7 @@ class _$PatchQtyImpl implements _PatchQty {
     required TResult Function() started,
     required TResult Function() getCart,
     required TResult Function(int? cartItem, String? action) patchQty,
+    required TResult Function(int? cartItem) deleteItem,
   }) {
     return patchQty(cartItem, action);
   }
@@ -381,6 +400,7 @@ class _$PatchQtyImpl implements _PatchQty {
     TResult? Function()? started,
     TResult? Function()? getCart,
     TResult? Function(int? cartItem, String? action)? patchQty,
+    TResult? Function(int? cartItem)? deleteItem,
   }) {
     return patchQty?.call(cartItem, action);
   }
@@ -391,6 +411,7 @@ class _$PatchQtyImpl implements _PatchQty {
     TResult Function()? started,
     TResult Function()? getCart,
     TResult Function(int? cartItem, String? action)? patchQty,
+    TResult Function(int? cartItem)? deleteItem,
     required TResult orElse(),
   }) {
     if (patchQty != null) {
@@ -405,6 +426,7 @@ class _$PatchQtyImpl implements _PatchQty {
     required TResult Function(_Started value) started,
     required TResult Function(_GetCart value) getCart,
     required TResult Function(_PatchQty value) patchQty,
+    required TResult Function(_DeleteItem value) deleteItem,
   }) {
     return patchQty(this);
   }
@@ -415,6 +437,7 @@ class _$PatchQtyImpl implements _PatchQty {
     TResult? Function(_Started value)? started,
     TResult? Function(_GetCart value)? getCart,
     TResult? Function(_PatchQty value)? patchQty,
+    TResult? Function(_DeleteItem value)? deleteItem,
   }) {
     return patchQty?.call(this);
   }
@@ -425,6 +448,7 @@ class _$PatchQtyImpl implements _PatchQty {
     TResult Function(_Started value)? started,
     TResult Function(_GetCart value)? getCart,
     TResult Function(_PatchQty value)? patchQty,
+    TResult Function(_DeleteItem value)? deleteItem,
     required TResult orElse(),
   }) {
     if (patchQty != null) {
@@ -447,6 +471,152 @@ abstract class _PatchQty implements CartEvent {
 }
 
 /// @nodoc
+abstract class _$$DeleteItemImplCopyWith<$Res> {
+  factory _$$DeleteItemImplCopyWith(
+          _$DeleteItemImpl value, $Res Function(_$DeleteItemImpl) then) =
+      __$$DeleteItemImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int? cartItem});
+}
+
+/// @nodoc
+class __$$DeleteItemImplCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$DeleteItemImpl>
+    implements _$$DeleteItemImplCopyWith<$Res> {
+  __$$DeleteItemImplCopyWithImpl(
+      _$DeleteItemImpl _value, $Res Function(_$DeleteItemImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? cartItem = freezed,
+  }) {
+    return _then(_$DeleteItemImpl(
+      cartItem: freezed == cartItem
+          ? _value.cartItem
+          : cartItem // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DeleteItemImpl implements _DeleteItem {
+  const _$DeleteItemImpl({required this.cartItem});
+
+  @override
+  final int? cartItem;
+
+  @override
+  String toString() {
+    return 'CartEvent.deleteItem(cartItem: $cartItem)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeleteItemImpl &&
+            (identical(other.cartItem, cartItem) ||
+                other.cartItem == cartItem));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, cartItem);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DeleteItemImplCopyWith<_$DeleteItemImpl> get copyWith =>
+      __$$DeleteItemImplCopyWithImpl<_$DeleteItemImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() getCart,
+    required TResult Function(int? cartItem, String? action) patchQty,
+    required TResult Function(int? cartItem) deleteItem,
+  }) {
+    return deleteItem(cartItem);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? getCart,
+    TResult? Function(int? cartItem, String? action)? patchQty,
+    TResult? Function(int? cartItem)? deleteItem,
+  }) {
+    return deleteItem?.call(cartItem);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? getCart,
+    TResult Function(int? cartItem, String? action)? patchQty,
+    TResult Function(int? cartItem)? deleteItem,
+    required TResult orElse(),
+  }) {
+    if (deleteItem != null) {
+      return deleteItem(cartItem);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetCart value) getCart,
+    required TResult Function(_PatchQty value) patchQty,
+    required TResult Function(_DeleteItem value) deleteItem,
+  }) {
+    return deleteItem(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetCart value)? getCart,
+    TResult? Function(_PatchQty value)? patchQty,
+    TResult? Function(_DeleteItem value)? deleteItem,
+  }) {
+    return deleteItem?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetCart value)? getCart,
+    TResult Function(_PatchQty value)? patchQty,
+    TResult Function(_DeleteItem value)? deleteItem,
+    required TResult orElse(),
+  }) {
+    if (deleteItem != null) {
+      return deleteItem(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteItem implements CartEvent {
+  const factory _DeleteItem({required final int? cartItem}) = _$DeleteItemImpl;
+
+  int? get cartItem;
+  @JsonKey(ignore: true)
+  _$$DeleteItemImplCopyWith<_$DeleteItemImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$CartState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -455,7 +625,8 @@ mixin _$CartState {
     required TResult Function(
             CartResponseModel? cartModel,
             List<DetailProductResponseModel?>? productDetails,
-            PatchQtyResponseModel? patchQtyModel)
+            PatchQtyResponseModel? patchQtyModel,
+            DeleteCartItemResponseModel? deleteModel)
         success,
     required TResult Function(String? message) error,
   }) =>
@@ -467,7 +638,8 @@ mixin _$CartState {
     TResult? Function(
             CartResponseModel? cartModel,
             List<DetailProductResponseModel?>? productDetails,
-            PatchQtyResponseModel? patchQtyModel)?
+            PatchQtyResponseModel? patchQtyModel,
+            DeleteCartItemResponseModel? deleteModel)?
         success,
     TResult? Function(String? message)? error,
   }) =>
@@ -479,7 +651,8 @@ mixin _$CartState {
     TResult Function(
             CartResponseModel? cartModel,
             List<DetailProductResponseModel?>? productDetails,
-            PatchQtyResponseModel? patchQtyModel)?
+            PatchQtyResponseModel? patchQtyModel,
+            DeleteCartItemResponseModel? deleteModel)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -572,7 +745,8 @@ class _$InitialImpl implements _Initial {
     required TResult Function(
             CartResponseModel? cartModel,
             List<DetailProductResponseModel?>? productDetails,
-            PatchQtyResponseModel? patchQtyModel)
+            PatchQtyResponseModel? patchQtyModel,
+            DeleteCartItemResponseModel? deleteModel)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -587,7 +761,8 @@ class _$InitialImpl implements _Initial {
     TResult? Function(
             CartResponseModel? cartModel,
             List<DetailProductResponseModel?>? productDetails,
-            PatchQtyResponseModel? patchQtyModel)?
+            PatchQtyResponseModel? patchQtyModel,
+            DeleteCartItemResponseModel? deleteModel)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -602,7 +777,8 @@ class _$InitialImpl implements _Initial {
     TResult Function(
             CartResponseModel? cartModel,
             List<DetailProductResponseModel?>? productDetails,
-            PatchQtyResponseModel? patchQtyModel)?
+            PatchQtyResponseModel? patchQtyModel,
+            DeleteCartItemResponseModel? deleteModel)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -698,7 +874,8 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(
             CartResponseModel? cartModel,
             List<DetailProductResponseModel?>? productDetails,
-            PatchQtyResponseModel? patchQtyModel)
+            PatchQtyResponseModel? patchQtyModel,
+            DeleteCartItemResponseModel? deleteModel)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -713,7 +890,8 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(
             CartResponseModel? cartModel,
             List<DetailProductResponseModel?>? productDetails,
-            PatchQtyResponseModel? patchQtyModel)?
+            PatchQtyResponseModel? patchQtyModel,
+            DeleteCartItemResponseModel? deleteModel)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -728,7 +906,8 @@ class _$LoadingImpl implements _Loading {
     TResult Function(
             CartResponseModel? cartModel,
             List<DetailProductResponseModel?>? productDetails,
-            PatchQtyResponseModel? patchQtyModel)?
+            PatchQtyResponseModel? patchQtyModel,
+            DeleteCartItemResponseModel? deleteModel)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -790,7 +969,8 @@ abstract class _$$SuccessImplCopyWith<$Res> {
   $Res call(
       {CartResponseModel? cartModel,
       List<DetailProductResponseModel?>? productDetails,
-      PatchQtyResponseModel? patchQtyModel});
+      PatchQtyResponseModel? patchQtyModel,
+      DeleteCartItemResponseModel? deleteModel});
 }
 
 /// @nodoc
@@ -807,6 +987,7 @@ class __$$SuccessImplCopyWithImpl<$Res>
     Object? cartModel = freezed,
     Object? productDetails = freezed,
     Object? patchQtyModel = freezed,
+    Object? deleteModel = freezed,
   }) {
     return _then(_$SuccessImpl(
       cartModel: freezed == cartModel
@@ -821,6 +1002,10 @@ class __$$SuccessImplCopyWithImpl<$Res>
           ? _value.patchQtyModel
           : patchQtyModel // ignore: cast_nullable_to_non_nullable
               as PatchQtyResponseModel?,
+      deleteModel: freezed == deleteModel
+          ? _value.deleteModel
+          : deleteModel // ignore: cast_nullable_to_non_nullable
+              as DeleteCartItemResponseModel?,
     ));
   }
 }
@@ -831,7 +1016,8 @@ class _$SuccessImpl implements _Success {
   const _$SuccessImpl(
       {required this.cartModel,
       required final List<DetailProductResponseModel?>? productDetails,
-      required this.patchQtyModel})
+      required this.patchQtyModel,
+      required this.deleteModel})
       : _productDetails = productDetails;
 
   @override
@@ -848,10 +1034,12 @@ class _$SuccessImpl implements _Success {
 
   @override
   final PatchQtyResponseModel? patchQtyModel;
+  @override
+  final DeleteCartItemResponseModel? deleteModel;
 
   @override
   String toString() {
-    return 'CartState.success(cartModel: $cartModel, productDetails: $productDetails, patchQtyModel: $patchQtyModel)';
+    return 'CartState.success(cartModel: $cartModel, productDetails: $productDetails, patchQtyModel: $patchQtyModel, deleteModel: $deleteModel)';
   }
 
   @override
@@ -864,12 +1052,18 @@ class _$SuccessImpl implements _Success {
             const DeepCollectionEquality()
                 .equals(other._productDetails, _productDetails) &&
             (identical(other.patchQtyModel, patchQtyModel) ||
-                other.patchQtyModel == patchQtyModel));
+                other.patchQtyModel == patchQtyModel) &&
+            (identical(other.deleteModel, deleteModel) ||
+                other.deleteModel == deleteModel));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, cartModel,
-      const DeepCollectionEquality().hash(_productDetails), patchQtyModel);
+  int get hashCode => Object.hash(
+      runtimeType,
+      cartModel,
+      const DeepCollectionEquality().hash(_productDetails),
+      patchQtyModel,
+      deleteModel);
 
   @JsonKey(ignore: true)
   @override
@@ -885,11 +1079,12 @@ class _$SuccessImpl implements _Success {
     required TResult Function(
             CartResponseModel? cartModel,
             List<DetailProductResponseModel?>? productDetails,
-            PatchQtyResponseModel? patchQtyModel)
+            PatchQtyResponseModel? patchQtyModel,
+            DeleteCartItemResponseModel? deleteModel)
         success,
     required TResult Function(String? message) error,
   }) {
-    return success(cartModel, productDetails, patchQtyModel);
+    return success(cartModel, productDetails, patchQtyModel, deleteModel);
   }
 
   @override
@@ -900,11 +1095,12 @@ class _$SuccessImpl implements _Success {
     TResult? Function(
             CartResponseModel? cartModel,
             List<DetailProductResponseModel?>? productDetails,
-            PatchQtyResponseModel? patchQtyModel)?
+            PatchQtyResponseModel? patchQtyModel,
+            DeleteCartItemResponseModel? deleteModel)?
         success,
     TResult? Function(String? message)? error,
   }) {
-    return success?.call(cartModel, productDetails, patchQtyModel);
+    return success?.call(cartModel, productDetails, patchQtyModel, deleteModel);
   }
 
   @override
@@ -915,13 +1111,14 @@ class _$SuccessImpl implements _Success {
     TResult Function(
             CartResponseModel? cartModel,
             List<DetailProductResponseModel?>? productDetails,
-            PatchQtyResponseModel? patchQtyModel)?
+            PatchQtyResponseModel? patchQtyModel,
+            DeleteCartItemResponseModel? deleteModel)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(cartModel, productDetails, patchQtyModel);
+      return success(cartModel, productDetails, patchQtyModel, deleteModel);
     }
     return orElse();
   }
@@ -968,11 +1165,13 @@ abstract class _Success implements CartState {
   const factory _Success(
       {required final CartResponseModel? cartModel,
       required final List<DetailProductResponseModel?>? productDetails,
-      required final PatchQtyResponseModel? patchQtyModel}) = _$SuccessImpl;
+      required final PatchQtyResponseModel? patchQtyModel,
+      required final DeleteCartItemResponseModel? deleteModel}) = _$SuccessImpl;
 
   CartResponseModel? get cartModel;
   List<DetailProductResponseModel?>? get productDetails;
   PatchQtyResponseModel? get patchQtyModel;
+  DeleteCartItemResponseModel? get deleteModel;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1047,7 +1246,8 @@ class _$ErrorImpl implements _Error {
     required TResult Function(
             CartResponseModel? cartModel,
             List<DetailProductResponseModel?>? productDetails,
-            PatchQtyResponseModel? patchQtyModel)
+            PatchQtyResponseModel? patchQtyModel,
+            DeleteCartItemResponseModel? deleteModel)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -1062,7 +1262,8 @@ class _$ErrorImpl implements _Error {
     TResult? Function(
             CartResponseModel? cartModel,
             List<DetailProductResponseModel?>? productDetails,
-            PatchQtyResponseModel? patchQtyModel)?
+            PatchQtyResponseModel? patchQtyModel,
+            DeleteCartItemResponseModel? deleteModel)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -1077,7 +1278,8 @@ class _$ErrorImpl implements _Error {
     TResult Function(
             CartResponseModel? cartModel,
             List<DetailProductResponseModel?>? productDetails,
-            PatchQtyResponseModel? patchQtyModel)?
+            PatchQtyResponseModel? patchQtyModel,
+            DeleteCartItemResponseModel? deleteModel)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),

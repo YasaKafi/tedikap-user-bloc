@@ -3,10 +3,13 @@ import 'package:dartz/dartz.dart';
 import 'package:tedikap_user_bloc/data/dio_instance.dart';
 import 'package:tedikap_user_bloc/data/models/request/post_cart_request_model.dart';
 import 'package:tedikap_user_bloc/data/models/request/post_cart_reward_request_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/cart_item_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/cart_response_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/delete_cart_item_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/patch_qty_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/post_cart_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/post_cart_reward_response_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/update_cart_response_model.dart';
 
 import '../repository/tedikap_repository.dart';
 
@@ -28,6 +31,20 @@ class CartDatasource{
     }
   }
 
+  Future<Either<String, CartItemResponseModel>> getCartItem() async {
+    try {
+      final response = await _dioInstance.getRequest(
+          endpoint: TedikapApiRepository.getCartItem, isAuthorize: true);
+      if (response.statusCode == 200) {
+        return Right(CartItemResponseModel.fromMap(response.data));
+      } else {
+        return const Left('Failed to access data cart item');
+      }
+    } catch (e) {
+      return Left('Failed to access data: ${e.toString()}');
+    }
+  }
+
   Future<Either<String, PostCartResponseModel>> postCart(
       PostCartRequestModel model) async {
     try {
@@ -43,6 +60,24 @@ class CartDatasource{
       }
     } catch (e) {
       return Left('Failed to Add/Updated to Cart: ${e.toString()}');
+    }
+  }
+
+  Future<Either<String, UpdateCartResponseModel>> updateCart(
+      PostCartRequestModel model, int? id) async {
+    try {
+      final response = await _dioInstance.putRequest(
+        isAuthorize: true,
+        endpoint: '${TedikapApiRepository.putCart}/$id',
+        data: model.toJson(),
+      );
+      if (response.statusCode == 200) {
+        return Right(UpdateCartResponseModel.fromMap(response.data));
+      } else {
+        return const Left('Success Updated to Cart');
+      }
+    } catch (e) {
+      return Left('Failed to Updated to Cart: ${e.toString()}');
     }
   }
 
@@ -74,6 +109,22 @@ class CartDatasource{
         return Right(PatchQtyResponseModel.fromMap(response.data));
       } else {
         return const Left('Failed to update quantity');
+      }
+    } catch (e) {
+      return Left('Failed to access data: ${e.toString()}');
+    }
+  }
+
+  Future<Either<String, DeleteCartItemResponseModel>> deleteItem(int? id) async {
+    try {
+      final response = await _dioInstance.deleteRequest(
+        endpoint: '${TedikapApiRepository.deleteCartItem}/$id',
+        isAuthorize: true,
+      );
+      if (response.statusCode == 200) {
+        return Right(DeleteCartItemResponseModel.fromMap(response.data));
+      } else {
+        return const Left('Failed to delete item');
       }
     } catch (e) {
       return Left('Failed to access data: ${e.toString()}');
