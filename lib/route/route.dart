@@ -1,5 +1,6 @@
 
 import 'package:go_router/go_router.dart';
+import 'package:tedikap_user_bloc/data/models/response/cart_response_model.dart';
 import 'package:tedikap_user_bloc/presentation/dashboard/dashboard_page.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/login_page/login_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/onboard_page/onboard_page_view.dart';
@@ -15,7 +16,6 @@ import 'package:tedikap_user_bloc/presentation/pages/information_page/language_s
 import 'package:tedikap_user_bloc/presentation/pages/information_page/setting_page/setting_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/terms_of_serive_page/terms_of_serive_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/point_page/point_page_view.dart';
-import 'package:tedikap_user_bloc/presentation/pages/profile_page/profile_page_view.dart';
 
 import '../presentation/pages/information_page/privacy_policy_page/privacy_policy_view.dart';
 
@@ -90,14 +90,7 @@ class AppRouter {
         path: '/point',
         builder: (context, state) => PointPage(),
       ),
-      GoRoute(
-        name: 'detail_order_common',
-        path: '/detail_order/:orderId',
-        builder: (context, state) {
-          final orderId = state.pathParameters['orderId'];
-          return DetailOrderPage(orderId: orderId);
-        },
-      ),
+
       GoRoute(
         name: 'detail_order_reward',
         path: '/detail_order_reward/:orderRewardId',
@@ -118,10 +111,11 @@ class AppRouter {
       ),
       GoRoute(
         name: 'detail_product_common',
-        path: '/detail_product/:productId',
+        path: '/detail_product_common/:productId',
         builder: (context, state) {
-          final productId = int.parse(state.pathParameters['productId']!);
-          return DetailProductPage(productId: productId);
+          final productId = state.pathParameters['productId'];
+          final cartItemId = state.extra is String ? state.extra as String : null;
+          return DetailProductPage(productId: int.parse(productId!), cartItemId: cartItemId != null ? int.parse(cartItemId) : null,);
         },
       ),
       GoRoute(

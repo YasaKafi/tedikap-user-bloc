@@ -96,9 +96,7 @@ class BoxCheckoutDetail extends StatelessWidget {
                                     children: [
                                       InkWell(
                                         onTap: () {
-                                          context.pushNamed('detail_product_common', extra: {
-                                            'cartItemId': productItemsCheckout.id!.toString(),
-                                          } ,pathParameters: {'productId': productItemsCheckout.productId!.toString()});
+                                          context.pushNamed('detail_product_common', extra: productItemsCheckout.id!.toString(),  pathParameters: {'productId': productItemsCheckout.productId!.toString()});
                                         },
                                         child: Icon(
                                           Icons.mode_edit_outlined,

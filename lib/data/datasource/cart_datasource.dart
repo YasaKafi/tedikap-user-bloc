@@ -31,10 +31,10 @@ class CartDatasource{
     }
   }
 
-  Future<Either<String, CartItemResponseModel>> getCartItem() async {
+  Future<Either<String, CartItemResponseModel>> getCartItem(int? id) async {
     try {
       final response = await _dioInstance.getRequest(
-          endpoint: TedikapApiRepository.getCartItem, isAuthorize: true);
+          endpoint: '${TedikapApiRepository.getCartItem}/$id', isAuthorize: true);
       if (response.statusCode == 200) {
         return Right(CartItemResponseModel.fromMap(response.data));
       } else {

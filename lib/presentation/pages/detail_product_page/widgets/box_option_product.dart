@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tedikap_user_bloc/data/models/response/cart_response_model.dart';
 import '../../../../../common/dimensions.dart';
 import '../../../../../common/theme.dart';
 import '../../../../../common/constant.dart';
@@ -9,7 +10,8 @@ import '../bloc/detail_product_bloc.dart';
 import 'option_row.dart';
 
 class BoxOptionProduct extends StatelessWidget {
-  const BoxOptionProduct({super.key});
+  const BoxOptionProduct({super.key, });
+
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,8 @@ class BoxOptionProduct extends StatelessWidget {
                    modelProductReward,
                    modelCartPost,
                    modelCartPostReward,
+                   modelCartItem,
+                   modelCartUpdate,
                    isTempSelected,
                    selectedTemp,
                    isSizeSelected,
@@ -43,6 +47,8 @@ class BoxOptionProduct extends StatelessWidget {
                    qty,
                    totalPrice,
                    note){
+
+
                  return Column(
                    children: [
                      BlocBuilder<DetailProductBloc, DetailProductState>(
@@ -58,6 +64,8 @@ class BoxOptionProduct extends StatelessWidget {
                                modelProductReward,
                                modelCartPost,
                                modelCartPostReward,
+                               modelCartItem,
+                               modelCartUpdate,
                                isTempSelected,
                                selectedTemp,
                                isSizeSelected,
@@ -69,8 +77,7 @@ class BoxOptionProduct extends StatelessWidget {
                                qty,
                                totalPrice,
                                note) {
-                             print(selectedTemp);
-                             print('ini adalah $selectedSize');
+
                              return OptionRow(
                                label: 'Temperature',
                                option1: 'Hot',
@@ -134,6 +141,8 @@ class BoxOptionProduct extends StatelessWidget {
                                modelProductReward,
                                modelCartPost,
                                modelCartPostReward,
+                               modelCartItem,
+                               modelCartUpdate,
                                isTempSelected,
                                selectedTemp,
                                isSizeSelected,
@@ -145,6 +154,9 @@ class BoxOptionProduct extends StatelessWidget {
                                qty,
                                totalPrice,
                                note) {
+                             print('This is the defalut value of Size : ${selectedSize}');
+                             print('This is the defalut value of isSelectedSize : ${isSizeSelected}');
+
                              return OptionRow(
                                label: 'Size',
                                option1: 'Large',
@@ -210,10 +222,13 @@ class BoxOptionProduct extends StatelessWidget {
                              loading: () => Center(
                                child: CircularProgressIndicator(),
                              ),
-                             success: (modelProduct,
+                             success: (
+                                 modelProduct,
                                  modelProductReward,
                                  modelCartPost,
                                  modelCartPostReward,
+                                 modelCartItem,
+                                 modelCartUpdate,
                                  isTempSelected,
                                  selectedTemp,
                                  isSizeSelected,
@@ -285,10 +300,13 @@ class BoxOptionProduct extends StatelessWidget {
                            loading: () => Center(
                              child: CircularProgressIndicator(),
                            ),
-                           success: (modelProduct,
+                           success: (
+                               modelProduct,
                                modelProductReward,
                                modelCartPost,
                                modelCartPostReward,
+                               modelCartItem,
+                               modelCartUpdate,
                                isTempSelected,
                                selectedTemp,
                                isSizeSelected,

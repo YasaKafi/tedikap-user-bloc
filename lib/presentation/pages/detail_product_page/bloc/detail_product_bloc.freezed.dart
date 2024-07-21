@@ -26,9 +26,11 @@ mixin _$DetailProductEvent {
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
+    required TResult Function(int cartId) getDetailItemCart,
     required TResult Function(int productRewardId) getDetailProductReward,
     required TResult Function(PostCartRequestModel? model) postCart,
     required TResult Function(PostCartRewardRequestModel? model) postCartReward,
+    required TResult Function(PostCartRequestModel? model, int? id) updateCart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,9 +43,11 @@ mixin _$DetailProductEvent {
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
+    TResult? Function(int cartId)? getDetailItemCart,
     TResult? Function(int productRewardId)? getDetailProductReward,
     TResult? Function(PostCartRequestModel? model)? postCart,
     TResult? Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult? Function(PostCartRequestModel? model, int? id)? updateCart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,9 +60,11 @@ mixin _$DetailProductEvent {
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
+    TResult Function(int cartId)? getDetailItemCart,
     TResult Function(int productRewardId)? getDetailProductReward,
     TResult Function(PostCartRequestModel? model)? postCart,
     TResult Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult Function(PostCartRequestModel? model, int? id)? updateCart,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -72,10 +78,12 @@ mixin _$DetailProductEvent {
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
+    required TResult Function(_GetDetailItemCart value) getDetailItemCart,
     required TResult Function(_GetDetailProductReward value)
         getDetailProductReward,
     required TResult Function(_PostCart value) postCart,
     required TResult Function(_PostCartReward value) postCartReward,
+    required TResult Function(_UpdateCart value) updateCart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -88,9 +96,11 @@ mixin _$DetailProductEvent {
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
+    TResult? Function(_GetDetailItemCart value)? getDetailItemCart,
     TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
     TResult? Function(_PostCart value)? postCart,
     TResult? Function(_PostCartReward value)? postCartReward,
+    TResult? Function(_UpdateCart value)? updateCart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -103,9 +113,11 @@ mixin _$DetailProductEvent {
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
+    TResult Function(_GetDetailItemCart value)? getDetailItemCart,
     TResult Function(_GetDetailProductReward value)? getDetailProductReward,
     TResult Function(_PostCart value)? postCart,
     TResult Function(_PostCartReward value)? postCartReward,
+    TResult Function(_UpdateCart value)? updateCart,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -175,9 +187,11 @@ class _$StartedImpl implements _Started {
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
+    required TResult Function(int cartId) getDetailItemCart,
     required TResult Function(int productRewardId) getDetailProductReward,
     required TResult Function(PostCartRequestModel? model) postCart,
     required TResult Function(PostCartRewardRequestModel? model) postCartReward,
+    required TResult Function(PostCartRequestModel? model, int? id) updateCart,
   }) {
     return started();
   }
@@ -193,9 +207,11 @@ class _$StartedImpl implements _Started {
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
+    TResult? Function(int cartId)? getDetailItemCart,
     TResult? Function(int productRewardId)? getDetailProductReward,
     TResult? Function(PostCartRequestModel? model)? postCart,
     TResult? Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult? Function(PostCartRequestModel? model, int? id)? updateCart,
   }) {
     return started?.call();
   }
@@ -211,9 +227,11 @@ class _$StartedImpl implements _Started {
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
+    TResult Function(int cartId)? getDetailItemCart,
     TResult Function(int productRewardId)? getDetailProductReward,
     TResult Function(PostCartRequestModel? model)? postCart,
     TResult Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult Function(PostCartRequestModel? model, int? id)? updateCart,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -233,10 +251,12 @@ class _$StartedImpl implements _Started {
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
+    required TResult Function(_GetDetailItemCart value) getDetailItemCart,
     required TResult Function(_GetDetailProductReward value)
         getDetailProductReward,
     required TResult Function(_PostCart value) postCart,
     required TResult Function(_PostCartReward value) postCartReward,
+    required TResult Function(_UpdateCart value) updateCart,
   }) {
     return started(this);
   }
@@ -252,9 +272,11 @@ class _$StartedImpl implements _Started {
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
+    TResult? Function(_GetDetailItemCart value)? getDetailItemCart,
     TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
     TResult? Function(_PostCart value)? postCart,
     TResult? Function(_PostCartReward value)? postCartReward,
+    TResult? Function(_UpdateCart value)? updateCart,
   }) {
     return started?.call(this);
   }
@@ -270,9 +292,11 @@ class _$StartedImpl implements _Started {
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
+    TResult Function(_GetDetailItemCart value)? getDetailItemCart,
     TResult Function(_GetDetailProductReward value)? getDetailProductReward,
     TResult Function(_PostCart value)? postCart,
     TResult Function(_PostCartReward value)? postCartReward,
+    TResult Function(_UpdateCart value)? updateCart,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -332,9 +356,11 @@ class _$ToggleTemperatureImpl implements _ToggleTemperature {
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
+    required TResult Function(int cartId) getDetailItemCart,
     required TResult Function(int productRewardId) getDetailProductReward,
     required TResult Function(PostCartRequestModel? model) postCart,
     required TResult Function(PostCartRewardRequestModel? model) postCartReward,
+    required TResult Function(PostCartRequestModel? model, int? id) updateCart,
   }) {
     return toggleTemp();
   }
@@ -350,9 +376,11 @@ class _$ToggleTemperatureImpl implements _ToggleTemperature {
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
+    TResult? Function(int cartId)? getDetailItemCart,
     TResult? Function(int productRewardId)? getDetailProductReward,
     TResult? Function(PostCartRequestModel? model)? postCart,
     TResult? Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult? Function(PostCartRequestModel? model, int? id)? updateCart,
   }) {
     return toggleTemp?.call();
   }
@@ -368,9 +396,11 @@ class _$ToggleTemperatureImpl implements _ToggleTemperature {
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
+    TResult Function(int cartId)? getDetailItemCart,
     TResult Function(int productRewardId)? getDetailProductReward,
     TResult Function(PostCartRequestModel? model)? postCart,
     TResult Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult Function(PostCartRequestModel? model, int? id)? updateCart,
     required TResult orElse(),
   }) {
     if (toggleTemp != null) {
@@ -390,10 +420,12 @@ class _$ToggleTemperatureImpl implements _ToggleTemperature {
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
+    required TResult Function(_GetDetailItemCart value) getDetailItemCart,
     required TResult Function(_GetDetailProductReward value)
         getDetailProductReward,
     required TResult Function(_PostCart value) postCart,
     required TResult Function(_PostCartReward value) postCartReward,
+    required TResult Function(_UpdateCart value) updateCart,
   }) {
     return toggleTemp(this);
   }
@@ -409,9 +441,11 @@ class _$ToggleTemperatureImpl implements _ToggleTemperature {
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
+    TResult? Function(_GetDetailItemCart value)? getDetailItemCart,
     TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
     TResult? Function(_PostCart value)? postCart,
     TResult? Function(_PostCartReward value)? postCartReward,
+    TResult? Function(_UpdateCart value)? updateCart,
   }) {
     return toggleTemp?.call(this);
   }
@@ -427,9 +461,11 @@ class _$ToggleTemperatureImpl implements _ToggleTemperature {
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
+    TResult Function(_GetDetailItemCart value)? getDetailItemCart,
     TResult Function(_GetDetailProductReward value)? getDetailProductReward,
     TResult Function(_PostCart value)? postCart,
     TResult Function(_PostCartReward value)? postCartReward,
+    TResult Function(_UpdateCart value)? updateCart,
     required TResult orElse(),
   }) {
     if (toggleTemp != null) {
@@ -489,9 +525,11 @@ class _$ToggleSizeImpl implements _ToggleSize {
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
+    required TResult Function(int cartId) getDetailItemCart,
     required TResult Function(int productRewardId) getDetailProductReward,
     required TResult Function(PostCartRequestModel? model) postCart,
     required TResult Function(PostCartRewardRequestModel? model) postCartReward,
+    required TResult Function(PostCartRequestModel? model, int? id) updateCart,
   }) {
     return toggleSize();
   }
@@ -507,9 +545,11 @@ class _$ToggleSizeImpl implements _ToggleSize {
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
+    TResult? Function(int cartId)? getDetailItemCart,
     TResult? Function(int productRewardId)? getDetailProductReward,
     TResult? Function(PostCartRequestModel? model)? postCart,
     TResult? Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult? Function(PostCartRequestModel? model, int? id)? updateCart,
   }) {
     return toggleSize?.call();
   }
@@ -525,9 +565,11 @@ class _$ToggleSizeImpl implements _ToggleSize {
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
+    TResult Function(int cartId)? getDetailItemCart,
     TResult Function(int productRewardId)? getDetailProductReward,
     TResult Function(PostCartRequestModel? model)? postCart,
     TResult Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult Function(PostCartRequestModel? model, int? id)? updateCart,
     required TResult orElse(),
   }) {
     if (toggleSize != null) {
@@ -547,10 +589,12 @@ class _$ToggleSizeImpl implements _ToggleSize {
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
+    required TResult Function(_GetDetailItemCart value) getDetailItemCart,
     required TResult Function(_GetDetailProductReward value)
         getDetailProductReward,
     required TResult Function(_PostCart value) postCart,
     required TResult Function(_PostCartReward value) postCartReward,
+    required TResult Function(_UpdateCart value) updateCart,
   }) {
     return toggleSize(this);
   }
@@ -566,9 +610,11 @@ class _$ToggleSizeImpl implements _ToggleSize {
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
+    TResult? Function(_GetDetailItemCart value)? getDetailItemCart,
     TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
     TResult? Function(_PostCart value)? postCart,
     TResult? Function(_PostCartReward value)? postCartReward,
+    TResult? Function(_UpdateCart value)? updateCart,
   }) {
     return toggleSize?.call(this);
   }
@@ -584,9 +630,11 @@ class _$ToggleSizeImpl implements _ToggleSize {
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
+    TResult Function(_GetDetailItemCart value)? getDetailItemCart,
     TResult Function(_GetDetailProductReward value)? getDetailProductReward,
     TResult Function(_PostCart value)? postCart,
     TResult Function(_PostCartReward value)? postCartReward,
+    TResult Function(_UpdateCart value)? updateCart,
     required TResult orElse(),
   }) {
     if (toggleSize != null) {
@@ -646,9 +694,11 @@ class _$ToggleIceImpl implements _ToggleIce {
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
+    required TResult Function(int cartId) getDetailItemCart,
     required TResult Function(int productRewardId) getDetailProductReward,
     required TResult Function(PostCartRequestModel? model) postCart,
     required TResult Function(PostCartRewardRequestModel? model) postCartReward,
+    required TResult Function(PostCartRequestModel? model, int? id) updateCart,
   }) {
     return toggleIce();
   }
@@ -664,9 +714,11 @@ class _$ToggleIceImpl implements _ToggleIce {
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
+    TResult? Function(int cartId)? getDetailItemCart,
     TResult? Function(int productRewardId)? getDetailProductReward,
     TResult? Function(PostCartRequestModel? model)? postCart,
     TResult? Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult? Function(PostCartRequestModel? model, int? id)? updateCart,
   }) {
     return toggleIce?.call();
   }
@@ -682,9 +734,11 @@ class _$ToggleIceImpl implements _ToggleIce {
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
+    TResult Function(int cartId)? getDetailItemCart,
     TResult Function(int productRewardId)? getDetailProductReward,
     TResult Function(PostCartRequestModel? model)? postCart,
     TResult Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult Function(PostCartRequestModel? model, int? id)? updateCart,
     required TResult orElse(),
   }) {
     if (toggleIce != null) {
@@ -704,10 +758,12 @@ class _$ToggleIceImpl implements _ToggleIce {
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
+    required TResult Function(_GetDetailItemCart value) getDetailItemCart,
     required TResult Function(_GetDetailProductReward value)
         getDetailProductReward,
     required TResult Function(_PostCart value) postCart,
     required TResult Function(_PostCartReward value) postCartReward,
+    required TResult Function(_UpdateCart value) updateCart,
   }) {
     return toggleIce(this);
   }
@@ -723,9 +779,11 @@ class _$ToggleIceImpl implements _ToggleIce {
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
+    TResult? Function(_GetDetailItemCart value)? getDetailItemCart,
     TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
     TResult? Function(_PostCart value)? postCart,
     TResult? Function(_PostCartReward value)? postCartReward,
+    TResult? Function(_UpdateCart value)? updateCart,
   }) {
     return toggleIce?.call(this);
   }
@@ -741,9 +799,11 @@ class _$ToggleIceImpl implements _ToggleIce {
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
+    TResult Function(_GetDetailItemCart value)? getDetailItemCart,
     TResult Function(_GetDetailProductReward value)? getDetailProductReward,
     TResult Function(_PostCart value)? postCart,
     TResult Function(_PostCartReward value)? postCartReward,
+    TResult Function(_UpdateCart value)? updateCart,
     required TResult orElse(),
   }) {
     if (toggleIce != null) {
@@ -803,9 +863,11 @@ class _$ToggleSugarImpl implements _ToggleSugar {
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
+    required TResult Function(int cartId) getDetailItemCart,
     required TResult Function(int productRewardId) getDetailProductReward,
     required TResult Function(PostCartRequestModel? model) postCart,
     required TResult Function(PostCartRewardRequestModel? model) postCartReward,
+    required TResult Function(PostCartRequestModel? model, int? id) updateCart,
   }) {
     return toggleSugar();
   }
@@ -821,9 +883,11 @@ class _$ToggleSugarImpl implements _ToggleSugar {
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
+    TResult? Function(int cartId)? getDetailItemCart,
     TResult? Function(int productRewardId)? getDetailProductReward,
     TResult? Function(PostCartRequestModel? model)? postCart,
     TResult? Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult? Function(PostCartRequestModel? model, int? id)? updateCart,
   }) {
     return toggleSugar?.call();
   }
@@ -839,9 +903,11 @@ class _$ToggleSugarImpl implements _ToggleSugar {
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
+    TResult Function(int cartId)? getDetailItemCart,
     TResult Function(int productRewardId)? getDetailProductReward,
     TResult Function(PostCartRequestModel? model)? postCart,
     TResult Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult Function(PostCartRequestModel? model, int? id)? updateCart,
     required TResult orElse(),
   }) {
     if (toggleSugar != null) {
@@ -861,10 +927,12 @@ class _$ToggleSugarImpl implements _ToggleSugar {
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
+    required TResult Function(_GetDetailItemCart value) getDetailItemCart,
     required TResult Function(_GetDetailProductReward value)
         getDetailProductReward,
     required TResult Function(_PostCart value) postCart,
     required TResult Function(_PostCartReward value) postCartReward,
+    required TResult Function(_UpdateCart value) updateCart,
   }) {
     return toggleSugar(this);
   }
@@ -880,9 +948,11 @@ class _$ToggleSugarImpl implements _ToggleSugar {
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
+    TResult? Function(_GetDetailItemCart value)? getDetailItemCart,
     TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
     TResult? Function(_PostCart value)? postCart,
     TResult? Function(_PostCartReward value)? postCartReward,
+    TResult? Function(_UpdateCart value)? updateCart,
   }) {
     return toggleSugar?.call(this);
   }
@@ -898,9 +968,11 @@ class _$ToggleSugarImpl implements _ToggleSugar {
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
+    TResult Function(_GetDetailItemCart value)? getDetailItemCart,
     TResult Function(_GetDetailProductReward value)? getDetailProductReward,
     TResult Function(_PostCart value)? postCart,
     TResult Function(_PostCartReward value)? postCartReward,
+    TResult Function(_UpdateCart value)? updateCart,
     required TResult orElse(),
   }) {
     if (toggleSugar != null) {
@@ -960,9 +1032,11 @@ class _$DecrementImpl implements _Decrement {
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
+    required TResult Function(int cartId) getDetailItemCart,
     required TResult Function(int productRewardId) getDetailProductReward,
     required TResult Function(PostCartRequestModel? model) postCart,
     required TResult Function(PostCartRewardRequestModel? model) postCartReward,
+    required TResult Function(PostCartRequestModel? model, int? id) updateCart,
   }) {
     return decrement();
   }
@@ -978,9 +1052,11 @@ class _$DecrementImpl implements _Decrement {
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
+    TResult? Function(int cartId)? getDetailItemCart,
     TResult? Function(int productRewardId)? getDetailProductReward,
     TResult? Function(PostCartRequestModel? model)? postCart,
     TResult? Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult? Function(PostCartRequestModel? model, int? id)? updateCart,
   }) {
     return decrement?.call();
   }
@@ -996,9 +1072,11 @@ class _$DecrementImpl implements _Decrement {
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
+    TResult Function(int cartId)? getDetailItemCart,
     TResult Function(int productRewardId)? getDetailProductReward,
     TResult Function(PostCartRequestModel? model)? postCart,
     TResult Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult Function(PostCartRequestModel? model, int? id)? updateCart,
     required TResult orElse(),
   }) {
     if (decrement != null) {
@@ -1018,10 +1096,12 @@ class _$DecrementImpl implements _Decrement {
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
+    required TResult Function(_GetDetailItemCart value) getDetailItemCart,
     required TResult Function(_GetDetailProductReward value)
         getDetailProductReward,
     required TResult Function(_PostCart value) postCart,
     required TResult Function(_PostCartReward value) postCartReward,
+    required TResult Function(_UpdateCart value) updateCart,
   }) {
     return decrement(this);
   }
@@ -1037,9 +1117,11 @@ class _$DecrementImpl implements _Decrement {
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
+    TResult? Function(_GetDetailItemCart value)? getDetailItemCart,
     TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
     TResult? Function(_PostCart value)? postCart,
     TResult? Function(_PostCartReward value)? postCartReward,
+    TResult? Function(_UpdateCart value)? updateCart,
   }) {
     return decrement?.call(this);
   }
@@ -1055,9 +1137,11 @@ class _$DecrementImpl implements _Decrement {
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
+    TResult Function(_GetDetailItemCart value)? getDetailItemCart,
     TResult Function(_GetDetailProductReward value)? getDetailProductReward,
     TResult Function(_PostCart value)? postCart,
     TResult Function(_PostCartReward value)? postCartReward,
+    TResult Function(_UpdateCart value)? updateCart,
     required TResult orElse(),
   }) {
     if (decrement != null) {
@@ -1117,9 +1201,11 @@ class _$IncrementImpl implements _Increment {
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
+    required TResult Function(int cartId) getDetailItemCart,
     required TResult Function(int productRewardId) getDetailProductReward,
     required TResult Function(PostCartRequestModel? model) postCart,
     required TResult Function(PostCartRewardRequestModel? model) postCartReward,
+    required TResult Function(PostCartRequestModel? model, int? id) updateCart,
   }) {
     return increment();
   }
@@ -1135,9 +1221,11 @@ class _$IncrementImpl implements _Increment {
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
+    TResult? Function(int cartId)? getDetailItemCart,
     TResult? Function(int productRewardId)? getDetailProductReward,
     TResult? Function(PostCartRequestModel? model)? postCart,
     TResult? Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult? Function(PostCartRequestModel? model, int? id)? updateCart,
   }) {
     return increment?.call();
   }
@@ -1153,9 +1241,11 @@ class _$IncrementImpl implements _Increment {
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
+    TResult Function(int cartId)? getDetailItemCart,
     TResult Function(int productRewardId)? getDetailProductReward,
     TResult Function(PostCartRequestModel? model)? postCart,
     TResult Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult Function(PostCartRequestModel? model, int? id)? updateCart,
     required TResult orElse(),
   }) {
     if (increment != null) {
@@ -1175,10 +1265,12 @@ class _$IncrementImpl implements _Increment {
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
+    required TResult Function(_GetDetailItemCart value) getDetailItemCart,
     required TResult Function(_GetDetailProductReward value)
         getDetailProductReward,
     required TResult Function(_PostCart value) postCart,
     required TResult Function(_PostCartReward value) postCartReward,
+    required TResult Function(_UpdateCart value) updateCart,
   }) {
     return increment(this);
   }
@@ -1194,9 +1286,11 @@ class _$IncrementImpl implements _Increment {
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
+    TResult? Function(_GetDetailItemCart value)? getDetailItemCart,
     TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
     TResult? Function(_PostCart value)? postCart,
     TResult? Function(_PostCartReward value)? postCartReward,
+    TResult? Function(_UpdateCart value)? updateCart,
   }) {
     return increment?.call(this);
   }
@@ -1212,9 +1306,11 @@ class _$IncrementImpl implements _Increment {
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
+    TResult Function(_GetDetailItemCart value)? getDetailItemCart,
     TResult Function(_GetDetailProductReward value)? getDetailProductReward,
     TResult Function(_PostCart value)? postCart,
     TResult Function(_PostCartReward value)? postCartReward,
+    TResult Function(_UpdateCart value)? updateCart,
     required TResult orElse(),
   }) {
     if (increment != null) {
@@ -1302,9 +1398,11 @@ class _$GetDetailProductImpl implements _GetDetailProduct {
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
+    required TResult Function(int cartId) getDetailItemCart,
     required TResult Function(int productRewardId) getDetailProductReward,
     required TResult Function(PostCartRequestModel? model) postCart,
     required TResult Function(PostCartRewardRequestModel? model) postCartReward,
+    required TResult Function(PostCartRequestModel? model, int? id) updateCart,
   }) {
     return getDetailProduct(productId);
   }
@@ -1320,9 +1418,11 @@ class _$GetDetailProductImpl implements _GetDetailProduct {
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
+    TResult? Function(int cartId)? getDetailItemCart,
     TResult? Function(int productRewardId)? getDetailProductReward,
     TResult? Function(PostCartRequestModel? model)? postCart,
     TResult? Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult? Function(PostCartRequestModel? model, int? id)? updateCart,
   }) {
     return getDetailProduct?.call(productId);
   }
@@ -1338,9 +1438,11 @@ class _$GetDetailProductImpl implements _GetDetailProduct {
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
+    TResult Function(int cartId)? getDetailItemCart,
     TResult Function(int productRewardId)? getDetailProductReward,
     TResult Function(PostCartRequestModel? model)? postCart,
     TResult Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult Function(PostCartRequestModel? model, int? id)? updateCart,
     required TResult orElse(),
   }) {
     if (getDetailProduct != null) {
@@ -1360,10 +1462,12 @@ class _$GetDetailProductImpl implements _GetDetailProduct {
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
+    required TResult Function(_GetDetailItemCart value) getDetailItemCart,
     required TResult Function(_GetDetailProductReward value)
         getDetailProductReward,
     required TResult Function(_PostCart value) postCart,
     required TResult Function(_PostCartReward value) postCartReward,
+    required TResult Function(_UpdateCart value) updateCart,
   }) {
     return getDetailProduct(this);
   }
@@ -1379,9 +1483,11 @@ class _$GetDetailProductImpl implements _GetDetailProduct {
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
+    TResult? Function(_GetDetailItemCart value)? getDetailItemCart,
     TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
     TResult? Function(_PostCart value)? postCart,
     TResult? Function(_PostCartReward value)? postCartReward,
+    TResult? Function(_UpdateCart value)? updateCart,
   }) {
     return getDetailProduct?.call(this);
   }
@@ -1397,9 +1503,11 @@ class _$GetDetailProductImpl implements _GetDetailProduct {
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
+    TResult Function(_GetDetailItemCart value)? getDetailItemCart,
     TResult Function(_GetDetailProductReward value)? getDetailProductReward,
     TResult Function(_PostCart value)? postCart,
     TResult Function(_PostCartReward value)? postCartReward,
+    TResult Function(_UpdateCart value)? updateCart,
     required TResult orElse(),
   }) {
     if (getDetailProduct != null) {
@@ -1415,6 +1523,207 @@ abstract class _GetDetailProduct implements DetailProductEvent {
   int get productId;
   @JsonKey(ignore: true)
   _$$GetDetailProductImplCopyWith<_$GetDetailProductImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetDetailItemCartImplCopyWith<$Res> {
+  factory _$$GetDetailItemCartImplCopyWith(_$GetDetailItemCartImpl value,
+          $Res Function(_$GetDetailItemCartImpl) then) =
+      __$$GetDetailItemCartImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int cartId});
+}
+
+/// @nodoc
+class __$$GetDetailItemCartImplCopyWithImpl<$Res>
+    extends _$DetailProductEventCopyWithImpl<$Res, _$GetDetailItemCartImpl>
+    implements _$$GetDetailItemCartImplCopyWith<$Res> {
+  __$$GetDetailItemCartImplCopyWithImpl(_$GetDetailItemCartImpl _value,
+      $Res Function(_$GetDetailItemCartImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? cartId = null,
+  }) {
+    return _then(_$GetDetailItemCartImpl(
+      null == cartId
+          ? _value.cartId
+          : cartId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetDetailItemCartImpl implements _GetDetailItemCart {
+  const _$GetDetailItemCartImpl(this.cartId);
+
+  @override
+  final int cartId;
+
+  @override
+  String toString() {
+    return 'DetailProductEvent.getDetailItemCart(cartId: $cartId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetDetailItemCartImpl &&
+            (identical(other.cartId, cartId) || other.cartId == cartId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, cartId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetDetailItemCartImplCopyWith<_$GetDetailItemCartImpl> get copyWith =>
+      __$$GetDetailItemCartImplCopyWithImpl<_$GetDetailItemCartImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() toggleTemp,
+    required TResult Function() toggleSize,
+    required TResult Function() toggleIce,
+    required TResult Function() toggleSugar,
+    required TResult Function() decrement,
+    required TResult Function() increment,
+    required TResult Function(int productId) getDetailProduct,
+    required TResult Function(int cartId) getDetailItemCart,
+    required TResult Function(int productRewardId) getDetailProductReward,
+    required TResult Function(PostCartRequestModel? model) postCart,
+    required TResult Function(PostCartRewardRequestModel? model) postCartReward,
+    required TResult Function(PostCartRequestModel? model, int? id) updateCart,
+  }) {
+    return getDetailItemCart(cartId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? toggleTemp,
+    TResult? Function()? toggleSize,
+    TResult? Function()? toggleIce,
+    TResult? Function()? toggleSugar,
+    TResult? Function()? decrement,
+    TResult? Function()? increment,
+    TResult? Function(int productId)? getDetailProduct,
+    TResult? Function(int cartId)? getDetailItemCart,
+    TResult? Function(int productRewardId)? getDetailProductReward,
+    TResult? Function(PostCartRequestModel? model)? postCart,
+    TResult? Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult? Function(PostCartRequestModel? model, int? id)? updateCart,
+  }) {
+    return getDetailItemCart?.call(cartId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? toggleTemp,
+    TResult Function()? toggleSize,
+    TResult Function()? toggleIce,
+    TResult Function()? toggleSugar,
+    TResult Function()? decrement,
+    TResult Function()? increment,
+    TResult Function(int productId)? getDetailProduct,
+    TResult Function(int cartId)? getDetailItemCart,
+    TResult Function(int productRewardId)? getDetailProductReward,
+    TResult Function(PostCartRequestModel? model)? postCart,
+    TResult Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult Function(PostCartRequestModel? model, int? id)? updateCart,
+    required TResult orElse(),
+  }) {
+    if (getDetailItemCart != null) {
+      return getDetailItemCart(cartId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_ToggleTemperature value) toggleTemp,
+    required TResult Function(_ToggleSize value) toggleSize,
+    required TResult Function(_ToggleIce value) toggleIce,
+    required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_Decrement value) decrement,
+    required TResult Function(_Increment value) increment,
+    required TResult Function(_GetDetailProduct value) getDetailProduct,
+    required TResult Function(_GetDetailItemCart value) getDetailItemCart,
+    required TResult Function(_GetDetailProductReward value)
+        getDetailProductReward,
+    required TResult Function(_PostCart value) postCart,
+    required TResult Function(_PostCartReward value) postCartReward,
+    required TResult Function(_UpdateCart value) updateCart,
+  }) {
+    return getDetailItemCart(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_ToggleTemperature value)? toggleTemp,
+    TResult? Function(_ToggleSize value)? toggleSize,
+    TResult? Function(_ToggleIce value)? toggleIce,
+    TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_Decrement value)? decrement,
+    TResult? Function(_Increment value)? increment,
+    TResult? Function(_GetDetailProduct value)? getDetailProduct,
+    TResult? Function(_GetDetailItemCart value)? getDetailItemCart,
+    TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
+    TResult? Function(_PostCart value)? postCart,
+    TResult? Function(_PostCartReward value)? postCartReward,
+    TResult? Function(_UpdateCart value)? updateCart,
+  }) {
+    return getDetailItemCart?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_ToggleTemperature value)? toggleTemp,
+    TResult Function(_ToggleSize value)? toggleSize,
+    TResult Function(_ToggleIce value)? toggleIce,
+    TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_Decrement value)? decrement,
+    TResult Function(_Increment value)? increment,
+    TResult Function(_GetDetailProduct value)? getDetailProduct,
+    TResult Function(_GetDetailItemCart value)? getDetailItemCart,
+    TResult Function(_GetDetailProductReward value)? getDetailProductReward,
+    TResult Function(_PostCart value)? postCart,
+    TResult Function(_PostCartReward value)? postCartReward,
+    TResult Function(_UpdateCart value)? updateCart,
+    required TResult orElse(),
+  }) {
+    if (getDetailItemCart != null) {
+      return getDetailItemCart(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetDetailItemCart implements DetailProductEvent {
+  const factory _GetDetailItemCart(final int cartId) = _$GetDetailItemCartImpl;
+
+  int get cartId;
+  @JsonKey(ignore: true)
+  _$$GetDetailItemCartImplCopyWith<_$GetDetailItemCartImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1494,9 +1803,11 @@ class _$GetDetailProductRewardImpl implements _GetDetailProductReward {
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
+    required TResult Function(int cartId) getDetailItemCart,
     required TResult Function(int productRewardId) getDetailProductReward,
     required TResult Function(PostCartRequestModel? model) postCart,
     required TResult Function(PostCartRewardRequestModel? model) postCartReward,
+    required TResult Function(PostCartRequestModel? model, int? id) updateCart,
   }) {
     return getDetailProductReward(productRewardId);
   }
@@ -1512,9 +1823,11 @@ class _$GetDetailProductRewardImpl implements _GetDetailProductReward {
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
+    TResult? Function(int cartId)? getDetailItemCart,
     TResult? Function(int productRewardId)? getDetailProductReward,
     TResult? Function(PostCartRequestModel? model)? postCart,
     TResult? Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult? Function(PostCartRequestModel? model, int? id)? updateCart,
   }) {
     return getDetailProductReward?.call(productRewardId);
   }
@@ -1530,9 +1843,11 @@ class _$GetDetailProductRewardImpl implements _GetDetailProductReward {
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
+    TResult Function(int cartId)? getDetailItemCart,
     TResult Function(int productRewardId)? getDetailProductReward,
     TResult Function(PostCartRequestModel? model)? postCart,
     TResult Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult Function(PostCartRequestModel? model, int? id)? updateCart,
     required TResult orElse(),
   }) {
     if (getDetailProductReward != null) {
@@ -1552,10 +1867,12 @@ class _$GetDetailProductRewardImpl implements _GetDetailProductReward {
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
+    required TResult Function(_GetDetailItemCart value) getDetailItemCart,
     required TResult Function(_GetDetailProductReward value)
         getDetailProductReward,
     required TResult Function(_PostCart value) postCart,
     required TResult Function(_PostCartReward value) postCartReward,
+    required TResult Function(_UpdateCart value) updateCart,
   }) {
     return getDetailProductReward(this);
   }
@@ -1571,9 +1888,11 @@ class _$GetDetailProductRewardImpl implements _GetDetailProductReward {
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
+    TResult? Function(_GetDetailItemCart value)? getDetailItemCart,
     TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
     TResult? Function(_PostCart value)? postCart,
     TResult? Function(_PostCartReward value)? postCartReward,
+    TResult? Function(_UpdateCart value)? updateCart,
   }) {
     return getDetailProductReward?.call(this);
   }
@@ -1589,9 +1908,11 @@ class _$GetDetailProductRewardImpl implements _GetDetailProductReward {
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
+    TResult Function(_GetDetailItemCart value)? getDetailItemCart,
     TResult Function(_GetDetailProductReward value)? getDetailProductReward,
     TResult Function(_PostCart value)? postCart,
     TResult Function(_PostCartReward value)? postCartReward,
+    TResult Function(_UpdateCart value)? updateCart,
     required TResult orElse(),
   }) {
     if (getDetailProductReward != null) {
@@ -1683,9 +2004,11 @@ class _$PostCartImpl implements _PostCart {
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
+    required TResult Function(int cartId) getDetailItemCart,
     required TResult Function(int productRewardId) getDetailProductReward,
     required TResult Function(PostCartRequestModel? model) postCart,
     required TResult Function(PostCartRewardRequestModel? model) postCartReward,
+    required TResult Function(PostCartRequestModel? model, int? id) updateCart,
   }) {
     return postCart(model);
   }
@@ -1701,9 +2024,11 @@ class _$PostCartImpl implements _PostCart {
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
+    TResult? Function(int cartId)? getDetailItemCart,
     TResult? Function(int productRewardId)? getDetailProductReward,
     TResult? Function(PostCartRequestModel? model)? postCart,
     TResult? Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult? Function(PostCartRequestModel? model, int? id)? updateCart,
   }) {
     return postCart?.call(model);
   }
@@ -1719,9 +2044,11 @@ class _$PostCartImpl implements _PostCart {
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
+    TResult Function(int cartId)? getDetailItemCart,
     TResult Function(int productRewardId)? getDetailProductReward,
     TResult Function(PostCartRequestModel? model)? postCart,
     TResult Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult Function(PostCartRequestModel? model, int? id)? updateCart,
     required TResult orElse(),
   }) {
     if (postCart != null) {
@@ -1741,10 +2068,12 @@ class _$PostCartImpl implements _PostCart {
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
+    required TResult Function(_GetDetailItemCart value) getDetailItemCart,
     required TResult Function(_GetDetailProductReward value)
         getDetailProductReward,
     required TResult Function(_PostCart value) postCart,
     required TResult Function(_PostCartReward value) postCartReward,
+    required TResult Function(_UpdateCart value) updateCart,
   }) {
     return postCart(this);
   }
@@ -1760,9 +2089,11 @@ class _$PostCartImpl implements _PostCart {
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
+    TResult? Function(_GetDetailItemCart value)? getDetailItemCart,
     TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
     TResult? Function(_PostCart value)? postCart,
     TResult? Function(_PostCartReward value)? postCartReward,
+    TResult? Function(_UpdateCart value)? updateCart,
   }) {
     return postCart?.call(this);
   }
@@ -1778,9 +2109,11 @@ class _$PostCartImpl implements _PostCart {
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
+    TResult Function(_GetDetailItemCart value)? getDetailItemCart,
     TResult Function(_GetDetailProductReward value)? getDetailProductReward,
     TResult Function(_PostCart value)? postCart,
     TResult Function(_PostCartReward value)? postCartReward,
+    TResult Function(_UpdateCart value)? updateCart,
     required TResult orElse(),
   }) {
     if (postCart != null) {
@@ -1872,9 +2205,11 @@ class _$PostCartRewardImpl implements _PostCartReward {
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
+    required TResult Function(int cartId) getDetailItemCart,
     required TResult Function(int productRewardId) getDetailProductReward,
     required TResult Function(PostCartRequestModel? model) postCart,
     required TResult Function(PostCartRewardRequestModel? model) postCartReward,
+    required TResult Function(PostCartRequestModel? model, int? id) updateCart,
   }) {
     return postCartReward(model);
   }
@@ -1890,9 +2225,11 @@ class _$PostCartRewardImpl implements _PostCartReward {
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
+    TResult? Function(int cartId)? getDetailItemCart,
     TResult? Function(int productRewardId)? getDetailProductReward,
     TResult? Function(PostCartRequestModel? model)? postCart,
     TResult? Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult? Function(PostCartRequestModel? model, int? id)? updateCart,
   }) {
     return postCartReward?.call(model);
   }
@@ -1908,9 +2245,11 @@ class _$PostCartRewardImpl implements _PostCartReward {
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
+    TResult Function(int cartId)? getDetailItemCart,
     TResult Function(int productRewardId)? getDetailProductReward,
     TResult Function(PostCartRequestModel? model)? postCart,
     TResult Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult Function(PostCartRequestModel? model, int? id)? updateCart,
     required TResult orElse(),
   }) {
     if (postCartReward != null) {
@@ -1930,10 +2269,12 @@ class _$PostCartRewardImpl implements _PostCartReward {
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
+    required TResult Function(_GetDetailItemCart value) getDetailItemCart,
     required TResult Function(_GetDetailProductReward value)
         getDetailProductReward,
     required TResult Function(_PostCart value) postCart,
     required TResult Function(_PostCartReward value) postCartReward,
+    required TResult Function(_UpdateCart value) updateCart,
   }) {
     return postCartReward(this);
   }
@@ -1949,9 +2290,11 @@ class _$PostCartRewardImpl implements _PostCartReward {
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
+    TResult? Function(_GetDetailItemCart value)? getDetailItemCart,
     TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
     TResult? Function(_PostCart value)? postCart,
     TResult? Function(_PostCartReward value)? postCartReward,
+    TResult? Function(_UpdateCart value)? updateCart,
   }) {
     return postCartReward?.call(this);
   }
@@ -1967,9 +2310,11 @@ class _$PostCartRewardImpl implements _PostCartReward {
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
+    TResult Function(_GetDetailItemCart value)? getDetailItemCart,
     TResult Function(_GetDetailProductReward value)? getDetailProductReward,
     TResult Function(_PostCart value)? postCart,
     TResult Function(_PostCartReward value)? postCartReward,
+    TResult Function(_UpdateCart value)? updateCart,
     required TResult orElse(),
   }) {
     if (postCartReward != null) {
@@ -1990,6 +2335,216 @@ abstract class _PostCartReward implements DetailProductEvent {
 }
 
 /// @nodoc
+abstract class _$$UpdateCartImplCopyWith<$Res> {
+  factory _$$UpdateCartImplCopyWith(
+          _$UpdateCartImpl value, $Res Function(_$UpdateCartImpl) then) =
+      __$$UpdateCartImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({PostCartRequestModel? model, int? id});
+}
+
+/// @nodoc
+class __$$UpdateCartImplCopyWithImpl<$Res>
+    extends _$DetailProductEventCopyWithImpl<$Res, _$UpdateCartImpl>
+    implements _$$UpdateCartImplCopyWith<$Res> {
+  __$$UpdateCartImplCopyWithImpl(
+      _$UpdateCartImpl _value, $Res Function(_$UpdateCartImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? model = freezed,
+    Object? id = freezed,
+  }) {
+    return _then(_$UpdateCartImpl(
+      freezed == model
+          ? _value.model
+          : model // ignore: cast_nullable_to_non_nullable
+              as PostCartRequestModel?,
+      freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateCartImpl implements _UpdateCart {
+  const _$UpdateCartImpl(this.model, this.id);
+
+  @override
+  final PostCartRequestModel? model;
+  @override
+  final int? id;
+
+  @override
+  String toString() {
+    return 'DetailProductEvent.updateCart(model: $model, id: $id)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateCartImpl &&
+            (identical(other.model, model) || other.model == model) &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, model, id);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateCartImplCopyWith<_$UpdateCartImpl> get copyWith =>
+      __$$UpdateCartImplCopyWithImpl<_$UpdateCartImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() toggleTemp,
+    required TResult Function() toggleSize,
+    required TResult Function() toggleIce,
+    required TResult Function() toggleSugar,
+    required TResult Function() decrement,
+    required TResult Function() increment,
+    required TResult Function(int productId) getDetailProduct,
+    required TResult Function(int cartId) getDetailItemCart,
+    required TResult Function(int productRewardId) getDetailProductReward,
+    required TResult Function(PostCartRequestModel? model) postCart,
+    required TResult Function(PostCartRewardRequestModel? model) postCartReward,
+    required TResult Function(PostCartRequestModel? model, int? id) updateCart,
+  }) {
+    return updateCart(model, id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? toggleTemp,
+    TResult? Function()? toggleSize,
+    TResult? Function()? toggleIce,
+    TResult? Function()? toggleSugar,
+    TResult? Function()? decrement,
+    TResult? Function()? increment,
+    TResult? Function(int productId)? getDetailProduct,
+    TResult? Function(int cartId)? getDetailItemCart,
+    TResult? Function(int productRewardId)? getDetailProductReward,
+    TResult? Function(PostCartRequestModel? model)? postCart,
+    TResult? Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult? Function(PostCartRequestModel? model, int? id)? updateCart,
+  }) {
+    return updateCart?.call(model, id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? toggleTemp,
+    TResult Function()? toggleSize,
+    TResult Function()? toggleIce,
+    TResult Function()? toggleSugar,
+    TResult Function()? decrement,
+    TResult Function()? increment,
+    TResult Function(int productId)? getDetailProduct,
+    TResult Function(int cartId)? getDetailItemCart,
+    TResult Function(int productRewardId)? getDetailProductReward,
+    TResult Function(PostCartRequestModel? model)? postCart,
+    TResult Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult Function(PostCartRequestModel? model, int? id)? updateCart,
+    required TResult orElse(),
+  }) {
+    if (updateCart != null) {
+      return updateCart(model, id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_ToggleTemperature value) toggleTemp,
+    required TResult Function(_ToggleSize value) toggleSize,
+    required TResult Function(_ToggleIce value) toggleIce,
+    required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_Decrement value) decrement,
+    required TResult Function(_Increment value) increment,
+    required TResult Function(_GetDetailProduct value) getDetailProduct,
+    required TResult Function(_GetDetailItemCart value) getDetailItemCart,
+    required TResult Function(_GetDetailProductReward value)
+        getDetailProductReward,
+    required TResult Function(_PostCart value) postCart,
+    required TResult Function(_PostCartReward value) postCartReward,
+    required TResult Function(_UpdateCart value) updateCart,
+  }) {
+    return updateCart(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_ToggleTemperature value)? toggleTemp,
+    TResult? Function(_ToggleSize value)? toggleSize,
+    TResult? Function(_ToggleIce value)? toggleIce,
+    TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_Decrement value)? decrement,
+    TResult? Function(_Increment value)? increment,
+    TResult? Function(_GetDetailProduct value)? getDetailProduct,
+    TResult? Function(_GetDetailItemCart value)? getDetailItemCart,
+    TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
+    TResult? Function(_PostCart value)? postCart,
+    TResult? Function(_PostCartReward value)? postCartReward,
+    TResult? Function(_UpdateCart value)? updateCart,
+  }) {
+    return updateCart?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_ToggleTemperature value)? toggleTemp,
+    TResult Function(_ToggleSize value)? toggleSize,
+    TResult Function(_ToggleIce value)? toggleIce,
+    TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_Decrement value)? decrement,
+    TResult Function(_Increment value)? increment,
+    TResult Function(_GetDetailProduct value)? getDetailProduct,
+    TResult Function(_GetDetailItemCart value)? getDetailItemCart,
+    TResult Function(_GetDetailProductReward value)? getDetailProductReward,
+    TResult Function(_PostCart value)? postCart,
+    TResult Function(_PostCartReward value)? postCartReward,
+    TResult Function(_UpdateCart value)? updateCart,
+    required TResult orElse(),
+  }) {
+    if (updateCart != null) {
+      return updateCart(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateCart implements DetailProductEvent {
+  const factory _UpdateCart(final PostCartRequestModel? model, final int? id) =
+      _$UpdateCartImpl;
+
+  PostCartRequestModel? get model;
+  int? get id;
+  @JsonKey(ignore: true)
+  _$$UpdateCartImplCopyWith<_$UpdateCartImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$DetailProductState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -2000,6 +2555,8 @@ mixin _$DetailProductState {
             DetailProductRewardResponseModel? modelReward,
             PostCartResponseModel? modelCartPost,
             PostCartRewardResponseModel? modelCartRewardPost,
+            CartItemResponseModel? modelCartItem,
+            UpdateCartResponseModel? modelCartUpdate,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -2024,6 +2581,8 @@ mixin _$DetailProductState {
             DetailProductRewardResponseModel? modelReward,
             PostCartResponseModel? modelCartPost,
             PostCartRewardResponseModel? modelCartRewardPost,
+            CartItemResponseModel? modelCartItem,
+            UpdateCartResponseModel? modelCartUpdate,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -2048,6 +2607,8 @@ mixin _$DetailProductState {
             DetailProductRewardResponseModel? modelReward,
             PostCartResponseModel? modelCartPost,
             PostCartRewardResponseModel? modelCartRewardPost,
+            CartItemResponseModel? modelCartItem,
+            UpdateCartResponseModel? modelCartUpdate,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -2154,6 +2715,8 @@ class _$InitialImpl implements _Initial {
             DetailProductRewardResponseModel? modelReward,
             PostCartResponseModel? modelCartPost,
             PostCartRewardResponseModel? modelCartRewardPost,
+            CartItemResponseModel? modelCartItem,
+            UpdateCartResponseModel? modelCartUpdate,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -2181,6 +2744,8 @@ class _$InitialImpl implements _Initial {
             DetailProductRewardResponseModel? modelReward,
             PostCartResponseModel? modelCartPost,
             PostCartRewardResponseModel? modelCartRewardPost,
+            CartItemResponseModel? modelCartItem,
+            UpdateCartResponseModel? modelCartUpdate,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -2208,6 +2773,8 @@ class _$InitialImpl implements _Initial {
             DetailProductRewardResponseModel? modelReward,
             PostCartResponseModel? modelCartPost,
             PostCartRewardResponseModel? modelCartRewardPost,
+            CartItemResponseModel? modelCartItem,
+            UpdateCartResponseModel? modelCartUpdate,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -2316,6 +2883,8 @@ class _$LoadingImpl implements _Loading {
             DetailProductRewardResponseModel? modelReward,
             PostCartResponseModel? modelCartPost,
             PostCartRewardResponseModel? modelCartRewardPost,
+            CartItemResponseModel? modelCartItem,
+            UpdateCartResponseModel? modelCartUpdate,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -2343,6 +2912,8 @@ class _$LoadingImpl implements _Loading {
             DetailProductRewardResponseModel? modelReward,
             PostCartResponseModel? modelCartPost,
             PostCartRewardResponseModel? modelCartRewardPost,
+            CartItemResponseModel? modelCartItem,
+            UpdateCartResponseModel? modelCartUpdate,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -2370,6 +2941,8 @@ class _$LoadingImpl implements _Loading {
             DetailProductRewardResponseModel? modelReward,
             PostCartResponseModel? modelCartPost,
             PostCartRewardResponseModel? modelCartRewardPost,
+            CartItemResponseModel? modelCartItem,
+            UpdateCartResponseModel? modelCartUpdate,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -2444,6 +3017,8 @@ abstract class _$$SuccessImplCopyWith<$Res> {
       DetailProductRewardResponseModel? modelReward,
       PostCartResponseModel? modelCartPost,
       PostCartRewardResponseModel? modelCartRewardPost,
+      CartItemResponseModel? modelCartItem,
+      UpdateCartResponseModel? modelCartUpdate,
       bool isTempSelected,
       String selectedTemp,
       bool isSizeSelected,
@@ -2472,6 +3047,8 @@ class __$$SuccessImplCopyWithImpl<$Res>
     Object? modelReward = freezed,
     Object? modelCartPost = freezed,
     Object? modelCartRewardPost = freezed,
+    Object? modelCartItem = freezed,
+    Object? modelCartUpdate = freezed,
     Object? isTempSelected = null,
     Object? selectedTemp = null,
     Object? isSizeSelected = null,
@@ -2501,6 +3078,14 @@ class __$$SuccessImplCopyWithImpl<$Res>
           ? _value.modelCartRewardPost
           : modelCartRewardPost // ignore: cast_nullable_to_non_nullable
               as PostCartRewardResponseModel?,
+      modelCartItem: freezed == modelCartItem
+          ? _value.modelCartItem
+          : modelCartItem // ignore: cast_nullable_to_non_nullable
+              as CartItemResponseModel?,
+      modelCartUpdate: freezed == modelCartUpdate
+          ? _value.modelCartUpdate
+          : modelCartUpdate // ignore: cast_nullable_to_non_nullable
+              as UpdateCartResponseModel?,
       isTempSelected: null == isTempSelected
           ? _value.isTempSelected
           : isTempSelected // ignore: cast_nullable_to_non_nullable
@@ -2557,6 +3142,8 @@ class _$SuccessImpl implements _Success {
       required this.modelReward,
       required this.modelCartPost,
       required this.modelCartRewardPost,
+      required this.modelCartItem,
+      required this.modelCartUpdate,
       this.isTempSelected = false,
       this.selectedTemp = 'ice',
       this.isSizeSelected = false,
@@ -2577,6 +3164,10 @@ class _$SuccessImpl implements _Success {
   final PostCartResponseModel? modelCartPost;
   @override
   final PostCartRewardResponseModel? modelCartRewardPost;
+  @override
+  final CartItemResponseModel? modelCartItem;
+  @override
+  final UpdateCartResponseModel? modelCartUpdate;
   @override
   @JsonKey()
   final bool isTempSelected;
@@ -2613,7 +3204,7 @@ class _$SuccessImpl implements _Success {
 
   @override
   String toString() {
-    return 'DetailProductState.success(model: $model, modelReward: $modelReward, modelCartPost: $modelCartPost, modelCartRewardPost: $modelCartRewardPost, isTempSelected: $isTempSelected, selectedTemp: $selectedTemp, isSizeSelected: $isSizeSelected, selectedSize: $selectedSize, isIceSelected: $isIceSelected, selectedIce: $selectedIce, isSugarSelected: $isSugarSelected, selectedSugar: $selectedSugar, quantityCount: $quantityCount, totalPrice: $totalPrice, note: $note)';
+    return 'DetailProductState.success(model: $model, modelReward: $modelReward, modelCartPost: $modelCartPost, modelCartRewardPost: $modelCartRewardPost, modelCartItem: $modelCartItem, modelCartUpdate: $modelCartUpdate, isTempSelected: $isTempSelected, selectedTemp: $selectedTemp, isSizeSelected: $isSizeSelected, selectedSize: $selectedSize, isIceSelected: $isIceSelected, selectedIce: $selectedIce, isSugarSelected: $isSugarSelected, selectedSugar: $selectedSugar, quantityCount: $quantityCount, totalPrice: $totalPrice, note: $note)';
   }
 
   @override
@@ -2628,6 +3219,10 @@ class _$SuccessImpl implements _Success {
                 other.modelCartPost == modelCartPost) &&
             (identical(other.modelCartRewardPost, modelCartRewardPost) ||
                 other.modelCartRewardPost == modelCartRewardPost) &&
+            (identical(other.modelCartItem, modelCartItem) ||
+                other.modelCartItem == modelCartItem) &&
+            (identical(other.modelCartUpdate, modelCartUpdate) ||
+                other.modelCartUpdate == modelCartUpdate) &&
             (identical(other.isTempSelected, isTempSelected) ||
                 other.isTempSelected == isTempSelected) &&
             (identical(other.selectedTemp, selectedTemp) ||
@@ -2658,6 +3253,8 @@ class _$SuccessImpl implements _Success {
       modelReward,
       modelCartPost,
       modelCartRewardPost,
+      modelCartItem,
+      modelCartUpdate,
       isTempSelected,
       selectedTemp,
       isSizeSelected,
@@ -2686,6 +3283,8 @@ class _$SuccessImpl implements _Success {
             DetailProductRewardResponseModel? modelReward,
             PostCartResponseModel? modelCartPost,
             PostCartRewardResponseModel? modelCartRewardPost,
+            CartItemResponseModel? modelCartItem,
+            UpdateCartResponseModel? modelCartUpdate,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -2705,6 +3304,8 @@ class _$SuccessImpl implements _Success {
         modelReward,
         modelCartPost,
         modelCartRewardPost,
+        modelCartItem,
+        modelCartUpdate,
         isTempSelected,
         selectedTemp,
         isSizeSelected,
@@ -2728,6 +3329,8 @@ class _$SuccessImpl implements _Success {
             DetailProductRewardResponseModel? modelReward,
             PostCartResponseModel? modelCartPost,
             PostCartRewardResponseModel? modelCartRewardPost,
+            CartItemResponseModel? modelCartItem,
+            UpdateCartResponseModel? modelCartUpdate,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -2747,6 +3350,8 @@ class _$SuccessImpl implements _Success {
         modelReward,
         modelCartPost,
         modelCartRewardPost,
+        modelCartItem,
+        modelCartUpdate,
         isTempSelected,
         selectedTemp,
         isSizeSelected,
@@ -2770,6 +3375,8 @@ class _$SuccessImpl implements _Success {
             DetailProductRewardResponseModel? modelReward,
             PostCartResponseModel? modelCartPost,
             PostCartRewardResponseModel? modelCartRewardPost,
+            CartItemResponseModel? modelCartItem,
+            UpdateCartResponseModel? modelCartUpdate,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -2791,6 +3398,8 @@ class _$SuccessImpl implements _Success {
           modelReward,
           modelCartPost,
           modelCartRewardPost,
+          modelCartItem,
+          modelCartUpdate,
           isTempSelected,
           selectedTemp,
           isSizeSelected,
@@ -2850,6 +3459,8 @@ abstract class _Success implements DetailProductState {
       required final DetailProductRewardResponseModel? modelReward,
       required final PostCartResponseModel? modelCartPost,
       required final PostCartRewardResponseModel? modelCartRewardPost,
+      required final CartItemResponseModel? modelCartItem,
+      required final UpdateCartResponseModel? modelCartUpdate,
       final bool isTempSelected,
       final String selectedTemp,
       final bool isSizeSelected,
@@ -2866,6 +3477,8 @@ abstract class _Success implements DetailProductState {
   DetailProductRewardResponseModel? get modelReward;
   PostCartResponseModel? get modelCartPost;
   PostCartRewardResponseModel? get modelCartRewardPost;
+  CartItemResponseModel? get modelCartItem;
+  UpdateCartResponseModel? get modelCartUpdate;
   bool get isTempSelected;
   String get selectedTemp;
   bool get isSizeSelected;
@@ -2953,6 +3566,8 @@ class _$ErrorImpl implements _Error {
             DetailProductRewardResponseModel? modelReward,
             PostCartResponseModel? modelCartPost,
             PostCartRewardResponseModel? modelCartRewardPost,
+            CartItemResponseModel? modelCartItem,
+            UpdateCartResponseModel? modelCartUpdate,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -2980,6 +3595,8 @@ class _$ErrorImpl implements _Error {
             DetailProductRewardResponseModel? modelReward,
             PostCartResponseModel? modelCartPost,
             PostCartRewardResponseModel? modelCartRewardPost,
+            CartItemResponseModel? modelCartItem,
+            UpdateCartResponseModel? modelCartUpdate,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -3007,6 +3624,8 @@ class _$ErrorImpl implements _Error {
             DetailProductRewardResponseModel? modelReward,
             PostCartResponseModel? modelCartPost,
             PostCartRewardResponseModel? modelCartRewardPost,
+            CartItemResponseModel? modelCartItem,
+            UpdateCartResponseModel? modelCartUpdate,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,

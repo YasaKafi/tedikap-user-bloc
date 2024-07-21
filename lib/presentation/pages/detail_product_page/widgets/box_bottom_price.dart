@@ -13,11 +13,12 @@ class BoxBottomPrice extends StatelessWidget {
   const BoxBottomPrice({
     super.key,
     required this.screenWidth,
-    required this.noteController,
+    required this.noteController,required this.cartItemId,
   });
 
   final double screenWidth;
   final TextEditingController noteController;
+  final int? cartItemId;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +52,23 @@ class BoxBottomPrice extends StatelessWidget {
                         orElse: () => Center(
                           child: CircularProgressIndicator(),
                         ),
-                        success: (modelProduct, modelProductReward, modelCartPost, modelCartPostReward, isTempSelected, selectedTemp, isSizeSelected ,selectedSize,isIceSelected, selectedIce, isSugarSelected, selectedSugar, qty, totalPrice, note) {
+                        success: (modelProduct,
+                            modelProductReward,
+                            modelCartPost,
+                            modelCartPostReward,
+                            modelCartItem,
+                            modelCartUpdate,
+                            isTempSelected,
+                            selectedTemp,
+                            isSizeSelected,
+                            selectedSize,
+                            isIceSelected,
+                            selectedIce,
+                            isSugarSelected,
+                            selectedSugar,
+                            qty,
+                            totalPrice,
+                            note) {
                           int itemPrice;
 
                           if (modelProduct != null) {
@@ -120,9 +137,23 @@ class BoxBottomPrice extends StatelessWidget {
                           orElse: () => Center(
                                 child: CircularProgressIndicator(),
                               ),
-                          success: (modelProduct, modelProductReward, modelCartPost, modelCartPostReward, isTempSelected, selectedTemp, isSizeSelected ,selectedSize,isIceSelected, selectedIce, isSugarSelected, selectedSugar, qty, totalPrice, note) {
-                            print('qty sekarang $qty');
-                            print('totalPrice sekarang $totalPrice');
+                          success: (modelProduct,
+                              modelProductReward,
+                              modelCartPost,
+                              modelCartPostReward,
+                              modelCartItem,
+                              modelCartUpdate,
+                              isTempSelected,
+                              selectedTemp,
+                              isSizeSelected,
+                              selectedSize,
+                              isIceSelected,
+                              selectedIce,
+                              isSugarSelected,
+                              selectedSugar,
+                              qty,
+                              totalPrice,
+                              note) {
                             return Row(
                               children: [
                                 IconButton(
@@ -180,7 +211,30 @@ class BoxBottomPrice extends StatelessWidget {
                       // ));
                       // context.pushNamed('dashboard');
                     },
-                    success: (modelProduct, modelProductReward, modelCartPost, modelCartPostReward, isTempSelected, selectedTemp, isSizeSelected ,selectedSize,isIceSelected, selectedIce, isSugarSelected, selectedSugar, qty, totalPrice, note) {
+                    success: (modelProduct,
+                        modelProductReward,
+                        modelCartPost,
+                        modelCartPostReward,
+                        modelCartItem,
+                        modelCartUpdate,
+                        isTempSelected,
+                        selectedTemp,
+                        isSizeSelected,
+                        selectedSize,
+                        isIceSelected,
+                        selectedIce,
+                        isSugarSelected,
+                        selectedSugar,
+                        qty,
+                        totalPrice,
+                        note) {
+                      if(modelCartUpdate != null){
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('Cart Reward posted successfully!', style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w500, color: baseColor),),
+                          backgroundColor: greenMedium,
+                        ));
+                        context.pushNamed('cart_common');
+                      } else
                       if (modelCartPost != null) {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text('Cart posted successfully!', style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w500, color: baseColor),),
@@ -205,7 +259,23 @@ class BoxBottomPrice extends StatelessWidget {
                       loading: () => Center(
                             child: CircularProgressIndicator(),
                           ),
-                      success: (modelProduct, modelProductReward, modelCartPost, modelCartPostReward, isTempSelected, selectedTemp, isSizeSelected ,selectedSize,isIceSelected, selectedIce, isSugarSelected, selectedSugar, qty, totalPrice, note) {
+                      success: (modelProduct,
+                          modelProductReward,
+                          modelCartPost,
+                          modelCartPostReward,
+                          modelCartItem,
+                          modelCartUpdate,
+                          isTempSelected,
+                          selectedTemp,
+                          isSizeSelected,
+                          selectedSize,
+                          isIceSelected,
+                          selectedIce,
+                          isSugarSelected,
+                          selectedSugar,
+                          qty,
+                          totalPrice,
+                          note) {
                         return InkWell(
                           onTap: () {
                             int itemPrice;
@@ -220,18 +290,29 @@ class BoxBottomPrice extends StatelessWidget {
                             }
                             totalPrice = itemPrice * qty;
                             if(modelProduct != null){
-                              final itemProductCommon = modelProduct!.data;
-                              note = noteController.text;
+                              final itemProductCommon = modelProduct.data;
                               final requestModel = PostCartRequestModel(
                                 productId: itemProductCommon!.id,
                                 temperatur: selectedTemp,
                                 size: selectedSize,
                                 ice: selectedIce,
                                 sugar: selectedSugar,
-                                note: note,
+                                note: noteController.text,
                                 quantity: qty,
                                 price: itemPrice,
                               );
+                              final requestUpdateModel = PostCartRequestModel(
+                                temperatur: selectedTemp,
+                                size: selectedSize,
+                                ice: selectedIce,
+                                sugar: selectedSugar,
+                                note: noteController.text,
+                                quantity: qty,
+                                price: itemPrice,
+                              );
+                              cartItemId != null ? context
+                                  .read<DetailProductBloc>()
+                                  .add(DetailProductEvent.updateCart(requestUpdateModel, cartItemId!)) :
                               context
                                   .read<DetailProductBloc>()
                                   .add(DetailProductEvent.postCart(requestModel));
@@ -264,7 +345,7 @@ class BoxBottomPrice extends StatelessWidget {
                                   BorderRadius.all(Radius.circular(20)),
                             ),
                             child: Center(
-                                child: Text(
+                                child: Text( cartItemId != null ? 'Update Cart' :
                               'Add to Cart',
                               style: txtPrimaryTitle.copyWith(
                                   fontWeight: FontWeight.w600,
