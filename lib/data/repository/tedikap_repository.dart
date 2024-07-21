@@ -8,7 +8,7 @@ class TedikapApiRepository {
   static String getAllVoucherActive = '$mainUrl/api/voucher/active';
   static String getAllProductFavorite = '$mainUrl/api/product/favorite';
   static String getCart = '$mainUrl/api/cart';
-  static String getCheckoutRewardProduct = '$mainUrl/api/cart-reward';
+  static String getCartReward = '$mainUrl/api/cart-reward';
   static String getAllOrder = '$mainUrl/api/order/history';
   static String getOrderReward = '$mainUrl/api/order-reward';
   static String getOrderByID = '$mainUrl/api/order';
@@ -22,7 +22,7 @@ class TedikapApiRepository {
   static String getCheckoutProductByIDUser = '$mainUrl/api/cart/getById';
   static String getDetailPromoByID= '$mainUrl/api/voucher/show';
   static String getCartItem= '$mainUrl/api/cart/item';
-  static String getDetailCartRewardByID= '$mainUrl/api/cart-reward/item';
+  static String getCartItemReward= '$mainUrl/api/cart-reward/item';
   static String postProductFavorite = '$mainUrl/api/product/favorite';
 
   static String getImage = '$mainUrl/storage/product/';
@@ -39,11 +39,11 @@ class TedikapApiRepository {
   static String postOrder = '$mainUrl/api/order/store';
 
   static String putCart = '$mainUrl/api/cart/update';
-  static String putOrderRewardtByID = '$mainUrl/api/cart-reward/update';
+  static String putCartReward = '$mainUrl/api/cart-reward/update';
   static String postCart = '$mainUrl/api/cart/store';
   static String postCartReward = '$mainUrl/api/cart-reward/store';
   static String deleteCartItem = '$mainUrl/api/cart/delete';
-  static String deleteOrderRewardByID = '$mainUrl/api/cart-reward/delete';
+  static String deleteCartItemReward = '$mainUrl/api/cart-reward/delete';
   static String patchUpdateQty = '$mainUrl/api/cart/update-quantity';
   static String patchUpdateQtyReward = '$mainUrl/api/cart-reward/update-quantity';
 

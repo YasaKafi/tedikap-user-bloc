@@ -46,7 +46,7 @@ class PointPage extends StatelessWidget {
                     style: txtSecondaryHeader.copyWith(
                         fontWeight: FontWeight.w600, color: blackColor),
                   ),
-                  ButtonCircleIcon(routes: '', icon: icCart)
+                  ButtonCircleIcon(routes: 'cart_reward', icon: icCart)
                 ],
               ),
             ),
