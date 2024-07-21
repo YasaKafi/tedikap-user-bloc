@@ -124,8 +124,8 @@ class AppRouter {
         path: '/detail_product_reward/:productRewardId',
         builder: (context, state) {
           final productRewardId = int.parse(state.pathParameters['productRewardId']!) ;
-          final cartItemId = state.extra is String ? state.extra as String : null;
-          return DetailProductPage(productRewardId: productRewardId);
+          final cartItemRewardId = state.extra is String ? state.extra as String : null;
+          return DetailProductPage(productRewardId: productRewardId, cartItemRewardId: cartItemRewardId != null ? int.parse(cartItemRewardId) : null, );
         },
       ),
 

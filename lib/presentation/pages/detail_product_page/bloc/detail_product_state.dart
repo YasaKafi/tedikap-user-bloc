@@ -11,6 +11,8 @@ class DetailProductState with _$DetailProductState {
     required PostCartRewardResponseModel? modelCartRewardPost,
     required CartItemResponseModel? modelCartItem,
     required UpdateCartResponseModel? modelCartUpdate,
+    required CartItemRewardResponseModel? modelCartItemReward,
+    required UpdateCartRewardResponseModel? modelCartRewardUpdate,
     @Default(false) bool isTempSelected,
     @Default('ice') String selectedTemp,
     @Default(false) bool isSizeSelected,
