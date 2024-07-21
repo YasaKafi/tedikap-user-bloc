@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_page/bloc/cart_bloc.dart';
+import 'package:tedikap_user_bloc/presentation/pages/cart_reward_page/bloc/cart_reward_bloc.dart';
 
 import '../../../../../common/constant.dart';
 import '../../../../../common/dimensions.dart';
@@ -39,51 +40,8 @@ class BoxCheckoutSummary extends StatelessWidget {
           ),
           child: Column(
             children: [
-              InkWell(
-                onTap: () {},
-                child: Container(
-                  width: screenWidth,
-                  padding: EdgeInsets.symmetric(
-                      vertical: Dimensions.paddingSizeSmall,
-                      horizontal: Dimensions.paddingSizeDefault),
-                  decoration: BoxDecoration(
-                    color: baseColor,
-                    border: Border.all(color: blackColor, width: 1),
-                    borderRadius: BorderRadius.all(Radius.circular(15)),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          SvgPicture.asset(
-                            icDiscountActive,
-                            width: 32,
-                            height: 32,
-                          ),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Text(
-                            'Makin hemat pakai promo',
-                            style: txtPrimarySubTitle.copyWith(
-                                fontWeight: FontWeight.w600, color: blackColor),
-                          ),
-                        ],
-                      ),
-                      Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        size: 20,
-                        color: blackColor,
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              BlocBuilder<CartBloc, CartState>(
+
+              BlocBuilder<CartRewardBloc, CartRewardState>(
                 builder: (context, state) {
                   return state.when(
                       initial: () => Center(child: CircularProgressIndicator()),
@@ -119,7 +77,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                         width: 3,
                                       ),
                                       Text(
-                                        itemCart!.totalPrice.toString(),
+                                        itemCart!.totalPoints.toString(),
                                         style: txtPrimaryHeader.copyWith(
                                             fontWeight: FontWeight.w600,
                                             color: blackColor),

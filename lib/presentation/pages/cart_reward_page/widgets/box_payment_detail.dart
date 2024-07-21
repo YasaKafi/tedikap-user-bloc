@@ -4,6 +4,7 @@ import 'package:tedikap_user_bloc/presentation/pages/cart_page/bloc/cart_bloc.da
 
 import '../../../../../common/dimensions.dart';
 import '../../../../../common/theme.dart';
+import '../bloc/cart_reward_bloc.dart';
 
 class BoxPaymentDetail extends StatelessWidget {
   const BoxPaymentDetail({
@@ -31,7 +32,7 @@ class BoxPaymentDetail extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          BlocBuilder<CartBloc, CartState>(
+          BlocBuilder<CartRewardBloc, CartRewardState>(
             builder: (context, state) {
               return state.when(
                   initial: () => Center(child: CircularProgressIndicator()),
@@ -47,25 +48,12 @@ class BoxPaymentDetail extends StatelessWidget {
                               Text('Subtotal',
                                   style: txtPrimarySubTitle.copyWith(
                                       fontWeight: FontWeight.w500, color: blackColor)),
-                              Text('Rp ${itemCart!.originalPrice.toString()}',
+                              Text('Rp ${itemCart!.totalPoints.toString()}',
                                   style: txtPrimarySubTitle.copyWith(
                                       fontWeight: FontWeight.w500, color: blackColor)),
                             ],
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('Diskon',
-                                  style: txtPrimarySubTitle.copyWith(
-                                      fontWeight: FontWeight.w500, color: redMedium)),
-                              Text('- ${itemCart.discountAmount ?? 0}',
-                                  style: txtPrimarySubTitle.copyWith(
-                                      fontWeight: FontWeight.w500, color: redMedium)),
-                            ],
-                          ),
+
                           SizedBox(
                             height: 20,
                           ),
@@ -82,7 +70,7 @@ class BoxPaymentDetail extends StatelessWidget {
                               Text('Total Pembayaran',
                                   style: txtPrimarySubTitle.copyWith(
                                       fontWeight: FontWeight.w600, color: blackColor)),
-                              Text('Rp ${itemCart.totalPrice}',
+                              Text('Rp ${itemCart.totalPoints}',
                                   style: txtPrimarySubTitle.copyWith(
                                       fontWeight: FontWeight.w600, color: blackColor)),
                             ],
