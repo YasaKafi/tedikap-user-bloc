@@ -52,6 +52,8 @@ class BoxInfoProduct extends StatelessWidget {
                       modelCartPostReward,
                       modelCartItem,
                       modelCartUpdate,
+                      modelCartItemReward,
+                      modelCartRewardUpdate,
                       isTempSelected,
                       selectedTemp,
                       isSizeSelected,

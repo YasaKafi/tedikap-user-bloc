@@ -5,11 +5,13 @@ import 'package:tedikap_user_bloc/data/datasource/product_datasource.dart';
 import 'package:tedikap_user_bloc/data/models/request/post_cart_request_model.dart';
 import 'package:tedikap_user_bloc/data/models/request/post_cart_reward_request_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/cart_item_response_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/cart_item_reward_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/detail_product_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/detail_product_reward_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/post_cart_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/post_cart_reward_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/update_cart_response_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/update_cart_reward_response_model.dart';
 
 part 'detail_product_event.dart';
 part 'detail_product_state.dart';
@@ -40,6 +42,8 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
               modelCartRewardPost: null,
               modelCartItem: cartModel,
               modelCartUpdate: null,
+              modelCartItemReward: null,
+              modelCartRewardUpdate: null,
               isTempSelected: cartModel.cartItem?.temperatur == 'hot',
               selectedTemp: cartModel.cartItem?.temperatur ?? 'ice',
               isSizeSelected: cartModel.cartItem?.size == 'large',
@@ -50,6 +54,48 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
               selectedSugar: cartModel.cartItem?.sugar ?? 'normal',
               quantityCount: cartModel.cartItem?.quantity ?? 1,
               totalPrice: cartModel.cartItem?.totalPrice ?? 0,
+              note: cartModel.cartItem?.note ?? '',
+            ));
+          } else {
+            emit(const _Error(message: 'No items in cart'));
+          }
+        });
+      } catch (e) {
+        emit(_Error(message: 'An error occurred: $e'));
+      }
+    });
+
+    on<_GetDetailItemCartReward>((event, emit) async {
+      emit(const _Loading());
+      try {
+        final result = await cartDatasource.getCartItemReward(event.cartId);
+        await result.fold((l) {
+          emit(const _Error(message: 'Failed to access data order'));
+        }, (cartModel) async {
+          if (cartModel.cartItem != null) {
+            final productId = cartModel.cartItem!.productId;
+            final productResult = await datasource.getDetailProductRewardByID(productId!);
+            final productDetails = productResult.fold((l) => null, (product) => product);
+
+            emit(_Success(
+              model: null,
+              modelReward: productDetails,
+              modelCartPost: null,
+              modelCartRewardPost: null,
+              modelCartItem: null,
+              modelCartUpdate: null,
+              modelCartItemReward: cartModel,
+              modelCartRewardUpdate: null,
+              isTempSelected: cartModel.cartItem?.temperatur == 'hot',
+              selectedTemp: cartModel.cartItem?.temperatur ?? 'ice',
+              isSizeSelected: cartModel.cartItem?.size == 'large',
+              selectedSize: cartModel.cartItem?.size ?? 'regular',
+              isIceSelected: cartModel.cartItem?.ice == 'less',
+              selectedIce: cartModel.cartItem?.ice ?? 'normal',
+              isSugarSelected: cartModel.cartItem?.sugar == 'less',
+              selectedSugar: cartModel.cartItem?.sugar ?? 'normal',
+              quantityCount: cartModel.cartItem?.quantity ?? 1,
+              totalPrice: cartModel.cartItem?.totalPoints ?? 0,
               note: cartModel.cartItem?.note ?? '',
             ));
           } else {
@@ -74,6 +120,8 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
             modelCartRewardPost: null,
             modelCartItem: null,
             modelCartUpdate: null,
+                modelCartItemReward: null,
+                modelCartRewardUpdate: null,
           )),
         );
       } catch (e) {
@@ -94,6 +142,8 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
             modelCartRewardPost: null,
             modelCartItem: null,
             modelCartUpdate: null,
+                modelCartItemReward: null,
+                modelCartRewardUpdate: null,
           )),
         );
       } catch (e) {
@@ -114,6 +164,8 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
             modelCartRewardPost: null,
             modelCartItem: null,
             modelCartUpdate: null,
+                modelCartItemReward: null,
+                modelCartRewardUpdate: null,
           )),
         );
       } catch (e) {
@@ -134,6 +186,30 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
             modelCartRewardPost: null,
             modelCartItem: null,
             modelCartUpdate: r,
+                modelCartItemReward: null,
+                modelCartRewardUpdate: null,
+          )),
+        );
+      } catch (e) {
+        emit(_Error(message: 'An error occurred: $e'));
+      }
+    });
+
+    on<_UpdateCartReward>((event, emit) async {
+      emit(const _Loading());
+      try {
+        final result = await cartDatasource.updateCartReward(event.model!, event.id!);
+        result.fold(
+              (l) => emit(_Error(message: l)),
+              (r) => emit(_Success(
+            model: null,
+            modelCartPost: null,
+            modelReward: null,
+            modelCartRewardPost: null,
+            modelCartItem: null,
+            modelCartUpdate: null,
+                modelCartItemReward: null,
+                modelCartRewardUpdate: r,
           )),
         );
       } catch (e) {
@@ -154,6 +230,8 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
             modelReward: null,
             modelCartItem: null,
             modelCartUpdate: null,
+                modelCartItemReward: null,
+                modelCartRewardUpdate: null,
           )),
         );
       } catch (e) {

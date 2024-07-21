@@ -13,11 +13,12 @@ import '../../../common/theme.dart';
 import 'bloc/detail_product_bloc.dart';
 
 class DetailProductPage extends StatelessWidget {
-  DetailProductPage({super.key, this.productId, this.productRewardId, this.cartItemId});
+  DetailProductPage({super.key, this.productId, this.productRewardId, this.cartItemId, this.cartItemRewardId});
 
   int? productId;
   int? productRewardId;
   int? cartItemId;
+  int? cartItemRewardId;
 
   TextEditingController notesController = TextEditingController(); 
 
@@ -25,12 +26,13 @@ class DetailProductPage extends StatelessWidget {
   Widget build(BuildContext context) {
     if (cartItemId != null) {
       context.read<DetailProductBloc>().add(DetailProductEvent.getDetailItemCart(cartItemId!));
+    } else if (cartItemRewardId != null){
+      context.read<DetailProductBloc>().add(DetailProductEvent.getDetailItemCartReward(cartItemRewardId!));
     } else if (productId != null) {
       context.read<DetailProductBloc>().add(DetailProductEvent.getDetailProduct(productId!));
     } else if (productRewardId != null) {
       context.read<DetailProductBloc>().add(DetailProductEvent.getDetailProductReward(productRewardId!));
     }
-
 
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
@@ -55,7 +57,7 @@ class DetailProductPage extends StatelessWidget {
                 },
               ),
               Text(
-                'Detail ${cartItemId ?? 'Product'}',
+                'Detail ${cartItemRewardId ?? 'Product'}',
                 style: txtSecondaryHeader.copyWith(
                     fontWeight: FontWeight.w600, color: blackColor),
               ),
@@ -110,7 +112,7 @@ class DetailProductPage extends StatelessWidget {
             Positioned(
               bottom: 0,
               child: BoxBottomPrice(
-                  screenWidth: screenWidth,  noteController: notesController, cartItemId: cartItemId,),
+                  screenWidth: screenWidth,  noteController: notesController, cartItemId: cartItemId, cartItemRewardId: cartItemRewardId,),
             )
           ],
         ),

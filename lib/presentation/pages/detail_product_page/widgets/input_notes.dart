@@ -53,6 +53,8 @@ class InputNotes extends StatelessWidget {
                           modelCartPostReward,
                           modelCartItem,
                           modelCartUpdate,
+                          modelCartItemReward,
+                          modelCartRewardUpdate,
                           isTempSelected,
                           selectedTemp,
                           isSizeSelected,
@@ -66,14 +68,16 @@ class InputNotes extends StatelessWidget {
                           note){
                         if (modelCartItem != null) {
                           notesController!.text = note;
+                        } else if (modelCartItemReward != null) {
+                          notesController!.text = note;
                         }
                         return TextFormField(
                           controller:notesController,
-                          maxLength: 30,
+                          maxLength: 50,
                           style: txtPrimarySubTitle.copyWith(
                               fontWeight: FontWeight.w500, color: blackColor),
                           decoration: InputDecoration(
-                            hintText: modelCartItem != null ? note :  'Add notes here..',
+                            hintText: 'Add notes here..',
                             hintStyle: txtPrimarySubTitle.copyWith(
                                 fontWeight: FontWeight.w500, color: blackColor),
                             border: OutlineInputBorder(
