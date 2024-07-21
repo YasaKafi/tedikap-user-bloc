@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_product_page/widgets/box_bottom_price.dart';
@@ -9,17 +10,28 @@ import 'package:tedikap_user_bloc/presentation/pages/detail_product_page/widgets
 import '../../../common/constant.dart';
 import '../../../common/dimensions.dart';
 import '../../../common/theme.dart';
+import 'bloc/detail_product_bloc.dart';
 
 class DetailProductPage extends StatelessWidget {
-  DetailProductPage({super.key, this.productId, this.productRewardId});
+  DetailProductPage({super.key, this.productId, this.productRewardId, this.cartItemId});
 
   int? productId;
   int? productRewardId;
-  
+  int? cartItemId;
+
   TextEditingController notesController = TextEditingController(); 
 
   @override
   Widget build(BuildContext context) {
+    if (cartItemId != null) {
+      context.read<DetailProductBloc>().add(DetailProductEvent.getDetailItemCart(cartItemId!));
+    } else if (productId != null) {
+      context.read<DetailProductBloc>().add(DetailProductEvent.getDetailProduct(productId!));
+    } else if (productRewardId != null) {
+      context.read<DetailProductBloc>().add(DetailProductEvent.getDetailProductReward(productRewardId!));
+    }
+
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -43,7 +55,7 @@ class DetailProductPage extends StatelessWidget {
                 },
               ),
               Text(
-                'Detail Product',
+                'Detail ${cartItemId ?? 'Product'}',
                 style: txtSecondaryHeader.copyWith(
                     fontWeight: FontWeight.w600, color: blackColor),
               ),
@@ -82,7 +94,7 @@ class DetailProductPage extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        BoxInfoProduct(screenWidth: screenWidth, productId: productId, productRewardId: productRewardId, ),
+                        BoxInfoProduct(screenWidth: screenWidth, ),
 
                         const SizedBox(height: 20),
                         BoxOptionProduct(),
@@ -98,7 +110,7 @@ class DetailProductPage extends StatelessWidget {
             Positioned(
               bottom: 0,
               child: BoxBottomPrice(
-                  screenWidth: screenWidth,  noteController: notesController),
+                  screenWidth: screenWidth,  noteController: notesController, cartItemId: cartItemId,),
             )
           ],
         ),

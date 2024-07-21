@@ -9,8 +9,8 @@ class DetailProductState with _$DetailProductState {
     required DetailProductRewardResponseModel? modelReward,
     required PostCartResponseModel? modelCartPost,
     required PostCartRewardResponseModel? modelCartRewardPost,
-
-
+    required CartItemResponseModel? modelCartItem,
+    required UpdateCartResponseModel? modelCartUpdate,
     @Default(false) bool isTempSelected,
     @Default('ice') String selectedTemp,
     @Default(false) bool isSizeSelected,
@@ -26,3 +26,4 @@ class DetailProductState with _$DetailProductState {
       ) = _Success;
   const factory DetailProductState.error({String? message}) = _Error;
 }
+

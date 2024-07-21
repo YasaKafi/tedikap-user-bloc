@@ -53,7 +53,7 @@ class AppProviders{
       create: (context) => PointBloc(ProductDatasource()),
     ),
     BlocProvider<DetailProductBloc>(
-      create: (context) => DetailProductBloc(datasource: ProductDatasource(), cartDatasource: CartDatasource()),
+      create: (context) => DetailProductBloc(datasource: ProductDatasource(), cartDatasource: CartDatasource(),),
     ),
     BlocProvider<CartBloc>(
       create: (context) => CartBloc(productDatasource: ProductDatasource(), cartDatasource: CartDatasource()),

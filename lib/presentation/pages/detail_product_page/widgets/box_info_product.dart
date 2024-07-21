@@ -9,38 +9,13 @@ import '../../../../../common/theme.dart';
 import '../../../../data/repository/tedikap_repository.dart';
 
 class BoxInfoProduct extends StatelessWidget {
-  BoxInfoProduct(
-      {Key? key,
-        required this.screenWidth,
-        this.productId,
-        this.productRewardId})
-      : super(key: key);
-
   final double screenWidth;
 
-  int? productId;
-  int? productRewardId;
-
+  BoxInfoProduct({Key? key, required this.screenWidth}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (productId != null) {
-      context
-          .read<DetailProductBloc>()
-          .add(DetailProductEvent.getDetailProduct(productId!));
-    }
-    if (productRewardId != null) {
-      context
-          .read<DetailProductBloc>()
-          .add(DetailProductEvent.getDetailProductReward(productRewardId!));
-    }
     return buildProductDetail(screenWidth);
-  }
-
-  Widget buildRewardProductDetail(
-      double screenWidth,
-      ) {
-    return buildCommonDetail(screenWidth);
   }
 
   Widget buildProductDetail(double screenWidth) {
@@ -64,34 +39,52 @@ class BoxInfoProduct extends StatelessWidget {
             child: BlocBuilder<DetailProductBloc, DetailProductState>(
               builder: (context, state) {
                 return state.when(
-                    initial: () => Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                    loading: () => Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                    success: (modelProduct, modelProductReward, modelCartPost, modelCartPostReward, isTempSelected, selectedTemp, isSizeSelected ,selectedSize,isIceSelected, selectedIce, isSugarSelected, selectedSugar, qty, totalPrice, note) {
+                  initial: () => Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  loading: () => Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  success: (
+                      modelProduct,
+                      modelProductReward,
+                      modelCartPost,
+                      modelCartPostReward,
+                      modelCartItem,
+                      modelCartUpdate,
+                      isTempSelected,
+                      selectedTemp,
+                      isSizeSelected,
+                      selectedSize,
+                      isIceSelected,
+                      selectedIce,
+                      isSugarSelected,
+                      selectedSugar,
+                      qty,
+                      totalPrice,
+                      note,
+                      ) {
+                    String? name;
+                    String? imageUrl;
+                    String? category;
+                    String? description;
 
-                      String? name;
-                      String? imageUrl;
-                      String? category;
-                      String? description;
+                    if (modelProduct != null && modelProduct.data != null) {
+                      imageUrl = modelProduct.data!.image;
+                      name = modelProduct.data!.name;
+                      category = modelProduct.data!.category;
+                      description = modelProduct.data!.description;
+                    } else if (modelProductReward != null && modelProductReward.data != null) {
+                      imageUrl = modelProductReward.data!.image;
+                      name = modelProductReward.data!.name;
+                      category = modelProductReward.data!.category;
+                      description = modelProductReward.data!.description;
+                    }
 
-                      if(modelProduct != null){
-                        imageUrl = modelProduct.data!.image!;
-                         name = modelProduct.data!.name!;
-                         category = modelProduct.data!.category!;
-                         description = modelProduct.data!.description!;
-                      } else if (modelProductReward != null){
-                        imageUrl = modelProductReward.data!.image!;
-                        name = modelProductReward.data!.name!;
-                        category = modelProductReward.data!.category!;
-                        description = modelProductReward.data!.description!;
-                      }
-
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (imageUrl != null)
                           Center(
                             child: Container(
                               decoration: BoxDecoration(
@@ -101,52 +94,63 @@ class BoxInfoProduct extends StatelessWidget {
                                     color: Color.fromRGBO(174, 174, 192, 0.5),
                                     spreadRadius: 3,
                                     blurRadius: 11,
-                                    offset: Offset(
-                                        4, 5), // changes position of shadow
+                                    offset: Offset(4, 5), // changes position of shadow
                                   ),
                                 ],
                               ),
                               child: CircleAvatar(
-                                backgroundImage: NetworkImage(TedikapApiRepository.getImage + imageUrl!),
+                                backgroundImage: NetworkImage(imageUrl),
                                 radius: 80,
                               ),
                             ),
                           ),
-                          const SizedBox(height: 20),
+                        const SizedBox(height: 20),
+                        if (name != null)
                           Text(
-                            name!,
+                            name,
                             style: txtSecondaryHeader.copyWith(
-                                fontWeight: FontWeight.w700, color: blackColor),
+                              fontWeight: FontWeight.w700,
+                              color: blackColor,
+                            ),
                           ),
-                          const SizedBox(height: 10),
+                        const SizedBox(height: 10),
+                        if (category != null)
                           Text(
                             '$category series',
                             style: txtPrimarySubTitle.copyWith(
-                                fontWeight: FontWeight.w500, color: Colors.black38),
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black38,
+                            ),
                           ),
-                          const SizedBox(height: 15),
-                          Divider(
-                            height: 5,
-                            color: grey,
+                        const SizedBox(height: 15),
+                        Divider(
+                          height: 5,
+                          color: grey,
+                        ),
+                        const SizedBox(height: 15),
+                        Text(
+                          'Description',
+                          style: txtSecondaryTitle.copyWith(
+                            fontWeight: FontWeight.w500,
+                            color: blackColor,
                           ),
-                          const SizedBox(height: 15),
+                        ),
+                        const SizedBox(height: 5),
+                        if (description != null)
                           Text(
-                            'Description',
-                            style: txtSecondaryTitle.copyWith(
-                                fontWeight: FontWeight.w500, color: blackColor),
-                          ),
-                          const SizedBox(height: 5),
-                          Text(
-                            description!,
+                            description,
                             style: txtPrimarySubTitle.copyWith(
-                                fontWeight: FontWeight.w400, color: Colors.black38),
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black38,
+                            ),
                           ),
-                        ],
-                      );
-                    },
-                    error: (message) => Center(
-                      child: Text(message!),
-                    ));
+                      ],
+                    );
+                  },
+                  error: (message) => Center(
+                    child: Text(message!),
+                  ),
+                );
               },
             ),
           ),
