@@ -57,10 +57,10 @@ class AppProviders{
       create: (context) => DetailProductBloc(datasource: ProductDatasource(), cartDatasource: CartDatasource(),),
     ),
     BlocProvider<CartBloc>(
-      create: (context) => CartBloc(productDatasource: ProductDatasource(), cartDatasource: CartDatasource()),
+      create: (context) => CartBloc(productDatasource: ProductDatasource(), cartDatasource: CartDatasource(), orderDatasource: OrderDatasource()),
     ),
     BlocProvider<CartRewardBloc>(
-      create: (context) => CartRewardBloc(productDatasource: ProductDatasource(), cartDatasource: CartDatasource()),
+      create: (context) => CartRewardBloc(productDatasource: ProductDatasource(), cartDatasource: CartDatasource(), orderDatasource: OrderDatasource()),
     ),
     BlocProvider<HomeBloc>(
       create: (context) => HomeBloc(datasource: UserDatasource(), productDatasource: ProductDatasource()),

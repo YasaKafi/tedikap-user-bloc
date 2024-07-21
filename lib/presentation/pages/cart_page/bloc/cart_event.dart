@@ -6,4 +6,6 @@ class CartEvent with _$CartEvent {
   const factory CartEvent.getCart() = _GetCart;
   const factory CartEvent.patchQty({required int? cartItem, required String? action}) = _PatchQty;
   const factory CartEvent.deleteItem({required int? cartItem}) = _DeleteItem;
+  const factory CartEvent.postOrder({required PostOrderRequestModel modelOrder}) = _PostOrder;
+  const factory CartEvent.postPayment({required String? cartId}) = _PostPayment;
 }

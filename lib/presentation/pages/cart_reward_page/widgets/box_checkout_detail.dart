@@ -63,7 +63,7 @@ class BoxCheckoutDetail extends StatelessWidget {
                 return state.when(
                   initial: () => Center(child: CircularProgressIndicator()),
                   loading: () => Center(child: CircularProgressIndicator()),
-                  success: (cartModel, productDetails, modelQty, deleteModel) {
+                  success: (cartModel, productDetails, modelQty, deleteModel, modelPostOrder) {
                     if (cartModel?.cart != null && productDetails != null) {
                       final itemCart = cartModel!.cart;
                       return Column(
