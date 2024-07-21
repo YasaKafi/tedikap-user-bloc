@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:tedikap_user_bloc/data/models/request/post_order_request_model.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_page/bloc/cart_bloc.dart';
 
 import '../../../../../common/constant.dart';
@@ -88,7 +90,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                   return state.when(
                       initial: () => Center(child: CircularProgressIndicator()),
                       loading: () => Center(child: CircularProgressIndicator()),
-                      success: (cartModel, productModel, modelQty, deleteModel){
+                      success: (cartModel, productModel, modelQty, deleteModel, modelPostOrder, modelPostPayment){
                         if(cartModel != null){
                           final itemCart = cartModel.cart;
                           return Row(
@@ -146,8 +148,14 @@ class BoxCheckoutSummary extends StatelessWidget {
                                           'Kamu tidak dapat melakukan pembatalan atau perubahan apapun pada pesanan setelah melakukan pembayaran.',
                                           icon: icAlert,
                                           onPressed: () {
-                                            // Get.back();
-                                            // controller.handleOrderPayment();
+                                        final modelRequestOrder = PostOrderRequestModel(
+                                          cartId: itemCart.id,
+                                          voucherId: itemCart.voucherId ?? null,
+                                        );
+                                            context.read<CartBloc>().add(CartEvent.postOrder(modelOrder: modelRequestOrder));
+                                            Future.delayed(Duration(seconds: 4), (){
+                                              context.pushNamed('dashboard');
+                                        });
                                           });
                                     },
                                     child: Container(

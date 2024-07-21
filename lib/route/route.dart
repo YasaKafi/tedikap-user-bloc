@@ -91,7 +91,14 @@ class AppRouter {
         path: '/point',
         builder: (context, state) => PointPage(),
       ),
-
+      GoRoute(
+        name: 'detail_order_common',
+        path: '/detail_order_reward/:orderId',
+        builder: (context, state) {
+          final orderId = state.pathParameters['orderId'];
+          return DetailOrderPage(orderId: orderId,);
+        },
+      ),
       GoRoute(
         name: 'detail_order_reward',
         path: '/detail_order_reward/:orderRewardId',

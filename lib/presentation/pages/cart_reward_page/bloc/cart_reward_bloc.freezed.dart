@@ -22,6 +22,7 @@ mixin _$CartRewardEvent {
     required TResult Function() getCart,
     required TResult Function(int? cartRewardItem, String? action) patchQty,
     required TResult Function(int? cartItem) deleteItem,
+    required TResult Function(int? cartId) postOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +31,7 @@ mixin _$CartRewardEvent {
     TResult? Function()? getCart,
     TResult? Function(int? cartRewardItem, String? action)? patchQty,
     TResult? Function(int? cartItem)? deleteItem,
+    TResult? Function(int? cartId)? postOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +40,7 @@ mixin _$CartRewardEvent {
     TResult Function()? getCart,
     TResult Function(int? cartRewardItem, String? action)? patchQty,
     TResult Function(int? cartItem)? deleteItem,
+    TResult Function(int? cartId)? postOrder,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +50,7 @@ mixin _$CartRewardEvent {
     required TResult Function(_GetCart value) getCart,
     required TResult Function(_PatchQty value) patchQty,
     required TResult Function(_DeleteItem value) deleteItem,
+    required TResult Function(_PostOrder value) postOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +59,7 @@ mixin _$CartRewardEvent {
     TResult? Function(_GetCart value)? getCart,
     TResult? Function(_PatchQty value)? patchQty,
     TResult? Function(_DeleteItem value)? deleteItem,
+    TResult? Function(_PostOrder value)? postOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +68,7 @@ mixin _$CartRewardEvent {
     TResult Function(_GetCart value)? getCart,
     TResult Function(_PatchQty value)? patchQty,
     TResult Function(_DeleteItem value)? deleteItem,
+    TResult Function(_PostOrder value)? postOrder,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -128,6 +134,7 @@ class _$StartedImpl implements _Started {
     required TResult Function() getCart,
     required TResult Function(int? cartRewardItem, String? action) patchQty,
     required TResult Function(int? cartItem) deleteItem,
+    required TResult Function(int? cartId) postOrder,
   }) {
     return started();
   }
@@ -139,6 +146,7 @@ class _$StartedImpl implements _Started {
     TResult? Function()? getCart,
     TResult? Function(int? cartRewardItem, String? action)? patchQty,
     TResult? Function(int? cartItem)? deleteItem,
+    TResult? Function(int? cartId)? postOrder,
   }) {
     return started?.call();
   }
@@ -150,6 +158,7 @@ class _$StartedImpl implements _Started {
     TResult Function()? getCart,
     TResult Function(int? cartRewardItem, String? action)? patchQty,
     TResult Function(int? cartItem)? deleteItem,
+    TResult Function(int? cartId)? postOrder,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -165,6 +174,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(_GetCart value) getCart,
     required TResult Function(_PatchQty value) patchQty,
     required TResult Function(_DeleteItem value) deleteItem,
+    required TResult Function(_PostOrder value) postOrder,
   }) {
     return started(this);
   }
@@ -176,6 +186,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(_GetCart value)? getCart,
     TResult? Function(_PatchQty value)? patchQty,
     TResult? Function(_DeleteItem value)? deleteItem,
+    TResult? Function(_PostOrder value)? postOrder,
   }) {
     return started?.call(this);
   }
@@ -187,6 +198,7 @@ class _$StartedImpl implements _Started {
     TResult Function(_GetCart value)? getCart,
     TResult Function(_PatchQty value)? patchQty,
     TResult Function(_DeleteItem value)? deleteItem,
+    TResult Function(_PostOrder value)? postOrder,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -242,6 +254,7 @@ class _$GetCartImpl implements _GetCart {
     required TResult Function() getCart,
     required TResult Function(int? cartRewardItem, String? action) patchQty,
     required TResult Function(int? cartItem) deleteItem,
+    required TResult Function(int? cartId) postOrder,
   }) {
     return getCart();
   }
@@ -253,6 +266,7 @@ class _$GetCartImpl implements _GetCart {
     TResult? Function()? getCart,
     TResult? Function(int? cartRewardItem, String? action)? patchQty,
     TResult? Function(int? cartItem)? deleteItem,
+    TResult? Function(int? cartId)? postOrder,
   }) {
     return getCart?.call();
   }
@@ -264,6 +278,7 @@ class _$GetCartImpl implements _GetCart {
     TResult Function()? getCart,
     TResult Function(int? cartRewardItem, String? action)? patchQty,
     TResult Function(int? cartItem)? deleteItem,
+    TResult Function(int? cartId)? postOrder,
     required TResult orElse(),
   }) {
     if (getCart != null) {
@@ -279,6 +294,7 @@ class _$GetCartImpl implements _GetCart {
     required TResult Function(_GetCart value) getCart,
     required TResult Function(_PatchQty value) patchQty,
     required TResult Function(_DeleteItem value) deleteItem,
+    required TResult Function(_PostOrder value) postOrder,
   }) {
     return getCart(this);
   }
@@ -290,6 +306,7 @@ class _$GetCartImpl implements _GetCart {
     TResult? Function(_GetCart value)? getCart,
     TResult? Function(_PatchQty value)? patchQty,
     TResult? Function(_DeleteItem value)? deleteItem,
+    TResult? Function(_PostOrder value)? postOrder,
   }) {
     return getCart?.call(this);
   }
@@ -301,6 +318,7 @@ class _$GetCartImpl implements _GetCart {
     TResult Function(_GetCart value)? getCart,
     TResult Function(_PatchQty value)? patchQty,
     TResult Function(_DeleteItem value)? deleteItem,
+    TResult Function(_PostOrder value)? postOrder,
     required TResult orElse(),
   }) {
     if (getCart != null) {
@@ -391,6 +409,7 @@ class _$PatchQtyImpl implements _PatchQty {
     required TResult Function() getCart,
     required TResult Function(int? cartRewardItem, String? action) patchQty,
     required TResult Function(int? cartItem) deleteItem,
+    required TResult Function(int? cartId) postOrder,
   }) {
     return patchQty(cartRewardItem, action);
   }
@@ -402,6 +421,7 @@ class _$PatchQtyImpl implements _PatchQty {
     TResult? Function()? getCart,
     TResult? Function(int? cartRewardItem, String? action)? patchQty,
     TResult? Function(int? cartItem)? deleteItem,
+    TResult? Function(int? cartId)? postOrder,
   }) {
     return patchQty?.call(cartRewardItem, action);
   }
@@ -413,6 +433,7 @@ class _$PatchQtyImpl implements _PatchQty {
     TResult Function()? getCart,
     TResult Function(int? cartRewardItem, String? action)? patchQty,
     TResult Function(int? cartItem)? deleteItem,
+    TResult Function(int? cartId)? postOrder,
     required TResult orElse(),
   }) {
     if (patchQty != null) {
@@ -428,6 +449,7 @@ class _$PatchQtyImpl implements _PatchQty {
     required TResult Function(_GetCart value) getCart,
     required TResult Function(_PatchQty value) patchQty,
     required TResult Function(_DeleteItem value) deleteItem,
+    required TResult Function(_PostOrder value) postOrder,
   }) {
     return patchQty(this);
   }
@@ -439,6 +461,7 @@ class _$PatchQtyImpl implements _PatchQty {
     TResult? Function(_GetCart value)? getCart,
     TResult? Function(_PatchQty value)? patchQty,
     TResult? Function(_DeleteItem value)? deleteItem,
+    TResult? Function(_PostOrder value)? postOrder,
   }) {
     return patchQty?.call(this);
   }
@@ -450,6 +473,7 @@ class _$PatchQtyImpl implements _PatchQty {
     TResult Function(_GetCart value)? getCart,
     TResult Function(_PatchQty value)? patchQty,
     TResult Function(_DeleteItem value)? deleteItem,
+    TResult Function(_PostOrder value)? postOrder,
     required TResult orElse(),
   }) {
     if (patchQty != null) {
@@ -540,6 +564,7 @@ class _$DeleteItemImpl implements _DeleteItem {
     required TResult Function() getCart,
     required TResult Function(int? cartRewardItem, String? action) patchQty,
     required TResult Function(int? cartItem) deleteItem,
+    required TResult Function(int? cartId) postOrder,
   }) {
     return deleteItem(cartItem);
   }
@@ -551,6 +576,7 @@ class _$DeleteItemImpl implements _DeleteItem {
     TResult? Function()? getCart,
     TResult? Function(int? cartRewardItem, String? action)? patchQty,
     TResult? Function(int? cartItem)? deleteItem,
+    TResult? Function(int? cartId)? postOrder,
   }) {
     return deleteItem?.call(cartItem);
   }
@@ -562,6 +588,7 @@ class _$DeleteItemImpl implements _DeleteItem {
     TResult Function()? getCart,
     TResult Function(int? cartRewardItem, String? action)? patchQty,
     TResult Function(int? cartItem)? deleteItem,
+    TResult Function(int? cartId)? postOrder,
     required TResult orElse(),
   }) {
     if (deleteItem != null) {
@@ -577,6 +604,7 @@ class _$DeleteItemImpl implements _DeleteItem {
     required TResult Function(_GetCart value) getCart,
     required TResult Function(_PatchQty value) patchQty,
     required TResult Function(_DeleteItem value) deleteItem,
+    required TResult Function(_PostOrder value) postOrder,
   }) {
     return deleteItem(this);
   }
@@ -588,6 +616,7 @@ class _$DeleteItemImpl implements _DeleteItem {
     TResult? Function(_GetCart value)? getCart,
     TResult? Function(_PatchQty value)? patchQty,
     TResult? Function(_DeleteItem value)? deleteItem,
+    TResult? Function(_PostOrder value)? postOrder,
   }) {
     return deleteItem?.call(this);
   }
@@ -599,6 +628,7 @@ class _$DeleteItemImpl implements _DeleteItem {
     TResult Function(_GetCart value)? getCart,
     TResult Function(_PatchQty value)? patchQty,
     TResult Function(_DeleteItem value)? deleteItem,
+    TResult Function(_PostOrder value)? postOrder,
     required TResult orElse(),
   }) {
     if (deleteItem != null) {
@@ -618,6 +648,157 @@ abstract class _DeleteItem implements CartRewardEvent {
 }
 
 /// @nodoc
+abstract class _$$PostOrderImplCopyWith<$Res> {
+  factory _$$PostOrderImplCopyWith(
+          _$PostOrderImpl value, $Res Function(_$PostOrderImpl) then) =
+      __$$PostOrderImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int? cartId});
+}
+
+/// @nodoc
+class __$$PostOrderImplCopyWithImpl<$Res>
+    extends _$CartRewardEventCopyWithImpl<$Res, _$PostOrderImpl>
+    implements _$$PostOrderImplCopyWith<$Res> {
+  __$$PostOrderImplCopyWithImpl(
+      _$PostOrderImpl _value, $Res Function(_$PostOrderImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? cartId = freezed,
+  }) {
+    return _then(_$PostOrderImpl(
+      cartId: freezed == cartId
+          ? _value.cartId
+          : cartId // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$PostOrderImpl implements _PostOrder {
+  const _$PostOrderImpl({required this.cartId});
+
+  @override
+  final int? cartId;
+
+  @override
+  String toString() {
+    return 'CartRewardEvent.postOrder(cartId: $cartId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PostOrderImpl &&
+            (identical(other.cartId, cartId) || other.cartId == cartId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, cartId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PostOrderImplCopyWith<_$PostOrderImpl> get copyWith =>
+      __$$PostOrderImplCopyWithImpl<_$PostOrderImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() getCart,
+    required TResult Function(int? cartRewardItem, String? action) patchQty,
+    required TResult Function(int? cartItem) deleteItem,
+    required TResult Function(int? cartId) postOrder,
+  }) {
+    return postOrder(cartId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? getCart,
+    TResult? Function(int? cartRewardItem, String? action)? patchQty,
+    TResult? Function(int? cartItem)? deleteItem,
+    TResult? Function(int? cartId)? postOrder,
+  }) {
+    return postOrder?.call(cartId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? getCart,
+    TResult Function(int? cartRewardItem, String? action)? patchQty,
+    TResult Function(int? cartItem)? deleteItem,
+    TResult Function(int? cartId)? postOrder,
+    required TResult orElse(),
+  }) {
+    if (postOrder != null) {
+      return postOrder(cartId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetCart value) getCart,
+    required TResult Function(_PatchQty value) patchQty,
+    required TResult Function(_DeleteItem value) deleteItem,
+    required TResult Function(_PostOrder value) postOrder,
+  }) {
+    return postOrder(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetCart value)? getCart,
+    TResult? Function(_PatchQty value)? patchQty,
+    TResult? Function(_DeleteItem value)? deleteItem,
+    TResult? Function(_PostOrder value)? postOrder,
+  }) {
+    return postOrder?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetCart value)? getCart,
+    TResult Function(_PatchQty value)? patchQty,
+    TResult Function(_DeleteItem value)? deleteItem,
+    TResult Function(_PostOrder value)? postOrder,
+    required TResult orElse(),
+  }) {
+    if (postOrder != null) {
+      return postOrder(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PostOrder implements CartRewardEvent {
+  const factory _PostOrder({required final int? cartId}) = _$PostOrderImpl;
+
+  int? get cartId;
+  @JsonKey(ignore: true)
+  _$$PostOrderImplCopyWith<_$PostOrderImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$CartRewardState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -627,7 +808,8 @@ mixin _$CartRewardState {
             CartRewardResponseModel? cartModel,
             List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
-            DeleteCartItemResponseModel? deleteModel)
+            DeleteCartItemResponseModel? deleteModel,
+            PostOrderRewardResponseModel? modelPostOrder)
         success,
     required TResult Function(String? message) error,
   }) =>
@@ -640,7 +822,8 @@ mixin _$CartRewardState {
             CartRewardResponseModel? cartModel,
             List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
-            DeleteCartItemResponseModel? deleteModel)?
+            DeleteCartItemResponseModel? deleteModel,
+            PostOrderRewardResponseModel? modelPostOrder)?
         success,
     TResult? Function(String? message)? error,
   }) =>
@@ -653,7 +836,8 @@ mixin _$CartRewardState {
             CartRewardResponseModel? cartModel,
             List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
-            DeleteCartItemResponseModel? deleteModel)?
+            DeleteCartItemResponseModel? deleteModel,
+            PostOrderRewardResponseModel? modelPostOrder)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -748,7 +932,8 @@ class _$InitialImpl implements _Initial {
             CartRewardResponseModel? cartModel,
             List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
-            DeleteCartItemResponseModel? deleteModel)
+            DeleteCartItemResponseModel? deleteModel,
+            PostOrderRewardResponseModel? modelPostOrder)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -764,7 +949,8 @@ class _$InitialImpl implements _Initial {
             CartRewardResponseModel? cartModel,
             List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
-            DeleteCartItemResponseModel? deleteModel)?
+            DeleteCartItemResponseModel? deleteModel,
+            PostOrderRewardResponseModel? modelPostOrder)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -780,7 +966,8 @@ class _$InitialImpl implements _Initial {
             CartRewardResponseModel? cartModel,
             List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
-            DeleteCartItemResponseModel? deleteModel)?
+            DeleteCartItemResponseModel? deleteModel,
+            PostOrderRewardResponseModel? modelPostOrder)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -877,7 +1064,8 @@ class _$LoadingImpl implements _Loading {
             CartRewardResponseModel? cartModel,
             List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
-            DeleteCartItemResponseModel? deleteModel)
+            DeleteCartItemResponseModel? deleteModel,
+            PostOrderRewardResponseModel? modelPostOrder)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -893,7 +1081,8 @@ class _$LoadingImpl implements _Loading {
             CartRewardResponseModel? cartModel,
             List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
-            DeleteCartItemResponseModel? deleteModel)?
+            DeleteCartItemResponseModel? deleteModel,
+            PostOrderRewardResponseModel? modelPostOrder)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -909,7 +1098,8 @@ class _$LoadingImpl implements _Loading {
             CartRewardResponseModel? cartModel,
             List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
-            DeleteCartItemResponseModel? deleteModel)?
+            DeleteCartItemResponseModel? deleteModel,
+            PostOrderRewardResponseModel? modelPostOrder)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -972,7 +1162,8 @@ abstract class _$$SuccessImplCopyWith<$Res> {
       {CartRewardResponseModel? cartModel,
       List<DetailProductRewardResponseModel?>? productDetails,
       PatchQtyResponseModel? patchQtyModel,
-      DeleteCartItemResponseModel? deleteModel});
+      DeleteCartItemResponseModel? deleteModel,
+      PostOrderRewardResponseModel? modelPostOrder});
 }
 
 /// @nodoc
@@ -990,6 +1181,7 @@ class __$$SuccessImplCopyWithImpl<$Res>
     Object? productDetails = freezed,
     Object? patchQtyModel = freezed,
     Object? deleteModel = freezed,
+    Object? modelPostOrder = freezed,
   }) {
     return _then(_$SuccessImpl(
       cartModel: freezed == cartModel
@@ -1008,6 +1200,10 @@ class __$$SuccessImplCopyWithImpl<$Res>
           ? _value.deleteModel
           : deleteModel // ignore: cast_nullable_to_non_nullable
               as DeleteCartItemResponseModel?,
+      modelPostOrder: freezed == modelPostOrder
+          ? _value.modelPostOrder
+          : modelPostOrder // ignore: cast_nullable_to_non_nullable
+              as PostOrderRewardResponseModel?,
     ));
   }
 }
@@ -1019,7 +1215,8 @@ class _$SuccessImpl implements _Success {
       {required this.cartModel,
       required final List<DetailProductRewardResponseModel?>? productDetails,
       required this.patchQtyModel,
-      required this.deleteModel})
+      required this.deleteModel,
+      required this.modelPostOrder})
       : _productDetails = productDetails;
 
   @override
@@ -1038,10 +1235,12 @@ class _$SuccessImpl implements _Success {
   final PatchQtyResponseModel? patchQtyModel;
   @override
   final DeleteCartItemResponseModel? deleteModel;
+  @override
+  final PostOrderRewardResponseModel? modelPostOrder;
 
   @override
   String toString() {
-    return 'CartRewardState.success(cartModel: $cartModel, productDetails: $productDetails, patchQtyModel: $patchQtyModel, deleteModel: $deleteModel)';
+    return 'CartRewardState.success(cartModel: $cartModel, productDetails: $productDetails, patchQtyModel: $patchQtyModel, deleteModel: $deleteModel, modelPostOrder: $modelPostOrder)';
   }
 
   @override
@@ -1056,7 +1255,9 @@ class _$SuccessImpl implements _Success {
             (identical(other.patchQtyModel, patchQtyModel) ||
                 other.patchQtyModel == patchQtyModel) &&
             (identical(other.deleteModel, deleteModel) ||
-                other.deleteModel == deleteModel));
+                other.deleteModel == deleteModel) &&
+            (identical(other.modelPostOrder, modelPostOrder) ||
+                other.modelPostOrder == modelPostOrder));
   }
 
   @override
@@ -1065,7 +1266,8 @@ class _$SuccessImpl implements _Success {
       cartModel,
       const DeepCollectionEquality().hash(_productDetails),
       patchQtyModel,
-      deleteModel);
+      deleteModel,
+      modelPostOrder);
 
   @JsonKey(ignore: true)
   @override
@@ -1082,11 +1284,13 @@ class _$SuccessImpl implements _Success {
             CartRewardResponseModel? cartModel,
             List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
-            DeleteCartItemResponseModel? deleteModel)
+            DeleteCartItemResponseModel? deleteModel,
+            PostOrderRewardResponseModel? modelPostOrder)
         success,
     required TResult Function(String? message) error,
   }) {
-    return success(cartModel, productDetails, patchQtyModel, deleteModel);
+    return success(
+        cartModel, productDetails, patchQtyModel, deleteModel, modelPostOrder);
   }
 
   @override
@@ -1098,11 +1302,13 @@ class _$SuccessImpl implements _Success {
             CartRewardResponseModel? cartModel,
             List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
-            DeleteCartItemResponseModel? deleteModel)?
+            DeleteCartItemResponseModel? deleteModel,
+            PostOrderRewardResponseModel? modelPostOrder)?
         success,
     TResult? Function(String? message)? error,
   }) {
-    return success?.call(cartModel, productDetails, patchQtyModel, deleteModel);
+    return success?.call(
+        cartModel, productDetails, patchQtyModel, deleteModel, modelPostOrder);
   }
 
   @override
@@ -1114,13 +1320,15 @@ class _$SuccessImpl implements _Success {
             CartRewardResponseModel? cartModel,
             List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
-            DeleteCartItemResponseModel? deleteModel)?
+            DeleteCartItemResponseModel? deleteModel,
+            PostOrderRewardResponseModel? modelPostOrder)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(cartModel, productDetails, patchQtyModel, deleteModel);
+      return success(cartModel, productDetails, patchQtyModel, deleteModel,
+          modelPostOrder);
     }
     return orElse();
   }
@@ -1168,12 +1376,15 @@ abstract class _Success implements CartRewardState {
       {required final CartRewardResponseModel? cartModel,
       required final List<DetailProductRewardResponseModel?>? productDetails,
       required final PatchQtyResponseModel? patchQtyModel,
-      required final DeleteCartItemResponseModel? deleteModel}) = _$SuccessImpl;
+      required final DeleteCartItemResponseModel? deleteModel,
+      required final PostOrderRewardResponseModel?
+          modelPostOrder}) = _$SuccessImpl;
 
   CartRewardResponseModel? get cartModel;
   List<DetailProductRewardResponseModel?>? get productDetails;
   PatchQtyResponseModel? get patchQtyModel;
   DeleteCartItemResponseModel? get deleteModel;
+  PostOrderRewardResponseModel? get modelPostOrder;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1249,7 +1460,8 @@ class _$ErrorImpl implements _Error {
             CartRewardResponseModel? cartModel,
             List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
-            DeleteCartItemResponseModel? deleteModel)
+            DeleteCartItemResponseModel? deleteModel,
+            PostOrderRewardResponseModel? modelPostOrder)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -1265,7 +1477,8 @@ class _$ErrorImpl implements _Error {
             CartRewardResponseModel? cartModel,
             List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
-            DeleteCartItemResponseModel? deleteModel)?
+            DeleteCartItemResponseModel? deleteModel,
+            PostOrderRewardResponseModel? modelPostOrder)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -1281,7 +1494,8 @@ class _$ErrorImpl implements _Error {
             CartRewardResponseModel? cartModel,
             List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
-            DeleteCartItemResponseModel? deleteModel)?
+            DeleteCartItemResponseModel? deleteModel,
+            PostOrderRewardResponseModel? modelPostOrder)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
