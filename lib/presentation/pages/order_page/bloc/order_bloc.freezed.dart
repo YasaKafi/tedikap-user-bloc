@@ -21,6 +21,7 @@ mixin _$OrderEvent {
     required TResult Function() started,
     required TResult Function() getAllHistoryOrder,
     required TResult Function() getAllHistoryOrderReward,
+    required TResult Function(String query) getFilterOrder,
     required TResult Function(int filterIndex) doFilterOrder,
   }) =>
       throw _privateConstructorUsedError;
@@ -29,6 +30,7 @@ mixin _$OrderEvent {
     TResult? Function()? started,
     TResult? Function()? getAllHistoryOrder,
     TResult? Function()? getAllHistoryOrderReward,
+    TResult? Function(String query)? getFilterOrder,
     TResult? Function(int filterIndex)? doFilterOrder,
   }) =>
       throw _privateConstructorUsedError;
@@ -37,6 +39,7 @@ mixin _$OrderEvent {
     TResult Function()? started,
     TResult Function()? getAllHistoryOrder,
     TResult Function()? getAllHistoryOrderReward,
+    TResult Function(String query)? getFilterOrder,
     TResult Function(int filterIndex)? doFilterOrder,
     required TResult orElse(),
   }) =>
@@ -47,6 +50,7 @@ mixin _$OrderEvent {
     required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
     required TResult Function(_GetAllHistoryOrderReward value)
         getAllHistoryOrderReward,
+    required TResult Function(_GetCategoryOrder value) getFilterOrder,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
   }) =>
       throw _privateConstructorUsedError;
@@ -56,6 +60,7 @@ mixin _$OrderEvent {
     TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
     TResult? Function(_GetAllHistoryOrderReward value)?
         getAllHistoryOrderReward,
+    TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
   }) =>
       throw _privateConstructorUsedError;
@@ -64,6 +69,7 @@ mixin _$OrderEvent {
     TResult Function(_Started value)? started,
     TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
+    TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
     required TResult orElse(),
   }) =>
@@ -129,6 +135,7 @@ class _$StartedImpl implements _Started {
     required TResult Function() started,
     required TResult Function() getAllHistoryOrder,
     required TResult Function() getAllHistoryOrderReward,
+    required TResult Function(String query) getFilterOrder,
     required TResult Function(int filterIndex) doFilterOrder,
   }) {
     return started();
@@ -140,6 +147,7 @@ class _$StartedImpl implements _Started {
     TResult? Function()? started,
     TResult? Function()? getAllHistoryOrder,
     TResult? Function()? getAllHistoryOrderReward,
+    TResult? Function(String query)? getFilterOrder,
     TResult? Function(int filterIndex)? doFilterOrder,
   }) {
     return started?.call();
@@ -151,6 +159,7 @@ class _$StartedImpl implements _Started {
     TResult Function()? started,
     TResult Function()? getAllHistoryOrder,
     TResult Function()? getAllHistoryOrderReward,
+    TResult Function(String query)? getFilterOrder,
     TResult Function(int filterIndex)? doFilterOrder,
     required TResult orElse(),
   }) {
@@ -167,6 +176,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
     required TResult Function(_GetAllHistoryOrderReward value)
         getAllHistoryOrderReward,
+    required TResult Function(_GetCategoryOrder value) getFilterOrder,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
   }) {
     return started(this);
@@ -179,6 +189,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
     TResult? Function(_GetAllHistoryOrderReward value)?
         getAllHistoryOrderReward,
+    TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
   }) {
     return started?.call(this);
@@ -190,6 +201,7 @@ class _$StartedImpl implements _Started {
     TResult Function(_Started value)? started,
     TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
+    TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
     required TResult orElse(),
   }) {
@@ -245,6 +257,7 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
     required TResult Function() started,
     required TResult Function() getAllHistoryOrder,
     required TResult Function() getAllHistoryOrderReward,
+    required TResult Function(String query) getFilterOrder,
     required TResult Function(int filterIndex) doFilterOrder,
   }) {
     return getAllHistoryOrder();
@@ -256,6 +269,7 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
     TResult? Function()? started,
     TResult? Function()? getAllHistoryOrder,
     TResult? Function()? getAllHistoryOrderReward,
+    TResult? Function(String query)? getFilterOrder,
     TResult? Function(int filterIndex)? doFilterOrder,
   }) {
     return getAllHistoryOrder?.call();
@@ -267,6 +281,7 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
     TResult Function()? started,
     TResult Function()? getAllHistoryOrder,
     TResult Function()? getAllHistoryOrderReward,
+    TResult Function(String query)? getFilterOrder,
     TResult Function(int filterIndex)? doFilterOrder,
     required TResult orElse(),
   }) {
@@ -283,6 +298,7 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
     required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
     required TResult Function(_GetAllHistoryOrderReward value)
         getAllHistoryOrderReward,
+    required TResult Function(_GetCategoryOrder value) getFilterOrder,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
   }) {
     return getAllHistoryOrder(this);
@@ -295,6 +311,7 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
     TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
     TResult? Function(_GetAllHistoryOrderReward value)?
         getAllHistoryOrderReward,
+    TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
   }) {
     return getAllHistoryOrder?.call(this);
@@ -306,6 +323,7 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
     TResult Function(_Started value)? started,
     TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
+    TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
     required TResult orElse(),
   }) {
@@ -364,6 +382,7 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
     required TResult Function() started,
     required TResult Function() getAllHistoryOrder,
     required TResult Function() getAllHistoryOrderReward,
+    required TResult Function(String query) getFilterOrder,
     required TResult Function(int filterIndex) doFilterOrder,
   }) {
     return getAllHistoryOrderReward();
@@ -375,6 +394,7 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
     TResult? Function()? started,
     TResult? Function()? getAllHistoryOrder,
     TResult? Function()? getAllHistoryOrderReward,
+    TResult? Function(String query)? getFilterOrder,
     TResult? Function(int filterIndex)? doFilterOrder,
   }) {
     return getAllHistoryOrderReward?.call();
@@ -386,6 +406,7 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
     TResult Function()? started,
     TResult Function()? getAllHistoryOrder,
     TResult Function()? getAllHistoryOrderReward,
+    TResult Function(String query)? getFilterOrder,
     TResult Function(int filterIndex)? doFilterOrder,
     required TResult orElse(),
   }) {
@@ -402,6 +423,7 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
     required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
     required TResult Function(_GetAllHistoryOrderReward value)
         getAllHistoryOrderReward,
+    required TResult Function(_GetCategoryOrder value) getFilterOrder,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
   }) {
     return getAllHistoryOrderReward(this);
@@ -414,6 +436,7 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
     TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
     TResult? Function(_GetAllHistoryOrderReward value)?
         getAllHistoryOrderReward,
+    TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
   }) {
     return getAllHistoryOrderReward?.call(this);
@@ -425,6 +448,7 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
     TResult Function(_Started value)? started,
     TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
+    TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
     required TResult orElse(),
   }) {
@@ -437,6 +461,160 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
 
 abstract class _GetAllHistoryOrderReward implements OrderEvent {
   const factory _GetAllHistoryOrderReward() = _$GetAllHistoryOrderRewardImpl;
+}
+
+/// @nodoc
+abstract class _$$GetCategoryOrderImplCopyWith<$Res> {
+  factory _$$GetCategoryOrderImplCopyWith(_$GetCategoryOrderImpl value,
+          $Res Function(_$GetCategoryOrderImpl) then) =
+      __$$GetCategoryOrderImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String query});
+}
+
+/// @nodoc
+class __$$GetCategoryOrderImplCopyWithImpl<$Res>
+    extends _$OrderEventCopyWithImpl<$Res, _$GetCategoryOrderImpl>
+    implements _$$GetCategoryOrderImplCopyWith<$Res> {
+  __$$GetCategoryOrderImplCopyWithImpl(_$GetCategoryOrderImpl _value,
+      $Res Function(_$GetCategoryOrderImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? query = null,
+  }) {
+    return _then(_$GetCategoryOrderImpl(
+      null == query
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetCategoryOrderImpl implements _GetCategoryOrder {
+  const _$GetCategoryOrderImpl(this.query);
+
+  @override
+  final String query;
+
+  @override
+  String toString() {
+    return 'OrderEvent.getFilterOrder(query: $query)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetCategoryOrderImpl &&
+            (identical(other.query, query) || other.query == query));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, query);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetCategoryOrderImplCopyWith<_$GetCategoryOrderImpl> get copyWith =>
+      __$$GetCategoryOrderImplCopyWithImpl<_$GetCategoryOrderImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() getAllHistoryOrder,
+    required TResult Function() getAllHistoryOrderReward,
+    required TResult Function(String query) getFilterOrder,
+    required TResult Function(int filterIndex) doFilterOrder,
+  }) {
+    return getFilterOrder(query);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? getAllHistoryOrder,
+    TResult? Function()? getAllHistoryOrderReward,
+    TResult? Function(String query)? getFilterOrder,
+    TResult? Function(int filterIndex)? doFilterOrder,
+  }) {
+    return getFilterOrder?.call(query);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? getAllHistoryOrder,
+    TResult Function()? getAllHistoryOrderReward,
+    TResult Function(String query)? getFilterOrder,
+    TResult Function(int filterIndex)? doFilterOrder,
+    required TResult orElse(),
+  }) {
+    if (getFilterOrder != null) {
+      return getFilterOrder(query);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_GetAllHistoryOrderReward value)
+        getAllHistoryOrderReward,
+    required TResult Function(_GetCategoryOrder value) getFilterOrder,
+    required TResult Function(_DoFilterOrder value) doFilterOrder,
+  }) {
+    return getFilterOrder(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_GetAllHistoryOrderReward value)?
+        getAllHistoryOrderReward,
+    TResult? Function(_GetCategoryOrder value)? getFilterOrder,
+    TResult? Function(_DoFilterOrder value)? doFilterOrder,
+  }) {
+    return getFilterOrder?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
+    TResult Function(_GetCategoryOrder value)? getFilterOrder,
+    TResult Function(_DoFilterOrder value)? doFilterOrder,
+    required TResult orElse(),
+  }) {
+    if (getFilterOrder != null) {
+      return getFilterOrder(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetCategoryOrder implements OrderEvent {
+  const factory _GetCategoryOrder(final String query) = _$GetCategoryOrderImpl;
+
+  String get query;
+  @JsonKey(ignore: true)
+  _$$GetCategoryOrderImplCopyWith<_$GetCategoryOrderImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -507,6 +685,7 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
     required TResult Function() started,
     required TResult Function() getAllHistoryOrder,
     required TResult Function() getAllHistoryOrderReward,
+    required TResult Function(String query) getFilterOrder,
     required TResult Function(int filterIndex) doFilterOrder,
   }) {
     return doFilterOrder(filterIndex);
@@ -518,6 +697,7 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
     TResult? Function()? started,
     TResult? Function()? getAllHistoryOrder,
     TResult? Function()? getAllHistoryOrderReward,
+    TResult? Function(String query)? getFilterOrder,
     TResult? Function(int filterIndex)? doFilterOrder,
   }) {
     return doFilterOrder?.call(filterIndex);
@@ -529,6 +709,7 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
     TResult Function()? started,
     TResult Function()? getAllHistoryOrder,
     TResult Function()? getAllHistoryOrderReward,
+    TResult Function(String query)? getFilterOrder,
     TResult Function(int filterIndex)? doFilterOrder,
     required TResult orElse(),
   }) {
@@ -545,6 +726,7 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
     required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
     required TResult Function(_GetAllHistoryOrderReward value)
         getAllHistoryOrderReward,
+    required TResult Function(_GetCategoryOrder value) getFilterOrder,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
   }) {
     return doFilterOrder(this);
@@ -557,6 +739,7 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
     TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
     TResult? Function(_GetAllHistoryOrderReward value)?
         getAllHistoryOrderReward,
+    TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
   }) {
     return doFilterOrder?.call(this);
@@ -568,6 +751,7 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
     TResult Function(_Started value)? started,
     TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
+    TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
     required TResult orElse(),
   }) {

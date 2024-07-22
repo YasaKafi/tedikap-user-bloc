@@ -14,6 +14,7 @@ class TedikapApiRepository {
   static String getOrderByID = '$mainUrl/api/order';
   static String getUserPoin = '$mainUrl/api/point';
   static String getFilterProduct = '$mainUrl/api/filter/product';
+  static String getFilterOrder = '$mainUrl/api/order/history';
   static String getFilterRewardProduct = '$mainUrl/api/filter/reward-product';
   static String getSearchProduct = '$mainUrl/api/filter/product';
 
