@@ -24,6 +24,12 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       result.fold((l) => emit(const _Error(message: 'Failed to access data order')), (r) => emit(_Success(null, r, 1)));
     });
 
+    on<_GetCategoryOrder>((event, emit) async {
+      emit(const _Loading());
+      final result = await datasource.getFilterTypeOrder(event.query);
+      result.fold((l) => emit(const _Error(message: 'Failed to access data order')), (r) => emit(_Success(r, null, 0)));
+    });
+
     on<_DoFilterOrder>((event, emit) async {
       emit(const OrderState.loading());
       final filterIndex = event.filterIndex;

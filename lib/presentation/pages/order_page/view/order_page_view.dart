@@ -14,7 +14,9 @@ class OrderPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<OrderBloc>().add(OrderEvent.getAllHistoryOrder());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<OrderBloc>().add(OrderEvent.getFilterOrder('ongoing'));
+    });
     context.read<OrderBloc>().add(OrderEvent.getAllHistoryOrderReward());
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
@@ -53,6 +55,18 @@ class OrderPage extends StatelessWidget {
                   indicatorColor: blackColor,
                   labelColor: blackColor,
                   unselectedLabelColor: grey,
+                  onTap: (index) {
+                    switch (index) {
+                      case 0:
+                        context.read<OrderBloc>().add(
+                            OrderEvent.getFilterOrder('ongoing'));
+                        break;
+                      case 1:
+                        context.read<OrderBloc>().add(
+                            OrderEvent.getFilterOrder('history'));
+                        break;
+                    }
+                  },
                   tabs: [
                     Tab(
                       child: Text(
@@ -148,15 +162,72 @@ class OrderPage extends StatelessWidget {
                       ),
                     ),
                     Tab(
-                      child: ListView.builder(
-                        itemCount: 5,
-                        scrollDirection: Axis.vertical,
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: () {},
-                            child: ListBoxMenuStatusOver(),
-                          );
-                        },
+                      child: Column(
+                        children: [
+                          OrderFilter(),
+                          BlocBuilder<OrderBloc, OrderState>(
+                            builder: (context, state) {
+                              return state.when(
+                                initial: () {
+                                  return Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                },
+                                loading: () => Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                                success: (model, modelReward, filterIndex) {
+
+                                  return Expanded(
+                                    child: ListView.builder(
+                                      itemCount: filterIndex == 0 ? model!.orders!.length : modelReward!.orders!.length,
+                                      scrollDirection: Axis.vertical,
+                                      itemBuilder: (context, index) {
+                                        if(filterIndex == 0){
+                                          final order = model!.orders![index];
+                                          return InkWell(
+                                            onTap: () {
+                                              context.pushNamed('detail_order_common', pathParameters: {'orderId': order.id!});
+                                            },
+                                            child: ListBoxMenuStatus(
+                                              status: order.status!,
+                                              totalItem: order.orderItems!.length
+                                                  .toString(),
+                                              totalPrice: order.totalPrice!
+                                                  .toString(),
+                                              orderItems: order.orderItems,
+                                              createdAt: order.createdAt.toString(),
+                                            ),
+                                          );
+
+                                        } else {
+                                          final order = modelReward!.orders![index];
+                                          return InkWell(
+                                            onTap: () {
+                                              context.pushNamed('detail_order_reward', pathParameters: {'orderRewardId': order.id!});},
+                                            child: ListBoxMenuStatus(
+                                              status: order.status!,
+                                              totalItem: order.orderRewardItems!.length
+                                                  .toString(),
+                                              totalPrice: order.totalPoint!
+                                                  .toString(),
+                                              orderItemsReward: order.orderRewardItems,
+                                              createdAt: order.createdAt.toString(),
+                                            ),
+                                          );
+                                        }
+
+                                      },
+                                    ),
+                                  );
+                                },
+                                error: (message) => Center(
+                                  child: Text(message!),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
                       ),
                     ),
                   ],

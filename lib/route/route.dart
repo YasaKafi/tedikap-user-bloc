@@ -1,6 +1,5 @@
 
 import 'package:go_router/go_router.dart';
-import 'package:tedikap_user_bloc/data/models/response/cart_response_model.dart';
 import 'package:tedikap_user_bloc/presentation/dashboard/dashboard_page.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/login_page/login_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/onboard_page/onboard_page_view.dart';

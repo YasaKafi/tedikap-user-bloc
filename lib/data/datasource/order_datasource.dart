@@ -133,4 +133,23 @@ class OrderDatasource{
       return Left('Failed Payment: ${e.toString()}');
     }
   }
+
+  Future<Either<String, HistoryOrderResponseModel>> getFilterTypeOrder(String query) async {
+    try {
+      final response = await _dioInstance.getRequest(
+        endpoint: TedikapApiRepository.getFilterOrder,
+        isAuthorize: true,
+        queryParameters: {
+          'type': query
+        },
+      );
+      if (response.statusCode == 200) {
+        return Right(HistoryOrderResponseModel.fromMap(response.data));
+      } else {
+        return const Left('Failed to access data order');
+      }
+    } catch (e) {
+      return Left('Failed to access data: ${e.toString()}');
+    }
+  }
 }
