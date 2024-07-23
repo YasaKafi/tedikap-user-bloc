@@ -17,6 +17,7 @@ import 'package:tedikap_user_bloc/presentation/pages/information_page/language_s
 import 'package:tedikap_user_bloc/presentation/pages/information_page/setting_page/setting_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/terms_of_serive_page/terms_of_serive_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/point_page/point_page_view.dart';
+import 'package:tedikap_user_bloc/presentation/pages/voucher_page/voucher_page_view.dart';
 
 import '../presentation/pages/information_page/privacy_policy_page/privacy_policy_view.dart';
 
@@ -95,6 +96,11 @@ class AppRouter {
         name: 'favorite',
         path: '/favorite',
         builder: (context, state) => FavoritePage(),
+      ),
+      GoRoute(
+        name: 'voucher',
+        path: '/voucher',
+        builder: (context, state) => VoucherPage(),
       ),
       GoRoute(
         name: 'detail_order_common',

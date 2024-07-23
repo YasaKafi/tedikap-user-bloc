@@ -4,6 +4,7 @@ import 'package:tedikap_user_bloc/data/datasource/favorite_datasource.dart';
 import 'package:tedikap_user_bloc/data/datasource/order_datasource.dart';
 import 'package:tedikap_user_bloc/data/datasource/product_datasource.dart';
 import 'package:tedikap_user_bloc/data/datasource/user_datasource.dart';
+import 'package:tedikap_user_bloc/data/datasource/voucher_datasource.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/login_page/bloc/login_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_page/bloc/cart_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_reward_page/bloc/cart_reward_bloc.dart';
@@ -17,6 +18,7 @@ import 'package:tedikap_user_bloc/presentation/pages/menu_page/bloc/menu_bloc.da
 import 'package:tedikap_user_bloc/presentation/pages/order_page/bloc/order_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/point_page/bloc/point_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/profile_page/bloc/profile_bloc.dart';
+import 'package:tedikap_user_bloc/presentation/pages/voucher_page/bloc/voucher_bloc.dart';
 
 import '../presentation/initial_pages/onboard_page/bloc/onboard_bloc.dart';
 import '../presentation/initial_pages/register_page/bloc/register_bloc.dart';
@@ -54,6 +56,9 @@ class AppProviders{
     ),
     BlocProvider<PointBloc>(
       create: (context) => PointBloc(ProductDatasource()),
+    ),
+    BlocProvider<VoucherBloc>(
+      create: (context) => VoucherBloc(VoucherDatasource(), CartDatasource()),
     ),
     BlocProvider<FavoriteBloc>(
       create: (context) => FavoriteBloc(FavoriteDatasource(), ProductDatasource()),

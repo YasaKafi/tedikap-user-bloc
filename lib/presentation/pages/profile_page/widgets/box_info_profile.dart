@@ -37,6 +37,7 @@ class InfoBoxProfile extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: (){
+                    context.pushNamed('voucher');
                   },
                   child: Column(
                     children: [

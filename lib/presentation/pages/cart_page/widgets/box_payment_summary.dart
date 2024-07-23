@@ -42,7 +42,9 @@ class BoxCheckoutSummary extends StatelessWidget {
           child: Column(
             children: [
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  context.pushNamed('voucher');
+                },
                 child: Container(
                   width: screenWidth,
                   padding: EdgeInsets.symmetric(
