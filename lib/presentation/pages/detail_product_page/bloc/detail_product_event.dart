@@ -7,6 +7,8 @@ class DetailProductEvent with _$DetailProductEvent {
   const factory DetailProductEvent.toggleSize() = _ToggleSize;
   const factory DetailProductEvent.toggleIce() = _ToggleIce;
   const factory DetailProductEvent.toggleSugar() = _ToggleSugar;
+  const factory DetailProductEvent.postFavorite(int? productId) = _PostFavorite;
+  const factory DetailProductEvent.checkFavorite(int? productId) = _CheckFavoriteProduct;
   const factory DetailProductEvent.decrement() = _Decrement;
   const factory DetailProductEvent.increment() = _Increment;
   const factory DetailProductEvent.getDetailProduct(int productId) = _GetDetailProduct;

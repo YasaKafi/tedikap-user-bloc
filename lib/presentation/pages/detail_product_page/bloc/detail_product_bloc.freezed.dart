@@ -23,6 +23,8 @@ mixin _$DetailProductEvent {
     required TResult Function() toggleSize,
     required TResult Function() toggleIce,
     required TResult Function() toggleSugar,
+    required TResult Function(int? productId) postFavorite,
+    required TResult Function(int? productId) checkFavorite,
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
@@ -43,6 +45,8 @@ mixin _$DetailProductEvent {
     TResult? Function()? toggleSize,
     TResult? Function()? toggleIce,
     TResult? Function()? toggleSugar,
+    TResult? Function(int? productId)? postFavorite,
+    TResult? Function(int? productId)? checkFavorite,
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
@@ -63,6 +67,8 @@ mixin _$DetailProductEvent {
     TResult Function()? toggleSize,
     TResult Function()? toggleIce,
     TResult Function()? toggleSugar,
+    TResult Function(int? productId)? postFavorite,
+    TResult Function(int? productId)? checkFavorite,
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
@@ -84,6 +90,8 @@ mixin _$DetailProductEvent {
     required TResult Function(_ToggleSize value) toggleSize,
     required TResult Function(_ToggleIce value) toggleIce,
     required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_PostFavorite value) postFavorite,
+    required TResult Function(_CheckFavoriteProduct value) checkFavorite,
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
@@ -105,6 +113,8 @@ mixin _$DetailProductEvent {
     TResult? Function(_ToggleSize value)? toggleSize,
     TResult? Function(_ToggleIce value)? toggleIce,
     TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_PostFavorite value)? postFavorite,
+    TResult? Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
@@ -124,6 +134,8 @@ mixin _$DetailProductEvent {
     TResult Function(_ToggleSize value)? toggleSize,
     TResult Function(_ToggleIce value)? toggleIce,
     TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_PostFavorite value)? postFavorite,
+    TResult Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
@@ -200,6 +212,8 @@ class _$StartedImpl implements _Started {
     required TResult Function() toggleSize,
     required TResult Function() toggleIce,
     required TResult Function() toggleSugar,
+    required TResult Function(int? productId) postFavorite,
+    required TResult Function(int? productId) checkFavorite,
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
@@ -223,6 +237,8 @@ class _$StartedImpl implements _Started {
     TResult? Function()? toggleSize,
     TResult? Function()? toggleIce,
     TResult? Function()? toggleSugar,
+    TResult? Function(int? productId)? postFavorite,
+    TResult? Function(int? productId)? checkFavorite,
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
@@ -246,6 +262,8 @@ class _$StartedImpl implements _Started {
     TResult Function()? toggleSize,
     TResult Function()? toggleIce,
     TResult Function()? toggleSugar,
+    TResult Function(int? productId)? postFavorite,
+    TResult Function(int? productId)? checkFavorite,
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
@@ -273,6 +291,8 @@ class _$StartedImpl implements _Started {
     required TResult Function(_ToggleSize value) toggleSize,
     required TResult Function(_ToggleIce value) toggleIce,
     required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_PostFavorite value) postFavorite,
+    required TResult Function(_CheckFavoriteProduct value) checkFavorite,
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
@@ -297,6 +317,8 @@ class _$StartedImpl implements _Started {
     TResult? Function(_ToggleSize value)? toggleSize,
     TResult? Function(_ToggleIce value)? toggleIce,
     TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_PostFavorite value)? postFavorite,
+    TResult? Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
@@ -319,6 +341,8 @@ class _$StartedImpl implements _Started {
     TResult Function(_ToggleSize value)? toggleSize,
     TResult Function(_ToggleIce value)? toggleIce,
     TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_PostFavorite value)? postFavorite,
+    TResult Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
@@ -385,6 +409,8 @@ class _$ToggleTemperatureImpl implements _ToggleTemperature {
     required TResult Function() toggleSize,
     required TResult Function() toggleIce,
     required TResult Function() toggleSugar,
+    required TResult Function(int? productId) postFavorite,
+    required TResult Function(int? productId) checkFavorite,
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
@@ -408,6 +434,8 @@ class _$ToggleTemperatureImpl implements _ToggleTemperature {
     TResult? Function()? toggleSize,
     TResult? Function()? toggleIce,
     TResult? Function()? toggleSugar,
+    TResult? Function(int? productId)? postFavorite,
+    TResult? Function(int? productId)? checkFavorite,
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
@@ -431,6 +459,8 @@ class _$ToggleTemperatureImpl implements _ToggleTemperature {
     TResult Function()? toggleSize,
     TResult Function()? toggleIce,
     TResult Function()? toggleSugar,
+    TResult Function(int? productId)? postFavorite,
+    TResult Function(int? productId)? checkFavorite,
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
@@ -458,6 +488,8 @@ class _$ToggleTemperatureImpl implements _ToggleTemperature {
     required TResult Function(_ToggleSize value) toggleSize,
     required TResult Function(_ToggleIce value) toggleIce,
     required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_PostFavorite value) postFavorite,
+    required TResult Function(_CheckFavoriteProduct value) checkFavorite,
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
@@ -482,6 +514,8 @@ class _$ToggleTemperatureImpl implements _ToggleTemperature {
     TResult? Function(_ToggleSize value)? toggleSize,
     TResult? Function(_ToggleIce value)? toggleIce,
     TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_PostFavorite value)? postFavorite,
+    TResult? Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
@@ -504,6 +538,8 @@ class _$ToggleTemperatureImpl implements _ToggleTemperature {
     TResult Function(_ToggleSize value)? toggleSize,
     TResult Function(_ToggleIce value)? toggleIce,
     TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_PostFavorite value)? postFavorite,
+    TResult Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
@@ -570,6 +606,8 @@ class _$ToggleSizeImpl implements _ToggleSize {
     required TResult Function() toggleSize,
     required TResult Function() toggleIce,
     required TResult Function() toggleSugar,
+    required TResult Function(int? productId) postFavorite,
+    required TResult Function(int? productId) checkFavorite,
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
@@ -593,6 +631,8 @@ class _$ToggleSizeImpl implements _ToggleSize {
     TResult? Function()? toggleSize,
     TResult? Function()? toggleIce,
     TResult? Function()? toggleSugar,
+    TResult? Function(int? productId)? postFavorite,
+    TResult? Function(int? productId)? checkFavorite,
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
@@ -616,6 +656,8 @@ class _$ToggleSizeImpl implements _ToggleSize {
     TResult Function()? toggleSize,
     TResult Function()? toggleIce,
     TResult Function()? toggleSugar,
+    TResult Function(int? productId)? postFavorite,
+    TResult Function(int? productId)? checkFavorite,
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
@@ -643,6 +685,8 @@ class _$ToggleSizeImpl implements _ToggleSize {
     required TResult Function(_ToggleSize value) toggleSize,
     required TResult Function(_ToggleIce value) toggleIce,
     required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_PostFavorite value) postFavorite,
+    required TResult Function(_CheckFavoriteProduct value) checkFavorite,
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
@@ -667,6 +711,8 @@ class _$ToggleSizeImpl implements _ToggleSize {
     TResult? Function(_ToggleSize value)? toggleSize,
     TResult? Function(_ToggleIce value)? toggleIce,
     TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_PostFavorite value)? postFavorite,
+    TResult? Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
@@ -689,6 +735,8 @@ class _$ToggleSizeImpl implements _ToggleSize {
     TResult Function(_ToggleSize value)? toggleSize,
     TResult Function(_ToggleIce value)? toggleIce,
     TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_PostFavorite value)? postFavorite,
+    TResult Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
@@ -755,6 +803,8 @@ class _$ToggleIceImpl implements _ToggleIce {
     required TResult Function() toggleSize,
     required TResult Function() toggleIce,
     required TResult Function() toggleSugar,
+    required TResult Function(int? productId) postFavorite,
+    required TResult Function(int? productId) checkFavorite,
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
@@ -778,6 +828,8 @@ class _$ToggleIceImpl implements _ToggleIce {
     TResult? Function()? toggleSize,
     TResult? Function()? toggleIce,
     TResult? Function()? toggleSugar,
+    TResult? Function(int? productId)? postFavorite,
+    TResult? Function(int? productId)? checkFavorite,
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
@@ -801,6 +853,8 @@ class _$ToggleIceImpl implements _ToggleIce {
     TResult Function()? toggleSize,
     TResult Function()? toggleIce,
     TResult Function()? toggleSugar,
+    TResult Function(int? productId)? postFavorite,
+    TResult Function(int? productId)? checkFavorite,
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
@@ -828,6 +882,8 @@ class _$ToggleIceImpl implements _ToggleIce {
     required TResult Function(_ToggleSize value) toggleSize,
     required TResult Function(_ToggleIce value) toggleIce,
     required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_PostFavorite value) postFavorite,
+    required TResult Function(_CheckFavoriteProduct value) checkFavorite,
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
@@ -852,6 +908,8 @@ class _$ToggleIceImpl implements _ToggleIce {
     TResult? Function(_ToggleSize value)? toggleSize,
     TResult? Function(_ToggleIce value)? toggleIce,
     TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_PostFavorite value)? postFavorite,
+    TResult? Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
@@ -874,6 +932,8 @@ class _$ToggleIceImpl implements _ToggleIce {
     TResult Function(_ToggleSize value)? toggleSize,
     TResult Function(_ToggleIce value)? toggleIce,
     TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_PostFavorite value)? postFavorite,
+    TResult Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
@@ -940,6 +1000,8 @@ class _$ToggleSugarImpl implements _ToggleSugar {
     required TResult Function() toggleSize,
     required TResult Function() toggleIce,
     required TResult Function() toggleSugar,
+    required TResult Function(int? productId) postFavorite,
+    required TResult Function(int? productId) checkFavorite,
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
@@ -963,6 +1025,8 @@ class _$ToggleSugarImpl implements _ToggleSugar {
     TResult? Function()? toggleSize,
     TResult? Function()? toggleIce,
     TResult? Function()? toggleSugar,
+    TResult? Function(int? productId)? postFavorite,
+    TResult? Function(int? productId)? checkFavorite,
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
@@ -986,6 +1050,8 @@ class _$ToggleSugarImpl implements _ToggleSugar {
     TResult Function()? toggleSize,
     TResult Function()? toggleIce,
     TResult Function()? toggleSugar,
+    TResult Function(int? productId)? postFavorite,
+    TResult Function(int? productId)? checkFavorite,
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
@@ -1013,6 +1079,8 @@ class _$ToggleSugarImpl implements _ToggleSugar {
     required TResult Function(_ToggleSize value) toggleSize,
     required TResult Function(_ToggleIce value) toggleIce,
     required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_PostFavorite value) postFavorite,
+    required TResult Function(_CheckFavoriteProduct value) checkFavorite,
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
@@ -1037,6 +1105,8 @@ class _$ToggleSugarImpl implements _ToggleSugar {
     TResult? Function(_ToggleSize value)? toggleSize,
     TResult? Function(_ToggleIce value)? toggleIce,
     TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_PostFavorite value)? postFavorite,
+    TResult? Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
@@ -1059,6 +1129,8 @@ class _$ToggleSugarImpl implements _ToggleSugar {
     TResult Function(_ToggleSize value)? toggleSize,
     TResult Function(_ToggleIce value)? toggleIce,
     TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_PostFavorite value)? postFavorite,
+    TResult Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
@@ -1080,6 +1152,467 @@ class _$ToggleSugarImpl implements _ToggleSugar {
 
 abstract class _ToggleSugar implements DetailProductEvent {
   const factory _ToggleSugar() = _$ToggleSugarImpl;
+}
+
+/// @nodoc
+abstract class _$$PostFavoriteImplCopyWith<$Res> {
+  factory _$$PostFavoriteImplCopyWith(
+          _$PostFavoriteImpl value, $Res Function(_$PostFavoriteImpl) then) =
+      __$$PostFavoriteImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int? productId});
+}
+
+/// @nodoc
+class __$$PostFavoriteImplCopyWithImpl<$Res>
+    extends _$DetailProductEventCopyWithImpl<$Res, _$PostFavoriteImpl>
+    implements _$$PostFavoriteImplCopyWith<$Res> {
+  __$$PostFavoriteImplCopyWithImpl(
+      _$PostFavoriteImpl _value, $Res Function(_$PostFavoriteImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? productId = freezed,
+  }) {
+    return _then(_$PostFavoriteImpl(
+      freezed == productId
+          ? _value.productId
+          : productId // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$PostFavoriteImpl implements _PostFavorite {
+  const _$PostFavoriteImpl(this.productId);
+
+  @override
+  final int? productId;
+
+  @override
+  String toString() {
+    return 'DetailProductEvent.postFavorite(productId: $productId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PostFavoriteImpl &&
+            (identical(other.productId, productId) ||
+                other.productId == productId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, productId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PostFavoriteImplCopyWith<_$PostFavoriteImpl> get copyWith =>
+      __$$PostFavoriteImplCopyWithImpl<_$PostFavoriteImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() toggleTemp,
+    required TResult Function() toggleSize,
+    required TResult Function() toggleIce,
+    required TResult Function() toggleSugar,
+    required TResult Function(int? productId) postFavorite,
+    required TResult Function(int? productId) checkFavorite,
+    required TResult Function() decrement,
+    required TResult Function() increment,
+    required TResult Function(int productId) getDetailProduct,
+    required TResult Function(int cartId) getDetailItemCart,
+    required TResult Function(int cartId) getDetailItemCartReward,
+    required TResult Function(int productRewardId) getDetailProductReward,
+    required TResult Function(PostCartRequestModel? model) postCart,
+    required TResult Function(PostCartRewardRequestModel? model) postCartReward,
+    required TResult Function(PostCartRequestModel? model, int? id) updateCart,
+    required TResult Function(PostCartRewardRequestModel? model, int? id)
+        updateCartReward,
+  }) {
+    return postFavorite(productId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? toggleTemp,
+    TResult? Function()? toggleSize,
+    TResult? Function()? toggleIce,
+    TResult? Function()? toggleSugar,
+    TResult? Function(int? productId)? postFavorite,
+    TResult? Function(int? productId)? checkFavorite,
+    TResult? Function()? decrement,
+    TResult? Function()? increment,
+    TResult? Function(int productId)? getDetailProduct,
+    TResult? Function(int cartId)? getDetailItemCart,
+    TResult? Function(int cartId)? getDetailItemCartReward,
+    TResult? Function(int productRewardId)? getDetailProductReward,
+    TResult? Function(PostCartRequestModel? model)? postCart,
+    TResult? Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult? Function(PostCartRequestModel? model, int? id)? updateCart,
+    TResult? Function(PostCartRewardRequestModel? model, int? id)?
+        updateCartReward,
+  }) {
+    return postFavorite?.call(productId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? toggleTemp,
+    TResult Function()? toggleSize,
+    TResult Function()? toggleIce,
+    TResult Function()? toggleSugar,
+    TResult Function(int? productId)? postFavorite,
+    TResult Function(int? productId)? checkFavorite,
+    TResult Function()? decrement,
+    TResult Function()? increment,
+    TResult Function(int productId)? getDetailProduct,
+    TResult Function(int cartId)? getDetailItemCart,
+    TResult Function(int cartId)? getDetailItemCartReward,
+    TResult Function(int productRewardId)? getDetailProductReward,
+    TResult Function(PostCartRequestModel? model)? postCart,
+    TResult Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult Function(PostCartRequestModel? model, int? id)? updateCart,
+    TResult Function(PostCartRewardRequestModel? model, int? id)?
+        updateCartReward,
+    required TResult orElse(),
+  }) {
+    if (postFavorite != null) {
+      return postFavorite(productId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_ToggleTemperature value) toggleTemp,
+    required TResult Function(_ToggleSize value) toggleSize,
+    required TResult Function(_ToggleIce value) toggleIce,
+    required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_PostFavorite value) postFavorite,
+    required TResult Function(_CheckFavoriteProduct value) checkFavorite,
+    required TResult Function(_Decrement value) decrement,
+    required TResult Function(_Increment value) increment,
+    required TResult Function(_GetDetailProduct value) getDetailProduct,
+    required TResult Function(_GetDetailItemCart value) getDetailItemCart,
+    required TResult Function(_GetDetailItemCartReward value)
+        getDetailItemCartReward,
+    required TResult Function(_GetDetailProductReward value)
+        getDetailProductReward,
+    required TResult Function(_PostCart value) postCart,
+    required TResult Function(_PostCartReward value) postCartReward,
+    required TResult Function(_UpdateCart value) updateCart,
+    required TResult Function(_UpdateCartReward value) updateCartReward,
+  }) {
+    return postFavorite(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_ToggleTemperature value)? toggleTemp,
+    TResult? Function(_ToggleSize value)? toggleSize,
+    TResult? Function(_ToggleIce value)? toggleIce,
+    TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_PostFavorite value)? postFavorite,
+    TResult? Function(_CheckFavoriteProduct value)? checkFavorite,
+    TResult? Function(_Decrement value)? decrement,
+    TResult? Function(_Increment value)? increment,
+    TResult? Function(_GetDetailProduct value)? getDetailProduct,
+    TResult? Function(_GetDetailItemCart value)? getDetailItemCart,
+    TResult? Function(_GetDetailItemCartReward value)? getDetailItemCartReward,
+    TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
+    TResult? Function(_PostCart value)? postCart,
+    TResult? Function(_PostCartReward value)? postCartReward,
+    TResult? Function(_UpdateCart value)? updateCart,
+    TResult? Function(_UpdateCartReward value)? updateCartReward,
+  }) {
+    return postFavorite?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_ToggleTemperature value)? toggleTemp,
+    TResult Function(_ToggleSize value)? toggleSize,
+    TResult Function(_ToggleIce value)? toggleIce,
+    TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_PostFavorite value)? postFavorite,
+    TResult Function(_CheckFavoriteProduct value)? checkFavorite,
+    TResult Function(_Decrement value)? decrement,
+    TResult Function(_Increment value)? increment,
+    TResult Function(_GetDetailProduct value)? getDetailProduct,
+    TResult Function(_GetDetailItemCart value)? getDetailItemCart,
+    TResult Function(_GetDetailItemCartReward value)? getDetailItemCartReward,
+    TResult Function(_GetDetailProductReward value)? getDetailProductReward,
+    TResult Function(_PostCart value)? postCart,
+    TResult Function(_PostCartReward value)? postCartReward,
+    TResult Function(_UpdateCart value)? updateCart,
+    TResult Function(_UpdateCartReward value)? updateCartReward,
+    required TResult orElse(),
+  }) {
+    if (postFavorite != null) {
+      return postFavorite(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PostFavorite implements DetailProductEvent {
+  const factory _PostFavorite(final int? productId) = _$PostFavoriteImpl;
+
+  int? get productId;
+  @JsonKey(ignore: true)
+  _$$PostFavoriteImplCopyWith<_$PostFavoriteImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CheckFavoriteProductImplCopyWith<$Res> {
+  factory _$$CheckFavoriteProductImplCopyWith(_$CheckFavoriteProductImpl value,
+          $Res Function(_$CheckFavoriteProductImpl) then) =
+      __$$CheckFavoriteProductImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int? productId});
+}
+
+/// @nodoc
+class __$$CheckFavoriteProductImplCopyWithImpl<$Res>
+    extends _$DetailProductEventCopyWithImpl<$Res, _$CheckFavoriteProductImpl>
+    implements _$$CheckFavoriteProductImplCopyWith<$Res> {
+  __$$CheckFavoriteProductImplCopyWithImpl(_$CheckFavoriteProductImpl _value,
+      $Res Function(_$CheckFavoriteProductImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? productId = freezed,
+  }) {
+    return _then(_$CheckFavoriteProductImpl(
+      freezed == productId
+          ? _value.productId
+          : productId // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CheckFavoriteProductImpl implements _CheckFavoriteProduct {
+  const _$CheckFavoriteProductImpl(this.productId);
+
+  @override
+  final int? productId;
+
+  @override
+  String toString() {
+    return 'DetailProductEvent.checkFavorite(productId: $productId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CheckFavoriteProductImpl &&
+            (identical(other.productId, productId) ||
+                other.productId == productId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, productId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CheckFavoriteProductImplCopyWith<_$CheckFavoriteProductImpl>
+      get copyWith =>
+          __$$CheckFavoriteProductImplCopyWithImpl<_$CheckFavoriteProductImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() toggleTemp,
+    required TResult Function() toggleSize,
+    required TResult Function() toggleIce,
+    required TResult Function() toggleSugar,
+    required TResult Function(int? productId) postFavorite,
+    required TResult Function(int? productId) checkFavorite,
+    required TResult Function() decrement,
+    required TResult Function() increment,
+    required TResult Function(int productId) getDetailProduct,
+    required TResult Function(int cartId) getDetailItemCart,
+    required TResult Function(int cartId) getDetailItemCartReward,
+    required TResult Function(int productRewardId) getDetailProductReward,
+    required TResult Function(PostCartRequestModel? model) postCart,
+    required TResult Function(PostCartRewardRequestModel? model) postCartReward,
+    required TResult Function(PostCartRequestModel? model, int? id) updateCart,
+    required TResult Function(PostCartRewardRequestModel? model, int? id)
+        updateCartReward,
+  }) {
+    return checkFavorite(productId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? toggleTemp,
+    TResult? Function()? toggleSize,
+    TResult? Function()? toggleIce,
+    TResult? Function()? toggleSugar,
+    TResult? Function(int? productId)? postFavorite,
+    TResult? Function(int? productId)? checkFavorite,
+    TResult? Function()? decrement,
+    TResult? Function()? increment,
+    TResult? Function(int productId)? getDetailProduct,
+    TResult? Function(int cartId)? getDetailItemCart,
+    TResult? Function(int cartId)? getDetailItemCartReward,
+    TResult? Function(int productRewardId)? getDetailProductReward,
+    TResult? Function(PostCartRequestModel? model)? postCart,
+    TResult? Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult? Function(PostCartRequestModel? model, int? id)? updateCart,
+    TResult? Function(PostCartRewardRequestModel? model, int? id)?
+        updateCartReward,
+  }) {
+    return checkFavorite?.call(productId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? toggleTemp,
+    TResult Function()? toggleSize,
+    TResult Function()? toggleIce,
+    TResult Function()? toggleSugar,
+    TResult Function(int? productId)? postFavorite,
+    TResult Function(int? productId)? checkFavorite,
+    TResult Function()? decrement,
+    TResult Function()? increment,
+    TResult Function(int productId)? getDetailProduct,
+    TResult Function(int cartId)? getDetailItemCart,
+    TResult Function(int cartId)? getDetailItemCartReward,
+    TResult Function(int productRewardId)? getDetailProductReward,
+    TResult Function(PostCartRequestModel? model)? postCart,
+    TResult Function(PostCartRewardRequestModel? model)? postCartReward,
+    TResult Function(PostCartRequestModel? model, int? id)? updateCart,
+    TResult Function(PostCartRewardRequestModel? model, int? id)?
+        updateCartReward,
+    required TResult orElse(),
+  }) {
+    if (checkFavorite != null) {
+      return checkFavorite(productId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_ToggleTemperature value) toggleTemp,
+    required TResult Function(_ToggleSize value) toggleSize,
+    required TResult Function(_ToggleIce value) toggleIce,
+    required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_PostFavorite value) postFavorite,
+    required TResult Function(_CheckFavoriteProduct value) checkFavorite,
+    required TResult Function(_Decrement value) decrement,
+    required TResult Function(_Increment value) increment,
+    required TResult Function(_GetDetailProduct value) getDetailProduct,
+    required TResult Function(_GetDetailItemCart value) getDetailItemCart,
+    required TResult Function(_GetDetailItemCartReward value)
+        getDetailItemCartReward,
+    required TResult Function(_GetDetailProductReward value)
+        getDetailProductReward,
+    required TResult Function(_PostCart value) postCart,
+    required TResult Function(_PostCartReward value) postCartReward,
+    required TResult Function(_UpdateCart value) updateCart,
+    required TResult Function(_UpdateCartReward value) updateCartReward,
+  }) {
+    return checkFavorite(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_ToggleTemperature value)? toggleTemp,
+    TResult? Function(_ToggleSize value)? toggleSize,
+    TResult? Function(_ToggleIce value)? toggleIce,
+    TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_PostFavorite value)? postFavorite,
+    TResult? Function(_CheckFavoriteProduct value)? checkFavorite,
+    TResult? Function(_Decrement value)? decrement,
+    TResult? Function(_Increment value)? increment,
+    TResult? Function(_GetDetailProduct value)? getDetailProduct,
+    TResult? Function(_GetDetailItemCart value)? getDetailItemCart,
+    TResult? Function(_GetDetailItemCartReward value)? getDetailItemCartReward,
+    TResult? Function(_GetDetailProductReward value)? getDetailProductReward,
+    TResult? Function(_PostCart value)? postCart,
+    TResult? Function(_PostCartReward value)? postCartReward,
+    TResult? Function(_UpdateCart value)? updateCart,
+    TResult? Function(_UpdateCartReward value)? updateCartReward,
+  }) {
+    return checkFavorite?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_ToggleTemperature value)? toggleTemp,
+    TResult Function(_ToggleSize value)? toggleSize,
+    TResult Function(_ToggleIce value)? toggleIce,
+    TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_PostFavorite value)? postFavorite,
+    TResult Function(_CheckFavoriteProduct value)? checkFavorite,
+    TResult Function(_Decrement value)? decrement,
+    TResult Function(_Increment value)? increment,
+    TResult Function(_GetDetailProduct value)? getDetailProduct,
+    TResult Function(_GetDetailItemCart value)? getDetailItemCart,
+    TResult Function(_GetDetailItemCartReward value)? getDetailItemCartReward,
+    TResult Function(_GetDetailProductReward value)? getDetailProductReward,
+    TResult Function(_PostCart value)? postCart,
+    TResult Function(_PostCartReward value)? postCartReward,
+    TResult Function(_UpdateCart value)? updateCart,
+    TResult Function(_UpdateCartReward value)? updateCartReward,
+    required TResult orElse(),
+  }) {
+    if (checkFavorite != null) {
+      return checkFavorite(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CheckFavoriteProduct implements DetailProductEvent {
+  const factory _CheckFavoriteProduct(final int? productId) =
+      _$CheckFavoriteProductImpl;
+
+  int? get productId;
+  @JsonKey(ignore: true)
+  _$$CheckFavoriteProductImplCopyWith<_$CheckFavoriteProductImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1125,6 +1658,8 @@ class _$DecrementImpl implements _Decrement {
     required TResult Function() toggleSize,
     required TResult Function() toggleIce,
     required TResult Function() toggleSugar,
+    required TResult Function(int? productId) postFavorite,
+    required TResult Function(int? productId) checkFavorite,
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
@@ -1148,6 +1683,8 @@ class _$DecrementImpl implements _Decrement {
     TResult? Function()? toggleSize,
     TResult? Function()? toggleIce,
     TResult? Function()? toggleSugar,
+    TResult? Function(int? productId)? postFavorite,
+    TResult? Function(int? productId)? checkFavorite,
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
@@ -1171,6 +1708,8 @@ class _$DecrementImpl implements _Decrement {
     TResult Function()? toggleSize,
     TResult Function()? toggleIce,
     TResult Function()? toggleSugar,
+    TResult Function(int? productId)? postFavorite,
+    TResult Function(int? productId)? checkFavorite,
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
@@ -1198,6 +1737,8 @@ class _$DecrementImpl implements _Decrement {
     required TResult Function(_ToggleSize value) toggleSize,
     required TResult Function(_ToggleIce value) toggleIce,
     required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_PostFavorite value) postFavorite,
+    required TResult Function(_CheckFavoriteProduct value) checkFavorite,
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
@@ -1222,6 +1763,8 @@ class _$DecrementImpl implements _Decrement {
     TResult? Function(_ToggleSize value)? toggleSize,
     TResult? Function(_ToggleIce value)? toggleIce,
     TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_PostFavorite value)? postFavorite,
+    TResult? Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
@@ -1244,6 +1787,8 @@ class _$DecrementImpl implements _Decrement {
     TResult Function(_ToggleSize value)? toggleSize,
     TResult Function(_ToggleIce value)? toggleIce,
     TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_PostFavorite value)? postFavorite,
+    TResult Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
@@ -1310,6 +1855,8 @@ class _$IncrementImpl implements _Increment {
     required TResult Function() toggleSize,
     required TResult Function() toggleIce,
     required TResult Function() toggleSugar,
+    required TResult Function(int? productId) postFavorite,
+    required TResult Function(int? productId) checkFavorite,
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
@@ -1333,6 +1880,8 @@ class _$IncrementImpl implements _Increment {
     TResult? Function()? toggleSize,
     TResult? Function()? toggleIce,
     TResult? Function()? toggleSugar,
+    TResult? Function(int? productId)? postFavorite,
+    TResult? Function(int? productId)? checkFavorite,
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
@@ -1356,6 +1905,8 @@ class _$IncrementImpl implements _Increment {
     TResult Function()? toggleSize,
     TResult Function()? toggleIce,
     TResult Function()? toggleSugar,
+    TResult Function(int? productId)? postFavorite,
+    TResult Function(int? productId)? checkFavorite,
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
@@ -1383,6 +1934,8 @@ class _$IncrementImpl implements _Increment {
     required TResult Function(_ToggleSize value) toggleSize,
     required TResult Function(_ToggleIce value) toggleIce,
     required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_PostFavorite value) postFavorite,
+    required TResult Function(_CheckFavoriteProduct value) checkFavorite,
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
@@ -1407,6 +1960,8 @@ class _$IncrementImpl implements _Increment {
     TResult? Function(_ToggleSize value)? toggleSize,
     TResult? Function(_ToggleIce value)? toggleIce,
     TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_PostFavorite value)? postFavorite,
+    TResult? Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
@@ -1429,6 +1984,8 @@ class _$IncrementImpl implements _Increment {
     TResult Function(_ToggleSize value)? toggleSize,
     TResult Function(_ToggleIce value)? toggleIce,
     TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_PostFavorite value)? postFavorite,
+    TResult Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
@@ -1523,6 +2080,8 @@ class _$GetDetailProductImpl implements _GetDetailProduct {
     required TResult Function() toggleSize,
     required TResult Function() toggleIce,
     required TResult Function() toggleSugar,
+    required TResult Function(int? productId) postFavorite,
+    required TResult Function(int? productId) checkFavorite,
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
@@ -1546,6 +2105,8 @@ class _$GetDetailProductImpl implements _GetDetailProduct {
     TResult? Function()? toggleSize,
     TResult? Function()? toggleIce,
     TResult? Function()? toggleSugar,
+    TResult? Function(int? productId)? postFavorite,
+    TResult? Function(int? productId)? checkFavorite,
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
@@ -1569,6 +2130,8 @@ class _$GetDetailProductImpl implements _GetDetailProduct {
     TResult Function()? toggleSize,
     TResult Function()? toggleIce,
     TResult Function()? toggleSugar,
+    TResult Function(int? productId)? postFavorite,
+    TResult Function(int? productId)? checkFavorite,
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
@@ -1596,6 +2159,8 @@ class _$GetDetailProductImpl implements _GetDetailProduct {
     required TResult Function(_ToggleSize value) toggleSize,
     required TResult Function(_ToggleIce value) toggleIce,
     required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_PostFavorite value) postFavorite,
+    required TResult Function(_CheckFavoriteProduct value) checkFavorite,
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
@@ -1620,6 +2185,8 @@ class _$GetDetailProductImpl implements _GetDetailProduct {
     TResult? Function(_ToggleSize value)? toggleSize,
     TResult? Function(_ToggleIce value)? toggleIce,
     TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_PostFavorite value)? postFavorite,
+    TResult? Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
@@ -1642,6 +2209,8 @@ class _$GetDetailProductImpl implements _GetDetailProduct {
     TResult Function(_ToggleSize value)? toggleSize,
     TResult Function(_ToggleIce value)? toggleIce,
     TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_PostFavorite value)? postFavorite,
+    TResult Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
@@ -1740,6 +2309,8 @@ class _$GetDetailItemCartImpl implements _GetDetailItemCart {
     required TResult Function() toggleSize,
     required TResult Function() toggleIce,
     required TResult Function() toggleSugar,
+    required TResult Function(int? productId) postFavorite,
+    required TResult Function(int? productId) checkFavorite,
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
@@ -1763,6 +2334,8 @@ class _$GetDetailItemCartImpl implements _GetDetailItemCart {
     TResult? Function()? toggleSize,
     TResult? Function()? toggleIce,
     TResult? Function()? toggleSugar,
+    TResult? Function(int? productId)? postFavorite,
+    TResult? Function(int? productId)? checkFavorite,
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
@@ -1786,6 +2359,8 @@ class _$GetDetailItemCartImpl implements _GetDetailItemCart {
     TResult Function()? toggleSize,
     TResult Function()? toggleIce,
     TResult Function()? toggleSugar,
+    TResult Function(int? productId)? postFavorite,
+    TResult Function(int? productId)? checkFavorite,
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
@@ -1813,6 +2388,8 @@ class _$GetDetailItemCartImpl implements _GetDetailItemCart {
     required TResult Function(_ToggleSize value) toggleSize,
     required TResult Function(_ToggleIce value) toggleIce,
     required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_PostFavorite value) postFavorite,
+    required TResult Function(_CheckFavoriteProduct value) checkFavorite,
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
@@ -1837,6 +2414,8 @@ class _$GetDetailItemCartImpl implements _GetDetailItemCart {
     TResult? Function(_ToggleSize value)? toggleSize,
     TResult? Function(_ToggleIce value)? toggleIce,
     TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_PostFavorite value)? postFavorite,
+    TResult? Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
@@ -1859,6 +2438,8 @@ class _$GetDetailItemCartImpl implements _GetDetailItemCart {
     TResult Function(_ToggleSize value)? toggleSize,
     TResult Function(_ToggleIce value)? toggleIce,
     TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_PostFavorite value)? postFavorite,
+    TResult Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
@@ -1960,6 +2541,8 @@ class _$GetDetailItemCartRewardImpl implements _GetDetailItemCartReward {
     required TResult Function() toggleSize,
     required TResult Function() toggleIce,
     required TResult Function() toggleSugar,
+    required TResult Function(int? productId) postFavorite,
+    required TResult Function(int? productId) checkFavorite,
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
@@ -1983,6 +2566,8 @@ class _$GetDetailItemCartRewardImpl implements _GetDetailItemCartReward {
     TResult? Function()? toggleSize,
     TResult? Function()? toggleIce,
     TResult? Function()? toggleSugar,
+    TResult? Function(int? productId)? postFavorite,
+    TResult? Function(int? productId)? checkFavorite,
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
@@ -2006,6 +2591,8 @@ class _$GetDetailItemCartRewardImpl implements _GetDetailItemCartReward {
     TResult Function()? toggleSize,
     TResult Function()? toggleIce,
     TResult Function()? toggleSugar,
+    TResult Function(int? productId)? postFavorite,
+    TResult Function(int? productId)? checkFavorite,
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
@@ -2033,6 +2620,8 @@ class _$GetDetailItemCartRewardImpl implements _GetDetailItemCartReward {
     required TResult Function(_ToggleSize value) toggleSize,
     required TResult Function(_ToggleIce value) toggleIce,
     required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_PostFavorite value) postFavorite,
+    required TResult Function(_CheckFavoriteProduct value) checkFavorite,
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
@@ -2057,6 +2646,8 @@ class _$GetDetailItemCartRewardImpl implements _GetDetailItemCartReward {
     TResult? Function(_ToggleSize value)? toggleSize,
     TResult? Function(_ToggleIce value)? toggleIce,
     TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_PostFavorite value)? postFavorite,
+    TResult? Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
@@ -2079,6 +2670,8 @@ class _$GetDetailItemCartRewardImpl implements _GetDetailItemCartReward {
     TResult Function(_ToggleSize value)? toggleSize,
     TResult Function(_ToggleIce value)? toggleIce,
     TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_PostFavorite value)? postFavorite,
+    TResult Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
@@ -2181,6 +2774,8 @@ class _$GetDetailProductRewardImpl implements _GetDetailProductReward {
     required TResult Function() toggleSize,
     required TResult Function() toggleIce,
     required TResult Function() toggleSugar,
+    required TResult Function(int? productId) postFavorite,
+    required TResult Function(int? productId) checkFavorite,
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
@@ -2204,6 +2799,8 @@ class _$GetDetailProductRewardImpl implements _GetDetailProductReward {
     TResult? Function()? toggleSize,
     TResult? Function()? toggleIce,
     TResult? Function()? toggleSugar,
+    TResult? Function(int? productId)? postFavorite,
+    TResult? Function(int? productId)? checkFavorite,
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
@@ -2227,6 +2824,8 @@ class _$GetDetailProductRewardImpl implements _GetDetailProductReward {
     TResult Function()? toggleSize,
     TResult Function()? toggleIce,
     TResult Function()? toggleSugar,
+    TResult Function(int? productId)? postFavorite,
+    TResult Function(int? productId)? checkFavorite,
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
@@ -2254,6 +2853,8 @@ class _$GetDetailProductRewardImpl implements _GetDetailProductReward {
     required TResult Function(_ToggleSize value) toggleSize,
     required TResult Function(_ToggleIce value) toggleIce,
     required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_PostFavorite value) postFavorite,
+    required TResult Function(_CheckFavoriteProduct value) checkFavorite,
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
@@ -2278,6 +2879,8 @@ class _$GetDetailProductRewardImpl implements _GetDetailProductReward {
     TResult? Function(_ToggleSize value)? toggleSize,
     TResult? Function(_ToggleIce value)? toggleIce,
     TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_PostFavorite value)? postFavorite,
+    TResult? Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
@@ -2300,6 +2903,8 @@ class _$GetDetailProductRewardImpl implements _GetDetailProductReward {
     TResult Function(_ToggleSize value)? toggleSize,
     TResult Function(_ToggleIce value)? toggleIce,
     TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_PostFavorite value)? postFavorite,
+    TResult Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
@@ -2398,6 +3003,8 @@ class _$PostCartImpl implements _PostCart {
     required TResult Function() toggleSize,
     required TResult Function() toggleIce,
     required TResult Function() toggleSugar,
+    required TResult Function(int? productId) postFavorite,
+    required TResult Function(int? productId) checkFavorite,
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
@@ -2421,6 +3028,8 @@ class _$PostCartImpl implements _PostCart {
     TResult? Function()? toggleSize,
     TResult? Function()? toggleIce,
     TResult? Function()? toggleSugar,
+    TResult? Function(int? productId)? postFavorite,
+    TResult? Function(int? productId)? checkFavorite,
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
@@ -2444,6 +3053,8 @@ class _$PostCartImpl implements _PostCart {
     TResult Function()? toggleSize,
     TResult Function()? toggleIce,
     TResult Function()? toggleSugar,
+    TResult Function(int? productId)? postFavorite,
+    TResult Function(int? productId)? checkFavorite,
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
@@ -2471,6 +3082,8 @@ class _$PostCartImpl implements _PostCart {
     required TResult Function(_ToggleSize value) toggleSize,
     required TResult Function(_ToggleIce value) toggleIce,
     required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_PostFavorite value) postFavorite,
+    required TResult Function(_CheckFavoriteProduct value) checkFavorite,
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
@@ -2495,6 +3108,8 @@ class _$PostCartImpl implements _PostCart {
     TResult? Function(_ToggleSize value)? toggleSize,
     TResult? Function(_ToggleIce value)? toggleIce,
     TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_PostFavorite value)? postFavorite,
+    TResult? Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
@@ -2517,6 +3132,8 @@ class _$PostCartImpl implements _PostCart {
     TResult Function(_ToggleSize value)? toggleSize,
     TResult Function(_ToggleIce value)? toggleIce,
     TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_PostFavorite value)? postFavorite,
+    TResult Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
@@ -2615,6 +3232,8 @@ class _$PostCartRewardImpl implements _PostCartReward {
     required TResult Function() toggleSize,
     required TResult Function() toggleIce,
     required TResult Function() toggleSugar,
+    required TResult Function(int? productId) postFavorite,
+    required TResult Function(int? productId) checkFavorite,
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
@@ -2638,6 +3257,8 @@ class _$PostCartRewardImpl implements _PostCartReward {
     TResult? Function()? toggleSize,
     TResult? Function()? toggleIce,
     TResult? Function()? toggleSugar,
+    TResult? Function(int? productId)? postFavorite,
+    TResult? Function(int? productId)? checkFavorite,
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
@@ -2661,6 +3282,8 @@ class _$PostCartRewardImpl implements _PostCartReward {
     TResult Function()? toggleSize,
     TResult Function()? toggleIce,
     TResult Function()? toggleSugar,
+    TResult Function(int? productId)? postFavorite,
+    TResult Function(int? productId)? checkFavorite,
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
@@ -2688,6 +3311,8 @@ class _$PostCartRewardImpl implements _PostCartReward {
     required TResult Function(_ToggleSize value) toggleSize,
     required TResult Function(_ToggleIce value) toggleIce,
     required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_PostFavorite value) postFavorite,
+    required TResult Function(_CheckFavoriteProduct value) checkFavorite,
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
@@ -2712,6 +3337,8 @@ class _$PostCartRewardImpl implements _PostCartReward {
     TResult? Function(_ToggleSize value)? toggleSize,
     TResult? Function(_ToggleIce value)? toggleIce,
     TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_PostFavorite value)? postFavorite,
+    TResult? Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
@@ -2734,6 +3361,8 @@ class _$PostCartRewardImpl implements _PostCartReward {
     TResult Function(_ToggleSize value)? toggleSize,
     TResult Function(_ToggleIce value)? toggleIce,
     TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_PostFavorite value)? postFavorite,
+    TResult Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
@@ -2840,6 +3469,8 @@ class _$UpdateCartImpl implements _UpdateCart {
     required TResult Function() toggleSize,
     required TResult Function() toggleIce,
     required TResult Function() toggleSugar,
+    required TResult Function(int? productId) postFavorite,
+    required TResult Function(int? productId) checkFavorite,
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
@@ -2863,6 +3494,8 @@ class _$UpdateCartImpl implements _UpdateCart {
     TResult? Function()? toggleSize,
     TResult? Function()? toggleIce,
     TResult? Function()? toggleSugar,
+    TResult? Function(int? productId)? postFavorite,
+    TResult? Function(int? productId)? checkFavorite,
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
@@ -2886,6 +3519,8 @@ class _$UpdateCartImpl implements _UpdateCart {
     TResult Function()? toggleSize,
     TResult Function()? toggleIce,
     TResult Function()? toggleSugar,
+    TResult Function(int? productId)? postFavorite,
+    TResult Function(int? productId)? checkFavorite,
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
@@ -2913,6 +3548,8 @@ class _$UpdateCartImpl implements _UpdateCart {
     required TResult Function(_ToggleSize value) toggleSize,
     required TResult Function(_ToggleIce value) toggleIce,
     required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_PostFavorite value) postFavorite,
+    required TResult Function(_CheckFavoriteProduct value) checkFavorite,
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
@@ -2937,6 +3574,8 @@ class _$UpdateCartImpl implements _UpdateCart {
     TResult? Function(_ToggleSize value)? toggleSize,
     TResult? Function(_ToggleIce value)? toggleIce,
     TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_PostFavorite value)? postFavorite,
+    TResult? Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
@@ -2959,6 +3598,8 @@ class _$UpdateCartImpl implements _UpdateCart {
     TResult Function(_ToggleSize value)? toggleSize,
     TResult Function(_ToggleIce value)? toggleIce,
     TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_PostFavorite value)? postFavorite,
+    TResult Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
@@ -3067,6 +3708,8 @@ class _$UpdateCartRewardImpl implements _UpdateCartReward {
     required TResult Function() toggleSize,
     required TResult Function() toggleIce,
     required TResult Function() toggleSugar,
+    required TResult Function(int? productId) postFavorite,
+    required TResult Function(int? productId) checkFavorite,
     required TResult Function() decrement,
     required TResult Function() increment,
     required TResult Function(int productId) getDetailProduct,
@@ -3090,6 +3733,8 @@ class _$UpdateCartRewardImpl implements _UpdateCartReward {
     TResult? Function()? toggleSize,
     TResult? Function()? toggleIce,
     TResult? Function()? toggleSugar,
+    TResult? Function(int? productId)? postFavorite,
+    TResult? Function(int? productId)? checkFavorite,
     TResult? Function()? decrement,
     TResult? Function()? increment,
     TResult? Function(int productId)? getDetailProduct,
@@ -3113,6 +3758,8 @@ class _$UpdateCartRewardImpl implements _UpdateCartReward {
     TResult Function()? toggleSize,
     TResult Function()? toggleIce,
     TResult Function()? toggleSugar,
+    TResult Function(int? productId)? postFavorite,
+    TResult Function(int? productId)? checkFavorite,
     TResult Function()? decrement,
     TResult Function()? increment,
     TResult Function(int productId)? getDetailProduct,
@@ -3140,6 +3787,8 @@ class _$UpdateCartRewardImpl implements _UpdateCartReward {
     required TResult Function(_ToggleSize value) toggleSize,
     required TResult Function(_ToggleIce value) toggleIce,
     required TResult Function(_ToggleSugar value) toggleSugar,
+    required TResult Function(_PostFavorite value) postFavorite,
+    required TResult Function(_CheckFavoriteProduct value) checkFavorite,
     required TResult Function(_Decrement value) decrement,
     required TResult Function(_Increment value) increment,
     required TResult Function(_GetDetailProduct value) getDetailProduct,
@@ -3164,6 +3813,8 @@ class _$UpdateCartRewardImpl implements _UpdateCartReward {
     TResult? Function(_ToggleSize value)? toggleSize,
     TResult? Function(_ToggleIce value)? toggleIce,
     TResult? Function(_ToggleSugar value)? toggleSugar,
+    TResult? Function(_PostFavorite value)? postFavorite,
+    TResult? Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult? Function(_Decrement value)? decrement,
     TResult? Function(_Increment value)? increment,
     TResult? Function(_GetDetailProduct value)? getDetailProduct,
@@ -3186,6 +3837,8 @@ class _$UpdateCartRewardImpl implements _UpdateCartReward {
     TResult Function(_ToggleSize value)? toggleSize,
     TResult Function(_ToggleIce value)? toggleIce,
     TResult Function(_ToggleSugar value)? toggleSugar,
+    TResult Function(_PostFavorite value)? postFavorite,
+    TResult Function(_CheckFavoriteProduct value)? checkFavorite,
     TResult Function(_Decrement value)? decrement,
     TResult Function(_Increment value)? increment,
     TResult Function(_GetDetailProduct value)? getDetailProduct,
@@ -3232,6 +3885,8 @@ mixin _$DetailProductState {
             UpdateCartResponseModel? modelCartUpdate,
             CartItemRewardResponseModel? modelCartItemReward,
             UpdateCartRewardResponseModel? modelCartRewardUpdate,
+            PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -3242,7 +3897,8 @@ mixin _$DetailProductState {
             String selectedSugar,
             int quantityCount,
             int totalPrice,
-            String note)
+            String note,
+            bool isLiked)
         success,
     required TResult Function(String? message) error,
   }) =>
@@ -3260,6 +3916,8 @@ mixin _$DetailProductState {
             UpdateCartResponseModel? modelCartUpdate,
             CartItemRewardResponseModel? modelCartItemReward,
             UpdateCartRewardResponseModel? modelCartRewardUpdate,
+            PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -3270,7 +3928,8 @@ mixin _$DetailProductState {
             String selectedSugar,
             int quantityCount,
             int totalPrice,
-            String note)?
+            String note,
+            bool isLiked)?
         success,
     TResult? Function(String? message)? error,
   }) =>
@@ -3288,6 +3947,8 @@ mixin _$DetailProductState {
             UpdateCartResponseModel? modelCartUpdate,
             CartItemRewardResponseModel? modelCartItemReward,
             UpdateCartRewardResponseModel? modelCartRewardUpdate,
+            PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -3298,7 +3959,8 @@ mixin _$DetailProductState {
             String selectedSugar,
             int quantityCount,
             int totalPrice,
-            String note)?
+            String note,
+            bool isLiked)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -3398,6 +4060,8 @@ class _$InitialImpl implements _Initial {
             UpdateCartResponseModel? modelCartUpdate,
             CartItemRewardResponseModel? modelCartItemReward,
             UpdateCartRewardResponseModel? modelCartRewardUpdate,
+            PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -3408,7 +4072,8 @@ class _$InitialImpl implements _Initial {
             String selectedSugar,
             int quantityCount,
             int totalPrice,
-            String note)
+            String note,
+            bool isLiked)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -3429,6 +4094,8 @@ class _$InitialImpl implements _Initial {
             UpdateCartResponseModel? modelCartUpdate,
             CartItemRewardResponseModel? modelCartItemReward,
             UpdateCartRewardResponseModel? modelCartRewardUpdate,
+            PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -3439,7 +4106,8 @@ class _$InitialImpl implements _Initial {
             String selectedSugar,
             int quantityCount,
             int totalPrice,
-            String note)?
+            String note,
+            bool isLiked)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -3460,6 +4128,8 @@ class _$InitialImpl implements _Initial {
             UpdateCartResponseModel? modelCartUpdate,
             CartItemRewardResponseModel? modelCartItemReward,
             UpdateCartRewardResponseModel? modelCartRewardUpdate,
+            PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -3470,7 +4140,8 @@ class _$InitialImpl implements _Initial {
             String selectedSugar,
             int quantityCount,
             int totalPrice,
-            String note)?
+            String note,
+            bool isLiked)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -3572,6 +4243,8 @@ class _$LoadingImpl implements _Loading {
             UpdateCartResponseModel? modelCartUpdate,
             CartItemRewardResponseModel? modelCartItemReward,
             UpdateCartRewardResponseModel? modelCartRewardUpdate,
+            PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -3582,7 +4255,8 @@ class _$LoadingImpl implements _Loading {
             String selectedSugar,
             int quantityCount,
             int totalPrice,
-            String note)
+            String note,
+            bool isLiked)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -3603,6 +4277,8 @@ class _$LoadingImpl implements _Loading {
             UpdateCartResponseModel? modelCartUpdate,
             CartItemRewardResponseModel? modelCartItemReward,
             UpdateCartRewardResponseModel? modelCartRewardUpdate,
+            PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -3613,7 +4289,8 @@ class _$LoadingImpl implements _Loading {
             String selectedSugar,
             int quantityCount,
             int totalPrice,
-            String note)?
+            String note,
+            bool isLiked)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -3634,6 +4311,8 @@ class _$LoadingImpl implements _Loading {
             UpdateCartResponseModel? modelCartUpdate,
             CartItemRewardResponseModel? modelCartItemReward,
             UpdateCartRewardResponseModel? modelCartRewardUpdate,
+            PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -3644,7 +4323,8 @@ class _$LoadingImpl implements _Loading {
             String selectedSugar,
             int quantityCount,
             int totalPrice,
-            String note)?
+            String note,
+            bool isLiked)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -3712,6 +4392,8 @@ abstract class _$$SuccessImplCopyWith<$Res> {
       UpdateCartResponseModel? modelCartUpdate,
       CartItemRewardResponseModel? modelCartItemReward,
       UpdateCartRewardResponseModel? modelCartRewardUpdate,
+      PostFavoriteResponseModel? modelPostFavorite,
+      FavoriteResponseModel? modelFavorite,
       bool isTempSelected,
       String selectedTemp,
       bool isSizeSelected,
@@ -3722,7 +4404,8 @@ abstract class _$$SuccessImplCopyWith<$Res> {
       String selectedSugar,
       int quantityCount,
       int totalPrice,
-      String note});
+      String note,
+      bool isLiked});
 }
 
 /// @nodoc
@@ -3744,6 +4427,8 @@ class __$$SuccessImplCopyWithImpl<$Res>
     Object? modelCartUpdate = freezed,
     Object? modelCartItemReward = freezed,
     Object? modelCartRewardUpdate = freezed,
+    Object? modelPostFavorite = freezed,
+    Object? modelFavorite = freezed,
     Object? isTempSelected = null,
     Object? selectedTemp = null,
     Object? isSizeSelected = null,
@@ -3755,6 +4440,7 @@ class __$$SuccessImplCopyWithImpl<$Res>
     Object? quantityCount = null,
     Object? totalPrice = null,
     Object? note = null,
+    Object? isLiked = null,
   }) {
     return _then(_$SuccessImpl(
       model: freezed == model
@@ -3789,6 +4475,14 @@ class __$$SuccessImplCopyWithImpl<$Res>
           ? _value.modelCartRewardUpdate
           : modelCartRewardUpdate // ignore: cast_nullable_to_non_nullable
               as UpdateCartRewardResponseModel?,
+      modelPostFavorite: freezed == modelPostFavorite
+          ? _value.modelPostFavorite
+          : modelPostFavorite // ignore: cast_nullable_to_non_nullable
+              as PostFavoriteResponseModel?,
+      modelFavorite: freezed == modelFavorite
+          ? _value.modelFavorite
+          : modelFavorite // ignore: cast_nullable_to_non_nullable
+              as FavoriteResponseModel?,
       isTempSelected: null == isTempSelected
           ? _value.isTempSelected
           : isTempSelected // ignore: cast_nullable_to_non_nullable
@@ -3833,6 +4527,10 @@ class __$$SuccessImplCopyWithImpl<$Res>
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
               as String,
+      isLiked: null == isLiked
+          ? _value.isLiked
+          : isLiked // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -3841,14 +4539,16 @@ class __$$SuccessImplCopyWithImpl<$Res>
 
 class _$SuccessImpl implements _Success {
   const _$SuccessImpl(
-      {required this.model,
-      required this.modelReward,
-      required this.modelCartPost,
-      required this.modelCartRewardPost,
-      required this.modelCartItem,
-      required this.modelCartUpdate,
-      required this.modelCartItemReward,
-      required this.modelCartRewardUpdate,
+      {this.model,
+      this.modelReward,
+      this.modelCartPost,
+      this.modelCartRewardPost,
+      this.modelCartItem,
+      this.modelCartUpdate,
+      this.modelCartItemReward,
+      this.modelCartRewardUpdate,
+      this.modelPostFavorite,
+      this.modelFavorite,
       this.isTempSelected = false,
       this.selectedTemp = 'ice',
       this.isSizeSelected = false,
@@ -3859,7 +4559,8 @@ class _$SuccessImpl implements _Success {
       this.selectedSugar = 'normal',
       this.quantityCount = 1,
       this.totalPrice = 0,
-      this.note = ''});
+      this.note = '',
+      this.isLiked = false});
 
   @override
   final DetailProductResponseModel? model;
@@ -3877,6 +4578,10 @@ class _$SuccessImpl implements _Success {
   final CartItemRewardResponseModel? modelCartItemReward;
   @override
   final UpdateCartRewardResponseModel? modelCartRewardUpdate;
+  @override
+  final PostFavoriteResponseModel? modelPostFavorite;
+  @override
+  final FavoriteResponseModel? modelFavorite;
   @override
   @JsonKey()
   final bool isTempSelected;
@@ -3910,10 +4615,13 @@ class _$SuccessImpl implements _Success {
   @override
   @JsonKey()
   final String note;
+  @override
+  @JsonKey()
+  final bool isLiked;
 
   @override
   String toString() {
-    return 'DetailProductState.success(model: $model, modelReward: $modelReward, modelCartPost: $modelCartPost, modelCartRewardPost: $modelCartRewardPost, modelCartItem: $modelCartItem, modelCartUpdate: $modelCartUpdate, modelCartItemReward: $modelCartItemReward, modelCartRewardUpdate: $modelCartRewardUpdate, isTempSelected: $isTempSelected, selectedTemp: $selectedTemp, isSizeSelected: $isSizeSelected, selectedSize: $selectedSize, isIceSelected: $isIceSelected, selectedIce: $selectedIce, isSugarSelected: $isSugarSelected, selectedSugar: $selectedSugar, quantityCount: $quantityCount, totalPrice: $totalPrice, note: $note)';
+    return 'DetailProductState.success(model: $model, modelReward: $modelReward, modelCartPost: $modelCartPost, modelCartRewardPost: $modelCartRewardPost, modelCartItem: $modelCartItem, modelCartUpdate: $modelCartUpdate, modelCartItemReward: $modelCartItemReward, modelCartRewardUpdate: $modelCartRewardUpdate, modelPostFavorite: $modelPostFavorite, modelFavorite: $modelFavorite, isTempSelected: $isTempSelected, selectedTemp: $selectedTemp, isSizeSelected: $isSizeSelected, selectedSize: $selectedSize, isIceSelected: $isIceSelected, selectedIce: $selectedIce, isSugarSelected: $isSugarSelected, selectedSugar: $selectedSugar, quantityCount: $quantityCount, totalPrice: $totalPrice, note: $note, isLiked: $isLiked)';
   }
 
   @override
@@ -3936,6 +4644,10 @@ class _$SuccessImpl implements _Success {
                 other.modelCartItemReward == modelCartItemReward) &&
             (identical(other.modelCartRewardUpdate, modelCartRewardUpdate) ||
                 other.modelCartRewardUpdate == modelCartRewardUpdate) &&
+            (identical(other.modelPostFavorite, modelPostFavorite) ||
+                other.modelPostFavorite == modelPostFavorite) &&
+            (identical(other.modelFavorite, modelFavorite) ||
+                other.modelFavorite == modelFavorite) &&
             (identical(other.isTempSelected, isTempSelected) ||
                 other.isTempSelected == isTempSelected) &&
             (identical(other.selectedTemp, selectedTemp) ||
@@ -3956,7 +4668,8 @@ class _$SuccessImpl implements _Success {
                 other.quantityCount == quantityCount) &&
             (identical(other.totalPrice, totalPrice) ||
                 other.totalPrice == totalPrice) &&
-            (identical(other.note, note) || other.note == note));
+            (identical(other.note, note) || other.note == note) &&
+            (identical(other.isLiked, isLiked) || other.isLiked == isLiked));
   }
 
   @override
@@ -3970,6 +4683,8 @@ class _$SuccessImpl implements _Success {
         modelCartUpdate,
         modelCartItemReward,
         modelCartRewardUpdate,
+        modelPostFavorite,
+        modelFavorite,
         isTempSelected,
         selectedTemp,
         isSizeSelected,
@@ -3980,7 +4695,8 @@ class _$SuccessImpl implements _Success {
         selectedSugar,
         quantityCount,
         totalPrice,
-        note
+        note,
+        isLiked
       ]);
 
   @JsonKey(ignore: true)
@@ -4003,6 +4719,8 @@ class _$SuccessImpl implements _Success {
             UpdateCartResponseModel? modelCartUpdate,
             CartItemRewardResponseModel? modelCartItemReward,
             UpdateCartRewardResponseModel? modelCartRewardUpdate,
+            PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -4013,7 +4731,8 @@ class _$SuccessImpl implements _Success {
             String selectedSugar,
             int quantityCount,
             int totalPrice,
-            String note)
+            String note,
+            bool isLiked)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -4026,6 +4745,8 @@ class _$SuccessImpl implements _Success {
         modelCartUpdate,
         modelCartItemReward,
         modelCartRewardUpdate,
+        modelPostFavorite,
+        modelFavorite,
         isTempSelected,
         selectedTemp,
         isSizeSelected,
@@ -4036,7 +4757,8 @@ class _$SuccessImpl implements _Success {
         selectedSugar,
         quantityCount,
         totalPrice,
-        note);
+        note,
+        isLiked);
   }
 
   @override
@@ -4053,6 +4775,8 @@ class _$SuccessImpl implements _Success {
             UpdateCartResponseModel? modelCartUpdate,
             CartItemRewardResponseModel? modelCartItemReward,
             UpdateCartRewardResponseModel? modelCartRewardUpdate,
+            PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -4063,7 +4787,8 @@ class _$SuccessImpl implements _Success {
             String selectedSugar,
             int quantityCount,
             int totalPrice,
-            String note)?
+            String note,
+            bool isLiked)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -4076,6 +4801,8 @@ class _$SuccessImpl implements _Success {
         modelCartUpdate,
         modelCartItemReward,
         modelCartRewardUpdate,
+        modelPostFavorite,
+        modelFavorite,
         isTempSelected,
         selectedTemp,
         isSizeSelected,
@@ -4086,7 +4813,8 @@ class _$SuccessImpl implements _Success {
         selectedSugar,
         quantityCount,
         totalPrice,
-        note);
+        note,
+        isLiked);
   }
 
   @override
@@ -4103,6 +4831,8 @@ class _$SuccessImpl implements _Success {
             UpdateCartResponseModel? modelCartUpdate,
             CartItemRewardResponseModel? modelCartItemReward,
             UpdateCartRewardResponseModel? modelCartRewardUpdate,
+            PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -4113,7 +4843,8 @@ class _$SuccessImpl implements _Success {
             String selectedSugar,
             int quantityCount,
             int totalPrice,
-            String note)?
+            String note,
+            bool isLiked)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -4128,6 +4859,8 @@ class _$SuccessImpl implements _Success {
           modelCartUpdate,
           modelCartItemReward,
           modelCartRewardUpdate,
+          modelPostFavorite,
+          modelFavorite,
           isTempSelected,
           selectedTemp,
           isSizeSelected,
@@ -4138,7 +4871,8 @@ class _$SuccessImpl implements _Success {
           selectedSugar,
           quantityCount,
           totalPrice,
-          note);
+          note,
+          isLiked);
     }
     return orElse();
   }
@@ -4183,14 +4917,16 @@ class _$SuccessImpl implements _Success {
 
 abstract class _Success implements DetailProductState {
   const factory _Success(
-      {required final DetailProductResponseModel? model,
-      required final DetailProductRewardResponseModel? modelReward,
-      required final PostCartResponseModel? modelCartPost,
-      required final PostCartRewardResponseModel? modelCartRewardPost,
-      required final CartItemResponseModel? modelCartItem,
-      required final UpdateCartResponseModel? modelCartUpdate,
-      required final CartItemRewardResponseModel? modelCartItemReward,
-      required final UpdateCartRewardResponseModel? modelCartRewardUpdate,
+      {final DetailProductResponseModel? model,
+      final DetailProductRewardResponseModel? modelReward,
+      final PostCartResponseModel? modelCartPost,
+      final PostCartRewardResponseModel? modelCartRewardPost,
+      final CartItemResponseModel? modelCartItem,
+      final UpdateCartResponseModel? modelCartUpdate,
+      final CartItemRewardResponseModel? modelCartItemReward,
+      final UpdateCartRewardResponseModel? modelCartRewardUpdate,
+      final PostFavoriteResponseModel? modelPostFavorite,
+      final FavoriteResponseModel? modelFavorite,
       final bool isTempSelected,
       final String selectedTemp,
       final bool isSizeSelected,
@@ -4201,7 +4937,8 @@ abstract class _Success implements DetailProductState {
       final String selectedSugar,
       final int quantityCount,
       final int totalPrice,
-      final String note}) = _$SuccessImpl;
+      final String note,
+      final bool isLiked}) = _$SuccessImpl;
 
   DetailProductResponseModel? get model;
   DetailProductRewardResponseModel? get modelReward;
@@ -4211,6 +4948,8 @@ abstract class _Success implements DetailProductState {
   UpdateCartResponseModel? get modelCartUpdate;
   CartItemRewardResponseModel? get modelCartItemReward;
   UpdateCartRewardResponseModel? get modelCartRewardUpdate;
+  PostFavoriteResponseModel? get modelPostFavorite;
+  FavoriteResponseModel? get modelFavorite;
   bool get isTempSelected;
   String get selectedTemp;
   bool get isSizeSelected;
@@ -4222,6 +4961,7 @@ abstract class _Success implements DetailProductState {
   int get quantityCount;
   int get totalPrice;
   String get note;
+  bool get isLiked;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -4302,6 +5042,8 @@ class _$ErrorImpl implements _Error {
             UpdateCartResponseModel? modelCartUpdate,
             CartItemRewardResponseModel? modelCartItemReward,
             UpdateCartRewardResponseModel? modelCartRewardUpdate,
+            PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -4312,7 +5054,8 @@ class _$ErrorImpl implements _Error {
             String selectedSugar,
             int quantityCount,
             int totalPrice,
-            String note)
+            String note,
+            bool isLiked)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -4333,6 +5076,8 @@ class _$ErrorImpl implements _Error {
             UpdateCartResponseModel? modelCartUpdate,
             CartItemRewardResponseModel? modelCartItemReward,
             UpdateCartRewardResponseModel? modelCartRewardUpdate,
+            PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -4343,7 +5088,8 @@ class _$ErrorImpl implements _Error {
             String selectedSugar,
             int quantityCount,
             int totalPrice,
-            String note)?
+            String note,
+            bool isLiked)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -4364,6 +5110,8 @@ class _$ErrorImpl implements _Error {
             UpdateCartResponseModel? modelCartUpdate,
             CartItemRewardResponseModel? modelCartItemReward,
             UpdateCartRewardResponseModel? modelCartRewardUpdate,
+            PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite,
             bool isTempSelected,
             String selectedTemp,
             bool isSizeSelected,
@@ -4374,7 +5122,8 @@ class _$ErrorImpl implements _Error {
             String selectedSugar,
             int quantityCount,
             int totalPrice,
-            String note)?
+            String note,
+            bool isLiked)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),

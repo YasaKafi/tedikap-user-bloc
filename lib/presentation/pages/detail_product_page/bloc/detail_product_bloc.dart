@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tedikap_user_bloc/data/datasource/cart_datasource.dart';
+import 'package:tedikap_user_bloc/data/datasource/favorite_datasource.dart';
 import 'package:tedikap_user_bloc/data/datasource/product_datasource.dart';
 import 'package:tedikap_user_bloc/data/models/request/post_cart_request_model.dart';
 import 'package:tedikap_user_bloc/data/models/request/post_cart_reward_request_model.dart';
@@ -8,10 +9,13 @@ import 'package:tedikap_user_bloc/data/models/response/cart_item_response_model.
 import 'package:tedikap_user_bloc/data/models/response/cart_item_reward_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/detail_product_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/detail_product_reward_response_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/favorite_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/post_cart_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/post_cart_reward_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/update_cart_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/update_cart_reward_response_model.dart';
+
+import '../../../../data/models/response/check_if_favorite_response_model.dart';
 
 part 'detail_product_event.dart';
 part 'detail_product_state.dart';
@@ -20,8 +24,9 @@ part 'detail_product_bloc.freezed.dart';
 class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
   final ProductDatasource datasource;
   final CartDatasource cartDatasource;
+  final FavoriteDatasource favoriteDatasource;
 
-  DetailProductBloc({required this.datasource, required this.cartDatasource}) : super(const DetailProductState.initial()) {
+  DetailProductBloc({required this.datasource, required this.cartDatasource, required this.favoriteDatasource}) : super(const DetailProductState.initial()) {
 
     on<_GetDetailItemCart>((event, emit) async {
       emit(const _Loading());
@@ -35,6 +40,15 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
             final productResult = await datasource.getDetailProductByID(productId!);
             final productDetails = productResult.fold((l) => null, (product) => product);
 
+            // Check favorite status here
+            final favoriteResult = await favoriteDatasource.getFavoriteProduct();
+            final isLiked = favoriteResult.fold((l) => false, (favorite) {
+              if (favorite.data != null) {
+                return favorite.data!.any((item) => item.productId == productId);
+              }
+              return false;
+            });
+
             emit(_Success(
               model: productDetails,
               modelReward: null,
@@ -44,6 +58,8 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
               modelCartUpdate: null,
               modelCartItemReward: null,
               modelCartRewardUpdate: null,
+              modelFavorite: null,
+              modelPostFavorite: null,
               isTempSelected: cartModel.cartItem?.temperatur == 'hot',
               selectedTemp: cartModel.cartItem?.temperatur ?? 'ice',
               isSizeSelected: cartModel.cartItem?.size == 'large',
@@ -55,6 +71,7 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
               quantityCount: cartModel.cartItem?.quantity ?? 1,
               totalPrice: cartModel.cartItem?.totalPrice ?? 0,
               note: cartModel.cartItem?.note ?? '',
+              isLiked: isLiked,
             ));
           } else {
             emit(const _Error(message: 'No items in cart'));
@@ -77,6 +94,15 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
             final productResult = await datasource.getDetailProductRewardByID(productId!);
             final productDetails = productResult.fold((l) => null, (product) => product);
 
+            // Check favorite status here
+            final favoriteResult = await favoriteDatasource.getFavoriteProduct();
+            final isLiked = favoriteResult.fold((l) => false, (favorite) {
+              if (favorite.data != null) {
+                return favorite.data!.any((item) => item.productId == productId);
+              }
+              return false;
+            });
+
             emit(_Success(
               model: null,
               modelReward: productDetails,
@@ -86,6 +112,8 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
               modelCartUpdate: null,
               modelCartItemReward: cartModel,
               modelCartRewardUpdate: null,
+              modelFavorite: null,
+              modelPostFavorite: null,
               isTempSelected: cartModel.cartItem?.temperatur == 'hot',
               selectedTemp: cartModel.cartItem?.temperatur ?? 'ice',
               isSizeSelected: cartModel.cartItem?.size == 'large',
@@ -97,6 +125,7 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
               quantityCount: cartModel.cartItem?.quantity ?? 1,
               totalPrice: cartModel.cartItem?.totalPoints ?? 0,
               note: cartModel.cartItem?.note ?? '',
+              isLiked: isLiked
             ));
           } else {
             emit(const _Error(message: 'No items in cart'));
@@ -111,6 +140,13 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
       emit(const _Loading());
       try {
         final response = await datasource.getDetailProductByID(event.productId);
+        final favoriteResult = await favoriteDatasource.getFavoriteProduct();
+        final isLiked = favoriteResult.fold((l) => false, (favorite) {
+          if (favorite.data != null) {
+            return favorite.data!.any((item) => item.productId == event.productId);
+          }
+          return false;
+        });
         response.fold(
               (l) => emit(_Error(message: l)),
               (r) => emit(_Success(
@@ -122,6 +158,9 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
             modelCartUpdate: null,
                 modelCartItemReward: null,
                 modelCartRewardUpdate: null,
+                  modelFavorite: null,
+                  modelPostFavorite: null,
+                isLiked: isLiked,
           )),
         );
       } catch (e) {
@@ -133,6 +172,13 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
       emit(const _Loading());
       try {
         final response = await datasource.getDetailProductRewardByID(event.productRewardId);
+        final favoriteResult = await favoriteDatasource.getFavoriteProduct();
+        final isLiked = favoriteResult.fold((l) => false, (favorite) {
+          if (favorite.data != null) {
+            return favorite.data!.any((item) => item.productId == event.productRewardId);
+          }
+          return false;
+        });
         response.fold(
               (l) => emit(_Error(message: l)),
               (r) => emit(_Success(
@@ -144,6 +190,9 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
             modelCartUpdate: null,
                 modelCartItemReward: null,
                 modelCartRewardUpdate: null,
+                  modelFavorite: null,
+                  modelPostFavorite: null,
+                isLiked: isLiked,
           )),
         );
       } catch (e) {
@@ -166,6 +215,8 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
             modelCartUpdate: null,
                 modelCartItemReward: null,
                 modelCartRewardUpdate: null,
+                  modelFavorite: null,
+                  modelPostFavorite: null
           )),
         );
       } catch (e) {
@@ -188,6 +239,8 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
             modelCartUpdate: r,
                 modelCartItemReward: null,
                 modelCartRewardUpdate: null,
+                  modelFavorite: null,
+                  modelPostFavorite: null
           )),
         );
       } catch (e) {
@@ -210,6 +263,8 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
             modelCartUpdate: null,
                 modelCartItemReward: null,
                 modelCartRewardUpdate: r,
+                modelFavorite: null,
+                  modelPostFavorite: null
           )),
         );
       } catch (e) {
@@ -232,6 +287,8 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
             modelCartUpdate: null,
                 modelCartItemReward: null,
                 modelCartRewardUpdate: null,
+                  modelFavorite: null,
+                  modelPostFavorite: null
           )),
         );
       } catch (e) {
@@ -300,6 +357,55 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
         ));
       }
     });
+
+
+    on<_CheckFavoriteProduct>((event, emit) async {
+      final currentState = state;
+      if (currentState is _Success) {
+        try {
+          final result = await favoriteDatasource.getFavoriteProduct();
+          result.fold(
+                (l) => emit(_Error(message: 'Failed to access data order')),
+                (favorite) {
+              if (favorite.data != null) {
+                final isProductFavorite = favorite.data!.any((item) => item.productId == event.productId);
+                emit(currentState.copyWith(
+                  modelFavorite: favorite,
+                  isLiked: isProductFavorite,
+                ));
+              } else {
+                emit(_Error(message: 'No items in favorite list'));
+              }
+            },
+          );
+        } catch (e) {
+          emit(_Error(message: 'An error occurred: $e'));
+        }
+      }
+    });
+
+
+
+    on<_PostFavorite>((event, emit) async {
+      final currentState = state;
+      if (currentState is _Success) {
+        emit(const _Loading());
+        try {
+          final response = await favoriteDatasource.postFavoriteProduct(event.productId!);
+          response.fold(
+                (l) => emit(_Error(message: l)),
+                (r) => emit(currentState.copyWith(
+              modelPostFavorite: r,
+              isLiked: r.message == 'Liked' ? true : false,
+            )),
+          );
+        } catch (e) {
+          emit(_Error(message: 'An error occurred: $e'));
+        }
+      }
+    });
+
+
   }
 }
 
