@@ -21,7 +21,7 @@ class TedikapApiRepository {
   static String getProductByID = '$mainUrl/api/product/show';
   static String getRewardProductByID = '$mainUrl/api/reward-product/show';
   static String getCheckoutProductByIDUser = '$mainUrl/api/cart/getById';
-  static String getDetailPromoByID= '$mainUrl/api/voucher/show';
+  static String getDetailVoucher= '$mainUrl/api/voucher/show';
   static String getCartItem= '$mainUrl/api/cart/item';
   static String getCartItemReward= '$mainUrl/api/cart-reward/item';
   static String postProductFavorite = '$mainUrl/api/product/favorite';

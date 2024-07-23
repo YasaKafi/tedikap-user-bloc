@@ -109,7 +109,9 @@ class VoucherPage extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final item = itemVoucher[index];
                                 return InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    context.pushNamed('detail_voucher', pathParameters: {'voucherId': item.id!.toString()});
+                                  },
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [

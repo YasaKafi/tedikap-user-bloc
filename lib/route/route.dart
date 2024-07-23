@@ -19,6 +19,7 @@ import 'package:tedikap_user_bloc/presentation/pages/information_page/terms_of_s
 import 'package:tedikap_user_bloc/presentation/pages/point_page/point_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/voucher_page/voucher_page_view.dart';
 
+import '../presentation/pages/detail_voucher_page/detail_voucher_page_view.dart';
 import '../presentation/pages/information_page/privacy_policy_page/privacy_policy_view.dart';
 
 
@@ -116,6 +117,14 @@ class AppRouter {
         builder: (context, state) {
           final orderRewardId = state.pathParameters['orderRewardId'];
           return DetailOrderPage(orderRewardId: orderRewardId);
+        },
+      ),
+      GoRoute(
+        name: 'detail_voucher',
+        path: '/detail_voucher/:voucherId',
+        builder: (context, state) {
+          final voucherId = state.pathParameters['voucherId'];
+          return DetailVoucherPage(voucherId: int.parse(voucherId!));
         },
       ),
       GoRoute(
