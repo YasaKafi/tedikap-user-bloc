@@ -47,7 +47,8 @@ class InputNotes extends StatelessWidget {
                       loading: () => Center(
                         child: CircularProgressIndicator(),
                       ),
-                      success: (modelProduct,
+                      success: (
+                          modelProduct,
                           modelProductReward,
                           modelCartPost,
                           modelCartPostReward,
@@ -55,6 +56,8 @@ class InputNotes extends StatelessWidget {
                           modelCartUpdate,
                           modelCartItemReward,
                           modelCartRewardUpdate,
+                          modelPostFavorite,
+                          modelFavorite,
                           isTempSelected,
                           selectedTemp,
                           isSizeSelected,
@@ -65,7 +68,9 @@ class InputNotes extends StatelessWidget {
                           selectedSugar,
                           qty,
                           totalPrice,
-                          note){
+                          note,
+                          isLiked
+                          ){
                         if (modelCartItem != null) {
                           notesController!.text = note;
                         } else if (modelCartItemReward != null) {

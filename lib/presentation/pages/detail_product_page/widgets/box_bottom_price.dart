@@ -55,7 +55,8 @@ class BoxBottomPrice extends StatelessWidget {
                         orElse: () => Center(
                           child: CircularProgressIndicator(),
                         ),
-                        success: (modelProduct,
+                        success: (
+                            modelProduct,
                             modelProductReward,
                             modelCartPost,
                             modelCartPostReward,
@@ -63,6 +64,8 @@ class BoxBottomPrice extends StatelessWidget {
                             modelCartUpdate,
                             modelCartItemReward,
                             modelCartRewardUpdate,
+                            modelPostFavorite,
+                            modelFavorite,
                             isTempSelected,
                             selectedTemp,
                             isSizeSelected,
@@ -73,7 +76,9 @@ class BoxBottomPrice extends StatelessWidget {
                             selectedSugar,
                             qty,
                             totalPrice,
-                            note) {
+                            note,
+                            isLiked
+                            ) {
                           int itemPrice;
 
                           if (modelProduct != null) {
@@ -142,7 +147,8 @@ class BoxBottomPrice extends StatelessWidget {
                           orElse: () => Center(
                                 child: CircularProgressIndicator(),
                               ),
-                          success: (modelProduct,
+                          success: (
+                              modelProduct,
                               modelProductReward,
                               modelCartPost,
                               modelCartPostReward,
@@ -150,6 +156,8 @@ class BoxBottomPrice extends StatelessWidget {
                               modelCartUpdate,
                               modelCartItemReward,
                               modelCartRewardUpdate,
+                              modelPostFavorite,
+                              modelFavorite,
                               isTempSelected,
                               selectedTemp,
                               isSizeSelected,
@@ -160,7 +168,9 @@ class BoxBottomPrice extends StatelessWidget {
                               selectedSugar,
                               qty,
                               totalPrice,
-                              note) {
+                              note,
+                              isLiked
+                              ) {
                             return Row(
                               children: [
                                 IconButton(
@@ -217,7 +227,8 @@ class BoxBottomPrice extends StatelessWidget {
                       // ));
                       // context.pushNamed('dashboard');
                     },
-                    success: (modelProduct,
+                    success: (
+                        modelProduct,
                         modelProductReward,
                         modelCartPost,
                         modelCartPostReward,
@@ -225,6 +236,8 @@ class BoxBottomPrice extends StatelessWidget {
                         modelCartUpdate,
                         modelCartItemReward,
                         modelCartRewardUpdate,
+                        modelPostFavorite,
+                        modelFavorite,
                         isTempSelected,
                         selectedTemp,
                         isSizeSelected,
@@ -235,7 +248,9 @@ class BoxBottomPrice extends StatelessWidget {
                         selectedSugar,
                         qty,
                         totalPrice,
-                        note) {
+                        note,
+                        isLiked
+                        ) {
                       if (modelCartUpdate != null) {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text(
@@ -288,7 +303,8 @@ class BoxBottomPrice extends StatelessWidget {
                       loading: () => Center(
                             child: CircularProgressIndicator(),
                           ),
-                      success: (modelProduct,
+                      success: (
+                          modelProduct,
                           modelProductReward,
                           modelCartPost,
                           modelCartPostReward,
@@ -296,6 +312,8 @@ class BoxBottomPrice extends StatelessWidget {
                           modelCartUpdate,
                           modelCartItemReward,
                           modelCartRewardUpdate,
+                          modelPostFavorite,
+                          modelFavorite,
                           isTempSelected,
                           selectedTemp,
                           isSizeSelected,
@@ -306,7 +324,9 @@ class BoxBottomPrice extends StatelessWidget {
                           selectedSugar,
                           qty,
                           totalPrice,
-                          note) {
+                          note,
+                          isLiked
+                          ) {
                         return InkWell(
                           onTap: () {
                             int itemPrice;

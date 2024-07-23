@@ -54,6 +54,8 @@ class BoxInfoProduct extends StatelessWidget {
                       modelCartUpdate,
                       modelCartItemReward,
                       modelCartRewardUpdate,
+                      modelPostFavorite,
+                      modelFavorite,
                       isTempSelected,
                       selectedTemp,
                       isSizeSelected,
@@ -65,6 +67,7 @@ class BoxInfoProduct extends StatelessWidget {
                       qty,
                       totalPrice,
                       note,
+                      isLiked
                       ) {
                     String? name;
                     String? imageUrl;

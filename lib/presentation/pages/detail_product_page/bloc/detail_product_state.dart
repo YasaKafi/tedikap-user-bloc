@@ -5,14 +5,16 @@ class DetailProductState with _$DetailProductState {
   const factory DetailProductState.initial() = _Initial;
   const factory DetailProductState.loading() = _Loading;
   const factory DetailProductState.success({
-      required DetailProductResponseModel? model,
-    required DetailProductRewardResponseModel? modelReward,
-    required PostCartResponseModel? modelCartPost,
-    required PostCartRewardResponseModel? modelCartRewardPost,
-    required CartItemResponseModel? modelCartItem,
-    required UpdateCartResponseModel? modelCartUpdate,
-    required CartItemRewardResponseModel? modelCartItemReward,
-    required UpdateCartRewardResponseModel? modelCartRewardUpdate,
+       DetailProductResponseModel? model,
+     DetailProductRewardResponseModel? modelReward,
+     PostCartResponseModel? modelCartPost,
+     PostCartRewardResponseModel? modelCartRewardPost,
+     CartItemResponseModel? modelCartItem,
+     UpdateCartResponseModel? modelCartUpdate,
+     CartItemRewardResponseModel? modelCartItemReward,
+     UpdateCartRewardResponseModel? modelCartRewardUpdate,
+     PostFavoriteResponseModel? modelPostFavorite,
+     FavoriteResponseModel? modelFavorite,
     @Default(false) bool isTempSelected,
     @Default('ice') String selectedTemp,
     @Default(false) bool isSizeSelected,
@@ -24,6 +26,7 @@ class DetailProductState with _$DetailProductState {
     @Default(1) int quantityCount,
     @Default(0) int totalPrice,
     @Default('') String note,
+    @Default(false) bool isLiked,
       }
       ) = _Success;
   const factory DetailProductState.error({String? message}) = _Error;

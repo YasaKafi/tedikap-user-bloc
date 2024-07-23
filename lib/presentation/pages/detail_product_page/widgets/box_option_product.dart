@@ -39,6 +39,8 @@ class BoxOptionProduct extends StatelessWidget {
                    modelCartUpdate,
                    modelCartItemReward,
                    modelCartRewardUpdate,
+                   modelPostFavorite,
+                   modelFavorite,
                    isTempSelected,
                    selectedTemp,
                    isSizeSelected,
@@ -49,7 +51,9 @@ class BoxOptionProduct extends StatelessWidget {
                    selectedSugar,
                    qty,
                    totalPrice,
-                   note){
+                   note,
+                   isLiked
+                   ){
 
 
                  return Column(
@@ -72,6 +76,8 @@ class BoxOptionProduct extends StatelessWidget {
                                modelCartUpdate,
                                modelCartItemReward,
                                modelCartRewardUpdate,
+                               modelPostFavorite,
+                               modelFavorite,
                                isTempSelected,
                                selectedTemp,
                                isSizeSelected,
@@ -82,7 +88,9 @@ class BoxOptionProduct extends StatelessWidget {
                                selectedSugar,
                                qty,
                                totalPrice,
-                               note) {
+                               note,
+                               isLiked
+                               ) {
 
                              return OptionRow(
                                label: 'Temperature',
@@ -152,6 +160,8 @@ class BoxOptionProduct extends StatelessWidget {
                                modelCartUpdate,
                                modelCartItemReward,
                                modelCartRewardUpdate,
+                               modelPostFavorite,
+                               modelFavorite,
                                isTempSelected,
                                selectedTemp,
                                isSizeSelected,
@@ -162,7 +172,9 @@ class BoxOptionProduct extends StatelessWidget {
                                selectedSugar,
                                qty,
                                totalPrice,
-                               note) {
+                               note,
+                               isLiked
+                               ) {
                              print('This is the defalut value of Size : ${selectedSize}');
                              print('This is the defalut value of isSelectedSize : ${isSizeSelected}');
 
@@ -240,6 +252,8 @@ class BoxOptionProduct extends StatelessWidget {
                                  modelCartUpdate,
                                  modelCartItemReward,
                                  modelCartRewardUpdate,
+                                 modelPostFavorite,
+                                 modelFavorite,
                                  isTempSelected,
                                  selectedTemp,
                                  isSizeSelected,
@@ -250,7 +264,9 @@ class BoxOptionProduct extends StatelessWidget {
                                  selectedSugar,
                                  qty,
                                  totalPrice,
-                                 note) {
+                                 note,
+                                 isLiked
+                                 ) {
                                return OptionRow(
                                  label: 'Ice',
                                  option1: 'Less',
@@ -320,6 +336,8 @@ class BoxOptionProduct extends StatelessWidget {
                                modelCartUpdate,
                                modelCartItemReward,
                                modelCartRewardUpdate,
+                               modelPostFavorite,
+                               modelFavorite,
                                isTempSelected,
                                selectedTemp,
                                isSizeSelected,
@@ -330,7 +348,9 @@ class BoxOptionProduct extends StatelessWidget {
                                selectedSugar,
                                qty,
                                totalPrice,
-                               note) {
+                               note,
+                               isLiked
+                               ) {
                              return OptionRow(
                                label: 'Sugar',
                                option1: 'Less',

@@ -9,6 +9,7 @@ import 'package:tedikap_user_bloc/presentation/pages/cart_page/cart_page_view.da
 import 'package:tedikap_user_bloc/presentation/pages/cart_reward_page/cart_reward_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/detail_order_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_product_page/detail_product_page_view.dart';
+import 'package:tedikap_user_bloc/presentation/pages/favorite_page/favorite_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/detail_point_page/detail_point_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/edit_profile_page/view/edit_profile_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/help_center_page/view/help_center_view.dart';
@@ -89,6 +90,11 @@ class AppRouter {
         name: 'point',
         path: '/point',
         builder: (context, state) => PointPage(),
+      ),
+      GoRoute(
+        name: 'favorite',
+        path: '/favorite',
+        builder: (context, state) => FavoritePage(),
       ),
       GoRoute(
         name: 'detail_order_common',

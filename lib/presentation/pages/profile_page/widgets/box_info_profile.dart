@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../common/constant.dart';
 import '../../../../../common/dimensions.dart';
@@ -76,6 +77,7 @@ class InfoBoxProfile extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: (){
+                    context.pushNamed('favorite');
                   },
                   child: Column(
                     children: [

@@ -13,25 +13,41 @@ import '../../../common/theme.dart';
 import 'bloc/detail_product_bloc.dart';
 
 class DetailProductPage extends StatelessWidget {
-  DetailProductPage({super.key, this.productId, this.productRewardId, this.cartItemId, this.cartItemRewardId});
+  DetailProductPage(
+      {super.key,
+      this.productId,
+      this.productRewardId,
+      this.cartItemId,
+      this.cartItemRewardId});
 
   int? productId;
   int? productRewardId;
   int? cartItemId;
   int? cartItemRewardId;
 
-  TextEditingController notesController = TextEditingController(); 
+  TextEditingController notesController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     if (cartItemId != null) {
-      context.read<DetailProductBloc>().add(DetailProductEvent.getDetailItemCart(cartItemId!));
-    } else if (cartItemRewardId != null){
-      context.read<DetailProductBloc>().add(DetailProductEvent.getDetailItemCartReward(cartItemRewardId!));
+      context
+          .read<DetailProductBloc>()
+          .add(DetailProductEvent.getDetailItemCart(cartItemId!));
+
+    } else if (cartItemRewardId != null) {
+      context
+          .read<DetailProductBloc>()
+          .add(DetailProductEvent.getDetailItemCartReward(cartItemRewardId!));
     } else if (productId != null) {
-      context.read<DetailProductBloc>().add(DetailProductEvent.getDetailProduct(productId!));
+      context
+          .read<DetailProductBloc>()
+          .add(DetailProductEvent.getDetailProduct(productId!));
+
     } else if (productRewardId != null) {
-      context.read<DetailProductBloc>().add(DetailProductEvent.getDetailProductReward(productRewardId!));
+      context
+          .read<DetailProductBloc>()
+          .add(DetailProductEvent.getDetailProductReward(productRewardId!));
+
     }
 
     double screenWidth = MediaQuery.of(context).size.width;
@@ -45,7 +61,7 @@ class DetailProductPage extends StatelessWidget {
             color: baseColor50,
           ),
           padding:
-          const EdgeInsets.only(top: 30, bottom: 10, left: 10, right: 10),
+              const EdgeInsets.only(top: 30, bottom: 10, left: 10, right: 10),
           width: MediaQuery.of(context).size.width,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -64,16 +80,73 @@ class DetailProductPage extends StatelessWidget {
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  InkWell(
-                    onTap: (){},
-                    child: Container(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: SvgPicture.asset(
-                          icHeart,
-                          width: 24,
-                          height: 24,
-                        )
-                    ),
+                  BlocConsumer<DetailProductBloc, DetailProductState>(
+                    listener: (context, state) {
+                      // TODO: implement listener
+                    },
+                    builder: (context, state) {
+                      return state.when(
+                        initial: () => Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        loading: () => Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        success: (
+                            modelProduct,
+                            modelProductReward,
+                            modelCartPost,
+                            modelCartPostReward,
+                            modelCartItem,
+                            modelCartUpdate,
+                            modelCartItemReward,
+                            modelCartRewardUpdate,
+                            modelPostFavorite,
+                            modelFavorite,
+                            isTempSelected,
+                            selectedTemp,
+                            isSizeSelected,
+                            selectedSize,
+                            isIceSelected,
+                            selectedIce,
+                            isSugarSelected,
+                            selectedSugar,
+                            qty,
+                            totalPrice,
+                            note,
+                            isLiked
+                        ) {
+                          print('product isLiked : $isLiked');
+                          return InkWell(
+                            onTap: () {
+                              if(productId != null){
+                                context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(productId!));
+                              } else if (productRewardId != null){
+                                context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(productRewardId!));
+                              } else if (cartItemId != null) {
+                                context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(modelCartItem!.cartItem!.productId!));
+                              } else if (cartItemRewardId != null) {
+                                context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(modelCartItemReward!.cartItem!.productId));
+                              }
+                            },
+                            child: Container(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: isLiked == false ? SvgPicture.asset(
+                                  icHeart,
+                                  width: 24,
+                                  height: 24,
+                                ) : SvgPicture.asset(
+                                  icHeartActive,
+                                  width: 24,
+                                  height: 24,
+                                ))
+                          );
+                        },
+                        error: (message) => Center(
+                          child: Text(message!),
+                        ),
+                      );
+                    },
                   ),
                 ],
               )
@@ -96,12 +169,15 @@ class DetailProductPage extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        BoxInfoProduct(screenWidth: screenWidth, ),
-
+                        BoxInfoProduct(
+                          screenWidth: screenWidth,
+                        ),
                         const SizedBox(height: 20),
                         BoxOptionProduct(),
                         const SizedBox(height: 20),
-                        InputNotes(notesController: notesController,),
+                        InputNotes(
+                          notesController: notesController,
+                        ),
                         const SizedBox(height: 120),
                       ],
                     ),
@@ -112,7 +188,11 @@ class DetailProductPage extends StatelessWidget {
             Positioned(
               bottom: 0,
               child: BoxBottomPrice(
-                  screenWidth: screenWidth,  noteController: notesController, cartItemId: cartItemId, cartItemRewardId: cartItemRewardId,),
+                screenWidth: screenWidth,
+                noteController: notesController,
+                cartItemId: cartItemId,
+                cartItemRewardId: cartItemRewardId,
+              ),
             )
           ],
         ),
