@@ -1,6 +1,7 @@
 
 
 import 'package:dartz/dartz.dart';
+import 'package:tedikap_user_bloc/data/models/response/detail_voucher_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/voucher_active_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/voucher_applied_remove_response_model.dart';
 
@@ -18,6 +19,20 @@ class VoucherDatasource {
           endpoint: TedikapApiRepository.getAllVoucherActive, isAuthorize: true);
       if (response.statusCode == 200) {
         return Right(VoucherActiveResponseModel.fromMap(response.data));
+      } else {
+        return const Left('Failed to access data voucher');
+      }
+    } catch (e) {
+      return Left('Failed to access data voucher : ${e.toString()}');
+    }
+  }
+  
+  Future<Either<String, DetailVoucherResponseModel>> getDetailVoucher(int? id) async {
+    try {
+      final response = await _dioInstance.getRequest(
+          endpoint: '${TedikapApiRepository.getDetailVoucher}/$id', isAuthorize: true);
+      if (response.statusCode == 200) {
+        return Right(DetailVoucherResponseModel.fromMap(response.data));
       } else {
         return const Left('Failed to access data voucher');
       }

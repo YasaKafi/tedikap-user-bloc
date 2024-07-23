@@ -10,6 +10,7 @@ import 'package:tedikap_user_bloc/presentation/pages/cart_page/bloc/cart_bloc.da
 import 'package:tedikap_user_bloc/presentation/pages/cart_reward_page/bloc/cart_reward_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/bloc/detail_order_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_product_page/bloc/detail_product_bloc.dart';
+import 'package:tedikap_user_bloc/presentation/pages/detail_voucher_page/bloc/detail_voucher_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/favorite_page/bloc/favorite_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/home_page/bloc/home_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/edit_profile_page/bloc/edit_profile_bloc.dart';
@@ -56,6 +57,9 @@ class AppProviders{
     ),
     BlocProvider<PointBloc>(
       create: (context) => PointBloc(ProductDatasource()),
+    ),
+    BlocProvider<DetailVoucherBloc>(
+      create: (context) => DetailVoucherBloc(VoucherDatasource()),
     ),
     BlocProvider<VoucherBloc>(
       create: (context) => VoucherBloc(VoucherDatasource(), CartDatasource()),
