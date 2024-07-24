@@ -80,6 +80,7 @@ class ProductDatasource {
       if (response.statusCode == 200) {
         return Right(ProductsResponseModel.fromMap(response.data));
       } else {
+
         return const Left('Failed to access data product');
       }
     } catch (e) {
@@ -118,6 +119,9 @@ class ProductDatasource {
       if (response.statusCode == 200) {
         return Right(ProductsResponseModel.fromMap(response.data));
       } else {
+        if (response.statusCode == 429) {
+          return const Left('Too many requests. Please try again later.');
+        }
         return const Left('Failed to access data product');
       }
     } catch (e) {

@@ -59,14 +59,22 @@ class ListBoxProductMenu extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Flexible(child: Text(title, style: txtPrimaryTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor))),
+                Flexible(
+                    child: Text(title,
+                        style: txtPrimaryTitle.copyWith(
+                            fontWeight: FontWeight.w500, color: blackColor))),
                 const SizedBox(
                   height: 5,
                 ),
                 Container(
                   width: screenWidth * 0.45,
-                  child: Text('Racikan teh spesial Tedikap dari beberapa daun teh kering pilihan terbaik.', style: txtSecondarySubTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor90), overflow: TextOverflow.ellipsis,
-                    maxLines: 1,),
+                  child: Text(
+                    'Racikan teh spesial Tedikap dari beberapa daun teh kering pilihan terbaik.',
+                    style: txtSecondarySubTitle.copyWith(
+                        fontWeight: FontWeight.w500, color: blackColor90),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
                 ),
               ],
             ),
@@ -74,7 +82,9 @@ class ListBoxProductMenu extends StatelessWidget {
                 child: Container(
                     height: screenHeight,
                     child: Center(
-                      child:Text('Rp. ${price.toString()}', style: txtPrimarySubTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor90)),
+                      child: Text('Rp. ${price.toString()}',
+                          style: txtPrimarySubTitle.copyWith(
+                              fontWeight: FontWeight.w500, color: blackColor)),
                     )))
           ],
         ));
