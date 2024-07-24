@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tedikap_user_bloc/data/repository/tedikap_repository.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/presentation/pages/menu_page/bloc/menu_bloc.dart';
 
 import '../../../common/dimensions.dart';
@@ -9,12 +10,15 @@ import 'widgets/custom_app_bar.dart';
 import 'widgets/list_box_product_menu.dart';
 
 class MenuPage extends StatelessWidget {
-  MenuPage({Key? key}) : super(key: key);
+  const MenuPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _searchController = TextEditingController();
-    context.read<MenuBloc>().add(MenuEvent.getProduct());
+    final TextEditingController searchController = TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<MenuBloc>().add(const MenuEvent.getProduct());
+    });
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
@@ -30,35 +34,30 @@ class MenuPage extends StatelessWidget {
                 screenHeight: screenHeight,
                 screenWidth: screenWidth,
                 onSearch: (query) {
-                  if (query.length >= 1) { // Minimum character threshold
+                  if (query.isNotEmpty) { // Minimum character threshold
                     context.read<MenuBloc>().add(MenuEvent.getFilterSearch(query));
                   }
                 },
                 onClearSearch: () {
-                  context.read<MenuBloc>().add(MenuEvent.getProduct());
+                  context.read<MenuBloc>().add(const MenuEvent.getProduct());
                 },
-                searchController: _searchController,
+                searchController: searchController,
               );
             },
           ),
         ),
         body: BlocBuilder<MenuBloc, MenuState>(
           builder: (context, state) {
-            return state.when(
-              initial: () => Center(child: CircularProgressIndicator()),
-              success: (model, isSearching) {
-                return Column(
+            return Column(
                   children: [
                     Container(
                       height: screenHeight * 0.05,
                       width: screenWidth,
+                      margin: const EdgeInsets.only(top: Dimensions.marginSizeSmall),
                       child: BlocBuilder<MenuBloc, MenuState>(
                         builder: (context, state) {
-                          return state.when(
-                            initial: () => Center(child: CircularProgressIndicator()),
-                            success: (model, _) {
                               return TabBar(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                   horizontal: Dimensions.paddingSizeLarge,
                                 ),
                                 dividerHeight: 2,
@@ -70,19 +69,19 @@ class MenuPage extends StatelessWidget {
                                   switch (index) {
                                     case 0:
                                       context.read<MenuBloc>().add(
-                                          MenuEvent.getFilterSearch(_searchController.text));
+                                          MenuEvent.getFilterSearch(searchController.text));
                                       break;
                                     case 1:
                                       context.read<MenuBloc>().add(
-                                          MenuEvent.getFilterCategory('tea'));
+                                          const MenuEvent.getFilterCategory('tea'));
                                       break;
                                     case 2:
                                       context.read<MenuBloc>().add(
-                                          MenuEvent.getFilterCategory('nontea'));
+                                          const MenuEvent.getFilterCategory('nontea'));
                                       break;
                                     case 3:
                                       context.read<MenuBloc>().add(
-                                          MenuEvent.getFilterCategory('snack'));
+                                          const MenuEvent.getFilterCategory('snack'));
                                       break;
                                   }
                                 },
@@ -113,18 +112,8 @@ class MenuPage extends StatelessWidget {
                                   ),
                                 ],
                               );
-                            },
-                            loading: () => Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                            error: (message) => Center(
-                              child: Text(
-                                message!,
-                                style: txtSecondaryTitle.copyWith(
-                                    fontWeight: FontWeight.w600, color: blackColor),
-                              ),
-                            ),
-                          );
+
+
                         },
                       ),
                     ),
@@ -140,16 +129,6 @@ class MenuPage extends StatelessWidget {
                     ),
                   ],
                 );
-              },
-              loading: () => Center(child: CircularProgressIndicator()),
-              error: (message) => Center(
-                child: Text(
-                  message!,
-                  style: txtSecondaryTitle.copyWith(
-                      fontWeight: FontWeight.w600, color: blackColor),
-                ),
-              ),
-            );
           },
         ),
       ),
@@ -159,28 +138,104 @@ class MenuPage extends StatelessWidget {
   Widget buildProductList() {
     return BlocBuilder<MenuBloc, MenuState>(
       builder: (context, state) {
+        Shimmer? loadingCard() {
+          double screenWidth = MediaQuery.of(context).size.width;
+          return Shimmer.fromColors(
+            baseColor: Colors.grey[300]!,
+            highlightColor: Colors.grey[100]!,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+              child: Row(
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                      margin: const EdgeInsets.only(left: Dimensions.marginSizeSmall),
+                      width: 70,
+                      height: 70,
+                      decoration: const ShapeDecoration(
+                        color: grey,
+                        shape: OvalBorder(),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: Dimensions.marginSizeLarge,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.grey,
+                        ),
+                        width: screenWidth * 0.5,
+                        height: 20,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.grey,
+                        ),
+                        width: screenWidth * 0.45,
+                        height: 20,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+
         return state.when(
-          initial: () => Center(child: CircularProgressIndicator()),
+          initial: () => ListView.builder(
+            itemCount: 8,
+            itemBuilder: (context, index) {
+              return loadingCard();
+            },
+          ),
           success: (model, _) {
             return ListView.builder(
               itemCount: model!.data!.length,
               itemBuilder: (context, index) {
-                return InkWell(
-                  onTap: () {},
-                  child: ListBoxProductMenu(
-                    screenHeight: MediaQuery.of(context).size.height,
-                    screenWidth: MediaQuery.of(context).size.width,
-                    image: model.data![index].image!,
-                    category: model.data![index].category!,
-                    title: model.data![index].name!,
-                    rating: 4.5,
-                    price: model.data![index].regularPrice!,
-                  ),
-                );
+                final itemProduct = model.data![index];
+                if (model.data != null){
+                  return InkWell(
+                    onTap: () {
+                      context.pushNamed('detail_product_common', pathParameters: {'productId': itemProduct.id!.toString()});
+                    },
+                    child: ListBoxProductMenu(
+                      screenHeight: MediaQuery.of(context).size.height,
+                      screenWidth: MediaQuery.of(context).size.width,
+                      image: itemProduct.image!,
+                      category: itemProduct.category!,
+                      title: itemProduct.name!,
+                      rating: 4.5,
+                      price: itemProduct.regularPrice!,
+                    ),
+                  );
+
+                } else {
+                  return const Center(
+                    child: Text('No data available'),
+                  );
+                }
+
               },
             );
           },
-          loading: () => Center(child: CircularProgressIndicator()),
+          loading: () => ListView.builder(
+            itemCount: 8,
+            itemBuilder: (context, index) {
+              return loadingCard();
+            },
+          ),
           error: (message) => Center(
             child: Text(
               message!,

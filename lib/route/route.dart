@@ -11,7 +11,6 @@ import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/detail_or
 import 'package:tedikap_user_bloc/presentation/pages/detail_point_page/detail_point_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_product_page/detail_product_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/favorite_page/favorite_page_view.dart';
-import 'package:tedikap_user_bloc/presentation/pages/information_page/detail_point_page/detail_point_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/edit_profile_page/view/edit_profile_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/help_center_page/view/help_center_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/language_setting_page/language_setting_view.dart';
@@ -87,7 +86,7 @@ class AppRouter {
       GoRoute(
         name: 'detail_point',
         path: '/detail_point',
-        builder: (context, state) => DetailPoinPage(),
+        builder: (context, state) => DetailPointPage(),
       ),
       GoRoute(
         name: 'point',
