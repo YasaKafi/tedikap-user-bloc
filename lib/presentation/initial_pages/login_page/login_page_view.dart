@@ -133,6 +133,7 @@ class LoginPage extends StatelessWidget {
                             },
                             borderRadius: 10,
                             height: 55,
+                            width: MediaQuery.of(context).size.width,
                             fontSize: 18,
                           );
                         },

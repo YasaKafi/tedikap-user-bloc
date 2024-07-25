@@ -122,6 +122,7 @@ class OnboardPage extends StatelessWidget {
                             text: buttonText,
                             onPressed: () => context.read<OnboardBloc>().add(const OnboardEvent.onPressedButton()),
                             borderRadius: 10,
+                            width: MediaQuery.of(context).size.width,
                             height: 50,
                           );
                         }

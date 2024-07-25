@@ -34,7 +34,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       emit(const OrderState.loading());
       final filterIndex = event.filterIndex;
       if (filterIndex == 0) {
-        final result = await datasource.getAllHistoryOrder();
+        final result = await datasource.getFilterTypeOrder(event.query);
         emit(result.fold(
               (l) => OrderState.error(message: 'Failed to access data order'),
               (r) => OrderState.success(r, null, filterIndex),
@@ -47,7 +47,6 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         ));
       }
     });
-
 
   }
 
