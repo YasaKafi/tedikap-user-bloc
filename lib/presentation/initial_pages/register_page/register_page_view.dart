@@ -102,6 +102,7 @@ class RegisterPage extends StatelessWidget {
                       orElse: (){
                         return CommonButton(
                           text: 'Register',
+                          width: MediaQuery.of(context).size.width,
                           onPressed: () {
 
                             if (usernameController.text.isEmpty || emailController.text.isEmpty || passwordController.text.isEmpty || confirmpasswordController.text.isEmpty) {

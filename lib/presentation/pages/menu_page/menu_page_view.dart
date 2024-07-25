@@ -146,6 +146,7 @@ class MenuPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Align(
                     alignment: Alignment.centerLeft,
@@ -183,6 +184,22 @@ class MenuPage extends StatelessWidget {
                           color: Colors.grey,
                         ),
                         width: screenWidth * 0.45,
+                        height: 20,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    width: Dimensions.marginSizeLarge,
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.grey,
+                        ),
+                        width: screenWidth * 0.1,
                         height: 20,
                       ),
                     ],

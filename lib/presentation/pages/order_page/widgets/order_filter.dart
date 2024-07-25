@@ -7,6 +7,10 @@ import '../bloc/order_bloc.dart';
 class OrderFilter extends StatelessWidget {
   final List<String> options = ['Common Product', 'Point Product'];
 
+  OrderFilter({super.key, this.query});
+
+  final String? query;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OrderBloc, OrderState>(
@@ -19,7 +23,7 @@ class OrderFilter extends StatelessWidget {
         return ChipsChoice<int>.single(
           value: filterIndex,
           onChanged: (val) {
-            context.read<OrderBloc>().add(OrderEvent.doFilterOrder(filterIndex: val));
+            context.read<OrderBloc>().add(OrderEvent.doFilterOrder(filterIndex: val, query: query!));
           },
           choiceItems: C2Choice.listFrom<int, String>(
             source: options,
@@ -27,7 +31,7 @@ class OrderFilter extends StatelessWidget {
             label: (i, v) => v,
           ),
           choiceStyle: C2ChipStyle.outlined(
-            borderRadius: BorderRadius.all(Radius.circular(25)),
+            borderRadius: const BorderRadius.all(Radius.circular(25)),
             foregroundStyle: txtPrimarySubTitle.copyWith(fontWeight: FontWeight.w500, color: Colors.black38),
             color: Colors.black12,
             avatarForegroundColor: Colors.black12,
@@ -37,7 +41,7 @@ class OrderFilter extends StatelessWidget {
               checkmarkColor: primaryColor,
               checkmarkStyle: C2ChipCheckmarkStyle.round,
               foregroundStyle: txtPrimarySubTitle.copyWith(fontWeight: FontWeight.w500, color: primaryColor),
-              borderRadius: BorderRadius.all(Radius.circular(25)),
+              borderRadius: const BorderRadius.all(Radius.circular(25)),
               borderColor: primaryColor,
               borderWidth: 2,
             ),

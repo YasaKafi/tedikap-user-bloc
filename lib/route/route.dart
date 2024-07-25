@@ -105,7 +105,7 @@ class AppRouter {
       ),
       GoRoute(
         name: 'detail_order_common',
-        path: '/detail_order_reward/:orderId',
+        path: '/detail_order_common/:orderId',
         builder: (context, state) {
           final orderId = state.pathParameters['orderId'];
           return DetailOrderPage(orderId: orderId,);
