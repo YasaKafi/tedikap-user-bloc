@@ -67,6 +67,8 @@ class Cart {
 class CartItem {
   int? id;
   int? productId;
+  String? productName;
+  String? productImage;
   String? temperatur;
   String? size;
   String? ice;
@@ -79,6 +81,8 @@ class CartItem {
   CartItem({
     this.id,
     this.productId,
+    this.productName,
+    this.productImage,
     this.temperatur,
     this.size,
     this.ice,
@@ -96,6 +100,8 @@ class CartItem {
   factory CartItem.fromMap(Map<String, dynamic> json) => CartItem(
     id: json["id"],
     productId: json["product_id"],
+    productName: json["product_name"],
+    productImage: json["product_image"],
     temperatur: json["temperatur"],
     size: json["size"],
     ice: json["ice"],
@@ -109,6 +115,8 @@ class CartItem {
   Map<String, dynamic> toMap() => {
     "id": id,
     "product_id": productId,
+    "product_name": productName,
+    "product_image": productImage,
     "temperatur": temperatur,
     "size": size,
     "ice": ice,

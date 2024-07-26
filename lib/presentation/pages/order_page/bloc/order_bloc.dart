@@ -49,5 +49,4 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     });
 
   }
-
 }

@@ -12,19 +12,13 @@ class BoxProductCheckout extends StatelessWidget {
     super.key,
     required this.screenWidth,
     required this.item,
-    required this.productDetail,
   });
 
   final double screenWidth;
   final CartItem item;
-  final DetailProductRewardResponseModel? productDetail;
 
   @override
   Widget build(BuildContext context) {
-    if (productDetail == null) {
-      return Center(child: Text('Product not found'));
-    }
-    final itemProduct = productDetail!.data;
 
     return Column(
       children: [
@@ -35,7 +29,7 @@ class BoxProductCheckout extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Image.network(
-              itemProduct!.image ?? '',
+              item.productImage ?? '',
               width: 80,
               height: 80,
             ),
@@ -47,7 +41,7 @@ class BoxProductCheckout extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(itemProduct.name ?? '',
+                  Text(item.productName ?? '',
                       style: txtSecondaryTitle.copyWith(
                           fontWeight: FontWeight.w600, color: blackColor)),
                   Text('${item.temperatur} temp, ${item.size} size, ${item.ice} ice, ${item.sugar} sugar',

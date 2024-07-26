@@ -58,7 +58,6 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
               emit(_Error(message: l));
             },
                 (r) async {
-              // Fetch data ulang setelah postFavorite berhasil
               final updatedFavoriteResult = await favoriteDatasource.getFavoriteProduct();
               final updatedProductResult = await productDatasource.getAllProduct();
               final updatedProductDetails = updatedProductResult.fold((l) => null, (product) => product);

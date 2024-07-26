@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/data/models/response/detail_history_order_response_model.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/bloc/detail_order_bloc.dart';
 
@@ -19,6 +20,21 @@ class BoxProductOrder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget loadingCard(double width, double height) {
+      double screenWidth = MediaQuery.of(context).size.width;
+      return Shimmer.fromColors(
+        baseColor: Colors.grey[300]!,
+        highlightColor: Colors.grey[100]!,
+        child: Container(
+          width: screenWidth * width,
+          height: height,
+          decoration: BoxDecoration(
+            color: baseColor,
+            borderRadius: BorderRadius.circular(5),
+          ),
+        ),
+      );
+    }
     return Container(
       decoration: BoxDecoration(
         color: baseColor,
@@ -48,12 +64,9 @@ class BoxProductOrder extends StatelessWidget {
                 return state.when(
                   initial: () =>
                       Center(
-                        child: CircularProgressIndicator(),
+                        child: loadingCard(screenWidth, 200),
                       ),
-                  loading: () =>
-                      Center(
-                        child: CircularProgressIndicator(),
-                      ),
+                  loading: () => loadingCard(screenWidth, 200),
                   success: (model, rewardModel) {
                     if (model != null && model.order != null &&
                         model.order!.orderItems != null) {
@@ -67,8 +80,8 @@ class BoxProductOrder extends StatelessWidget {
                               Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Image.asset(
-                                    originalTea,
+                                  Image.network(
+                                    detailOrderItem.productImage!,
                                     width: 80,
                                     height: 80,
                                   ),

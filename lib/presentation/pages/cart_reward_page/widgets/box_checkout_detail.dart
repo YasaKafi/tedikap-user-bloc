@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tedikap_user_bloc/presentation/pages/cart_page/bloc/cart_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_reward_page/bloc/cart_reward_bloc.dart';
 
 import '../../../../../common/dimensions.dart';
@@ -63,20 +62,18 @@ class BoxCheckoutDetail extends StatelessWidget {
                 return state.when(
                   initial: () => Center(child: CircularProgressIndicator()),
                   loading: () => Center(child: CircularProgressIndicator()),
-                  success: (cartModel, productDetails, modelQty, deleteModel, modelPostOrder) {
-                    if (cartModel?.cart != null && productDetails != null) {
+                  success: (cartModel,  modelQty, deleteModel, modelPostOrder) {
+                    if (cartModel?.cart != null) {
                       final itemCart = cartModel!.cart;
                       return Column(
                         children: List.generate(itemCart!.cartItems!.length, (index) {
                           var productItemsCheckout = itemCart.cartItems![index];
-                          var productDetail = productDetails[index];
 
                           return Column(
                             children: [
                               BoxProductCheckout(
                                 item: productItemsCheckout,
                                 screenWidth: screenWidth,
-                                productDetail: productDetail,
                               ),
                               Divider(
                                 height: 1,
