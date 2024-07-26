@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../../../common/dimensions.dart';
 import '../../../../../common/theme.dart';
@@ -17,8 +18,7 @@ class BoxPaymentDetailOrder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: screenWidth,
-      padding:
-      EdgeInsets.all(Dimensions.paddingSizeLarge),
+      padding: EdgeInsets.all(Dimensions.paddingSizeLarge),
       decoration: BoxDecoration(
         color: baseColor,
         borderRadius: BorderRadius.circular(15),
@@ -28,126 +28,145 @@ class BoxPaymentDetailOrder extends StatelessWidget {
         children: [
           Text('Ringkasan Pembayaran', style: txtPrimaryTitle.copyWith(
               fontWeight: FontWeight.w600, color: blackColor)),
-          SizedBox(
-            height: 10,
+          SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Subtotal', style: txtPrimarySubTitle.copyWith(
+                  fontWeight: FontWeight.w500, color: blackColor)),
+              BlocBuilder<DetailOrderBloc, DetailOrderState>(
+                builder: (context, state) {
+                  return state.when(
+                    initial: () => Shimmer.fromColors(
+                      baseColor: Colors.grey[300]!,
+                      highlightColor: Colors.grey[100]!,
+                      child: Container(
+                        width: 100,
+                        height: 20,
+                        color: Colors.grey[300],
+                      ),
+                    ),
+                    loading: () => Shimmer.fromColors(
+                      baseColor: Colors.grey[300]!,
+                      highlightColor: Colors.grey[100]!,
+                      child: Container(
+                        width: 100,
+                        height: 20,
+                        color: Colors.grey[300],
+                      ),
+                    ),
+                    success: (model, modelReward) {
+                      if (model != null) {
+                        final order = model.order!;
+                        return Text('Rp ${order.originalPrice}', style: txtPrimarySubTitle.copyWith(
+                            fontWeight: FontWeight.w500, color: blackColor));
+                      } else if (modelReward != null) {
+                        final order = modelReward.order!;
+                        return Text('${order.totalPoint} Point', style: txtPrimarySubTitle.copyWith(
+                            fontWeight: FontWeight.w500, color: blackColor));
+                      } else {
+                        return Text('No data available');
+                      }
+                    },
+                    error: (message) => Text(message!),
+                  );
+                },
+              ),
+            ],
           ),
+          SizedBox(height: 10),
           BlocBuilder<DetailOrderBloc, DetailOrderState>(
             builder: (context, state) {
               return state.when(
-                  initial: () {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  },
-                  loading: () => Center(
-                    child:
-                    CircularProgressIndicator(),
+                initial: () => Shimmer.fromColors(
+                  baseColor: Colors.grey[300]!,
+                  highlightColor: Colors.grey[100]!,
+                  child: Container(
+                    width: double.infinity,
+                    height: 20,
+                    color: Colors.grey[300],
                   ),
-                  success: (model, modelReward) {
-                    if(model != null ){
-                      final order = model.order!;
-                      return Column(
+                ),
+                loading: () => Shimmer.fromColors(
+                  baseColor: Colors.grey[300]!,
+                  highlightColor: Colors.grey[100]!,
+                  child: Container(
+                    width: double.infinity,
+                    height: 20,
+                    color: Colors.grey[300],
+                  ),
+                ),
+                success: (model, modelReward) {
+                  if (model != null && model.order!.voucherId != null) {
+                    final order = model.order!;
+                    return Visibility(
+                      visible: order.voucherId != null,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('Subtotal', style: txtPrimarySubTitle.copyWith(
-                                  fontWeight: FontWeight.w500, color: blackColor)),
-                              Text('Rp ${order.originalPrice}',
-                                  style: txtPrimarySubTitle.copyWith(
-                                      fontWeight: FontWeight.w500, color: blackColor)),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('Diskon', style: txtPrimarySubTitle.copyWith(
-                                  fontWeight: FontWeight.w500, color: redMedium)),
-                              Text('- Rp ${order.discountAmount}',
-                                  style: txtPrimarySubTitle.copyWith(
-                                      fontWeight: FontWeight.w500, color: redMedium)),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Divider(
-                            height: 1,
-                            color: grey,
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('Total Pembayaran',
-                                  style: txtPrimarySubTitle.copyWith(
-                                      fontWeight: FontWeight.w600, color: blackColor)),
-                              Text('Rp ${order.totalPrice}',
-                                  style: txtPrimarySubTitle.copyWith(
-                                      fontWeight: FontWeight.w600, color: blackColor)),
-                            ],
-                          ),
+                          Text('Diskon', style: txtPrimarySubTitle.copyWith(
+                              fontWeight: FontWeight.w500, color: redMedium)),
+                          Text('- Rp ${order.discountAmount}', style: txtPrimarySubTitle.copyWith(
+                              fontWeight: FontWeight.w500, color: redMedium)),
                         ],
-                      );
-
-                    } else if(modelReward != null){
-                      final order = modelReward.order!;
-                      return Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('Subtotal', style: txtPrimarySubTitle.copyWith(
-                                  fontWeight: FontWeight.w500, color: blackColor)),
-                              Text('${order.totalPoint} Point',
-                                  style: txtPrimarySubTitle.copyWith(
-                                      fontWeight: FontWeight.w500, color: blackColor)),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Divider(
-                            height: 1,
-                            color: grey,
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('Total Pembayaran',
-                                  style: txtPrimarySubTitle.copyWith(
-                                      fontWeight: FontWeight.w600, color: blackColor)),
-                              Text('Rp ${order.totalPoint} Point',
-                                  style: txtPrimarySubTitle.copyWith(
-                                      fontWeight: FontWeight.w600, color: blackColor)),
-                            ],
-                          ),
-                        ],
-                      );
-                    } else {
-                      return Center(child: Text('No data available'),);
-                    }
-
-                  },
-                  error: (message) => Center(
-                    child: Text(message!),
-                  ));
+                      ),
+                    );
+                  } else {
+                    return Container();
+                  }
+                },
+                error: (message) => Text(message!),
+              );
             },
           ),
-
+          SizedBox(height: 20),
+          Divider(height: 1, color: grey),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Total Pembayaran', style: txtPrimarySubTitle.copyWith(
+                  fontWeight: FontWeight.w600, color: blackColor)),
+              BlocBuilder<DetailOrderBloc, DetailOrderState>(
+                builder: (context, state) {
+                  return state.when(
+                    initial: () => Shimmer.fromColors(
+                      baseColor: Colors.grey[300]!,
+                      highlightColor: Colors.grey[100]!,
+                      child: Container(
+                        width: 100,
+                        height: 20,
+                        color: Colors.grey[300],
+                      ),
+                    ),
+                    loading: () => Shimmer.fromColors(
+                      baseColor: Colors.grey[300]!,
+                      highlightColor: Colors.grey[100]!,
+                      child: Container(
+                        width: 100,
+                        height: 20,
+                        color: Colors.grey[300],
+                      ),
+                    ),
+                    success: (model, modelReward) {
+                      if (model != null) {
+                        final order = model.order!;
+                        return Text('Rp ${order.totalPrice}', style: txtPrimarySubTitle.copyWith(
+                            fontWeight: FontWeight.w600, color: blackColor));
+                      } else if (modelReward != null) {
+                        final order = modelReward.order!;
+                        return Text('${order.totalPoint} Point', style: txtPrimarySubTitle.copyWith(
+                            fontWeight: FontWeight.w600, color: blackColor));
+                      } else {
+                        return Text('No data available');
+                      }
+                    },
+                    error: (message) => Text(message!),
+                  );
+                },
+              ),
+            ],
+          ),
         ],
       ),
     );

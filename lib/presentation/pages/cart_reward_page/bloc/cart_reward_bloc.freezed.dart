@@ -806,7 +806,6 @@ mixin _$CartRewardState {
     required TResult Function() loading,
     required TResult Function(
             CartRewardResponseModel? cartModel,
-            List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
             DeleteCartItemResponseModel? deleteModel,
             PostOrderRewardResponseModel? modelPostOrder)
@@ -820,7 +819,6 @@ mixin _$CartRewardState {
     TResult? Function()? loading,
     TResult? Function(
             CartRewardResponseModel? cartModel,
-            List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
             DeleteCartItemResponseModel? deleteModel,
             PostOrderRewardResponseModel? modelPostOrder)?
@@ -834,7 +832,6 @@ mixin _$CartRewardState {
     TResult Function()? loading,
     TResult Function(
             CartRewardResponseModel? cartModel,
-            List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
             DeleteCartItemResponseModel? deleteModel,
             PostOrderRewardResponseModel? modelPostOrder)?
@@ -930,7 +927,6 @@ class _$InitialImpl implements _Initial {
     required TResult Function() loading,
     required TResult Function(
             CartRewardResponseModel? cartModel,
-            List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
             DeleteCartItemResponseModel? deleteModel,
             PostOrderRewardResponseModel? modelPostOrder)
@@ -947,7 +943,6 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? loading,
     TResult? Function(
             CartRewardResponseModel? cartModel,
-            List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
             DeleteCartItemResponseModel? deleteModel,
             PostOrderRewardResponseModel? modelPostOrder)?
@@ -964,7 +959,6 @@ class _$InitialImpl implements _Initial {
     TResult Function()? loading,
     TResult Function(
             CartRewardResponseModel? cartModel,
-            List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
             DeleteCartItemResponseModel? deleteModel,
             PostOrderRewardResponseModel? modelPostOrder)?
@@ -1062,7 +1056,6 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() loading,
     required TResult Function(
             CartRewardResponseModel? cartModel,
-            List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
             DeleteCartItemResponseModel? deleteModel,
             PostOrderRewardResponseModel? modelPostOrder)
@@ -1079,7 +1072,6 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? loading,
     TResult? Function(
             CartRewardResponseModel? cartModel,
-            List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
             DeleteCartItemResponseModel? deleteModel,
             PostOrderRewardResponseModel? modelPostOrder)?
@@ -1096,7 +1088,6 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? loading,
     TResult Function(
             CartRewardResponseModel? cartModel,
-            List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
             DeleteCartItemResponseModel? deleteModel,
             PostOrderRewardResponseModel? modelPostOrder)?
@@ -1160,7 +1151,6 @@ abstract class _$$SuccessImplCopyWith<$Res> {
   @useResult
   $Res call(
       {CartRewardResponseModel? cartModel,
-      List<DetailProductRewardResponseModel?>? productDetails,
       PatchQtyResponseModel? patchQtyModel,
       DeleteCartItemResponseModel? deleteModel,
       PostOrderRewardResponseModel? modelPostOrder});
@@ -1178,7 +1168,6 @@ class __$$SuccessImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? cartModel = freezed,
-    Object? productDetails = freezed,
     Object? patchQtyModel = freezed,
     Object? deleteModel = freezed,
     Object? modelPostOrder = freezed,
@@ -1188,10 +1177,6 @@ class __$$SuccessImplCopyWithImpl<$Res>
           ? _value.cartModel
           : cartModel // ignore: cast_nullable_to_non_nullable
               as CartRewardResponseModel?,
-      productDetails: freezed == productDetails
-          ? _value._productDetails
-          : productDetails // ignore: cast_nullable_to_non_nullable
-              as List<DetailProductRewardResponseModel?>?,
       patchQtyModel: freezed == patchQtyModel
           ? _value.patchQtyModel
           : patchQtyModel // ignore: cast_nullable_to_non_nullable
@@ -1213,24 +1198,12 @@ class __$$SuccessImplCopyWithImpl<$Res>
 class _$SuccessImpl implements _Success {
   const _$SuccessImpl(
       {required this.cartModel,
-      required final List<DetailProductRewardResponseModel?>? productDetails,
       required this.patchQtyModel,
       required this.deleteModel,
-      required this.modelPostOrder})
-      : _productDetails = productDetails;
+      required this.modelPostOrder});
 
   @override
   final CartRewardResponseModel? cartModel;
-  final List<DetailProductRewardResponseModel?>? _productDetails;
-  @override
-  List<DetailProductRewardResponseModel?>? get productDetails {
-    final value = _productDetails;
-    if (value == null) return null;
-    if (_productDetails is EqualUnmodifiableListView) return _productDetails;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
   @override
   final PatchQtyResponseModel? patchQtyModel;
   @override
@@ -1240,7 +1213,7 @@ class _$SuccessImpl implements _Success {
 
   @override
   String toString() {
-    return 'CartRewardState.success(cartModel: $cartModel, productDetails: $productDetails, patchQtyModel: $patchQtyModel, deleteModel: $deleteModel, modelPostOrder: $modelPostOrder)';
+    return 'CartRewardState.success(cartModel: $cartModel, patchQtyModel: $patchQtyModel, deleteModel: $deleteModel, modelPostOrder: $modelPostOrder)';
   }
 
   @override
@@ -1250,8 +1223,6 @@ class _$SuccessImpl implements _Success {
             other is _$SuccessImpl &&
             (identical(other.cartModel, cartModel) ||
                 other.cartModel == cartModel) &&
-            const DeepCollectionEquality()
-                .equals(other._productDetails, _productDetails) &&
             (identical(other.patchQtyModel, patchQtyModel) ||
                 other.patchQtyModel == patchQtyModel) &&
             (identical(other.deleteModel, deleteModel) ||
@@ -1262,12 +1233,7 @@ class _$SuccessImpl implements _Success {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      cartModel,
-      const DeepCollectionEquality().hash(_productDetails),
-      patchQtyModel,
-      deleteModel,
-      modelPostOrder);
+      runtimeType, cartModel, patchQtyModel, deleteModel, modelPostOrder);
 
   @JsonKey(ignore: true)
   @override
@@ -1282,15 +1248,13 @@ class _$SuccessImpl implements _Success {
     required TResult Function() loading,
     required TResult Function(
             CartRewardResponseModel? cartModel,
-            List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
             DeleteCartItemResponseModel? deleteModel,
             PostOrderRewardResponseModel? modelPostOrder)
         success,
     required TResult Function(String? message) error,
   }) {
-    return success(
-        cartModel, productDetails, patchQtyModel, deleteModel, modelPostOrder);
+    return success(cartModel, patchQtyModel, deleteModel, modelPostOrder);
   }
 
   @override
@@ -1300,15 +1264,13 @@ class _$SuccessImpl implements _Success {
     TResult? Function()? loading,
     TResult? Function(
             CartRewardResponseModel? cartModel,
-            List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
             DeleteCartItemResponseModel? deleteModel,
             PostOrderRewardResponseModel? modelPostOrder)?
         success,
     TResult? Function(String? message)? error,
   }) {
-    return success?.call(
-        cartModel, productDetails, patchQtyModel, deleteModel, modelPostOrder);
+    return success?.call(cartModel, patchQtyModel, deleteModel, modelPostOrder);
   }
 
   @override
@@ -1318,7 +1280,6 @@ class _$SuccessImpl implements _Success {
     TResult Function()? loading,
     TResult Function(
             CartRewardResponseModel? cartModel,
-            List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
             DeleteCartItemResponseModel? deleteModel,
             PostOrderRewardResponseModel? modelPostOrder)?
@@ -1327,8 +1288,7 @@ class _$SuccessImpl implements _Success {
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(cartModel, productDetails, patchQtyModel, deleteModel,
-          modelPostOrder);
+      return success(cartModel, patchQtyModel, deleteModel, modelPostOrder);
     }
     return orElse();
   }
@@ -1373,15 +1333,13 @@ class _$SuccessImpl implements _Success {
 
 abstract class _Success implements CartRewardState {
   const factory _Success(
-      {required final CartRewardResponseModel? cartModel,
-      required final List<DetailProductRewardResponseModel?>? productDetails,
-      required final PatchQtyResponseModel? patchQtyModel,
-      required final DeleteCartItemResponseModel? deleteModel,
-      required final PostOrderRewardResponseModel?
-          modelPostOrder}) = _$SuccessImpl;
+          {required final CartRewardResponseModel? cartModel,
+          required final PatchQtyResponseModel? patchQtyModel,
+          required final DeleteCartItemResponseModel? deleteModel,
+          required final PostOrderRewardResponseModel? modelPostOrder}) =
+      _$SuccessImpl;
 
   CartRewardResponseModel? get cartModel;
-  List<DetailProductRewardResponseModel?>? get productDetails;
   PatchQtyResponseModel? get patchQtyModel;
   DeleteCartItemResponseModel? get deleteModel;
   PostOrderRewardResponseModel? get modelPostOrder;
@@ -1458,7 +1416,6 @@ class _$ErrorImpl implements _Error {
     required TResult Function() loading,
     required TResult Function(
             CartRewardResponseModel? cartModel,
-            List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
             DeleteCartItemResponseModel? deleteModel,
             PostOrderRewardResponseModel? modelPostOrder)
@@ -1475,7 +1432,6 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? loading,
     TResult? Function(
             CartRewardResponseModel? cartModel,
-            List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
             DeleteCartItemResponseModel? deleteModel,
             PostOrderRewardResponseModel? modelPostOrder)?
@@ -1492,7 +1448,6 @@ class _$ErrorImpl implements _Error {
     TResult Function()? loading,
     TResult Function(
             CartRewardResponseModel? cartModel,
-            List<DetailProductRewardResponseModel?>? productDetails,
             PatchQtyResponseModel? patchQtyModel,
             DeleteCartItemResponseModel? deleteModel,
             PostOrderRewardResponseModel? modelPostOrder)?

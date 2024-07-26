@@ -23,27 +23,25 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   final CartDatasource cartDatasource;
   final ProductDatasource productDatasource;
   final OrderDatasource orderDatasource;
-  CartBloc({required this.cartDatasource, required this.productDatasource, required this.orderDatasource}) : super(const CartState.initial()) {
+  CartBloc(
+      {required this.cartDatasource,
+      required this.productDatasource,
+      required this.orderDatasource})
+      : super(const CartState.initial()) {
 
 
     on<_GetCart>((event, emit) async {
       emit(const _Loading());
       final result = await cartDatasource.getCart();
-      await result.fold((l) {
-        emit(const _Error(message: 'Failed to access data order'));
-      }, (cartModel) async {
-        if (cartModel.cart?.cartItems != null) {
-          final productDetails = await Future.wait(
-            cartModel.cart!.cartItems!.map((item) async {
-              final productResult = await productDatasource.getDetailProductByID(item.productId!);
-              return productResult.fold((l) => null, (product) => product);
-            }).toList(),
-          );
-          emit(_Success(cartModel: cartModel, productDetails: productDetails, patchQtyModel: null, deleteModel: null, modelPostOrder: null, modelPostPayment: null));
-        } else {
-          emit(_Error(message: 'No items in cart'));
-        }
-      });
+      result.fold((l) {
+        emit(const _Error(message: 'Failed to access data cart'));
+      },
+          (r) => emit(_Success(
+              cartModel: r,
+              patchQtyModel: null,
+              deleteModel: null,
+              modelPostOrder: null,
+              modelPostPayment: null)));
     });
 
     Future<void> launchURL(Uri url) async {
@@ -64,14 +62,19 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           if (postOrderModel.order != null) {
             final cartId = postOrderModel.order!.id;
             final paymentResult = await orderDatasource.postPayment(cartId);
-            final paymentDetails = paymentResult.fold((l) => null, (payment) => payment);
+            final paymentDetails =
+                paymentResult.fold((l) => null, (payment) => payment);
             if (paymentDetails != null) {
               final url = Uri.parse(paymentDetails.checkoutLink!);
               await launchURL(url);
             }
 
-            emit(_Success(cartModel: null, productDetails: null, patchQtyModel: null, deleteModel: null, modelPostOrder: postOrderModel, modelPostPayment: paymentDetails));
-
+            emit(_Success(
+                cartModel: null,
+                patchQtyModel: null,
+                deleteModel: null,
+                modelPostOrder: postOrderModel,
+                modelPostPayment: paymentDetails));
           } else {
             emit(const _Error(message: 'No items in cart'));
           }
@@ -81,20 +84,31 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       }
     });
 
-
-
-
-
     on<_PatchQty>((event, emit) async {
       emit(const _Loading());
-      final result = await cartDatasource.patchQty(event.action!, event.cartItem!);
-      result.fold((l) => emit(const _Error(message: 'Failed to access data order')), (r) => emit(_Success(cartModel: null, productDetails: null, patchQtyModel: r, deleteModel: null, modelPostOrder: null, modelPostPayment: null)));
+      final result =
+          await cartDatasource.patchQty(event.action!, event.cartItem!);
+      result.fold(
+          (l) => emit(const _Error(message: 'Failed to access data order')),
+          (r) => emit(_Success(
+              cartModel: null,
+              patchQtyModel: r,
+              deleteModel: null,
+              modelPostOrder: null,
+              modelPostPayment: null)));
     });
 
     on<_DeleteItem>((event, emit) async {
       emit(const _Loading());
       final result = await cartDatasource.deleteItem(event.cartItem);
-      result.fold((l) => emit(const _Error(message: 'Failed to access data order')), (r) => emit(_Success(cartModel: null, productDetails: null, patchQtyModel: null, deleteModel: r, modelPostOrder: null, modelPostPayment: null)));
+      result.fold(
+          (l) => emit(const _Error(message: 'Failed to access data order')),
+          (r) => emit(_Success(
+              cartModel: null,
+              patchQtyModel: null,
+              deleteModel: r,
+              modelPostOrder: null,
+              modelPostPayment: null)));
     });
   }
 }

@@ -28,13 +28,13 @@ class DetailOrder {
   String? id;
   int? userId;
   int? cartId;
-  dynamic voucherId;
+  int? voucherId;
   int? totalPrice;
   int? discountAmount;
   int? rewardPoint;
   int? originalPrice;
   String? status;
-  dynamic paymentChannel;
+  String? paymentChannel;
   DateTime? createdAt;
   DateTime? updatedAt;
   String? schedulePickup;
@@ -100,6 +100,7 @@ class DetailOrderItem {
   int? id;
   int? productId;
   String? productName;
+  String? productImage;
   String? itemType;
   String? temperatur;
   String? size;
@@ -113,6 +114,7 @@ class DetailOrderItem {
     this.id,
     this.productId,
     this.productName,
+    this.productImage,
     this.itemType,
     this.temperatur,
     this.size,
@@ -131,6 +133,7 @@ class DetailOrderItem {
     id: json["id"],
     productId: json["product_id"],
     productName: json["product_name"],
+    productImage: json["product_image"],
     itemType: json["item_type"],
     temperatur: json["temperatur"],
     size: json["size"],
@@ -145,6 +148,7 @@ class DetailOrderItem {
     "id": id,
     "product_id": productId,
     "product_name": productName,
+    "product_image": productImage,
     "item_type": itemType,
     "temperatur": temperatur,
     "size": size,
