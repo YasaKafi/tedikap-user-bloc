@@ -60,6 +60,11 @@ String icStatusOrder = '${svgImages}ic_status_order.svg';
 String icOutlet = '${svgImages}ic_outlet.svg';
 String icOutletActive = '${svgImages}ic_outlet_active.svg';
 String icClockPrimaryColor = '${svgImages}ic_clock_primary.svg';
+String icOrderError = '${svgImages}ic_order_error.svg';
+String icAccessDenied = '${svgImages}ic_access_denied.svg';
+String icCartEmpty = '${svgImages}ic_cart_empty.svg';
+String icOrderEmpty = '${svgImages}ic_order_empty.svg';
+String icServerError = '${svgImages}ic_error_server.svg';
 
 
 

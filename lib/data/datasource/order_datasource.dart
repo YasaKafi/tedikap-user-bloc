@@ -152,4 +152,23 @@ class OrderDatasource{
       return Left('Failed to access data: ${e.toString()}');
     }
   }
+
+  Future<Either<String, HistoryOrderRewardResponseModel>> getFilterTypeOrderReward(String query) async {
+    try {
+      final response = await _dioInstance.getRequest(
+        endpoint: TedikapApiRepository.getFilterOrderReward,
+        isAuthorize: true,
+        queryParameters: {
+          'type': query
+        },
+      );
+      if (response.statusCode == 200) {
+        return Right(HistoryOrderRewardResponseModel.fromMap(response.data));
+      } else {
+        return const Left('Failed to access data order');
+      }
+    } catch (e) {
+      return Left('Failed to access data: ${e.toString()}');
+    }
+  }
 }

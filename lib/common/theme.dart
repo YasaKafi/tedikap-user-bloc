@@ -9,6 +9,7 @@ const Color baseColor50 = Color(0xFFF8F8F8);
 const Color greenLight = Color(0xFF6CD8B0);
 const Color greenMedium = Color(0xFF5CB85C);
 const Color redMedium = Color(0xFFD85458);
+const Color redDark = Color(0xFF8B0000);
 const Color redLight = Color(0xFFF8E8E5);
 const Color pinkLight = Color(0xFFFF7CA3);
 const Color grey = Color(0xFFD9D9D9);

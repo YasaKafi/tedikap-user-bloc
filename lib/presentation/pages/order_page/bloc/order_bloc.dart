@@ -14,39 +14,76 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
 
     on<_GetAllHistoryOrder>((event, emit) async {
       emit(const _Loading());
-      final result = await datasource.getAllHistoryOrder();
-      result.fold((l) => emit(const _Error(message: 'Failed to access data order')), (r) => emit(_Success(r, null , 0)));
+      try {
+        final result = await datasource.getAllHistoryOrder();
+        result.fold(
+              (l) => emit(const _Error(message: 'Oops, something went wrong. Please try again later')),
+              (r) => emit(_Success(r, null, 0)),
+        );
+      } catch (e) {
+        emit(_Error(message: e.toString()));
+      }
     });
 
     on<_GetAllHistoryOrderReward>((event, emit) async {
       emit(const _Loading());
-      final result = await datasource.getAllHistoryOrderReward();
-      result.fold((l) => emit(const _Error(message: 'Failed to access data order')), (r) => emit(_Success(null, r, 1)));
+      try {
+        final result = await datasource.getAllHistoryOrderReward();
+        result.fold(
+              (l) => emit(const _Error(message: 'Oops, something went wrong. Please try again later')),
+              (r) => emit(_Success(null, r, 1)),
+        );
+      } catch (e) {
+        emit(_Error(message: e.toString()));
+      }
     });
 
     on<_GetCategoryOrder>((event, emit) async {
       emit(const _Loading());
-      final result = await datasource.getFilterTypeOrder(event.query);
-      result.fold((l) => emit(const _Error(message: 'Failed to access data order')), (r) => emit(_Success(r, null, 0)));
+      try {
+        final result = await datasource.getFilterTypeOrder(event.query);
+        result.fold(
+              (l) => emit(const _Error(message: 'Oops, something went wrong. Please try again later')),
+              (r) => emit(_Success(r, null, 0)),
+        );
+      } catch (e) {
+        emit(_Error(message: e.toString()));
+      }
+    });
+
+    on<_GetCategoryOrderReward>((event, emit) async {
+      emit(const _Loading());
+      try {
+        final result = await datasource.getFilterTypeOrderReward(event.query);
+        result.fold(
+              (l) => emit(const _Error(message: 'Oops, something went wrong. Please try again later')),
+              (r) => emit(_Success(null, r, 0)),
+        );
+      } catch (e) {
+        emit(_Error(message: e.toString()));
+      }
     });
 
     on<_DoFilterOrder>((event, emit) async {
       emit(const OrderState.loading());
       final filterIndex = event.filterIndex;
-      if (filterIndex == 0) {
-        final result = await datasource.getFilterTypeOrder(event.query);
-        emit(result.fold(
-              (l) => OrderState.error(message: 'Failed to access data order'),
-              (r) => OrderState.success(r, null, filterIndex),
-        ));
-      } else {
-        final result = await datasource.getAllHistoryOrderReward();
-        emit(result.fold(
-              (l) => OrderState.error(message: 'Failed to access data order'),
-              (r) => OrderState.success(null, r, filterIndex),
-        ));
+      try {
+        if (filterIndex == 0) {
+          final result = await datasource.getFilterTypeOrder(event.query);
+          emit(result.fold(
+                (l) => const OrderState.error(message: 'Oops, something went wrong. Please try again later'),
+                (r) => OrderState.success(r, null, filterIndex),
+          ));
+        } else {
+          final result = await datasource.getFilterTypeOrderReward(event.query);
+          emit(result.fold(
+                (l) => const OrderState.error(message: 'Oops, something went wrong. Please try again later'),
+                (r) => OrderState.success(null, r, filterIndex),
+          ));
+        }
+      } catch (e) {
+        emit(OrderState.error(message: e.toString()));
       }
     });
-
   }
 }
