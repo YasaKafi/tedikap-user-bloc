@@ -31,8 +31,15 @@ class DioInstance {
             }),
       );
     } on DioException catch (e) {
-      print(e.message);
-      throw Exception(e.message);
+      if(e.type == DioExceptionType.connectionTimeout || e.message!.contains('Failed host lookup')){
+        throw Exception('Internet connection appears to be offline.');
+      } else if(e.type == DioExceptionType.badResponse){
+        throw Exception('Failed to connect to the server.');
+
+      } else {
+        print(e.message);
+        throw Exception(e.message);
+      }
     }
 
     return response;

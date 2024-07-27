@@ -47,8 +47,20 @@ class ListBoxMenuStatus extends StatelessWidget {
     }
   }
 
+
+
   @override
   Widget build(BuildContext context) {
+
+    Color backgroundColor;
+    if (status == 'pesanan dibatalkan' || status == 'pesanan ditolak') {
+      backgroundColor = redDark;
+    } else if (status == 'pesanan selesai') {
+      backgroundColor = primaryColor;
+    } else {
+      backgroundColor = navyColor;
+    }
+
     return Container(
       padding: const EdgeInsets.only(bottom: Dimensions.paddingSizeSmall),
       margin: const EdgeInsets.only(
@@ -60,7 +72,7 @@ class ListBoxMenuStatus extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(color: Colors.black, width: 0.1),
         shape: BoxShape.rectangle,
-        color: Colors.white,
+        color: baseColor,
         borderRadius: BorderRadius.circular(12),
         boxShadow: const [
           BoxShadow(
@@ -77,12 +89,12 @@ class ListBoxMenuStatus extends StatelessWidget {
             padding: const EdgeInsets.symmetric(
                 horizontal: Dimensions.paddingSizeLarge),
             height: 40,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(12),
-                topRight: Radius.circular(12),
+            decoration:  BoxDecoration(
+              borderRadius: const BorderRadius.only(
+                topLeft:  Radius.circular(12),
+                topRight:  Radius.circular(12),
               ),
-              color: navyColor,
+              color: backgroundColor,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -217,7 +229,7 @@ class ListBoxMenuStatus extends StatelessWidget {
                     CommonButton(
                       text: 'Hubungi Admin',
                       onPressed: () {},
-                      backgroundColor: navyColor,
+                      backgroundColor: backgroundColor,
                       textColor: baseColor,
                       borderRadius: 10,
                       fontSize: 12,
@@ -238,7 +250,7 @@ class ListBoxMenuStatus extends StatelessWidget {
                           },
                         );
                       },
-                      backgroundColor: navyColor,
+                      backgroundColor: backgroundColor,
                       textColor: baseColor,
                       fontWeight: FontWeight.w500,
                     ),
