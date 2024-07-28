@@ -44,7 +44,6 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
             final favoriteResult = await favoriteDatasource.getFavoriteProduct();
             final isLiked = favoriteResult.fold((l) => false, (favorite) {
               if (favorite.data != null) {
-                return favorite.data!.any((item) => item.productId == productId);
               }
               return false;
             });
@@ -71,7 +70,7 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
               quantityCount: cartModel.cartItem?.quantity ?? 1,
               totalPrice: cartModel.cartItem?.totalPrice ?? 0,
               note: cartModel.cartItem?.note ?? '',
-              isLiked: isLiked,
+              isLiked: false,
             ));
           } else {
             emit(const _Error(message: 'No items in cart'));
@@ -98,7 +97,6 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
             final favoriteResult = await favoriteDatasource.getFavoriteProduct();
             final isLiked = favoriteResult.fold((l) => false, (favorite) {
               if (favorite.data != null) {
-                return favorite.data!.any((item) => item.productId == productId);
               }
               return false;
             });
@@ -125,7 +123,7 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
               quantityCount: cartModel.cartItem?.quantity ?? 1,
               totalPrice: cartModel.cartItem?.totalPoints ?? 0,
               note: cartModel.cartItem?.note ?? '',
-              isLiked: isLiked
+              isLiked: false
             ));
           } else {
             emit(const _Error(message: 'No items in cart'));
@@ -143,7 +141,6 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
         final favoriteResult = await favoriteDatasource.getFavoriteProduct();
         final isLiked = favoriteResult.fold((l) => false, (favorite) {
           if (favorite.data != null) {
-            return favorite.data!.any((item) => item.productId == event.productId);
           }
           return false;
         });
@@ -160,7 +157,7 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
                 modelCartRewardUpdate: null,
                   modelFavorite: null,
                   modelPostFavorite: null,
-                isLiked: isLiked,
+                isLiked: false,
           )),
         );
       } catch (e) {
@@ -175,7 +172,6 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
         final favoriteResult = await favoriteDatasource.getFavoriteProduct();
         final isLiked = favoriteResult.fold((l) => false, (favorite) {
           if (favorite.data != null) {
-            return favorite.data!.any((item) => item.productId == event.productRewardId);
           }
           return false;
         });
@@ -368,10 +364,9 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
                 (l) => emit(_Error(message: 'Failed to access data order')),
                 (favorite) {
               if (favorite.data != null) {
-                final isProductFavorite = favorite.data!.any((item) => item.productId == event.productId);
                 emit(currentState.copyWith(
                   modelFavorite: favorite,
-                  isLiked: isProductFavorite,
+                  isLiked: false,
                 ));
               } else {
                 emit(_Error(message: 'No items in favorite list'));

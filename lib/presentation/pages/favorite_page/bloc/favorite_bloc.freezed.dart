@@ -442,11 +442,8 @@ mixin _$FavoriteState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            PostFavoriteResponseModel? modelPostFavorite,
-            FavoriteResponseModel? modelFavorite,
-            ProductsResponseModel? modelProduct,
-            bool isLiked)
+    required TResult Function(PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite)
         success,
     required TResult Function(String? message) error,
   }) =>
@@ -455,11 +452,8 @@ mixin _$FavoriteState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            PostFavoriteResponseModel? modelPostFavorite,
-            FavoriteResponseModel? modelFavorite,
-            ProductsResponseModel? modelProduct,
-            bool isLiked)?
+    TResult? Function(PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite)?
         success,
     TResult? Function(String? message)? error,
   }) =>
@@ -468,11 +462,8 @@ mixin _$FavoriteState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            PostFavoriteResponseModel? modelPostFavorite,
-            FavoriteResponseModel? modelFavorite,
-            ProductsResponseModel? modelProduct,
-            bool isLiked)?
+    TResult Function(PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -563,11 +554,8 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            PostFavoriteResponseModel? modelPostFavorite,
-            FavoriteResponseModel? modelFavorite,
-            ProductsResponseModel? modelProduct,
-            bool isLiked)
+    required TResult Function(PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -579,11 +567,8 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            PostFavoriteResponseModel? modelPostFavorite,
-            FavoriteResponseModel? modelFavorite,
-            ProductsResponseModel? modelProduct,
-            bool isLiked)?
+    TResult? Function(PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -595,11 +580,8 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            PostFavoriteResponseModel? modelPostFavorite,
-            FavoriteResponseModel? modelFavorite,
-            ProductsResponseModel? modelProduct,
-            bool isLiked)?
+    TResult Function(PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -692,11 +674,8 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            PostFavoriteResponseModel? modelPostFavorite,
-            FavoriteResponseModel? modelFavorite,
-            ProductsResponseModel? modelProduct,
-            bool isLiked)
+    required TResult Function(PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -708,11 +687,8 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            PostFavoriteResponseModel? modelPostFavorite,
-            FavoriteResponseModel? modelFavorite,
-            ProductsResponseModel? modelProduct,
-            bool isLiked)?
+    TResult? Function(PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -724,11 +700,8 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            PostFavoriteResponseModel? modelPostFavorite,
-            FavoriteResponseModel? modelFavorite,
-            ProductsResponseModel? modelProduct,
-            bool isLiked)?
+    TResult Function(PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -789,9 +762,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
   @useResult
   $Res call(
       {PostFavoriteResponseModel? modelPostFavorite,
-      FavoriteResponseModel? modelFavorite,
-      ProductsResponseModel? modelProduct,
-      bool isLiked});
+      FavoriteResponseModel? modelFavorite});
 }
 
 /// @nodoc
@@ -807,8 +778,6 @@ class __$$SuccessImplCopyWithImpl<$Res>
   $Res call({
     Object? modelPostFavorite = freezed,
     Object? modelFavorite = freezed,
-    Object? modelProduct = freezed,
-    Object? isLiked = null,
   }) {
     return _then(_$SuccessImpl(
       modelPostFavorite: freezed == modelPostFavorite
@@ -819,14 +788,6 @@ class __$$SuccessImplCopyWithImpl<$Res>
           ? _value.modelFavorite
           : modelFavorite // ignore: cast_nullable_to_non_nullable
               as FavoriteResponseModel?,
-      modelProduct: freezed == modelProduct
-          ? _value.modelProduct
-          : modelProduct // ignore: cast_nullable_to_non_nullable
-              as ProductsResponseModel?,
-      isLiked: null == isLiked
-          ? _value.isLiked
-          : isLiked // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -834,25 +795,16 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl(
-      {this.modelPostFavorite,
-      this.modelFavorite,
-      this.modelProduct,
-      this.isLiked = false});
+  const _$SuccessImpl({this.modelPostFavorite, this.modelFavorite});
 
   @override
   final PostFavoriteResponseModel? modelPostFavorite;
   @override
   final FavoriteResponseModel? modelFavorite;
-  @override
-  final ProductsResponseModel? modelProduct;
-  @override
-  @JsonKey()
-  final bool isLiked;
 
   @override
   String toString() {
-    return 'FavoriteState.success(modelPostFavorite: $modelPostFavorite, modelFavorite: $modelFavorite, modelProduct: $modelProduct, isLiked: $isLiked)';
+    return 'FavoriteState.success(modelPostFavorite: $modelPostFavorite, modelFavorite: $modelFavorite)';
   }
 
   @override
@@ -863,15 +815,12 @@ class _$SuccessImpl implements _Success {
             (identical(other.modelPostFavorite, modelPostFavorite) ||
                 other.modelPostFavorite == modelPostFavorite) &&
             (identical(other.modelFavorite, modelFavorite) ||
-                other.modelFavorite == modelFavorite) &&
-            (identical(other.modelProduct, modelProduct) ||
-                other.modelProduct == modelProduct) &&
-            (identical(other.isLiked, isLiked) || other.isLiked == isLiked));
+                other.modelFavorite == modelFavorite));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, modelPostFavorite, modelFavorite, modelProduct, isLiked);
+  int get hashCode =>
+      Object.hash(runtimeType, modelPostFavorite, modelFavorite);
 
   @JsonKey(ignore: true)
   @override
@@ -884,15 +833,12 @@ class _$SuccessImpl implements _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            PostFavoriteResponseModel? modelPostFavorite,
-            FavoriteResponseModel? modelFavorite,
-            ProductsResponseModel? modelProduct,
-            bool isLiked)
+    required TResult Function(PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite)
         success,
     required TResult Function(String? message) error,
   }) {
-    return success(modelPostFavorite, modelFavorite, modelProduct, isLiked);
+    return success(modelPostFavorite, modelFavorite);
   }
 
   @override
@@ -900,16 +846,12 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            PostFavoriteResponseModel? modelPostFavorite,
-            FavoriteResponseModel? modelFavorite,
-            ProductsResponseModel? modelProduct,
-            bool isLiked)?
+    TResult? Function(PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite)?
         success,
     TResult? Function(String? message)? error,
   }) {
-    return success?.call(
-        modelPostFavorite, modelFavorite, modelProduct, isLiked);
+    return success?.call(modelPostFavorite, modelFavorite);
   }
 
   @override
@@ -917,17 +859,14 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            PostFavoriteResponseModel? modelPostFavorite,
-            FavoriteResponseModel? modelFavorite,
-            ProductsResponseModel? modelProduct,
-            bool isLiked)?
+    TResult Function(PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(modelPostFavorite, modelFavorite, modelProduct, isLiked);
+      return success(modelPostFavorite, modelFavorite);
     }
     return orElse();
   }
@@ -973,14 +912,10 @@ class _$SuccessImpl implements _Success {
 abstract class _Success implements FavoriteState {
   const factory _Success(
       {final PostFavoriteResponseModel? modelPostFavorite,
-      final FavoriteResponseModel? modelFavorite,
-      final ProductsResponseModel? modelProduct,
-      final bool isLiked}) = _$SuccessImpl;
+      final FavoriteResponseModel? modelFavorite}) = _$SuccessImpl;
 
   PostFavoriteResponseModel? get modelPostFavorite;
   FavoriteResponseModel? get modelFavorite;
-  ProductsResponseModel? get modelProduct;
-  bool get isLiked;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1052,11 +987,8 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            PostFavoriteResponseModel? modelPostFavorite,
-            FavoriteResponseModel? modelFavorite,
-            ProductsResponseModel? modelProduct,
-            bool isLiked)
+    required TResult Function(PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -1068,11 +1000,8 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            PostFavoriteResponseModel? modelPostFavorite,
-            FavoriteResponseModel? modelFavorite,
-            ProductsResponseModel? modelProduct,
-            bool isLiked)?
+    TResult? Function(PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -1084,11 +1013,8 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            PostFavoriteResponseModel? modelPostFavorite,
-            FavoriteResponseModel? modelFavorite,
-            ProductsResponseModel? modelProduct,
-            bool isLiked)?
+    TResult Function(PostFavoriteResponseModel? modelPostFavorite,
+            FavoriteResponseModel? modelFavorite)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),

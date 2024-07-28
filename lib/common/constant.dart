@@ -64,6 +64,8 @@ String icOrderError = '${svgImages}ic_order_error.svg';
 String icAccessDenied = '${svgImages}ic_access_denied.svg';
 String icCartEmpty = '${svgImages}ic_cart_empty.svg';
 String icOrderEmpty = '${svgImages}ic_order_empty.svg';
+String icFavoriteEmpty = '${svgImages}ic_favorite_empty.svg';
+String icNotificationEmpty = '${svgImages}ic_notification_empty.svg';
 String icServerError = '${svgImages}ic_error_server.svg';
 
 
