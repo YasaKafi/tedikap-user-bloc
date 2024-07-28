@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/presentation/pages/menu_page/bloc/menu_bloc.dart';
 
+import '../../../common/constant.dart';
 import '../../../common/dimensions.dart';
 import '../../../common/theme.dart';
 import 'widgets/custom_app_bar.dart';
@@ -34,7 +36,7 @@ class MenuPage extends StatelessWidget {
                 screenHeight: screenHeight,
                 screenWidth: screenWidth,
                 onSearch: (query) {
-                  if (query.isNotEmpty) { // Minimum character threshold
+                  if (query.isNotEmpty) {
                     context.read<MenuBloc>().add(MenuEvent.getFilterSearch(query));
                   }
                 },
@@ -120,10 +122,10 @@ class MenuPage extends StatelessWidget {
                     Expanded(
                       child: TabBarView(
                         children: [
-                          buildProductList(),
-                          buildProductList(),
-                          buildProductList(),
-                          buildProductList(),
+                          buildProductList(searchController.text),
+                          buildProductList(searchController.text),
+                          buildProductList(searchController.text),
+                          buildProductList(searchController.text),
                         ],
                       ),
                     ),
@@ -135,7 +137,7 @@ class MenuPage extends StatelessWidget {
     );
   }
 
-  Widget buildProductList() {
+  Widget buildProductList(String query) {
     return BlocBuilder<MenuBloc, MenuState>(
       builder: (context, state) {
         Shimmer? loadingCard() {
@@ -217,7 +219,10 @@ class MenuPage extends StatelessWidget {
               return loadingCard();
             },
           ),
-          success: (model, _) {
+          success: (model, isSearching) {
+            if (isSearching && model!.data!.isEmpty) {
+              return _buildEmptySearchState(context, query);
+            }
             return ListView.builder(
               itemCount: model!.data!.length,
               itemBuilder: (context, index) {
@@ -253,15 +258,72 @@ class MenuPage extends StatelessWidget {
               return loadingCard();
             },
           ),
-          error: (message) => Center(
-            child: Text(
-              message!,
-              style: txtSecondaryTitle.copyWith(
-                  fontWeight: FontWeight.w600, color: blackColor),
-            ),
-          ),
+          error: (message) => _buildErrorState(context, message!),
+          empty: () => _buildEmptySearchState(context, query)
         );
       },
+    );
+  }
+  Widget _buildErrorState(BuildContext context, String message) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SvgPicture.asset(icServerError, width: screenWidth * 0.5),
+          const SizedBox(height: 10),
+          SizedBox(
+            width: screenWidth * 0.7,
+            child: Text(
+              message,
+              style: txtPrimaryTitle.copyWith(
+                fontWeight: FontWeight.w500,
+                color: blackColor,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildEmptySearchState(BuildContext context, String productName) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SvgPicture.asset(icSearchEmpty, width: screenWidth * 0.5),
+          const SizedBox(height: 10),
+          SizedBox(
+            width: screenWidth * 0.8,
+            child: Column(
+              children: [
+                Text(
+                  'Product not found',
+                  style: txtPrimaryTitle.copyWith(
+                    fontWeight: FontWeight.w500,
+                    color: blackColor,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  'We could not find a match for "$productName". Please try another search.',
+                  style: txtSecondarySubTitle.copyWith(
+                    fontWeight: FontWeight.w400,
+                    color: blackColor,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

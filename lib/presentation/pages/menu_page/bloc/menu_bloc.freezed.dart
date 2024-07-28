@@ -766,6 +766,7 @@ mixin _$MenuState {
     required TResult Function(ProductsResponseModel? model, bool isSearching)
         success,
     required TResult Function(String? message) error,
+    required TResult Function() empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -774,6 +775,7 @@ mixin _$MenuState {
     TResult? Function()? loading,
     TResult? Function(ProductsResponseModel? model, bool isSearching)? success,
     TResult? Function(String? message)? error,
+    TResult? Function()? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -782,6 +784,7 @@ mixin _$MenuState {
     TResult Function()? loading,
     TResult Function(ProductsResponseModel? model, bool isSearching)? success,
     TResult Function(String? message)? error,
+    TResult Function()? empty,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -791,6 +794,7 @@ mixin _$MenuState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
+    required TResult Function(_Empty value) empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -799,6 +803,7 @@ mixin _$MenuState {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
+    TResult? Function(_Empty value)? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -807,6 +812,7 @@ mixin _$MenuState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
+    TResult Function(_Empty value)? empty,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -872,6 +878,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(ProductsResponseModel? model, bool isSearching)
         success,
     required TResult Function(String? message) error,
+    required TResult Function() empty,
   }) {
     return initial();
   }
@@ -883,6 +890,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? loading,
     TResult? Function(ProductsResponseModel? model, bool isSearching)? success,
     TResult? Function(String? message)? error,
+    TResult? Function()? empty,
   }) {
     return initial?.call();
   }
@@ -894,6 +902,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? loading,
     TResult Function(ProductsResponseModel? model, bool isSearching)? success,
     TResult Function(String? message)? error,
+    TResult Function()? empty,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -909,6 +918,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
+    required TResult Function(_Empty value) empty,
   }) {
     return initial(this);
   }
@@ -920,6 +930,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
+    TResult? Function(_Empty value)? empty,
   }) {
     return initial?.call(this);
   }
@@ -931,6 +942,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
+    TResult Function(_Empty value)? empty,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -987,6 +999,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(ProductsResponseModel? model, bool isSearching)
         success,
     required TResult Function(String? message) error,
+    required TResult Function() empty,
   }) {
     return loading();
   }
@@ -998,6 +1011,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? loading,
     TResult? Function(ProductsResponseModel? model, bool isSearching)? success,
     TResult? Function(String? message)? error,
+    TResult? Function()? empty,
   }) {
     return loading?.call();
   }
@@ -1009,6 +1023,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? loading,
     TResult Function(ProductsResponseModel? model, bool isSearching)? success,
     TResult Function(String? message)? error,
+    TResult Function()? empty,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -1024,6 +1039,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
+    required TResult Function(_Empty value) empty,
   }) {
     return loading(this);
   }
@@ -1035,6 +1051,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
+    TResult? Function(_Empty value)? empty,
   }) {
     return loading?.call(this);
   }
@@ -1046,6 +1063,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
+    TResult Function(_Empty value)? empty,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -1138,6 +1156,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function(ProductsResponseModel? model, bool isSearching)
         success,
     required TResult Function(String? message) error,
+    required TResult Function() empty,
   }) {
     return success(model, isSearching);
   }
@@ -1149,6 +1168,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function()? loading,
     TResult? Function(ProductsResponseModel? model, bool isSearching)? success,
     TResult? Function(String? message)? error,
+    TResult? Function()? empty,
   }) {
     return success?.call(model, isSearching);
   }
@@ -1160,6 +1180,7 @@ class _$SuccessImpl implements _Success {
     TResult Function()? loading,
     TResult Function(ProductsResponseModel? model, bool isSearching)? success,
     TResult Function(String? message)? error,
+    TResult Function()? empty,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -1175,6 +1196,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
+    required TResult Function(_Empty value) empty,
   }) {
     return success(this);
   }
@@ -1186,6 +1208,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
+    TResult? Function(_Empty value)? empty,
   }) {
     return success?.call(this);
   }
@@ -1197,6 +1220,7 @@ class _$SuccessImpl implements _Success {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
+    TResult Function(_Empty value)? empty,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -1286,6 +1310,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(ProductsResponseModel? model, bool isSearching)
         success,
     required TResult Function(String? message) error,
+    required TResult Function() empty,
   }) {
     return error(message);
   }
@@ -1297,6 +1322,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? loading,
     TResult? Function(ProductsResponseModel? model, bool isSearching)? success,
     TResult? Function(String? message)? error,
+    TResult? Function()? empty,
   }) {
     return error?.call(message);
   }
@@ -1308,6 +1334,7 @@ class _$ErrorImpl implements _Error {
     TResult Function()? loading,
     TResult Function(ProductsResponseModel? model, bool isSearching)? success,
     TResult Function(String? message)? error,
+    TResult Function()? empty,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1323,6 +1350,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
+    required TResult Function(_Empty value) empty,
   }) {
     return error(this);
   }
@@ -1334,6 +1362,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
+    TResult? Function(_Empty value)? empty,
   }) {
     return error?.call(this);
   }
@@ -1345,6 +1374,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
+    TResult Function(_Empty value)? empty,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1361,4 +1391,125 @@ abstract class _Error implements MenuState {
   @JsonKey(ignore: true)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$EmptyImplCopyWith<$Res> {
+  factory _$$EmptyImplCopyWith(
+          _$EmptyImpl value, $Res Function(_$EmptyImpl) then) =
+      __$$EmptyImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$EmptyImplCopyWithImpl<$Res>
+    extends _$MenuStateCopyWithImpl<$Res, _$EmptyImpl>
+    implements _$$EmptyImplCopyWith<$Res> {
+  __$$EmptyImplCopyWithImpl(
+      _$EmptyImpl _value, $Res Function(_$EmptyImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$EmptyImpl implements _Empty {
+  const _$EmptyImpl();
+
+  @override
+  String toString() {
+    return 'MenuState.empty()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$EmptyImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(ProductsResponseModel? model, bool isSearching)
+        success,
+    required TResult Function(String? message) error,
+    required TResult Function() empty,
+  }) {
+    return empty();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(ProductsResponseModel? model, bool isSearching)? success,
+    TResult? Function(String? message)? error,
+    TResult? Function()? empty,
+  }) {
+    return empty?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(ProductsResponseModel? model, bool isSearching)? success,
+    TResult Function(String? message)? error,
+    TResult Function()? empty,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Empty value) empty,
+  }) {
+    return empty(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Empty value)? empty,
+  }) {
+    return empty?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    TResult Function(_Empty value)? empty,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Empty implements MenuState {
+  const factory _Empty() = _$EmptyImpl;
 }

@@ -15,24 +15,34 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
     on<_GetProduct>((event, emit) async {
       emit(const _Loading());
       final result = await datasource.getAllProduct();
-      result.fold((l) => emit(_Error(message: l)), (r) => emit(_Success(r)));
+      result.fold((l) => emit(_Error(message: 'Oops, something went wrong. Please try again later')), (r) => emit(_Success(r)));
     }, transformer: droppable());
 
     on<_GetFilterCategory>((event, emit) async {
       emit(const _Loading());
       final result = await datasource.getFilterCategory(event.query);
-      result.fold((l) => emit(_Error(message: l)), (r) => emit(_Success(r)));
+      result.fold((l) => emit(_Error(message: 'Oops, something went wrong. Please try again later')), (r) => emit(_Success(r)));
     }, transformer: droppable());
 
     on<_GetSearchCategory>((event, emit) async {
-      if (state is _Success) {
-        emit((state as _Success).copyWith(isSearching: true)); // Update after fetching data
-        final result = await datasource.getFilterSearch(event.query);
-        result.fold(
-              (l) => emit(_Error(message: l)),
-              (r) => emit(_Success(r, isSearching: true)), // Keep isSearching true
-        );
-      }
+      emit((state as _Success).copyWith(isSearching: true));
+      final result = await datasource.getFilterSearch(event.query);
+      result.fold(
+            (l) {
+          if (l.contains('Failed to access data: Exception: Failed to connect to the server.')) {
+            emit(_Empty());
+          } else {
+            emit(_Error(message: 'Oops, something went wrong. Please try again later'));
+          }
+        },
+            (r) {
+          if (r.data!.isEmpty) {
+            emit(_Empty());
+          } else {
+            emit(_Success(r, isSearching: true));
+          }
+        },
+      );
     }, transformer: droppable());
 
   }
