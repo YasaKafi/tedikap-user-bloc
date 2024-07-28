@@ -22,25 +22,13 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
       emit(const _Loading());
       try {
         final result = await favoriteDatasource.getFavoriteProduct();
-        await result.fold((l) async {
-          emit(_Error(message: 'Failed to access data product'));
-        }, (favorite) async {
-          if (favorite.data != null) {
-            final productResult = await productDatasource.getAllProduct();
-            final productDetails = productResult.fold((l) => null, (product) => product);
-
-            final isLiked = result.fold((l) => false, (favorite) {
-              if (favorite.data != null) {
-                return favorite.data!.any((item) => item.productId == productDetails!.data!.map((itemProduct) => itemProduct.id));
-              }
-              return false;
-            });
-
-            emit(_Success(
-                modelFavorite: favorite,
-                isLiked: isLiked,
-                modelProduct: productDetails));
-          }
+        result.fold((l) {
+          emit(_Error(message: 'Oops, something went wrong. Please try again later'));
+        }, (r)  {
+          emit(_Success(
+            modelFavorite: r,
+            modelPostFavorite: null,
+          ));
         });
       } catch (e) {
         emit(_Error(message: 'Failed to access data product $e'));
@@ -48,31 +36,29 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
     });
 
     on<_PostFavorite>((event, emit) async {
-      final currentState = state;
-      if (currentState is _Success) {
-        emit(const _Loading());
-        try {
-          final response = await favoriteDatasource.postFavoriteProduct(event.productId!);
-          await response.fold(
-                (l) async {
-              emit(_Error(message: l));
-            },
-                (r) async {
-              final updatedFavoriteResult = await favoriteDatasource.getFavoriteProduct();
-              final updatedProductResult = await productDatasource.getAllProduct();
-              final updatedProductDetails = updatedProductResult.fold((l) => null, (product) => product);
-              emit(currentState.copyWith(
-                modelProduct: updatedProductDetails,
-                modelFavorite: updatedFavoriteResult.fold((l) => null, (fav) => fav),
-                modelPostFavorite: r,
-                isLiked: r.message == 'Liked' ? true : false,
-              ));
-            },
-          );
-        } catch (e) {
-          emit(_Error(message: 'An error occurred: $e'));
-        }
+      print('Event _PostFavorite received, emitting loading state');
+      emit(const _Loading()); // Emit loading state before async operations
+      try {
+        final response = await favoriteDatasource.postFavoriteProduct(event.productId!);
+        await response.fold(
+              (l) async {
+            emit(_Error(message: l));
+          },
+              (r) async {
+                print('Successfully posted favorite, fetching updated favorites');
+            final updatedFavoriteResult = await favoriteDatasource.getFavoriteProduct();
+            final updatedFavorites = updatedFavoriteResult.fold((l) => null, (fav) => fav);
+            print('Updated favorites fetched, emitting success state');
+            emit(_Success(
+              modelFavorite: updatedFavorites,
+              modelPostFavorite: r,
+            ));
+          },
+        );
+      } catch (e) {
+        emit(_Error(message: 'An error occurred: $e'));
       }
     });
   }
 }
+

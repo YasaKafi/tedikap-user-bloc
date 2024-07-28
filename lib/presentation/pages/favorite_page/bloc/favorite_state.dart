@@ -8,9 +8,6 @@ class FavoriteState with _$FavoriteState {
       {
         PostFavoriteResponseModel? modelPostFavorite,
         FavoriteResponseModel? modelFavorite,
-        ProductsResponseModel? modelProduct,
-        @Default(false) bool isLiked,
-
       }) = _Success;
   const factory FavoriteState.error({String? message}) = _Error;
 }
