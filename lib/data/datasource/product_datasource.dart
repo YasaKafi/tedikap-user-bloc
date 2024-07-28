@@ -18,8 +18,10 @@ class ProductDatasource {
           endpoint: TedikapApiRepository.getAllProduct, isAuthorize: true);
       if (response.statusCode == 200) {
         return Right(ProductsResponseModel.fromMap(response.data));
+      } else if (response.statusCode == 404) {
+        return const Left('Oops, something went wrong. Please try again later');
       } else {
-        return const Left('Failed to access data product');
+        return const Left('Oops, something went wrong. Please try again later');
       }
     } catch (e) {
       return Left('Failed to access data: ${e.toString()}');
@@ -32,8 +34,10 @@ class ProductDatasource {
           endpoint: TedikapApiRepository.getAllRewardProduct, isAuthorize: true);
       if (response.statusCode == 200) {
         return Right(ProductsRewardResponseModel.fromMap(response.data));
+      } else if (response.statusCode == 404) {
+        return const Left('Oops, something went wrong. Please try again later');
       } else {
-        return const Left('Failed to access data reward product');
+        return const Left('Oops, something went wrong. Please try again later');
       }
     } catch (e) {
       return Left('Failed to access data: ${e.toString()}');
@@ -46,8 +50,10 @@ class ProductDatasource {
           endpoint: '${TedikapApiRepository.getProductByID}/$id', isAuthorize: true);
       if (response.statusCode == 200) {
         return Right(DetailProductResponseModel.fromMap(response.data));
+      } else if (response.statusCode == 404) {
+        return const Left('Oops, something went wrong. Please try again later');
       } else {
-        return const Left('Failed to access data detail product');
+        return const Left('Oops, something went wrong. Please try again later');
       }
     } catch (e) {
       return Left('Failed to access data: ${e.toString()}');
@@ -60,8 +66,10 @@ class ProductDatasource {
           endpoint: '${TedikapApiRepository.getRewardProductByID}/$id', isAuthorize: true);
       if (response.statusCode == 200) {
         return Right(DetailProductRewardResponseModel.fromMap(response.data));
+      } else if (response.statusCode == 404) {
+        return const Left('Oops, something went wrong. Please try again later');
       } else {
-        return const Left('Failed to access data detail product reward');
+        return const Left('Oops, something went wrong. Please try again later');
       }
     } catch (e) {
       return Left('Failed to access data: ${e.toString()}');
@@ -79,9 +87,10 @@ class ProductDatasource {
       );
       if (response.statusCode == 200) {
         return Right(ProductsResponseModel.fromMap(response.data));
+      } else if (response.statusCode == 404) {
+        return const Left('Oops, something went wrong. Please try again later');
       } else {
-
-        return const Left('Failed to access data product');
+        return const Left('Oops, something went wrong. Please try again later');
       }
     } catch (e) {
       return Left('Failed to access data: ${e.toString()}');
@@ -99,8 +108,10 @@ class ProductDatasource {
       );
       if (response.statusCode == 200) {
         return Right(ProductsRewardResponseModel.fromMap(response.data));
+      } else if (response.statusCode == 404) {
+        return const Left('Oops, something went wrong. Please try again later');
       } else {
-        return const Left('Failed to access data reward product');
+        return const Left('Oops, something went wrong. Please try again later');
       }
     } catch (e) {
       return Left('Failed to access data: ${e.toString()}');
@@ -121,8 +132,10 @@ class ProductDatasource {
       } else {
         if (response.statusCode == 429) {
           return const Left('Too many requests. Please try again later.');
+        } else if (response.statusCode == 404){
+          return const Left('Oops, something went wrong. Please try again later');
         }
-        return const Left('Failed to access data product');
+        return const Left('Oops, something went wrong. Please try again later');
       }
     } catch (e) {
       return Left('Failed to access data: ${e.toString()}');
