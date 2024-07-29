@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/data/models/response/detail_product_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/detail_product_reward_response_model.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_product_page/bloc/detail_product_bloc.dart';
@@ -39,12 +40,8 @@ class BoxInfoProduct extends StatelessWidget {
             child: BlocBuilder<DetailProductBloc, DetailProductState>(
               builder: (context, state) {
                 return state.when(
-                  initial: () => Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  loading: () => Center(
-                    child: CircularProgressIndicator(),
-                  ),
+                  initial: () => buildLoadingShimmer(),
+                  loading: () => buildLoadingShimmer(),
                   success: (
                       modelProduct,
                       modelProductReward,
@@ -67,7 +64,6 @@ class BoxInfoProduct extends StatelessWidget {
                       qty,
                       totalPrice,
                       note,
-                      isLiked
                       ) {
                     String? name;
                     String? imageUrl;
@@ -161,6 +157,68 @@ class BoxInfoProduct extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+  Widget buildLoadingShimmer() {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: grey,
+              ),
+              width: 160,
+              height: 160,
+            ),
+          ),
+          const SizedBox(height: 20),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Colors.grey,
+            ),
+            height: 20,
+            width: screenWidth * 0.5,
+          ),
+          const SizedBox(height: 10),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Colors.grey,
+            ),
+            height: 20,
+            width: screenWidth * 0.3,
+          ),
+          const SizedBox(height: 15),
+          Divider(
+            height: 5,
+            color: grey,
+          ),
+          const SizedBox(height: 15),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Colors.grey,
+            ),
+            height: 20,
+            width: screenWidth * 0.4,
+          ),
+          const SizedBox(height: 5),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Colors.grey,
+            ),
+            height: 20,
+            width: screenWidth * 0.8,
+          ),
+        ],
+      ),
     );
   }
 }

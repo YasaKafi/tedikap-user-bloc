@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/data/models/response/cart_response_model.dart';
 import '../../../../../common/dimensions.dart';
 import '../../../../../common/theme.dart';
@@ -15,6 +16,7 @@ class BoxOptionProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -28,7 +30,7 @@ class BoxOptionProduct extends StatelessWidget {
             builder: (context, state) {
              return state.maybeWhen(
                orElse: (){
-                 return Center(child: CircularProgressIndicator(),);
+                 return buildLoadingShimmer(screenWidth);
                },
                success: (
                    modelProduct,
@@ -52,7 +54,7 @@ class BoxOptionProduct extends StatelessWidget {
                    qty,
                    totalPrice,
                    note,
-                   isLiked
+
                    ){
 
 
@@ -89,7 +91,7 @@ class BoxOptionProduct extends StatelessWidget {
                                qty,
                                totalPrice,
                                note,
-                               isLiked
+
                                ) {
 
                              return OptionRow(
@@ -173,11 +175,8 @@ class BoxOptionProduct extends StatelessWidget {
                                qty,
                                totalPrice,
                                note,
-                               isLiked
-                               ) {
-                             print('This is the defalut value of Size : ${selectedSize}');
-                             print('This is the defalut value of isSelectedSize : ${isSizeSelected}');
 
+                               ) {
                              return OptionRow(
                                label: 'Size',
                                option1: 'Large',
@@ -265,7 +264,7 @@ class BoxOptionProduct extends StatelessWidget {
                                  qty,
                                  totalPrice,
                                  note,
-                                 isLiked
+
                                  ) {
                                return OptionRow(
                                  label: 'Ice',
@@ -349,7 +348,7 @@ class BoxOptionProduct extends StatelessWidget {
                                qty,
                                totalPrice,
                                note,
-                               isLiked
+
                                ) {
                              return OptionRow(
                                label: 'Sugar',
@@ -407,6 +406,37 @@ class BoxOptionProduct extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+  Widget buildLoadingShimmer(double screenWidth) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: screenWidth * 0.3,
+                height: 20.0,
+                color: Colors.white,
+              ),
+              Container(
+                width: screenWidth * 0.2,
+                height: 20.0,
+                color: Colors.white,
+              ),
+            ],
+          ),
+          const SizedBox(height: 20.0),
+          Container(
+            width: screenWidth * 0.8,
+            height: 40.0,
+            color: Colors.white,
+          ),
+        ],
+      ),
     );
   }
 }

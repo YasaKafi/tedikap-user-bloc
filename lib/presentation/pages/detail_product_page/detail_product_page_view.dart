@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_product_page/widgets/box_bottom_price.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_product_page/widgets/box_info_product.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_product_page/widgets/box_option_product.dart';
@@ -15,10 +16,10 @@ import 'bloc/detail_product_bloc.dart';
 class DetailProductPage extends StatelessWidget {
   DetailProductPage(
       {super.key,
-      this.productId,
-      this.productRewardId,
-      this.cartItemId,
-      this.cartItemRewardId});
+        this.productId,
+        this.productRewardId,
+        this.cartItemId,
+        this.cartItemRewardId});
 
   int? productId;
   int? productRewardId;
@@ -61,7 +62,7 @@ class DetailProductPage extends StatelessWidget {
             color: baseColor50,
           ),
           padding:
-              const EdgeInsets.only(top: 30, bottom: 10, left: 10, right: 10),
+          const EdgeInsets.only(top: 30, bottom: 10, left: 10, right: 10),
           width: MediaQuery.of(context).size.width,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -73,7 +74,7 @@ class DetailProductPage extends StatelessWidget {
                 },
               ),
               Text(
-                'Detail ${cartItemRewardId ?? 'Product'}',
+                'Detail Product',
                 style: txtSecondaryHeader.copyWith(
                     fontWeight: FontWeight.w600, color: blackColor),
               ),
@@ -82,16 +83,56 @@ class DetailProductPage extends StatelessWidget {
                 children: [
                   BlocConsumer<DetailProductBloc, DetailProductState>(
                     listener: (context, state) {
-                      // TODO: implement listener
+                      state.maybeWhen(
+                        orElse: () {},
+                        success: (modelProduct,
+                            modelProductReward,
+                            modelCartPost,
+                            modelCartPostReward,
+                            modelCartItem,
+                            modelCartUpdate,
+                            modelCartItemReward,
+                            modelCartRewardUpdate,
+                            modelPostFavorite,
+                            modelFavorite,
+                            isTempSelected,
+                            selectedTemp,
+                            isSizeSelected,
+                            selectedSize,
+                            isIceSelected,
+                            selectedIce,
+                            isSugarSelected,
+                            selectedSugar,
+                            qty,
+                            totalPrice,
+                            note,) {
+                          final itemIsLiked = modelPostFavorite?.message;
+                          if (itemIsLiked == 'Liked') {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(
+                                'Successfully added from my favorite!',
+                                style: txtSecondaryTitle.copyWith(
+                                    fontWeight: FontWeight.w500, color: baseColor),
+                              ),
+                              backgroundColor: greenMedium,
+                            ));
+                          } else if (itemIsLiked == 'Unliked') {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(
+                                'Successfully removed from my favorite!',
+                                style: txtSecondaryTitle.copyWith(
+                                    fontWeight: FontWeight.w500, color: baseColor),
+                              ),
+                              backgroundColor: redMedium,
+                            ));
+                          }
+                        },
+                      );
                     },
                     builder: (context, state) {
                       return state.when(
-                        initial: () => Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                        loading: () => Center(
-                          child: CircularProgressIndicator(),
-                        ),
+                        initial: () => buildLoadingShimmer(),
+                        loading: () => buildLoadingShimmer(),
                         success: (
                             modelProduct,
                             modelProductReward,
@@ -114,32 +155,36 @@ class DetailProductPage extends StatelessWidget {
                             qty,
                             totalPrice,
                             note,
-                            isLiked
-                        ) {
-                          print('product isLiked : $isLiked');
+
+                            ) {
                           return InkWell(
-                            onTap: () {
-                              if(productId != null){
-                                context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(productId!));
-                              } else if (productRewardId != null){
-                                context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(productRewardId!));
-                              } else if (cartItemId != null) {
-                                context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(modelCartItem!.cartItem!.productId!));
-                              } else if (cartItemRewardId != null) {
-                                context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(modelCartItemReward!.cartItem!.productId));
-                              }
-                            },
-                            child: Container(
-                                padding: const EdgeInsets.only(right: 10),
-                                child: isLiked == false ? SvgPicture.asset(
-                                  icHeart,
-                                  width: 24,
-                                  height: 24,
-                                ) : SvgPicture.asset(
-                                  icHeartActive,
-                                  width: 24,
-                                  height: 24,
-                                ))
+                              onTap: () {
+                                if(productId != null){
+                                  context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(productId!));
+                                } else if (productRewardId != null){
+                                  context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(productRewardId!));
+                                } else if (cartItemId != null) {
+                                  context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(modelCartItem!.cartItem!.productId!));
+                                } else if (cartItemRewardId != null) {
+                                  context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(modelCartItemReward!.cartItem!.productId!));
+                                }
+                              },
+                              child: (productRewardId == null && cartItemRewardId == null)
+                                  ? Container(
+                                  padding: const EdgeInsets.only(right: 10),
+                                  child: (modelProduct?.data?.isLiked ?? false) == false
+                                      ? SvgPicture.asset(
+                                    icHeart,
+                                    width: 24,
+                                    height: 24,
+                                  )
+                                      : SvgPicture.asset(
+                                    icHeartActive,
+                                    width: 24,
+                                    height: 24,
+                                  )
+                              )
+                                  : Container(width: 24),
                           );
                         },
                         error: (message) => Center(
@@ -199,4 +244,20 @@ class DetailProductPage extends StatelessWidget {
       ),
     );
   }
+  Widget buildLoadingShimmer() {
+
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Container(
+        width: 28,
+        height: 28,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          color: Colors.grey,
+        ),
+      ),
+    );
+  }
 }
+

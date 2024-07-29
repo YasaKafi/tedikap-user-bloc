@@ -82,7 +82,7 @@ class ListBoxProductMenu extends StatelessWidget {
                 child: Container(
                     height: screenHeight,
                     child: Center(
-                      child: Text('Rp. ${price.toString()}',
+                      child: Text('Rp${price.toString()}',
                           style: txtPrimarySubTitle.copyWith(
                               fontWeight: FontWeight.w500, color: blackColor)),
                     )))
