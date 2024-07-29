@@ -83,7 +83,7 @@ class BoxBottomPrice extends StatelessWidget {
                       ),
                       backgroundColor: greenMedium,
                     ));
-                    context.pushNamed('cart_common');
+                    context.goNamed('cart_common');
                   } else if (modelCartRewardUpdate != null) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text(
@@ -93,7 +93,7 @@ class BoxBottomPrice extends StatelessWidget {
                       ),
                       backgroundColor: greenMedium,
                     ));
-                    context.pushNamed('cart_reward');
+                    context.goNamed('cart_reward');
                   } else if (modelCartPost != null) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text(
@@ -103,7 +103,7 @@ class BoxBottomPrice extends StatelessWidget {
                       ),
                       backgroundColor: greenMedium,
                     ));
-                    context.pushNamed('dashboard');
+                    context.goNamed('cart_common');
                   } else if (modelCartPostReward != null) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text(
@@ -113,7 +113,7 @@ class BoxBottomPrice extends StatelessWidget {
                       ),
                       backgroundColor: greenMedium,
                     ));
-                    context.pushNamed('dashboard');
+                    context.goNamed('cart_reward');
                   }
                 },
               );
