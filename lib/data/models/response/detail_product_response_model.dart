@@ -28,6 +28,8 @@ class DetailDataProduct {
   int? largePrice;
   String? category;
   String? image;
+  bool? isLiked;
+  dynamic favoritesCount;
 
   DetailDataProduct({
     this.id,
@@ -37,6 +39,8 @@ class DetailDataProduct {
     this.largePrice,
     this.category,
     this.image,
+    this.isLiked,
+    this.favoritesCount,
   });
 
   factory DetailDataProduct.fromJson(String str) => DetailDataProduct.fromMap(json.decode(str));
@@ -51,6 +55,8 @@ class DetailDataProduct {
     largePrice: json["large_price"],
     category: json["category"],
     image: json["image"],
+    isLiked: json["isLiked"],
+    favoritesCount: json["favorites_count"],
   );
 
   Map<String, dynamic> toMap() => {
@@ -61,5 +67,7 @@ class DetailDataProduct {
     "large_price": largePrice,
     "category": category,
     "image": image,
+    "isLiked": isLiked,
+    "favorites_count": favoritesCount,
   };
 }

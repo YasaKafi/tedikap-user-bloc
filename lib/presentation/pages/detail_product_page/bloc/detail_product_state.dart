@@ -26,7 +26,6 @@ class DetailProductState with _$DetailProductState {
     @Default(1) int quantityCount,
     @Default(0) int totalPrice,
     @Default('') String note,
-    @Default(false) bool isLiked,
       }
       ) = _Success;
   const factory DetailProductState.error({String? message}) = _Error;

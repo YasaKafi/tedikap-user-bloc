@@ -40,14 +40,6 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
             final productResult = await datasource.getDetailProductByID(productId!);
             final productDetails = productResult.fold((l) => null, (product) => product);
 
-            // Check favorite status here
-            final favoriteResult = await favoriteDatasource.getFavoriteProduct();
-            final isLiked = favoriteResult.fold((l) => false, (favorite) {
-              if (favorite.data != null) {
-              }
-              return false;
-            });
-
             emit(_Success(
               model: productDetails,
               modelReward: null,
@@ -70,7 +62,6 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
               quantityCount: cartModel.cartItem?.quantity ?? 1,
               totalPrice: cartModel.cartItem?.totalPrice ?? 0,
               note: cartModel.cartItem?.note ?? '',
-              isLiked: false,
             ));
           } else {
             emit(const _Error(message: 'No items in cart'));
@@ -92,14 +83,6 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
             final productId = cartModel.cartItem!.productId;
             final productResult = await datasource.getDetailProductRewardByID(productId!);
             final productDetails = productResult.fold((l) => null, (product) => product);
-
-            // Check favorite status here
-            final favoriteResult = await favoriteDatasource.getFavoriteProduct();
-            final isLiked = favoriteResult.fold((l) => false, (favorite) {
-              if (favorite.data != null) {
-              }
-              return false;
-            });
 
             emit(_Success(
               model: null,
@@ -123,7 +106,6 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
               quantityCount: cartModel.cartItem?.quantity ?? 1,
               totalPrice: cartModel.cartItem?.totalPoints ?? 0,
               note: cartModel.cartItem?.note ?? '',
-              isLiked: false
             ));
           } else {
             emit(const _Error(message: 'No items in cart'));
@@ -138,12 +120,6 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
       emit(const _Loading());
       try {
         final response = await datasource.getDetailProductByID(event.productId);
-        final favoriteResult = await favoriteDatasource.getFavoriteProduct();
-        final isLiked = favoriteResult.fold((l) => false, (favorite) {
-          if (favorite.data != null) {
-          }
-          return false;
-        });
         response.fold(
               (l) => emit(_Error(message: l)),
               (r) => emit(_Success(
@@ -157,7 +133,6 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
                 modelCartRewardUpdate: null,
                   modelFavorite: null,
                   modelPostFavorite: null,
-                isLiked: false,
           )),
         );
       } catch (e) {
@@ -169,12 +144,6 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
       emit(const _Loading());
       try {
         final response = await datasource.getDetailProductRewardByID(event.productRewardId);
-        final favoriteResult = await favoriteDatasource.getFavoriteProduct();
-        final isLiked = favoriteResult.fold((l) => false, (favorite) {
-          if (favorite.data != null) {
-          }
-          return false;
-        });
         response.fold(
               (l) => emit(_Error(message: l)),
               (r) => emit(_Success(
@@ -188,7 +157,6 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
                 modelCartRewardUpdate: null,
                   modelFavorite: null,
                   modelPostFavorite: null,
-                isLiked: isLiked,
           )),
         );
       } catch (e) {
@@ -355,44 +323,22 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
     });
 
 
-    on<_CheckFavoriteProduct>((event, emit) async {
-      final currentState = state;
-      if (currentState is _Success) {
-        try {
-          final result = await favoriteDatasource.getFavoriteProduct();
-          result.fold(
-                (l) => emit(_Error(message: 'Failed to access data order')),
-                (favorite) {
-              if (favorite.data != null) {
-                emit(currentState.copyWith(
-                  modelFavorite: favorite,
-                  isLiked: false,
-                ));
-              } else {
-                emit(_Error(message: 'No items in favorite list'));
-              }
-            },
-          );
-        } catch (e) {
-          emit(_Error(message: 'An error occurred: $e'));
-        }
-      }
-    });
-
-
-
     on<_PostFavorite>((event, emit) async {
       final currentState = state;
-      if (currentState is _Success) {
+      if (currentState is _Success)  {
         emit(const _Loading());
         try {
           final response = await favoriteDatasource.postFavoriteProduct(event.productId!);
-          response.fold(
-                (l) => emit(_Error(message: l)),
-                (r) => emit(currentState.copyWith(
-              modelPostFavorite: r,
-              isLiked: r.message == 'Liked' ? true : false,
-            )),
+          await response.fold(
+                (l) async =>  emit(_Error(message: l)),
+                (r) async {
+                  final responseDetailProduct = await datasource.getDetailProductByID(event.productId!);
+                  final productDetails = responseDetailProduct.fold((l) => null, (product) => product);
+                  emit(currentState.copyWith(
+                    modelPostFavorite: r,
+                    model: productDetails
+                  ));
+                }
           );
         } catch (e) {
           emit(_Error(message: 'An error occurred: $e'));
