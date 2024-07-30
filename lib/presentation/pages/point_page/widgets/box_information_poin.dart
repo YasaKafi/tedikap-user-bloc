@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:tedikap_user_bloc/presentation/pages/point_page/bloc/point_bloc.dart';
 
 import '../../../../../common/constant.dart';
 import '../../../../../common/dimensions.dart';
@@ -62,11 +65,30 @@ class BoxInformationPoin extends StatelessWidget {
                   SizedBox(
                     width: 10,
                   ),
-                  Text(
-                        '100 Poin',
-                        style: txtPrimaryHeader.copyWith(
-                            fontWeight: FontWeight.w600, color: primaryColor),
-                      )
+                  BlocBuilder<PointBloc, PointState>(
+                    builder: (context, state) {
+                      return state.maybeWhen(
+                          orElse: () => Shimmer.fromColors(
+                            baseColor: Colors.grey[300]!,
+                            highlightColor: Colors.grey[100]!,
+                            child: Container(
+                              width: 50,
+                              height: 20,
+                              color: Colors.white,
+                            ),
+                          ),
+                        success: (model, pointModel){
+                            final point = pointModel?.data?[0].point ?? 0;
+                          return Text(
+                            '$point Poin',
+                            style: txtPrimaryHeader.copyWith(
+                                fontWeight: FontWeight.w600, color: primaryColor),
+                          );
+                        }
+                      );
+
+                    },
+                  )
                 ],
               ),
               SizedBox(
@@ -103,7 +125,7 @@ class BoxInformationPoin extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(25)),
+                                  BorderRadius.all(Radius.circular(25)),
                                 ),
                                 padding: EdgeInsets.all(10),
                                 child: Text(
