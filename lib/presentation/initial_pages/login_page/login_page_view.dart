@@ -101,7 +101,7 @@ class LoginPage extends StatelessWidget {
                           ),
                           backgroundColor: greenMedium,
                         ));
-                        context.goNamed('dashboard');
+                        context.goNamed('dashboard', pathParameters: {'pageIndex': '0'});
                       },
                     );
                   },

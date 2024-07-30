@@ -19,11 +19,28 @@ class BoxProductCheckout extends StatelessWidget {
   final double screenWidth;
   final CartItem item;
 
+  String _buildProductDescription(CartItem item) {
+    List<String> details = [];
+    if (item.temperatur != null) {
+      details.add('${item.temperatur} temp');
+    }
+    if (item.size != null) {
+      details.add('${item.size} size');
+    }
+    if (item.ice != null) {
+      details.add('${item.ice} ice');
+    }
+    if (item.sugar != null) {
+      details.add('${item.sugar} sugar');
+    }
+    return details.join(', ');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Row(
@@ -34,7 +51,7 @@ class BoxProductCheckout extends StatelessWidget {
               width: 80,
               height: 80,
             ),
-            SizedBox(
+            const SizedBox(
               width: 15,
             ),
             Expanded(
@@ -45,28 +62,34 @@ class BoxProductCheckout extends StatelessWidget {
                   Text(item.productName ?? '',
                       style: txtSecondaryTitle.copyWith(
                           fontWeight: FontWeight.w600, color: blackColor)),
-                  Text('${item.temperatur} temp, ${item.size} size, ${item.ice} ice, ${item.sugar} sugar',
+                  Visibility(
+                    visible: item.temperatur != null || item.size != null || item.ice != null || item.sugar != null,
+                    child: Text(
+                      _buildProductDescription(item),
                       style: txtPrimarySubTitle.copyWith(
                           fontWeight: FontWeight.w500,
-                          color: Colors.black38)),
+                          color: Colors.black38),
+                    ),
+                  ),
                 ],
               ),
             )
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
+
         Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
               decoration: BoxDecoration(
                 color: greybgNote,
-                borderRadius: BorderRadius.all(Radius.circular(8)),
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
               ),
               width: screenWidth,
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                   vertical: Dimensions.paddingSizeDefault,
                   horizontal: Dimensions.paddingSizeDefault),
               child: Row(
@@ -77,7 +100,7 @@ class BoxProductCheckout extends StatelessWidget {
                     width: 18,
                     height: 18,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Expanded(
@@ -92,11 +115,10 @@ class BoxProductCheckout extends StatelessWidget {
             )
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
       ],
     );
   }
 }
-

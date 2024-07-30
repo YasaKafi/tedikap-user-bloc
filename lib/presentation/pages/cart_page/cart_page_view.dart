@@ -17,6 +17,11 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> _refreshData() async {
+      context.read<CartBloc>().add(CartEvent.getCart());
+      await Future.delayed(Duration(seconds: 1));
+    }
+
     context.read<CartBloc>().add(CartEvent.getCart());
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
@@ -40,7 +45,7 @@ class CartPage extends StatelessWidget {
                   if (Navigator.canPop(context)) {
                     context.pop();
                   } else {
-                    context.goNamed('dashboard');
+                    context.goNamed('dashboard', pathParameters: {'pageIndex': '0'});
                   }
                 },
               ),
@@ -63,31 +68,34 @@ class CartPage extends StatelessWidget {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          SingleChildScrollView(
-            child: Container(
-              margin: EdgeInsets.only(bottom: 200),
-              child: Padding(
-                padding: const EdgeInsets.all(Dimensions.paddingSizeLarge),
-                child: Align(
-                  alignment: Alignment.topCenter,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Column(
-                        children: [
-                          BoxEstimationPickup(screenWidth: screenWidth),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          BoxCheckoutDetail(screenWidth: screenWidth),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          BoxPaymentDetail(screenWidth: screenWidth),
-                          BoxAlertPoin(screenWidth: screenWidth),
-                        ],
-                      ),
-                    ],
+          RefreshIndicator(
+            onRefresh: _refreshData,
+            child: SingleChildScrollView(
+              child: Container(
+                margin: EdgeInsets.only(bottom: 200),
+                child: Padding(
+                  padding: const EdgeInsets.all(Dimensions.paddingSizeLarge),
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Column(
+                          children: [
+                            BoxEstimationPickup(screenWidth: screenWidth),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            BoxCheckoutDetail(screenWidth: screenWidth),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            BoxPaymentDetail(screenWidth: screenWidth),
+                            BoxAlertPoin(screenWidth: screenWidth),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

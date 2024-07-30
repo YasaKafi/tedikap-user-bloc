@@ -8,7 +8,6 @@ class PostCartRequestModel {
   String? sugar;
   String? note;
   int? quantity;
-  int? price;
 
   PostCartRequestModel({
     this.productId,
@@ -18,7 +17,6 @@ class PostCartRequestModel {
     this.sugar,
     this.note,
     this.quantity,
-    this.price,
   });
 
   factory PostCartRequestModel.fromJson(String str) => PostCartRequestModel.fromMap(json.decode(str));
@@ -33,7 +31,6 @@ class PostCartRequestModel {
     sugar: json["sugar"],
     note: json["note"],
     quantity: json["quantity"],
-    price: json["price"],
   );
 
   Map<String, dynamic> toMap() => {
@@ -44,6 +41,5 @@ class PostCartRequestModel {
     "sugar": sugar,
     "note": note,
     "quantity": quantity,
-    "price": price,
   };
 }

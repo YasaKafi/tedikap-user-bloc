@@ -9,15 +9,26 @@ import '../pages/order_page/order_page_view.dart';
 import '../pages/profile_page/profile_page_view.dart';
 
 
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import '../../common/constant.dart';
+import '../../common/theme.dart';
+import '../pages/home_page/home_page_view.dart';
+import '../pages/menu_page/menu_page_view.dart';
+import '../pages/order_page/order_page_view.dart';
+import '../pages/profile_page/profile_page_view.dart';
+
 class DashboardPage extends StatefulWidget {
-  const DashboardPage({super.key});
+  final int pageIndex;
+
+  const DashboardPage({Key? key, required this.pageIndex}) : super(key: key);
 
   @override
   State<DashboardPage> createState() => _DashboardPageState();
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  int _selectedIndex = 0;
+  int? _selectedIndex;
 
   final List<Widget> _pages = [
     HomePage(),
@@ -25,6 +36,14 @@ class _DashboardPageState extends State<DashboardPage> {
     OrderPage(),
     ProfilePage(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.pageIndex;
+  }
+
+
 
   void _onItemTapped(int index) {
     setState(() {
@@ -35,10 +54,10 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_selectedIndex],
+      body: _pages[_selectedIndex ?? 0],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        currentIndex: _selectedIndex,
+        currentIndex: _selectedIndex ?? 0,
         unselectedLabelStyle: txtThirdSubTitle.copyWith(fontWeight: FontWeight.w600, color: primaryColor),
         selectedLabelStyle: txtThirdSubTitle.copyWith(fontWeight: FontWeight.w600, color: grey),
         unselectedItemColor: grey,

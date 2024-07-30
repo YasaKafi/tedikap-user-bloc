@@ -28,6 +28,7 @@ class DetailProductPage extends StatelessWidget {
 
   TextEditingController notesController = TextEditingController();
 
+
   @override
   Widget build(BuildContext context) {
     if (cartItemId != null) {
@@ -48,7 +49,6 @@ class DetailProductPage extends StatelessWidget {
       context
           .read<DetailProductBloc>()
           .add(DetailProductEvent.getDetailProductReward(productRewardId!));
-
     }
 
     double screenWidth = MediaQuery.of(context).size.width;
@@ -70,7 +70,13 @@ class DetailProductPage extends StatelessWidget {
               IconButton(
                 icon: const Icon(Icons.arrow_back_ios),
                 onPressed: () {
-                  context.pop();
+                  if (Navigator.canPop(context)) {
+                    context.pop();
+                  } else if (cartItemId != null) {
+                    context.goNamed('cart_common');
+                  } else if (cartItemRewardId != null) {
+                    context.goNamed('cart_reward');
+                  }
                 },
               ),
               Text(

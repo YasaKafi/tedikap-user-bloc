@@ -145,6 +145,8 @@ class BoxBottomPrice extends StatelessWidget {
                     totalPrice,
                     note,
                     ) {
+
+
                   int itemPrice;
 
                   if (modelProduct != null) {
@@ -242,17 +244,11 @@ class BoxBottomPrice extends StatelessWidget {
                       const SizedBox(height: 20),
                       InkWell(
                         onTap: () {
-                          int itemPrice;
-                          if (modelProduct != null) {
-                            itemPrice = selectedSize == 'regular'
-                                ? modelProduct.data?.regularPrice ?? 0
-                                : modelProduct.data?.largePrice ?? 0;
-                          } else {
-                            itemPrice = selectedSize == 'regular'
-                                ? modelProductReward?.data?.regularPoint ?? 0
-                                : modelProductReward?.data?.largePoint ?? 0;
-                          }
-                          totalPrice = itemPrice * qty;
+
+                          print('INI TOTAL PRICE : $totalPrice');
+                          print('INI PRICE SEKARANG : $itemPrice');
+
+
                           if (modelProduct != null) {
                             final itemProductCommon = modelProduct.data;
                             final requestModel = PostCartRequestModel(
@@ -263,17 +259,19 @@ class BoxBottomPrice extends StatelessWidget {
                               sugar: selectedSugar,
                               note: noteController.text,
                               quantity: qty,
-                              price: itemPrice,
                             );
+
                             final requestUpdateModel = PostCartRequestModel(
+                              productId: itemProductCommon.id,
                               temperatur: selectedTemp,
                               size: selectedSize,
                               ice: selectedIce,
                               sugar: selectedSugar,
                               note: noteController.text,
                               quantity: qty,
-                              price: itemPrice,
                             );
+
+
                             cartItemId != null
                                 ? context.read<DetailProductBloc>().add(
                                 DetailProductEvent.updateCart(
@@ -281,7 +279,11 @@ class BoxBottomPrice extends StatelessWidget {
                                 : context.read<DetailProductBloc>().add(
                                 DetailProductEvent.postCart(
                                     requestModel));
+
+
                           } else {
+
+
                             final itemProductReward = modelProductReward!.data;
                             note = noteController.text;
                             final requestModel = PostCartRewardRequestModel(
@@ -315,6 +317,8 @@ class BoxBottomPrice extends StatelessWidget {
                                     requestModel));
                           }
                         },
+
+
                         child: Container(
                           width: screenWidth,
                           padding: const EdgeInsets.symmetric(

@@ -254,6 +254,7 @@ class FavoritePage extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
+
               ],
             ),
           ),

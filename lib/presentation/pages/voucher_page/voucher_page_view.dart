@@ -37,7 +37,12 @@ class VoucherPage extends StatelessWidget {
               IconButton(
                 icon: const Icon(Icons.arrow_back_ios),
                 onPressed: () {
-                  context.pop();
+                  if (Navigator.canPop(context)) {
+                    context.pop();
+                  } else {
+                    context.goNamed('cart_common');
+                  }
+
                 },
               ),
               Text(

@@ -226,7 +226,7 @@ class EditProfilePage extends StatelessWidget {
                             ),
                             backgroundColor: greenMedium,
                           ));
-                          context.pushNamed('dashboard');
+                          context.goNamed('dashboard', pathParameters: {'pageIndex': '3'});
                         },
                       );
                     },

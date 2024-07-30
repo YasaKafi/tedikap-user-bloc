@@ -35,6 +35,7 @@ class DetailOrder {
   int? originalPrice;
   String? status;
   String? paymentChannel;
+  String? iconStatus;
   DateTime? createdAt;
   DateTime? updatedAt;
   String? schedulePickup;
@@ -51,6 +52,7 @@ class DetailOrder {
     this.originalPrice,
     this.status,
     this.paymentChannel,
+    this.iconStatus,
     this.createdAt,
     this.updatedAt,
     this.schedulePickup,
@@ -72,6 +74,7 @@ class DetailOrder {
     originalPrice: json["original_price"],
     status: json["status"],
     paymentChannel: json["payment_channel"],
+    iconStatus: json["icon_status"],
     createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
     updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
     schedulePickup: json["schedule_pickup"],
@@ -89,6 +92,7 @@ class DetailOrder {
     "original_price": originalPrice,
     "status": status,
     "payment_channel": paymentChannel,
+    "icon_status": iconStatus,
     "created_at": createdAt?.toIso8601String(),
     "updated_at": updatedAt?.toIso8601String(),
     "schedule_pickup": schedulePickup,

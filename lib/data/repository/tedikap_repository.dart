@@ -31,6 +31,7 @@ class TedikapApiRepository {
   static String getAvatarProfile = '$mainUrl/storage/avatar/';
   static String getImagePromo = '$mainUrl/storage/voucher/';
   static String getImageRewardProduct = '$mainUrl/storage/reward-product/';
+  static String getImageStatusOrder = '$mainUrl/storage/icon-status-order/';
 
   static String postRegister = '$mainUrl/api/user/register';
   static String postLogin = '$mainUrl/api/user/login';

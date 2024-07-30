@@ -25,7 +25,7 @@ import '../presentation/pages/information_page/privacy_policy_page/privacy_polic
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: '/dashboard',
+    initialLocation: '/dashboard/0',
     debugLogDiagnostics: true,
     routes: [
       GoRoute(
@@ -50,8 +50,11 @@ class AppRouter {
       ),
       GoRoute(
         name: 'dashboard',
-        path: '/dashboard',
-        builder: (context, state) => const DashboardPage(),
+        path: '/dashboard/:pageIndex',
+        builder: (context, state) {
+          final pageIndex = int.parse(state.pathParameters['pageIndex'] ?? '0');
+          return DashboardPage(pageIndex: pageIndex);
+        },
       ),
       GoRoute(
         name: 'help_center',

@@ -27,6 +27,7 @@ class Cart {
   int? totalPrice;
   int? discountAmount;
   int? originalPrice;
+  int? rewardPoint;
   List<CartItem>? cartItems;
 
   Cart({
@@ -36,6 +37,7 @@ class Cart {
     this.totalPrice,
     this.discountAmount,
     this.originalPrice,
+    this.rewardPoint,
     this.cartItems,
   });
 
@@ -50,6 +52,7 @@ class Cart {
     totalPrice: json["total_price"],
     discountAmount: json["discount_amount"],
     originalPrice: json["original_price"],
+    rewardPoint: json["reward_point"],
     cartItems: json["cart_items"] == null ? [] : List<CartItem>.from(json["cart_items"]!.map((x) => CartItem.fromMap(x))),
   );
 
@@ -60,6 +63,7 @@ class Cart {
     "total_price": totalPrice,
     "discount_amount": discountAmount,
     "original_price": originalPrice,
+    "reward_point": rewardPoint,
     "cart_items": cartItems == null ? [] : List<dynamic>.from(cartItems!.map((x) => x.toMap())),
   };
 }

@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:tedikap_user_bloc/presentation/pages/cart_page/bloc/cart_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_reward_page/bloc/cart_reward_bloc.dart';
 
 import '../../../../../common/constant.dart';
@@ -45,11 +45,12 @@ class BoxCheckoutSummary extends StatelessWidget {
               BlocBuilder<CartRewardBloc, CartRewardState>(
                 builder: (context, state) {
                   return state.when(
-                      initial: () => Center(child: CircularProgressIndicator()),
-                      loading: () => Center(child: CircularProgressIndicator()),
+                      initial: () =>  _buildShimmerEffect(context),
+                      loading: () => _buildShimmerEffect(context),
                       success: (cartModel,  modelQty, deleteModel, modelPostOrder){
                         if(cartModel != null){
                           final itemCart = cartModel.cart;
+                          final isCartItemEmpty = itemCart?.cartItems?.isEmpty ?? true;
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -92,6 +93,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                 children: [
                                   InkWell(
                                     onTap: () {
+                                      isCartItemEmpty ? null :
                                       _onAlertButtonsPressed(context,
                                           bgcolor: baseColor,
                                           title: 'Kebijakan Privasi',
@@ -106,7 +108,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                           icon: icAlert,
                                           onPressed: () {
                                             context.read<CartRewardBloc>().add(CartRewardEvent.postOrder(cartId: itemCart.id));
-                                            context.pushNamed('dashboard');
+                                            context.goNamed('dashboard', pathParameters: {'pageIndex': '2'});
                                           });
                                     },
                                     child: Container(
@@ -114,7 +116,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                           vertical: Dimensions.paddingSizeDefault,
                                           horizontal: Dimensions.paddingSizeLarge),
                                       decoration: BoxDecoration(
-                                        color: navyColor,
+                                        color: isCartItemEmpty ? grey : navyColor,
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(25)),
                                       ),
@@ -143,15 +145,10 @@ class BoxCheckoutSummary extends StatelessWidget {
                             ],
                           );
                         } else {
-                          return Center(child: Text("No product details available"));
+                          return  _buildShimmerEffect(context);
                         }
-
-
-
                       },
-                    error: (message) => Center(child: Text(message!)),
-
-
+                    error: (message) => _buildShimmerEffect(context),
                   );
 
                 },
@@ -160,6 +157,74 @@ class BoxCheckoutSummary extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildShimmerEffect(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 100,
+                height: 20,
+                color: Colors.grey,
+              ),
+              SizedBox(height: 5),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 10,
+                    height: 20,
+                    color: Colors.grey,
+                  ),
+                  SizedBox(width: 3),
+                  Container(
+                    width: 100,
+                    height: 20,
+                    color: Colors.grey,
+                  ),
+                ],
+              ),
+            ],
+          ),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(
+                    vertical: Dimensions.paddingSizeDefault,
+                    horizontal: Dimensions.paddingSizeLarge),
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.all(Radius.circular(25)),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 24,
+                      height: 24,
+                      color: Colors.grey,
+                    ),
+                    SizedBox(width: 10),
+                    Container(
+                      width: 100,
+                      height: 20,
+                      color: Colors.grey,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
