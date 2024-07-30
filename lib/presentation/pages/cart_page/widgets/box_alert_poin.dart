@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:tedikap_user_bloc/presentation/pages/cart_page/bloc/cart_bloc.dart';
 
 import '../../../../../common/constant.dart';
 import '../../../../../common/dimensions.dart';
@@ -16,10 +19,9 @@ class BoxAlertPoin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(top: 20),
+        margin: const EdgeInsets.only(top: 20),
         width: screenWidth,
-        padding:
-        EdgeInsets.all(Dimensions.paddingSizeLarge),
+        padding: const EdgeInsets.all(Dimensions.paddingSizeLarge),
         decoration: BoxDecoration(
           color: primaryColor2,
           borderRadius: BorderRadius.circular(15),
@@ -33,17 +35,47 @@ class BoxAlertPoin extends StatelessWidget {
               width: 24,
               height: 24,
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Row(
               children: [
                 Text('Kamu berpotensi mendapatkan',
-                    style: txtPrimarySubTitle.copyWith(fontWeight: FontWeight.w400, color: blackColor)),
-                SizedBox(
+                    style: txtPrimarySubTitle.copyWith(
+                        fontWeight: FontWeight.w400, color: blackColor)),
+                const SizedBox(
                   width: 3,
                 ),
-                Text('3 Poin', style: txtPrimarySubTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor)),
+                BlocBuilder<CartBloc, CartState>(
+                  builder: (context, state) {
+                    return state.maybeWhen(
+                        orElse: () => Shimmer.fromColors(
+                          baseColor: Colors.grey[300]!,
+                          highlightColor: Colors.grey[100]!,
+                          child: Container(
+                            width: 50,
+                            height: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                        success: (cartModel, modelQty, deleteModel,
+                            modelPostOrder, modelPostPayment) {
+                          final itemPoint = cartModel?.cart;
+
+                          if (itemPoint != null) {
+                            return Text('${itemPoint.rewardPoint} Point',
+                                style: txtPrimarySubTitle.copyWith(
+                                    fontWeight: FontWeight.w500,
+                                    color: blackColor));
+                          } else {
+                            return Text('0 Point',
+                                style: txtPrimarySubTitle.copyWith(
+                                    fontWeight: FontWeight.w500,
+                                    color: blackColor));
+                          }
+                        });
+                  },
+                ),
               ],
             ),
           ],

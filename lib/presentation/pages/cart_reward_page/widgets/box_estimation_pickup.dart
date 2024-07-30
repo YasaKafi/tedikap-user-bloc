@@ -52,7 +52,7 @@ class BoxEstimationPickup extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             SvgPicture.asset(
-                              icOutlet,
+                              icOutletActive,
                               height: 32,
                               width: 32,
                             ),

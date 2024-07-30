@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:tedikap_user_bloc/data/repository/tedikap_repository.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/bloc/detail_order_bloc.dart';
 
 import '../../../../../common/constant.dart';
@@ -81,7 +82,6 @@ class BoxInfoStatus extends StatelessWidget {
                               ),
                             );
                           }
-
                         },
                       );
                     },
@@ -149,7 +149,8 @@ class BoxInfoStatus extends StatelessWidget {
                           final detailOrder = model?.order;
                           if (detailOrder != null) {
                             return Text(
-                              'Tanggal : ${formatDate(detailOrder.createdAt!.toString())}',
+                              'Tanggal : ${formatDate(
+                                  detailOrder.createdAt!.toString())}',
                               style: txtSecondarySubTitle.copyWith(
                                 fontWeight: FontWeight.w600,
                                 color: blackColor,
@@ -157,7 +158,8 @@ class BoxInfoStatus extends StatelessWidget {
                             );
                           }
                           return Text(
-                            'Tanggal : ${formatDate(rewardModel!.order!.createdAt!.toString())}',
+                            'Tanggal : ${formatDate(
+                                rewardModel!.order!.createdAt!.toString())}',
                             style: txtSecondarySubTitle.copyWith(
                               fontWeight: FontWeight.w600,
                               color: blackColor,
@@ -170,12 +172,30 @@ class BoxInfoStatus extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              child: SvgPicture.asset(
-                icStatusOrder,
-                width: 80,
-                height: 80,
-              ),
+            BlocBuilder<DetailOrderBloc, DetailOrderState>(
+              builder: (context, state) {
+                return state.maybeWhen(
+                  orElse: () => loadingCard(0.12, 50),
+                  success: (model, rewardModel){
+                    final detailOrder = model?.order;
+                    final detailOrderReward = rewardModel?.order;
+                    if (detailOrder != null) {
+                      return SvgPicture.network(
+                        TedikapApiRepository.getImageStatusOrder + detailOrder.iconStatus!,
+                        width: 80,
+                        height: 80,
+                      );
+                    } else {
+                      return SvgPicture.network(
+                        TedikapApiRepository.getImageStatusOrder + detailOrderReward!.iconStatus!,
+                        width: 80,
+                        height: 80,
+                      );
+                    }
+                  }
+                );
+
+              },
             )
           ],
         ),
