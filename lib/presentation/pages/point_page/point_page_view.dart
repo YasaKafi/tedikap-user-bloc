@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/presentation/pages/point_page/bloc/point_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/point_page/widgets/box_information_poin.dart';
 import 'package:tedikap_user_bloc/presentation/pages/point_page/widgets/list_box_product_poin.dart';
@@ -17,6 +18,7 @@ class PointPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<PointBloc>().add(PointEvent.getFilterCategory('tea'));
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return DefaultTabController(
@@ -41,7 +43,8 @@ class PointPage extends StatelessWidget {
                       if (Navigator.canPop(context)) {
                         context.pop();
                       } else {
-                        context.goNamed('dashboard', pathParameters: {'pageIndex': '0'});
+                        context.goNamed('dashboard',
+                            pathParameters: {'pageIndex': '0'});
                       }
                     },
                   ),
@@ -66,127 +69,70 @@ class PointPage extends StatelessWidget {
                   SizedBox(
                     height: 30,
                   ),
-                  BlocBuilder<PointBloc, PointState>(
-                    builder: (context, state) {
-                      return state.when(
-                        initial: () =>
-                            Center(child: CircularProgressIndicator()),
-                        success: (model) {
-                          return Container(
-                            width: screenWidth,
-                            child: BlocBuilder<PointBloc, PointState>(
-                              builder: (context, state) {
-                                return state.when(
-                                  initial: () => Center(
-                                      child: CircularProgressIndicator()),
-                                  success: (model) {
-                                    return TabBar(
-                                      indicatorPadding:
-                                          EdgeInsets.symmetric(
-                                              horizontal: -10, vertical: 5),
-                                      indicator: BoxDecoration(
-                                        border:
-                                            Border.all(color: primaryColor),
-                                        borderRadius:
-                                            BorderRadius.circular(20),
-                                      ),
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal:
-                                            Dimensions.paddingSizeLarge,
-                                      ),
-                                      dividerHeight: 2,
-                                      dividerColor: Colors.transparent,
-                                      indicatorColor: Colors.transparent,
-                                      labelColor: blackColor,
-                                      unselectedLabelColor: grey,
-                                      onTap: (index) {
-                                        switch (index) {
-                                          case 0:
-                                            context.read<PointBloc>().add(
-                                                PointEvent
-                                                    .getFilterCategory(
-                                                        'tea'));
-                                            break;
-                                          case 1:
-                                            context.read<PointBloc>().add(
-                                                PointEvent
-                                                    .getFilterCategory(
-                                                        'nontea'));
-                                            break;
-                                          case 2:
-                                            context.read<PointBloc>().add(
-                                                PointEvent
-                                                    .getFilterCategory(
-                                                        'snack'));
-                                            break;
-                                        }
-                                      },
-                                      tabs: [
-
-                                        Tab(
-                                          child: Text('Tea',
-                                              style: txtPrimarySubTitle
-                                                  .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: blackColor)),
-                                        ),
-                                        Tab(
-                                          child: Text('Non Tea',
-                                              style: txtPrimarySubTitle
-                                                  .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: blackColor)),
-                                        ),
-                                        Tab(
-                                          child: Text('Snack',
-                                              style: txtPrimarySubTitle
-                                                  .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: blackColor)),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                  loading: () => Center(
-                                    child: CircularProgressIndicator(),
-                                  ),
-                                  error: (message) => Center(
-                                    child: Text(
-                                      message!,
-                                      style: txtSecondaryTitle.copyWith(
-                                          fontWeight: FontWeight.w600,
-                                          color: blackColor),
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          );
-                        },
-                        loading: () =>
-                            Center(child: CircularProgressIndicator()),
-                        error: (message) => Center(
-                          child: Text(
-                            message!,
-                            style: txtSecondaryTitle.copyWith(
-                                fontWeight: FontWeight.w600, color: blackColor),
-                          ),
+                  Container(
+                    width: screenWidth,
+                    child: TabBar(
+                      indicatorPadding:
+                          EdgeInsets.symmetric(horizontal: -10, vertical: 5),
+                      indicator: BoxDecoration(
+                        border: Border.all(color: primaryColor),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: Dimensions.paddingSizeLarge,
+                      ),
+                      dividerHeight: 2,
+                      dividerColor: Colors.transparent,
+                      indicatorColor: Colors.transparent,
+                      labelColor: blackColor,
+                      unselectedLabelColor: grey,
+                      onTap: (index) {
+                        switch (index) {
+                          case 0:
+                            context
+                                .read<PointBloc>()
+                                .add(PointEvent.getFilterCategory('tea'));
+                            break;
+                          case 1:
+                            context
+                                .read<PointBloc>()
+                                .add(PointEvent.getFilterCategory('nontea'));
+                            break;
+                          case 2:
+                            context
+                                .read<PointBloc>()
+                                .add(PointEvent.getFilterCategory('snack'));
+                            break;
+                        }
+                      },
+                      tabs: [
+                        Tab(
+                          child: Text('Tea',
+                              style: txtPrimarySubTitle.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                  color: blackColor)),
                         ),
-                      );
-                    },
+                        Tab(
+                          child: Text('Non Tea',
+                              style: txtPrimarySubTitle.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                  color: blackColor)),
+                        ),
+                        Tab(
+                          child: Text('Snack',
+                              style: txtPrimarySubTitle.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                  color: blackColor)),
+                        ),
+                      ],
+                    ),
                   ),
                   Expanded(
                     child: TabBarView(
                       children: [
-                        buildTabGridViewProduct(
-                            screenHeight, screenWidth),
-                        buildTabGridViewProduct(
-                            screenHeight, screenWidth),
-                        buildTabGridViewProduct(
-                            screenHeight, screenWidth),
+                        buildTabGridViewProduct(screenHeight, screenWidth),
+                        buildTabGridViewProduct(screenHeight, screenWidth),
+                        buildTabGridViewProduct(screenHeight, screenWidth),
                       ],
                     ),
                   ),
@@ -199,19 +145,18 @@ class PointPage extends StatelessWidget {
     return BlocBuilder<PointBloc, PointState>(
       builder: (context, state) {
         return state.when(
-          initial: () => Center(child: CircularProgressIndicator()),
-          success: (model) {
-            return Tab(
-                child: GridView.builder(
+          initial: () => buildShimmer(screenHeight, screenWidth),
+          success: (model, pointModel) {
+            return GridView.builder(
               itemCount: model!.data!.length,
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
                 final rewardProduct = model!.data![index];
-                // final imageUrl =
-                // rewardProduct.image!;
                 return InkWell(
                   onTap: () {
-                    context.pushNamed('detail_product_reward', pathParameters: {'productRewardId': rewardProduct.id!.toString()});
+                    context.pushNamed('detail_product_reward', pathParameters: {
+                      'productRewardId': rewardProduct.id!.toString()
+                    });
                   },
                   child: ListBoxProductPoin(
                     screenHeight: screenHeight,
@@ -224,13 +169,14 @@ class PointPage extends StatelessWidget {
                 );
               },
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.75,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10),
-            ));
+                crossAxisCount: 2,
+                childAspectRatio: 0.75,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+              ),
+            );
           },
-          loading: () => Center(child: CircularProgressIndicator()),
+          loading: () => buildShimmer(screenHeight, screenWidth),
           error: (message) => Center(
             child: Text(
               message!,
@@ -239,8 +185,44 @@ class PointPage extends StatelessWidget {
             ),
           ),
         );
-
       },
+    );
+  }
+
+  Widget buildShimmer(double screenHeight, double screenWidth) {
+    return GridView.builder(
+      itemCount: 6, // Number of shimmer items to display
+      scrollDirection: Axis.vertical,
+      itemBuilder: (context, index) {
+        return Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                margin: EdgeInsets.all(5),
+                height: screenHeight * 0.2,
+                width: screenWidth * 0.4,
+                color: grey,
+              ),
+              Container(
+                margin: EdgeInsets.all(5),
+                height: 30,
+                width: screenWidth * 0.3,
+                color: grey,
+              ),
+            ],
+          ),
+        );
+      },
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 0.75,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+      ),
     );
   }
 }

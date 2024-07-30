@@ -105,6 +105,8 @@ class OrderDatasource{
       );
       if (response.statusCode == 201 || response.statusCode == 200) {
         return Right(PostOrderRewardResponseModel.fromMap(response.data));
+      } else if (response.statusCode == 400){
+        return const Left('Your point is not enough');
       } else {
         return const Left('Failed Ordered');
       }
