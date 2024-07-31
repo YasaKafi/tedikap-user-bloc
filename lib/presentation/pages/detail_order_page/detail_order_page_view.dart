@@ -7,6 +7,7 @@ import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/widgets/b
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/widgets/box_payment_order_detail.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/widgets/box_status_order.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/widgets/box_timeline_pickup.dart';
+import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/widgets/section_button.dart';
 
 
 import '../../../../../common/theme.dart';
@@ -65,26 +66,35 @@ class DetailOrderPage extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(Dimensions.paddingSizeLarge),
-          child: Column(
-            children: [
-              BoxInfoStatus(screenWidth: screenWidth),
-              SizedBox(height: 20,),
-              BoxTimelinePickup(screenWidth: screenWidth,),
-              SizedBox(height: 20,),
-              BoxProductOrder(screenWidth: screenWidth,),
-              SizedBox(height: 20,),
-              BoxPaymentDetailOrder(screenWidth: screenWidth),
-              SizedBox(height: 20,),
-              BoxKindOfPayment(screenWidth: screenWidth),
-              SizedBox(height: 20,),
-              SizedBox(height: 20,),
-              SizedBox(height: 20,),
-            ],
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              child: Column(
+                children: [
+                  BoxInfoStatus(screenWidth: screenWidth),
+                  SizedBox(height: 20,),
+                  BoxTimelinePickup(screenWidth: screenWidth,),
+                  SizedBox(height: 20,),
+                  BoxProductOrder(screenWidth: screenWidth,),
+                  SizedBox(height: 20,),
+                  BoxPaymentDetailOrder(screenWidth: screenWidth),
+                  SizedBox(height: 20,),
+                  BoxKindOfPayment(screenWidth: screenWidth),
+                  SizedBox(height: 20,),
+                ],
+              ),
+            ),
           ),
-        ),
+
+          Positioned(
+              bottom: 0,
+              right: 0,
+              left: 0,
+              child: SectionButton()
+          ),
+        ],
       ),
 
     );
