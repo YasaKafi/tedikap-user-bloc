@@ -34,7 +34,7 @@ class AlertBox extends StatelessWidget {
           ),
           Flexible(
             child: Text(
-              'Vouchers can only be used on the checkout page',
+              'Vouchers can only be used on the cart page',
               style: txtPrimarySubTitle.copyWith(fontWeight: FontWeight.w600, color: primaryColor),
             ),
           ),

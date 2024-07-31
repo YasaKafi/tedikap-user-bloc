@@ -9,6 +9,7 @@ class VoucherState with _$VoucherState {
     required CartResponseModel? modelCart,
     required VoucherAppliedRemoveResponseModel? modelVoucherAppliedRemove,
     @Default(false) bool isUseVoucher,
+    required CartResponseModel? cartModel,
   }) = _Success;
   const factory VoucherState.error({String? message}) = _Error;
 }

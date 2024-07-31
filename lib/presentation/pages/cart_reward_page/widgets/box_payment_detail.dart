@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_page/bloc/cart_bloc.dart';
 
 import '../../../../../common/dimensions.dart';
@@ -35,8 +36,8 @@ class BoxPaymentDetail extends StatelessWidget {
           BlocBuilder<CartRewardBloc, CartRewardState>(
             builder: (context, state) {
               return state.when(
-                  initial: () => Center(child: CircularProgressIndicator()),
-                  loading: () => Center(child: CircularProgressIndicator()),
+                  initial: () => buildShimmer(),
+                  loading: () => buildShimmer(),
                   success: (cartModel,  modelQty, deleteModel, modelPostOrder, modelPoint){
                     if(cartModel != null){
                       final itemCart = cartModel.cart;
@@ -78,15 +79,79 @@ class BoxPaymentDetail extends StatelessWidget {
                         ],
                       );
                     } else {
-                      return Center(child: Text('Cart kosong'),);
+                      return buildShimmer();
                     }
 
                   },
-                error: (message) => Center(child: Text(message!)),
+                error: (message) => buildShimmer(),
               );
 
             },
           )
+        ],
+      ),
+    );
+  }
+  Widget buildShimmer() {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: screenWidth * 0.3,
+                height: 20,
+                color: Colors.grey,
+              ),
+              Container(
+                width: screenWidth * 0.2,
+                height: 20,
+                color: Colors.grey,
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: screenWidth * 0.2,
+                height: 20,
+                color: Colors.grey,
+              ),
+              Container(
+                width: screenWidth * 0.1,
+                height: 20,
+                color: Colors.grey,
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          const Divider(
+            height: 1,
+            color: grey,
+          ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: screenWidth * 0.4,
+                height: 20,
+                color: Colors.grey,
+              ),
+              Container(
+                width: screenWidth * 0.3,
+                height: 20,
+                color: Colors.grey,
+              ),
+            ],
+          ),
         ],
       ),
     );
