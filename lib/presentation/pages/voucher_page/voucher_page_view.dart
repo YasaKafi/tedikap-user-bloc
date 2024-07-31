@@ -136,8 +136,11 @@ class VoucherPage extends StatelessWidget {
                       ),
                       success: (modelVoucher, modelCart, modelApplyRemove,
                           isUseVoucher, cartModel) {
-                        if (modelVoucher?.activeVouchers != null) {
-                          final itemVoucher = modelVoucher?.activeVouchers;
+                        if (modelVoucher!.activeVouchers!.isEmpty) {
+                          return _buildEmptyVoucherState(context);
+
+                        } else {
+                          final itemVoucher = modelVoucher.activeVouchers;
                           return ListView.builder(
                             itemCount: itemVoucher!.length,
                             itemBuilder: (context, index) {
@@ -156,7 +159,7 @@ class VoucherPage extends StatelessWidget {
                                             'voucherId': item.id!.toString()
                                           });
                                     }
-                                        ,
+                                    ,
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
@@ -407,15 +410,10 @@ class VoucherPage extends StatelessWidget {
                               );
                             },
                           );
-                        } else {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
+
                         }
                       },
-                      error: (message) => Center(
-                        child: Text(message!),
-                      ),
+                      error: (message) => _buildErrorState(context)
                     );
                   },
                 ),
@@ -423,6 +421,68 @@ class VoucherPage extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+  Widget _buildErrorState(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SvgPicture.asset(icServerError, width: screenWidth * 0.5),
+          const SizedBox(height: 10),
+          SizedBox(
+            width: screenWidth * 0.7,
+            child: Text(
+              'Oops, something went wrong. Please try again later.',
+              style: txtPrimaryTitle.copyWith(
+                fontWeight: FontWeight.w500,
+                color: blackColor,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildEmptyVoucherState(BuildContext context,) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SvgPicture.asset(icSearchEmpty, width: screenWidth * 0.5),
+          const SizedBox(height: 10),
+          SizedBox(
+            width: screenWidth * 0.8,
+            child: Column(
+              children: [
+                Text(
+                  'No Vouchers Available',
+                  style: txtPrimaryTitle.copyWith(
+                    fontWeight: FontWeight.w500,
+                    color: blackColor,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  'You currently do not have any vouchers. Discover exciting offers and discounts to earn vouchers.'
+                  ,style: txtSecondarySubTitle.copyWith(
+                    fontWeight: FontWeight.w400,
+                    color: blackColor,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
