@@ -32,7 +32,8 @@ class VoucherBloc extends Bloc<VoucherEvent, VoucherState> {
                       modelVoucher: r,
                       modelCart: getCartDetails,
                       modelVoucherAppliedRemove: null,
-                    isUseVoucher: isUseVoucher
+                    isUseVoucher: isUseVoucher,
+                    cartModel: getCartDetails
                   ));
                 } // Update products in _Success state
         );

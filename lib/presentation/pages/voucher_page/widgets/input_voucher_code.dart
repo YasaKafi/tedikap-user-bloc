@@ -43,13 +43,25 @@ class InputVoucherCode extends StatelessWidget {
               SizedBox(
                 width: 10,
               ),
-              Expanded(
-                  child: Center(
-                    child: Text(
-                      'Apply',
-                      style: txtPrimarySubTitle.copyWith(fontWeight: FontWeight.w600, color: primaryColor)
+              InkWell(
+                onTap: (){
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(
+                      'Sorry, voucher not found!',
+                      style: txtSecondaryTitle.copyWith(
+                          fontWeight: FontWeight.w500, color: baseColor),
                     ),
-                  ))
+                    backgroundColor: redMedium,
+                  ));
+                },
+                child: Expanded(
+                    child: Center(
+                      child: Text(
+                        'Apply',
+                        style: txtPrimarySubTitle.copyWith(fontWeight: FontWeight.w600, color: primaryColor)
+                      ),
+                    )),
+              )
             ],
           ),
         )

@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tedikap_user_bloc/presentation/pages/cart_reward_page/widgets/box_alert_poin.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_reward_page/widgets/box_checkout_detail.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_reward_page/widgets/box_estimation_pickup.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_reward_page/widgets/box_payment_detail.dart';
@@ -46,7 +45,7 @@ class CartRewardPage extends StatelessWidget {
                 },
               ),
               Text(
-                'My Reward Order',
+                'My Reward Cart',
                 style: txtSecondaryHeader.copyWith(fontWeight: FontWeight.w600, color: blackColor),
               ),
               Container(
@@ -85,7 +84,6 @@ class CartRewardPage extends StatelessWidget {
                             height: 20,
                           ),
                           BoxPaymentDetail(screenWidth: screenWidth),
-                          BoxAlertPoin(screenWidth: screenWidth),
                         ],
                       ),
                     ],

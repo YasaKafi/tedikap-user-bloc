@@ -50,7 +50,7 @@ class CartPage extends StatelessWidget {
                 },
               ),
               Text(
-                'My Order',
+                'My Cart',
                 style: txtSecondaryHeader.copyWith(fontWeight: FontWeight.w600, color: blackColor),
               ),
               Container(

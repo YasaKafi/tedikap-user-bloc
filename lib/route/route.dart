@@ -103,8 +103,11 @@ class AppRouter {
       ),
       GoRoute(
         name: 'voucher',
-        path: '/voucher',
-        builder: (context, state) => VoucherPage(),
+        path: '/voucher/:cartId',
+        builder: (context, state) {
+          final cartId = int.parse(state.pathParameters['cartId'] ?? '');
+          return VoucherPage(cartId: cartId,);
+        }
       ),
       GoRoute(
         name: 'detail_order_common',
