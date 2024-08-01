@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:tedikap_user_bloc/data/models/request/login_request_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/login_response_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/update_fcm_token_response_model.dart';
 import 'package:tedikap_user_bloc/data/repository/tedikap_repository.dart';
 
 import '../dio_instance.dart';
 import '../models/request/register_request_model.dart';
+import '../models/response/logout_response_model.dart';
 import '../models/response/register_response_model.dart';
 
 class AuthDatasource {
@@ -38,6 +40,25 @@ class AuthDatasource {
         return Right(LoginResponseModel.fromMap(response.data));
       } else {
         return const Left('Failed to register');
+      }
+    } catch (e) {
+      return Left('Failed to login: ${e.toString()}');
+    }
+  }
+
+  Future<Either<String, UpdateFcmResponseModel>> putFCMToken(String fcmToken) async {
+    try {
+      final response = await _dioInstance.putRequest(
+          endpoint: TedikapApiRepository.putFCMToken,
+          isAuthorize: true,
+          data: {
+            "fcm_token": fcmToken
+          }
+      );
+      if (response.statusCode == 200) {
+        return Right(UpdateFcmResponseModel.fromMap(response.data));
+      } else {
+        return const Left('Failed to Update FCM');
       }
     } catch (e) {
       return Left('Failed to login: ${e.toString()}');
