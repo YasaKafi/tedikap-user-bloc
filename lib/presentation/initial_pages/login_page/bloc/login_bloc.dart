@@ -17,5 +17,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final result = await datasource.postLogin(event.data!);
       result.fold((l) => emit(LoginState.error(message: 'Failed to login')), (r) => emit(LoginState.success(model: r)));
     });
+
+    on<_DoUpdateFcm>((event, emit) async {
+      emit(const LoginState.loading());
+      final result = await datasource.putFCMToken(event.fcmToken!);
+      result.fold((l) => emit(LoginState.error(message: 'Failed to Update FCM')), (r) => emit(LoginState.success(model: null,)));
+    });
   }
 }

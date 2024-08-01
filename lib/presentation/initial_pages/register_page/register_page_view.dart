@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tedikap_user_bloc/data/repository/global_variabel.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/register_page/bloc/register_bloc.dart';
 
 import '../../../common/constant.dart';
@@ -116,6 +117,11 @@ class RegisterPage extends StatelessWidget {
                               context
                                   .read<RegisterBloc>()
                                   .add(RegisterEvent.doRegister(requestModel));
+
+                              context
+                                  .read<RegisterBloc>()
+                                  .add(RegisterEvent.doUpdateFcm(GlobalVariables.deviceToken));
+
                             }
                           },
                           borderRadius: 10,

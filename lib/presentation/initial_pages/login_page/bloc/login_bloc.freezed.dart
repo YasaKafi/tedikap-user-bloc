@@ -20,18 +20,21 @@ mixin _$LoginEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(LoginRequestModel? data) doLogin,
+    required TResult Function(String? fcmToken) doUpdateFcm,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(LoginRequestModel? data)? doLogin,
+    TResult? Function(String? fcmToken)? doUpdateFcm,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(LoginRequestModel? data)? doLogin,
+    TResult Function(String? fcmToken)? doUpdateFcm,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$LoginEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_DoLogin value) doLogin,
+    required TResult Function(_DoUpdateFcm value) doUpdateFcm,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_DoLogin value)? doLogin,
+    TResult? Function(_DoUpdateFcm value)? doUpdateFcm,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_DoLogin value)? doLogin,
+    TResult Function(_DoUpdateFcm value)? doUpdateFcm,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -114,6 +120,7 @@ class _$StartedImpl implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(LoginRequestModel? data) doLogin,
+    required TResult Function(String? fcmToken) doUpdateFcm,
   }) {
     return started();
   }
@@ -123,6 +130,7 @@ class _$StartedImpl implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(LoginRequestModel? data)? doLogin,
+    TResult? Function(String? fcmToken)? doUpdateFcm,
   }) {
     return started?.call();
   }
@@ -132,6 +140,7 @@ class _$StartedImpl implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(LoginRequestModel? data)? doLogin,
+    TResult Function(String? fcmToken)? doUpdateFcm,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -145,6 +154,7 @@ class _$StartedImpl implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_DoLogin value) doLogin,
+    required TResult Function(_DoUpdateFcm value) doUpdateFcm,
   }) {
     return started(this);
   }
@@ -154,6 +164,7 @@ class _$StartedImpl implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_DoLogin value)? doLogin,
+    TResult? Function(_DoUpdateFcm value)? doUpdateFcm,
   }) {
     return started?.call(this);
   }
@@ -163,6 +174,7 @@ class _$StartedImpl implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_DoLogin value)? doLogin,
+    TResult Function(_DoUpdateFcm value)? doUpdateFcm,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -242,6 +254,7 @@ class _$DoLoginImpl implements _DoLogin {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(LoginRequestModel? data) doLogin,
+    required TResult Function(String? fcmToken) doUpdateFcm,
   }) {
     return doLogin(data);
   }
@@ -251,6 +264,7 @@ class _$DoLoginImpl implements _DoLogin {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(LoginRequestModel? data)? doLogin,
+    TResult? Function(String? fcmToken)? doUpdateFcm,
   }) {
     return doLogin?.call(data);
   }
@@ -260,6 +274,7 @@ class _$DoLoginImpl implements _DoLogin {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(LoginRequestModel? data)? doLogin,
+    TResult Function(String? fcmToken)? doUpdateFcm,
     required TResult orElse(),
   }) {
     if (doLogin != null) {
@@ -273,6 +288,7 @@ class _$DoLoginImpl implements _DoLogin {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_DoLogin value) doLogin,
+    required TResult Function(_DoUpdateFcm value) doUpdateFcm,
   }) {
     return doLogin(this);
   }
@@ -282,6 +298,7 @@ class _$DoLoginImpl implements _DoLogin {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_DoLogin value)? doLogin,
+    TResult? Function(_DoUpdateFcm value)? doUpdateFcm,
   }) {
     return doLogin?.call(this);
   }
@@ -291,6 +308,7 @@ class _$DoLoginImpl implements _DoLogin {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_DoLogin value)? doLogin,
+    TResult Function(_DoUpdateFcm value)? doUpdateFcm,
     required TResult orElse(),
   }) {
     if (doLogin != null) {
@@ -306,6 +324,146 @@ abstract class _DoLogin implements LoginEvent {
   LoginRequestModel? get data;
   @JsonKey(ignore: true)
   _$$DoLoginImplCopyWith<_$DoLoginImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DoUpdateFcmImplCopyWith<$Res> {
+  factory _$$DoUpdateFcmImplCopyWith(
+          _$DoUpdateFcmImpl value, $Res Function(_$DoUpdateFcmImpl) then) =
+      __$$DoUpdateFcmImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String? fcmToken});
+}
+
+/// @nodoc
+class __$$DoUpdateFcmImplCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res, _$DoUpdateFcmImpl>
+    implements _$$DoUpdateFcmImplCopyWith<$Res> {
+  __$$DoUpdateFcmImplCopyWithImpl(
+      _$DoUpdateFcmImpl _value, $Res Function(_$DoUpdateFcmImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? fcmToken = freezed,
+  }) {
+    return _then(_$DoUpdateFcmImpl(
+      freezed == fcmToken
+          ? _value.fcmToken
+          : fcmToken // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DoUpdateFcmImpl implements _DoUpdateFcm {
+  const _$DoUpdateFcmImpl(this.fcmToken);
+
+  @override
+  final String? fcmToken;
+
+  @override
+  String toString() {
+    return 'LoginEvent.doUpdateFcm(fcmToken: $fcmToken)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DoUpdateFcmImpl &&
+            (identical(other.fcmToken, fcmToken) ||
+                other.fcmToken == fcmToken));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, fcmToken);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DoUpdateFcmImplCopyWith<_$DoUpdateFcmImpl> get copyWith =>
+      __$$DoUpdateFcmImplCopyWithImpl<_$DoUpdateFcmImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(LoginRequestModel? data) doLogin,
+    required TResult Function(String? fcmToken) doUpdateFcm,
+  }) {
+    return doUpdateFcm(fcmToken);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(LoginRequestModel? data)? doLogin,
+    TResult? Function(String? fcmToken)? doUpdateFcm,
+  }) {
+    return doUpdateFcm?.call(fcmToken);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(LoginRequestModel? data)? doLogin,
+    TResult Function(String? fcmToken)? doUpdateFcm,
+    required TResult orElse(),
+  }) {
+    if (doUpdateFcm != null) {
+      return doUpdateFcm(fcmToken);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_DoLogin value) doLogin,
+    required TResult Function(_DoUpdateFcm value) doUpdateFcm,
+  }) {
+    return doUpdateFcm(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_DoLogin value)? doLogin,
+    TResult? Function(_DoUpdateFcm value)? doUpdateFcm,
+  }) {
+    return doUpdateFcm?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_DoLogin value)? doLogin,
+    TResult Function(_DoUpdateFcm value)? doUpdateFcm,
+    required TResult orElse(),
+  }) {
+    if (doUpdateFcm != null) {
+      return doUpdateFcm(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DoUpdateFcm implements LoginEvent {
+  const factory _DoUpdateFcm(final String? fcmToken) = _$DoUpdateFcmImpl;
+
+  String? get fcmToken;
+  @JsonKey(ignore: true)
+  _$$DoUpdateFcmImplCopyWith<_$DoUpdateFcmImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

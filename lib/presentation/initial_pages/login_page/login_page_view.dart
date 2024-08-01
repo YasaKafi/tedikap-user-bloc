@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tedikap_user_bloc/data/models/request/login_request_model.dart';
+import 'package:tedikap_user_bloc/data/repository/global_variabel.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/login_page/bloc/login_bloc.dart';
 
 import '../../../common/constant.dart';
@@ -23,7 +24,7 @@ class LoginPage extends StatelessWidget {
     final List<Map<String, dynamic>> fields = [
       {
         'label': 'Email',
-        'hint': 'Enter your email',
+        'hint': '${GlobalVariables.deviceToken}',
         'controller': emailController
       },
       {
@@ -129,6 +130,10 @@ class LoginPage extends StatelessWidget {
                                 context
                                     .read<LoginBloc>()
                                     .add(LoginEvent.doLogin(requestModel));
+
+                                context
+                                    .read<LoginBloc>()
+                                    .add(LoginEvent.doUpdateFcm(GlobalVariables.deviceToken));
                               }
                             },
                             borderRadius: 10,

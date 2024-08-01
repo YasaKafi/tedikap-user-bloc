@@ -38,6 +38,9 @@ class TedikapApiRepository {
   static String getCurrentUser = '$mainUrl/api/user/get-user';
   static String postProfile = '$mainUrl/api/user/update-profile';
   static String postLogout = '$mainUrl/api/user/logout';
+
+  static String putFCMToken = '$mainUrl/api/user/update-fcm-token';
+
   static String postPayment = '$mainUrl/api/payment';
   static String postOrder = '$mainUrl/api/order/store';
   static String postOrderReward = '$mainUrl/api/order-reward/store';

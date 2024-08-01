@@ -4,4 +4,6 @@ part of 'login_bloc.dart';
 class LoginEvent with _$LoginEvent {
   const factory LoginEvent.started() = _Started;
   const factory LoginEvent.doLogin(LoginRequestModel? data) = _DoLogin;
+  const factory LoginEvent.doUpdateFcm(String? fcmToken) = _DoUpdateFcm;
+
 }
