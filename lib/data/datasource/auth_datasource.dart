@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tedikap_user_bloc/data/models/request/login_request_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/login_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/update_fcm_token_response_model.dart';
@@ -6,7 +7,6 @@ import 'package:tedikap_user_bloc/data/repository/tedikap_repository.dart';
 
 import '../dio_instance.dart';
 import '../models/request/register_request_model.dart';
-import '../models/response/logout_response_model.dart';
 import '../models/response/register_response_model.dart';
 
 class AuthDatasource {
@@ -20,12 +20,17 @@ class AuthDatasource {
         data: model.toJson(),
       );
       if (response.statusCode == 201) {
+        final prefs = await SharedPreferences.getInstance();
+        final token = response.data['token'];
+        if (token != null) {
+          await prefs.setString('token', token);
+        }
         return Right(RegisterResponseModel.fromMap(response.data));
       } else {
         return const Left('Failed to register');
       }
     } catch (e) {
-      return Left('Failed to login: ${e.toString()}');
+      return Left('Failed to register: ${e.toString()}');
     }
   }
 
@@ -39,7 +44,7 @@ class AuthDatasource {
       if (response.statusCode == 200) {
         return Right(LoginResponseModel.fromMap(response.data));
       } else {
-        return const Left('Failed to register');
+        return const Left('Failed to login');
       }
     } catch (e) {
       return Left('Failed to login: ${e.toString()}');
@@ -61,7 +66,8 @@ class AuthDatasource {
         return const Left('Failed to Update FCM');
       }
     } catch (e) {
-      return Left('Failed to login: ${e.toString()}');
+      return Left('Failed to update FCM token: ${e.toString()}');
     }
   }
 }
+

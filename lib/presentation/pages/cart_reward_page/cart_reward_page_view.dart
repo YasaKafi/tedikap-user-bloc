@@ -17,7 +17,9 @@ class CartRewardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<CartRewardBloc>().add(CartRewardEvent.getCart());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<CartRewardBloc>().add(CartRewardEvent.getCart());
+    });
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(

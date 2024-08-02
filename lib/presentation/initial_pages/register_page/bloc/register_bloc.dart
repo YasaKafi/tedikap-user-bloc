@@ -4,6 +4,7 @@ import 'package:tedikap_user_bloc/data/models/request/register_request_model.dar
 import 'package:tedikap_user_bloc/data/models/response/register_response_model.dart';
 
 import '../../../../data/datasource/auth_datasource.dart';
+import '../../../../data/models/response/update_fcm_token_response_model.dart';
 
 part 'register_event.dart';
 part 'register_state.dart';
@@ -15,13 +16,16 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     on<_DoRegister>((event, emit) async {
       emit(const RegisterState.loading());
       final result = await datasource.postRegister(event.data!);
-      result.fold((l) => emit(RegisterState.error(message: 'Failed to login')), (r) => emit(RegisterState.success(model: r)));
+      await result.fold((l) async => emit(RegisterState.error(message: 'Failed to login')), (r) async {
+        if(r.data != null){
+          final resultFcm = await datasource.putFCMToken(event.fcmToken!);
+          final tokenFcm = resultFcm.fold((l) => null, (success) => success);
+          emit(RegisterState.success(model: r, modelFcm: tokenFcm));
+        }
+      }
+      );
     });
 
-    on<_DoUpdateFcm>((event, emit) async {
-      emit(const RegisterState.loading());
-      final result = await datasource.putFCMToken(event.fcmToken!);
-      result.fold((l) => emit(RegisterState.error(message: 'Failed to Update FCM')), (r) => emit(RegisterState.success(model: null,)));
-    });
+
   }
 }
