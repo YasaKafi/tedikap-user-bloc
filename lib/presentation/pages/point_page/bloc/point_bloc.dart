@@ -13,24 +13,27 @@ part 'point_bloc.freezed.dart';
 class PointBloc extends Bloc<PointEvent, PointState> {
   final ProductDatasource datasource;
   final UserDatasource userDatasource;
+
   PointBloc(this.datasource, this.userDatasource)
       : super(const PointState.initial()) {
-
-
     on<_GetFilterCategory>((event, emit) async {
       emit(const _Loading());
-      final result = await datasource.getFilterCategoryReward(event.query);
-      await result.fold(
-          (l) async => emit(const _Error(message: 'Failed to access data product')),
-          (r) async {
-        final result = await userDatasource.getPointUser();
-        final resultPoint = result.fold((l) => null, (success) => success);
 
-        emit(
-            _Success(r, resultPoint)
-        );
-      });
+      final ProductsRewardResponseModel? products;
+      final UserPointResponseModel? points;
 
+      if (state is _Success && (state as _Success).poinModel != null) {
+        points = (state as _Success).poinModel;
+      } else {
+        final pointResult = await userDatasource.getPointUser();
+        points = pointResult.fold((l) => null, (success) => success);
+      }
+
+      final productResult = await datasource.getFilterCategoryReward(event.query);
+      productResult.fold(
+            (l) => emit(const _Error(message: 'Failed to access data product')),
+            (r) => emit(_Success(r, points)),
+      );
     });
   }
 }

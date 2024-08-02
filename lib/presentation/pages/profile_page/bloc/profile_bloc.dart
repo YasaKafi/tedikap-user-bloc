@@ -12,6 +12,7 @@ part 'profile_bloc.freezed.dart';
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final UserDatasource datasource;
 
+
   ProfileBloc(this.datasource) : super(const _Initial()) {
     on<_GetUser>((event, emit) async {
       emit(const _Loading());

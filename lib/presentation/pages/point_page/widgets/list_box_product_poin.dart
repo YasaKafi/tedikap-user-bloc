@@ -8,7 +8,7 @@ import '../../../../common/theme.dart';
 
 
 class ListBoxProductPoin extends StatelessWidget {
-  ListBoxProductPoin({
+  const ListBoxProductPoin({
     super.key,
     required this.screenWidth,
     required this.screenHeight,
@@ -27,7 +27,7 @@ class ListBoxProductPoin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
 
         width: screenWidth,
         child: Column(
@@ -48,7 +48,7 @@ class ListBoxProductPoin extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
-                  margin: EdgeInsets.only(top: 5),
+                  margin: const EdgeInsets.only(top: 5),
                   width: screenWidth,
                     child: Text(title, style: txtPrimaryTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor),)),
               ],
@@ -58,12 +58,12 @@ class ListBoxProductPoin extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  margin: EdgeInsets.only(top: 5),
+                  margin: const EdgeInsets.only(top: 5),
                     width: screenWidth,
                     child: Row(
                       children: [
                         SvgPicture.asset(icLogoPrimary, width: 24, height: 24,),
-                        SizedBox(
+                        const SizedBox(
                           width: Dimensions.marginSizeSmall,
                         ),
                         Text('$price poin', style: txtSecondarySubTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor)),

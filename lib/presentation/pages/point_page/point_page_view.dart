@@ -10,20 +10,22 @@ import '../../../common/constant.dart';
 import '../../../common/dimensions.dart';
 import '../../../common/theme.dart';
 import '../home_page/widgets/base_section.dart';
-import '../menu_page/widgets/list_box_product_menu.dart';
 
 class PointPage extends StatelessWidget {
   const PointPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    context.read<PointBloc>().add(PointEvent.getFilterCategory('tea'));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<PointBloc>().add(const PointEvent.getFilterCategory('tea'));
+    });
 
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+        backgroundColor: baseColor,
           appBar: AppBar(
             automaticallyImplyLeading: false,
             flexibleSpace: Container(
@@ -60,25 +62,25 @@ class PointPage extends StatelessWidget {
           ),
           body: Container(
               padding:
-                  EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeLarge),
+                  const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeLarge),
               width: screenWidth,
               height: screenHeight,
               child: Column(
                 children: [
                   BoxInformationPoin(screenWidth: screenWidth),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
-                  Container(
+                  SizedBox(
                     width: screenWidth,
                     child: TabBar(
                       indicatorPadding:
-                          EdgeInsets.symmetric(horizontal: -10, vertical: 5),
+                          const EdgeInsets.symmetric(horizontal: -10, vertical: 5),
                       indicator: BoxDecoration(
                         border: Border.all(color: primaryColor),
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: Dimensions.paddingSizeLarge,
                       ),
                       dividerHeight: 2,
@@ -91,17 +93,17 @@ class PointPage extends StatelessWidget {
                           case 0:
                             context
                                 .read<PointBloc>()
-                                .add(PointEvent.getFilterCategory('tea'));
+                                .add(const PointEvent.getFilterCategory('tea'));
                             break;
                           case 1:
                             context
                                 .read<PointBloc>()
-                                .add(PointEvent.getFilterCategory('nontea'));
+                                .add(const PointEvent.getFilterCategory('nontea'));
                             break;
                           case 2:
                             context
                                 .read<PointBloc>()
-                                .add(PointEvent.getFilterCategory('snack'));
+                                .add(const PointEvent.getFilterCategory('snack'));
                             break;
                         }
                       },
@@ -146,12 +148,12 @@ class PointPage extends StatelessWidget {
       builder: (context, state) {
         return state.when(
           initial: () => buildShimmer(screenHeight, screenWidth),
-          success: (model, pointModel) {
+          success: (model, pointModel, ) {
             return GridView.builder(
               itemCount: model!.data!.length,
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
-                final rewardProduct = model!.data![index];
+                final rewardProduct = model.data![index];
                 return InkWell(
                   onTap: () {
                     context.pushNamed('detail_product_reward', pathParameters: {
@@ -168,7 +170,7 @@ class PointPage extends StatelessWidget {
                   ),
                 );
               },
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 0.75,
                 mainAxisSpacing: 10,
@@ -202,13 +204,13 @@ class PointPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                margin: EdgeInsets.all(5),
+                margin: const EdgeInsets.all(5),
                 height: screenHeight * 0.2,
                 width: screenWidth * 0.4,
                 color: grey,
               ),
               Container(
-                margin: EdgeInsets.all(5),
+                margin: const EdgeInsets.all(5),
                 height: 30,
                 width: screenWidth * 0.3,
                 color: grey,
@@ -217,7 +219,7 @@ class PointPage extends StatelessWidget {
           ),
         );
       },
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: 0.75,
         mainAxisSpacing: 10,

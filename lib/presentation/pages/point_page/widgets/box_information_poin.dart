@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/presentation/pages/point_page/bloc/point_bloc.dart';
 
 import '../../../../../common/constant.dart';
 import '../../../../../common/dimensions.dart';
 import '../../../../../common/theme.dart';
-
 
 class BoxInformationPoin extends StatelessWidget {
   const BoxInformationPoin({
@@ -23,10 +21,10 @@ class BoxInformationPoin extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
               horizontal: Dimensions.paddingSizeLarge,
               vertical: Dimensions.paddingSizeLarge),
-          margin: EdgeInsets.only(top: Dimensions.marginSizeLarge),
+          margin: const EdgeInsets.only(top: Dimensions.marginSizeLarge),
           width: screenWidth,
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -41,7 +39,7 @@ class BoxInformationPoin extends StatelessWidget {
               ],
               stops: const [0.14, 0.39, 0.57, 0.73, 0.90],
             ),
-            borderRadius: BorderRadius.all(Radius.circular(25)),
+            borderRadius: const BorderRadius.all(Radius.circular(25)),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.2),
@@ -62,47 +60,51 @@ class BoxInformationPoin extends StatelessWidget {
                     height: 40,
                     width: 40,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   BlocBuilder<PointBloc, PointState>(
                     builder: (context, state) {
-                      return state.maybeWhen(
-                          orElse: () => Shimmer.fromColors(
-                            baseColor: Colors.grey[300]!,
-                            highlightColor: Colors.grey[100]!,
-                            child: Container(
-                              width: 50,
-                              height: 20,
-                              color: Colors.white,
-                            ),
-                          ),
-                        success: (model, pointModel){
-                            final point = pointModel?.data?[0].point ?? 0;
+                      return state.maybeWhen(orElse: () {
+                        return Text(
+                          'Memuat.. Poin',
+                          style: txtPrimaryHeader.copyWith(
+                              fontWeight: FontWeight.w600, color: primaryColor),
+                        );
+                      }, success: (productModel, userPointModel) {
+                        if (userPointModel != null && userPointModel.data!.isNotEmpty) {
+                          final point = userPointModel.data!.first.point;
                           return Text(
                             '$point Poin',
                             style: txtPrimaryHeader.copyWith(
-                                fontWeight: FontWeight.w600, color: primaryColor),
+                                fontWeight: FontWeight.w600,
+                                color: primaryColor),
+                          );
+                        } else {
+                          return Text(
+                            'Memuat.. Poin',
+                            style: txtPrimaryHeader.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: primaryColor),
                           );
                         }
-                      );
-
+                      });
                     },
-                  )
+                  ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: Dimensions.marginSizeLarge,
               ),
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: transparentWhite70,
                       borderRadius: BorderRadius.all(Radius.circular(25)),
                     ),
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                         horizontal: Dimensions.paddingSizeSmall,
                         vertical: Dimensions.paddingSizeMedium),
                     child: Row(
@@ -122,12 +124,12 @@ class BoxInformationPoin extends StatelessWidget {
                           child: Column(
                             children: [
                               Container(
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   color: Colors.white,
                                   borderRadius:
                                   BorderRadius.all(Radius.circular(25)),
                                 ),
-                                padding: EdgeInsets.all(10),
+                                padding: const EdgeInsets.all(10),
                                 child: Text(
                                   'Detail',
                                   style: txtPrimarySubTitle.copyWith(
@@ -150,3 +152,4 @@ class BoxInformationPoin extends StatelessWidget {
     );
   }
 }
+

@@ -29,10 +29,11 @@ class CartRewardBloc extends Bloc<CartRewardEvent, CartRewardState> {
        await result.fold((l) async {
         emit(const _Error(message: 'Failed to access data order'));
       }, (r) async  {
-         final result = await userDatasource.getPointUser();
-         final resultPoint = result.fold((l) => null, (success) => success);
-         emit(_Success(cartModel: r, patchQtyModel: null, deleteModel: null, modelPostOrder: null, modelPoint: resultPoint));
-
+         if (r.cart != null) {
+           final result = await userDatasource.getPointUser();
+           final resultPoint = result.fold((l) => null, (success) => success);
+           emit(_Success(cartModel: r, patchQtyModel: null, deleteModel: null, modelPostOrder: null, modelPoint: resultPoint));
+         }
       });
     });
 
