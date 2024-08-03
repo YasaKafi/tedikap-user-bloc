@@ -45,6 +45,23 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
       );
     }, transformer: droppable());
 
+    on<_TabSwitched>((event, emit) async {
+      switch (event.index) {
+        case 0:
+          add(const MenuEvent.getProduct());
+          break;
+        case 1:
+          add(const MenuEvent.getFilterCategory('tea'));
+          break;
+        case 2:
+          add(const MenuEvent.getFilterCategory('nontea'));
+          break;
+        case 3:
+          add(const MenuEvent.getFilterCategory('snack'));
+          break;
+      }
+    }, transformer: droppable());
+
   }
 }
 

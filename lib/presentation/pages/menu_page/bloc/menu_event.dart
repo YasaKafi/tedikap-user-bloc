@@ -7,4 +7,5 @@ class MenuEvent with _$MenuEvent {
   const factory MenuEvent.getFilterCategory(String query) = _GetFilterCategory;
   const factory MenuEvent.getFilterSearch(String query) = _GetSearchCategory;
   const factory MenuEvent.clearSearch() = _ClearSearch;
+  const factory MenuEvent.tabSwitched(int index, {String? searchQuery}) = _TabSwitched;
 }

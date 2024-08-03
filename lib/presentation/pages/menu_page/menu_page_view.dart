@@ -11,16 +11,30 @@ import '../../../common/theme.dart';
 import 'widgets/custom_app_bar.dart';
 import 'widgets/list_box_product_menu.dart';
 
-class MenuPage extends StatelessWidget {
+class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final TextEditingController searchController = TextEditingController();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<MenuBloc>().add(const MenuEvent.getProduct());
-    });
+  _MenuPageState createState() => _MenuPageState();
+}
 
+class _MenuPageState extends State<MenuPage> {
+  final TextEditingController searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+      context.read<MenuBloc>().add(const MenuEvent.getProduct());
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    searchController.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
@@ -51,86 +65,86 @@ class MenuPage extends StatelessWidget {
         body: BlocBuilder<MenuBloc, MenuState>(
           builder: (context, state) {
             return Column(
-                  children: [
-                    Container(
-                      height: screenHeight * 0.05,
-                      width: screenWidth,
-                      margin: const EdgeInsets.only(top: Dimensions.marginSizeSmall),
-                      child: BlocBuilder<MenuBloc, MenuState>(
-                        builder: (context, state) {
-                              return TabBar(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: Dimensions.paddingSizeLarge,
-                                ),
-                                dividerHeight: 2,
-                                dividerColor: grey,
-                                indicatorColor: blackColor,
-                                labelColor: blackColor,
-                                unselectedLabelColor: grey,
-                                onTap: (index) {
-                                  switch (index) {
-                                    case 0:
-                                      context.read<MenuBloc>().add(
-                                          MenuEvent.getFilterSearch(searchController.text));
-                                      break;
-                                    case 1:
-                                      context.read<MenuBloc>().add(
-                                          const MenuEvent.getFilterCategory('tea'));
-                                      break;
-                                    case 2:
-                                      context.read<MenuBloc>().add(
-                                          const MenuEvent.getFilterCategory('nontea'));
-                                      break;
-                                    case 3:
-                                      context.read<MenuBloc>().add(
-                                          const MenuEvent.getFilterCategory('snack'));
-                                      break;
-                                  }
-                                },
-                                tabs: [
-                                  Tab(
-                                    child: Text('All',
-                                        style: txtPrimarySubTitle.copyWith(
-                                            fontWeight: FontWeight.w500,
-                                            color: blackColor)),
-                                  ),
-                                  Tab(
-                                    child: Text('Tea',
-                                        style: txtPrimarySubTitle.copyWith(
-                                            fontWeight: FontWeight.w500,
-                                            color: blackColor)),
-                                  ),
-                                  Tab(
-                                    child: Text('Non Tea',
-                                        style: txtPrimarySubTitle.copyWith(
-                                            fontWeight: FontWeight.w500,
-                                            color: blackColor)),
-                                  ),
-                                  Tab(
-                                    child: Text('Snack',
-                                        style: txtPrimarySubTitle.copyWith(
-                                            fontWeight: FontWeight.w500,
-                                            color: blackColor)),
-                                  ),
-                                ],
-                              );
+              children: [
+                Container(
+                  height: screenHeight * 0.05,
+                  width: screenWidth,
+                  margin: const EdgeInsets.only(top: Dimensions.marginSizeSmall),
+                  child: BlocBuilder<MenuBloc, MenuState>(
+                    builder: (context, state) {
+                      return TabBar(
 
-
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: Dimensions.paddingSizeLarge,
+                        ),
+                        dividerHeight: 2,
+                        dividerColor: grey,
+                        indicatorColor: blackColor,
+                        labelColor: blackColor,
+                        unselectedLabelColor: grey,
+                        onTap: (index) {
+                          switch (index) {
+                            case 0:
+                              context.read<MenuBloc>().add(
+                                  MenuEvent.getFilterSearch(searchController.text));
+                              break;
+                            case 1:
+                              context.read<MenuBloc>().add(
+                                  const MenuEvent.getFilterCategory('tea'));
+                              break;
+                            case 2:
+                              context.read<MenuBloc>().add(
+                                  const MenuEvent.getFilterCategory('nontea'));
+                              break;
+                            case 3:
+                              context.read<MenuBloc>().add(
+                                  const MenuEvent.getFilterCategory('snack'));
+                              break;
+                          }
                         },
-                      ),
-                    ),
-                    Expanded(
-                      child: TabBarView(
-                        children: [
-                          buildProductList(searchController.text),
-                          buildProductList(searchController.text),
-                          buildProductList(searchController.text),
-                          buildProductList(searchController.text),
+                        tabs: [
+                          Tab(
+                            child: Text('All',
+                                style: txtPrimarySubTitle.copyWith(
+                                    fontWeight: FontWeight.w500,
+                                    color: blackColor)),
+                          ),
+                          Tab(
+                            child: Text('Tea',
+                                style: txtPrimarySubTitle.copyWith(
+                                    fontWeight: FontWeight.w500,
+                                    color: blackColor)),
+                          ),
+                          Tab(
+                            child: Text('Non Tea',
+                                style: txtPrimarySubTitle.copyWith(
+                                    fontWeight: FontWeight.w500,
+                                    color: blackColor)),
+                          ),
+                          Tab(
+                            child: Text('Snack',
+                                style: txtPrimarySubTitle.copyWith(
+                                    fontWeight: FontWeight.w500,
+                                    color: blackColor)),
+                          ),
                         ],
-                      ),
-                    ),
-                  ],
-                );
+                      );
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: TabBarView(
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: [
+                      buildProductList(searchController.text),
+                      buildProductList(searchController.text),
+                      buildProductList(searchController.text),
+                      buildProductList(searchController.text),
+                    ],
+                  ),
+                ),
+              ],
+            );
           },
         ),
       ),
@@ -227,7 +241,7 @@ class MenuPage extends StatelessWidget {
               itemCount: model!.data!.length,
               itemBuilder: (context, index) {
                 final itemProduct = model.data![index];
-                if (model.data != null){
+                if (model.data != null) {
                   return InkWell(
                     onTap: () {
                       context.pushNamed('detail_product_common', pathParameters: {'productId': itemProduct.id!.toString()});
@@ -242,13 +256,11 @@ class MenuPage extends StatelessWidget {
                       price: itemProduct.regularPrice!,
                     ),
                   );
-
                 } else {
                   return const Center(
                     child: Text('No data available'),
                   );
                 }
-
               },
             );
           },
@@ -259,11 +271,12 @@ class MenuPage extends StatelessWidget {
             },
           ),
           error: (message) => _buildErrorState(context, message!),
-          empty: () => _buildEmptySearchState(context, query)
+          empty: () => _buildEmptySearchState(context, query),
         );
       },
     );
   }
+
   Widget _buildErrorState(BuildContext context, String message) {
     final double screenWidth = MediaQuery.of(context).size.width;
     return Center(

@@ -43,8 +43,8 @@ class CustomAppBar extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.only(
-                  top: Dimensions.paddingSizeExtraSmall,
-                  ),
+                top: Dimensions.paddingSizeExtraSmall,
+              ),
               padding:
               const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeLarge),
               decoration: BoxDecoration(
@@ -58,12 +58,21 @@ class CustomAppBar extends StatelessWidget {
                 controller: searchController,
                 style: txtPrimarySubTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor),
                 decoration: InputDecoration(
-                    border: InputBorder.none,
-                    suffixIcon: const Icon(Icons.search, color: Color.fromRGBO(0, 0, 0, 100)),
-                    focusColor: const Color.fromRGBO(246, 246, 246, 100),
-                    fillColor: const Color.fromRGBO(246, 246, 246, 100),
-                    hintText: 'What would you like to drink today?',
-                    hintStyle: txtPrimarySubTitle.copyWith(fontWeight: FontWeight.w500, color: grey)),
+                  border: InputBorder.none,
+                  suffixIcon: searchController.text.isNotEmpty
+                      ? IconButton(
+                    icon: const Icon(Icons.clear, color: Color.fromRGBO(0, 0, 0, 100)),
+                    onPressed: () {
+                      searchController.clear();
+                      onClearSearch();
+                    },
+                  )
+                      : const Icon(Icons.search, color: Color.fromRGBO(0, 0, 0, 100)),
+                  focusColor: const Color.fromRGBO(246, 246, 246, 100),
+                  fillColor: const Color.fromRGBO(246, 246, 246, 100),
+                  hintText: 'What would you like to drink today?',
+                  hintStyle: txtPrimarySubTitle.copyWith(fontWeight: FontWeight.w500, color: grey),
+                ),
               ),
             ),
           ],
@@ -72,3 +81,4 @@ class CustomAppBar extends StatelessWidget {
     );
   }
 }
+
