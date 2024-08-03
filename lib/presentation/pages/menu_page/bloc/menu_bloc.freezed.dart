@@ -23,6 +23,7 @@ mixin _$MenuEvent {
     required TResult Function(String query) getFilterCategory,
     required TResult Function(String query) getFilterSearch,
     required TResult Function() clearSearch,
+    required TResult Function(int index, String? searchQuery) tabSwitched,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +33,7 @@ mixin _$MenuEvent {
     TResult? Function(String query)? getFilterCategory,
     TResult? Function(String query)? getFilterSearch,
     TResult? Function()? clearSearch,
+    TResult? Function(int index, String? searchQuery)? tabSwitched,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +43,7 @@ mixin _$MenuEvent {
     TResult Function(String query)? getFilterCategory,
     TResult Function(String query)? getFilterSearch,
     TResult Function()? clearSearch,
+    TResult Function(int index, String? searchQuery)? tabSwitched,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -51,6 +54,7 @@ mixin _$MenuEvent {
     required TResult Function(_GetFilterCategory value) getFilterCategory,
     required TResult Function(_GetSearchCategory value) getFilterSearch,
     required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_TabSwitched value) tabSwitched,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,6 +64,7 @@ mixin _$MenuEvent {
     TResult? Function(_GetFilterCategory value)? getFilterCategory,
     TResult? Function(_GetSearchCategory value)? getFilterSearch,
     TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_TabSwitched value)? tabSwitched,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,6 +74,7 @@ mixin _$MenuEvent {
     TResult Function(_GetFilterCategory value)? getFilterCategory,
     TResult Function(_GetSearchCategory value)? getFilterSearch,
     TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_TabSwitched value)? tabSwitched,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -134,6 +140,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(String query) getFilterCategory,
     required TResult Function(String query) getFilterSearch,
     required TResult Function() clearSearch,
+    required TResult Function(int index, String? searchQuery) tabSwitched,
   }) {
     return started();
   }
@@ -146,6 +153,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(String query)? getFilterCategory,
     TResult? Function(String query)? getFilterSearch,
     TResult? Function()? clearSearch,
+    TResult? Function(int index, String? searchQuery)? tabSwitched,
   }) {
     return started?.call();
   }
@@ -158,6 +166,7 @@ class _$StartedImpl implements _Started {
     TResult Function(String query)? getFilterCategory,
     TResult Function(String query)? getFilterSearch,
     TResult Function()? clearSearch,
+    TResult Function(int index, String? searchQuery)? tabSwitched,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -174,6 +183,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(_GetFilterCategory value) getFilterCategory,
     required TResult Function(_GetSearchCategory value) getFilterSearch,
     required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_TabSwitched value) tabSwitched,
   }) {
     return started(this);
   }
@@ -186,6 +196,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(_GetFilterCategory value)? getFilterCategory,
     TResult? Function(_GetSearchCategory value)? getFilterSearch,
     TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_TabSwitched value)? tabSwitched,
   }) {
     return started?.call(this);
   }
@@ -198,6 +209,7 @@ class _$StartedImpl implements _Started {
     TResult Function(_GetFilterCategory value)? getFilterCategory,
     TResult Function(_GetSearchCategory value)? getFilterSearch,
     TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_TabSwitched value)? tabSwitched,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -254,6 +266,7 @@ class _$GetProductImpl implements _GetProduct {
     required TResult Function(String query) getFilterCategory,
     required TResult Function(String query) getFilterSearch,
     required TResult Function() clearSearch,
+    required TResult Function(int index, String? searchQuery) tabSwitched,
   }) {
     return getProduct();
   }
@@ -266,6 +279,7 @@ class _$GetProductImpl implements _GetProduct {
     TResult? Function(String query)? getFilterCategory,
     TResult? Function(String query)? getFilterSearch,
     TResult? Function()? clearSearch,
+    TResult? Function(int index, String? searchQuery)? tabSwitched,
   }) {
     return getProduct?.call();
   }
@@ -278,6 +292,7 @@ class _$GetProductImpl implements _GetProduct {
     TResult Function(String query)? getFilterCategory,
     TResult Function(String query)? getFilterSearch,
     TResult Function()? clearSearch,
+    TResult Function(int index, String? searchQuery)? tabSwitched,
     required TResult orElse(),
   }) {
     if (getProduct != null) {
@@ -294,6 +309,7 @@ class _$GetProductImpl implements _GetProduct {
     required TResult Function(_GetFilterCategory value) getFilterCategory,
     required TResult Function(_GetSearchCategory value) getFilterSearch,
     required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_TabSwitched value) tabSwitched,
   }) {
     return getProduct(this);
   }
@@ -306,6 +322,7 @@ class _$GetProductImpl implements _GetProduct {
     TResult? Function(_GetFilterCategory value)? getFilterCategory,
     TResult? Function(_GetSearchCategory value)? getFilterSearch,
     TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_TabSwitched value)? tabSwitched,
   }) {
     return getProduct?.call(this);
   }
@@ -318,6 +335,7 @@ class _$GetProductImpl implements _GetProduct {
     TResult Function(_GetFilterCategory value)? getFilterCategory,
     TResult Function(_GetSearchCategory value)? getFilterSearch,
     TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_TabSwitched value)? tabSwitched,
     required TResult orElse(),
   }) {
     if (getProduct != null) {
@@ -401,6 +419,7 @@ class _$GetFilterCategoryImpl implements _GetFilterCategory {
     required TResult Function(String query) getFilterCategory,
     required TResult Function(String query) getFilterSearch,
     required TResult Function() clearSearch,
+    required TResult Function(int index, String? searchQuery) tabSwitched,
   }) {
     return getFilterCategory(query);
   }
@@ -413,6 +432,7 @@ class _$GetFilterCategoryImpl implements _GetFilterCategory {
     TResult? Function(String query)? getFilterCategory,
     TResult? Function(String query)? getFilterSearch,
     TResult? Function()? clearSearch,
+    TResult? Function(int index, String? searchQuery)? tabSwitched,
   }) {
     return getFilterCategory?.call(query);
   }
@@ -425,6 +445,7 @@ class _$GetFilterCategoryImpl implements _GetFilterCategory {
     TResult Function(String query)? getFilterCategory,
     TResult Function(String query)? getFilterSearch,
     TResult Function()? clearSearch,
+    TResult Function(int index, String? searchQuery)? tabSwitched,
     required TResult orElse(),
   }) {
     if (getFilterCategory != null) {
@@ -441,6 +462,7 @@ class _$GetFilterCategoryImpl implements _GetFilterCategory {
     required TResult Function(_GetFilterCategory value) getFilterCategory,
     required TResult Function(_GetSearchCategory value) getFilterSearch,
     required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_TabSwitched value) tabSwitched,
   }) {
     return getFilterCategory(this);
   }
@@ -453,6 +475,7 @@ class _$GetFilterCategoryImpl implements _GetFilterCategory {
     TResult? Function(_GetFilterCategory value)? getFilterCategory,
     TResult? Function(_GetSearchCategory value)? getFilterSearch,
     TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_TabSwitched value)? tabSwitched,
   }) {
     return getFilterCategory?.call(this);
   }
@@ -465,6 +488,7 @@ class _$GetFilterCategoryImpl implements _GetFilterCategory {
     TResult Function(_GetFilterCategory value)? getFilterCategory,
     TResult Function(_GetSearchCategory value)? getFilterSearch,
     TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_TabSwitched value)? tabSwitched,
     required TResult orElse(),
   }) {
     if (getFilterCategory != null) {
@@ -554,6 +578,7 @@ class _$GetSearchCategoryImpl implements _GetSearchCategory {
     required TResult Function(String query) getFilterCategory,
     required TResult Function(String query) getFilterSearch,
     required TResult Function() clearSearch,
+    required TResult Function(int index, String? searchQuery) tabSwitched,
   }) {
     return getFilterSearch(query);
   }
@@ -566,6 +591,7 @@ class _$GetSearchCategoryImpl implements _GetSearchCategory {
     TResult? Function(String query)? getFilterCategory,
     TResult? Function(String query)? getFilterSearch,
     TResult? Function()? clearSearch,
+    TResult? Function(int index, String? searchQuery)? tabSwitched,
   }) {
     return getFilterSearch?.call(query);
   }
@@ -578,6 +604,7 @@ class _$GetSearchCategoryImpl implements _GetSearchCategory {
     TResult Function(String query)? getFilterCategory,
     TResult Function(String query)? getFilterSearch,
     TResult Function()? clearSearch,
+    TResult Function(int index, String? searchQuery)? tabSwitched,
     required TResult orElse(),
   }) {
     if (getFilterSearch != null) {
@@ -594,6 +621,7 @@ class _$GetSearchCategoryImpl implements _GetSearchCategory {
     required TResult Function(_GetFilterCategory value) getFilterCategory,
     required TResult Function(_GetSearchCategory value) getFilterSearch,
     required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_TabSwitched value) tabSwitched,
   }) {
     return getFilterSearch(this);
   }
@@ -606,6 +634,7 @@ class _$GetSearchCategoryImpl implements _GetSearchCategory {
     TResult? Function(_GetFilterCategory value)? getFilterCategory,
     TResult? Function(_GetSearchCategory value)? getFilterSearch,
     TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_TabSwitched value)? tabSwitched,
   }) {
     return getFilterSearch?.call(this);
   }
@@ -618,6 +647,7 @@ class _$GetSearchCategoryImpl implements _GetSearchCategory {
     TResult Function(_GetFilterCategory value)? getFilterCategory,
     TResult Function(_GetSearchCategory value)? getFilterSearch,
     TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_TabSwitched value)? tabSwitched,
     required TResult orElse(),
   }) {
     if (getFilterSearch != null) {
@@ -680,6 +710,7 @@ class _$ClearSearchImpl implements _ClearSearch {
     required TResult Function(String query) getFilterCategory,
     required TResult Function(String query) getFilterSearch,
     required TResult Function() clearSearch,
+    required TResult Function(int index, String? searchQuery) tabSwitched,
   }) {
     return clearSearch();
   }
@@ -692,6 +723,7 @@ class _$ClearSearchImpl implements _ClearSearch {
     TResult? Function(String query)? getFilterCategory,
     TResult? Function(String query)? getFilterSearch,
     TResult? Function()? clearSearch,
+    TResult? Function(int index, String? searchQuery)? tabSwitched,
   }) {
     return clearSearch?.call();
   }
@@ -704,6 +736,7 @@ class _$ClearSearchImpl implements _ClearSearch {
     TResult Function(String query)? getFilterCategory,
     TResult Function(String query)? getFilterSearch,
     TResult Function()? clearSearch,
+    TResult Function(int index, String? searchQuery)? tabSwitched,
     required TResult orElse(),
   }) {
     if (clearSearch != null) {
@@ -720,6 +753,7 @@ class _$ClearSearchImpl implements _ClearSearch {
     required TResult Function(_GetFilterCategory value) getFilterCategory,
     required TResult Function(_GetSearchCategory value) getFilterSearch,
     required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_TabSwitched value) tabSwitched,
   }) {
     return clearSearch(this);
   }
@@ -732,6 +766,7 @@ class _$ClearSearchImpl implements _ClearSearch {
     TResult? Function(_GetFilterCategory value)? getFilterCategory,
     TResult? Function(_GetSearchCategory value)? getFilterSearch,
     TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_TabSwitched value)? tabSwitched,
   }) {
     return clearSearch?.call(this);
   }
@@ -744,6 +779,7 @@ class _$ClearSearchImpl implements _ClearSearch {
     TResult Function(_GetFilterCategory value)? getFilterCategory,
     TResult Function(_GetSearchCategory value)? getFilterSearch,
     TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_TabSwitched value)? tabSwitched,
     required TResult orElse(),
   }) {
     if (clearSearch != null) {
@@ -755,6 +791,174 @@ class _$ClearSearchImpl implements _ClearSearch {
 
 abstract class _ClearSearch implements MenuEvent {
   const factory _ClearSearch() = _$ClearSearchImpl;
+}
+
+/// @nodoc
+abstract class _$$TabSwitchedImplCopyWith<$Res> {
+  factory _$$TabSwitchedImplCopyWith(
+          _$TabSwitchedImpl value, $Res Function(_$TabSwitchedImpl) then) =
+      __$$TabSwitchedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int index, String? searchQuery});
+}
+
+/// @nodoc
+class __$$TabSwitchedImplCopyWithImpl<$Res>
+    extends _$MenuEventCopyWithImpl<$Res, _$TabSwitchedImpl>
+    implements _$$TabSwitchedImplCopyWith<$Res> {
+  __$$TabSwitchedImplCopyWithImpl(
+      _$TabSwitchedImpl _value, $Res Function(_$TabSwitchedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? index = null,
+    Object? searchQuery = freezed,
+  }) {
+    return _then(_$TabSwitchedImpl(
+      null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+      searchQuery: freezed == searchQuery
+          ? _value.searchQuery
+          : searchQuery // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$TabSwitchedImpl implements _TabSwitched {
+  const _$TabSwitchedImpl(this.index, {this.searchQuery});
+
+  @override
+  final int index;
+  @override
+  final String? searchQuery;
+
+  @override
+  String toString() {
+    return 'MenuEvent.tabSwitched(index: $index, searchQuery: $searchQuery)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TabSwitchedImpl &&
+            (identical(other.index, index) || other.index == index) &&
+            (identical(other.searchQuery, searchQuery) ||
+                other.searchQuery == searchQuery));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, index, searchQuery);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TabSwitchedImplCopyWith<_$TabSwitchedImpl> get copyWith =>
+      __$$TabSwitchedImplCopyWithImpl<_$TabSwitchedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() getProduct,
+    required TResult Function(String query) getFilterCategory,
+    required TResult Function(String query) getFilterSearch,
+    required TResult Function() clearSearch,
+    required TResult Function(int index, String? searchQuery) tabSwitched,
+  }) {
+    return tabSwitched(index, searchQuery);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? getProduct,
+    TResult? Function(String query)? getFilterCategory,
+    TResult? Function(String query)? getFilterSearch,
+    TResult? Function()? clearSearch,
+    TResult? Function(int index, String? searchQuery)? tabSwitched,
+  }) {
+    return tabSwitched?.call(index, searchQuery);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? getProduct,
+    TResult Function(String query)? getFilterCategory,
+    TResult Function(String query)? getFilterSearch,
+    TResult Function()? clearSearch,
+    TResult Function(int index, String? searchQuery)? tabSwitched,
+    required TResult orElse(),
+  }) {
+    if (tabSwitched != null) {
+      return tabSwitched(index, searchQuery);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetProduct value) getProduct,
+    required TResult Function(_GetFilterCategory value) getFilterCategory,
+    required TResult Function(_GetSearchCategory value) getFilterSearch,
+    required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_TabSwitched value) tabSwitched,
+  }) {
+    return tabSwitched(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetProduct value)? getProduct,
+    TResult? Function(_GetFilterCategory value)? getFilterCategory,
+    TResult? Function(_GetSearchCategory value)? getFilterSearch,
+    TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_TabSwitched value)? tabSwitched,
+  }) {
+    return tabSwitched?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetProduct value)? getProduct,
+    TResult Function(_GetFilterCategory value)? getFilterCategory,
+    TResult Function(_GetSearchCategory value)? getFilterSearch,
+    TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_TabSwitched value)? tabSwitched,
+    required TResult orElse(),
+  }) {
+    if (tabSwitched != null) {
+      return tabSwitched(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _TabSwitched implements MenuEvent {
+  const factory _TabSwitched(final int index, {final String? searchQuery}) =
+      _$TabSwitchedImpl;
+
+  int get index;
+  String? get searchQuery;
+  @JsonKey(ignore: true)
+  _$$TabSwitchedImplCopyWith<_$TabSwitchedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

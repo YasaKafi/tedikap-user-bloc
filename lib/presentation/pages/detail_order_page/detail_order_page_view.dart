@@ -25,9 +25,11 @@ class DetailOrderPage extends StatelessWidget {
     if (orderId != null) {
       context.read<DetailOrderBloc>().add(DetailOrderEvent.getDetailHistoryOrder(orderId!));
     }
+
     if (orderRewardId != null) {
       context.read<DetailOrderBloc>().add(DetailOrderEvent.getDetailHistoryOrderReward(orderRewardId!));
     }
+
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
