@@ -13,46 +13,54 @@ import '../../../common/dimensions.dart';
 import '../../../common/theme.dart';
 import 'bloc/detail_product_bloc.dart';
 
-class DetailProductPage extends StatelessWidget {
-  DetailProductPage(
-      {super.key,
-        this.productId,
-        this.productRewardId,
-        this.cartItemId,
-        this.cartItemRewardId});
+class DetailProductPage extends StatefulWidget {
+  const DetailProductPage({
+    super.key,
+    this.productId,
+    this.productRewardId,
+    this.cartItemId,
+    this.cartItemRewardId,
+  });
 
-  int? productId;
-  int? productRewardId;
-  int? cartItemId;
-  int? cartItemRewardId;
+  final int? productId;
+  final int? productRewardId;
+  final int? cartItemId;
+  final int? cartItemRewardId;
 
-  TextEditingController notesController = TextEditingController();
+  @override
+  _DetailProductPageState createState() => _DetailProductPageState();
+}
 
+class _DetailProductPageState extends State<DetailProductPage> {
+  late TextEditingController notesController;
+
+  @override
+  void initState() {
+    super.initState();
+    notesController = TextEditingController();
+
+    if (widget.cartItemId != null) {
+      context.read<DetailProductBloc>().add(DetailProductEvent.getDetailItemCart(widget.cartItemId!));
+    } else if (widget.cartItemRewardId != null) {
+      context.read<DetailProductBloc>().add(DetailProductEvent.getDetailItemCartReward(widget.cartItemRewardId!));
+    } else if (widget.productId != null) {
+      context.read<DetailProductBloc>().add(DetailProductEvent.getDetailProduct(widget.productId!));
+    } else if (widget.productRewardId != null) {
+      context.read<DetailProductBloc>().add(DetailProductEvent.getDetailProductReward(widget.productRewardId!));
+    }
+  }
+
+  @override
+  void dispose() {
+    notesController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    if (cartItemId != null) {
-      context
-          .read<DetailProductBloc>()
-          .add(DetailProductEvent.getDetailItemCart(cartItemId!));
-
-    } else if (cartItemRewardId != null) {
-      context
-          .read<DetailProductBloc>()
-          .add(DetailProductEvent.getDetailItemCartReward(cartItemRewardId!));
-    } else if (productId != null) {
-      context
-          .read<DetailProductBloc>()
-          .add(DetailProductEvent.getDetailProduct(productId!));
-
-    } else if (productRewardId != null) {
-      context
-          .read<DetailProductBloc>()
-          .add(DetailProductEvent.getDetailProductReward(productRewardId!));
-    }
-
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -61,8 +69,7 @@ class DetailProductPage extends StatelessWidget {
           decoration: const BoxDecoration(
             color: baseColor50,
           ),
-          padding:
-          const EdgeInsets.only(top: 30, bottom: 10, left: 10, right: 10),
+          padding: const EdgeInsets.only(top: 30, bottom: 10, left: 10, right: 10),
           width: MediaQuery.of(context).size.width,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -72,9 +79,9 @@ class DetailProductPage extends StatelessWidget {
                 onPressed: () {
                   if (Navigator.canPop(context)) {
                     context.pop();
-                  } else if (cartItemId != null) {
+                  } else if (widget.cartItemId != null) {
                     context.goNamed('cart_common');
-                  } else if (cartItemRewardId != null) {
+                  } else if (widget.cartItemRewardId != null) {
                     context.goNamed('cart_reward');
                   }
                 },
@@ -91,7 +98,8 @@ class DetailProductPage extends StatelessWidget {
                     listener: (context, state) {
                       state.maybeWhen(
                         orElse: () {},
-                        success: (modelProduct,
+                        success: (
+                            modelProduct,
                             modelProductReward,
                             modelCartPost,
                             modelCartPostReward,
@@ -111,7 +119,8 @@ class DetailProductPage extends StatelessWidget {
                             selectedSugar,
                             qty,
                             totalPrice,
-                            note,) {
+                            note,
+                            ) {
                           final itemIsLiked = modelPostFavorite?.message;
                           if (itemIsLiked == 'Liked') {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -161,36 +170,35 @@ class DetailProductPage extends StatelessWidget {
                             qty,
                             totalPrice,
                             note,
-
                             ) {
                           return InkWell(
-                              onTap: () {
-                                if(productId != null){
-                                  context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(productId!));
-                                } else if (productRewardId != null){
-                                  context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(productRewardId!));
-                                } else if (cartItemId != null) {
-                                  context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(modelCartItem!.cartItem!.productId!));
-                                } else if (cartItemRewardId != null) {
-                                  context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(modelCartItemReward!.cartItem!.productId!));
-                                }
-                              },
-                              child: (productRewardId == null && cartItemRewardId == null)
-                                  ? Container(
-                                  padding: const EdgeInsets.only(right: 10),
-                                  child: (modelProduct?.data?.isLiked ?? false) == false
-                                      ? SvgPicture.asset(
-                                    icHeart,
-                                    width: 24,
-                                    height: 24,
-                                  )
-                                      : SvgPicture.asset(
-                                    icHeartActive,
-                                    width: 24,
-                                    height: 24,
-                                  )
+                            onTap: () {
+                              if (widget.productId != null) {
+                                context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(widget.productId!));
+                              } else if (widget.productRewardId != null) {
+                                context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(widget.productRewardId!));
+                              } else if (widget.cartItemId != null) {
+                                context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(modelCartItem!.cartItem!.productId!));
+                              } else if (widget.cartItemRewardId != null) {
+                                context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(modelCartItemReward!.cartItem!.productId!));
+                              }
+                            },
+                            child: (widget.productRewardId == null && widget.cartItemRewardId == null)
+                                ? Container(
+                              padding: const EdgeInsets.only(right: 10),
+                              child: (modelProduct?.data?.isLiked ?? false) == false
+                                  ? SvgPicture.asset(
+                                icHeart,
+                                width: 24,
+                                height: 24,
                               )
-                                  : Container(width: 24),
+                                  : SvgPicture.asset(
+                                icHeartActive,
+                                width: 24,
+                                height: 24,
+                              ),
+                            )
+                                : Container(width: 24),
                           );
                         },
                         error: (message) => Center(
@@ -241,8 +249,8 @@ class DetailProductPage extends StatelessWidget {
               child: BoxBottomPrice(
                 screenWidth: screenWidth,
                 noteController: notesController,
-                cartItemId: cartItemId,
-                cartItemRewardId: cartItemRewardId,
+                cartItemId: widget.cartItemId,
+                cartItemRewardId: widget.cartItemRewardId,
               ),
             )
           ],
@@ -250,8 +258,8 @@ class DetailProductPage extends StatelessWidget {
       ),
     );
   }
-  Widget buildLoadingShimmer() {
 
+  Widget buildLoadingShimmer() {
     return Shimmer.fromColors(
       baseColor: Colors.grey[300]!,
       highlightColor: Colors.grey[100]!,
@@ -266,4 +274,5 @@ class DetailProductPage extends StatelessWidget {
     );
   }
 }
+
 
