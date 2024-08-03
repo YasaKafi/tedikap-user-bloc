@@ -48,10 +48,19 @@ class UserDatasource {
     File? imageFile,
   }) async {
     try {
+      // Manually print out the request data
+      print('Request Data:');
+      print('Name: $name');
+      print('Email: $email');
+      print('Gender: $gender');
+      if (imageFile != null) {
+        print('Avatar: ${imageFile.path.split('/').last}');
+      }
+
       FormData formData = FormData.fromMap({
-        'name': name,
-        'email': email,
-        'gender': gender,
+        'name': 'name',
+        'email': 'email',
+        'gender': 'gender',
         if (imageFile != null)
           'avatar': await MultipartFile.fromFile(imageFile.path,
               filename: imageFile.path.split('/').last),
@@ -62,6 +71,7 @@ class UserDatasource {
           data: formData,
           isMultipart: true,
           isAuthorize: true);
+
       if (response.statusCode == 200) {
         return Right(EditProfileResponseModel.fromMap(response.data));
       } else {
@@ -71,6 +81,7 @@ class UserDatasource {
       return Left('Failed to update profile: ${e.toString()}');
     }
   }
+
 
   Future<Either<String, LogoutResponseModel>> postLogout() async {
     try {

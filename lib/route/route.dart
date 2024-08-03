@@ -114,7 +114,8 @@ class AppRouter {
         path: '/detail_order_common/:orderId',
         builder: (context, state) {
           final orderId = state.pathParameters['orderId'];
-          return DetailOrderPage(orderId: orderId,);
+          final checkoutLink = state.extra is String ? state.extra as String : null;
+          return DetailOrderPage(orderId: orderId, linkCheckout: checkoutLink,);
         },
       ),
       GoRoute(

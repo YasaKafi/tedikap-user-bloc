@@ -42,6 +42,11 @@ class AuthDatasource {
         data: model.toJson(),
       );
       if (response.statusCode == 200) {
+        final prefs = await SharedPreferences.getInstance();
+        final token = response.data['token'];
+        if (token != null) {
+          await prefs.setString('token', token);
+        }
         return Right(LoginResponseModel.fromMap(response.data));
       } else {
         return const Left('Failed to login');

@@ -3,16 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tedikap_user_bloc/common/theme.dart';
 import 'package:tedikap_user_bloc/presentation/global_components/common_button.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/bloc/detail_order_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../common/dimensions.dart';
-
 import 'dart:async';
 
-import 'package:intl/intl.dart';
-
-
 class SectionButton extends StatefulWidget {
-  const SectionButton({super.key});
+  SectionButton({super.key, this.linkCheckout});
+  String? linkCheckout;
 
   @override
   _SectionButtonState createState() => _SectionButtonState();
@@ -21,6 +19,8 @@ class SectionButton extends StatefulWidget {
 class _SectionButtonState extends State<SectionButton> {
   Timer? _timer;
   Duration _remainingTime = Duration.zero;
+  bool _timerEnded = false;
+
 
   @override
   void dispose() {
@@ -29,7 +29,7 @@ class _SectionButtonState extends State<SectionButton> {
   }
 
   void startTimer(DateTime createdAt) {
-    final endTime = createdAt.add(Duration(minutes: 1));
+    final endTime = createdAt.add(Duration(seconds: 30));
     _remainingTime = endTime.difference(DateTime.now());
 
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
@@ -39,10 +39,19 @@ class _SectionButtonState extends State<SectionButton> {
           _remainingTime = endTime.difference(now);
         } else {
           _remainingTime = Duration.zero;
+          _timerEnded = true;
           timer.cancel();
         }
       });
     });
+  }
+
+  Future<void> launchURL(Uri url) async {
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   @override
@@ -54,15 +63,18 @@ class _SectionButtonState extends State<SectionButton> {
         return state.maybeWhen(
           orElse: () => Center(child: CircularProgressIndicator()),
           success: (model, modelReward) {
-            if (model != null) {
+            final isPayment = model!.order!.paymentChannel == null;
+            // final urlPayment = model!.order!. == null;
+            if (isPayment) {
               final createdAt = model.order!.createdAt!;
-              if (_remainingTime == Duration.zero && (_timer == null || !_timer!.isActive)) {
+              if (_remainingTime == Duration.zero &&
+                  (_timer == null || !_timer!.isActive)) {
                 startTimer(createdAt);
               }
               final minutes = _remainingTime.inMinutes.remainder(60);
               final seconds = _remainingTime.inSeconds.remainder(60);
-              final timerText = 'Lanjutkan Pembayaran ($minutes:${seconds.toString().padLeft(2, '0')})';
-
+              final timerText =
+                  'Lanjutkan Pembayaran ($minutes:${seconds.toString().padLeft(2, '0')})';
               return Container(
                 width: screenWidth,
                 padding: EdgeInsets.all(Dimensions.paddingSizeLarge),
@@ -73,11 +85,16 @@ class _SectionButtonState extends State<SectionButton> {
                 child: Center(
                   child: CommonButton(
                     width: screenWidth,
-                    text: timerText,
-                    onPressed: () {},
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                    text: _timerEnded == true ? 'Pembayaran Berakhir' : timerText,
+                    onPressed: _timerEnded ? null : () async {
+                      if(widget.linkCheckout != null){
+                        await launchUrl(Uri.parse(widget.linkCheckout!));
+                      }
+                    },
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 15),
                     textColor: baseColor,
-                    backgroundColor: navyColor,
+                    backgroundColor: _timerEnded ? grey : redMedium,
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
                     borderRadius: 15,
@@ -85,7 +102,7 @@ class _SectionButtonState extends State<SectionButton> {
                 ),
               );
             } else {
-              return Center();
+              return Visibility(visible: true,child: Container());
             }
           },
         );
@@ -93,5 +110,3 @@ class _SectionButtonState extends State<SectionButton> {
     );
   }
 }
-
-

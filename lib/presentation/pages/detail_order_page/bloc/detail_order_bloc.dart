@@ -12,13 +12,25 @@ part 'detail_order_bloc.freezed.dart';
 class DetailOrderBloc extends Bloc<DetailOrderEvent, DetailOrderState> {
   final OrderDatasource datasource;
   DetailOrderBloc(this.datasource) : super(const DetailOrderState.initial()) {
+    // Fetch data saat pertama kali Bloc dibuat
+    add(DetailOrderEvent.getDetailHistoryOrder('orderId'));
+
     on<_GetDetailHistoryOrder>((event, emit) async {
+      // Cek apakah data sudah ada di dalam state atau belum
+      if (state is _Success && (state as _Success).model != null) {
+        return;
+      }
+
       emit(const _Loading());
       final result = await datasource.getDetailHistoryOrder(event.orderId);
       result.fold((l) => emit(const _Error(message: 'Failed to access data order')), (r) => emit(_Success(r, null)));
     });
-
     on<_GetDetailHistoryOrderReward>((event, emit) async {
+      // Cek apakah data sudah ada di dalam state atau belum
+      if (state is _Success && (state as _Success).modelReward != null) {
+        return;
+      }
+
       emit(const _Loading());
       final result = await datasource.getDetailHistoryOrderReward(event.orderRewardId);
       result.fold((l) => emit(const _Error(message: 'Failed to access data order')), (r) => emit(_Success(null, r)));

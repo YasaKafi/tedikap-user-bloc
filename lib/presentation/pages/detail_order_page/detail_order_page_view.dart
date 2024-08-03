@@ -14,10 +14,11 @@ import '../../../../../common/theme.dart';
 import '../../../common/dimensions.dart';
 
 class DetailOrderPage extends StatelessWidget {
-  DetailOrderPage({super.key , this.orderId, this.orderRewardId});
+  DetailOrderPage({super.key , this.orderId, this.orderRewardId, this.linkCheckout});
 
   String? orderId;
   String? orderRewardId;
+  String? linkCheckout;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,11 @@ class DetailOrderPage extends StatelessWidget {
               IconButton(
                 icon: const Icon(Icons.arrow_back_ios),
                 onPressed: () {
+                  if (Navigator.canPop(context)){
                   context.pop();
+                  } else {
+                    context.goNamed('dashboard', pathParameters: {'pageIndex': '2'});
+                  }
 
                 },
               ),
@@ -92,7 +97,7 @@ class DetailOrderPage extends StatelessWidget {
               bottom: 0,
               right: 0,
               left: 0,
-              child: SectionButton()
+              child: SectionButton(linkCheckout: linkCheckout ,)
           ),
         ],
       ),

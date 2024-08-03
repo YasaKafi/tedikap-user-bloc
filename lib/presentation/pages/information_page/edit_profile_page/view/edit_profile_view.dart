@@ -15,14 +15,26 @@ import '../widget/dropdown_gender_input.dart';
 import '../widget/editimage_button.dart';
 import '../widget/save_button.dart';
 
-class EditProfilePage extends StatelessWidget {
+class EditProfilePage extends StatefulWidget {
+  @override
+  _EditProfilePageState createState() => _EditProfilePageState();
+}
+
+class _EditProfilePageState extends State<EditProfilePage> {
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  String gender = 'male';
+  ValueNotifier<String> defaultImagePath = ValueNotifier<String>('1720414987.jpg');
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<EditProfileBloc>().add(const EditProfileEvent.getUser());
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    context.read<EditProfileBloc>().add(const EditProfileEvent.getUser());
-    final TextEditingController usernameController = TextEditingController();
-    final TextEditingController emailController = TextEditingController();
-    String gender = 'male';
-    ValueNotifier<String> defaultImagePath = ValueNotifier<String>('1720414987.jpg');
     return Scaffold(
       backgroundColor: baseColor,
       body: SingleChildScrollView(
@@ -62,67 +74,67 @@ class EditProfilePage extends StatelessWidget {
                 BlocBuilder<EditProfileBloc, EditProfileState>(
                   builder: (context, state) {
                     return state.maybeWhen(
-                      orElse: (){
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      },
-                      loaded: (_, o, imagePath){
-                        defaultImagePath.value = imagePath ?? '1720414987.jpg';
-                        return Container(
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                          ),
-                          child: imagePath != null ? ClipOval(
-                            child: Image.file(
-                              i.File(imagePath),
-                              width: 170,
-                              height: 170,
-                              fit: BoxFit.cover,
+                        orElse: (){
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
+                        loaded: (_, o, imagePath){
+                          defaultImagePath.value = imagePath ?? '1720414987.jpg';
+                          return Container(
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
                             ),
-                          ) : ClipOval(
-                            child: Image.network(
-                              TedikapApiRepository.getAvatarProfile + _!.data!.avatar!,
-                              width: 170,
-                              height: 170,
-                              fit: BoxFit.cover,
+                            child: imagePath != null ? ClipOval(
+                              child: Image.file(
+                                i.File(imagePath),
+                                width: 170,
+                                height: 170,
+                                fit: BoxFit.cover,
+                              ),
+                            ) : ClipOval(
+                              child: Image.network(
+                                TedikapApiRepository.getAvatarProfile + _!.data!.avatar!,
+                                width: 170,
+                                height: 170,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          ),
-                        );
-                      }
+                          );
+                        }
                     );
                   },
-                ),BlocBuilder<EditProfileBloc, EditProfileState>(
+                ),
+                BlocBuilder<EditProfileBloc, EditProfileState>(
                   builder: (context, state) {
                     return state.maybeWhen(
-                      orElse: (){
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      },
+                        orElse: (){
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
                         loading: (){
                           return Center(
                             child: CircularProgressIndicator(),
                           );
-                        } ,
-                      loaded: (_, o, imagePath){
-                        return Positioned(
-                          right: 0,
-                          top: 10,
-                          child: EditImageButton(
-                            onPressed: () {
-                              context.read<EditProfileBloc>().add(
-                                EditProfileEvent.changeImage(),
-                              );
-                            },
-                          ),
-                        );
-                      }
+                        },
+                        loaded: (_, o, imagePath){
+                          return Positioned(
+                            right: 0,
+                            top: 10,
+                            child: EditImageButton(
+                              onPressed: () {
+                                context.read<EditProfileBloc>().add(
+                                  EditProfileEvent.changeImage(),
+                                );
+                              },
+                            ),
+                          );
+                        }
                     );
                   },
                 ),
-
               ],
             ),
             SizedBox(
@@ -138,66 +150,80 @@ class EditProfilePage extends StatelessWidget {
                 children: [
                   BlocBuilder<EditProfileBloc, EditProfileState>(
                     builder: (context, state) {
-                      return state.maybeWhen(orElse: () {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }, loading: () {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }, loaded: (user, n, o) {
-                        usernameController.text = user!.data!.name!;
-                        return CustomTextField(
-                          hintText: 'Username',
-                          keyboardType: TextInputType.text,
-                          controller: usernameController,
-                          maxTextLength: 12,
-                        );
-                      }, error: (message) {
-                        return Center(
-                            child: Text(
-                          message,
-                          style: txtSecondaryTitle.copyWith(
-                              fontWeight: FontWeight.w600, color: blackColor),
-                        ));
-                      });
+                      return state.maybeWhen(
+                          orElse: () {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          },
+                          loading: () {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          },
+                          loaded: (user, n, o) {
+                            usernameController.text = user!.data!.name!;
+                            return CustomTextField(
+                              hintText: 'Username',
+                              keyboardType: TextInputType.text,
+                              controller: usernameController,
+                              maxTextLength: 12,
+                            );
+                          },
+                          error: (message) {
+                            return Center(
+                              child: Text(
+                                message,
+                                style: txtSecondaryTitle.copyWith(
+                                    fontWeight: FontWeight.w600, color: blackColor),
+                              ),
+                            );
+                          }
+                      );
                     },
                   ),
                   SizedBox(height: 30),
                   BlocBuilder<EditProfileBloc, EditProfileState>(
                     builder: (context, state) {
-                      return state.maybeWhen(orElse: () {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }, loading: () {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }, loaded: (user, n, o) {
-                        emailController.text = user!.data!.email!;
-                        return CustomTextField(
-                          hintText: 'Email',
-                          keyboardType: TextInputType.emailAddress,
-                          controller: emailController,
-                          maxTextLength: 12,
-                        );
-                      }, error: (message) {
-                        return Center(
-                            child: Text(
-                          message,
-                          style: txtSecondaryTitle.copyWith(
-                              fontWeight: FontWeight.w600, color: blackColor),
-                        ));
-                      });
+                      return state.maybeWhen(
+                          orElse: () {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          },
+                          loading: () {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          },
+                          loaded: (user, n, o) {
+                            emailController.text = user!.data!.email!;
+                            return CustomTextField(
+                              hintText: 'Email',
+                              keyboardType: TextInputType.emailAddress,
+                              controller: emailController,
+                              maxTextLength: 12,
+                            );
+                          },
+                          error: (message) {
+                            return Center(
+                              child: Text(
+                                message,
+                                style: txtSecondaryTitle.copyWith(
+                                    fontWeight: FontWeight.w600, color: blackColor),
+                              ),
+                            );
+                          }
+                      );
                     },
                   ),
                   SizedBox(height: 30),
                   CustomDropDown(
                     gender: gender,
                     onChanged: (newValue) {
-                      gender = newValue ?? 'male';
+                      setState(() {
+                        gender = newValue ?? 'male';
+                      });
                     },
                   ),
                   SizedBox(height: 30),
@@ -239,10 +265,13 @@ class EditProfilePage extends StatelessWidget {
                             child: SaveButton(
                               onPressed: () {
                                 context.read<EditProfileBloc>().add(
-                                    EditProfileEvent.doEditProfile(name: usernameController.text, email: emailController.text, gender: gender, imageFile: i.File(defaultImagePath.value))
-
+                                    EditProfileEvent.doEditProfile(
+                                        name: usernameController.text,
+                                        email: emailController.text,
+                                        gender: 'female',
+                                        imageFile: i.File(defaultImagePath.value)
+                                    )
                                 );
-
                               },
                             ),
                           );
@@ -264,3 +293,4 @@ class EditProfilePage extends StatelessWidget {
     );
   }
 }
+
