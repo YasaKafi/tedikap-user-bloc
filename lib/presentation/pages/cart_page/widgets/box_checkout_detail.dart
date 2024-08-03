@@ -66,7 +66,7 @@ class BoxCheckoutDetail extends StatelessWidget {
                   initial: () => buildShimmer(),
                   loading: () => buildShimmer(),
                   success: (cartModel, modelQty, deleteModel, modelPostOrder,
-                      modelPostPayment) {
+                      modelPostPayment, orderId) {
                     if (cartModel == null || cartModel.cart == null) {
                       return buildShimmer();
                     } else if (cartModel.cart!.cartItems!.isEmpty) {

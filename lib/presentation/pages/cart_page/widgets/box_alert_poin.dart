@@ -59,7 +59,7 @@ class BoxAlertPoin extends StatelessWidget {
                           ),
                         ),
                         success: (cartModel, modelQty, deleteModel,
-                            modelPostOrder, modelPostPayment) {
+                            modelPostOrder, modelPostPayment, orderId, ) {
                           final itemPoint = cartModel?.cart;
 
                           if (itemPoint != null) {

@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tedikap_user_bloc/data/datasource/order_datasource.dart';
 import 'package:tedikap_user_bloc/data/datasource/product_datasource.dart';
 import 'package:tedikap_user_bloc/data/models/request/post_order_request_model.dart';
@@ -43,7 +44,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               patchQtyModel: null,
               deleteModel: null,
               modelPostOrder: null,
-              modelPostPayment: null)));
+              modelPostPayment: null,
+            orderId : null,
+
+          )));
     });
 
     Future<void> launchURL(Uri url) async {
@@ -65,18 +69,25 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             final cartId = postOrderModel.order!.id;
             final paymentResult = await orderDatasource.postPayment(cartId);
             final paymentDetails =
-                paymentResult.fold((l) => null, (payment) => payment);
+            paymentResult.fold((l) => null, (payment) => payment);
             if (paymentDetails != null) {
               final url = Uri.parse(paymentDetails.checkoutLink!);
               await launchURL(url);
             }
 
-            emit(_Success(
+            // Tunggu sampai postPayment selesai sebelum mengakses orderId
+            await paymentResult.fold((l) => null, (r) async {
+              emit(_Success(
                 cartModel: null,
                 patchQtyModel: null,
                 deleteModel: null,
                 modelPostOrder: postOrderModel,
-                modelPostPayment: paymentDetails));
+                modelPostPayment: paymentDetails,
+                orderId: r.orderId,
+              ));
+
+              event.onOrderSuccess(r.orderId!, r.checkoutLink!);
+            });
           } else {
             emit(const _Error(message: 'No items in cart'));
           }
@@ -97,7 +108,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 patchQtyModel: r,
                 deleteModel: null,
                 modelPostOrder: null,
-                modelPostPayment: null))
+                modelPostPayment: null,
+                  orderId: null,
+                ))
         );
 
 
@@ -114,7 +127,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               patchQtyModel: null,
               deleteModel: r,
               modelPostOrder: null,
-              modelPostPayment: null)));
+              modelPostPayment: null,
+            orderId: null,
+          )));
     });
   }
 }

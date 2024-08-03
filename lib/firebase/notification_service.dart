@@ -29,16 +29,16 @@ class NotificationService {
   }
 
   void requestNotificationPermisions() async {
-    if (Platform.isIOS) {
-      await messaging.requestPermission(
-          alert: true,
-          announcement: true,
-          badge: true,
-          carPlay: true,
-          criticalAlert: true,
-          provisional: true,
-          sound: true);
-    }
+    // if (Platform.isIOS) {
+    //   await messaging.requestPermission(
+    //       alert: true,
+    //       announcement: true,
+    //       badge: true,
+    //       carPlay: true,
+    //       criticalAlert: true,
+    //       provisional: true,
+    //       sound: true);
+    // }
 
     NotificationSettings notificationSettings =
     await messaging.requestPermission(
@@ -74,7 +74,7 @@ class NotificationService {
       AndroidNotification? android = message.notification!.android;
 
       print("Notification title: ${notification!.title}");
-      print("Notification title: ${notification!.body}");
+      print("Notification body: ${notification!.body}");
       print("Data: ${message.data.toString()}");
 
       // For IoS
