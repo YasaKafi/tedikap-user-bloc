@@ -19,22 +19,20 @@ mixin _$LoginEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(LoginRequestModel? data) doLogin,
-    required TResult Function(String? fcmToken) doUpdateFcm,
+    required TResult Function(LoginRequestModel? data, String? fcmToken)
+        doLogin,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(LoginRequestModel? data)? doLogin,
-    TResult? Function(String? fcmToken)? doUpdateFcm,
+    TResult? Function(LoginRequestModel? data, String? fcmToken)? doLogin,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(LoginRequestModel? data)? doLogin,
-    TResult Function(String? fcmToken)? doUpdateFcm,
+    TResult Function(LoginRequestModel? data, String? fcmToken)? doLogin,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -42,21 +40,18 @@ mixin _$LoginEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_DoLogin value) doLogin,
-    required TResult Function(_DoUpdateFcm value) doUpdateFcm,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_DoLogin value)? doLogin,
-    TResult? Function(_DoUpdateFcm value)? doUpdateFcm,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_DoLogin value)? doLogin,
-    TResult Function(_DoUpdateFcm value)? doUpdateFcm,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -119,8 +114,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(LoginRequestModel? data) doLogin,
-    required TResult Function(String? fcmToken) doUpdateFcm,
+    required TResult Function(LoginRequestModel? data, String? fcmToken)
+        doLogin,
   }) {
     return started();
   }
@@ -129,8 +124,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(LoginRequestModel? data)? doLogin,
-    TResult? Function(String? fcmToken)? doUpdateFcm,
+    TResult? Function(LoginRequestModel? data, String? fcmToken)? doLogin,
   }) {
     return started?.call();
   }
@@ -139,8 +133,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(LoginRequestModel? data)? doLogin,
-    TResult Function(String? fcmToken)? doUpdateFcm,
+    TResult Function(LoginRequestModel? data, String? fcmToken)? doLogin,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -154,7 +147,6 @@ class _$StartedImpl implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_DoLogin value) doLogin,
-    required TResult Function(_DoUpdateFcm value) doUpdateFcm,
   }) {
     return started(this);
   }
@@ -164,7 +156,6 @@ class _$StartedImpl implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_DoLogin value)? doLogin,
-    TResult? Function(_DoUpdateFcm value)? doUpdateFcm,
   }) {
     return started?.call(this);
   }
@@ -174,7 +165,6 @@ class _$StartedImpl implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_DoLogin value)? doLogin,
-    TResult Function(_DoUpdateFcm value)? doUpdateFcm,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -194,7 +184,7 @@ abstract class _$$DoLoginImplCopyWith<$Res> {
           _$DoLoginImpl value, $Res Function(_$DoLoginImpl) then) =
       __$$DoLoginImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({LoginRequestModel? data});
+  $Res call({LoginRequestModel? data, String? fcmToken});
 }
 
 /// @nodoc
@@ -209,12 +199,17 @@ class __$$DoLoginImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? data = freezed,
+    Object? fcmToken = freezed,
   }) {
     return _then(_$DoLoginImpl(
       freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as LoginRequestModel?,
+      freezed == fcmToken
+          ? _value.fcmToken
+          : fcmToken // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -222,14 +217,16 @@ class __$$DoLoginImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DoLoginImpl implements _DoLogin {
-  const _$DoLoginImpl(this.data);
+  const _$DoLoginImpl(this.data, this.fcmToken);
 
   @override
   final LoginRequestModel? data;
+  @override
+  final String? fcmToken;
 
   @override
   String toString() {
-    return 'LoginEvent.doLogin(data: $data)';
+    return 'LoginEvent.doLogin(data: $data, fcmToken: $fcmToken)';
   }
 
   @override
@@ -237,11 +234,13 @@ class _$DoLoginImpl implements _DoLogin {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DoLoginImpl &&
-            (identical(other.data, data) || other.data == data));
+            (identical(other.data, data) || other.data == data) &&
+            (identical(other.fcmToken, fcmToken) ||
+                other.fcmToken == fcmToken));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, data);
+  int get hashCode => Object.hash(runtimeType, data, fcmToken);
 
   @JsonKey(ignore: true)
   @override
@@ -253,32 +252,30 @@ class _$DoLoginImpl implements _DoLogin {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(LoginRequestModel? data) doLogin,
-    required TResult Function(String? fcmToken) doUpdateFcm,
+    required TResult Function(LoginRequestModel? data, String? fcmToken)
+        doLogin,
   }) {
-    return doLogin(data);
+    return doLogin(data, fcmToken);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(LoginRequestModel? data)? doLogin,
-    TResult? Function(String? fcmToken)? doUpdateFcm,
+    TResult? Function(LoginRequestModel? data, String? fcmToken)? doLogin,
   }) {
-    return doLogin?.call(data);
+    return doLogin?.call(data, fcmToken);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(LoginRequestModel? data)? doLogin,
-    TResult Function(String? fcmToken)? doUpdateFcm,
+    TResult Function(LoginRequestModel? data, String? fcmToken)? doLogin,
     required TResult orElse(),
   }) {
     if (doLogin != null) {
-      return doLogin(data);
+      return doLogin(data, fcmToken);
     }
     return orElse();
   }
@@ -288,7 +285,6 @@ class _$DoLoginImpl implements _DoLogin {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_DoLogin value) doLogin,
-    required TResult Function(_DoUpdateFcm value) doUpdateFcm,
   }) {
     return doLogin(this);
   }
@@ -298,7 +294,6 @@ class _$DoLoginImpl implements _DoLogin {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_DoLogin value)? doLogin,
-    TResult? Function(_DoUpdateFcm value)? doUpdateFcm,
   }) {
     return doLogin?.call(this);
   }
@@ -308,7 +303,6 @@ class _$DoLoginImpl implements _DoLogin {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_DoLogin value)? doLogin,
-    TResult Function(_DoUpdateFcm value)? doUpdateFcm,
     required TResult orElse(),
   }) {
     if (doLogin != null) {
@@ -319,151 +313,13 @@ class _$DoLoginImpl implements _DoLogin {
 }
 
 abstract class _DoLogin implements LoginEvent {
-  const factory _DoLogin(final LoginRequestModel? data) = _$DoLoginImpl;
+  const factory _DoLogin(
+      final LoginRequestModel? data, final String? fcmToken) = _$DoLoginImpl;
 
   LoginRequestModel? get data;
-  @JsonKey(ignore: true)
-  _$$DoLoginImplCopyWith<_$DoLoginImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$DoUpdateFcmImplCopyWith<$Res> {
-  factory _$$DoUpdateFcmImplCopyWith(
-          _$DoUpdateFcmImpl value, $Res Function(_$DoUpdateFcmImpl) then) =
-      __$$DoUpdateFcmImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String? fcmToken});
-}
-
-/// @nodoc
-class __$$DoUpdateFcmImplCopyWithImpl<$Res>
-    extends _$LoginEventCopyWithImpl<$Res, _$DoUpdateFcmImpl>
-    implements _$$DoUpdateFcmImplCopyWith<$Res> {
-  __$$DoUpdateFcmImplCopyWithImpl(
-      _$DoUpdateFcmImpl _value, $Res Function(_$DoUpdateFcmImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? fcmToken = freezed,
-  }) {
-    return _then(_$DoUpdateFcmImpl(
-      freezed == fcmToken
-          ? _value.fcmToken
-          : fcmToken // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$DoUpdateFcmImpl implements _DoUpdateFcm {
-  const _$DoUpdateFcmImpl(this.fcmToken);
-
-  @override
-  final String? fcmToken;
-
-  @override
-  String toString() {
-    return 'LoginEvent.doUpdateFcm(fcmToken: $fcmToken)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$DoUpdateFcmImpl &&
-            (identical(other.fcmToken, fcmToken) ||
-                other.fcmToken == fcmToken));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, fcmToken);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$DoUpdateFcmImplCopyWith<_$DoUpdateFcmImpl> get copyWith =>
-      __$$DoUpdateFcmImplCopyWithImpl<_$DoUpdateFcmImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function(LoginRequestModel? data) doLogin,
-    required TResult Function(String? fcmToken) doUpdateFcm,
-  }) {
-    return doUpdateFcm(fcmToken);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function(LoginRequestModel? data)? doLogin,
-    TResult? Function(String? fcmToken)? doUpdateFcm,
-  }) {
-    return doUpdateFcm?.call(fcmToken);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function(LoginRequestModel? data)? doLogin,
-    TResult Function(String? fcmToken)? doUpdateFcm,
-    required TResult orElse(),
-  }) {
-    if (doUpdateFcm != null) {
-      return doUpdateFcm(fcmToken);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_DoLogin value) doLogin,
-    required TResult Function(_DoUpdateFcm value) doUpdateFcm,
-  }) {
-    return doUpdateFcm(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_DoLogin value)? doLogin,
-    TResult? Function(_DoUpdateFcm value)? doUpdateFcm,
-  }) {
-    return doUpdateFcm?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_DoLogin value)? doLogin,
-    TResult Function(_DoUpdateFcm value)? doUpdateFcm,
-    required TResult orElse(),
-  }) {
-    if (doUpdateFcm != null) {
-      return doUpdateFcm(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _DoUpdateFcm implements LoginEvent {
-  const factory _DoUpdateFcm(final String? fcmToken) = _$DoUpdateFcmImpl;
-
   String? get fcmToken;
   @JsonKey(ignore: true)
-  _$$DoUpdateFcmImplCopyWith<_$DoUpdateFcmImpl> get copyWith =>
+  _$$DoLoginImplCopyWith<_$DoLoginImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -473,7 +329,9 @@ mixin _$LoginState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(LoginResponseModel? model) success,
+    required TResult Function(
+            LoginResponseModel? model, UpdateFcmResponseModel? modelFcm)
+        success,
     required TResult Function(String? message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -481,7 +339,9 @@ mixin _$LoginState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(LoginResponseModel? model)? success,
+    TResult? Function(
+            LoginResponseModel? model, UpdateFcmResponseModel? modelFcm)?
+        success,
     TResult? Function(String? message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -489,7 +349,9 @@ mixin _$LoginState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(LoginResponseModel? model)? success,
+    TResult Function(
+            LoginResponseModel? model, UpdateFcmResponseModel? modelFcm)?
+        success,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) =>
@@ -579,7 +441,9 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(LoginResponseModel? model) success,
+    required TResult Function(
+            LoginResponseModel? model, UpdateFcmResponseModel? modelFcm)
+        success,
     required TResult Function(String? message) error,
   }) {
     return initial();
@@ -590,7 +454,9 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(LoginResponseModel? model)? success,
+    TResult? Function(
+            LoginResponseModel? model, UpdateFcmResponseModel? modelFcm)?
+        success,
     TResult? Function(String? message)? error,
   }) {
     return initial?.call();
@@ -601,7 +467,9 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(LoginResponseModel? model)? success,
+    TResult Function(
+            LoginResponseModel? model, UpdateFcmResponseModel? modelFcm)?
+        success,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {
@@ -693,7 +561,9 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(LoginResponseModel? model) success,
+    required TResult Function(
+            LoginResponseModel? model, UpdateFcmResponseModel? modelFcm)
+        success,
     required TResult Function(String? message) error,
   }) {
     return loading();
@@ -704,7 +574,9 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(LoginResponseModel? model)? success,
+    TResult? Function(
+            LoginResponseModel? model, UpdateFcmResponseModel? modelFcm)?
+        success,
     TResult? Function(String? message)? error,
   }) {
     return loading?.call();
@@ -715,7 +587,9 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(LoginResponseModel? model)? success,
+    TResult Function(
+            LoginResponseModel? model, UpdateFcmResponseModel? modelFcm)?
+        success,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {
@@ -773,7 +647,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({LoginResponseModel? model});
+  $Res call({LoginResponseModel? model, UpdateFcmResponseModel? modelFcm});
 }
 
 /// @nodoc
@@ -788,12 +662,17 @@ class __$$SuccessImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? model = freezed,
+    Object? modelFcm = freezed,
   }) {
     return _then(_$SuccessImpl(
       model: freezed == model
           ? _value.model
           : model // ignore: cast_nullable_to_non_nullable
               as LoginResponseModel?,
+      modelFcm: freezed == modelFcm
+          ? _value.modelFcm
+          : modelFcm // ignore: cast_nullable_to_non_nullable
+              as UpdateFcmResponseModel?,
     ));
   }
 }
@@ -801,14 +680,16 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl({this.model});
+  const _$SuccessImpl({this.model, this.modelFcm});
 
   @override
   final LoginResponseModel? model;
+  @override
+  final UpdateFcmResponseModel? modelFcm;
 
   @override
   String toString() {
-    return 'LoginState.success(model: $model)';
+    return 'LoginState.success(model: $model, modelFcm: $modelFcm)';
   }
 
   @override
@@ -816,11 +697,13 @@ class _$SuccessImpl implements _Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            (identical(other.model, model) || other.model == model));
+            (identical(other.model, model) || other.model == model) &&
+            (identical(other.modelFcm, modelFcm) ||
+                other.modelFcm == modelFcm));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, model);
+  int get hashCode => Object.hash(runtimeType, model, modelFcm);
 
   @JsonKey(ignore: true)
   @override
@@ -833,10 +716,12 @@ class _$SuccessImpl implements _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(LoginResponseModel? model) success,
+    required TResult Function(
+            LoginResponseModel? model, UpdateFcmResponseModel? modelFcm)
+        success,
     required TResult Function(String? message) error,
   }) {
-    return success(model);
+    return success(model, modelFcm);
   }
 
   @override
@@ -844,10 +729,12 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(LoginResponseModel? model)? success,
+    TResult? Function(
+            LoginResponseModel? model, UpdateFcmResponseModel? modelFcm)?
+        success,
     TResult? Function(String? message)? error,
   }) {
-    return success?.call(model);
+    return success?.call(model, modelFcm);
   }
 
   @override
@@ -855,12 +742,14 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(LoginResponseModel? model)? success,
+    TResult Function(
+            LoginResponseModel? model, UpdateFcmResponseModel? modelFcm)?
+        success,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(model);
+      return success(model, modelFcm);
     }
     return orElse();
   }
@@ -904,9 +793,12 @@ class _$SuccessImpl implements _Success {
 }
 
 abstract class _Success implements LoginState {
-  const factory _Success({final LoginResponseModel? model}) = _$SuccessImpl;
+  const factory _Success(
+      {final LoginResponseModel? model,
+      final UpdateFcmResponseModel? modelFcm}) = _$SuccessImpl;
 
   LoginResponseModel? get model;
+  UpdateFcmResponseModel? get modelFcm;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -978,7 +870,9 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(LoginResponseModel? model) success,
+    required TResult Function(
+            LoginResponseModel? model, UpdateFcmResponseModel? modelFcm)
+        success,
     required TResult Function(String? message) error,
   }) {
     return error(message);
@@ -989,7 +883,9 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(LoginResponseModel? model)? success,
+    TResult? Function(
+            LoginResponseModel? model, UpdateFcmResponseModel? modelFcm)?
+        success,
     TResult? Function(String? message)? error,
   }) {
     return error?.call(message);
@@ -1000,7 +896,9 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(LoginResponseModel? model)? success,
+    TResult Function(
+            LoginResponseModel? model, UpdateFcmResponseModel? modelFcm)?
+        success,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {

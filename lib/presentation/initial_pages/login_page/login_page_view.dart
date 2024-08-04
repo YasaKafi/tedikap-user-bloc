@@ -93,7 +93,7 @@ class LoginPage extends StatelessWidget {
                           backgroundColor: redMedium,
                         ));
                       },
-                      success: (model) {
+                      success: (model, modelFcm) {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text(
                             model!.message!,
@@ -129,11 +129,8 @@ class LoginPage extends StatelessWidget {
                                     password: passwordController.text);
                                 context
                                     .read<LoginBloc>()
-                                    .add(LoginEvent.doLogin(requestModel));
+                                    .add(LoginEvent.doLogin(requestModel, GlobalVariables.deviceToken!));
 
-                                context
-                                    .read<LoginBloc>()
-                                    .add(LoginEvent.doUpdateFcm(GlobalVariables.deviceToken));
                               }
                             },
                             borderRadius: 10,
