@@ -20,7 +20,7 @@ class UserDatasource {
       if (response.statusCode == 200) {
         return Right(CurrentUserModel.fromMap(response.data));
       } else {
-        return const Left('Failed to access data');
+        return const Left('Failed to access data user');
       }
     } catch (e) {
       return Left('Failed to access data: ${e.toString()}');
@@ -58,9 +58,9 @@ class UserDatasource {
       }
 
       FormData formData = FormData.fromMap({
-        'name': 'name',
-        'email': 'email',
-        'gender': 'gender',
+        'name': name,
+        'email': email,
+        'gender': gender,
         if (imageFile != null)
           'avatar': await MultipartFile.fromFile(imageFile.path,
               filename: imageFile.path.split('/').last),

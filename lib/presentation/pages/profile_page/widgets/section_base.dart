@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tedikap_user_bloc/data/repository/tedikap_repository.dart';
 import 'package:tedikap_user_bloc/presentation/pages/profile_page/bloc/profile_bloc.dart';
+import 'package:tedikap_user_bloc/presentation/pages/profile_page/widgets/shimmer_user_profile.dart';
 
 import '../../../../../common/constant.dart';
 import '../../../../../common/dimensions.dart';
@@ -20,12 +21,10 @@ class SectionBaseProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<ProfileBloc>().add(const ProfileEvent.getUser());
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-
           width: screenwWidth,
           decoration: const BoxDecoration(
             color: primaryColor40,
@@ -43,77 +42,100 @@ class SectionBaseProfile extends StatelessWidget {
                 ),
               ),
               Align(
-                  alignment: Alignment.bottomLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      top: 100,
-                      left: Dimensions.paddingSizeLarge,
-                      bottom: Dimensions.paddingSizeOverLarge,
-                    ),
-                    child: BlocBuilder<ProfileBloc, ProfileState>(
-                      builder: (context, state) {
-                        return state.when(
-                          initial: () {
-                            return const Center(child: Text('halo'));
-                          },
-                          loading: () {
-                            return const Center(child: CircularProgressIndicator());
-                          },
-
-                          error: (message) {
-                            return Center(child: Text(message));
-                          },
-                          loaded: (user, _) {
-                            return Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      context.pushNamed('edit_profile');
-                                    },
-                                    child: CircleAvatar(
-                                      radius: 28,
-                                      backgroundImage: NetworkImage(TedikapApiRepository.getAvatarProfile + user!.data!.avatar!),
-                                    ),
+                alignment: Alignment.bottomLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    top: 100,
+                    left: Dimensions.paddingSizeLarge,
+                    bottom: Dimensions.paddingSizeOverLarge,
+                  ),
+                  child: BlocBuilder<ProfileBloc, ProfileState>(
+                    builder: (context, state) {
+                      return state.when(
+                        initial: () {
+                          return ShimmerProfile();
+                        },
+                        loading: () {
+                          return ShimmerProfile();
+                        },
+                        error: (message) {
+                          return Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                },
+                                child: CircleAvatar(
+                                  radius: 28,
+                                  backgroundColor: grey,
+                                ),
+                              ),
+                              const SizedBox(height: 6),
+                              Text(
+                                'Hi, unknown user',
+                                style: txtSecondaryTitle.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: blackColor,
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                        loaded: (user, _) {
+                          return Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  context.pushNamed('edit_profile');
+                                },
+                                child: CircleAvatar(
+                                  radius: 28,
+                                  backgroundImage: NetworkImage(
+                                    TedikapApiRepository.getAvatarProfile +
+                                        user!.data!.avatar!,
                                   ),
-                                  const SizedBox(
-                                    height: 6,
-                                  ),
-                                  Text('Hi, ${user.data!.name!}',
-                                      style: txtSecondaryTitle.copyWith(
-                                          fontWeight: FontWeight.w600,
-                                          color: blackColor)),
-                                ]);
-                          },
-                        );
-
-                      },
-                    ),
-                  )),
+                                ),
+                              ),
+                              const SizedBox(height: 6),
+                              Text(
+                                'Hi, ${user.data!.name!}',
+                                style: txtSecondaryTitle.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: blackColor,
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ),
               Align(
-                  alignment: Alignment.bottomRight,
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      top: 100,
-                      right: Dimensions.paddingSizeOverLarge,
-                      bottom: Dimensions.paddingSizeThirty,
-                    ),
-                    child: SvgPicture.asset(
-                      icFood,
-                      width: 120,
-                      height: 120,
-                    ),
-                  ))
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    top: 100,
+                    right: Dimensions.paddingSizeOverLarge,
+                    bottom: Dimensions.paddingSizeThirty,
+                  ),
+                  child: SvgPicture.asset(
+                    icFood,
+                    width: 120,
+                    height: 120,
+                  ),
+                ),
+              ),
             ],
           ),
         ),
         BoxHelpSupport(screenwWidth: screenwWidth),
-        const SizedBox(height: 20,)
-
+        const SizedBox(height: 20),
       ],
     );
   }
 }
-
-

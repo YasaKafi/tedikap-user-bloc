@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/presentation/pages/profile_page/bloc/profile_bloc.dart';
 import '../../../../../common/theme.dart';
 import '../../../../common/dimensions.dart';
@@ -57,8 +58,7 @@ class SettingPage extends StatelessWidget {
           const SizedBox(height: 30),
           Padding(
             padding: const EdgeInsets.symmetric(
-                horizontal:
-                    Dimensions.paddingSizeLarge), // Ubah sesuai kebutuhan Anda
+                horizontal: Dimensions.paddingSizeLarge), // Ubah sesuai kebutuhan Anda
             child: Column(
               children: [
                 InkWell(
@@ -103,7 +103,6 @@ class SettingPage extends StatelessWidget {
                 ),
                 const Divider(),
                 const SizedBox(height: 20),
-
                 InkWell(
                   onTap: () {},
                   child: Row(
@@ -133,7 +132,7 @@ class SettingPage extends StatelessWidget {
                       error: (message) {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text(
-                            message!,
+                            message,
                             style: txtSecondaryTitle.copyWith(
                                 fontWeight: FontWeight.w500, color: baseColor),
                           ),
@@ -155,7 +154,7 @@ class SettingPage extends StatelessWidget {
                   },
                   builder: (context, state) {
                     return state.maybeWhen(
-                      orElse: (){
+                      orElse: () {
                         return InkWell(
                           onTap: () {
                             context.read<ProfileBloc>().add(const ProfileEvent.doLogout());
@@ -178,18 +177,31 @@ class SettingPage extends StatelessWidget {
                             ],
                           ),
                         );
-
                       },
                       loading: () {
-                        return const Center(child: CircularProgressIndicator());
+                        return _buildShimmer();
                       },
                     );
-
                   },
                 ),
-
               ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildShimmer() {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Column(
+        children: [
+          Container(
+            width: 150,
+            height: 24,
+            color: Colors.white,
           ),
         ],
       ),
