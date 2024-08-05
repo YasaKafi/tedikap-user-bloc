@@ -3,6 +3,6 @@ part of 'login_bloc.dart';
 @freezed
 class LoginEvent with _$LoginEvent {
   const factory LoginEvent.started() = _Started;
-  const factory LoginEvent.doLogin(LoginRequestModel? data, String? fcmToken) = _DoLogin;
+  const factory LoginEvent.doLogin(LoginRequestModel? data) = _DoLogin;
 
 }

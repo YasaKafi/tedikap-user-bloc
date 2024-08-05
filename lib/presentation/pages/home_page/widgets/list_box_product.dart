@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:tedikap_user_bloc/data/repository/tedikap_repository.dart';
 
 import '../../../../common/dimensions.dart';
 import '../../../../common/theme.dart';
@@ -46,7 +47,7 @@ class ListBoxProduct extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Image.network(
-              image,
+              TedikapApiRepository.getImage + image,
               height: 100,
               width: double.infinity,
               fit: BoxFit.cover,

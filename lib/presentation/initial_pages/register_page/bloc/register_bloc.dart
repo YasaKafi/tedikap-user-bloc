@@ -16,13 +16,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     on<_DoRegister>((event, emit) async {
       emit(const RegisterState.loading());
       final result = await datasource.postRegister(event.data!);
-      await result.fold((l) async => emit(RegisterState.error(message: 'Failed to login')), (r) async {
-        if(r.data != null){
-          final resultFcm = await datasource.putFCMToken(event.fcmToken!);
-          final tokenFcm = resultFcm.fold((l) => null, (success) => success);
-          emit(RegisterState.success(model: r, modelFcm: tokenFcm));
-        }
-      }
+       result.fold((l) async => emit(RegisterState.error(message: 'Failed to login')), (r) => emit(RegisterState.success(model: r) )
       );
     });
 
