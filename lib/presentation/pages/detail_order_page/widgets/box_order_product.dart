@@ -9,6 +9,7 @@ import '../../../../../common/constant.dart';
 import '../../../../../common/dimensions.dart';
 import '../../../../../common/theme.dart';
 import '../../../../data/models/response/detail_history_order_reward_response_model.dart';
+import '../../../../data/repository/tedikap_repository.dart';
 
 class BoxProductOrder extends StatelessWidget {
   const BoxProductOrder({
@@ -81,7 +82,7 @@ class BoxProductOrder extends StatelessWidget {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Image.network(
-                                    detailOrderItem.productImage!,
+                                    TedikapApiRepository.getImage + detailOrderItem.productImage!,
                                     width: 80,
                                     height: 80,
                                   ),
@@ -193,8 +194,8 @@ class BoxProductOrder extends StatelessWidget {
                               Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Image.asset(
-                                    originalTea,
+                                  Image.network(
+                                    TedikapApiRepository.getImageRewardProduct + detailOrderItemReward.productImage!,
                                     width: 80,
                                     height: 80,
                                   ),

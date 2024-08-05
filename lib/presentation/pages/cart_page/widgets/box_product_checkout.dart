@@ -7,6 +7,7 @@ import 'package:tedikap_user_bloc/data/models/response/detail_product_response_m
 import '../../../../../common/constant.dart';
 import '../../../../../common/dimensions.dart';
 import '../../../../../common/theme.dart';
+import '../../../../data/repository/tedikap_repository.dart';
 import '../bloc/cart_bloc.dart';
 
 class BoxProductCheckout extends StatelessWidget {
@@ -47,7 +48,7 @@ class BoxProductCheckout extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Image.network(
-              item.productImage ?? '',
+              TedikapApiRepository.getImage + item.productImage! ?? '',
               width: 80,
               height: 80,
             ),

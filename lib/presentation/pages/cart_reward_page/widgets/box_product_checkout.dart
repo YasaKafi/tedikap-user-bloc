@@ -6,6 +6,7 @@ import '../../../../../common/constant.dart';
 import '../../../../../common/dimensions.dart';
 import '../../../../../common/theme.dart';
 import '../../../../data/models/response/cart_reward_response_model.dart';
+import '../../../../data/repository/tedikap_repository.dart';
 
 class BoxProductCheckout extends StatelessWidget {
   const BoxProductCheckout({
@@ -45,7 +46,7 @@ class BoxProductCheckout extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Image.network(
-              item.productImage ?? '',
+              TedikapApiRepository.getImageRewardProduct + item.productImage! ?? '',
               width: 80,
               height: 80,
             ),

@@ -10,17 +10,30 @@ import '../../../common/constant.dart';
 import '../../../common/dimensions.dart';
 import '../../../common/theme.dart';
 
-class FavoritePage extends StatelessWidget {
+class FavoritePage extends StatefulWidget {
   const FavoritePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  _FavoritePageState createState() => _FavoritePageState();
+}
+
+class _FavoritePageState extends State<FavoritePage> {
+  @override
+  void initState() {
+    super.initState();
+    _fetchInitialData();
+  }
+
+  void _fetchInitialData() {
     context.read<FavoriteBloc>().add(const FavoriteEvent.getFavorite());
+  }
+
+  @override
+  Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
     Shimmer? loadingCard() {
-      double screenWidth = MediaQuery.of(context).size.width;
       return Shimmer.fromColors(
         baseColor: Colors.grey[300]!,
         highlightColor: Colors.grey[100]!,
@@ -150,7 +163,7 @@ class FavoritePage extends StatelessWidget {
           },
           builder: (context, state) {
             return state.when(
-              initial: () =>ListView.builder(
+              initial: () => ListView.builder(
                 itemCount: 8,
                 itemBuilder: (context, index) {
                   return loadingCard();
@@ -254,7 +267,6 @@ class FavoritePage extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-
               ],
             ),
           ),
@@ -263,3 +275,4 @@ class FavoritePage extends StatelessWidget {
     );
   }
 }
+

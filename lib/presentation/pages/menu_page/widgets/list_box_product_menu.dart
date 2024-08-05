@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:tedikap_user_bloc/data/repository/tedikap_repository.dart';
 
 import '../../../../common/dimensions.dart';
 import '../../../../common/theme.dart';
@@ -46,7 +47,7 @@ class ListBoxProductMenu extends StatelessWidget {
                   color: const Color(0x0C56473C),
                   shape: const OvalBorder(),
                   image: DecorationImage(
-                    image: NetworkImage(image),
+                    image: NetworkImage(TedikapApiRepository.getImage + image),
                     fit: BoxFit.cover,
                   ),
                 ),

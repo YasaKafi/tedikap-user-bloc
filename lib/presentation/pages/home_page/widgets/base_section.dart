@@ -230,7 +230,7 @@ class ButtonCircleIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.pushNamed(routes);
+        context.goNamed(routes);
       },
       child: Container(
         padding: EdgeInsets.all(Dimensions.paddingSizeMedium),

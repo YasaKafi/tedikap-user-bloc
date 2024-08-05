@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:tedikap_user_bloc/common/constant.dart';
-import 'package:tedikap_user_bloc/presentation/dashboard/dashboard_page.dart';
 import 'package:tedikap_user_bloc/presentation/pages/order_page/bloc/order_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/order_page/widgets/order_filter.dart';
 import 'package:tedikap_user_bloc/presentation/pages/order_page/widgets/shimmer_list_box_order.dart';
@@ -12,8 +10,24 @@ import '../../../common/dimensions.dart';
 import '../../../common/theme.dart';
 import 'widgets/list_box_order_status.dart';
 
-class OrderPage extends StatelessWidget {
+class OrderPage extends StatefulWidget {
   const OrderPage({super.key});
+
+  @override
+  _OrderPageState createState() => _OrderPageState();
+}
+
+class _OrderPageState extends State<OrderPage> {
+  @override
+  void initState() {
+    super.initState();
+    _fetchInitialData();
+  }
+
+  Future<void> _fetchInitialData() async {
+    context.read<OrderBloc>().add(const OrderEvent.getFilterOrder('ongoing'));
+    context.read<OrderBloc>().add(const OrderEvent.getFilterOrderReward('ongoing'));
+  }
 
   Future<void> _refreshData(BuildContext context) async {
     context.read<OrderBloc>().add(const OrderEvent.getFilterOrder('ongoing'));
@@ -23,9 +37,6 @@ class OrderPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    context.read<OrderBloc>().add(const OrderEvent.getFilterOrder('ongoing'));
-
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
@@ -102,72 +113,72 @@ class OrderPage extends StatelessWidget {
                           BlocBuilder<OrderBloc, OrderState>(
                             builder: (context, state) {
                               return state.when(
-                                initial: () {
-                                  return const Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                },
-                                loading: () => Expanded(
-                                  child: ListView.builder(
-                                    itemCount: 3,
-                                    itemBuilder: (context, index) =>
-                                    const ShimmerListBoxMenuStatus(),
-                                  ),
-                                ),
-                                success: (model, modelReward, filterIndex) {
-                                  if ((model?.orders == null ||
-                                      model?.orders?.isEmpty == true) &&
-                                      (modelReward?.orders == null ||
-                                          modelReward?.orders?.isEmpty ==
-                                              true)) {
-                                    return _buildEmptyOrderState(context);
-                                  } else {
-                                    return Expanded(
-                                      child: ListView.builder(
-                                        itemCount: filterIndex == 0
-                                            ? model?.orders?.length ?? 0
-                                            : modelReward?.orders?.length ?? 0,
-                                        scrollDirection: Axis.vertical,
-                                        itemBuilder: (context, index) {
-                                          if (filterIndex == 0) {
-                                            final order = model!.orders![index];
-
-                                            return ListBoxMenuStatus(
-                                              status: order.status!,
-                                              totalItem: order
-                                                  .orderItems!.length
-                                                  .toString(),
-                                              totalPrice:
-                                              order.totalPrice!.toString(),
-                                              orderItems: order.orderItems,
-                                              createdAt:
-                                              order.createdAt.toString(),
-                                              orderId: order.id!,
-                                            );
-                                          } else {
-                                            final order =
-                                            modelReward!.orders![index];
-
-                                            return ListBoxMenuStatus(
-                                              status: order.status!,
-                                              totalItem: order
-                                                  .orderRewardItems!.length
-                                                  .toString(),
-                                              totalPrice:
-                                              order.totalPoint!.toString(),
-                                              orderItemsReward:
-                                              order.orderRewardItems,
-                                              createdAt:
-                                              order.createdAt.toString(),
-                                              orderRewardId: order.id!,
-                                            );
-                                          }
-                                        },
-                                      ),
+                                  initial: () {
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
                                     );
-                                  }
-                                },
-                                error: (message) => _buildErrorState(context, message!)
+                                  },
+                                  loading: () => Expanded(
+                                    child: ListView.builder(
+                                      itemCount: 3,
+                                      itemBuilder: (context, index) =>
+                                      const ShimmerListBoxMenuStatus(),
+                                    ),
+                                  ),
+                                  success: (model, modelReward, filterIndex) {
+                                    if ((model?.orders == null ||
+                                        model?.orders?.isEmpty == true) &&
+                                        (modelReward?.orders == null ||
+                                            modelReward?.orders?.isEmpty ==
+                                                true)) {
+                                      return _buildEmptyOrderState(context);
+                                    } else {
+                                      return Expanded(
+                                        child: ListView.builder(
+                                          itemCount: filterIndex == 0
+                                              ? model?.orders?.length ?? 0
+                                              : modelReward?.orders?.length ?? 0,
+                                          scrollDirection: Axis.vertical,
+                                          itemBuilder: (context, index) {
+                                            if (filterIndex == 0) {
+                                              final order = model!.orders![index];
+
+                                              return ListBoxMenuStatus(
+                                                status: order.status!,
+                                                totalItem: order
+                                                    .orderItems!.length
+                                                    .toString(),
+                                                totalPrice:
+                                                order.totalPrice!.toString(),
+                                                orderItems: order.orderItems,
+                                                createdAt:
+                                                order.createdAt.toString(),
+                                                orderId: order.id!,
+                                              );
+                                            } else {
+                                              final order =
+                                              modelReward!.orders![index];
+
+                                              return ListBoxMenuStatus(
+                                                status: order.status!,
+                                                totalItem: order
+                                                    .orderRewardItems!.length
+                                                    .toString(),
+                                                totalPrice:
+                                                order.totalPoint!.toString(),
+                                                orderItemsReward:
+                                                order.orderRewardItems,
+                                                createdAt:
+                                                order.createdAt.toString(),
+                                                orderRewardId: order.id!,
+                                              );
+                                            }
+                                          },
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  error: (message) => _buildErrorState(context, message!)
                               );
                             },
                           ),
@@ -182,72 +193,72 @@ class OrderPage extends StatelessWidget {
                           BlocBuilder<OrderBloc, OrderState>(
                             builder: (context, state) {
                               return state.when(
-                                initial: () {
-                                  return const Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                },
-                                loading: () => Expanded(
-                                  child: ListView.builder(
-                                    itemCount: 3,
-                                    itemBuilder: (context, index) =>
-                                    const ShimmerListBoxMenuStatus(),
-                                  ),
-                                ),
-                                success: (model, modelReward, filterIndex) {
-                                  if ((model?.orders == null ||
-                                      model?.orders?.isEmpty == true) &&
-                                      (modelReward?.orders == null ||
-                                          modelReward?.orders?.isEmpty ==
-                                              true)) {
-                                    return _buildEmptyOrderState(context);
-                                  } else {
-                                    return Expanded(
-                                      child: ListView.builder(
-                                        itemCount: filterIndex == 0
-                                            ? model?.orders?.length ?? 0
-                                            : modelReward?.orders?.length ?? 0,
-                                        scrollDirection: Axis.vertical,
-                                        itemBuilder: (context, index) {
-                                          if (filterIndex == 0) {
-                                            final order = model!.orders![index];
-
-                                            return ListBoxMenuStatus(
-                                              orderId: order.id!,
-                                              status: order.status!,
-                                              totalItem: order
-                                                  .orderItems!.length
-                                                  .toString(),
-                                              totalPrice: order.totalPrice!
-                                                  .toString(),
-                                              orderItems: order.orderItems,
-                                              createdAt:
-                                              order.createdAt.toString(),
-                                            );
-                                          } else {
-                                            final order =
-                                            modelReward!.orders![index];
-
-                                            return ListBoxMenuStatus(
-                                              status: order.status!,
-                                              totalItem: order
-                                                  .orderRewardItems!.length
-                                                  .toString(),
-                                              totalPrice:
-                                              order.totalPoint!.toString(),
-                                              orderItemsReward:
-                                              order.orderRewardItems,
-                                              createdAt:
-                                              order.createdAt.toString(),
-                                              orderRewardId: order.id!,
-                                            );
-                                          }
-                                        },
-                                      ),
+                                  initial: () {
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
                                     );
-                                  }
-                                },
-                                error: (message) => _buildErrorState(context, message!)
+                                  },
+                                  loading: () => Expanded(
+                                    child: ListView.builder(
+                                      itemCount: 3,
+                                      itemBuilder: (context, index) =>
+                                      const ShimmerListBoxMenuStatus(),
+                                    ),
+                                  ),
+                                  success: (model, modelReward, filterIndex) {
+                                    if ((model?.orders == null ||
+                                        model?.orders?.isEmpty == true) &&
+                                        (modelReward?.orders == null ||
+                                            modelReward?.orders?.isEmpty ==
+                                                true)) {
+                                      return _buildEmptyOrderState(context);
+                                    } else {
+                                      return Expanded(
+                                        child: ListView.builder(
+                                          itemCount: filterIndex == 0
+                                              ? model?.orders?.length ?? 0
+                                              : modelReward?.orders?.length ?? 0,
+                                          scrollDirection: Axis.vertical,
+                                          itemBuilder: (context, index) {
+                                            if (filterIndex == 0) {
+                                              final order = model!.orders![index];
+
+                                              return ListBoxMenuStatus(
+                                                orderId: order.id!,
+                                                status: order.status!,
+                                                totalItem: order
+                                                    .orderItems!.length
+                                                    .toString(),
+                                                totalPrice: order.totalPrice!
+                                                    .toString(),
+                                                orderItems: order.orderItems,
+                                                createdAt:
+                                                order.createdAt.toString(),
+                                              );
+                                            } else {
+                                              final order =
+                                              modelReward!.orders![index];
+
+                                              return ListBoxMenuStatus(
+                                                status: order.status!,
+                                                totalItem: order
+                                                    .orderRewardItems!.length
+                                                    .toString(),
+                                                totalPrice:
+                                                order.totalPoint!.toString(),
+                                                orderItemsReward:
+                                                order.orderRewardItems,
+                                                createdAt:
+                                                order.createdAt.toString(),
+                                                orderRewardId: order.id!,
+                                              );
+                                            }
+                                          },
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  error: (message) => _buildErrorState(context, message!)
                               );
                             },
                           ),
@@ -263,7 +274,6 @@ class OrderPage extends StatelessWidget {
       ),
     );
   }
-
 
   Widget _buildErrorState(BuildContext context, String message) {
     final double screenWidth = MediaQuery.of(context).size.width;
@@ -323,7 +333,6 @@ class OrderPage extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-
                 ],
               ),
             ),
@@ -333,3 +342,4 @@ class OrderPage extends StatelessWidget {
     );
   }
 }
+
