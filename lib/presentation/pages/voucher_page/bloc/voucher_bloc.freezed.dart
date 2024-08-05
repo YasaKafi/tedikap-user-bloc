@@ -767,7 +767,8 @@ mixin _$VoucherState {
             CartResponseModel? modelCart,
             VoucherAppliedRemoveResponseModel? modelVoucherAppliedRemove,
             bool isUseVoucher,
-            CartResponseModel? cartModel)
+            CartResponseModel? cartModel,
+            int? currentVoucherId)
         success,
     required TResult Function(String? message) error,
   }) =>
@@ -781,7 +782,8 @@ mixin _$VoucherState {
             CartResponseModel? modelCart,
             VoucherAppliedRemoveResponseModel? modelVoucherAppliedRemove,
             bool isUseVoucher,
-            CartResponseModel? cartModel)?
+            CartResponseModel? cartModel,
+            int? currentVoucherId)?
         success,
     TResult? Function(String? message)? error,
   }) =>
@@ -795,7 +797,8 @@ mixin _$VoucherState {
             CartResponseModel? modelCart,
             VoucherAppliedRemoveResponseModel? modelVoucherAppliedRemove,
             bool isUseVoucher,
-            CartResponseModel? cartModel)?
+            CartResponseModel? cartModel,
+            int? currentVoucherId)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -891,7 +894,8 @@ class _$InitialImpl implements _Initial {
             CartResponseModel? modelCart,
             VoucherAppliedRemoveResponseModel? modelVoucherAppliedRemove,
             bool isUseVoucher,
-            CartResponseModel? cartModel)
+            CartResponseModel? cartModel,
+            int? currentVoucherId)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -908,7 +912,8 @@ class _$InitialImpl implements _Initial {
             CartResponseModel? modelCart,
             VoucherAppliedRemoveResponseModel? modelVoucherAppliedRemove,
             bool isUseVoucher,
-            CartResponseModel? cartModel)?
+            CartResponseModel? cartModel,
+            int? currentVoucherId)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -925,7 +930,8 @@ class _$InitialImpl implements _Initial {
             CartResponseModel? modelCart,
             VoucherAppliedRemoveResponseModel? modelVoucherAppliedRemove,
             bool isUseVoucher,
-            CartResponseModel? cartModel)?
+            CartResponseModel? cartModel,
+            int? currentVoucherId)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -1023,7 +1029,8 @@ class _$LoadingImpl implements _Loading {
             CartResponseModel? modelCart,
             VoucherAppliedRemoveResponseModel? modelVoucherAppliedRemove,
             bool isUseVoucher,
-            CartResponseModel? cartModel)
+            CartResponseModel? cartModel,
+            int? currentVoucherId)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -1040,7 +1047,8 @@ class _$LoadingImpl implements _Loading {
             CartResponseModel? modelCart,
             VoucherAppliedRemoveResponseModel? modelVoucherAppliedRemove,
             bool isUseVoucher,
-            CartResponseModel? cartModel)?
+            CartResponseModel? cartModel,
+            int? currentVoucherId)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -1057,7 +1065,8 @@ class _$LoadingImpl implements _Loading {
             CartResponseModel? modelCart,
             VoucherAppliedRemoveResponseModel? modelVoucherAppliedRemove,
             bool isUseVoucher,
-            CartResponseModel? cartModel)?
+            CartResponseModel? cartModel,
+            int? currentVoucherId)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -1121,7 +1130,8 @@ abstract class _$$SuccessImplCopyWith<$Res> {
       CartResponseModel? modelCart,
       VoucherAppliedRemoveResponseModel? modelVoucherAppliedRemove,
       bool isUseVoucher,
-      CartResponseModel? cartModel});
+      CartResponseModel? cartModel,
+      int? currentVoucherId});
 }
 
 /// @nodoc
@@ -1140,6 +1150,7 @@ class __$$SuccessImplCopyWithImpl<$Res>
     Object? modelVoucherAppliedRemove = freezed,
     Object? isUseVoucher = null,
     Object? cartModel = freezed,
+    Object? currentVoucherId = freezed,
   }) {
     return _then(_$SuccessImpl(
       modelVoucher: freezed == modelVoucher
@@ -1162,6 +1173,10 @@ class __$$SuccessImplCopyWithImpl<$Res>
           ? _value.cartModel
           : cartModel // ignore: cast_nullable_to_non_nullable
               as CartResponseModel?,
+      currentVoucherId: freezed == currentVoucherId
+          ? _value.currentVoucherId
+          : currentVoucherId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -1174,7 +1189,8 @@ class _$SuccessImpl implements _Success {
       required this.modelCart,
       required this.modelVoucherAppliedRemove,
       this.isUseVoucher = false,
-      required this.cartModel});
+      required this.cartModel,
+      this.currentVoucherId});
 
   @override
   final VoucherActiveResponseModel? modelVoucher;
@@ -1187,10 +1203,12 @@ class _$SuccessImpl implements _Success {
   final bool isUseVoucher;
   @override
   final CartResponseModel? cartModel;
+  @override
+  final int? currentVoucherId;
 
   @override
   String toString() {
-    return 'VoucherState.success(modelVoucher: $modelVoucher, modelCart: $modelCart, modelVoucherAppliedRemove: $modelVoucherAppliedRemove, isUseVoucher: $isUseVoucher, cartModel: $cartModel)';
+    return 'VoucherState.success(modelVoucher: $modelVoucher, modelCart: $modelCart, modelVoucherAppliedRemove: $modelVoucherAppliedRemove, isUseVoucher: $isUseVoucher, cartModel: $cartModel, currentVoucherId: $currentVoucherId)';
   }
 
   @override
@@ -1208,12 +1226,14 @@ class _$SuccessImpl implements _Success {
             (identical(other.isUseVoucher, isUseVoucher) ||
                 other.isUseVoucher == isUseVoucher) &&
             (identical(other.cartModel, cartModel) ||
-                other.cartModel == cartModel));
+                other.cartModel == cartModel) &&
+            (identical(other.currentVoucherId, currentVoucherId) ||
+                other.currentVoucherId == currentVoucherId));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, modelVoucher, modelCart,
-      modelVoucherAppliedRemove, isUseVoucher, cartModel);
+      modelVoucherAppliedRemove, isUseVoucher, cartModel, currentVoucherId);
 
   @JsonKey(ignore: true)
   @override
@@ -1231,12 +1251,13 @@ class _$SuccessImpl implements _Success {
             CartResponseModel? modelCart,
             VoucherAppliedRemoveResponseModel? modelVoucherAppliedRemove,
             bool isUseVoucher,
-            CartResponseModel? cartModel)
+            CartResponseModel? cartModel,
+            int? currentVoucherId)
         success,
     required TResult Function(String? message) error,
   }) {
     return success(modelVoucher, modelCart, modelVoucherAppliedRemove,
-        isUseVoucher, cartModel);
+        isUseVoucher, cartModel, currentVoucherId);
   }
 
   @override
@@ -1249,12 +1270,13 @@ class _$SuccessImpl implements _Success {
             CartResponseModel? modelCart,
             VoucherAppliedRemoveResponseModel? modelVoucherAppliedRemove,
             bool isUseVoucher,
-            CartResponseModel? cartModel)?
+            CartResponseModel? cartModel,
+            int? currentVoucherId)?
         success,
     TResult? Function(String? message)? error,
   }) {
     return success?.call(modelVoucher, modelCart, modelVoucherAppliedRemove,
-        isUseVoucher, cartModel);
+        isUseVoucher, cartModel, currentVoucherId);
   }
 
   @override
@@ -1267,14 +1289,15 @@ class _$SuccessImpl implements _Success {
             CartResponseModel? modelCart,
             VoucherAppliedRemoveResponseModel? modelVoucherAppliedRemove,
             bool isUseVoucher,
-            CartResponseModel? cartModel)?
+            CartResponseModel? cartModel,
+            int? currentVoucherId)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
       return success(modelVoucher, modelCart, modelVoucherAppliedRemove,
-          isUseVoucher, cartModel);
+          isUseVoucher, cartModel, currentVoucherId);
     }
     return orElse();
   }
@@ -1324,13 +1347,15 @@ abstract class _Success implements VoucherState {
       required final VoucherAppliedRemoveResponseModel?
           modelVoucherAppliedRemove,
       final bool isUseVoucher,
-      required final CartResponseModel? cartModel}) = _$SuccessImpl;
+      required final CartResponseModel? cartModel,
+      final int? currentVoucherId}) = _$SuccessImpl;
 
   VoucherActiveResponseModel? get modelVoucher;
   CartResponseModel? get modelCart;
   VoucherAppliedRemoveResponseModel? get modelVoucherAppliedRemove;
   bool get isUseVoucher;
   CartResponseModel? get cartModel;
+  int? get currentVoucherId;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1407,7 +1432,8 @@ class _$ErrorImpl implements _Error {
             CartResponseModel? modelCart,
             VoucherAppliedRemoveResponseModel? modelVoucherAppliedRemove,
             bool isUseVoucher,
-            CartResponseModel? cartModel)
+            CartResponseModel? cartModel,
+            int? currentVoucherId)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -1424,7 +1450,8 @@ class _$ErrorImpl implements _Error {
             CartResponseModel? modelCart,
             VoucherAppliedRemoveResponseModel? modelVoucherAppliedRemove,
             bool isUseVoucher,
-            CartResponseModel? cartModel)?
+            CartResponseModel? cartModel,
+            int? currentVoucherId)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -1441,7 +1468,8 @@ class _$ErrorImpl implements _Error {
             CartResponseModel? modelCart,
             VoucherAppliedRemoveResponseModel? modelVoucherAppliedRemove,
             bool isUseVoucher,
-            CartResponseModel? cartModel)?
+            CartResponseModel? cartModel,
+            int? currentVoucherId)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
