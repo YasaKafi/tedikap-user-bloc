@@ -12,17 +12,31 @@ import '../../../common/dimensions.dart';
 import '../../../common/theme.dart';
 import 'bloc/cart_bloc.dart';
 
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
   const CartPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    Future<void> _refreshData() async {
-      context.read<CartBloc>().add(CartEvent.getCart());
-      await Future.delayed(Duration(seconds: 1));
-    }
+  _CartPageState createState() => _CartPageState();
+}
 
-    context.read<CartBloc>().add(CartEvent.getCart());
+class _CartPageState extends State<CartPage> {
+  @override
+  void initState() {
+    super.initState();
+    _fetchInitialData();
+  }
+
+  Future<void> _fetchInitialData() async {
+    context.read<CartBloc>().add(const CartEvent.getCart());
+  }
+
+  Future<void> _refreshData() async {
+    context.read<CartBloc>().add(const CartEvent.getCart());
+    await Future.delayed(const Duration(seconds: 1));
+  }
+
+  @override
+  Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -33,8 +47,7 @@ class CartPage extends StatelessWidget {
           decoration: const BoxDecoration(
             color: baseColor50,
           ),
-          padding:
-          const EdgeInsets.only(top: 30, bottom: 10, left: 10, right: 10),
+          padding: const EdgeInsets.only(top: 30, bottom: 10, left: 10, right: 10),
           width: MediaQuery.of(context).size.width,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -72,7 +85,7 @@ class CartPage extends StatelessWidget {
             onRefresh: _refreshData,
             child: SingleChildScrollView(
               child: Container(
-                margin: EdgeInsets.only(bottom: 200),
+                margin: const EdgeInsets.only(bottom: 200),
                 child: Padding(
                   padding: const EdgeInsets.all(Dimensions.paddingSizeLarge),
                   child: Align(
@@ -83,11 +96,11 @@ class CartPage extends StatelessWidget {
                         Column(
                           children: [
                             BoxEstimationPickup(screenWidth: screenWidth),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             BoxCheckoutDetail(screenWidth: screenWidth),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             BoxPaymentDetail(screenWidth: screenWidth),
@@ -112,3 +125,4 @@ class CartPage extends StatelessWidget {
     );
   }
 }
+

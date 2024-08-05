@@ -6,6 +6,7 @@ import 'package:tedikap_user_bloc/presentation/pages/favorite_page/bloc/favorite
 import '../../../../common/constant.dart';
 import '../../../../common/dimensions.dart';
 import '../../../../common/theme.dart';
+import '../../../../data/repository/tedikap_repository.dart';
 
 class ListBoxProductFavorite extends StatelessWidget {
   const ListBoxProductFavorite({
@@ -54,7 +55,7 @@ class ListBoxProductFavorite extends StatelessWidget {
                     color: const Color(0x0C56473C),
                     shape: const OvalBorder(),
                     image: DecorationImage(
-                      image: NetworkImage(image),
+                      image: NetworkImage(TedikapApiRepository.getImage + image),
                       fit: BoxFit.cover,
                     ),
                   ),

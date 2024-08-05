@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../common/constant.dart';
 import '../../../../common/dimensions.dart';
 import '../../../../common/theme.dart';
+import '../../../../data/repository/tedikap_repository.dart';
 
 
 class ListBoxProductPoin extends StatelessWidget {
@@ -39,7 +40,7 @@ class ListBoxProductPoin extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 color: primaryColor,
                   image: DecorationImage(
-                    image: NetworkImage(image),
+                    image: NetworkImage(TedikapApiRepository.getImageRewardProduct + image),
                     fit: BoxFit.cover,
               )
               ),

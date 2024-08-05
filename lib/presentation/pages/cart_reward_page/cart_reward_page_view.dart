@@ -12,14 +12,28 @@ import '../../../common/dimensions.dart';
 import '../../../common/theme.dart';
 import 'bloc/cart_reward_bloc.dart';
 
-class CartRewardPage extends StatelessWidget {
+class CartRewardPage extends StatefulWidget {
   const CartRewardPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  _CartRewardPageState createState() => _CartRewardPageState();
+}
+
+class _CartRewardPageState extends State<CartRewardPage> {
+  @override
+  void initState() {
+    super.initState();
+    _fetchInitialData();
+  }
+
+  void _fetchInitialData() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<CartRewardBloc>().add(CartRewardEvent.getCart());
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -67,7 +81,7 @@ class CartRewardPage extends StatelessWidget {
         children: [
           SingleChildScrollView(
             child: Container(
-              margin: EdgeInsets.only(bottom: 120),
+              margin: const EdgeInsets.only(bottom: 120),
               child: Padding(
                 padding: const EdgeInsets.all(Dimensions.paddingSizeLarge),
                 child: Align(
@@ -78,11 +92,11 @@ class CartRewardPage extends StatelessWidget {
                       Column(
                         children: [
                           BoxEstimationPickup(screenWidth: screenWidth),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                           BoxCheckoutDetail(screenWidth: screenWidth),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                           BoxPaymentDetail(screenWidth: screenWidth),
@@ -105,3 +119,4 @@ class CartRewardPage extends StatelessWidget {
     );
   }
 }
+

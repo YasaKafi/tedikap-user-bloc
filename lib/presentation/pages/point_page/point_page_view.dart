@@ -11,135 +11,141 @@ import '../../../common/dimensions.dart';
 import '../../../common/theme.dart';
 import '../home_page/widgets/base_section.dart';
 
-class PointPage extends StatelessWidget {
+class PointPage extends StatefulWidget {
   const PointPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<PointBloc>().add(const PointEvent.getFilterCategory('tea'));
-    });
+  _PointPageState createState() => _PointPageState();
+}
 
+class _PointPageState extends State<PointPage> {
+  @override
+  void initState() {
+    super.initState();
+    _fetchInitialData();
+  }
+
+  void _fetchInitialData() {
+    context.read<PointBloc>().add(const PointEvent.getFilterCategory('tea'));
+  }
+
+  @override
+  Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+
     return DefaultTabController(
       length: 3,
       child: Scaffold(
         backgroundColor: baseColor,
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            flexibleSpace: Container(
-              height: screenHeight,
-              decoration: const BoxDecoration(
-                color: baseColor,
-              ),
-              padding: const EdgeInsets.only(
-                  top: 30, bottom: 10, left: 10, right: 10),
-              width: MediaQuery.of(context).size.width,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back_ios),
-                    onPressed: () {
-                      if (Navigator.canPop(context)) {
-                        context.pop();
-                      } else {
-                        context.goNamed('dashboard',
-                            pathParameters: {'pageIndex': '0'});
-                      }
-                    },
-                  ),
-                  Text(
-                    'TEDIKAPwards',
-                    style: txtSecondaryHeader.copyWith(
-                        fontWeight: FontWeight.w600, color: blackColor),
-                  ),
-                  ButtonCircleIcon(routes: 'cart_reward', icon: icCart)
-                ],
-              ),
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          flexibleSpace: Container(
+            height: screenHeight,
+            decoration: const BoxDecoration(
+              color: baseColor,
+            ),
+            padding: const EdgeInsets.only(
+                top: 30, bottom: 10, left: 10, right: 10),
+            width: MediaQuery.of(context).size.width,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.arrow_back_ios),
+                  onPressed: () {
+                    if (Navigator.canPop(context)) {
+                      context.pop();
+                    } else {
+                      context.goNamed('dashboard',
+                          pathParameters: {'pageIndex': '0'});
+                    }
+                  },
+                ),
+                Text(
+                  'TEDIKAPwards',
+                  style: txtSecondaryHeader.copyWith(
+                      fontWeight: FontWeight.w600, color: blackColor),
+                ),
+                ButtonCircleIcon(routes: 'cart_reward', icon: icCart)
+              ],
             ),
           ),
-          body: Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeLarge),
-              width: screenWidth,
-              height: screenHeight,
-              child: Column(
-                children: [
-                  BoxInformationPoin(screenWidth: screenWidth),
-                  const SizedBox(
-                    height: 30,
+        ),
+        body: Container(
+          padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeLarge),
+          width: screenWidth,
+          height: screenHeight,
+          child: Column(
+            children: [
+              BoxInformationPoin(screenWidth: screenWidth),
+              const SizedBox(
+                height: 30,
+              ),
+              SizedBox(
+                width: screenWidth,
+                child: TabBar(
+                  indicatorPadding: const EdgeInsets.symmetric(horizontal: -10, vertical: 5),
+                  indicator: BoxDecoration(
+                    border: Border.all(color: primaryColor),
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  SizedBox(
-                    width: screenWidth,
-                    child: TabBar(
-                      indicatorPadding:
-                          const EdgeInsets.symmetric(horizontal: -10, vertical: 5),
-                      indicator: BoxDecoration(
-                        border: Border.all(color: primaryColor),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: Dimensions.paddingSizeLarge,
-                      ),
-                      dividerHeight: 2,
-                      dividerColor: Colors.transparent,
-                      indicatorColor: Colors.transparent,
-                      labelColor: blackColor,
-                      unselectedLabelColor: grey,
-                      onTap: (index) {
-                        switch (index) {
-                          case 0:
-                            context
-                                .read<PointBloc>()
-                                .add(const PointEvent.getFilterCategory('tea'));
-                            break;
-                          case 1:
-                            context
-                                .read<PointBloc>()
-                                .add(const PointEvent.getFilterCategory('nontea'));
-                            break;
-                          case 2:
-                            context
-                                .read<PointBloc>()
-                                .add(const PointEvent.getFilterCategory('snack'));
-                            break;
-                        }
-                      },
-                      tabs: [
-                        Tab(
-                          child: Text('Tea',
-                              style: txtPrimarySubTitle.copyWith(
-                                  fontWeight: FontWeight.w500,
-                                  color: blackColor)),
-                        ),
-                        Tab(
-                          child: Text('Non Tea',
-                              style: txtPrimarySubTitle.copyWith(
-                                  fontWeight: FontWeight.w500,
-                                  color: blackColor)),
-                        ),
-                        Tab(
-                          child: Text('Snack',
-                              style: txtPrimarySubTitle.copyWith(
-                                  fontWeight: FontWeight.w500,
-                                  color: blackColor)),
-                        ),
-                      ],
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Dimensions.paddingSizeLarge,
+                  ),
+                  dividerHeight: 2,
+                  dividerColor: Colors.transparent,
+                  indicatorColor: Colors.transparent,
+                  labelColor: blackColor,
+                  unselectedLabelColor: grey,
+                  onTap: (index) {
+                    switch (index) {
+                      case 0:
+                        context.read<PointBloc>().add(const PointEvent.getFilterCategory('tea'));
+                        break;
+                      case 1:
+                        context.read<PointBloc>().add(const PointEvent.getFilterCategory('nontea'));
+                        break;
+                      case 2:
+                        context.read<PointBloc>().add(const PointEvent.getFilterCategory('snack'));
+                        break;
+                    }
+                  },
+                  tabs: [
+                    Tab(
+                      child: Text('Tea',
+                          style: txtPrimarySubTitle.copyWith(
+                              fontWeight: FontWeight.w500,
+                              color: blackColor)),
                     ),
-                  ),
-                  Expanded(
-                    child: TabBarView(
-                      children: [
-                        buildTabGridViewProduct(screenHeight, screenWidth),
-                        buildTabGridViewProduct(screenHeight, screenWidth),
-                        buildTabGridViewProduct(screenHeight, screenWidth),
-                      ],
+                    Tab(
+                      child: Text('Non Tea',
+                          style: txtPrimarySubTitle.copyWith(
+                              fontWeight: FontWeight.w500,
+                              color: blackColor)),
                     ),
-                  ),
-                ],
-              ))),
+                    Tab(
+                      child: Text('Snack',
+                          style: txtPrimarySubTitle.copyWith(
+                              fontWeight: FontWeight.w500,
+                              color: blackColor)),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: TabBarView(
+                  children: [
+                    buildTabGridViewProduct(screenHeight, screenWidth),
+                    buildTabGridViewProduct(screenHeight, screenWidth),
+                    buildTabGridViewProduct(screenHeight, screenWidth),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -228,3 +234,4 @@ class PointPage extends StatelessWidget {
     );
   }
 }
+

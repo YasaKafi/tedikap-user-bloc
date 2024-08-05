@@ -29,7 +29,7 @@ class _SectionButtonState extends State<SectionButton> {
   }
 
   void startTimer(DateTime createdAt) {
-    final endTime = createdAt.add(Duration(seconds: 30));
+    final endTime = createdAt.add(Duration(minutes: 1));
     _remainingTime = endTime.difference(DateTime.now());
 
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
@@ -63,13 +63,14 @@ class _SectionButtonState extends State<SectionButton> {
         return state.maybeWhen(
           orElse: () => Center(child: CircularProgressIndicator()),
           success: (model, modelReward) {
-            final isPayment = model!.order!.paymentChannel == null;
-            // final urlPayment = model!.order!. == null;
+            if (model != null && model.order != null){
+            final isPayment = model.order?.paymentChannel == null;
+
             if (isPayment) {
-              final createdAt = model.order!.createdAt!;
+              final createdAt = model.order?.createdAt!;
               if (_remainingTime == Duration.zero &&
                   (_timer == null || !_timer!.isActive)) {
-                startTimer(createdAt);
+                startTimer(createdAt!);
               }
               final minutes = _remainingTime.inMinutes.remainder(60);
               final seconds = _remainingTime.inSeconds.remainder(60);
@@ -104,7 +105,10 @@ class _SectionButtonState extends State<SectionButton> {
             } else {
               return Visibility(visible: true,child: Container());
             }
-          },
+          } else {
+              return Visibility(visible: true,child: Container());
+            }
+          }
         );
       },
     );

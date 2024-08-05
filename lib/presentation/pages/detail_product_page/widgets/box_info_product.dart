@@ -71,12 +71,12 @@ class BoxInfoProduct extends StatelessWidget {
                     String? description;
 
                     if (modelProduct != null && modelProduct.data != null) {
-                      imageUrl = modelProduct.data!.image;
+                      imageUrl = TedikapApiRepository.getImage+ modelProduct.data!.image!;
                       name = modelProduct.data!.name;
                       category = modelProduct.data!.category;
                       description = modelProduct.data!.description;
                     } else if (modelProductReward != null && modelProductReward.data != null) {
-                      imageUrl = modelProductReward.data!.image;
+                      imageUrl =TedikapApiRepository.getImageRewardProduct +  modelProductReward.data!.image!;
                       name = modelProductReward.data!.name;
                       category = modelProductReward.data!.category;
                       description = modelProductReward.data!.description;
