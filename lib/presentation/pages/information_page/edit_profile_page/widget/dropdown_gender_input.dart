@@ -24,7 +24,7 @@ class CustomDropDown extends StatelessWidget {
           loading: () {
             return Center(child: CircularProgressIndicator());
           },
-          loaded: (_, selectedOption, n) {
+          loaded: (_, selectedOption, n, modelEdit) {
             return Container(
               decoration: BoxDecoration(
                 border: Border.all(color: blackColor50),
@@ -41,6 +41,7 @@ class CustomDropDown extends StatelessWidget {
                 isExpanded: true,
                 value: selectedOption,
                 onChanged: (String? newValue) {
+                  print("Dropdown new value: $newValue");
                   onChanged(newValue);
                   if (newValue != null) {
                     context.read<EditProfileBloc>().add(
@@ -76,4 +77,5 @@ class CustomDropDown extends StatelessWidget {
     );
   }
 }
+
 

@@ -19,13 +19,38 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
     on<_GetUser>((event, emit) async {
       emit(const _Loading());
       final result = await datasource.getCurrentUser();
-      result.fold((l) => emit(const _Error('Failed to get data user')), (r) => emit(_Loaded(user: r, selectedOption: r.data!.gender!)));
+      result.fold(
+            (l) => emit(const _Error('Failed to get data user')),
+            (r) => emit(_Loaded(user: r, selectedOption: r.data!.gender!, imagePath: null)),
+      );
     });
 
     on<_DoEditProfile>((event, emit) async {
       emit(const _Loading());
-      final result = await datasource.updateCurrentUser(email: event.email, gender: event.gender, name: event.name, imageFile: event.imageFile);
-      result.fold((l) => emit(_Error(l)), (r) => emit(_Succeess(model: r,)));
+      final result = await datasource.updateCurrentUser(
+        email: event.email,
+        gender: event.gender,
+        name: event.name,
+        imageFile: event.imageFile,
+      );
+      await result.fold(
+            (l) async => emit(_Error(l)),
+            (r) async {
+          final resultGetUser = await datasource.getCurrentUser();
+          final getCurrentUser = resultGetUser.fold((l) => null, (success) => success);
+
+          if (getCurrentUser != null) {
+            emit(_Loaded(
+              user: getCurrentUser,
+              selectedOption: getCurrentUser.data!.gender!,
+              imagePath: null,
+              modelEdit: r,
+            ));
+          } else {
+            emit(const _Error('Failed to get updated user data'));
+          }
+        },
+      );
     });
 
     on<_ChangeOption>((event, emit) {
@@ -35,15 +60,18 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
       }
     });
 
+
     on<_ChangeImage>((event, emit) async {
       if (state is _Loaded) {
         final currentState = state as _Loaded;
         final picker = ImagePicker();
-        final pickedFile = await picker.pickImage(
-          source: ImageSource.gallery,
-        );
-        emit(currentState.copyWith(imagePath: pickedFile!.path));
+        final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+        print(pickedFile!.path);
+        emit(currentState.copyWith(imagePath: pickedFile.path));
       }
     });
   }
 }
+
+
+

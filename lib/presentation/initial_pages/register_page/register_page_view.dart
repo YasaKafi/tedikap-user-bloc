@@ -88,7 +88,7 @@ class RegisterPage extends StatelessWidget {
                           backgroundColor: redMedium,
                         ));
                       },
-                      success: (model, modelFcm) {
+                      success: (model) {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text(model!.message!, style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w500, color: baseColor),),
                           backgroundColor: greenMedium,
@@ -113,10 +113,12 @@ class RegisterPage extends StatelessWidget {
                               final requestModel = RegisterRequestModel(
                                   name: usernameController.text,
                                   email: emailController.text,
-                                  password: passwordController.text);
+                                  password: passwordController.text,
+                                  fcmToken: GlobalVariables.deviceToken,
+                              );
                               context
                                   .read<RegisterBloc>()
-                                  .add(RegisterEvent.doRegister(requestModel, GlobalVariables.deviceToken));
+                                  .add(RegisterEvent.doRegister(requestModel));
 
 
 

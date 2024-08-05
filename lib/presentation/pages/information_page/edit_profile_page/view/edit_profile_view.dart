@@ -24,7 +24,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   String gender = 'male';
-  ValueNotifier<String> defaultImagePath = ValueNotifier<String>('1720414987.jpg');
+  ValueNotifier<String> defaultImagePath = ValueNotifier<String>('');
 
   @override
   void initState() {
@@ -32,6 +32,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
     context.read<EditProfileBloc>().add(const EditProfileEvent.getUser());
   }
 
+  @override
+  void dispose() {
+    usernameController.dispose();
+    emailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +47,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.only(
-                  top: 50, bottom: 10, left: 10, right: 10),
+              padding: const EdgeInsets.only(top: 50, bottom: 10, left: 10, right: 10),
               width: MediaQuery.of(context).size.width,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -62,160 +67,132 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     decoration: BoxDecoration(
                       color: Colors.transparent,
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
-            SizedBox(
-              height: 30,
-            ),
+            SizedBox(height: 30),
             Stack(
               children: [
                 BlocBuilder<EditProfileBloc, EditProfileState>(
                   builder: (context, state) {
                     return state.maybeWhen(
-                        orElse: (){
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        },
-                        loaded: (_, o, imagePath){
-                          defaultImagePath.value = imagePath ?? '1720414987.jpg';
-                          return Container(
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                            child: imagePath != null ? ClipOval(
-                              child: Image.file(
-                                i.File(imagePath),
-                                width: 170,
-                                height: 170,
-                                fit: BoxFit.cover,
-                              ),
-                            ) : ClipOval(
-                              child: Image.network(
-                                TedikapApiRepository.getAvatarProfile + _!.data!.avatar!,
-                                width: 170,
-                                height: 170,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          );
+                      orElse: () => Center(child: CircularProgressIndicator()),
+                      loaded: (user, o, imagePath, modelEdit) {
+                        if (user?.data?.avatar == null && imagePath == null) {
+                          return Center(child: Text('No image available'));
                         }
+                        defaultImagePath.value = imagePath ?? user!.data!.avatar!;
+                        return Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(shape: BoxShape.circle),
+                          child: imagePath != null
+                              ? ClipOval(
+                            child: Image.file(
+                              i.File(imagePath),
+                              width: 170,
+                              height: 170,
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                              : ClipOval(
+                            child: Image.network(
+                              TedikapApiRepository.getAvatarProfile +
+                                  user!.data!.avatar!,
+                              width: 170,
+                              height: 170,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        );
+                      },
                     );
                   },
                 ),
-                BlocBuilder<EditProfileBloc, EditProfileState>(
-                  builder: (context, state) {
-                    return state.maybeWhen(
-                        orElse: (){
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        },
-                        loading: (){
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        },
-                        loaded: (_, o, imagePath){
-                          return Positioned(
-                            right: 0,
-                            top: 10,
-                            child: EditImageButton(
-                              onPressed: () {
-                                context.read<EditProfileBloc>().add(
-                                  EditProfileEvent.changeImage(),
-                                );
-                              },
-                            ),
-                          );
-                        }
-                    );
-                  },
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: Dimensions.marginSizeLarge,
-                  right: Dimensions.marginSizeLarge,
-                  top: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BlocBuilder<EditProfileBloc, EditProfileState>(
-                    builder: (context, state) {
-                      return state.maybeWhen(
-                          orElse: () {
-                            return Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          },
-                          loading: () {
-                            return Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          },
-                          loaded: (user, n, o) {
-                            usernameController.text = user!.data!.name!;
-                            return CustomTextField(
-                              hintText: 'Username',
-                              keyboardType: TextInputType.text,
-                              controller: usernameController,
-                              maxTextLength: 12,
-                            );
-                          },
-                          error: (message) {
-                            return Center(
-                              child: Text(
-                                message,
-                                style: txtSecondaryTitle.copyWith(
-                                    fontWeight: FontWeight.w600, color: blackColor),
-                              ),
-                            );
-                          }
+                Positioned(
+                  right: 0,
+                  top: 10,
+                  child: EditImageButton(
+                    onPressed: () {
+                      context.read<EditProfileBloc>().add(
+                        EditProfileEvent.changeImage(),
                       );
                     },
                   ),
-                  SizedBox(height: 30),
-                  BlocBuilder<EditProfileBloc, EditProfileState>(
-                    builder: (context, state) {
-                      return state.maybeWhen(
-                          orElse: () {
-                            return Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          },
-                          loading: () {
-                            return Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          },
-                          loaded: (user, n, o) {
-                            emailController.text = user!.data!.email!;
-                            return CustomTextField(
-                              hintText: 'Email',
-                              keyboardType: TextInputType.emailAddress,
-                              controller: emailController,
-                              maxTextLength: 12,
-                            );
-                          },
-                          error: (message) {
-                            return Center(
-                              child: Text(
-                                message,
-                                style: txtSecondaryTitle.copyWith(
-                                    fontWeight: FontWeight.w600, color: blackColor),
-                              ),
-                            );
-                          }
+                ),
+              ],
+            ),
+            SizedBox(height: 30),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: Dimensions.marginSizeLarge,
+                right: Dimensions.marginSizeLarge,
+                top: 20,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  BlocListener<EditProfileBloc, EditProfileState>(
+                    listener: (context, state) {
+                      state.maybeWhen(
+                        loaded: (user, n, o, modelEdit) {
+                          usernameController.text = user?.data?.name ?? '';
+                          emailController.text = user?.data?.email ?? '';
+                          gender = user?.data?.gender ?? 'male';
+                        },
+                        orElse: () {},
                       );
                     },
+                    child: Column(
+                      children: [
+                        BlocBuilder<EditProfileBloc, EditProfileState>(
+                          builder: (context, state) {
+                            return state.maybeWhen(
+                              orElse: () => Center(child: CircularProgressIndicator()),
+                              loading: () => Center(child: CircularProgressIndicator()),
+                              loaded: (user, n, o, modelEdit) {
+                                return CustomTextField(
+                                  hintText: 'Username',
+                                  keyboardType: TextInputType.text,
+                                  controller: usernameController,
+                                  maxTextLength: 12,
+                                );
+                              },
+                              error: (message) => Center(
+                                child: Text(
+                                  message,
+                                  style: txtSecondaryTitle.copyWith(
+                                      fontWeight: FontWeight.w600, color: blackColor),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                        SizedBox(height: 30),
+                        BlocBuilder<EditProfileBloc, EditProfileState>(
+                          builder: (context, state) {
+                            return state.maybeWhen(
+                              orElse: () => Center(child: CircularProgressIndicator()),
+                              loading: () => Center(child: CircularProgressIndicator()),
+                              loaded: (user, n, o, modelEdit) {
+                                return CustomTextField(
+                                  hintText: 'Email',
+                                  keyboardType: TextInputType.emailAddress,
+                                  controller: emailController,
+                                );
+                              },
+                              error: (message) => Center(
+                                child: Text(
+                                  message,
+                                  style: txtSecondaryTitle.copyWith(
+                                      fontWeight: FontWeight.w600, color: blackColor),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(height: 30),
                   CustomDropDown(
@@ -232,55 +209,67 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       state.maybeWhen(
                         orElse: () {},
                         error: (message) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(
-                              message,
-                              style: txtSecondaryTitle.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  color: blackColor),
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                message,
+                                style: txtSecondaryTitle.copyWith(
+                                    fontWeight: FontWeight.w600, color: blackColor),
+                              ),
+                              backgroundColor: redMedium,
                             ),
-                            backgroundColor: redMedium,
-                          ));
+                          );
                         },
-                        success: (model) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(
-                              model!.message!,
-                              style: txtSecondaryTitle.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  color: blackColor),
-                            ),
-                            backgroundColor: greenMedium,
-                          ));
-                          context.goNamed('dashboard', pathParameters: {'pageIndex': '3'});
+                        loaded: (user, o, n, modelEdit) {
+                          if (modelEdit != null) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  modelEdit.message!,
+                                  style: txtSecondaryTitle.copyWith(
+                                      fontWeight: FontWeight.w600, color: blackColor),
+                                ),
+                                backgroundColor: greenMedium,
+                              ),
+                            );
+                          }
                         },
                       );
                     },
                     builder: (context, state) {
                       return state.maybeWhen(
-                        orElse: () {
-                          return Container(
-                            margin: EdgeInsets.only(
-                                top: Dimensions.marginSizeExtraLarge),
-                            child: SaveButton(
-                              onPressed: () {
+                        orElse: () => Container(
+                          margin: EdgeInsets.only(top: Dimensions.marginSizeExtraLarge),
+                          child: SaveButton(
+                            onPressed: () {
+                              if (usernameController.text.isNotEmpty &&
+                                  emailController.text.isNotEmpty) {
                                 context.read<EditProfileBloc>().add(
-                                    EditProfileEvent.doEditProfile(
-                                        name: usernameController.text,
-                                        email: emailController.text,
-                                        gender: 'female',
-                                        imageFile: i.File(defaultImagePath.value)
-                                    )
+                                  EditProfileEvent.doEditProfile(
+                                    name: usernameController.text,
+                                    email: emailController.text,
+                                    gender: gender,
+                                    imageFile: defaultImagePath.value.isNotEmpty
+                                        ? i.File(defaultImagePath.value)
+                                        : null,
+                                  ),
                                 );
-                              },
-                            ),
-                          );
-                        },
-                        loading: () {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        },
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Please fill in all fields',
+                                      style: txtSecondaryTitle.copyWith(
+                                          fontWeight: FontWeight.w600, color: blackColor),
+                                    ),
+                                    backgroundColor: redMedium,
+                                  ),
+                                );
+                              }
+                            },
+                          ),
+                        ),
+                        loading: () => Center(child: CircularProgressIndicator()),
                       );
                     },
                   ),
@@ -293,4 +282,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 }
+
+
+
+
+
 

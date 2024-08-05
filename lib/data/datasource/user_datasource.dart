@@ -42,9 +42,9 @@ class UserDatasource {
   }
 
   Future<Either<String, EditProfileResponseModel>> updateCurrentUser({
-    required String name,
-    required String email,
-    required String gender,
+    String? name,
+    String? email,
+    String? gender,
     File? imageFile,
   }) async {
     try {
