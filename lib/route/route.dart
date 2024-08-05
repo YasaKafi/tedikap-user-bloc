@@ -103,17 +103,17 @@ class AppRouter {
       ),
       GoRoute(
         name: 'voucher',
-        path: '/voucher/:cartId',
+        path: '/voucher',
         builder: (context, state) {
-          final cartId = int.parse(state.pathParameters['cartId'] ?? '');
-          return VoucherPage(cartId: cartId,);
-        }
+          final isFromCart = state.extra is bool ? state.extra as bool : false;
+          return VoucherPage(isFromCart: isFromCart);
+        },
       ),
       GoRoute(
         name: 'detail_order_common',
         path: '/detail_order_common/:orderId',
         builder: (context, state) {
-          final orderId = state.pathParameters['orderId'];
+          final orderId = state.pathParameters['orderId'] ?? '0';
           final checkoutLink = state.extra is String ? state.extra as String : null;
           return DetailOrderPage(orderId: orderId, linkCheckout: checkoutLink,);
         },

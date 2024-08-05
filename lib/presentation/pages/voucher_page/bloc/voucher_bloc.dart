@@ -26,7 +26,7 @@ class VoucherBloc extends Bloc<VoucherEvent, VoucherState> {
                 (r) async {
                   final getCartResult = await cartDatasource.getCart();
                   final getCartDetails = getCartResult.fold((l) => null, (cart) => cart);
-                  final isUseVoucher = getCartDetails?.cart?.voucherId != null;
+                  final isUseVoucher = getCartDetails?.cart?.voucherId != null ;
 
                   emit(_Success(
                       modelVoucher: r,
@@ -55,11 +55,15 @@ class VoucherBloc extends Bloc<VoucherEvent, VoucherState> {
                   final updatedVoucherResult = await voucherDatasource.getVoucher();
                   final updatedVoucherDetails = updatedVoucherResult.fold((l) => null, (voucher) => voucher);
 
+                  final getCartResult = await cartDatasource.getCart();
+                  final getCartDetails = getCartResult.fold((l) => null, (cart) => cart);
+
                   emit((currentState.copyWith(
                       modelVoucher: updatedVoucherDetails,
-                      modelCart: null,
+                      modelCart: getCartDetails,
                       modelVoucherAppliedRemove: r,
-                      isUseVoucher: true
+                      isUseVoucher: true,
+                    currentVoucherId: event.voucherId,
                   )));
                 }
           );
@@ -81,11 +85,15 @@ class VoucherBloc extends Bloc<VoucherEvent, VoucherState> {
                   final updatedVoucherResult = await voucherDatasource.getVoucher();
                   final updatedVoucherDetails = updatedVoucherResult.fold((l) => null, (voucher) => voucher);
 
+                  final getCartResult = await cartDatasource.getCart();
+                  final getCartDetails = getCartResult.fold((l) => null, (cart) => cart);
+
                   emit((currentState.copyWith(
                       modelVoucher: updatedVoucherDetails,
-                      modelCart: null,
+                      modelCart: getCartDetails,
                       modelVoucherAppliedRemove: r,
-                      isUseVoucher: false
+                      isUseVoucher: false,
+                    currentVoucherId: event.voucherId,
                   )));
                 }
 

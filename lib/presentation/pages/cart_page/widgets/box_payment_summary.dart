@@ -41,13 +41,13 @@ class BoxCheckoutSummary extends StatelessWidget {
           ),
           child: BlocBuilder<CartBloc, CartState>(
             builder: (context, state) {
-              return state.maybeWhen(orElse: () {
+              return state.maybeWhen(
+                  orElse: () {
                 return Column(
                   children: [
                     InkWell(
                       onTap: () {
-                        context.goNamed('voucher',
-                            pathParameters: {'cartId': '1'});
+
                       },
                       child: Container(
                         width: screenWidth,
@@ -241,8 +241,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                       onTap: () {
                         isCartItemEmpty
                             ? null
-                            : context.goNamed('voucher',
-                                pathParameters: {'cartId': '1'});
+                            : context.goNamed('voucher', extra: true);
                       },
                       child: Container(
                         width: screenWidth,
@@ -393,15 +392,6 @@ class BoxCheckoutSummary extends StatelessWidget {
                                                                       linkCheckout
                                                                 );
                                                           }));
-
-                                                  // Future.delayed(Duration(seconds: 4), () {
-                                                  //   if (orderId != null) {
-                                                  //     context.goNamed('detail_order_common',
-                                                  //         pathParameters: {'orderId': modelPostPayment!.orderId!});
-                                                  //   } else {
-                                                  //     context.goNamed('dashboard', pathParameters: {'pageIndex': '2'});
-                                                  //   }
-                                                  // });
                                                 });
                                         },
                                         child: Container(

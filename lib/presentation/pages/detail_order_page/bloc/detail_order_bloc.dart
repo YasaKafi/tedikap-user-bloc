@@ -12,11 +12,7 @@ part 'detail_order_bloc.freezed.dart';
 class DetailOrderBloc extends Bloc<DetailOrderEvent, DetailOrderState> {
   final OrderDatasource datasource;
   DetailOrderBloc(this.datasource) : super(const DetailOrderState.initial()) {
-    // Fetch data saat pertama kali Bloc dibuat
-    add(DetailOrderEvent.getDetailHistoryOrder('orderId'));
-
     on<_GetDetailHistoryOrder>((event, emit) async {
-      // Cek apakah data sudah ada di dalam state atau belum
       if (state is _Success && (state as _Success).model != null) {
         return;
       }
