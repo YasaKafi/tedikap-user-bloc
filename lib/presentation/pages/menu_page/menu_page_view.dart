@@ -225,7 +225,6 @@ class _MenuPageState extends State<MenuPage> {
             ),
           );
         }
-
         return state.when(
           initial: () => ListView.builder(
             itemCount: 8,

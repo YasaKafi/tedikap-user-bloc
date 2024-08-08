@@ -14,7 +14,6 @@ class DetailVoucherBloc extends Bloc<DetailVoucherEvent, DetailVoucherState> {
     on<_GetDetailVoucher>((event, emit) async {
       emit(const _Loading());
       try {
-        // Allow product fetch even if user is loaded
         final result = await voucherDatasource.getDetailVoucher(event.id);
         result.fold(
                 (l) => emit(_Error(message: 'Failed to access data product')),

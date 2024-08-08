@@ -6,26 +6,28 @@ import 'package:tedikap_user_bloc/presentation/pages/home_page/widgets/poin_sect
 import '../../../common/theme.dart';
 import 'bloc/home_bloc.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
     context.read<HomeBloc>().add(HomeEvent.getUser());
-    Future.delayed(Duration(seconds: 2), () {
-      context.read<HomeBloc>().add(HomeEvent.getProduct());
-    });
+  }
 
+  Future<void> _refreshData() async {
+    context.read<HomeBloc>().add(HomeEvent.getUser());
+    await Future.delayed(Duration(seconds: 1));
+  }
+
+  @override
+  Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-
-    Future<void> _refreshData() async {
-      context.read<HomeBloc>().add(HomeEvent.getUser());
-      Future.delayed(Duration(seconds: 2), () {
-        context.read<HomeBloc>().add(HomeEvent.getProduct());
-      });
-      // You can add a delay if needed to simulate the fetch time
-      await Future.delayed(Duration(seconds: 1));
-    }
 
     return Scaffold(
       backgroundColor: baseColor,

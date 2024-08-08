@@ -4,6 +4,7 @@ class TedikapApiRepository {
   static String mainUrl = GlobalVariables.baseUrl;
 
   static String getAllProduct = '$mainUrl/api/product';
+  static String getAllMostPopularProduct = '$mainUrl/api/product/most-popular';
   static String getAllRewardProduct = '$mainUrl/api/reward-product';
   static String getAllVoucherActive = '$mainUrl/api/voucher/active';
   static String getAllProductFavorite = '$mainUrl/api/product/favorite';

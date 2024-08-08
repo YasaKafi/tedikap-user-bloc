@@ -75,7 +75,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               await launchURL(url);
             }
 
-            // Tunggu sampai postPayment selesai sebelum mengakses orderId
             await paymentResult.fold((l) => null, (r) async {
               emit(_Success(
                 cartModel: null,

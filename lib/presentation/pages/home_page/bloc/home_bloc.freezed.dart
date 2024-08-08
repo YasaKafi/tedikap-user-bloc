@@ -19,7 +19,7 @@ mixin _$HomeEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() getProduct,
+    required TResult Function() getPoint,
     required TResult Function() getUser,
     required TResult Function(int index) changeIndex,
   }) =>
@@ -27,7 +27,7 @@ mixin _$HomeEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? getProduct,
+    TResult? Function()? getPoint,
     TResult? Function()? getUser,
     TResult? Function(int index)? changeIndex,
   }) =>
@@ -35,7 +35,7 @@ mixin _$HomeEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getProduct,
+    TResult Function()? getPoint,
     TResult Function()? getUser,
     TResult Function(int index)? changeIndex,
     required TResult orElse(),
@@ -44,7 +44,7 @@ mixin _$HomeEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_GetProduct value) getProduct,
+    required TResult Function(_GetPoint value) getPoint,
     required TResult Function(_GetUser value) getUser,
     required TResult Function(_ChangeIndex value) changeIndex,
   }) =>
@@ -52,7 +52,7 @@ mixin _$HomeEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_GetProduct value)? getProduct,
+    TResult? Function(_GetPoint value)? getPoint,
     TResult? Function(_GetUser value)? getUser,
     TResult? Function(_ChangeIndex value)? changeIndex,
   }) =>
@@ -60,7 +60,7 @@ mixin _$HomeEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_GetProduct value)? getProduct,
+    TResult Function(_GetPoint value)? getPoint,
     TResult Function(_GetUser value)? getUser,
     TResult Function(_ChangeIndex value)? changeIndex,
     required TResult orElse(),
@@ -124,7 +124,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() getProduct,
+    required TResult Function() getPoint,
     required TResult Function() getUser,
     required TResult Function(int index) changeIndex,
   }) {
@@ -135,7 +135,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? getProduct,
+    TResult? Function()? getPoint,
     TResult? Function()? getUser,
     TResult? Function(int index)? changeIndex,
   }) {
@@ -146,7 +146,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getProduct,
+    TResult Function()? getPoint,
     TResult Function()? getUser,
     TResult Function(int index)? changeIndex,
     required TResult orElse(),
@@ -161,7 +161,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_GetProduct value) getProduct,
+    required TResult Function(_GetPoint value) getPoint,
     required TResult Function(_GetUser value) getUser,
     required TResult Function(_ChangeIndex value) changeIndex,
   }) {
@@ -172,7 +172,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_GetProduct value)? getProduct,
+    TResult? Function(_GetPoint value)? getPoint,
     TResult? Function(_GetUser value)? getUser,
     TResult? Function(_ChangeIndex value)? changeIndex,
   }) {
@@ -183,7 +183,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_GetProduct value)? getProduct,
+    TResult Function(_GetPoint value)? getPoint,
     TResult Function(_GetUser value)? getUser,
     TResult Function(_ChangeIndex value)? changeIndex,
     required TResult orElse(),
@@ -200,35 +200,35 @@ abstract class _Started implements HomeEvent {
 }
 
 /// @nodoc
-abstract class _$$GetProductImplCopyWith<$Res> {
-  factory _$$GetProductImplCopyWith(
-          _$GetProductImpl value, $Res Function(_$GetProductImpl) then) =
-      __$$GetProductImplCopyWithImpl<$Res>;
+abstract class _$$GetPointImplCopyWith<$Res> {
+  factory _$$GetPointImplCopyWith(
+          _$GetPointImpl value, $Res Function(_$GetPointImpl) then) =
+      __$$GetPointImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$GetProductImplCopyWithImpl<$Res>
-    extends _$HomeEventCopyWithImpl<$Res, _$GetProductImpl>
-    implements _$$GetProductImplCopyWith<$Res> {
-  __$$GetProductImplCopyWithImpl(
-      _$GetProductImpl _value, $Res Function(_$GetProductImpl) _then)
+class __$$GetPointImplCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res, _$GetPointImpl>
+    implements _$$GetPointImplCopyWith<$Res> {
+  __$$GetPointImplCopyWithImpl(
+      _$GetPointImpl _value, $Res Function(_$GetPointImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$GetProductImpl implements _GetProduct {
-  const _$GetProductImpl();
+class _$GetPointImpl implements _GetPoint {
+  const _$GetPointImpl();
 
   @override
   String toString() {
-    return 'HomeEvent.getProduct()';
+    return 'HomeEvent.getPoint()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$GetProductImpl);
+        (other.runtimeType == runtimeType && other is _$GetPointImpl);
   }
 
   @override
@@ -238,35 +238,35 @@ class _$GetProductImpl implements _GetProduct {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() getProduct,
+    required TResult Function() getPoint,
     required TResult Function() getUser,
     required TResult Function(int index) changeIndex,
   }) {
-    return getProduct();
+    return getPoint();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? getProduct,
+    TResult? Function()? getPoint,
     TResult? Function()? getUser,
     TResult? Function(int index)? changeIndex,
   }) {
-    return getProduct?.call();
+    return getPoint?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getProduct,
+    TResult Function()? getPoint,
     TResult Function()? getUser,
     TResult Function(int index)? changeIndex,
     required TResult orElse(),
   }) {
-    if (getProduct != null) {
-      return getProduct();
+    if (getPoint != null) {
+      return getPoint();
     }
     return orElse();
   }
@@ -275,42 +275,42 @@ class _$GetProductImpl implements _GetProduct {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_GetProduct value) getProduct,
+    required TResult Function(_GetPoint value) getPoint,
     required TResult Function(_GetUser value) getUser,
     required TResult Function(_ChangeIndex value) changeIndex,
   }) {
-    return getProduct(this);
+    return getPoint(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_GetProduct value)? getProduct,
+    TResult? Function(_GetPoint value)? getPoint,
     TResult? Function(_GetUser value)? getUser,
     TResult? Function(_ChangeIndex value)? changeIndex,
   }) {
-    return getProduct?.call(this);
+    return getPoint?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_GetProduct value)? getProduct,
+    TResult Function(_GetPoint value)? getPoint,
     TResult Function(_GetUser value)? getUser,
     TResult Function(_ChangeIndex value)? changeIndex,
     required TResult orElse(),
   }) {
-    if (getProduct != null) {
-      return getProduct(this);
+    if (getPoint != null) {
+      return getPoint(this);
     }
     return orElse();
   }
 }
 
-abstract class _GetProduct implements HomeEvent {
-  const factory _GetProduct() = _$GetProductImpl;
+abstract class _GetPoint implements HomeEvent {
+  const factory _GetPoint() = _$GetPointImpl;
 }
 
 /// @nodoc
@@ -352,7 +352,7 @@ class _$GetUserImpl implements _GetUser {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() getProduct,
+    required TResult Function() getPoint,
     required TResult Function() getUser,
     required TResult Function(int index) changeIndex,
   }) {
@@ -363,7 +363,7 @@ class _$GetUserImpl implements _GetUser {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? getProduct,
+    TResult? Function()? getPoint,
     TResult? Function()? getUser,
     TResult? Function(int index)? changeIndex,
   }) {
@@ -374,7 +374,7 @@ class _$GetUserImpl implements _GetUser {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getProduct,
+    TResult Function()? getPoint,
     TResult Function()? getUser,
     TResult Function(int index)? changeIndex,
     required TResult orElse(),
@@ -389,7 +389,7 @@ class _$GetUserImpl implements _GetUser {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_GetProduct value) getProduct,
+    required TResult Function(_GetPoint value) getPoint,
     required TResult Function(_GetUser value) getUser,
     required TResult Function(_ChangeIndex value) changeIndex,
   }) {
@@ -400,7 +400,7 @@ class _$GetUserImpl implements _GetUser {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_GetProduct value)? getProduct,
+    TResult? Function(_GetPoint value)? getPoint,
     TResult? Function(_GetUser value)? getUser,
     TResult? Function(_ChangeIndex value)? changeIndex,
   }) {
@@ -411,7 +411,7 @@ class _$GetUserImpl implements _GetUser {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_GetProduct value)? getProduct,
+    TResult Function(_GetPoint value)? getPoint,
     TResult Function(_GetUser value)? getUser,
     TResult Function(_ChangeIndex value)? changeIndex,
     required TResult orElse(),
@@ -492,7 +492,7 @@ class _$ChangeIndexImpl implements _ChangeIndex {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() getProduct,
+    required TResult Function() getPoint,
     required TResult Function() getUser,
     required TResult Function(int index) changeIndex,
   }) {
@@ -503,7 +503,7 @@ class _$ChangeIndexImpl implements _ChangeIndex {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? getProduct,
+    TResult? Function()? getPoint,
     TResult? Function()? getUser,
     TResult? Function(int index)? changeIndex,
   }) {
@@ -514,7 +514,7 @@ class _$ChangeIndexImpl implements _ChangeIndex {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getProduct,
+    TResult Function()? getPoint,
     TResult Function()? getUser,
     TResult Function(int index)? changeIndex,
     required TResult orElse(),
@@ -529,7 +529,7 @@ class _$ChangeIndexImpl implements _ChangeIndex {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_GetProduct value) getProduct,
+    required TResult Function(_GetPoint value) getPoint,
     required TResult Function(_GetUser value) getUser,
     required TResult Function(_ChangeIndex value) changeIndex,
   }) {
@@ -540,7 +540,7 @@ class _$ChangeIndexImpl implements _ChangeIndex {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_GetProduct value)? getProduct,
+    TResult? Function(_GetPoint value)? getPoint,
     TResult? Function(_GetUser value)? getUser,
     TResult? Function(_ChangeIndex value)? changeIndex,
   }) {
@@ -551,7 +551,7 @@ class _$ChangeIndexImpl implements _ChangeIndex {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_GetProduct value)? getProduct,
+    TResult Function(_GetPoint value)? getPoint,
     TResult Function(_GetUser value)? getUser,
     TResult Function(_ChangeIndex value)? changeIndex,
     required TResult orElse(),
@@ -579,7 +579,10 @@ mixin _$HomeState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            ProductsResponseModel? model, CurrentUserModel? user, int? newIndex)
+            MostPopularProductResponseModel? model,
+            CurrentUserModel? user,
+            int? newIndex,
+            UserPointResponseModel? pointModel)
         success,
     required TResult Function(String? message) error,
   }) =>
@@ -588,8 +591,11 @@ mixin _$HomeState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(ProductsResponseModel? model, CurrentUserModel? user,
-            int? newIndex)?
+    TResult? Function(
+            MostPopularProductResponseModel? model,
+            CurrentUserModel? user,
+            int? newIndex,
+            UserPointResponseModel? pointModel)?
         success,
     TResult? Function(String? message)? error,
   }) =>
@@ -598,8 +604,11 @@ mixin _$HomeState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(ProductsResponseModel? model, CurrentUserModel? user,
-            int? newIndex)?
+    TResult Function(
+            MostPopularProductResponseModel? model,
+            CurrentUserModel? user,
+            int? newIndex,
+            UserPointResponseModel? pointModel)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -690,7 +699,10 @@ class _$InitialImpl implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            ProductsResponseModel? model, CurrentUserModel? user, int? newIndex)
+            MostPopularProductResponseModel? model,
+            CurrentUserModel? user,
+            int? newIndex,
+            UserPointResponseModel? pointModel)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -702,8 +714,11 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(ProductsResponseModel? model, CurrentUserModel? user,
-            int? newIndex)?
+    TResult? Function(
+            MostPopularProductResponseModel? model,
+            CurrentUserModel? user,
+            int? newIndex,
+            UserPointResponseModel? pointModel)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -715,8 +730,11 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(ProductsResponseModel? model, CurrentUserModel? user,
-            int? newIndex)?
+    TResult Function(
+            MostPopularProductResponseModel? model,
+            CurrentUserModel? user,
+            int? newIndex,
+            UserPointResponseModel? pointModel)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -810,7 +828,10 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            ProductsResponseModel? model, CurrentUserModel? user, int? newIndex)
+            MostPopularProductResponseModel? model,
+            CurrentUserModel? user,
+            int? newIndex,
+            UserPointResponseModel? pointModel)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -822,8 +843,11 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(ProductsResponseModel? model, CurrentUserModel? user,
-            int? newIndex)?
+    TResult? Function(
+            MostPopularProductResponseModel? model,
+            CurrentUserModel? user,
+            int? newIndex,
+            UserPointResponseModel? pointModel)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -835,8 +859,11 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(ProductsResponseModel? model, CurrentUserModel? user,
-            int? newIndex)?
+    TResult Function(
+            MostPopularProductResponseModel? model,
+            CurrentUserModel? user,
+            int? newIndex,
+            UserPointResponseModel? pointModel)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -896,7 +923,10 @@ abstract class _$$SuccessImplCopyWith<$Res> {
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {ProductsResponseModel? model, CurrentUserModel? user, int? newIndex});
+      {MostPopularProductResponseModel? model,
+      CurrentUserModel? user,
+      int? newIndex,
+      UserPointResponseModel? pointModel});
 }
 
 /// @nodoc
@@ -913,12 +943,13 @@ class __$$SuccessImplCopyWithImpl<$Res>
     Object? model = freezed,
     Object? user = freezed,
     Object? newIndex = freezed,
+    Object? pointModel = freezed,
   }) {
     return _then(_$SuccessImpl(
       model: freezed == model
           ? _value.model
           : model // ignore: cast_nullable_to_non_nullable
-              as ProductsResponseModel?,
+              as MostPopularProductResponseModel?,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -927,6 +958,10 @@ class __$$SuccessImplCopyWithImpl<$Res>
           ? _value.newIndex
           : newIndex // ignore: cast_nullable_to_non_nullable
               as int?,
+      pointModel: freezed == pointModel
+          ? _value.pointModel
+          : pointModel // ignore: cast_nullable_to_non_nullable
+              as UserPointResponseModel?,
     ));
   }
 }
@@ -934,18 +969,20 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl({this.model, this.user, this.newIndex});
+  const _$SuccessImpl({this.model, this.user, this.newIndex, this.pointModel});
 
   @override
-  final ProductsResponseModel? model;
+  final MostPopularProductResponseModel? model;
   @override
   final CurrentUserModel? user;
   @override
   final int? newIndex;
+  @override
+  final UserPointResponseModel? pointModel;
 
   @override
   String toString() {
-    return 'HomeState.success(model: $model, user: $user, newIndex: $newIndex)';
+    return 'HomeState.success(model: $model, user: $user, newIndex: $newIndex, pointModel: $pointModel)';
   }
 
   @override
@@ -956,11 +993,14 @@ class _$SuccessImpl implements _Success {
             (identical(other.model, model) || other.model == model) &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.newIndex, newIndex) ||
-                other.newIndex == newIndex));
+                other.newIndex == newIndex) &&
+            (identical(other.pointModel, pointModel) ||
+                other.pointModel == pointModel));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, model, user, newIndex);
+  int get hashCode =>
+      Object.hash(runtimeType, model, user, newIndex, pointModel);
 
   @JsonKey(ignore: true)
   @override
@@ -974,11 +1014,14 @@ class _$SuccessImpl implements _Success {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            ProductsResponseModel? model, CurrentUserModel? user, int? newIndex)
+            MostPopularProductResponseModel? model,
+            CurrentUserModel? user,
+            int? newIndex,
+            UserPointResponseModel? pointModel)
         success,
     required TResult Function(String? message) error,
   }) {
-    return success(model, user, newIndex);
+    return success(model, user, newIndex, pointModel);
   }
 
   @override
@@ -986,12 +1029,15 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(ProductsResponseModel? model, CurrentUserModel? user,
-            int? newIndex)?
+    TResult? Function(
+            MostPopularProductResponseModel? model,
+            CurrentUserModel? user,
+            int? newIndex,
+            UserPointResponseModel? pointModel)?
         success,
     TResult? Function(String? message)? error,
   }) {
-    return success?.call(model, user, newIndex);
+    return success?.call(model, user, newIndex, pointModel);
   }
 
   @override
@@ -999,14 +1045,17 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(ProductsResponseModel? model, CurrentUserModel? user,
-            int? newIndex)?
+    TResult Function(
+            MostPopularProductResponseModel? model,
+            CurrentUserModel? user,
+            int? newIndex,
+            UserPointResponseModel? pointModel)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(model, user, newIndex);
+      return success(model, user, newIndex, pointModel);
     }
     return orElse();
   }
@@ -1051,13 +1100,15 @@ class _$SuccessImpl implements _Success {
 
 abstract class _Success implements HomeState {
   const factory _Success(
-      {final ProductsResponseModel? model,
+      {final MostPopularProductResponseModel? model,
       final CurrentUserModel? user,
-      final int? newIndex}) = _$SuccessImpl;
+      final int? newIndex,
+      final UserPointResponseModel? pointModel}) = _$SuccessImpl;
 
-  ProductsResponseModel? get model;
+  MostPopularProductResponseModel? get model;
   CurrentUserModel? get user;
   int? get newIndex;
+  UserPointResponseModel? get pointModel;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1130,7 +1181,10 @@ class _$ErrorImpl implements _Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            ProductsResponseModel? model, CurrentUserModel? user, int? newIndex)
+            MostPopularProductResponseModel? model,
+            CurrentUserModel? user,
+            int? newIndex,
+            UserPointResponseModel? pointModel)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -1142,8 +1196,11 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(ProductsResponseModel? model, CurrentUserModel? user,
-            int? newIndex)?
+    TResult? Function(
+            MostPopularProductResponseModel? model,
+            CurrentUserModel? user,
+            int? newIndex,
+            UserPointResponseModel? pointModel)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -1155,8 +1212,11 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(ProductsResponseModel? model, CurrentUserModel? user,
-            int? newIndex)?
+    TResult Function(
+            MostPopularProductResponseModel? model,
+            CurrentUserModel? user,
+            int? newIndex,
+            UserPointResponseModel? pointModel)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
