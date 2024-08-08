@@ -20,7 +20,7 @@ mixin _$EditProfileEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(
-            String name, String email, String gender, File? imageFile)
+            String? name, String? email, String? gender, File? imageFile)
         doEditProfile,
     required TResult Function() getUser,
     required TResult Function(String? newValue) changeOption,
@@ -31,7 +31,7 @@ mixin _$EditProfileEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(
-            String name, String email, String gender, File? imageFile)?
+            String? name, String? email, String? gender, File? imageFile)?
         doEditProfile,
     TResult? Function()? getUser,
     TResult? Function(String? newValue)? changeOption,
@@ -41,7 +41,8 @@ mixin _$EditProfileEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String name, String email, String gender, File? imageFile)?
+    TResult Function(
+            String? name, String? email, String? gender, File? imageFile)?
         doEditProfile,
     TResult Function()? getUser,
     TResult Function(String? newValue)? changeOption,
@@ -137,7 +138,7 @@ class _$StartedImpl implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(
-            String name, String email, String gender, File? imageFile)
+            String? name, String? email, String? gender, File? imageFile)
         doEditProfile,
     required TResult Function() getUser,
     required TResult Function(String? newValue) changeOption,
@@ -151,7 +152,7 @@ class _$StartedImpl implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(
-            String name, String email, String gender, File? imageFile)?
+            String? name, String? email, String? gender, File? imageFile)?
         doEditProfile,
     TResult? Function()? getUser,
     TResult? Function(String? newValue)? changeOption,
@@ -164,7 +165,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String name, String email, String gender, File? imageFile)?
+    TResult Function(
+            String? name, String? email, String? gender, File? imageFile)?
         doEditProfile,
     TResult Function()? getUser,
     TResult Function(String? newValue)? changeOption,
@@ -228,7 +230,7 @@ abstract class _$$DoEditProfileImplCopyWith<$Res> {
           _$DoEditProfileImpl value, $Res Function(_$DoEditProfileImpl) then) =
       __$$DoEditProfileImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String name, String email, String gender, File? imageFile});
+  $Res call({String? name, String? email, String? gender, File? imageFile});
 }
 
 /// @nodoc
@@ -242,24 +244,24 @@ class __$$DoEditProfileImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
-    Object? email = null,
-    Object? gender = null,
+    Object? name = freezed,
+    Object? email = freezed,
+    Object? gender = freezed,
     Object? imageFile = freezed,
   }) {
     return _then(_$DoEditProfileImpl(
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
+              as String?,
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      gender: null == gender
+              as String?,
+      gender: freezed == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       imageFile: freezed == imageFile
           ? _value.imageFile
           : imageFile // ignore: cast_nullable_to_non_nullable
@@ -272,17 +274,14 @@ class __$$DoEditProfileImplCopyWithImpl<$Res>
 
 class _$DoEditProfileImpl implements _DoEditProfile {
   const _$DoEditProfileImpl(
-      {required this.name,
-      required this.email,
-      required this.gender,
-      this.imageFile});
+      {this.name, this.email, this.gender, this.imageFile});
 
   @override
-  final String name;
+  final String? name;
   @override
-  final String email;
+  final String? email;
   @override
-  final String gender;
+  final String? gender;
   @override
   final File? imageFile;
 
@@ -317,7 +316,7 @@ class _$DoEditProfileImpl implements _DoEditProfile {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(
-            String name, String email, String gender, File? imageFile)
+            String? name, String? email, String? gender, File? imageFile)
         doEditProfile,
     required TResult Function() getUser,
     required TResult Function(String? newValue) changeOption,
@@ -331,7 +330,7 @@ class _$DoEditProfileImpl implements _DoEditProfile {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(
-            String name, String email, String gender, File? imageFile)?
+            String? name, String? email, String? gender, File? imageFile)?
         doEditProfile,
     TResult? Function()? getUser,
     TResult? Function(String? newValue)? changeOption,
@@ -344,7 +343,8 @@ class _$DoEditProfileImpl implements _DoEditProfile {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String name, String email, String gender, File? imageFile)?
+    TResult Function(
+            String? name, String? email, String? gender, File? imageFile)?
         doEditProfile,
     TResult Function()? getUser,
     TResult Function(String? newValue)? changeOption,
@@ -400,14 +400,14 @@ class _$DoEditProfileImpl implements _DoEditProfile {
 
 abstract class _DoEditProfile implements EditProfileEvent {
   const factory _DoEditProfile(
-      {required final String name,
-      required final String email,
-      required final String gender,
+      {final String? name,
+      final String? email,
+      final String? gender,
       final File? imageFile}) = _$DoEditProfileImpl;
 
-  String get name;
-  String get email;
-  String get gender;
+  String? get name;
+  String? get email;
+  String? get gender;
   File? get imageFile;
   @JsonKey(ignore: true)
   _$$DoEditProfileImplCopyWith<_$DoEditProfileImpl> get copyWith =>
@@ -454,7 +454,7 @@ class _$GetUserImpl implements _GetUser {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(
-            String name, String email, String gender, File? imageFile)
+            String? name, String? email, String? gender, File? imageFile)
         doEditProfile,
     required TResult Function() getUser,
     required TResult Function(String? newValue) changeOption,
@@ -468,7 +468,7 @@ class _$GetUserImpl implements _GetUser {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(
-            String name, String email, String gender, File? imageFile)?
+            String? name, String? email, String? gender, File? imageFile)?
         doEditProfile,
     TResult? Function()? getUser,
     TResult? Function(String? newValue)? changeOption,
@@ -481,7 +481,8 @@ class _$GetUserImpl implements _GetUser {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String name, String email, String gender, File? imageFile)?
+    TResult Function(
+            String? name, String? email, String? gender, File? imageFile)?
         doEditProfile,
     TResult Function()? getUser,
     TResult Function(String? newValue)? changeOption,
@@ -606,7 +607,7 @@ class _$ChangeOptionImpl implements _ChangeOption {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(
-            String name, String email, String gender, File? imageFile)
+            String? name, String? email, String? gender, File? imageFile)
         doEditProfile,
     required TResult Function() getUser,
     required TResult Function(String? newValue) changeOption,
@@ -620,7 +621,7 @@ class _$ChangeOptionImpl implements _ChangeOption {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(
-            String name, String email, String gender, File? imageFile)?
+            String? name, String? email, String? gender, File? imageFile)?
         doEditProfile,
     TResult? Function()? getUser,
     TResult? Function(String? newValue)? changeOption,
@@ -633,7 +634,8 @@ class _$ChangeOptionImpl implements _ChangeOption {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String name, String email, String gender, File? imageFile)?
+    TResult Function(
+            String? name, String? email, String? gender, File? imageFile)?
         doEditProfile,
     TResult Function()? getUser,
     TResult Function(String? newValue)? changeOption,
@@ -736,7 +738,7 @@ class _$ChangeImageImpl implements _ChangeImage {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(
-            String name, String email, String gender, File? imageFile)
+            String? name, String? email, String? gender, File? imageFile)
         doEditProfile,
     required TResult Function() getUser,
     required TResult Function(String? newValue) changeOption,
@@ -750,7 +752,7 @@ class _$ChangeImageImpl implements _ChangeImage {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(
-            String name, String email, String gender, File? imageFile)?
+            String? name, String? email, String? gender, File? imageFile)?
         doEditProfile,
     TResult? Function()? getUser,
     TResult? Function(String? newValue)? changeOption,
@@ -763,7 +765,8 @@ class _$ChangeImageImpl implements _ChangeImage {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String name, String email, String gender, File? imageFile)?
+    TResult Function(
+            String? name, String? email, String? gender, File? imageFile)?
         doEditProfile,
     TResult Function()? getUser,
     TResult Function(String? newValue)? changeOption,
