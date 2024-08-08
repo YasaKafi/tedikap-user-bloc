@@ -25,9 +25,7 @@ class _OrderPageState extends State<OrderPage> {
   }
 
   Future<void> _fetchInitialData() async {
-    context.read<OrderBloc>().add(const OrderEvent.getFilterOrder('ongoing'));
-    context.read<OrderBloc>().add(const OrderEvent.getFilterOrderReward('ongoing'));
-  }
+    context.read<OrderBloc>().add(const OrderEvent.getFilterOrder('ongoing'));}
 
   Future<void> _refreshData(BuildContext context) async {
     context.read<OrderBloc>().add(const OrderEvent.getFilterOrder('ongoing'));

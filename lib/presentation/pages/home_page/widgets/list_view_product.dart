@@ -4,7 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:tedikap_user_bloc/common/constant.dart';
 import 'package:tedikap_user_bloc/presentation/pages/home_page/bloc/home_bloc.dart';
 import '../../../../../common/dimensions.dart';
+import '../../../../common/theme.dart';
 import 'list_box_product.dart';
+import 'package:shimmer/shimmer.dart';
 
 
 class ListViewProduct extends StatelessWidget {
@@ -31,10 +33,14 @@ class ListViewProduct extends StatelessWidget {
                 initial: () => Center(
                   child: CircularProgressIndicator(),
                 ),
-                loading: () => Center(
-                  child: CircularProgressIndicator(),
+                loading: () => ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 5, // Number of shimmer items to show
+                  itemBuilder: (context, index) {
+                    return ShimmerListBoxProduct();
+                  },
                 ),
-                success: (model, user, index) {
+                success: (model, user, index, pointModel) {
                   if (model != null){
                     return ListView.builder(
                       scrollDirection: Axis.horizontal,
@@ -48,7 +54,7 @@ class ListViewProduct extends StatelessWidget {
                           },
                           child: ListBoxProduct(
                             image: bestSeller.image!,
-                            rating: 4.5,
+                            rating: bestSeller.favoritesCount!,
                             price: bestSeller.regularPrice!.toString(),
                             title: bestSeller.name!,
                           ),
@@ -71,3 +77,86 @@ class ListViewProduct extends StatelessWidget {
 }
 
 
+
+class ShimmerListBoxProduct extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(
+          left: Dimensions.marginSizeLarge,
+          top: Dimensions.marginSizeSmall,
+          bottom: Dimensions.marginSizeSmall),
+      width: 160,
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black, width: 0.1),
+        shape: BoxShape.rectangle,
+        color: baseColor,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x3F000000),
+            blurRadius: 4,
+            offset: Offset(0, 4),
+            spreadRadius: 0,
+          )
+        ],
+      ),
+      child: Shimmer.fromColors(
+        baseColor: Colors.grey[300]!,
+        highlightColor: Colors.grey[100]!,
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Container(
+                height: 100,
+                width: double.infinity,
+                color: Colors.white,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(Dimensions.paddingSizeSmall),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: 20,
+                    width: double.infinity,
+                    color: Colors.white,
+                  ),
+                  const SizedBox(
+                    height: Dimensions.paddingSizeExtraSmall,
+                  ),
+                  Container(
+                    height: 20,
+                    width: 100,
+                    color: Colors.white,
+                  ),
+                  const SizedBox(
+                    height: Dimensions.paddingSizeExtraSmall,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: Dimensions.iconSizeKindDeafult,
+                        width: Dimensions.iconSizeKindDeafult,
+                        color: Colors.white,
+                      ),
+                      const SizedBox(width: 5),
+                      Container(
+                        height: 20,
+                        width: 30,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

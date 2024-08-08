@@ -17,7 +17,7 @@ class ListBoxProduct extends StatelessWidget {
 
   final String image;
   final String title;
-  final double rating;
+  final int rating;
   final String price;
 
   @override
@@ -70,10 +70,11 @@ class ListBoxProduct extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children:  [
                     const Icon(
-                      Icons.star_rate_rounded,
-                      color: Colors.orange,
+                      Icons.favorite,
+                      color: redMedium,
                       size: Dimensions.iconSizeKindDeafult,
                     ),
+                    SizedBox(width: 5,),
                     Text(
                       rating.toString(),
                       style: const TextStyle(

@@ -6,6 +6,8 @@ import 'package:tedikap_user_bloc/presentation/pages/home_page/bloc/home_bloc.da
 import '../../../../common/dimensions.dart';
 import '../../../../common/theme.dart';
 
+import 'package:shimmer/shimmer.dart';
+
 class CarouselSliderWidget extends StatelessWidget {
   CarouselSliderWidget({
     super.key,
@@ -35,18 +37,9 @@ class CarouselSliderWidget extends StatelessWidget {
               child: BlocBuilder<HomeBloc, HomeState>(
                 builder: (context, state) {
                   return state.when(
-                      initial: () {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-
-                      },
-                      loading: () {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      },
-                      success: (model, user, index) {
+                      initial: () => _buildShimmerCarousel(),
+                      loading: () => _buildShimmerCarousel(),
+                      success: (model, user, index, pointModel) {
                         int currentIndex = index ?? 0;
                         return Column(
                           children: [
@@ -100,7 +93,8 @@ class CarouselSliderWidget extends StatelessWidget {
                       },
                       error: (message) {
                         return Text(message!);
-                      });
+                      }
+                  );
                 },
               ),
             ),
@@ -109,4 +103,39 @@ class CarouselSliderWidget extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildShimmerCarousel() {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Column(
+        children: [
+          Container(
+            width: screenWidth,
+            height: 150,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: baseColor
+            ),
+          ),
+          const SizedBox(height: Dimensions.paddingSizeSmall),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(3, (index) {
+              return Container(
+                width: 8.0,
+                height: 8.0,
+                margin: const EdgeInsets.symmetric(vertical: Dimensions.fontSizeExtraSmall, horizontal: 2.0),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white,
+                ),
+              );
+            }),
+          )
+        ],
+      ),
+    );
+  }
 }
+

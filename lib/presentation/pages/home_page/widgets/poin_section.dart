@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:tedikap_user_bloc/presentation/pages/home_page/bloc/home_bloc.dart';
 
 import '../../../../../common/constant.dart';
 import '../../../../../common/theme.dart';
@@ -33,7 +36,6 @@ class PoinSection extends StatelessWidget {
         child: InkWell(
           onTap: () {
             context.pushNamed('point');
-
           },
           child: Column(
             children: [
@@ -49,11 +51,34 @@ class PoinSection extends StatelessWidget {
                   const SizedBox(
                     width: 12,
                   ),
-                 Text(
-                      '100 Poin',
-                      style: txtSecondaryTitle.copyWith(
-                          fontWeight: FontWeight.w500, color: blackColor),
-                    )
+                  BlocBuilder<HomeBloc, HomeState>(
+                    builder: (context, state) {
+                      return state.when(
+                          initial: () => ShimmerUserHome(),
+                          loading: () => ShimmerUserHome(),
+                          success: (model, user, index, pointModel) {
+                            final point = pointModel?.data;
+                            if (point != null){
+                              final itemPoint = point.first.point;
+                              return Text(
+                                '$itemPoint Poin',
+                                style: txtSecondaryTitle.copyWith(
+                                    fontWeight: FontWeight.w500, color: blackColor),
+                              );
+                            } else {
+                              return Text('0 Poin',
+                                style: txtSecondaryTitle.copyWith(
+                                    fontWeight: FontWeight.w500, color: blackColor),
+                              );
+                            }
+
+                          },
+                          error: (message) {
+                            return Text(message!);
+                          }
+                      );
+                    },
+                  )
                 ],
               ),
               const Padding(
@@ -86,5 +111,25 @@ class PoinSection extends StatelessWidget {
             ],
           ),
         ));
+  }
+}
+
+class ShimmerUserHome extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 100,
+            height: 16,
+            color: Colors.grey[300],
+          ),
+        ],
+      ),
+    );
   }
 }

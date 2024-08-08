@@ -3,6 +3,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:tedikap_user_bloc/data/models/response/detail_product_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/detail_product_reward_response_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/most_like_product_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/products_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/products_reward_response_model.dart';
 
@@ -34,6 +35,22 @@ class ProductDatasource {
           endpoint: TedikapApiRepository.getAllRewardProduct, isAuthorize: true);
       if (response.statusCode == 200) {
         return Right(ProductsRewardResponseModel.fromMap(response.data));
+      } else if (response.statusCode == 404) {
+        return const Left('Oops, something went wrong. Please try again later');
+      } else {
+        return const Left('Oops, something went wrong. Please try again later');
+      }
+    } catch (e) {
+      return Left('Failed to access data: ${e.toString()}');
+    }
+  }
+
+  Future<Either<String, MostPopularProductResponseModel>> getAllMostPopularProduct() async {
+    try {
+      final response = await _dioInstance.getRequest(
+          endpoint: TedikapApiRepository.getAllMostPopularProduct, isAuthorize: true);
+      if (response.statusCode == 200) {
+        return Right(MostPopularProductResponseModel.fromMap(response.data));
       } else if (response.statusCode == 404) {
         return const Left('Oops, something went wrong. Please try again later');
       } else {

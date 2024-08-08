@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/common/constant.dart';
 import 'package:tedikap_user_bloc/presentation/pages/home_page/bloc/home_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/home_page/widgets/slider_promo.dart';
@@ -43,10 +44,8 @@ class BaseSection extends StatelessWidget {
                       initial: () => Center(
                             child: CircularProgressIndicator(),
                           ),
-                      loading: () => Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                      success: (model, user, index) {
+                      loading: () => ShimmerUserHome(),
+                      success: (model, user, index, pointModel) {
                         if(user != null ){
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,7 +144,7 @@ class BaseSection extends StatelessWidget {
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Menu Terlaris',
+                'Menu Terfavorit',
                 style: txtSecondaryHeader.copyWith(
                     fontWeight: FontWeight.w600, color: blackColor),
               ),
@@ -240,6 +239,32 @@ class ButtonCircleIcon extends StatelessWidget {
             child: SvgPicture.asset(
           icon,
         )),
+      ),
+    );
+  }
+}
+
+class ShimmerUserHome extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 150,
+            height: 16,
+            color: Colors.grey[300],
+          ),
+          const SizedBox(height: 6),
+          Container(
+            width: 100,
+            height: 16,
+            color: Colors.grey[300],
+          ),
+        ],
       ),
     );
   }
