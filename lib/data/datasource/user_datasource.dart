@@ -50,27 +50,34 @@ class UserDatasource {
     try {
       // Manually print out the request data
       print('Request Data:');
-      print('Name: $name');
-      print('Email: $email');
-      print('Gender: $gender');
+      if (name != null) print('Name: $name');
+      if (email != null) print('Email: $email');
+      if (gender != null) print('Gender: $gender');
       if (imageFile != null) {
         print('Avatar: ${imageFile.path.split('/').last}');
       }
 
-      FormData formData = FormData.fromMap({
-        'name': name,
-        'email': email,
-        'gender': gender,
-        if (imageFile != null)
-          'avatar': await MultipartFile.fromFile(imageFile.path,
-              filename: imageFile.path.split('/').last),
-      });
+      // Construct the form data
+      final formData = FormData();
+      if (name != null) formData.fields.add(MapEntry('name', name));
+      if (email != null) formData.fields.add(MapEntry('email', email));
+      if (gender != null) formData.fields.add(MapEntry('gender', gender));
+      if (imageFile != null) {
+        formData.files.add(MapEntry(
+          'avatar',
+          await MultipartFile.fromFile(
+            imageFile.path,
+            filename: imageFile.path.split('/').last,
+          ),
+        ));
+      }
 
       final response = await _dioInstance.postRequest(
-          endpoint: TedikapApiRepository.postProfile,
-          data: formData,
-          isMultipart: true,
-          isAuthorize: true);
+        endpoint: TedikapApiRepository.postProfile,
+        data: formData,
+        isMultipart: true,
+        isAuthorize: true,
+      );
 
       if (response.statusCode == 200) {
         return Right(EditProfileResponseModel.fromMap(response.data));
@@ -81,6 +88,7 @@ class UserDatasource {
       return Left('Failed to update profile: ${e.toString()}');
     }
   }
+
 
 
   Future<Either<String, LogoutResponseModel>> postLogout() async {

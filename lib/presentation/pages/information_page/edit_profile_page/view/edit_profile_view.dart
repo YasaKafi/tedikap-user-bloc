@@ -1,10 +1,10 @@
 import 'dart:io' as i;
+import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/edit_profile_page/bloc/edit_profile_bloc.dart';
 
 import '../../../../../common/dimensions.dart';
@@ -16,6 +16,8 @@ import '../widget/editimage_button.dart';
 import '../widget/save_button.dart';
 
 class EditProfilePage extends StatefulWidget {
+  const EditProfilePage({super.key});
+
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
 }
@@ -23,7 +25,7 @@ class EditProfilePage extends StatefulWidget {
 class _EditProfilePageState extends State<EditProfilePage> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
-  String gender = 'male';
+  String gender = '';
   ValueNotifier<String> defaultImagePath = ValueNotifier<String>('');
 
   @override
@@ -54,38 +56,45 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 children: [
                   IconButton(
                     icon: const Icon(Icons.arrow_back_ios),
-                    onPressed: () {},
+                    onPressed: () {
+                      if (Navigator.canPop(context)) {
+                        context.pop();
+                      } else {
+                        context.goNamed('dashboard', pathParameters: {'pageIndex': '3'});
+                      }
+                    },
                   ),
                   Text(
-                    'Edit Profile',
+                    'Edit $gender',
                     style: txtSecondaryHeader.copyWith(
                         fontWeight: FontWeight.w600, color: blackColor),
                   ),
                   Container(
                     width: 40,
                     height: 5,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.transparent,
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Stack(
               children: [
                 BlocBuilder<EditProfileBloc, EditProfileState>(
                   builder: (context, state) {
                     return state.maybeWhen(
-                      orElse: () => Center(child: CircularProgressIndicator()),
+                      orElse: () => const Center(child: CircularProgressIndicator()),
+                      loading: () => _buildShimmerProfile(),
                       loaded: (user, o, imagePath, modelEdit) {
                         if (user?.data?.avatar == null && imagePath == null) {
-                          return Center(child: Text('No image available'));
+                          return const Center(child: Text('No image available'));
                         }
                         defaultImagePath.value = imagePath ?? user!.data!.avatar!;
                         return Container(
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(shape: BoxShape.circle),
+                          padding: const EdgeInsets.all(10),
+                          decoration: const BoxDecoration(shape: BoxShape.circle),
                           child: imagePath != null
                               ? ClipOval(
                             child: Image.file(
@@ -115,14 +124,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   child: EditImageButton(
                     onPressed: () {
                       context.read<EditProfileBloc>().add(
-                        EditProfileEvent.changeImage(),
+                        const EditProfileEvent.changeImage(),
                       );
                     },
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Padding(
               padding: const EdgeInsets.only(
                 left: Dimensions.marginSizeLarge,
@@ -132,24 +141,22 @@ class _EditProfilePageState extends State<EditProfilePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BlocListener<EditProfileBloc, EditProfileState>(
-                    listener: (context, state) {
-                      state.maybeWhen(
-                        loaded: (user, n, o, modelEdit) {
-                          usernameController.text = user?.data?.name ?? '';
-                          emailController.text = user?.data?.email ?? '';
-                          gender = user?.data?.gender ?? 'male';
+                  Column(
+                    children: [
+                      BlocListener<EditProfileBloc, EditProfileState>(
+                        listener: (context, state) {
+                          state.maybeWhen(
+                              orElse: () {},
+                              loaded: (user, n, o, modelEdit) {
+                                usernameController.text = user!.data!.name!;
+                                emailController.text = user.data!.email!;
+                              });
                         },
-                        orElse: () {},
-                      );
-                    },
-                    child: Column(
-                      children: [
-                        BlocBuilder<EditProfileBloc, EditProfileState>(
+                        child: BlocBuilder<EditProfileBloc, EditProfileState>(
                           builder: (context, state) {
                             return state.maybeWhen(
-                              orElse: () => Center(child: CircularProgressIndicator()),
-                              loading: () => Center(child: CircularProgressIndicator()),
+                              orElse: () => _buildShimmerTextField(),
+                              loading: () => _buildShimmerTextField(),
                               loaded: (user, n, o, modelEdit) {
                                 return CustomTextField(
                                   hintText: 'Username',
@@ -162,48 +169,50 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 child: Text(
                                   message,
                                   style: txtSecondaryTitle.copyWith(
-                                      fontWeight: FontWeight.w600, color: blackColor),
+                                      fontWeight: FontWeight.w600,
+                                      color: blackColor),
                                 ),
                               ),
                             );
                           },
                         ),
-                        SizedBox(height: 30),
-                        BlocBuilder<EditProfileBloc, EditProfileState>(
-                          builder: (context, state) {
-                            return state.maybeWhen(
-                              orElse: () => Center(child: CircularProgressIndicator()),
-                              loading: () => Center(child: CircularProgressIndicator()),
-                              loaded: (user, n, o, modelEdit) {
-                                return CustomTextField(
-                                  hintText: 'Email',
-                                  keyboardType: TextInputType.emailAddress,
-                                  controller: emailController,
-                                );
-                              },
-                              error: (message) => Center(
-                                child: Text(
-                                  message,
-                                  style: txtSecondaryTitle.copyWith(
-                                      fontWeight: FontWeight.w600, color: blackColor),
-                                ),
+                      ),
+                      const SizedBox(height: 30),
+                      BlocBuilder<EditProfileBloc, EditProfileState>(
+                        builder: (context, state) {
+                          return state.maybeWhen(
+                            orElse: () => _buildShimmerTextField(),
+                            loading: () => _buildShimmerTextField(),
+                            loaded: (user, n, o, modelEdit) {
+                              return CustomTextField(
+                                hintText: 'Email',
+                                keyboardType: TextInputType.emailAddress,
+                                controller: emailController,
+                              );
+                            },
+                            error: (message) => Center(
+                              child: Text(
+                                message,
+                                style: txtSecondaryTitle.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: blackColor),
                               ),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   CustomDropDown(
                     gender: gender,
                     onChanged: (newValue) {
                       setState(() {
-                        gender = newValue ?? 'male';
+                        gender = newValue!;
                       });
                     },
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   BlocConsumer<EditProfileBloc, EditProfileState>(
                     listener: (context, state) {
                       state.maybeWhen(
@@ -221,55 +230,70 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           );
                         },
                         loaded: (user, o, n, modelEdit) {
-                          if (modelEdit != null) {
+                          if (modelEdit?.message == 'User updated successfully') {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  modelEdit.message!,
+                                  modelEdit!.message!,
                                   style: txtSecondaryTitle.copyWith(
                                       fontWeight: FontWeight.w600, color: blackColor),
                                 ),
                                 backgroundColor: greenMedium,
                               ),
                             );
+                            context.pushReplacementNamed('dashboard',
+                                pathParameters: {'pageIndex': '3'});
                           }
                         },
                       );
                     },
                     builder: (context, state) {
                       return state.maybeWhen(
-                        orElse: () => Container(
-                          margin: EdgeInsets.only(top: Dimensions.marginSizeExtraLarge),
-                          child: SaveButton(
-                            onPressed: () {
-                              if (usernameController.text.isNotEmpty &&
-                                  emailController.text.isNotEmpty) {
-                                context.read<EditProfileBloc>().add(
-                                  EditProfileEvent.doEditProfile(
-                                    name: usernameController.text,
-                                    email: emailController.text,
-                                    gender: gender,
-                                    imageFile: defaultImagePath.value.isNotEmpty
-                                        ? i.File(defaultImagePath.value)
-                                        : null,
-                                  ),
-                                );
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      'Please fill in all fields',
-                                      style: txtSecondaryTitle.copyWith(
-                                          fontWeight: FontWeight.w600, color: blackColor),
+                        orElse: () => const Center(child: CircularProgressIndicator()),
+                        loaded: (user, o, imagePath, modelEdit) => Container(
+                            margin: const EdgeInsets.only(top: Dimensions.marginSizeExtraLarge),
+                            child: SaveButton(
+                              onPressed: () {
+                                if (usernameController.text.isNotEmpty &&
+                                    emailController.text.isNotEmpty) {
+                                  String? updatedName;
+                                  String? updatedEmail;
+                                  String? updatedGender;
+
+                                  updatedName = usernameController.text;
+                                  updatedEmail = emailController.text;
+                                  updatedGender = o;
+
+                                  File? fileToUpload;
+                                  if (defaultImagePath.value.isNotEmpty &&
+                                      defaultImagePath.value.contains('/')) {
+                                    fileToUpload = File(defaultImagePath.value);
+                                  }
+
+                                  context.read<EditProfileBloc>().add(
+                                    EditProfileEvent.doEditProfile(
+                                      name: updatedName,
+                                      email: updatedEmail,
+                                      gender: updatedGender,
+                                      imageFile: fileToUpload,
                                     ),
-                                    backgroundColor: redMedium,
-                                  ),
-                                );
-                              }
-                            },
-                          ),
-                        ),
-                        loading: () => Center(child: CircularProgressIndicator()),
+                                  );
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'Please fill in all fields',
+                                        style: txtSecondaryTitle.copyWith(
+                                            fontWeight: FontWeight.w600,
+                                            color: blackColor),
+                                      ),
+                                      backgroundColor: redMedium,
+                                    ),
+                                  );
+                                }
+                              },
+                            )),
+                        loading: () => Center(child: _buildShimmerTextField()),
                       );
                     },
                   ),
@@ -281,10 +305,31 @@ class _EditProfilePageState extends State<EditProfilePage> {
       ),
     );
   }
+
+  Widget _buildShimmerProfile() {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.grey.shade100,
+      child: CircleAvatar(
+        radius: 85,
+        backgroundColor: Colors.white,
+      ),
+    );
+  }
+
+  Widget _buildShimmerTextField() {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.grey.shade100,
+      child: Container(
+        height: 48,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
+    );
+  }
 }
-
-
-
-
 
 
