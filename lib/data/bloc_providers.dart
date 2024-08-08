@@ -38,7 +38,7 @@ class AppProviders{
       create: (context) => LoginBloc(AuthDatasource()),
     ),
     BlocProvider<HelpCenterBloc>(
-      create: (context) => HelpCenterBloc(),
+      create: (context) => HelpCenterBloc(UserDatasource()),
     ),
     BlocProvider<ProfileBloc>(
       create: (context) => ProfileBloc(UserDatasource()),

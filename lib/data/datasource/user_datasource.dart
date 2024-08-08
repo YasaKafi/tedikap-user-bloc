@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:tedikap_user_bloc/data/models/response/current_user_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/edit_current_user_response_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/help_center_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/logout_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/user_point_response_model.dart';
 
@@ -21,6 +22,20 @@ class UserDatasource {
         return Right(CurrentUserModel.fromMap(response.data));
       } else {
         return const Left('Failed to access data user');
+      }
+    } catch (e) {
+      return Left('Failed to access data: ${e.toString()}');
+    }
+  }
+
+  Future<Either<String, HelpCenterResponseModel>> getHelpCenter() async {
+    try {
+      final response = await _dioInstance.getRequest(
+          endpoint: TedikapApiRepository.getHelpCenter, isAuthorize: true);
+      if (response.statusCode == 200) {
+        return Right(HelpCenterResponseModel.fromMap(response.data));
+      } else {
+        return const Left('Failed to access data help center');
       }
     } catch (e) {
       return Left('Failed to access data: ${e.toString()}');
