@@ -2,11 +2,12 @@ part of 'help_center_bloc.dart';
 
 @freezed
 class HelpCenterState with _$HelpCenterState {
-  const factory HelpCenterState({
+  const factory HelpCenterState.initial() = _Initial;
+  const factory HelpCenterState.loading() = _Loading;
+  const factory HelpCenterState.loaded({
     required List<bool> isExpanded,
-  }) = _HelpCenterState;
-
-  factory HelpCenterState.initial() => HelpCenterState(
-    isExpanded: List.generate(5, (_) => false),
-  );
+    required HelpCenterResponseModel model,
+  }) = _Loaded;
+  const factory HelpCenterState.error({required String message}) = _Error;
 }
+

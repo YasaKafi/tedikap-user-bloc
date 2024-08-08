@@ -25,7 +25,7 @@ import '../presentation/pages/information_page/privacy_policy_page/privacy_polic
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: '/dashboard/0',
+    initialLocation: '/dashboard/3',
     debugLogDiagnostics: true,
     routes: [
       GoRoute(
