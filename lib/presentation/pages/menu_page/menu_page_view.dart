@@ -18,19 +18,43 @@ class MenuPage extends StatefulWidget {
   _MenuPageState createState() => _MenuPageState();
 }
 
-class _MenuPageState extends State<MenuPage> {
+class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin{
   final TextEditingController searchController = TextEditingController();
+  late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
-      context.read<MenuBloc>().add(const MenuEvent.getProduct());
+    _tabController = TabController(length: 4, vsync: this);
+
+    // Listen to tab changes
+    _tabController.addListener(() {
+      if (_tabController.indexIsChanging) return; // To avoid triggering when the tab is still changing
+
+      switch (_tabController.index) {
+        case 0:
+          context.read<MenuBloc>().add(MenuEvent.getFilterSearch(searchController.text));
+          break;
+        case 1:
+          context.read<MenuBloc>().add(const MenuEvent.getFilterCategory('tea'));
+          break;
+        case 2:
+          context.read<MenuBloc>().add(const MenuEvent.getFilterCategory('nontea'));
+          break;
+        case 3:
+          context.read<MenuBloc>().add(const MenuEvent.getFilterCategory('snack'));
+          break;
+      }
+    });
+
+    context.read<MenuBloc>().add(const MenuEvent.getProduct());
   }
 
   @override
   void dispose() {
-    super.dispose();
+    _tabController.dispose();
     searchController.dispose();
+    super.dispose();
   }
 
   @override
@@ -73,7 +97,7 @@ class _MenuPageState extends State<MenuPage> {
                   child: BlocBuilder<MenuBloc, MenuState>(
                     builder: (context, state) {
                       return TabBar(
-
+                        controller: _tabController,
                         padding: const EdgeInsets.symmetric(
                           horizontal: Dimensions.paddingSizeLarge,
                         ),
@@ -134,7 +158,7 @@ class _MenuPageState extends State<MenuPage> {
                 ),
                 Expanded(
                   child: TabBarView(
-                    physics: const NeverScrollableScrollPhysics(),
+                    controller: _tabController,
                     children: [
                       buildProductList(searchController.text),
                       buildProductList(searchController.text),

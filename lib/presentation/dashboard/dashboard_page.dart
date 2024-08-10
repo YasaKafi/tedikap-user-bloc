@@ -9,15 +9,6 @@ import '../pages/order_page/order_page_view.dart';
 import '../pages/profile_page/profile_page_view.dart';
 
 
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import '../../common/constant.dart';
-import '../../common/theme.dart';
-import '../pages/home_page/home_page_view.dart';
-import '../pages/menu_page/menu_page_view.dart';
-import '../pages/order_page/order_page_view.dart';
-import '../pages/profile_page/profile_page_view.dart';
-
 class DashboardPage extends StatefulWidget {
   final int pageIndex;
 
