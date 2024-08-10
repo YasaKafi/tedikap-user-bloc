@@ -10,6 +10,7 @@ import 'package:tedikap_user_bloc/data/models/response/delete_cart_item_response
 import 'package:tedikap_user_bloc/data/models/response/detail_product_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/post_order_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/post_payment_response_model.dart';
+import 'package:tedikap_user_bloc/data/repository/global_variabel.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../data/datasource/cart_datasource.dart';
@@ -71,6 +72,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             final paymentDetails =
             paymentResult.fold((l) => null, (payment) => payment);
             if (paymentDetails != null) {
+              GlobalVariables.linkCheckoutGlobal = paymentDetails.checkoutLink;
               final url = Uri.parse(paymentDetails.checkoutLink!);
               await launchURL(url);
             }

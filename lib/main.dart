@@ -13,10 +13,13 @@ void main() async {
     name: 'tedikap-messaging',
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+
   const MyApp({super.key});
 
   @override
@@ -44,5 +47,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
 
 

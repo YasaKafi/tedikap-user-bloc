@@ -14,9 +14,10 @@ import '../../../common/dimensions.dart';
 import '../../../common/theme.dart';
 
 class VoucherPage extends StatefulWidget {
-  VoucherPage({super.key, this.isFromCart});
+  VoucherPage({super.key, this.isFromCart, required this.isFromNotification});
 
   bool? isFromCart;
+  final bool isFromNotification;
 
 
   @override
@@ -54,8 +55,10 @@ class _VoucherPageState extends State<VoucherPage> {
               IconButton(
                 icon: const Icon(Icons.arrow_back_ios),
                 onPressed: () {
-                  if (Navigator.canPop(context)) {
-                    context.pop();
+                  if (widget.isFromNotification) {
+                    context.pushReplacementNamed('dashboard' , pathParameters:  {'pageIndex' : '3'});
+                  } else if (Navigator.canPop(context)) {
+                    Navigator.pop(context);
                   } else {
                     context.goNamed('cart_common');
                   }

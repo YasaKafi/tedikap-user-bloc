@@ -58,6 +58,7 @@ class InfoBoxProfile extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: (){
+                    context.pushNamed('point', extra: false);
                   },
                   child: Column(
                     children: [

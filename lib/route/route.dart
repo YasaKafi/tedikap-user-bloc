@@ -19,13 +19,15 @@ import 'package:tedikap_user_bloc/presentation/pages/information_page/terms_of_s
 import 'package:tedikap_user_bloc/presentation/pages/point_page/point_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/voucher_page/voucher_page_view.dart';
 
+import '../firebase/notification_service.dart';
 import '../presentation/pages/detail_voucher_page/detail_voucher_page_view.dart';
 import '../presentation/pages/information_page/privacy_policy_page/privacy_policy_view.dart';
 
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: '/dashboard/3',
+    navigatorKey: navigatorKey,
+    initialLocation: '/splash',
     debugLogDiagnostics: true,
     routes: [
       GoRoute(
@@ -105,10 +107,15 @@ class AppRouter {
         name: 'voucher',
         path: '/voucher',
         builder: (context, state) {
-          final isFromCart = state.extra is bool ? state.extra as bool : false;
-          return VoucherPage(isFromCart: isFromCart);
+          final extraData = state.extra as Map<String, dynamic>?;
+
+          final isFromCart = extraData?['isFromCart'] as bool? ?? false;
+          final isNotification = extraData?['isNotification'] as bool? ?? false;
+
+          return VoucherPage(isFromCart: isFromCart, isFromNotification: isNotification);
         },
       ),
+
       GoRoute(
         name: 'detail_order_common',
         path: '/detail_order_common/:orderId',
