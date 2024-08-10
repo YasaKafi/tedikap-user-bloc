@@ -58,7 +58,7 @@ class PoinSection extends StatelessWidget {
                           loading: () => ShimmerUserHome(),
                           success: (model, user, index, pointModel) {
                             final point = pointModel?.data;
-                            if (point != null){
+                            if (point != null && point.isNotEmpty){
                               final itemPoint = point.first.point;
                               return Text(
                                 '$itemPoint Poin',
@@ -71,7 +71,6 @@ class PoinSection extends StatelessWidget {
                                     fontWeight: FontWeight.w500, color: blackColor),
                               );
                             }
-
                           },
                           error: (message) {
                             return Text(message!);

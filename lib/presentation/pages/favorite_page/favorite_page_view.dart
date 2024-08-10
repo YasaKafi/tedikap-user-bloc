@@ -30,6 +30,7 @@ class _FavoritePageState extends State<FavoritePage> {
 
   @override
   Widget build(BuildContext context) {
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
@@ -121,7 +122,11 @@ class _FavoritePageState extends State<FavoritePage> {
               IconButton(
                 icon: const Icon(Icons.arrow_back_ios),
                 onPressed: () {
+                  if (Navigator.canPop(context)){
                   context.pop();
+                  } else {
+                    context.goNamed('dashboard', pathParameters: {'pageIndex': '3'});
+                  }
                 },
               ),
               Text(

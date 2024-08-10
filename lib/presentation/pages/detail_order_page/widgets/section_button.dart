@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tedikap_user_bloc/common/theme.dart';
+import 'package:tedikap_user_bloc/data/repository/global_variabel.dart';
 import 'package:tedikap_user_bloc/presentation/global_components/common_button.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/bloc/detail_order_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -20,6 +21,8 @@ class _SectionButtonState extends State<SectionButton> {
   Timer? _timer;
   Duration _remainingTime = Duration.zero;
   bool _timerEnded = false;
+
+
 
 
   @override
@@ -88,8 +91,8 @@ class _SectionButtonState extends State<SectionButton> {
                     width: screenWidth,
                     text: _timerEnded == true ? 'Pembayaran Berakhir' : timerText,
                     onPressed: _timerEnded ? null : () async {
-                      if(widget.linkCheckout != null){
-                        await launchUrl(Uri.parse(widget.linkCheckout!));
+                      if(GlobalVariables.linkCheckoutGlobal != null){
+                        await launchUrl(Uri.parse(GlobalVariables.linkCheckoutGlobal!));
                       }
                     },
                     padding: const EdgeInsets.symmetric(

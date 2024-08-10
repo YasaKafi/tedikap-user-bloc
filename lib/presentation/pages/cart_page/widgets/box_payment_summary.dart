@@ -241,7 +241,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                       onTap: () {
                         isCartItemEmpty
                             ? null
-                            : context.goNamed('voucher', extra: true);
+                            : context.pushReplacementNamed('voucher', extra: {'isFromCart': true});
                       },
                       child: Container(
                         width: screenWidth,
