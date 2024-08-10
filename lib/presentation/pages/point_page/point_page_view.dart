@@ -18,16 +18,45 @@ class PointPage extends StatefulWidget {
   _PointPageState createState() => _PointPageState();
 }
 
-class _PointPageState extends State<PointPage> {
+class _PointPageState extends State<PointPage> with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+
   @override
   void initState() {
     super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+
+    // Listen to tab changes
+    _tabController.addListener(() {
+      if (_tabController.indexIsChanging) return; // To avoid triggering when the tab is still changing
+
+      switch (_tabController.index) {
+        case 0:
+          context.read<PointBloc>().add(const PointEvent.getFilterCategory('tea'));
+          break;
+        case 1:
+          context.read<PointBloc>().add(const PointEvent.getFilterCategory('nontea'));
+          break;
+        case 2:
+          context.read<PointBloc>().add(const PointEvent.getFilterCategory('snack'));
+          break;
+      }
+    });
+
     _fetchInitialData();
   }
 
   void _fetchInitialData() {
     context.read<PointBloc>().add(const PointEvent.getFilterCategory('tea'));
   }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +114,7 @@ class _PointPageState extends State<PointPage> {
               SizedBox(
                 width: screenWidth,
                 child: TabBar(
+                  controller: _tabController,
                   indicatorPadding: const EdgeInsets.symmetric(horizontal: -10, vertical: 5),
                   indicator: BoxDecoration(
                     border: Border.all(color: primaryColor),
@@ -135,6 +165,7 @@ class _PointPageState extends State<PointPage> {
               ),
               Expanded(
                 child: TabBarView(
+                  controller: _tabController,
                   children: [
                     buildTabGridViewProduct(screenHeight, screenWidth),
                     buildTabGridViewProduct(screenHeight, screenWidth),

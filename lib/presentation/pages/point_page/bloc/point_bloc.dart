@@ -35,5 +35,16 @@ class PointBloc extends Bloc<PointEvent, PointState> {
             (r) => emit(_Success(r, points)),
       );
     });
+
+    // on<_GetPointUser>((event, emit) async {
+    //   final result = await userDatasource.getPointUser();
+    //   result.fold((l) => emit(const _Error(message: 'Failed to get data user')), (r) => emit(_Success(null, r)));
+    // });
+    //
+    // on<_GetFilterCategory>((event, emit) async {
+    //   emit(const _Loading());
+    //   final productResult = await datasource.getFilterCategoryReward(event.query);
+    //   productResult.fold((l) => emit(const _Error(message: 'Failed to get data user')), (r) => emit(_Success(r, null)));
+    // });
   }
 }

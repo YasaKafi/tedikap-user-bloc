@@ -18,38 +18,38 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PointEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function() getPointUser,
     required TResult Function(String query) getFilterCategory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function()? getPointUser,
     TResult? Function(String query)? getFilterCategory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function()? getPointUser,
     TResult Function(String query)? getFilterCategory,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_GetPointUser value) getPointUser,
     required TResult Function(_GetFilterCategory value) getFilterCategory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
+    TResult? Function(_GetPointUser value)? getPointUser,
     TResult? Function(_GetFilterCategory value)? getFilterCategory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_GetPointUser value)? getPointUser,
     TResult Function(_GetFilterCategory value)? getFilterCategory,
     required TResult orElse(),
   }) =>
@@ -75,35 +75,35 @@ class _$PointEventCopyWithImpl<$Res, $Val extends PointEvent>
 }
 
 /// @nodoc
-abstract class _$$StartedImplCopyWith<$Res> {
-  factory _$$StartedImplCopyWith(
-          _$StartedImpl value, $Res Function(_$StartedImpl) then) =
-      __$$StartedImplCopyWithImpl<$Res>;
+abstract class _$$GetPointUserImplCopyWith<$Res> {
+  factory _$$GetPointUserImplCopyWith(
+          _$GetPointUserImpl value, $Res Function(_$GetPointUserImpl) then) =
+      __$$GetPointUserImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$StartedImplCopyWithImpl<$Res>
-    extends _$PointEventCopyWithImpl<$Res, _$StartedImpl>
-    implements _$$StartedImplCopyWith<$Res> {
-  __$$StartedImplCopyWithImpl(
-      _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
+class __$$GetPointUserImplCopyWithImpl<$Res>
+    extends _$PointEventCopyWithImpl<$Res, _$GetPointUserImpl>
+    implements _$$GetPointUserImplCopyWith<$Res> {
+  __$$GetPointUserImplCopyWithImpl(
+      _$GetPointUserImpl _value, $Res Function(_$GetPointUserImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$StartedImpl implements _Started {
-  const _$StartedImpl();
+class _$GetPointUserImpl implements _GetPointUser {
+  const _$GetPointUserImpl();
 
   @override
   String toString() {
-    return 'PointEvent.started()';
+    return 'PointEvent.getPointUser()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$StartedImpl);
+        (other.runtimeType == runtimeType && other is _$GetPointUserImpl);
   }
 
   @override
@@ -112,30 +112,30 @@ class _$StartedImpl implements _Started {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function() getPointUser,
     required TResult Function(String query) getFilterCategory,
   }) {
-    return started();
+    return getPointUser();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function()? getPointUser,
     TResult? Function(String query)? getFilterCategory,
   }) {
-    return started?.call();
+    return getPointUser?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function()? getPointUser,
     TResult Function(String query)? getFilterCategory,
     required TResult orElse(),
   }) {
-    if (started != null) {
-      return started();
+    if (getPointUser != null) {
+      return getPointUser();
     }
     return orElse();
   }
@@ -143,37 +143,37 @@ class _$StartedImpl implements _Started {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_GetPointUser value) getPointUser,
     required TResult Function(_GetFilterCategory value) getFilterCategory,
   }) {
-    return started(this);
+    return getPointUser(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
+    TResult? Function(_GetPointUser value)? getPointUser,
     TResult? Function(_GetFilterCategory value)? getFilterCategory,
   }) {
-    return started?.call(this);
+    return getPointUser?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_GetPointUser value)? getPointUser,
     TResult Function(_GetFilterCategory value)? getFilterCategory,
     required TResult orElse(),
   }) {
-    if (started != null) {
-      return started(this);
+    if (getPointUser != null) {
+      return getPointUser(this);
     }
     return orElse();
   }
 }
 
-abstract class _Started implements PointEvent {
-  const factory _Started() = _$StartedImpl;
+abstract class _GetPointUser implements PointEvent {
+  const factory _GetPointUser() = _$GetPointUserImpl;
 }
 
 /// @nodoc
@@ -241,7 +241,7 @@ class _$GetFilterCategoryImpl implements _GetFilterCategory {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function() getPointUser,
     required TResult Function(String query) getFilterCategory,
   }) {
     return getFilterCategory(query);
@@ -250,7 +250,7 @@ class _$GetFilterCategoryImpl implements _GetFilterCategory {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function()? getPointUser,
     TResult? Function(String query)? getFilterCategory,
   }) {
     return getFilterCategory?.call(query);
@@ -259,7 +259,7 @@ class _$GetFilterCategoryImpl implements _GetFilterCategory {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function()? getPointUser,
     TResult Function(String query)? getFilterCategory,
     required TResult orElse(),
   }) {
@@ -272,7 +272,7 @@ class _$GetFilterCategoryImpl implements _GetFilterCategory {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_GetPointUser value) getPointUser,
     required TResult Function(_GetFilterCategory value) getFilterCategory,
   }) {
     return getFilterCategory(this);
@@ -281,7 +281,7 @@ class _$GetFilterCategoryImpl implements _GetFilterCategory {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
+    TResult? Function(_GetPointUser value)? getPointUser,
     TResult? Function(_GetFilterCategory value)? getFilterCategory,
   }) {
     return getFilterCategory?.call(this);
@@ -290,7 +290,7 @@ class _$GetFilterCategoryImpl implements _GetFilterCategory {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_GetPointUser value)? getPointUser,
     TResult Function(_GetFilterCategory value)? getFilterCategory,
     required TResult orElse(),
   }) {
