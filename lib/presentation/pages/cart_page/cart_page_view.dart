@@ -13,8 +13,9 @@ import '../../../common/theme.dart';
 import 'bloc/cart_bloc.dart';
 
 class CartPage extends StatefulWidget {
-  const CartPage({super.key});
+  const CartPage({super.key, this.schedulePickUp});
 
+  final String? schedulePickUp;
   @override
   _CartPageState createState() => _CartPageState();
 }
@@ -95,7 +96,7 @@ class _CartPageState extends State<CartPage> {
                       children: [
                         Column(
                           children: [
-                            BoxEstimationPickup(screenWidth: screenWidth),
+                            BoxEstimationPickup(screenWidth: screenWidth, schedule: widget.schedulePickUp,),
                             const SizedBox(
                               height: 20,
                             ),

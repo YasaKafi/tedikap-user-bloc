@@ -12,8 +12,10 @@ import '../../../../../common/theme.dart';
 class PoinSection extends StatelessWidget {
 
   const PoinSection({
-    super.key,
+    super.key, this.schedulePickUp,
   });
+
+  final String? schedulePickUp;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class PoinSection extends StatelessWidget {
         const EdgeInsets.only(top: 12, bottom: 12, left: 16, right: 16),
         child: InkWell(
           onTap: () {
-            context.pushNamed('point');
+            context.pushNamed('point', extra: {''});
           },
           child: Column(
             children: [
@@ -56,7 +58,7 @@ class PoinSection extends StatelessWidget {
                       return state.when(
                           initial: () => ShimmerUserHome(),
                           loading: () => ShimmerUserHome(),
-                          success: (model, user, index, pointModel) {
+                          success: (model, user, index, pointModel, statusOutletModel) {
                             final point = pointModel?.data;
                             if (point != null && point.isNotEmpty){
                               final itemPoint = point.first.point;

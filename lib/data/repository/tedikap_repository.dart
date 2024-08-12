@@ -13,8 +13,10 @@ class TedikapApiRepository {
   static String getAllOrder = '$mainUrl/api/order/history';
   static String getOrderReward = '$mainUrl/api/order-reward';
   static String getOrderByID = '$mainUrl/api/order';
-  static String getUserPoin = '$mainUrl/api/point';
+  static String getUserPoint = '$mainUrl/api/point';
   static String getHelpCenter = '$mainUrl/api/help-center';
+  static String getStatusOutlet = '$mainUrl/api/status-store';
+
   static String getFilterProduct = '$mainUrl/api/filter/product';
   static String getFilterOrder = '$mainUrl/api/order/history';
   static String getFilterOrderReward = '$mainUrl/api/order-reward/history';

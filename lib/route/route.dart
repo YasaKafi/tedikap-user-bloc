@@ -144,7 +144,11 @@ class AppRouter {
       GoRoute(
         name: 'cart_common',
         path: '/cart_common',
-        builder: (context, state) => const CartPage(),
+        builder: (context, state) {
+          final extraData = state.extra as Map<String, dynamic>?;
+          final schedulePickUp = extraData?['schedulePickUp'] as String?;
+          return CartPage(schedulePickUp: schedulePickUp,);
+        },
       ),
       GoRoute(
         name: 'cart_reward',

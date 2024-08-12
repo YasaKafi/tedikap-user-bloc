@@ -41,8 +41,8 @@ class BoxCheckoutDetail extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    context.goNamed(
-                        'dashboard', pathParameters: {'pageIndex': '1'});
+                    context.goNamed('dashboard',
+                        pathParameters: {'pageIndex': '1'});
                   },
                   child: Container(
                     padding: const EdgeInsets.symmetric(
@@ -61,6 +61,9 @@ class BoxCheckoutDetail extends StatelessWidget {
               ],
             ),
             BlocBuilder<CartBloc, CartState>(
+              buildWhen: (previous, current) {
+                return previous != current;
+              },
               builder: (context, state) {
                 return state.when(
                   initial: () => buildShimmer(),
@@ -71,11 +74,11 @@ class BoxCheckoutDetail extends StatelessWidget {
                       return buildShimmer();
                     } else if (cartModel.cart!.cartItems!.isEmpty) {
                       return _buildEmptyCartState(context, screenWidth);
-
                     } else {
                       final itemCart = cartModel.cart!;
                       return Column(
-                        children: List.generate(itemCart.cartItems!.length, (index) {
+                        children:
+                            List.generate(itemCart.cartItems!.length, (index) {
                           var productItemsCheckout = itemCart.cartItems![index];
                           return Column(
                             children: [
@@ -83,85 +86,35 @@ class BoxCheckoutDetail extends StatelessWidget {
                                 item: productItemsCheckout,
                                 screenWidth: screenWidth,
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Rp ${productItemsCheckout.totalPrice}',
-                                    style: txtPrimaryTitle.copyWith(
-                                        fontWeight: FontWeight.w600,
-                                        color: blackColor),
-                                  ),
-                                  Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                              BlocBuilder<CartBloc, CartState>(
+                                builder: (context, state) {
+                                  return Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      InkWell(
-                                        onTap: () {
-                                          context.goNamed(
-                                            'detail_product_common',
-                                            extra: productItemsCheckout.id!.toString(),
-                                            pathParameters: {
-                                              'productId': productItemsCheckout.productId!.toString()
-                                            },
-                                          );
-                                        },
-                                        child: const Icon(
-                                          Icons.mode_edit_outlined,
-                                          size: 28,
-                                          color: navyColor,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      InkWell(
-                                        onTap: () {
-                                          context.read<CartBloc>().add(
-                                              CartEvent.deleteItem(
-                                                  cartItem: productItemsCheckout.id));
-                                          Future.delayed(
-                                              const Duration(milliseconds: 500),
-                                                  () => context
-                                                  .read<CartBloc>()
-                                                  .add(const CartEvent.getCart()));
-                                        },
-                                        child: const Icon(
-                                          Icons.delete_forever_outlined,
-                                          size: 28,
-                                          color: navyColor,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
+                                      Text(
+                                        'Rp ${productItemsCheckout.totalPrice}',
+                                        style: txtPrimaryTitle.copyWith(
+                                            fontWeight: FontWeight.w600,
+                                            color: blackColor),
                                       ),
                                       Row(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           InkWell(
                                             onTap: () {
-                                              context.read<CartBloc>().add(
-                                                  CartEvent.patchQty(
-                                                      cartItem: productItemsCheckout.id,
-                                                      action: 'decrement'));
-                                              Future.delayed(
-                                                  const Duration(milliseconds: 500),
-                                                      () => context
-                                                      .read<CartBloc>()
-                                                      .add(const CartEvent.getCart()));
+                                              context.goNamed(
+                                                'detail_product_common',
+                                                extra: productItemsCheckout.id!.toString(),
+                                                pathParameters: {
+                                                  'productId': productItemsCheckout.productId!.toString()
+                                                },
+                                              );
                                             },
                                             child: const Icon(
-                                              Icons.remove_circle_outline,
-                                              color: navyColor,
+                                              Icons.mode_edit_outlined,
                                               size: 28,
+                                              color: navyColor,
                                             ),
-                                          ),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(
-                                            productItemsCheckout.quantity.toString(),
-                                            style: txtSecondaryTitle.copyWith(
-                                                fontWeight: FontWeight.w600,
-                                                color: blackColor),
                                           ),
                                           const SizedBox(
                                             width: 10,
@@ -169,27 +122,72 @@ class BoxCheckoutDetail extends StatelessWidget {
                                           InkWell(
                                             onTap: () {
                                               context.read<CartBloc>().add(
-                                                  CartEvent.patchQty(
-                                                      cartItem: productItemsCheckout.id,
-                                                      action: 'increment'));
-                                              Future.delayed(
-                                                  const Duration(milliseconds: 500),
-                                                      () => context
-                                                      .read<CartBloc>()
-                                                      .add(const CartEvent.getCart()));
+                                                  CartEvent.deleteItem(
+                                                      cartItem: productItemsCheckout.id));
                                             },
                                             child: const Icon(
-                                              Icons.add_circle,
-                                              color: navyColor,
+                                              Icons.delete_forever_outlined,
                                               size: 28,
+                                              color: navyColor,
                                             ),
+                                          ),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          Row(
+                                            children: [
+                                              InkWell(
+                                                onTap: () {
+                                                  context.read<CartBloc>().add(
+                                                      CartEvent.patchQty(
+                                                          cartItem: productItemsCheckout.id,
+                                                          action: 'decrement'));
+                                                },
+                                                child: const Icon(
+                                                  Icons.remove_circle_outline,
+                                                  color: navyColor,
+                                                  size: 28,
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text(
+                                                productItemsCheckout.quantity.toString(),
+                                                style: txtSecondaryTitle.copyWith(
+                                                    fontWeight: FontWeight.w600,
+                                                    color: blackColor),
+                                              ),
+                                              const SizedBox(
+                                                width: 10,
+                                              ),
+                                              InkWell(
+                                                onTap: () {
+                                                  context.read<CartBloc>().add(
+                                                      CartEvent.patchQty(
+                                                          cartItem: productItemsCheckout.id,
+                                                          action: 'increment'));
+                                                  Future.delayed(
+                                                      const Duration(milliseconds: 500),
+                                                          () => context
+                                                          .read<CartBloc>()
+                                                          .add(const CartEvent.getCart()));
+                                                },
+                                                child: const Icon(
+                                                  Icons.add_circle,
+                                                  color: navyColor,
+                                                  size: 28,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
                                     ],
-                                  ),
-                                ],
+                                  );
+                                },
                               ),
+
                               const SizedBox(
                                 height: 20,
                               ),

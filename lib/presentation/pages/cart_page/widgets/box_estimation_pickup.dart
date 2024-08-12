@@ -1,5 +1,8 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:tedikap_user_bloc/presentation/pages/cart_page/bloc/cart_bloc.dart';
 
 import '../../../../../common/constant.dart';
 import '../../../../../common/dimensions.dart';
@@ -9,9 +12,11 @@ class BoxEstimationPickup extends StatelessWidget {
   const BoxEstimationPickup({
     super.key,
     required this.screenWidth,
+    this.schedule,
   });
 
   final double screenWidth;
+  final String? schedule;
 
   @override
   Widget build(BuildContext context) {
@@ -116,20 +121,84 @@ class BoxEstimationPickup extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Waktu Pick Up',
-                                  style: txtPrimarySubTitle.copyWith(
-                                      fontWeight: FontWeight.w500,
-                                      color: blackColor),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      'Waktu Pick Up',
+                                      style: txtPrimarySubTitle.copyWith(
+                                          fontWeight: FontWeight.w500,
+                                          color: blackColor),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    InkWell(
+                                        onTap: () {
+                                          _onAlertButtonsPressed(context,
+                                              title: 'Halooo',
+                                              desc: 'kwokwowo',
+                                              titleStyle:
+                                                  txtSecondaryHeader.copyWith(
+                                                fontWeight: FontWeight.w600,
+                                                color: blackColor,
+                                              ),
+                                              descStyle:
+                                                  txtPrimarySubTitle.copyWith(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: blackColor));
+                                        },
+                                        child: Icon(
+                                          Icons.info_outline_rounded,
+                                          size: 18,
+                                        )),
+                                  ],
                                 ),
                                 const SizedBox(
                                   height: 3,
                                 ),
-                                Text(
-                                  'Closed',
-                                  style: txtPrimaryTitle.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      color: blackColor),
+                                BlocBuilder<CartBloc, CartState>(
+                                  builder: (context, state) {
+                                    return state.maybeWhen(
+                                        orElse: (){
+                                          return Text(
+                                            'Failed access data',
+                                            style: txtPrimaryTitle.copyWith(
+                                                fontWeight: FontWeight.w600,
+                                                color: blackColor),
+                                          );
+                                        },
+                                      success: (cartModel, modelQty, deleteModel, modelPostOrder,
+                                          modelPostPayment, orderId){
+                                          final itemCart = cartModel?.cart;
+                                          if (itemCart != null){
+                                            return Text(
+                                              itemCart.schedulePickup!,
+                                              style: txtPrimaryTitle.copyWith(
+                                                  fontWeight: FontWeight.w600,
+                                                  color: blackColor),
+                                            );
+                                          } else {
+                                            return Text(
+                                              'Failed access data',
+                                              style: txtPrimaryTitle.copyWith(
+                                                  fontWeight: FontWeight.w600,
+                                                  color: blackColor),
+                                            );
+                                          }
+                                      },
+                                      loading: () {
+                                        return Text(
+                                          'Loading...',
+                                          style: txtPrimaryTitle.copyWith(
+                                              fontWeight: FontWeight.w600,
+                                              color: blackColor),
+                                        );
+                                      }
+                                    );
+                                  },
                                 ),
                               ],
                             ),
@@ -143,6 +212,31 @@ class BoxEstimationPickup extends StatelessWidget {
             ],
           ),
         ));
+  }
+
+  _onAlertButtonsPressed(context,
+      {String? title,
+      TextStyle? titleStyle,
+      TextStyle? descStyle,
+      String? desc,
+      String? icon,
+      Color? bgcolor,
+      VoidCallback? onPressed}) {
+    Alert(
+      context: context,
+      title: title,
+      padding: EdgeInsets.all(20),
+      style: AlertStyle(
+        animationType: AnimationType.grow,
+        isCloseButton: false,
+        isButtonVisible: false,
+        backgroundColor: bgcolor,
+        overlayColor: Colors.black38,
+        titleStyle: titleStyle!,
+        descStyle: descStyle!,
+      ),
+      desc: desc,
+    ).show();
   }
 }
 

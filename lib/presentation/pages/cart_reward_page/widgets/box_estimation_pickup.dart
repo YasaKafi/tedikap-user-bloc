@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'package:tedikap_user_bloc/presentation/pages/cart_reward_page/bloc/cart_reward_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/bloc/detail_order_bloc.dart';
 
 import '../../../../../common/constant.dart';
@@ -129,11 +130,46 @@ class BoxEstimationPickup extends StatelessWidget {
                                 SizedBox(
                                   height: 3,
                                 ),
-                                Text(
-                                  'Closed',
-                                  style: txtPrimaryTitle.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      color: blackColor),
+                                BlocBuilder<CartRewardBloc, CartRewardState>(
+                                  builder: (context, state) {
+                                    return state.maybeWhen(
+                                        orElse: (){
+                                          return Text(
+                                            'Failed access data',
+                                            style: txtPrimaryTitle.copyWith(
+                                                fontWeight: FontWeight.w600,
+                                                color: blackColor),
+                                          );
+                                        },
+                                        success: (cartModel, modelQty, deleteModel, modelPostOrder,
+                                            modelPoint){
+                                          final itemCart = cartModel?.cart;
+                                          if (itemCart != null){
+                                            return Text(
+                                              itemCart.schedulePickup!,
+                                              style: txtPrimaryTitle.copyWith(
+                                                  fontWeight: FontWeight.w600,
+                                                  color: blackColor),
+                                            );
+                                          } else {
+                                            return Text(
+                                              'Failed access data',
+                                              style: txtPrimaryTitle.copyWith(
+                                                  fontWeight: FontWeight.w600,
+                                                  color: blackColor),
+                                            );
+                                          }
+                                        },
+                                        loading: () {
+                                          return Text(
+                                            'Loading...',
+                                            style: txtPrimaryTitle.copyWith(
+                                                fontWeight: FontWeight.w600,
+                                                color: blackColor),
+                                          );
+                                        }
+                                    );
+                                  },
                                 ),
                               ],
                             ),

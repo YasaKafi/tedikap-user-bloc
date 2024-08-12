@@ -39,7 +39,7 @@ class CarouselSliderWidget extends StatelessWidget {
                   return state.when(
                       initial: () => _buildShimmerCarousel(),
                       loading: () => _buildShimmerCarousel(),
-                      success: (model, user, index, pointModel) {
+                      success: (model, user, index, pointModel, statusOutletModel) {
                         int currentIndex = index ?? 0;
                         return Column(
                           children: [

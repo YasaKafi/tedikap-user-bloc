@@ -99,24 +99,32 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     });
 
     on<_PatchQty>((event, emit) async {
-      emit(const _Loading());
-        final result =
-        await cartDatasource.patchQty(event.action!, event.cartItem!);
-        result.fold(
-                (l) => emit(const _Error(message: 'Failed to access data order')),
-                (r) => emit(_Success(
-                cartModel: null,
-                patchQtyModel: r,
-                deleteModel: null,
-                modelPostOrder: null,
-                modelPostPayment: null,
-                  orderId: null,
-                ))
-        );
+      // Ensure the current state is handled properly
+      await state.maybeWhen(
+        success: (cartModel, patchQtyModel, deleteModel, modelPostOrder, modelPostPayment, orderId) async {
+          // Patch the quantity and await the result
+          final result = await cartDatasource.patchQty(event.action!, event.cartItem!);
 
-
-
+          // Await the fold to ensure the emit happens before the handler completes
+          await result.fold(
+                (l) async => emit(const _Error(message: 'Failed to access data order')),
+                (r) async => emit(_Success(
+              cartModel: cartModel,
+              patchQtyModel: r,
+              deleteModel: deleteModel,
+              modelPostOrder: modelPostOrder,
+              modelPostPayment: modelPostPayment,
+              orderId: orderId,
+            )),
+          );
+        },
+        orElse: () async {
+          emit(const _Error(message: 'Unexpected state type'));
+        },
+      );
     });
+
+
 
     on<_DeleteItem>((event, emit) async {
       emit(const _Loading());

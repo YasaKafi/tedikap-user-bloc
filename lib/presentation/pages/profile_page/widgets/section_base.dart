@@ -83,32 +83,59 @@ class SectionBaseProfile extends StatelessWidget {
                           );
                         },
                         loaded: (user, _) {
-                          return Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  context.pushNamed('edit_profile');
-                                },
-                                child: CircleAvatar(
-                                  radius: 28,
-                                  backgroundImage: NetworkImage(
-                                    TedikapApiRepository.getAvatarProfile +
-                                        user!.data!.avatar!,
+                          if(user?.data != null){
+                            return Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    context.pushNamed('edit_profile');
+                                  },
+                                  child: CircleAvatar(
+                                    radius: 28,
+                                    backgroundImage: NetworkImage(
+                                      TedikapApiRepository.getAvatarProfile +
+                                          user!.data!.avatar!,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(height: 6),
-                              Text(
-                                'Hi, ${user.data!.name!}',
-                                style: txtSecondaryTitle.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  color: blackColor,
+                                const SizedBox(height: 6),
+                                Text(
+                                  'Hi, ${user.data!.name!}',
+                                  style: txtSecondaryTitle.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: blackColor,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          );
+                              ],
+                            );
+
+                          } else {
+                            return Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                  },
+                                  child: CircleAvatar(
+                                    radius: 28,
+                                    backgroundColor: grey,
+                                  ),
+                                ),
+                                const SizedBox(height: 6),
+                                Text(
+                                  'Hi, unknown user',
+                                  style: txtSecondaryTitle.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: blackColor,
+                                  ),
+                                ),
+                              ],
+                            );
+
+                          }
                         },
                       );
                     },
