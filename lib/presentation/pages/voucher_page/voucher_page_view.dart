@@ -125,7 +125,6 @@ class _VoucherPageState extends State<VoucherPage> {
                 height: Dimensions.marginSizeLarge,
               ),
               Container(
-                constraints: const BoxConstraints(minHeight: 200, maxHeight: 610),
                 width: screenWidth,
                 padding: const EdgeInsets.symmetric(
                   vertical: Dimensions.paddingSizeSmall,
@@ -133,317 +132,277 @@ class _VoucherPageState extends State<VoucherPage> {
                 child: BlocBuilder<VoucherBloc, VoucherState>(
                   builder: (context, state) {
                     return state.when(
-                        initial: () => ListView.builder(
-                          itemCount: 3,
-                          itemBuilder: (context, index) => Shimmer.fromColors(
-                            baseColor: Colors.grey[300]!,
-                            highlightColor: Colors.grey[100]!,
-                            child: VoucherShimmer(screenWidth: screenWidth),
-                          ),
-                        ),
-                        loading: () => ListView.builder(
-                          itemCount: 3,
-                          itemBuilder: (context, index) => Shimmer.fromColors(
-                            baseColor: Colors.grey[300]!,
-                            highlightColor: Colors.grey[100]!,
-                            child: VoucherShimmer(screenWidth: screenWidth),
-                          ),
-                        ),
-                        success: (modelVoucher, modelCart, modelApplyRemove,
-                            isUseVoucher, cartModel, currentVoucherId) {
-                          if (modelVoucher!.activeVouchers!.isEmpty) {
-                            return _buildEmptyVoucherState(context);
-                          } else {
-                            final itemVoucher = modelVoucher.activeVouchers;
-                            return ListView.builder(
-                              itemCount: itemVoucher!.length,
-                              itemBuilder: (context, index) {
-                                final item = itemVoucher[index];
-                                final itemVoucherCart = modelCart?.cart?.voucherId;
-                                String formattedDate = DateFormat('dd MMM yyyy').format(item.endDate!);
-                                String formattedMaxDiscount = NumberFormat('#,##0').format(item.maxDiscount);
-                                String formattedMinTransaction = NumberFormat('#,##0').format(item.minTransaction);
-                                voucherLength = itemVoucher.length;
-                                bool? isCurrentlyUsedVoucher = itemVoucherCart == item.id && widget.isFromCart!  ? true : false;
-                                bool isEligible = cartModel!.cart!.originalPrice! < item.minTransaction! || widget.isFromCart == false ? false : true;
+                      initial: () => Column(
+                        children: List.generate(3, (index) => Shimmer.fromColors(
+                          baseColor: Colors.grey[300]!,
+                          highlightColor: Colors.grey[100]!,
+                          child: VoucherShimmer(screenWidth: screenWidth),
+                        )),
+                      ),
+                      loading: () => Column(
+                        children: List.generate(3, (index) => Shimmer.fromColors(
+                          baseColor: Colors.grey[300]!,
+                          highlightColor: Colors.grey[100]!,
+                          child: VoucherShimmer(screenWidth: screenWidth),
+                        )),
+                      ),
+                      success: (modelVoucher, modelCart, modelApplyRemove,
+                          isUseVoucher, cartModel, currentVoucherId) {
+                        if (modelVoucher!.activeVouchers!.isEmpty) {
+                          return _buildEmptyVoucherState(context);
+                        } else {
+                          final itemVoucher = modelVoucher.activeVouchers;
+                          return Column(
+                            children: List.generate(itemVoucher!.length, (index) {
+                              final item = itemVoucher[index];
+                              final itemVoucherCart = modelCart?.cart?.voucherId;
+                              String formattedDate = DateFormat('dd MMM yyyy').format(item.endDate!);
+                              String formattedMaxDiscount = NumberFormat('#,##0').format(item.maxDiscount);
+                              String formattedMinTransaction = NumberFormat('#,##0').format(item.minTransaction);
+                              voucherLength = itemVoucher.length;
+                              bool? isCurrentlyUsedVoucher = itemVoucherCart == item.id && widget.isFromCart! ? true : false;
+                              bool isEligible = cartModel!.cart!.originalPrice! < item.minTransaction! || widget.isFromCart == false ? false : true;
 
-                                return Stack(
-                                  children: [
-                                    InkWell(
-                                      onTap: () {
-                                        context.pushNamed('detail_voucher',
-                                            pathParameters: {
-                                              'voucherId': item.id!.toString()
-                                            });
-                                      },
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.rectangle,
-                                              color: baseColor,
-                                              borderRadius: BorderRadius.circular(20),
-                                              border: Border.all(
-                                                  color: isCurrentlyUsedVoucher == true
-                                                      ? primaryColor
-                                                      : grey,
-                                                  width: 2),
-                                            ),
-                                            margin: const EdgeInsets.only(
-                                                top: Dimensions.marginSizeLarge),
-                                            width: screenWidth,
-                                            child: Column(
-                                              children: [
-                                                Stack(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: screenWidth,
-                                                      child: ClipRRect(
-                                                        borderRadius:
-                                                        const BorderRadius.only(
-                                                          topRight:
-                                                          Radius.circular(18),
-                                                          topLeft:
-                                                          Radius.circular(18),
-                                                        ),
-                                                        child: Image.asset(
-                                                          originalTea,
-                                                          height: 120,
-                                                          fit: BoxFit.cover,
-                                                        ),
+                              return Stack(
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      context.pushNamed('detail_voucher',
+                                          pathParameters: {
+                                            'voucherId': item.id!.toString()
+                                          });
+                                    },
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.rectangle,
+                                            color: baseColor,
+                                            borderRadius: BorderRadius.circular(20),
+                                            border: Border.all(
+                                                color: isCurrentlyUsedVoucher == true
+                                                    ? primaryColor
+                                                    : grey,
+                                                width: 2),
+                                          ),
+                                          margin: const EdgeInsets.only(
+                                              top: Dimensions.marginSizeLarge),
+                                          width: screenWidth,
+                                          child: Column(
+                                            children: [
+                                              Stack(
+                                                children: [
+                                                  SizedBox(
+                                                    width: screenWidth,
+                                                    child: ClipRRect(
+                                                      borderRadius: const BorderRadius.only(
+                                                        topRight: Radius.circular(18),
+                                                        topLeft: Radius.circular(18),
+                                                      ),
+                                                      child: Image.asset(
+                                                        originalTea,
+                                                        height: 120,
+                                                        fit: BoxFit.cover,
                                                       ),
                                                     ),
-                                                    Visibility(
-                                                      visible: isCurrentlyUsedVoucher ?? false,
-                                                      child: Positioned(
-                                                        right: 0,
-                                                        top: 0,
-                                                        child: Container(
-                                                          padding: const EdgeInsets.symmetric(
-                                                              horizontal: 15,
-                                                              vertical: 5),
-                                                          decoration: const BoxDecoration(
-                                                            color: primaryColor,
-                                                            borderRadius:
-                                                            BorderRadius.only(
-                                                              bottomLeft:
-                                                              Radius.circular(18),
-                                                              topRight:
-                                                              Radius.circular(18),
-                                                            ),
+                                                  ),
+                                                  Visibility(
+                                                    visible: isCurrentlyUsedVoucher ,
+                                                    child: Positioned(
+                                                      right: 0,
+                                                      top: 0,
+                                                      child: Container(
+                                                        padding: const EdgeInsets.symmetric(
+                                                            horizontal: 15, vertical: 5),
+                                                        decoration: const BoxDecoration(
+                                                          color: primaryColor,
+                                                          borderRadius: BorderRadius.only(
+                                                            bottomLeft: Radius.circular(18),
+                                                            topRight: Radius.circular(18),
                                                           ),
-                                                          child: Text('Terpasang',
-                                                              style: txtSecondarySubTitle
+                                                        ),
+                                                        child: Text('Terpasang',
+                                                            style: txtSecondarySubTitle
+                                                                .copyWith(
+                                                                fontWeight:
+                                                                FontWeight.w600,
+                                                                color: baseColor)),
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              const SizedBox(height: 10),
+                                              Container(
+                                                padding: const EdgeInsets.symmetric(
+                                                    horizontal: Dimensions.paddingSizeLarge),
+                                                width: screenWidth,
+                                                child: Row(
+                                                  children: [
+                                                    Expanded(
+                                                      flex: 2,
+                                                      child: Row(
+                                                        children: [
+                                                          Flexible(
+                                                            child: Text(
+                                                              item.title!,
+                                                              style: txtSecondaryTitle
                                                                   .copyWith(
                                                                   fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                                  color: baseColor)),
+                                                                  FontWeight.w600,
+                                                                  color: blackColor),
+                                                            ),
+                                                          ),
+                                                          const SizedBox(width: 10),
+                                                          const Icon(
+                                                            Icons.info_outline_rounded,
+                                                            size: 22,
+                                                            color: blackColor,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Column(
+                                                      mainAxisSize: MainAxisSize.min,
+                                                      children: [
+                                                        Container(
+                                                          decoration: BoxDecoration(
+                                                            color: primaryColor,
+                                                            borderRadius:
+                                                            BorderRadius.circular(15),
+                                                          ),
+                                                          padding: const EdgeInsets.symmetric(
+                                                              horizontal: 10, vertical: 5),
+                                                          margin:
+                                                          const EdgeInsets.only(left: 10),
+                                                          child: Row(
+                                                            children: [
+                                                              SvgPicture.asset(
+                                                                icVoucherWhite,
+                                                                width: 18,
+                                                                height: 18,
+                                                              ),
+                                                              const SizedBox(width: 5),
+                                                              Text(
+                                                                '1x',
+                                                                style: txtSecondarySubTitle
+                                                                    .copyWith(
+                                                                    fontWeight:
+                                                                    FontWeight.w600,
+                                                                    color: baseColor),
+                                                              ),
+                                                            ],
+                                                          ),
                                                         ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                margin: const EdgeInsets.only(top: 10),
+                                                padding: const EdgeInsets.only(left: 20),
+                                                alignment: Alignment.centerLeft,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                        'Diskon ${item.discount}% Maks. Rp$formattedMaxDiscount.',
+                                                        style: txtSecondarySubTitle.copyWith(
+                                                            fontWeight: FontWeight.w500,
+                                                            color: blackColor)),
+                                                    const SizedBox(height: 3),
+                                                    Text(
+                                                        'Dengan minimum transaksi Rp$formattedMinTransaction.',
+                                                        style: txtSecondarySubTitle.copyWith(
+                                                            fontWeight: FontWeight.w500,
+                                                            color: blackColor)),
+                                                    const SizedBox(height: 3),
+                                                    Text('Tidak Berlaku untuk menu Promo.',
+                                                        style: txtSecondarySubTitle.copyWith(
+                                                            fontWeight: FontWeight.w500,
+                                                            color: blackColor)),
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                margin: const EdgeInsets.only(
+                                                    top: 10, bottom: 10),
+                                                padding: const EdgeInsets.symmetric(
+                                                    horizontal: 20),
+                                                width: screenWidth,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    Text('Expire pada $formattedDate.',
+                                                        style: txtSecondarySubTitle.copyWith(
+                                                            fontWeight: FontWeight.w500,
+                                                            color: blackColor)),
+                                                    Visibility(
+                                                      visible: isEligible,
+                                                      child: InkWell(
+                                                        onTap: () {
+                                                          isCurrentlyUsedVoucher == true
+                                                              ? context
+                                                              .read<VoucherBloc>()
+                                                              .add(VoucherEvent
+                                                              .removeVoucher(
+                                                              item.id))
+                                                              : context
+                                                              .read<VoucherBloc>()
+                                                              .add(VoucherEvent
+                                                              .applyVoucher(
+                                                              item.id));
+                                                        },
+                                                        child: Container(
+                                                            decoration: BoxDecoration(
+                                                                color: primaryColor,
+                                                                borderRadius:
+                                                                BorderRadius.circular(20)),
+                                                            padding: const EdgeInsets
+                                                                .symmetric(
+                                                                horizontal: 10, vertical: 5),
+                                                            child: Text(
+                                                              isCurrentlyUsedVoucher == true
+                                                                  ? 'Disuse'
+                                                                  : 'Use',
+                                                              style: txtPrimarySubTitle
+                                                                  .copyWith(
+                                                                  fontWeight:
+                                                                  FontWeight.w600,
+                                                                  color: baseColor),
+                                                            )),
                                                       ),
                                                     )
                                                   ],
                                                 ),
-                                                const SizedBox(height: 10),
-                                                Container(
-                                                  padding: const EdgeInsets.symmetric(
-                                                      horizontal: Dimensions
-                                                          .paddingSizeLarge),
-                                                  width: screenWidth,
-                                                  child: Row(
-                                                    children: [
-                                                      Expanded(
-                                                        flex: 2,
-                                                        child: Row(
-                                                          children: [
-                                                            Flexible(
-                                                              child: Text(
-                                                                item.title!,
-                                                                style: txtSecondaryTitle
-                                                                    .copyWith(
-                                                                    fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                    color:
-                                                                    blackColor),
-                                                              ),
-                                                            ),
-                                                            const SizedBox(width: 10),
-                                                            const Icon(
-                                                              Icons
-                                                                  .info_outline_rounded,
-                                                              size: 22,
-                                                              color: blackColor,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Column(
-                                                        mainAxisSize: MainAxisSize.min,
-                                                        children: [
-                                                          Container(
-
-                                                            decoration: BoxDecoration(
-                                                              color: primaryColor,
-                                                              borderRadius:
-                                                              BorderRadius.circular(
-                                                                  15),
-                                                            ),
-
-                                                            padding:
-                                                            const EdgeInsets.symmetric(
-                                                                horizontal: 10,
-                                                                vertical: 5),
-                                                            margin: const EdgeInsets.only(
-                                                                left: 10),
-                                                            child: Row(
-                                                              children: [
-                                                                SvgPicture.asset(
-                                                                  icVoucherWhite,
-                                                                  width: 18,
-                                                                  height: 18,
-                                                                ),
-                                                                const SizedBox(width: 5),
-                                                                Text(
-                                                                  '1x',
-                                                                  style: txtSecondarySubTitle
-                                                                      .copyWith(
-                                                                      fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
-                                                                      color:
-                                                                      baseColor),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Container(
-                                                  margin: const EdgeInsets.only(top: 10),
-                                                  padding: const EdgeInsets.only(left: 20),
-                                                  alignment: Alignment.centerLeft,
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                    children: [
-                                                      Text(
-                                                          'Diskon ${item.discount}% Maks. Rp$formattedMaxDiscount.',
-                                                          style: txtSecondarySubTitle
-                                                              .copyWith(
-                                                              fontWeight:
-                                                              FontWeight.w500,
-                                                              color: blackColor)),
-                                                      const SizedBox(height: 3),
-                                                      Text(
-                                                          'Dengan minimum transaksi Rp$formattedMinTransaction.',
-                                                          style: txtSecondarySubTitle
-                                                              .copyWith(
-                                                              fontWeight:
-                                                              FontWeight.w500,
-                                                              color: blackColor)),
-                                                      const SizedBox(height: 3),
-                                                      Text(
-                                                          'Tidak Berlaku untuk menu Promo.',
-                                                          style: txtSecondarySubTitle
-                                                              .copyWith(
-                                                              fontWeight:
-                                                              FontWeight.w500,
-                                                              color: blackColor)),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Container(
-                                                  margin: const EdgeInsets.only(
-                                                      top: 10, bottom: 10),
-                                                  padding: const EdgeInsets.symmetric(
-                                                      horizontal: 20),
-                                                  width: screenWidth,
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                    children: [
-                                                      Text(
-                                                          'Expire pada $formattedDate.',
-                                                          style: txtSecondarySubTitle
-                                                              .copyWith(
-                                                              fontWeight:
-                                                              FontWeight.w500,
-                                                              color: blackColor)),
-                                                      Visibility(
-                                                        visible: isEligible,
-                                                        child: InkWell(
-                                                          onTap: () {
-                                                            isCurrentlyUsedVoucher == true
-                                                                ? context
-                                                                .read<VoucherBloc>()
-                                                                .add(VoucherEvent
-                                                                .removeVoucher(
-                                                                item.id))
-                                                                : context
-                                                                .read<VoucherBloc>()
-                                                                .add(VoucherEvent
-                                                                .applyVoucher(
-                                                                item.id));
-                                                          },
-                                                          child: Container(
-                                                              decoration: BoxDecoration(
-                                                                  color: primaryColor,
-                                                                  borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                      20)),
-                                                              padding: const EdgeInsets
-                                                                  .symmetric(
-                                                                  horizontal: 10,
-                                                                  vertical: 5),
-                                                              child: Text(
-                                                                isCurrentlyUsedVoucher == true
-                                                                    ? 'Disuse'
-                                                                    : 'Use',
-                                                                style: txtPrimarySubTitle
-                                                                    .copyWith(
-                                                                    fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                    color:
-                                                                    baseColor),
-                                                              )),
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          )
-                                        ],
-                                      ),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
                                     ),
-
-                                  ],
-                                );
-                              },
-                            );
-                          }
-                        },
-                        error: (message) => _buildErrorState(context)
+                                  ),
+                                ],
+                              );
+                            }),
+                          );
+                        }
+                      },
+                      error: (message) => _buildErrorState(context),
                     );
                   },
                 ),
-              )
+              ),
             ],
           ),
         ),
       ),
     );
   }
-
   Widget _buildErrorState(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
     return Center(

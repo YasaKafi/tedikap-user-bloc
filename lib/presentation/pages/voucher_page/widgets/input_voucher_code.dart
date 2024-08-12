@@ -34,7 +34,6 @@ class InputVoucherCode extends StatelessWidget {
                       border: InputBorder.none,
                       hintText: 'Input Promo Code',
                       hintStyle: txtPrimarySubTitle.copyWith(fontWeight: FontWeight.w600, color: grey),
-
                       focusColor: Colors.transparent
                   ),
                 ),
