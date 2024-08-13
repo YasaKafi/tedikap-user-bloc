@@ -267,6 +267,7 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
         emit(currentState.copyWith(
           isTempSelected: !currentState.isTempSelected,
           selectedTemp: newTemp,
+          modelPostFavorite: null
         ));
       }
     });
@@ -278,6 +279,7 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
         emit(currentState.copyWith(
           isSizeSelected: !currentState.isSizeSelected,
           selectedSize: newSize,
+            modelPostFavorite: null
         ));
       }
     });
@@ -289,6 +291,8 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
         emit(currentState.copyWith(
           isIceSelected: !currentState.isIceSelected,
           selectedIce: newIce,
+            modelPostFavorite: null
+
         ));
       }
     });
@@ -300,6 +304,8 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
         emit(currentState.copyWith(
           isSugarSelected: !currentState.isSugarSelected,
           selectedSugar: newSugar,
+            modelPostFavorite: null
+
         ));
       }
     });
@@ -309,6 +315,8 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
       if (currentState is _Success) {
         emit(currentState.copyWith(
           quantityCount: currentState.quantityCount + 1,
+            modelPostFavorite: null
+
         ));
       }
     });
@@ -318,6 +326,8 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
       if (currentState is _Success && currentState.quantityCount > 1) {
         emit(currentState.copyWith(
           quantityCount: currentState.quantityCount - 1,
+            modelPostFavorite: null
+
         ));
       }
     });

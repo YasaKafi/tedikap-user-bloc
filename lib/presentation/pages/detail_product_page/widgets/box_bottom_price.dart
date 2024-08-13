@@ -49,7 +49,6 @@ class BoxBottomPrice extends StatelessWidget {
             listener: (context, state) {
               state.maybeWhen(
                 orElse: () {
-                  // Handle error or other states
                 },
                 success: (
                     modelProduct,

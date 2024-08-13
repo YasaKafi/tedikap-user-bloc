@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:tedikap_user_bloc/data/models/response/current_user_response_model.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/edit_profile_page/bloc/edit_profile_bloc.dart';
 
 import '../../../../../common/dimensions.dart';
@@ -27,6 +28,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final TextEditingController emailController = TextEditingController();
   String gender = '';
   ValueNotifier<String> defaultImagePath = ValueNotifier<String>('');
+  bool isFirstLoad = true;
 
   @override
   void initState() {
@@ -65,7 +67,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     },
                   ),
                   Text(
-                    'Edit $gender',
+                    'Edit Profile',
                     style: txtSecondaryHeader.copyWith(
                         fontWeight: FontWeight.w600, color: blackColor),
                   ),
@@ -88,10 +90,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       orElse: () => const Center(child: CircularProgressIndicator()),
                       loading: () => _buildShimmerProfile(),
                       loaded: (user, o, imagePath, modelEdit) {
-                        if (user?.data?.avatar == null && imagePath == null) {
-                          return const Center(child: Text('No image available'));
+                        if (isFirstLoad) {
+                          // Initialize values only on first load
+                          usernameController.text = user?.data?.name ?? '';
+                          emailController.text = user?.data?.email ?? '';
+                          gender = user?.data?.gender ?? '';
+                          defaultImagePath.value = imagePath ?? user?.data?.avatar ?? '';
+                          isFirstLoad = false;
                         }
-                        defaultImagePath.value = imagePath ?? user!.data!.avatar!;
+                        if (imagePath != null) {
+                          defaultImagePath.value = imagePath;
+                        }
                         return Container(
                           padding: const EdgeInsets.all(10),
                           decoration: const BoxDecoration(shape: BoxShape.circle),
@@ -104,15 +113,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               fit: BoxFit.cover,
                             ),
                           )
-                              : ClipOval(
+                              : user?.data?.avatar != null
+                              ? ClipOval(
                             child: Image.network(
-                              TedikapApiRepository.getAvatarProfile +
-                                  user!.data!.avatar!,
+                              TedikapApiRepository.getAvatarProfile + user!.data!.avatar!,
                               width: 170,
                               height: 170,
                               fit: BoxFit.cover,
                             ),
-                          ),
+                          )
+                              : const Center(child: Text('No image available')),
                         );
                       },
                     );
@@ -143,39 +153,29 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 children: [
                   Column(
                     children: [
-                      BlocListener<EditProfileBloc, EditProfileState>(
-                        listener: (context, state) {
-                          state.maybeWhen(
-                              orElse: () {},
-                              loaded: (user, n, o, modelEdit) {
-                                usernameController.text = user!.data!.name!;
-                                emailController.text = user.data!.email!;
-                              });
-                        },
-                        child: BlocBuilder<EditProfileBloc, EditProfileState>(
-                          builder: (context, state) {
-                            return state.maybeWhen(
-                              orElse: () => _buildShimmerTextField(),
-                              loading: () => _buildShimmerTextField(),
-                              loaded: (user, n, o, modelEdit) {
-                                return CustomTextField(
-                                  hintText: 'Username',
-                                  keyboardType: TextInputType.text,
-                                  controller: usernameController,
-                                  maxTextLength: 12,
-                                );
-                              },
-                              error: (message) => Center(
-                                child: Text(
-                                  message,
-                                  style: txtSecondaryTitle.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      color: blackColor),
-                                ),
+                      BlocBuilder<EditProfileBloc, EditProfileState>(
+                        builder: (context, state) {
+                          return state.maybeWhen(
+                            orElse: () => _buildShimmerTextField(),
+                            loading: () => _buildShimmerTextField(),
+                            loaded: (user, n, o, modelEdit) {
+                              return CustomTextField(
+                                hintText: 'Username',
+                                keyboardType: TextInputType.text,
+                                controller: usernameController,
+                                maxTextLength: 12,
+                              );
+                            },
+                            error: (message) => Center(
+                              child: Text(
+                                message,
+                                style: txtSecondaryTitle.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: blackColor),
                               ),
-                            );
-                          },
-                        ),
+                            ),
+                          );
+                        },
                       ),
                       const SizedBox(height: 30),
                       BlocBuilder<EditProfileBloc, EditProfileState>(
@@ -251,48 +251,45 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       return state.maybeWhen(
                         orElse: () => const Center(child: CircularProgressIndicator()),
                         loaded: (user, o, imagePath, modelEdit) => Container(
-                            margin: const EdgeInsets.only(top: Dimensions.marginSizeExtraLarge),
-                            child: SaveButton(
-                              onPressed: () {
-                                if (usernameController.text.isNotEmpty &&
-                                    emailController.text.isNotEmpty) {
-                                  String? updatedName;
-                                  String? updatedEmail;
-                                  String? updatedGender;
+                          margin: const EdgeInsets.only(top: Dimensions.marginSizeExtraLarge),
+                          child: SaveButton(
+                            onPressed: () {
+                              if (usernameController.text.isNotEmpty &&
+                                  emailController.text.isNotEmpty) {
+                                String? updatedName = usernameController.text;
+                                String? updatedEmail = emailController.text;
+                                String? updatedGender = o;
 
-                                  updatedName = usernameController.text;
-                                  updatedEmail = emailController.text;
-                                  updatedGender = o;
-
-                                  File? fileToUpload;
-                                  if (defaultImagePath.value.isNotEmpty &&
-                                      defaultImagePath.value.contains('/')) {
-                                    fileToUpload = File(defaultImagePath.value);
-                                  }
-
-                                  context.read<EditProfileBloc>().add(
-                                    EditProfileEvent.doEditProfile(
-                                      name: updatedName,
-                                      email: updatedEmail,
-                                      gender: updatedGender,
-                                      imageFile: fileToUpload,
-                                    ),
-                                  );
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'Please fill in all fields',
-                                        style: txtSecondaryTitle.copyWith(
-                                            fontWeight: FontWeight.w600,
-                                            color: blackColor),
-                                      ),
-                                      backgroundColor: redMedium,
-                                    ),
-                                  );
+                                File? fileToUpload;
+                                if (defaultImagePath.value.isNotEmpty &&
+                                    defaultImagePath.value.contains('/')) {
+                                  fileToUpload = File(defaultImagePath.value);
                                 }
-                              },
-                            )),
+
+                                context.read<EditProfileBloc>().add(
+                                  EditProfileEvent.doEditProfile(
+                                    name: updatedName,
+                                    email: updatedEmail,
+                                    gender: updatedGender,
+                                    imageFile: fileToUpload,
+                                  ),
+                                );
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Please fill in all fields',
+                                      style: txtSecondaryTitle.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          color: blackColor),
+                                    ),
+                                    backgroundColor: redMedium,
+                                  ),
+                                );
+                              }
+                            },
+                          ),
+                        ),
                         loading: () => Center(child: _buildShimmerTextField()),
                       );
                     },
@@ -306,6 +303,32 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 
+  Widget _buildProfileImage(String? imagePath, CurrentUserModel? user) {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: const BoxDecoration(shape: BoxShape.circle),
+      child: imagePath != null
+          ? ClipOval(
+        child: Image.file(
+          i.File(imagePath),
+          width: 170,
+          height: 170,
+          fit: BoxFit.cover,
+        ),
+      )
+          : user?.data?.avatar != null
+          ? ClipOval(
+        child: Image.network(
+          TedikapApiRepository.getAvatarProfile + user!.data!.avatar!,
+          width: 170,
+          height: 170,
+          fit: BoxFit.cover,
+        ),
+      )
+          : const Center(child: Text('No image available')),
+    );
+  }
+
   Widget _buildShimmerProfile() {
     return Shimmer.fromColors(
       baseColor: Colors.grey.shade300,
@@ -313,6 +336,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       child: CircleAvatar(
         radius: 85,
         backgroundColor: Colors.white,
+        child: Container(),
       ),
     );
   }
@@ -322,14 +346,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
       baseColor: Colors.grey.shade300,
       highlightColor: Colors.grey.shade100,
       child: Container(
-        height: 48,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(8),
-        ),
+        height: 50.0,
+        color: Colors.white,
       ),
     );
   }
 }
+
 
 

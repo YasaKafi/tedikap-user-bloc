@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:tedikap_user_bloc/data/models/response/detail_product_response_model.dart';
-import 'package:tedikap_user_bloc/data/models/response/detail_product_reward_response_model.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_product_page/bloc/detail_product_bloc.dart';
 
 import '../../../../../common/dimensions.dart';
