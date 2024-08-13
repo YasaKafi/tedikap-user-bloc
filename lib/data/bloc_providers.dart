@@ -16,6 +16,7 @@ import 'package:tedikap_user_bloc/presentation/pages/home_page/bloc/home_bloc.da
 import 'package:tedikap_user_bloc/presentation/pages/information_page/edit_profile_page/bloc/edit_profile_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/help_center_page/bloc/help_center_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/menu_page/bloc/menu_bloc.dart';
+import 'package:tedikap_user_bloc/presentation/pages/notification_page/bloc/notification_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/order_page/bloc/order_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/point_page/bloc/point_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/profile_page/bloc/profile_bloc.dart';
@@ -42,6 +43,9 @@ class AppProviders{
     ),
     BlocProvider<ProfileBloc>(
       create: (context) => ProfileBloc(UserDatasource()),
+    ),
+    BlocProvider<NotificationBloc>(
+      create: (context) => NotificationBloc(),
     ),
     BlocProvider<EditProfileBloc>(
       create: (context) => EditProfileBloc(UserDatasource()),

@@ -97,7 +97,9 @@ class _PointPageState extends State<PointPage> with SingleTickerProviderStateMix
                   style: txtSecondaryHeader.copyWith(
                       fontWeight: FontWeight.w600, color: blackColor),
                 ),
-                ButtonCircleIcon(routes: 'cart_reward', icon: icCart, )
+                ButtonCircleIcon(onTap: (){
+                  context.goNamed('cart_reward');
+                }, icon: icCart, )
               ],
             ),
           ),

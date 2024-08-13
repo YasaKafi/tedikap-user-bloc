@@ -21,7 +21,7 @@ class NotificationService {
   void isRefreshToken() async {
     messaging.onTokenRefresh.listen((event) {
       event.toString();
-      print('TOken Refereshed');
+      print('Token Refereshed');
     });
   }
 
