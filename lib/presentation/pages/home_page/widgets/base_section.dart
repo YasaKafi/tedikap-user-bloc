@@ -70,12 +70,17 @@ class _BaseSectionState extends State<BaseSection> {
                 builder: (context, state) {
                   return state.when(
                       initial: () => Center(
-                        child: CircularProgressIndicator(),
-                      ),
+                            child: CircularProgressIndicator(),
+                          ),
                       loading: () => ShimmerUserHome(),
-                      success: (model, user, index, pointModel, statusOutletModel) {
+                      success:
+                          (model, user, index, pointModel, statusOutletModel) {
                         if (user != null) {
-                          final schedulePickUp = statusOutletModel?.data?.time ?? 'No Schedule';
+                          final schedulePickUp =
+                              statusOutletModel?.data?.time ?? 'No Schedule';
+
+                          final statusOutlet =
+                              statusOutletModel?.data?.description ?? 'Closed';
 
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,7 +88,8 @@ class _BaseSectionState extends State<BaseSection> {
                               // AnimatedSwitcher for transition
                               AnimatedSwitcher(
                                 duration: const Duration(seconds: 1),
-                                transitionBuilder: (Widget child, Animation<double> animation) {
+                                transitionBuilder: (Widget child,
+                                    Animation<double> animation) {
                                   return FadeTransition(
                                     opacity: animation,
                                     child: child,
@@ -92,7 +98,7 @@ class _BaseSectionState extends State<BaseSection> {
                                 child: Text(
                                   _isWelcomeMessage
                                       ? 'Selamat Datang'
-                                      : 'Pick Up Sesi 1',
+                                      : statusOutlet,
                                   key: ValueKey<bool>(_isWelcomeMessage),
                                   style: txtPrimarySubTitle.copyWith(
                                       fontWeight: FontWeight.w500,
@@ -102,7 +108,8 @@ class _BaseSectionState extends State<BaseSection> {
                               const SizedBox(height: 4),
                               AnimatedSwitcher(
                                 duration: const Duration(seconds: 1),
-                                transitionBuilder: (Widget child, Animation<double> animation) {
+                                transitionBuilder: (Widget child,
+                                    Animation<double> animation) {
                                   return FadeTransition(
                                     opacity: animation,
                                     child: child,
@@ -127,37 +134,27 @@ class _BaseSectionState extends State<BaseSection> {
                         }
                       },
                       error: (message) => Center(
-                        child: Text(message!),
-                      ));
+                            child: Text(message!),
+                          ));
                 },
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  BlocBuilder<HomeBloc, HomeState>(
-                    builder: (context, state) {
-                      return state.maybeWhen(
-                          success: (model, user, index, pointModel, statusOutletModel) {
-                            final schedulePickUp = statusOutletModel?.data?.time ?? 'No Schedule';
-                            return ButtonCircleIcon(
-                              routes: 'cart_common',
-                              icon: icCart,
-                              extra: {'schedulePickUp': schedulePickUp},
-                            );
-                          },
-                          orElse: () => ButtonCircleIcon(
-                            routes: 'cart_common',
-                            icon: icCart,
-                            extra: {'schedulePickUp': 'No Schedule'},
-                          ));
+                  ButtonCircleIcon(
+                    onTap: () {
+                      context.goNamed('cart_common');
                     },
+                    icon: icCart,
                   ),
                   const SizedBox(
                     width: 12,
                   ),
                   ButtonCircleIcon(
-                    routes: 'notification-page',
+                    onTap: () {
+                      context.pushNamed('notification');
+                    },
                     icon: icNotification,
                   ),
                 ],
@@ -288,25 +285,20 @@ class _BaseSectionState extends State<BaseSection> {
   }
 }
 
-
 class ButtonCircleIcon extends StatelessWidget {
   const ButtonCircleIcon({
     super.key,
-    required this.routes,
+    this.onTap,
     required this.icon,
-    this.extra,
   });
 
-  final String routes;
+  final void Function()? onTap;
   final String icon;
-  final Object? extra;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        context.goNamed(routes, extra: extra);
-      },
+      onTap: onTap,
       child: Container(
         padding: EdgeInsets.all(Dimensions.paddingSizeMedium),
         decoration:
