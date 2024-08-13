@@ -30,8 +30,12 @@ class ListViewProduct extends StatelessWidget {
         child: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
             return state.when(
-                initial: () => Center(
-                  child: CircularProgressIndicator(),
+                initial: () => ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 5, // Number of shimmer items to show
+                  itemBuilder: (context, index) {
+                    return ShimmerListBoxProduct();
+                  },
                 ),
                 loading: () => ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -40,7 +44,7 @@ class ListViewProduct extends StatelessWidget {
                     return ShimmerListBoxProduct();
                   },
                 ),
-                success: (model, user, index, pointModel, statusOutletModel) {
+                success: (model, user, index, pointModel, statusOutletModel, bannerModel, boxPromoModel) {
                   if (model != null){
                     return ListView.builder(
                       scrollDirection: Axis.horizontal,
@@ -66,9 +70,13 @@ class ListViewProduct extends StatelessWidget {
                   }
 
                 },
-                error: (message) => Center(
-                  child: Text(message!),
-                ));
+                error: (message) => ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 5, // Number of shimmer items to show
+                  itemBuilder: (context, index) {
+                    return ShimmerListBoxProduct();
+                  },
+                ),);
 
           },
         )

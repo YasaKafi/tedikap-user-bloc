@@ -240,8 +240,8 @@ class _VoucherPageState extends State<VoucherPage> {
                                                 width: screenWidth,
                                                 child: Row(
                                                   children: [
-                                                    Expanded(
-                                                      flex: 2,
+                                                    Container(
+                                                      width: screenWidth * 0.63,
                                                       child: Row(
                                                         children: [
                                                           Flexible(

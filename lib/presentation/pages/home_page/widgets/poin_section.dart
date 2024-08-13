@@ -58,7 +58,7 @@ class PoinSection extends StatelessWidget {
                       return state.when(
                           initial: () => ShimmerUserHome(),
                           loading: () => ShimmerUserHome(),
-                          success: (model, user, index, pointModel, statusOutletModel) {
+                          success: (model, user, index, pointModel, statusOutletModel, bannerModel, boxPromoModel) {
                             final point = pointModel?.data;
                             if (point != null && point.isNotEmpty){
                               final itemPoint = point.first.point;
@@ -74,9 +74,7 @@ class PoinSection extends StatelessWidget {
                               );
                             }
                           },
-                          error: (message) {
-                            return Text(message!);
-                          }
+                          error: (message) => ShimmerUserHome()
                       );
                     },
                   )

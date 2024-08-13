@@ -12,6 +12,7 @@ String imgPromo3 = '${images}promo5.png';
 String imgVoucher1 = '${images}voucher1.png';
 String originalTea = '${images}original_tea.png';
 String gifChecklist = '${images}checklist.gif';
+String bannerCallCenter = '${images}banner_call_center.png';
 
 
 

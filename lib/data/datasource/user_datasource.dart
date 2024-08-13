@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:tedikap_user_bloc/data/models/response/banner_response_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/box_promo_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/current_user_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/edit_current_user_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/help_center_response_model.dart';
@@ -63,6 +65,34 @@ class UserDatasource {
           endpoint: TedikapApiRepository.getUserPoint, isAuthorize: true);
       if (response.statusCode == 200) {
         return Right(UserPointResponseModel.fromMap(response.data));
+      } else {
+        return const Left('Failed to access data');
+      }
+    } catch (e) {
+      return Left('Failed to access data: ${e.toString()}');
+    }
+  }
+
+  Future<Either<String, BannerResponseModel>> getBanner() async {
+    try {
+      final response = await _dioInstance.getRequest(
+          endpoint: TedikapApiRepository.getBanner, isAuthorize: false);
+      if (response.statusCode == 200) {
+        return Right(BannerResponseModel.fromMap(response.data));
+      } else {
+        return const Left('Failed to access data');
+      }
+    } catch (e) {
+      return Left('Failed to access data: ${e.toString()}');
+    }
+  }
+
+  Future<Either<String, BoxPromoResponseModel>> getBoxPromo() async {
+    try {
+      final response = await _dioInstance.getRequest(
+          endpoint: TedikapApiRepository.getBoxPromo, isAuthorize: false);
+      if (response.statusCode == 200) {
+        return Right(BoxPromoResponseModel.fromMap(response.data));
       } else {
         return const Left('Failed to access data');
       }

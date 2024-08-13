@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/common/constant.dart';
+import 'package:tedikap_user_bloc/data/repository/tedikap_repository.dart';
 import 'package:tedikap_user_bloc/presentation/pages/home_page/bloc/home_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/home_page/widgets/slider_promo.dart';
 
@@ -69,13 +70,15 @@ class _BaseSectionState extends State<BaseSection> {
               BlocBuilder<HomeBloc, HomeState>(
                 builder: (context, state) {
                   return state.when(
-                      initial: () => Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                      loading: () => ShimmerUserHome(),
-                      success: (model, user, index, pointModel, statusOutletModel) {
+                      initial: () =>
+                      const ShimmerUserHome(),
+                      loading: () => const ShimmerUserHome(),
+                      success:
+                          (model, user, index, pointModel, statusOutletModel,
+                          bannerModel, boxPromoModel) {
                         if (user != null) {
-                          final schedulePickUp = statusOutletModel?.data?.time ?? 'No Schedule';
+                          final schedulePickUp =
+                              statusOutletModel?.data?.time ?? 'No Schedule';
 
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,7 +86,8 @@ class _BaseSectionState extends State<BaseSection> {
                               // AnimatedSwitcher for transition
                               AnimatedSwitcher(
                                 duration: const Duration(seconds: 1),
-                                transitionBuilder: (Widget child, Animation<double> animation) {
+                                transitionBuilder: (Widget child,
+                                    Animation<double> animation) {
                                   return FadeTransition(
                                     opacity: animation,
                                     child: child,
@@ -102,7 +106,8 @@ class _BaseSectionState extends State<BaseSection> {
                               const SizedBox(height: 4),
                               AnimatedSwitcher(
                                 duration: const Duration(seconds: 1),
-                                transitionBuilder: (Widget child, Animation<double> animation) {
+                                transitionBuilder: (Widget child,
+                                    Animation<double> animation) {
                                   return FadeTransition(
                                     opacity: animation,
                                     child: child,
@@ -121,37 +126,22 @@ class _BaseSectionState extends State<BaseSection> {
                             ],
                           );
                         } else {
-                          return Center(
+                          return const Center(
                             child: Text('No data user available'),
                           );
                         }
                       },
-                      error: (message) => Center(
-                        child: Text(message!),
-                      ));
+                      error: (message) =>
+                      const ShimmerUserHome());
                 },
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  BlocBuilder<HomeBloc, HomeState>(
-                    builder: (context, state) {
-                      return state.maybeWhen(
-                          success: (model, user, index, pointModel, statusOutletModel) {
-                            final schedulePickUp = statusOutletModel?.data?.time ?? 'No Schedule';
-                            return ButtonCircleIcon(
-                              routes: 'cart_common',
-                              icon: icCart,
-                              extra: {'schedulePickUp': schedulePickUp},
-                            );
-                          },
-                          orElse: () => ButtonCircleIcon(
-                            routes: 'cart_common',
-                            icon: icCart,
-                            extra: {'schedulePickUp': 'No Schedule'},
-                          ));
-                    },
+                  ButtonCircleIcon(
+                    routes: 'cart_common',
+                    icon: icCart,
                   ),
                   const SizedBox(
                     width: 12,
@@ -171,45 +161,77 @@ class _BaseSectionState extends State<BaseSection> {
             decoration: const BoxDecoration(
               color: baseColor,
             ),
-            child: CarouselSliderWidget(
-                screenWidth: widget.screenWidth,
-                carouselImageStrings: carouselImageStrings)),
-        Container(
-          width: widget.screenWidth,
-          padding: const EdgeInsets.symmetric(
-              vertical: Dimensions.paddingSizeSmall,
-              horizontal: Dimensions.paddingSizeLarge),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Jajan Makin Hemat',
-                style: txtSecondaryHeader.copyWith(
-                    fontWeight: FontWeight.w600, color: blackColor),
-              ),
-              const SizedBox(
-                height: Dimensions.paddingSizeExtraSmall,
-              ),
-              Text(
-                'Dapatkan diskon dan harga spesial hanya dengan melakukan pemesanan di App Tedikap',
-                style: txtPrimarySubTitle.copyWith(
-                    fontWeight: FontWeight.w400, color: blackColor),
-              ),
-              const SizedBox(
-                height: Dimensions.paddingSizeDefault,
-              ),
-              Container(
-                width: widget.screenWidth,
-                child: Image.asset(
-                  imgBanner,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ],
-          ),
+            child: BlocBuilder<HomeBloc, HomeState>(
+              builder: (context, state) {
+                return CarouselSliderWidget(
+                  screenWidth: widget.screenWidth,
+                );
+              },
+            )),
+        BlocBuilder<HomeBloc, HomeState>(
+          builder: (context, state) {
+            return state.when(
+                initial: (){
+                  return _buildShimmerLoading(widget.screenWidth);
+                },
+                loading: (){
+                  return _buildShimmerLoading(widget.screenWidth);
+                },
+                success: (model, user, index, pointModel, statusOutletModel,
+                    bannerModel, boxPromoModel){
+                  if (boxPromoModel != null){
+                    return Container(
+                      width: widget.screenWidth,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: Dimensions.paddingSizeSmall,
+                          horizontal: Dimensions.paddingSizeLarge),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            boxPromoModel.data?.the1?.title ?? 'No Title',
+                            style: txtSecondaryHeader.copyWith(
+                                fontWeight: FontWeight.w600, color: blackColor),
+                          ),
+                          const SizedBox(
+                            height: Dimensions.paddingSizeExtraSmall,
+                          ),
+                          Text(
+                            boxPromoModel.data?.the1?.subtitle ?? 'No Description',
+                            style: txtPrimarySubTitle.copyWith(
+                                fontWeight: FontWeight.w400, color: blackColor),
+                          ),
+                          const SizedBox(
+                            height: Dimensions.paddingSizeDefault,
+                          ),
+                          Container(
+                            width: widget.screenWidth,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image.network(
+                                TedikapApiRepository.getImageBoxPromo + boxPromoModel.data!.the1!.image!,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+
+                  } else {
+                    return Container();
+                  }
+
+                },
+                error: (message){
+                  return _buildShimmerLoading(widget.screenWidth);
+
+                }
+            );
+          },
         ),
         Padding(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
               left: Dimensions.paddingSizeLarge,
               top: Dimensions.paddingSizeSmall),
           child: Container(
@@ -232,62 +254,78 @@ class _BaseSectionState extends State<BaseSection> {
           padding: const EdgeInsets.symmetric(
               vertical: Dimensions.paddingSizeSmall,
               horizontal: Dimensions.paddingSizeLarge),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(12)),
-              color: Colors.white,
-              border: Border.all(
-                color: Colors.grey.withOpacity(0.5),
-                width: 1,
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image.asset(
-                    imgPromo1,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                const SizedBox(
-                  height: Dimensions.paddingSizeDefault,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: Dimensions.paddingSizeSmall,
-                      bottom: Dimensions.paddingSizeLarge,
-                      right: Dimensions.paddingSizeSmall),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Jajan Makin Hemat',
-                        style: txtSecondaryHeader.copyWith(
-                            fontWeight: FontWeight.w600, color: blackColor),
-                      ),
-                      SizedBox(
-                        height: Dimensions.paddingSizeExtraSmall,
-                      ),
-                      Text(
-                        'Dapatkan diskon dan harga spesial hanya dengan melakukan pemesanan di App Tedikap',
-                        style: txtPrimarySubTitle.copyWith(
-                            fontWeight: FontWeight.w400, color: blackColor),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.asset(
+              bannerCallCenter,
+              width: double.infinity,
+              fit: BoxFit.fill,
             ),
           ),
         ),
       ],
     );
   }
-}
+  Widget _buildShimmerLoading(double screenWidth) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+          vertical: Dimensions.paddingSizeSmall,
+          horizontal: Dimensions.paddingSizeLarge),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Shimmer.fromColors(
+            baseColor: Colors.grey.shade300,
+            highlightColor: Colors.grey.shade100,
+            child: Container(
+              width: screenWidth * 0.3,
+              height: 20.0,
+              decoration:  BoxDecoration(
+                color: baseColor,
+                borderRadius: BorderRadius.circular(5),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: Dimensions.paddingSizeExtraSmall,
+          ),
+          Shimmer.fromColors(
+            baseColor: Colors.grey.shade300,
+            highlightColor: Colors.grey.shade100,
+            child: Container(
+              width: screenWidth * 0.5,
+              height: 15.0,
+              decoration:  BoxDecoration(
+                color: baseColor,
+                borderRadius: BorderRadius.circular(5),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: Dimensions.paddingSizeDefault,
+          ),
+          Shimmer.fromColors(
+            baseColor: Colors.grey.shade300,
+            highlightColor: Colors.grey.shade100,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Container(
+                width: screenWidth,
+                height: 200.0,
+                decoration:  BoxDecoration(
+                  color: baseColor,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
+
+}
 
 class ButtonCircleIcon extends StatelessWidget {
   const ButtonCircleIcon({
@@ -308,19 +346,21 @@ class ButtonCircleIcon extends StatelessWidget {
         context.goNamed(routes, extra: extra);
       },
       child: Container(
-        padding: EdgeInsets.all(Dimensions.paddingSizeMedium),
+        padding: const EdgeInsets.all(Dimensions.paddingSizeMedium),
         decoration:
-            const BoxDecoration(color: transparent30, shape: BoxShape.circle),
+        const BoxDecoration(color: transparent30, shape: BoxShape.circle),
         child: Center(
             child: SvgPicture.asset(
-          icon,
-        )),
+              icon,
+            )),
       ),
     );
   }
 }
 
 class ShimmerUserHome extends StatelessWidget {
+  const ShimmerUserHome({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(

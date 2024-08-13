@@ -102,6 +102,7 @@ class SectionBaseProfile extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 6),
                                 Text(
+                                  user.data == null ? 'Hi, unknown user' :
                                   'Hi, ${user.data!.name!}',
                                   style: txtSecondaryTitle.copyWith(
                                     fontWeight: FontWeight.w600,
