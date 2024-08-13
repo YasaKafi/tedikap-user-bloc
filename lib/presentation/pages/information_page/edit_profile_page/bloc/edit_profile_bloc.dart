@@ -56,7 +56,7 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
     on<_ChangeOption>((event, emit) {
       if (state is _Loaded) {
         final currentState = state as _Loaded;
-        emit(currentState.copyWith(selectedOption: event.newValue));
+        emit(currentState.copyWith(selectedOption: event.newValue,));
       }
     });
 
