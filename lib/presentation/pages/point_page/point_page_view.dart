@@ -12,8 +12,9 @@ import '../../../common/theme.dart';
 import '../home_page/widgets/base_section.dart';
 
 class PointPage extends StatefulWidget {
-  const PointPage({super.key});
+  const PointPage({super.key, this.schedulePickUp});
 
+  final String? schedulePickUp;
   @override
   _PointPageState createState() => _PointPageState();
 }
@@ -96,7 +97,7 @@ class _PointPageState extends State<PointPage> with SingleTickerProviderStateMix
                   style: txtSecondaryHeader.copyWith(
                       fontWeight: FontWeight.w600, color: blackColor),
                 ),
-                ButtonCircleIcon(routes: 'cart_reward', icon: icCart)
+                ButtonCircleIcon(routes: 'cart_reward', icon: icCart, )
               ],
             ),
           ),

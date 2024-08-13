@@ -582,7 +582,8 @@ mixin _$HomeState {
             MostPopularProductResponseModel? model,
             CurrentUserModel? user,
             int? newIndex,
-            UserPointResponseModel? pointModel)
+            UserPointResponseModel? pointModel,
+            StatusOutletResponseModel? statusOutletModel)
         success,
     required TResult Function(String? message) error,
   }) =>
@@ -595,7 +596,8 @@ mixin _$HomeState {
             MostPopularProductResponseModel? model,
             CurrentUserModel? user,
             int? newIndex,
-            UserPointResponseModel? pointModel)?
+            UserPointResponseModel? pointModel,
+            StatusOutletResponseModel? statusOutletModel)?
         success,
     TResult? Function(String? message)? error,
   }) =>
@@ -608,7 +610,8 @@ mixin _$HomeState {
             MostPopularProductResponseModel? model,
             CurrentUserModel? user,
             int? newIndex,
-            UserPointResponseModel? pointModel)?
+            UserPointResponseModel? pointModel,
+            StatusOutletResponseModel? statusOutletModel)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -702,7 +705,8 @@ class _$InitialImpl implements _Initial {
             MostPopularProductResponseModel? model,
             CurrentUserModel? user,
             int? newIndex,
-            UserPointResponseModel? pointModel)
+            UserPointResponseModel? pointModel,
+            StatusOutletResponseModel? statusOutletModel)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -718,7 +722,8 @@ class _$InitialImpl implements _Initial {
             MostPopularProductResponseModel? model,
             CurrentUserModel? user,
             int? newIndex,
-            UserPointResponseModel? pointModel)?
+            UserPointResponseModel? pointModel,
+            StatusOutletResponseModel? statusOutletModel)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -734,7 +739,8 @@ class _$InitialImpl implements _Initial {
             MostPopularProductResponseModel? model,
             CurrentUserModel? user,
             int? newIndex,
-            UserPointResponseModel? pointModel)?
+            UserPointResponseModel? pointModel,
+            StatusOutletResponseModel? statusOutletModel)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -831,7 +837,8 @@ class _$LoadingImpl implements _Loading {
             MostPopularProductResponseModel? model,
             CurrentUserModel? user,
             int? newIndex,
-            UserPointResponseModel? pointModel)
+            UserPointResponseModel? pointModel,
+            StatusOutletResponseModel? statusOutletModel)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -847,7 +854,8 @@ class _$LoadingImpl implements _Loading {
             MostPopularProductResponseModel? model,
             CurrentUserModel? user,
             int? newIndex,
-            UserPointResponseModel? pointModel)?
+            UserPointResponseModel? pointModel,
+            StatusOutletResponseModel? statusOutletModel)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -863,7 +871,8 @@ class _$LoadingImpl implements _Loading {
             MostPopularProductResponseModel? model,
             CurrentUserModel? user,
             int? newIndex,
-            UserPointResponseModel? pointModel)?
+            UserPointResponseModel? pointModel,
+            StatusOutletResponseModel? statusOutletModel)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -926,7 +935,8 @@ abstract class _$$SuccessImplCopyWith<$Res> {
       {MostPopularProductResponseModel? model,
       CurrentUserModel? user,
       int? newIndex,
-      UserPointResponseModel? pointModel});
+      UserPointResponseModel? pointModel,
+      StatusOutletResponseModel? statusOutletModel});
 }
 
 /// @nodoc
@@ -944,6 +954,7 @@ class __$$SuccessImplCopyWithImpl<$Res>
     Object? user = freezed,
     Object? newIndex = freezed,
     Object? pointModel = freezed,
+    Object? statusOutletModel = freezed,
   }) {
     return _then(_$SuccessImpl(
       model: freezed == model
@@ -962,6 +973,10 @@ class __$$SuccessImplCopyWithImpl<$Res>
           ? _value.pointModel
           : pointModel // ignore: cast_nullable_to_non_nullable
               as UserPointResponseModel?,
+      statusOutletModel: freezed == statusOutletModel
+          ? _value.statusOutletModel
+          : statusOutletModel // ignore: cast_nullable_to_non_nullable
+              as StatusOutletResponseModel?,
     ));
   }
 }
@@ -969,7 +984,12 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl({this.model, this.user, this.newIndex, this.pointModel});
+  const _$SuccessImpl(
+      {this.model,
+      this.user,
+      this.newIndex,
+      this.pointModel,
+      this.statusOutletModel});
 
   @override
   final MostPopularProductResponseModel? model;
@@ -979,10 +999,12 @@ class _$SuccessImpl implements _Success {
   final int? newIndex;
   @override
   final UserPointResponseModel? pointModel;
+  @override
+  final StatusOutletResponseModel? statusOutletModel;
 
   @override
   String toString() {
-    return 'HomeState.success(model: $model, user: $user, newIndex: $newIndex, pointModel: $pointModel)';
+    return 'HomeState.success(model: $model, user: $user, newIndex: $newIndex, pointModel: $pointModel, statusOutletModel: $statusOutletModel)';
   }
 
   @override
@@ -995,12 +1017,14 @@ class _$SuccessImpl implements _Success {
             (identical(other.newIndex, newIndex) ||
                 other.newIndex == newIndex) &&
             (identical(other.pointModel, pointModel) ||
-                other.pointModel == pointModel));
+                other.pointModel == pointModel) &&
+            (identical(other.statusOutletModel, statusOutletModel) ||
+                other.statusOutletModel == statusOutletModel));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, model, user, newIndex, pointModel);
+  int get hashCode => Object.hash(
+      runtimeType, model, user, newIndex, pointModel, statusOutletModel);
 
   @JsonKey(ignore: true)
   @override
@@ -1017,11 +1041,12 @@ class _$SuccessImpl implements _Success {
             MostPopularProductResponseModel? model,
             CurrentUserModel? user,
             int? newIndex,
-            UserPointResponseModel? pointModel)
+            UserPointResponseModel? pointModel,
+            StatusOutletResponseModel? statusOutletModel)
         success,
     required TResult Function(String? message) error,
   }) {
-    return success(model, user, newIndex, pointModel);
+    return success(model, user, newIndex, pointModel, statusOutletModel);
   }
 
   @override
@@ -1033,11 +1058,12 @@ class _$SuccessImpl implements _Success {
             MostPopularProductResponseModel? model,
             CurrentUserModel? user,
             int? newIndex,
-            UserPointResponseModel? pointModel)?
+            UserPointResponseModel? pointModel,
+            StatusOutletResponseModel? statusOutletModel)?
         success,
     TResult? Function(String? message)? error,
   }) {
-    return success?.call(model, user, newIndex, pointModel);
+    return success?.call(model, user, newIndex, pointModel, statusOutletModel);
   }
 
   @override
@@ -1049,13 +1075,14 @@ class _$SuccessImpl implements _Success {
             MostPopularProductResponseModel? model,
             CurrentUserModel? user,
             int? newIndex,
-            UserPointResponseModel? pointModel)?
+            UserPointResponseModel? pointModel,
+            StatusOutletResponseModel? statusOutletModel)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(model, user, newIndex, pointModel);
+      return success(model, user, newIndex, pointModel, statusOutletModel);
     }
     return orElse();
   }
@@ -1103,12 +1130,14 @@ abstract class _Success implements HomeState {
       {final MostPopularProductResponseModel? model,
       final CurrentUserModel? user,
       final int? newIndex,
-      final UserPointResponseModel? pointModel}) = _$SuccessImpl;
+      final UserPointResponseModel? pointModel,
+      final StatusOutletResponseModel? statusOutletModel}) = _$SuccessImpl;
 
   MostPopularProductResponseModel? get model;
   CurrentUserModel? get user;
   int? get newIndex;
   UserPointResponseModel? get pointModel;
+  StatusOutletResponseModel? get statusOutletModel;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1184,7 +1213,8 @@ class _$ErrorImpl implements _Error {
             MostPopularProductResponseModel? model,
             CurrentUserModel? user,
             int? newIndex,
-            UserPointResponseModel? pointModel)
+            UserPointResponseModel? pointModel,
+            StatusOutletResponseModel? statusOutletModel)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -1200,7 +1230,8 @@ class _$ErrorImpl implements _Error {
             MostPopularProductResponseModel? model,
             CurrentUserModel? user,
             int? newIndex,
-            UserPointResponseModel? pointModel)?
+            UserPointResponseModel? pointModel,
+            StatusOutletResponseModel? statusOutletModel)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -1216,7 +1247,8 @@ class _$ErrorImpl implements _Error {
             MostPopularProductResponseModel? model,
             CurrentUserModel? user,
             int? newIndex,
-            UserPointResponseModel? pointModel)?
+            UserPointResponseModel? pointModel,
+            StatusOutletResponseModel? statusOutletModel)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),

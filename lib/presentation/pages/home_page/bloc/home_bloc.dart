@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tedikap_user_bloc/data/datasource/product_datasource.dart';
 import 'package:tedikap_user_bloc/data/models/response/most_like_product_response_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/status_outlet_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/user_point_response_model.dart';
 
 import '../../../../data/datasource/user_datasource.dart';
@@ -34,14 +35,17 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         }, (user) async {
           final productResult = await productDatasource.getAllMostPopularProduct();
           final pointsResult = await datasource.getPointUser();
+          final statusResult = await datasource.getStatusOutlet();
 
           final products = productResult.fold((l) => null, (r) => r);
           final points = pointsResult.fold((l) => null, (r) => r);
+          final status = statusResult.fold((l) => null, (r) => r);
 
           emit(_Success(
             user: user,
             model: products,
             pointModel: points,
+            statusOutletModel: status,
           ));
         });
       } catch (e) {

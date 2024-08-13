@@ -175,7 +175,7 @@ class BoxCheckoutDetail extends StatelessWidget {
                       );
                     }
                   },
-                  error: (message) => Center(child: Text(message!)),
+                  error: (message) => _buildErrorState(context, message!),
                 );
               },
             ),

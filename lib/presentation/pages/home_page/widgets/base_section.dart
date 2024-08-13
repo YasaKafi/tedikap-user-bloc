@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -13,16 +15,43 @@ import '../data/mockup_data.dart';
 import 'list_view_product.dart';
 
 // ignore: must_be_immutable
-class BaseSection extends StatelessWidget {
-  double screenWidth;
-  BaseSection({
+class BaseSection extends StatefulWidget {
+  final double screenWidth;
+
+  const BaseSection({
     super.key,
     required this.screenWidth,
   });
-  List carouselImageStrings = carouselImage.map((i) => i['image']).toList();
+
+  @override
+  _BaseSectionState createState() => _BaseSectionState();
+}
+
+class _BaseSectionState extends State<BaseSection> {
+  bool _isWelcomeMessage = true;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
+      if (mounted) {
+        setState(() {
+          _isWelcomeMessage = !_isWelcomeMessage;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    List carouselImageStrings = carouselImage.map((i) => i['image']).toList();
 
     return Column(
       children: [
@@ -39,46 +68,90 @@ class BaseSection extends StatelessWidget {
             children: [
               BlocBuilder<HomeBloc, HomeState>(
                 builder: (context, state) {
-
                   return state.when(
                       initial: () => Center(
-                            child: CircularProgressIndicator(),
-                          ),
+                        child: CircularProgressIndicator(),
+                      ),
                       loading: () => ShimmerUserHome(),
-                      success: (model, user, index, pointModel) {
-                        if(user != null ){
+                      success: (model, user, index, pointModel, statusOutletModel) {
+                        if (user != null) {
+                          final schedulePickUp = statusOutletModel?.data?.time ?? 'No Schedule';
+
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Selamat Datang',
+                              // AnimatedSwitcher for transition
+                              AnimatedSwitcher(
+                                duration: const Duration(seconds: 1),
+                                transitionBuilder: (Widget child, Animation<double> animation) {
+                                  return FadeTransition(
+                                    opacity: animation,
+                                    child: child,
+                                  );
+                                },
+                                child: Text(
+                                  _isWelcomeMessage
+                                      ? 'Selamat Datang'
+                                      : 'Pick Up Sesi 1',
+                                  key: ValueKey<bool>(_isWelcomeMessage),
                                   style: txtPrimarySubTitle.copyWith(
                                       fontWeight: FontWeight.w500,
-                                      color: baseColor)),
-                              Text(user.data!.name ?? 'No Name',
+                                      color: baseColor),
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              AnimatedSwitcher(
+                                duration: const Duration(seconds: 1),
+                                transitionBuilder: (Widget child, Animation<double> animation) {
+                                  return FadeTransition(
+                                    opacity: animation,
+                                    child: child,
+                                  );
+                                },
+                                child: Text(
+                                  _isWelcomeMessage
+                                      ? user.data!.name ?? 'No Name'
+                                      : schedulePickUp,
+                                  key: ValueKey<bool>(_isWelcomeMessage),
                                   style: txtPrimaryTitle.copyWith(
                                       fontWeight: FontWeight.w600,
-                                      color: baseColor))
-                              // D
+                                      color: baseColor),
+                                ),
+                              ),
                             ],
                           );
-
                         } else {
-                          return Center(child: Text('No data user available'),);
+                          return Center(
+                            child: Text('No data user available'),
+                          );
                         }
-
                       },
                       error: (message) => Center(
-                            child: Text(message!),
-                          ));
+                        child: Text(message!),
+                      ));
                 },
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  ButtonCircleIcon(
-                    routes: 'cart_common',
-                    icon: icCart,
+                  BlocBuilder<HomeBloc, HomeState>(
+                    builder: (context, state) {
+                      return state.maybeWhen(
+                          success: (model, user, index, pointModel, statusOutletModel) {
+                            final schedulePickUp = statusOutletModel?.data?.time ?? 'No Schedule';
+                            return ButtonCircleIcon(
+                              routes: 'cart_common',
+                              icon: icCart,
+                              extra: {'schedulePickUp': schedulePickUp},
+                            );
+                          },
+                          orElse: () => ButtonCircleIcon(
+                            routes: 'cart_common',
+                            icon: icCart,
+                            extra: {'schedulePickUp': 'No Schedule'},
+                          ));
+                    },
                   ),
                   const SizedBox(
                     width: 12,
@@ -93,16 +166,16 @@ class BaseSection extends StatelessWidget {
           ),
         ),
         Container(
-            width: screenWidth,
+            width: widget.screenWidth,
             margin: const EdgeInsets.only(top: Dimensions.paddingSizeLarge),
             decoration: const BoxDecoration(
               color: baseColor,
             ),
             child: CarouselSliderWidget(
-                screenWidth: screenWidth,
+                screenWidth: widget.screenWidth,
                 carouselImageStrings: carouselImageStrings)),
         Container(
-          width: screenWidth,
+          width: widget.screenWidth,
           padding: const EdgeInsets.symmetric(
               vertical: Dimensions.paddingSizeSmall,
               horizontal: Dimensions.paddingSizeLarge),
@@ -126,7 +199,7 @@ class BaseSection extends StatelessWidget {
                 height: Dimensions.paddingSizeDefault,
               ),
               Container(
-                width: screenWidth,
+                width: widget.screenWidth,
                 child: Image.asset(
                   imgBanner,
                   fit: BoxFit.cover,
@@ -140,7 +213,7 @@ class BaseSection extends StatelessWidget {
               left: Dimensions.paddingSizeLarge,
               top: Dimensions.paddingSizeSmall),
           child: Container(
-            width: screenWidth,
+            width: widget.screenWidth,
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -152,10 +225,10 @@ class BaseSection extends StatelessWidget {
           ),
         ),
         ListViewProduct(
-          screenWidth: screenWidth,
+          screenWidth: widget.screenWidth,
         ),
         Container(
-          width: screenWidth,
+          width: widget.screenWidth,
           padding: const EdgeInsets.symmetric(
               vertical: Dimensions.paddingSizeSmall,
               horizontal: Dimensions.paddingSizeLarge),
@@ -215,21 +288,24 @@ class BaseSection extends StatelessWidget {
   }
 }
 
+
 class ButtonCircleIcon extends StatelessWidget {
   const ButtonCircleIcon({
     super.key,
     required this.routes,
     required this.icon,
+    this.extra,
   });
 
   final String routes;
   final String icon;
+  final Object? extra;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.goNamed(routes);
+        context.goNamed(routes, extra: extra);
       },
       child: Container(
         padding: EdgeInsets.all(Dimensions.paddingSizeMedium),

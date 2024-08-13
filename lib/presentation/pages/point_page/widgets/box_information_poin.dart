@@ -82,7 +82,7 @@ class BoxInformationPoin extends StatelessWidget {
                           );
                         } else {
                           return Text(
-                            'Memuat.. Poin',
+                            '0 Poin',
                             style: txtPrimaryHeader.copyWith(
                                 fontWeight: FontWeight.w600,
                                 color: primaryColor),

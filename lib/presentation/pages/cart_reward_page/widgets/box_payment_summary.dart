@@ -45,17 +45,20 @@ class BoxCheckoutSummary extends StatelessWidget {
                   state.maybeWhen(
                     success: (cartModel, modelQty, deleteModel, modelPostOrder,
                         modelPoint) {
-                      if (modelPoint!.data![0].point! <=
-                          cartModel!.cart!.totalPoints!) {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text(
-                            'Your Point is not enough',
-                            style: txtSecondaryTitle.copyWith(
-                                fontWeight: FontWeight.w500, color: baseColor),
-                          ),
-                          backgroundColor: redMedium,
-                        ));
+                      if(modelPoint!.data!.isNotEmpty){
+                        if (modelPoint.data!.first.point! <=
+                            cartModel!.cart!.totalPoints!) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(
+                              'Your Point is not enough',
+                              style: txtSecondaryTitle.copyWith(
+                                  fontWeight: FontWeight.w500, color: baseColor),
+                            ),
+                            backgroundColor: redMedium,
+                          ));
+                        }
                       }
+
                     },
                     orElse: () {},
                   );

@@ -40,7 +40,7 @@ class ListViewProduct extends StatelessWidget {
                     return ShimmerListBoxProduct();
                   },
                 ),
-                success: (model, user, index, pointModel) {
+                success: (model, user, index, pointModel, statusOutletModel) {
                   if (model != null){
                     return ListView.builder(
                       scrollDirection: Axis.horizontal,
