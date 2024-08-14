@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tedikap_user_bloc/common/constant.dart';
 import 'package:tedikap_user_bloc/presentation/pages/order_page/bloc/order_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/order_page/widgets/order_filter.dart';
@@ -8,6 +9,7 @@ import 'package:tedikap_user_bloc/presentation/pages/order_page/widgets/shimmer_
 
 import '../../../common/dimensions.dart';
 import '../../../common/theme.dart';
+import '../../global_components/common_button.dart';
 import 'widgets/list_box_order_status.dart';
 
 class OrderPage extends StatefulWidget {
@@ -25,11 +27,14 @@ class _OrderPageState extends State<OrderPage> {
   }
 
   Future<void> _fetchInitialData() async {
-    context.read<OrderBloc>().add(const OrderEvent.getFilterOrder('ongoing'));}
+    context.read<OrderBloc>().add(const OrderEvent.getFilterOrder('ongoing'));
+  }
 
   Future<void> _refreshData(BuildContext context) async {
     context.read<OrderBloc>().add(const OrderEvent.getFilterOrder('ongoing'));
-    context.read<OrderBloc>().add(const OrderEvent.getFilterOrderReward('ongoing'));
+    context
+        .read<OrderBloc>()
+        .add(const OrderEvent.getFilterOrderReward('ongoing'));
     await Future.delayed(Duration(seconds: 1));
   }
 
@@ -74,7 +79,9 @@ class _OrderPageState extends State<OrderPage> {
                   unselectedLabelColor: grey,
                   onTap: (index) {
                     final query = index == 0 ? 'ongoing' : 'history';
-                    context.read<OrderBloc>().add(OrderEvent.getFilterOrder(query));
+                    context
+                        .read<OrderBloc>()
+                        .add(OrderEvent.getFilterOrder(query));
                   },
                   tabs: [
                     Tab(
@@ -117,15 +124,16 @@ class _OrderPageState extends State<OrderPage> {
                                     );
                                   },
                                   loading: () => Expanded(
-                                    child: ListView.builder(
-                                      itemCount: 3,
-                                      itemBuilder: (context, index) =>
-                                      const ShimmerListBoxMenuStatus(),
-                                    ),
-                                  ),
-                                  success: (model, modelReward, filterIndex) {
+                                        child: ListView.builder(
+                                          itemCount: 3,
+                                          itemBuilder: (context, index) =>
+                                              const ShimmerListBoxMenuStatus(),
+                                        ),
+                                      ),
+                                  success: (model, modelReward, filterIndex,
+                                      modelReOrder, modelReOrderReward, modelCart, modelCartReward) {
                                     if ((model?.orders == null ||
-                                        model?.orders?.isEmpty == true) &&
+                                            model?.orders?.isEmpty == true) &&
                                         (modelReward?.orders == null ||
                                             modelReward?.orders?.isEmpty ==
                                                 true)) {
@@ -135,39 +143,41 @@ class _OrderPageState extends State<OrderPage> {
                                         child: ListView.builder(
                                           itemCount: filterIndex == 0
                                               ? model?.orders?.length ?? 0
-                                              : modelReward?.orders?.length ?? 0,
+                                              : modelReward?.orders?.length ??
+                                                  0,
                                           scrollDirection: Axis.vertical,
                                           itemBuilder: (context, index) {
                                             if (filterIndex == 0) {
-                                              final order = model!.orders![index];
+                                              final order =
+                                                  model!.orders![index];
 
                                               return ListBoxMenuStatus(
                                                 status: order.status!,
                                                 totalItem: order
                                                     .orderItems!.length
                                                     .toString(),
-                                                totalPrice:
-                                                order.totalPrice!.toString(),
+                                                totalPrice: order.totalPrice!
+                                                    .toString(),
                                                 orderItems: order.orderItems,
                                                 createdAt:
-                                                order.createdAt.toString(),
+                                                    order.createdAt.toString(),
                                                 orderId: order.id!,
                                               );
                                             } else {
                                               final order =
-                                              modelReward!.orders![index];
+                                                  modelReward!.orders![index];
 
                                               return ListBoxMenuStatus(
                                                 status: order.status!,
                                                 totalItem: order
                                                     .orderRewardItems!.length
                                                     .toString(),
-                                                totalPrice:
-                                                order.totalPoint!.toString(),
+                                                totalPrice: order.totalPoint!
+                                                    .toString(),
                                                 orderItemsReward:
-                                                order.orderRewardItems,
+                                                    order.orderRewardItems,
                                                 createdAt:
-                                                order.createdAt.toString(),
+                                                    order.createdAt.toString(),
                                                 orderRewardId: order.id!,
                                               );
                                             }
@@ -176,8 +186,8 @@ class _OrderPageState extends State<OrderPage> {
                                       );
                                     }
                                   },
-                                  error: (message) => _buildErrorState(context, message!)
-                              );
+                                  error: (message) =>
+                                      _buildErrorState(context, message!));
                             },
                           ),
                         ],
@@ -188,77 +198,120 @@ class _OrderPageState extends State<OrderPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           OrderFilter(query: 'history'),
-                          BlocBuilder<OrderBloc, OrderState>(
-                            builder: (context, state) {
-                              return state.when(
-                                  initial: () {
-                                    return const Center(
-                                      child: CircularProgressIndicator(),
-                                    );
-                                  },
-                                  loading: () => Expanded(
-                                    child: ListView.builder(
-                                      itemCount: 3,
-                                      itemBuilder: (context, index) =>
-                                      const ShimmerListBoxMenuStatus(),
-                                    ),
-                                  ),
-                                  success: (model, modelReward, filterIndex) {
-                                    if ((model?.orders == null ||
-                                        model?.orders?.isEmpty == true) &&
-                                        (modelReward?.orders == null ||
-                                            modelReward?.orders?.isEmpty ==
-                                                true)) {
-                                      return _buildEmptyOrderState(context);
-                                    } else {
-                                      return Expanded(
-                                        child: ListView.builder(
-                                          itemCount: filterIndex == 0
-                                              ? model?.orders?.length ?? 0
-                                              : modelReward?.orders?.length ?? 0,
-                                          scrollDirection: Axis.vertical,
-                                          itemBuilder: (context, index) {
-                                            if (filterIndex == 0) {
-                                              final order = model!.orders![index];
+                          BlocListener<OrderBloc, OrderState>(
+                            listener: (context, state) {
+                              print('Current state: $state');
+                              state.maybeWhen(
+                                  orElse: () {},
+                                  success: (model, modelReward, filterIndex,
+                                      modelReOrder, modelReOrderReward, modelCart, modelCartReward) {
 
-                                              return ListBoxMenuStatus(
-                                                orderId: order.id!,
-                                                status: order.status!,
-                                                totalItem: order
-                                                    .orderItems!.length
-                                                    .toString(),
-                                                totalPrice: order.totalPrice!
-                                                    .toString(),
-                                                orderItems: order.orderItems,
-                                                createdAt:
-                                                order.createdAt.toString(),
-                                              );
-                                            } else {
-                                              final order =
-                                              modelReward!.orders![index];
-
-                                              return ListBoxMenuStatus(
-                                                status: order.status!,
-                                                totalItem: order
-                                                    .orderRewardItems!.length
-                                                    .toString(),
-                                                totalPrice:
-                                                order.totalPoint!.toString(),
-                                                orderItemsReward:
-                                                order.orderRewardItems,
-                                                createdAt:
-                                                order.createdAt.toString(),
-                                                orderRewardId: order.id!,
-                                              );
-                                            }
-                                          },
+                                    if (modelReOrder?.cart != null
+                                        ) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                        content: Text(
+                                          'Cart updated successfully!',
+                                          style: txtSecondaryTitle.copyWith(
+                                              fontWeight: FontWeight.w500,
+                                              color: baseColor),
                                         ),
-                                      );
+                                        backgroundColor: greenMedium,
+                                      ));
+                                      context.goNamed('cart_common');
                                     }
-                                  },
-                                  error: (message) => _buildErrorState(context, message!)
-                              );
+
+                                    if (modelReOrderReward?.cart != null
+                                        ) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                        content: Text(
+                                          'Cart updated successfully!',
+                                          style: txtSecondaryTitle.copyWith(
+                                              fontWeight: FontWeight.w500,
+                                              color: baseColor),
+                                        ),
+                                        backgroundColor: greenMedium,
+                                      ));
+                                      context.goNamed('cart_reward');
+                                    }
+                                  });
                             },
+                            child: BlocBuilder<OrderBloc, OrderState>(
+                              builder: (context, state) {
+                                return state.when(
+                                    initial: () {
+                                      return const Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    },
+                                    loading: () => Expanded(
+                                          child: ListView.builder(
+                                            itemCount: 3,
+                                            itemBuilder: (context, index) =>
+                                                const ShimmerListBoxMenuStatus(),
+                                          ),
+                                        ),
+                                    success: (model, modelReward, filterIndex,
+                                        modelReOrder, modelReOrderReward, modelCart, modelCartReward) {
+                                      if ((model?.orders == null ||
+                                              model?.orders?.isEmpty == true) &&
+                                          (modelReward?.orders == null ||
+                                              modelReward?.orders?.isEmpty ==
+                                                  true)) {
+                                        return _buildEmptyOrderState(context);
+                                      } else {
+                                        return Expanded(
+                                          child: ListView.builder(
+                                            itemCount: filterIndex == 0
+                                                ? model?.orders?.length ?? 0
+                                                : modelReward?.orders?.length ??
+                                                    0,
+                                            scrollDirection: Axis.vertical,
+                                            itemBuilder: (context, index) {
+                                              if (filterIndex == 0) {
+                                                final order =
+                                                    model!.orders![index];
+
+                                                return ListBoxMenuStatus(
+                                                  orderId: order.id!,
+                                                  status: order.status!,
+                                                  totalItem: order
+                                                      .orderItems!.length
+                                                      .toString(),
+                                                  totalPrice: order.totalPrice!
+                                                      .toString(),
+                                                  orderItems: order.orderItems,
+                                                  createdAt: order.createdAt
+                                                      .toString(),
+                                                );
+                                              } else {
+                                                final order =
+                                                    modelReward!.orders![index];
+
+                                                return ListBoxMenuStatus(
+                                                  status: order.status!,
+                                                  totalItem: order
+                                                      .orderRewardItems!.length
+                                                      .toString(),
+                                                  totalPrice: order.totalPoint!
+                                                      .toString(),
+                                                  orderItemsReward:
+                                                      order.orderRewardItems,
+                                                  createdAt: order.createdAt
+                                                      .toString(),
+                                                  orderRewardId: order.id!,
+                                                );
+                                              }
+                                            },
+                                          ),
+                                        );
+                                      }
+                                    },
+                                    error: (message) =>
+                                        _buildErrorState(context, message!));
+                              },
+                            ),
                           ),
                         ],
                       ),
@@ -299,7 +352,6 @@ class _OrderPageState extends State<OrderPage> {
       ),
     );
   }
-
   Widget _buildEmptyOrderState(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
     return Expanded(
@@ -340,4 +392,3 @@ class _OrderPageState extends State<OrderPage> {
     );
   }
 }
-

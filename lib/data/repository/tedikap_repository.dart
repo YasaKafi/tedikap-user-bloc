@@ -47,7 +47,9 @@ class TedikapApiRepository {
 
   static String postPayment = '$mainUrl/api/payment';
   static String postOrder = '$mainUrl/api/order/store';
+  static String postReOrder = '$mainUrl/api/reorder';
   static String postOrderReward = '$mainUrl/api/order-reward/store';
+  static String postReOrderReward = '$mainUrl/api/reorder-reward';
 
   static String putCart = '$mainUrl/api/cart/update';
   static String putCartReward = '$mainUrl/api/cart-reward/update';

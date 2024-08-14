@@ -54,7 +54,7 @@ class AppProviders{
       create: (context) => MenuBloc(ProductDatasource()),
     ),
     BlocProvider<OrderBloc>(
-      create: (context) => OrderBloc(OrderDatasource()),
+      create: (context) => OrderBloc(OrderDatasource(), CartDatasource()),
     ),
     BlocProvider<DetailOrderBloc>(
       create: (context) => DetailOrderBloc(OrderDatasource()),
