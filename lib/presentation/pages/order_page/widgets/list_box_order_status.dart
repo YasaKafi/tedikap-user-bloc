@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -9,6 +10,7 @@ import '../../../../common/constant.dart';
 import '../../../../common/dimensions.dart';
 import '../../../../common/theme.dart';
 import '../../../global_components/common_button.dart';
+import '../bloc/order_bloc.dart';
 
 class ListBoxMenuStatus extends StatelessWidget {
   const ListBoxMenuStatus({
@@ -47,18 +49,19 @@ class ListBoxMenuStatus extends StatelessWidget {
     }
   }
 
-
-
   @override
   Widget build(BuildContext context) {
-
+    String titleCommonButton;
     Color backgroundColor;
     if (status == 'pesanan dibatalkan' || status == 'pesanan ditolak') {
       backgroundColor = redDark;
+      titleCommonButton = 'Pesan Ulang';
     } else if (status == 'pesanan selesai') {
       backgroundColor = primaryColor;
+      titleCommonButton = 'Pesan Ulang';
     } else {
       backgroundColor = navyColor;
+      titleCommonButton = 'Hubungi Admin';
     }
 
     return Container(
@@ -89,10 +92,10 @@ class ListBoxMenuStatus extends StatelessWidget {
             padding: const EdgeInsets.symmetric(
                 horizontal: Dimensions.paddingSizeLarge),
             height: 40,
-            decoration:  BoxDecoration(
+            decoration: BoxDecoration(
               borderRadius: const BorderRadius.only(
-                topLeft:  Radius.circular(12),
-                topRight:  Radius.circular(12),
+                topLeft: Radius.circular(12),
+                topRight: Radius.circular(12),
               ),
               color: backgroundColor,
             ),
@@ -134,7 +137,7 @@ class ListBoxMenuStatus extends StatelessWidget {
             ),
           ),
           const Padding(
-            padding:  EdgeInsets.symmetric(
+            padding: EdgeInsets.symmetric(
                 horizontal: Dimensions.paddingSizeLarge,
                 vertical: Dimensions.paddingSizeExtraSmall),
             child: Divider(
@@ -226,22 +229,77 @@ class ListBoxMenuStatus extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CommonButton(
-                      text: 'Hubungi Admin',
-                      onPressed: () {},
-                      backgroundColor: backgroundColor,
-                      textColor: baseColor,
-                      borderRadius: 10,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
+                    BlocBuilder<OrderBloc, OrderState>(
+                      builder: (context, state) {
+                        return state.maybeWhen(
+                          orElse: () {
+                            return Container();
+                          },
+                          success: (
+                              model,
+                              modelReward,
+                              filterIndex,
+                              modelReOrder,
+                              modelReOrderReward,
+                              modelCart,
+                              modelCartReward,
+                              ) {
+                            return CommonButton(
+                              text: titleCommonButton,
+                              onPressed: () {
+                                // Separate checks for each cart state
+                                bool isModelCartNotEmpty = modelCart?.cart?.cartItems?.isNotEmpty ?? false;
+                                bool isModelCartRewardNotEmpty = modelCartReward?.cart?.cartItems?.isNotEmpty ?? false;
+
+                                // Condition for order status checks
+                                bool isOrderStatusForReorder = status == 'pesanan selesai' ||
+                                    status == 'pesanan dibatalkan' ||
+                                    status == 'pesanan ditolak';
+
+                                // Check conditions for showing bottom sheet
+                                if (isOrderStatusForReorder) {
+                                  if (isModelCartNotEmpty) {
+                                    _showReorderOptions(context, backgroundColor);
+                                  } else if (!isModelCartNotEmpty) {
+                                    if (orderId != null) {
+                                      context.read<OrderBloc>().add(OrderEvent.postReOrder(orderId!));
+                                    } else if (orderRewardId != null) {
+                                      context.read<OrderBloc>().add(OrderEvent.postReOrderReward(orderRewardId!));
+                                    }
+
+                                  } else if (isModelCartRewardNotEmpty) {
+                                    _showReorderOptions(context, backgroundColor);
+                                    // Check if it's a normal or reward order and trigger the appropriate even
+                                  } else {
+                                    if (orderId != null) {
+                                      context.read<OrderBloc>().add(OrderEvent.postReOrder(orderId!));
+                                    } else if (orderRewardId != null) {
+                                      context.read<OrderBloc>().add(OrderEvent.postReOrderReward(orderRewardId!));
+                                    }
+                                  }
+                                }
+                              },
+                              backgroundColor: backgroundColor,
+                              textColor: baseColor,
+                              borderRadius: 10,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            );
+                          },
+                        );
+                      },
                     ),
+
+
                     CommonButton(
                       text: 'Detail Pesanan',
                       borderRadius: 10,
                       fontSize: 12,
                       onPressed: () {
                         context.pushNamed(
-                          orderId != null ? 'detail_order_common' : 'detail_order_reward',
+                          orderId != null
+                              ? 'detail_order_common'
+                              : 'detail_order_reward',
                           pathParameters: {
                             if (orderId != null)
                               'orderId': orderId!
@@ -263,4 +321,109 @@ class ListBoxMenuStatus extends StatelessWidget {
       ),
     );
   }
+  void _showReorderOptions(BuildContext context, Color backgroundColor) {
+    showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
+      ),
+      builder: (BuildContext context) {
+        return Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: baseColor,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
+          ),
+          padding: EdgeInsets.only(top: 10.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Center(
+                child: Container(
+                    width: 50,
+                    height: 6,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(10),
+                    )
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    SvgPicture.asset(icOrderDone, width: MediaQuery.of(context).size.width * 0.35,
+                    ),
+                    Text(
+                      'Pesan ulang pesanan ini?',
+                      style: txtSecondaryTitle.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: blackColor,
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      'Keranjang anda sudah terisi dengan produk lain. Pesan ulang akan mengganti isi keranjang anda.',
+                      style: txtSecondarySubTitle.copyWith(
+                        fontWeight: FontWeight.w400,
+                        color: blackColor,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CommonButton(
+                          padding: EdgeInsets.symmetric(vertical: 15),
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          borderColor: blackColor,
+                          borderWidth: 1,
+                          text: 'Kembali',
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          backgroundColor: baseColor,
+                          textColor: blackColor,
+                          borderRadius: 30,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        CommonButton(
+                          padding: EdgeInsets.symmetric( vertical: 15),
+                          width: MediaQuery.of(context).size.width * 0.4,
+
+                          text: 'Pesan Ulang',
+                          onPressed: () {
+                            Navigator.pop(context);
+                            if (status == 'pesanan selesai' ||
+                                status == 'pesanan dibatalkan' ||
+                                status == 'pesanan ditolak') {
+                              context.read<OrderBloc>().add(orderId != null
+                                  ? OrderEvent.postReOrder(orderId!)
+                                  : OrderEvent.postReOrderReward(
+                                  orderRewardId!));
+                            }
+                          },
+                          backgroundColor: primaryColor,
+                          textColor: baseColor,
+                          borderRadius: 30,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ],
+                    ),
+
+                  ],
+                ),
+              ),
+
+
+            ],
+          ),
+        );
+      },
+    );
+  }
+
 }

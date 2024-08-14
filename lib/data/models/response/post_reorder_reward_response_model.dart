@@ -1,21 +1,25 @@
 import 'dart:convert';
 
-class CartRewardResponseModel {
+class PostReOrderRewardResponseModel {
+  String? message;
   Cart? cart;
 
-  CartRewardResponseModel({
+  PostReOrderRewardResponseModel({
+    this.message,
     this.cart,
   });
 
-  factory CartRewardResponseModel.fromJson(String str) => CartRewardResponseModel.fromMap(json.decode(str));
+  factory PostReOrderRewardResponseModel.fromJson(String str) => PostReOrderRewardResponseModel.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory CartRewardResponseModel.fromMap(Map<String, dynamic> json) => CartRewardResponseModel(
+  factory PostReOrderRewardResponseModel.fromMap(Map<String, dynamic> json) => PostReOrderRewardResponseModel(
+    message: json["message"],
     cart: json["cart"] == null ? null : Cart.fromMap(json["cart"]),
   );
 
   Map<String, dynamic> toMap() => {
+    "message": message,
     "cart": cart?.toMap(),
   };
 }
@@ -23,7 +27,7 @@ class CartRewardResponseModel {
 class Cart {
   int? id;
   int? userId;
-  int? totalPoints;
+  dynamic totalPoints;
   String? schedulePickup;
   List<CartItem>? cartItems;
 
@@ -65,7 +69,7 @@ class CartItem {
   String? size;
   String? ice;
   String? sugar;
-  String? note;
+  dynamic note;
   int? quantity;
   int? points;
   int? totalPoints;

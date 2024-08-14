@@ -26,14 +26,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   final ProductDatasource productDatasource;
   final OrderDatasource orderDatasource;
 
-
   CartBloc(
       {required this.cartDatasource,
       required this.productDatasource,
       required this.orderDatasource})
       : super(const CartState.initial()) {
-
-
     on<_GetCart>((event, emit) async {
       emit(const _Loading());
       final result = await cartDatasource.getCart();
@@ -41,14 +38,13 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         emit(const _Error(message: 'Failed to access data cart'));
       },
           (r) => emit(_Success(
-              cartModel: r,
-              patchQtyModel: null,
-              deleteModel: null,
-              modelPostOrder: null,
-              modelPostPayment: null,
-            orderId : null,
-
-          )));
+                cartModel: r,
+                patchQtyModel: null,
+                deleteModel: null,
+                modelPostOrder: null,
+                modelPostPayment: null,
+                orderId: null,
+              )));
     });
 
     Future<void> launchURL(Uri url) async {
@@ -70,7 +66,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             final cartId = postOrderModel.order!.id;
             final paymentResult = await orderDatasource.postPayment(cartId);
             final paymentDetails =
-            paymentResult.fold((l) => null, (payment) => payment);
+                paymentResult.fold((l) => null, (payment) => payment);
             if (paymentDetails != null) {
               GlobalVariables.linkCheckoutGlobal = paymentDetails.checkoutLink;
               final url = Uri.parse(paymentDetails.checkoutLink!);
@@ -101,14 +97,17 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     on<_PatchQty>((event, emit) async {
       // Ensure the current state is handled properly
       await state.maybeWhen(
-        success: (cartModel, patchQtyModel, deleteModel, modelPostOrder, modelPostPayment, orderId) async {
+        success: (cartModel, patchQtyModel, deleteModel, modelPostOrder,
+            modelPostPayment, orderId) async {
           // Patch the quantity and await the result
-          final result = await cartDatasource.patchQty(event.action!, event.cartItem!);
+          final result =
+              await cartDatasource.patchQty(event.action!, event.cartItem!);
 
           // Await the fold to ensure the emit happens before the handler completes
           await result.fold(
-                (l) async => emit(const _Error(message: 'Failed to access data order')),
-                (r) async => emit(_Success(
+            (l) async =>
+                emit(const _Error(message: 'Failed to access data order')),
+            (r) async => emit(_Success(
               cartModel: cartModel,
               patchQtyModel: r,
               deleteModel: deleteModel,
@@ -124,21 +123,31 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       );
     });
 
-
-
     on<_DeleteItem>((event, emit) async {
+      final currentState = state;
+
+      // Emit loading state
       emit(const _Loading());
+
+      if (currentState is! _Success) {
+        emit(const _Error(message: 'Unexpected state type'));
+        return;
+      }
+
       final result = await cartDatasource.deleteItem(event.cartItem);
-      result.fold(
-          (l) => emit(const _Error(message: 'Failed to access data order')),
-          (r) => emit(_Success(
-              cartModel: null,
-              patchQtyModel: null,
-              deleteModel: r,
-              modelPostOrder: null,
-              modelPostPayment: null,
-            orderId: null,
-          )));
+      await result.fold(
+            (l) async => emit(const _Error(message: 'Failed to access data order')),
+            (r) async {
+          final updatedCart = await cartDatasource.getCart();
+          updatedCart.fold(
+                (failure) =>
+                emit(const _Error(message: 'Failed to fetch updated cart')),
+                (updatedData) => emit(
+                currentState.copyWith(deleteModel: r, cartModel: updatedData)),
+          );
+        },
+      );
     });
+
   }
 }

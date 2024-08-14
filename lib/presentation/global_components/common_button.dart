@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../common/theme.dart';
 
+import 'package:flutter/material.dart';
+
 class CommonButton extends StatelessWidget {
   CommonButton({
     super.key,
@@ -16,6 +18,8 @@ class CommonButton extends StatelessWidget {
     this.fontSize,
     this.textColor,
     this.padding,
+    this.borderColor,
+    this.borderWidth,
   });
 
   final String text;
@@ -29,6 +33,8 @@ class CommonButton extends StatelessWidget {
   final Color? textColor;
   final FontWeight? fontWeight;
   final EdgeInsets? padding;
+  final Color? borderColor;
+  final double? borderWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +44,10 @@ class CommonButton extends StatelessWidget {
         backgroundColor: backgroundColor ?? primaryColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(borderRadius ?? 15),
+          side: BorderSide(
+            color: borderColor ?? Colors.transparent,
+            width: borderWidth ?? 1.0,
+          ),
         ),
         minimumSize: Size(width ?? 0, height ?? 0), // Set minimum size to zero to let the content dictate the size
         padding: padding ?? const EdgeInsets.only(
@@ -59,3 +69,4 @@ class CommonButton extends StatelessWidget {
     );
   }
 }
+

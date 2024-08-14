@@ -1,21 +1,25 @@
 import 'dart:convert';
 
-class CartRewardResponseModel {
+class PostReOrderResponseModel {
+  String? message;
   Cart? cart;
 
-  CartRewardResponseModel({
+  PostReOrderResponseModel({
+    this.message,
     this.cart,
   });
 
-  factory CartRewardResponseModel.fromJson(String str) => CartRewardResponseModel.fromMap(json.decode(str));
+  factory PostReOrderResponseModel.fromJson(String str) => PostReOrderResponseModel.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory CartRewardResponseModel.fromMap(Map<String, dynamic> json) => CartRewardResponseModel(
+  factory PostReOrderResponseModel.fromMap(Map<String, dynamic> json) => PostReOrderResponseModel(
+    message: json["message"],
     cart: json["cart"] == null ? null : Cart.fromMap(json["cart"]),
   );
 
   Map<String, dynamic> toMap() => {
+    "message": message,
     "cart": cart?.toMap(),
   };
 }
@@ -23,14 +27,22 @@ class CartRewardResponseModel {
 class Cart {
   int? id;
   int? userId;
-  int? totalPoints;
+  dynamic voucherId;
+  dynamic totalPrice;
+  dynamic discountAmount;
+  dynamic originalPrice;
+  int? rewardPoint;
   String? schedulePickup;
   List<CartItem>? cartItems;
 
   Cart({
     this.id,
     this.userId,
-    this.totalPoints,
+    this.voucherId,
+    this.totalPrice,
+    this.discountAmount,
+    this.originalPrice,
+    this.rewardPoint,
     this.schedulePickup,
     this.cartItems,
   });
@@ -42,7 +54,11 @@ class Cart {
   factory Cart.fromMap(Map<String, dynamic> json) => Cart(
     id: json["id"],
     userId: json["user_id"],
-    totalPoints: json["total_points"],
+    voucherId: json["voucher_id"],
+    totalPrice: json["total_price"],
+    discountAmount: json["discount_amount"],
+    originalPrice: json["original_price"],
+    rewardPoint: json["reward_point"],
     schedulePickup: json["schedule_pickup"],
     cartItems: json["cart_items"] == null ? [] : List<CartItem>.from(json["cart_items"]!.map((x) => CartItem.fromMap(x))),
   );
@@ -50,7 +66,11 @@ class Cart {
   Map<String, dynamic> toMap() => {
     "id": id,
     "user_id": userId,
-    "total_points": totalPoints,
+    "voucher_id": voucherId,
+    "total_price": totalPrice,
+    "discount_amount": discountAmount,
+    "original_price": originalPrice,
+    "reward_point": rewardPoint,
     "schedule_pickup": schedulePickup,
     "cart_items": cartItems == null ? [] : List<dynamic>.from(cartItems!.map((x) => x.toMap())),
   };
@@ -67,8 +87,8 @@ class CartItem {
   String? sugar;
   String? note;
   int? quantity;
-  int? points;
-  int? totalPoints;
+  int? price;
+  int? totalPrice;
 
   CartItem({
     this.id,
@@ -81,8 +101,8 @@ class CartItem {
     this.sugar,
     this.note,
     this.quantity,
-    this.points,
-    this.totalPoints,
+    this.price,
+    this.totalPrice,
   });
 
   factory CartItem.fromJson(String str) => CartItem.fromMap(json.decode(str));
@@ -100,8 +120,8 @@ class CartItem {
     sugar: json["sugar"],
     note: json["note"],
     quantity: json["quantity"],
-    points: json["points"],
-    totalPoints: json["total_points"],
+    price: json["price"],
+    totalPrice: json["total_price"],
   );
 
   Map<String, dynamic> toMap() => {
@@ -115,7 +135,7 @@ class CartItem {
     "sugar": sugar,
     "note": note,
     "quantity": quantity,
-    "points": points,
-    "total_points": totalPoints,
+    "price": price,
+    "total_price": totalPrice,
   };
 }
