@@ -8,6 +8,7 @@ import 'package:tedikap_user_bloc/data/models/response/current_user_response_mod
 import 'package:tedikap_user_bloc/data/models/response/edit_current_user_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/help_center_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/logout_response_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/notification_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/status_outlet_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/user_point_response_model.dart';
 
@@ -100,6 +101,50 @@ class UserDatasource {
       return Left('Failed to access data: ${e.toString()}');
     }
   }
+
+
+  Future<Either<String, NotificationResponseModel>> getNotification() async {
+    try {
+      final response = await _dioInstance.getRequest(
+          endpoint: TedikapApiRepository.getNotification, isAuthorize: true);
+      if (response.statusCode == 200) {
+        return Right(NotificationResponseModel.fromMap(response.data));
+      } else {
+        return const Left('Failed to access data');
+      }
+    } catch (e) {
+      return Left('Failed to access data: ${e.toString()}');
+    }
+  }
+
+  Future<Either<String, NotificationResponseModel>> getFilterNotification(
+      {String? type, String? startDate, String? endDate}) async {
+    try {
+      // Build the query parameters
+      final queryParameters = {
+        'type': type,
+        'start_date': startDate,
+        'end_date': endDate,
+      }..removeWhere((key, value) => value == null); // Remove null values
+
+      print(' HALOOOOO $queryParameters');
+
+      final response = await _dioInstance.getRequest(
+        endpoint: TedikapApiRepository.getNotification,
+        queryParameters: queryParameters,
+        isAuthorize: true,
+      );
+
+      if (response.statusCode == 200) {
+        return Right(NotificationResponseModel.fromMap(response.data));
+      } else {
+        return const Left('Failed to access data');
+      }
+    } catch (e) {
+      return Left('Failed to access data: ${e.toString()}');
+    }
+  }
+
 
   Future<Either<String, EditProfileResponseModel>> updateCurrentUser({
     String? name,

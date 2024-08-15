@@ -18,6 +18,7 @@ class TedikapApiRepository {
   static String getStatusOutlet = '$mainUrl/api/status-store';
   static String getBanner = '$mainUrl/api/banner';
   static String getBoxPromo = '$mainUrl/api/box-promo';
+  static String getNotification = '$mainUrl/api/user/notification';
 
   static String getFilterProduct = '$mainUrl/api/filter/product';
   static String getFilterOrder = '$mainUrl/api/order/history';
