@@ -1,19 +1,92 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
+import 'package:tedikap_user_bloc/presentation/pages/notification_page/bloc/notification_bloc.dart';
 
+import '../../../common/constant.dart';
 import '../../../common/dimensions.dart';
 import '../../../common/theme.dart';
+import '../../global_components/common_button.dart';
 import 'widgets/notification_box.dart';
 
-class NotificationPage extends StatelessWidget {
-  const NotificationPage({Key? key,  this.message}) : super(key: key);
+class NotificationPage extends StatefulWidget {
+  const NotificationPage({Key? key, this.message}) : super(key: key);
 
   final RemoteMessage? message;
+
+  @override
+  _NotificationPageState createState() => _NotificationPageState();
+}
+
+class _NotificationPageState extends State<NotificationPage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context
+        .read<NotificationBloc>()
+        .add(const NotificationEvent.getNotification());
+  }
+
+  String formatDate(String dateString) {
+    DateTime date = DateTime.parse(dateString);
+    String formattedDate = DateFormat('d MMMM yyyy • HH.mm').format(date);
+    return formattedDate;
+  }
+
+  Future<void> _selectDate(BuildContext context,
+      {required bool isStartDate}) async {
+    DateTime initialDate = isStartDate
+        ? DateTime.now().subtract(const Duration(days: 365))
+        : DateTime.now();
+    DateTime firstDate = DateTime(2000);
+    DateTime lastDate = DateTime(2100);
+
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: initialDate,
+      firstDate: firstDate,
+      lastDate: lastDate,
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: primaryColor, // header background color
+              onPrimary: baseColor, // header text color
+              onSurface: blackColor, // body text color
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: primaryColor, // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    if (picked != null) {
+      if (isStartDate) {
+        context
+            .read<NotificationBloc>()
+            .add(NotificationEvent.setStartDate(picked));
+      } else {
+        context
+            .read<NotificationBloc>()
+            .add(NotificationEvent.setEndDate(picked));
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: baseColor,
       appBar: AppBar(
@@ -45,13 +118,15 @@ class NotificationPage extends StatelessWidget {
                 style: txtSecondaryHeader.copyWith(
                     fontWeight: FontWeight.w600, color: blackColor),
               ),
-              Container(
-                width: 40,
-                height: 5,
-                decoration: const BoxDecoration(
-                  color: Colors.transparent,
-                ),
-              )
+              InkWell(
+                  onTap: () {
+                    _showReorderOptions(context);
+                  },
+                  child: Icon(
+                    Icons.filter_list,
+                    size: 26,
+                    color: primaryColor,
+                  )),
             ],
           ),
         ),
@@ -71,13 +146,51 @@ class NotificationPage extends StatelessWidget {
                     horizontal: Dimensions.paddingSizeLarge),
                 child: Column(
                   children: [
-                    BoxNotification(
-                      onTap: () {},
-                      color: primaryColor,
-                      title: message?.notification?.title ?? 'Lorem ipsum',
-                      description: message?.notification?.body ?? 'Lorem ipsum wkwkw'
+                    BlocBuilder<NotificationBloc, NotificationState>(
+                      builder: (context, state) {
+                        return state.when(
+                          initial: () {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          },
+                          loading: () {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          },
+                          success:
+                              (model, isInfo, isVoucher, startDate, endDate) {
+                            if (model?.data != null) {
+                              // Generate a list of notifications
+                              return ListView.builder(
+                                itemCount: model!.data!.length,
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  final notificationData = model.data![index];
+                                  return BoxNotification(
+                                    onTap: () {},
+                                    color: primaryColor,
+                                    title: notificationData.title ?? '',
+                                    description: notificationData.body ?? '',
+                                    time: formatDate(
+                                        notificationData.createdAt.toString()),
+                                  );
+                                },
+                              );
+                            } else {
+                              return Container();
+                            }
+                          },
+                          error: (message) {
+                            return Center(
+                              child: Text(message!),
+                            );
+                          },
+                        );
+                      },
                     ),
-                    SizedBox(height: 20),
                   ],
                 ),
               ),
@@ -85,6 +198,512 @@ class NotificationPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  void _showReorderOptions(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
+      ),
+      builder: (BuildContext context) {
+        return Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: baseColor,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
+          ),
+          padding: EdgeInsets.only(top: 10.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Center(
+                child: Container(
+                    width: 50,
+                    height: 6,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(10),
+                    )),
+              ),
+              Padding(
+                padding: EdgeInsets.all(20.0),
+                child: BlocBuilder<NotificationBloc, NotificationState>(
+                  builder: (context, state) {
+                    return state.maybeWhen(
+                        orElse: () {
+                      String startDateText = DateFormat('yyyy-MM-dd')
+                          .format(DateTime.now().subtract(Duration(days: 365)));
+                      String endDateText =
+                      DateFormat('yyyy-MM-dd').format(DateTime.now());
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Tipe Notifikasi',
+                            style: txtPrimaryTitle.copyWith(
+                              fontWeight: FontWeight.w500,
+                              color: blackColor,
+                            ),
+                            textAlign: TextAlign.start,
+                          ),
+                          SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+
+                              Text(
+                                'Informasi',
+                                style: txtPrimarySubTitle.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                  color: blackColor,
+                                ),
+                              ),
+                              Checkbox(
+                                  value: true,
+                                  activeColor: primaryColor,
+                                  tristate: true,
+                                  onChanged: (newValue) {
+                                    context.read<NotificationBloc>().add(
+                                        NotificationEvent.toggleInfo(
+                                            newValue, newValue));
+                                  }),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Voucher',
+                                style: txtPrimarySubTitle.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                  color: blackColor,
+                                ),
+                              ),
+                              Checkbox(
+                                  value: true,
+                                  activeColor: primaryColor,
+                                  tristate: true,
+                                  onChanged: (newValue) {
+                                    context.read<NotificationBloc>().add(
+                                        NotificationEvent.toggleVoucher(
+                                            newValue, newValue));
+                                  }),
+                            ],
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            'Periode Notifikasi',
+                            style: txtPrimaryTitle.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: blackColor,
+                            ),
+                            textAlign: TextAlign.start,
+                          ),
+                          SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              InkWell(
+                                onTap: () =>
+                                    _selectDate(context, isStartDate: true),
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 5),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      border:
+                                      Border.all(color: grey, width: 1)),
+                                  margin: EdgeInsets.only(top: 10),
+                                  child: Row(
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Mulai',
+                                            style:
+                                            txtSecondarySubTitle.copyWith(
+                                                color: blackColor,
+                                                fontWeight:
+                                                FontWeight.w500),
+                                          ),
+                                          SizedBox(height: 5),
+                                          Text(
+                                            startDateText,
+                                            style: txtPrimarySubTitle.copyWith(
+                                                color: blackColor,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding:
+                                        const EdgeInsets.only(left: 15),
+                                        child: Icon(
+                                          Icons.calendar_month_outlined,
+                                          size: 20,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Center(
+                                child: Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                    height: 3,
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey[200],
+                                      borderRadius: BorderRadius.circular(10),
+                                    )),
+                              ),
+                              InkWell(
+                                onTap: () =>
+                                    _selectDate(context, isStartDate: false),
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 5),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      border:
+                                      Border.all(color: grey, width: 1)),
+                                  child: Row(
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Berakhir',
+                                            style:
+                                            txtSecondarySubTitle.copyWith(
+                                                color: blackColor,
+                                                fontWeight:
+                                                FontWeight.w500),
+                                          ),
+                                          SizedBox(height: 5),
+                                          Text(
+                                            endDateText,
+                                            style: txtPrimarySubTitle.copyWith(
+                                                color: blackColor,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding:
+                                        const EdgeInsets.only(left: 15),
+                                        child: Icon(
+                                          Icons.calendar_month_outlined,
+                                          size: 20,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 45,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CommonButton(
+                                padding: EdgeInsets.symmetric(vertical: 15),
+                                width: MediaQuery.of(context).size.width * 0.4,
+                                borderColor: blackColor,
+                                borderWidth: 1,
+                                text: 'Reset',
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                backgroundColor: baseColor,
+                                textColor: blackColor,
+                                borderRadius: 30,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
+                              CommonButton(
+                                padding: EdgeInsets.symmetric(vertical: 15),
+                                width: MediaQuery.of(context).size.width * 0.4,
+                                text: 'Terapkan',
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                backgroundColor: primaryColor,
+                                textColor: baseColor,
+                                borderRadius: 30,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ],
+                          ),
+                        ],
+                      );
+                    }, success: (model, isInfo, isVoucher, startDate, endDate) {
+                      print('INI BOOL IS INFO  $isInfo');
+                      String startDateText = DateFormat('yyyy-MM-dd')
+                          .format(DateTime.now().subtract(Duration(days: 365)));
+                      String endDateText =
+                          DateFormat('yyyy-MM-dd').format(DateTime.now());
+
+                      startDateText = startDate != null
+                          ? DateFormat('yyyy-MM-dd').format(startDate)
+                          : startDateText;
+                      endDateText = endDate != null
+                          ? DateFormat('yyyy-MM-dd').format(endDate)
+                          : endDateText;
+
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Tipe Notifikasi',
+                            style: txtPrimaryTitle.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: blackColor,
+                            ),
+                            textAlign: TextAlign.start,
+                          ),
+                          SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Informasi',
+                                style: txtPrimarySubTitle.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                  color: blackColor,
+                                ),
+                              ),
+                              Checkbox(
+                                  value: isInfo,
+                                  activeColor: primaryColor,
+                                  onChanged: (newValue) {
+                                    context.read<NotificationBloc>().add(
+                                        NotificationEvent.toggleInfo(
+                                            newValue, newValue));
+                                  }),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Voucher',
+                                style: txtPrimarySubTitle.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                  color: blackColor,
+                                ),
+                              ),
+                              Checkbox(
+                                  value: isVoucher,
+                                  activeColor: primaryColor,
+                                  onChanged: (newValue) {
+                                    context.read<NotificationBloc>().add(
+                                        NotificationEvent.toggleVoucher(
+                                            newValue, newValue));
+                                  }),
+                            ],
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            'Periode Notifikasi',
+                            style: txtPrimaryTitle.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: blackColor,
+                            ),
+                            textAlign: TextAlign.start,
+                          ),
+                          SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              InkWell(
+                                onTap: () =>
+                                    _selectDate(context, isStartDate: true),
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 5),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      border:
+                                          Border.all(color: grey, width: 1)),
+                                  margin: EdgeInsets.only(top: 10),
+                                  child: Row(
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Mulai',
+                                            style:
+                                                txtSecondarySubTitle.copyWith(
+                                                    color: blackColor,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                          ),
+                                          SizedBox(height: 5),
+                                          Text(
+                                            startDateText,
+                                            style: txtPrimarySubTitle.copyWith(
+                                                color: blackColor,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 15),
+                                        child: Icon(
+                                          Icons.calendar_month_outlined,
+                                          size: 20,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Center(
+                                child: Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                    height: 3,
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey[200],
+                                      borderRadius: BorderRadius.circular(10),
+                                    )),
+                              ),
+                              InkWell(
+                                onTap: () =>
+                                    _selectDate(context, isStartDate: false),
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 5),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      border:
+                                          Border.all(color: grey, width: 1)),
+                                  child: Row(
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Berakhir',
+                                            style:
+                                                txtSecondarySubTitle.copyWith(
+                                                    color: blackColor,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                          ),
+                                          SizedBox(height: 5),
+                                          Text(
+                                            endDateText,
+                                            style: txtPrimarySubTitle.copyWith(
+                                                color: blackColor,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 15),
+                                        child: Icon(
+                                          Icons.calendar_month_outlined,
+                                          size: 20,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 45,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CommonButton(
+                                padding: EdgeInsets.symmetric(vertical: 15),
+                                width: MediaQuery.of(context).size.width * 0.4,
+                                borderColor: blackColor,
+                                borderWidth: 1,
+                                text: 'Reset',
+                                onPressed: () {
+                                  context.read<NotificationBloc>().add(NotificationEvent.resetFilters());
+                                  Future.delayed(Duration(seconds: 2), (){
+                                    context.pop();
+                                  });
+                                },
+                                backgroundColor: baseColor,
+                                textColor: blackColor,
+                                borderRadius: 30,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
+                              CommonButton(
+                                padding: EdgeInsets.symmetric(vertical: 15),
+                                width: MediaQuery.of(context).size.width * 0.4,
+                                text: 'Terapkan',
+                                onPressed: () {
+                                  if (isInfo == false && isVoucher == false) {
+                                    context.read<NotificationBloc>().add(
+                                        NotificationEvent.getFilterNotification(
+                                            'null',
+                                            startDateText,
+                                            endDateText));
+                                  } else if (isInfo == true &&
+                                      isVoucher == false) {
+                                    context.read<NotificationBloc>().add(
+                                        NotificationEvent.getFilterNotification(
+                                            'common',
+                                            startDateText,
+                                            endDateText));
+                                  } else if (isInfo == false &&
+                                      isVoucher == true) {
+                                    context.read<NotificationBloc>().add(
+                                        NotificationEvent.getFilterNotification(
+                                            'voucher',
+                                            startDateText,
+                                            endDateText));
+                                  } else if (isInfo == true &&
+                                      isVoucher == true) {
+                                    context.read<NotificationBloc>().add(
+                                        const NotificationEvent
+                                            .getNotification());
+                                  }
+
+                                  Navigator.pop(context);
+                                },
+                                backgroundColor: primaryColor,
+                                textColor: baseColor,
+                                borderRadius: 30,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ],
+                          ),
+                        ],
+                      );
+                    });
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

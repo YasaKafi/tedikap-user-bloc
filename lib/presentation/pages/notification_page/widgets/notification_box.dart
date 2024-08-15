@@ -11,8 +11,9 @@ class BoxNotification extends StatelessWidget {
   final Color? color;
   final String? title;
   final String? description;
+  final String? time;
   const BoxNotification({
-    super.key, required this.onTap,  this.color, this.title, this.description,
+    super.key, required this.onTap,  this.color, this.title, this.description, this.time,
   });
 
   @override
@@ -49,7 +50,7 @@ class BoxNotification extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '20 May 2024 • 12.00',
+                        time ?? '24:00',
                         style: txtSecondarySubTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor),
                       ),
                       SizedBox(height: 5),
@@ -72,6 +73,8 @@ class BoxNotification extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Divider(color: grey, height: 1),
+          SizedBox(height: 20),
+
         ],
       ),
     );

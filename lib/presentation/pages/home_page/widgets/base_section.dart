@@ -75,7 +75,7 @@ class _BaseSectionState extends State<BaseSection> {
                           ),
                       loading: () => ShimmerUserHome(),
                       success:
-                          (model, user, index, pointModel, statusOutletModel) {
+                          (model, user, index, pointModel, statusOutletModel, bannerModel, boxPromoModel) {
                         if (user != null) {
                           final schedulePickUp =
                               statusOutletModel?.data?.time ?? 'No Schedule';

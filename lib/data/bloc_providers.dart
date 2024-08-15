@@ -45,7 +45,7 @@ class AppProviders{
       create: (context) => ProfileBloc(UserDatasource()),
     ),
     BlocProvider<NotificationBloc>(
-      create: (context) => NotificationBloc(),
+      create: (context) => NotificationBloc(UserDatasource()),
     ),
     BlocProvider<EditProfileBloc>(
       create: (context) => EditProfileBloc(UserDatasource()),
