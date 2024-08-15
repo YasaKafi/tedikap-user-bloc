@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tedikap_user_bloc/common/constant.dart';
 
 import '../../../../../common/dimensions.dart';
 import '../../../../../common/theme.dart';
@@ -38,6 +40,24 @@ class BoxKindOfPayment extends StatelessWidget {
               success: (model, modelReward) {
                 if (model != null) {
                   final order = model.order!;
+                  String? logoPayment;
+
+                  if (order.paymentChannel == 'DANA'){
+                    logoPayment = icDana;
+                  } else if (order.paymentChannel == 'SHOPEEPAY'){
+                    logoPayment = icShopee;
+                  } else if (order.paymentChannel == 'OVO'){
+                    logoPayment = icOvo;
+                  } else if (order.paymentChannel == 'LINKAJA'){
+                    logoPayment = icLinkAja;
+                  } else if (order.paymentChannel == 'ASTRAPAY'){
+                    logoPayment = icAstraPay;
+                  } else if (order.paymentChannel == 'JENIUSPAY'){
+                    logoPayment = icJeniusPay;
+                  } else if (order.paymentChannel == 'QRIS'){
+                    logoPayment = icQris;
+                  }
+
                   if (order.paymentChannel != null) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,10 +71,16 @@ class BoxKindOfPayment extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(order.paymentChannel ?? '',
-                                style: txtPrimarySubTitle.copyWith(
-                                    fontWeight: FontWeight.w500,
-                                    color: blackColor)),
+                            Row(
+                              children: [
+                                SvgPicture.asset(logoPayment!, width: 24,),
+                                SizedBox(width: 5,),
+                                Text(order.paymentChannel ?? '',
+                                    style: txtPrimarySubTitle.copyWith(
+                                        fontWeight: FontWeight.w500,
+                                        color: blackColor)),
+                              ],
+                            ),
                             Text('Rp ${order.totalPrice}',
                                 style: txtPrimarySubTitle.copyWith(
                                     fontWeight: FontWeight.w500,
@@ -67,7 +93,6 @@ class BoxKindOfPayment extends StatelessWidget {
                     return Center();
                   }
                 } else if (modelReward != null) {
-                  final order = modelReward!.order!;
                   return Center();
                 } else {
                   return Center(child: Text('No data available'),);

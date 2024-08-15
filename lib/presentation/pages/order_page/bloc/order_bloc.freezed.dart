@@ -1430,9 +1430,7 @@ mixin _$OrderState {
             HistoryOrderRewardResponseModel? modelReward,
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
-            PostReOrderRewardResponseModel? modelReOrderReward,
-            CartResponseModel? cartModel,
-            CartRewardResponseModel? cartRewardModel)
+            PostReOrderRewardResponseModel? modelReOrderReward)
         success,
     required TResult Function(String? message) error,
   }) =>
@@ -1446,9 +1444,7 @@ mixin _$OrderState {
             HistoryOrderRewardResponseModel? modelReward,
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
-            PostReOrderRewardResponseModel? modelReOrderReward,
-            CartResponseModel? cartModel,
-            CartRewardResponseModel? cartRewardModel)?
+            PostReOrderRewardResponseModel? modelReOrderReward)?
         success,
     TResult? Function(String? message)? error,
   }) =>
@@ -1462,9 +1458,7 @@ mixin _$OrderState {
             HistoryOrderRewardResponseModel? modelReward,
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
-            PostReOrderRewardResponseModel? modelReOrderReward,
-            CartResponseModel? cartModel,
-            CartRewardResponseModel? cartRewardModel)?
+            PostReOrderRewardResponseModel? modelReOrderReward)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -1560,9 +1554,7 @@ class _$InitialImpl implements _Initial {
             HistoryOrderRewardResponseModel? modelReward,
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
-            PostReOrderRewardResponseModel? modelReOrderReward,
-            CartResponseModel? cartModel,
-            CartRewardResponseModel? cartRewardModel)
+            PostReOrderRewardResponseModel? modelReOrderReward)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -1579,9 +1571,7 @@ class _$InitialImpl implements _Initial {
             HistoryOrderRewardResponseModel? modelReward,
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
-            PostReOrderRewardResponseModel? modelReOrderReward,
-            CartResponseModel? cartModel,
-            CartRewardResponseModel? cartRewardModel)?
+            PostReOrderRewardResponseModel? modelReOrderReward)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -1598,9 +1588,7 @@ class _$InitialImpl implements _Initial {
             HistoryOrderRewardResponseModel? modelReward,
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
-            PostReOrderRewardResponseModel? modelReOrderReward,
-            CartResponseModel? cartModel,
-            CartRewardResponseModel? cartRewardModel)?
+            PostReOrderRewardResponseModel? modelReOrderReward)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -1698,9 +1686,7 @@ class _$LoadingImpl implements _Loading {
             HistoryOrderRewardResponseModel? modelReward,
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
-            PostReOrderRewardResponseModel? modelReOrderReward,
-            CartResponseModel? cartModel,
-            CartRewardResponseModel? cartRewardModel)
+            PostReOrderRewardResponseModel? modelReOrderReward)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -1717,9 +1703,7 @@ class _$LoadingImpl implements _Loading {
             HistoryOrderRewardResponseModel? modelReward,
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
-            PostReOrderRewardResponseModel? modelReOrderReward,
-            CartResponseModel? cartModel,
-            CartRewardResponseModel? cartRewardModel)?
+            PostReOrderRewardResponseModel? modelReOrderReward)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -1736,9 +1720,7 @@ class _$LoadingImpl implements _Loading {
             HistoryOrderRewardResponseModel? modelReward,
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
-            PostReOrderRewardResponseModel? modelReOrderReward,
-            CartResponseModel? cartModel,
-            CartRewardResponseModel? cartRewardModel)?
+            PostReOrderRewardResponseModel? modelReOrderReward)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -1802,9 +1784,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
       HistoryOrderRewardResponseModel? modelReward,
       int filterIndex,
       PostReOrderResponseModel? modelPostReOrder,
-      PostReOrderRewardResponseModel? modelReOrderReward,
-      CartResponseModel? cartModel,
-      CartRewardResponseModel? cartRewardModel});
+      PostReOrderRewardResponseModel? modelReOrderReward});
 }
 
 /// @nodoc
@@ -1823,8 +1803,6 @@ class __$$SuccessImplCopyWithImpl<$Res>
     Object? filterIndex = null,
     Object? modelPostReOrder = freezed,
     Object? modelReOrderReward = freezed,
-    Object? cartModel = freezed,
-    Object? cartRewardModel = freezed,
   }) {
     return _then(_$SuccessImpl(
       freezed == model
@@ -1847,14 +1825,6 @@ class __$$SuccessImplCopyWithImpl<$Res>
           ? _value.modelReOrderReward
           : modelReOrderReward // ignore: cast_nullable_to_non_nullable
               as PostReOrderRewardResponseModel?,
-      freezed == cartModel
-          ? _value.cartModel
-          : cartModel // ignore: cast_nullable_to_non_nullable
-              as CartResponseModel?,
-      freezed == cartRewardModel
-          ? _value.cartRewardModel
-          : cartRewardModel // ignore: cast_nullable_to_non_nullable
-              as CartRewardResponseModel?,
     ));
   }
 }
@@ -1862,14 +1832,8 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl(
-      this.model,
-      this.modelReward,
-      this.filterIndex,
-      this.modelPostReOrder,
-      this.modelReOrderReward,
-      this.cartModel,
-      this.cartRewardModel);
+  const _$SuccessImpl(this.model, this.modelReward, this.filterIndex,
+      this.modelPostReOrder, this.modelReOrderReward);
 
   @override
   final HistoryOrderResponseModel? model;
@@ -1881,14 +1845,10 @@ class _$SuccessImpl implements _Success {
   final PostReOrderResponseModel? modelPostReOrder;
   @override
   final PostReOrderRewardResponseModel? modelReOrderReward;
-  @override
-  final CartResponseModel? cartModel;
-  @override
-  final CartRewardResponseModel? cartRewardModel;
 
   @override
   String toString() {
-    return 'OrderState.success(model: $model, modelReward: $modelReward, filterIndex: $filterIndex, modelPostReOrder: $modelPostReOrder, modelReOrderReward: $modelReOrderReward, cartModel: $cartModel, cartRewardModel: $cartRewardModel)';
+    return 'OrderState.success(model: $model, modelReward: $modelReward, filterIndex: $filterIndex, modelPostReOrder: $modelPostReOrder, modelReOrderReward: $modelReOrderReward)';
   }
 
   @override
@@ -1904,16 +1864,12 @@ class _$SuccessImpl implements _Success {
             (identical(other.modelPostReOrder, modelPostReOrder) ||
                 other.modelPostReOrder == modelPostReOrder) &&
             (identical(other.modelReOrderReward, modelReOrderReward) ||
-                other.modelReOrderReward == modelReOrderReward) &&
-            (identical(other.cartModel, cartModel) ||
-                other.cartModel == cartModel) &&
-            (identical(other.cartRewardModel, cartRewardModel) ||
-                other.cartRewardModel == cartRewardModel));
+                other.modelReOrderReward == modelReOrderReward));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, model, modelReward, filterIndex,
-      modelPostReOrder, modelReOrderReward, cartModel, cartRewardModel);
+      modelPostReOrder, modelReOrderReward);
 
   @JsonKey(ignore: true)
   @override
@@ -1931,14 +1887,12 @@ class _$SuccessImpl implements _Success {
             HistoryOrderRewardResponseModel? modelReward,
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
-            PostReOrderRewardResponseModel? modelReOrderReward,
-            CartResponseModel? cartModel,
-            CartRewardResponseModel? cartRewardModel)
+            PostReOrderRewardResponseModel? modelReOrderReward)
         success,
     required TResult Function(String? message) error,
   }) {
-    return success(model, modelReward, filterIndex, modelPostReOrder,
-        modelReOrderReward, cartModel, cartRewardModel);
+    return success(
+        model, modelReward, filterIndex, modelPostReOrder, modelReOrderReward);
   }
 
   @override
@@ -1951,14 +1905,12 @@ class _$SuccessImpl implements _Success {
             HistoryOrderRewardResponseModel? modelReward,
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
-            PostReOrderRewardResponseModel? modelReOrderReward,
-            CartResponseModel? cartModel,
-            CartRewardResponseModel? cartRewardModel)?
+            PostReOrderRewardResponseModel? modelReOrderReward)?
         success,
     TResult? Function(String? message)? error,
   }) {
-    return success?.call(model, modelReward, filterIndex, modelPostReOrder,
-        modelReOrderReward, cartModel, cartRewardModel);
+    return success?.call(
+        model, modelReward, filterIndex, modelPostReOrder, modelReOrderReward);
   }
 
   @override
@@ -1971,16 +1923,14 @@ class _$SuccessImpl implements _Success {
             HistoryOrderRewardResponseModel? modelReward,
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
-            PostReOrderRewardResponseModel? modelReOrderReward,
-            CartResponseModel? cartModel,
-            CartRewardResponseModel? cartRewardModel)?
+            PostReOrderRewardResponseModel? modelReOrderReward)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
       return success(model, modelReward, filterIndex, modelPostReOrder,
-          modelReOrderReward, cartModel, cartRewardModel);
+          modelReOrderReward);
     }
     return orElse();
   }
@@ -2029,17 +1979,13 @@ abstract class _Success implements OrderState {
       final HistoryOrderRewardResponseModel? modelReward,
       final int filterIndex,
       final PostReOrderResponseModel? modelPostReOrder,
-      final PostReOrderRewardResponseModel? modelReOrderReward,
-      final CartResponseModel? cartModel,
-      final CartRewardResponseModel? cartRewardModel) = _$SuccessImpl;
+      final PostReOrderRewardResponseModel? modelReOrderReward) = _$SuccessImpl;
 
   HistoryOrderResponseModel? get model;
   HistoryOrderRewardResponseModel? get modelReward;
   int get filterIndex;
   PostReOrderResponseModel? get modelPostReOrder;
   PostReOrderRewardResponseModel? get modelReOrderReward;
-  CartResponseModel? get cartModel;
-  CartRewardResponseModel? get cartRewardModel;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -2116,9 +2062,7 @@ class _$ErrorImpl implements _Error {
             HistoryOrderRewardResponseModel? modelReward,
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
-            PostReOrderRewardResponseModel? modelReOrderReward,
-            CartResponseModel? cartModel,
-            CartRewardResponseModel? cartRewardModel)
+            PostReOrderRewardResponseModel? modelReOrderReward)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -2135,9 +2079,7 @@ class _$ErrorImpl implements _Error {
             HistoryOrderRewardResponseModel? modelReward,
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
-            PostReOrderRewardResponseModel? modelReOrderReward,
-            CartResponseModel? cartModel,
-            CartRewardResponseModel? cartRewardModel)?
+            PostReOrderRewardResponseModel? modelReOrderReward)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -2154,9 +2096,7 @@ class _$ErrorImpl implements _Error {
             HistoryOrderRewardResponseModel? modelReward,
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
-            PostReOrderRewardResponseModel? modelReOrderReward,
-            CartResponseModel? cartModel,
-            CartRewardResponseModel? cartRewardModel)?
+            PostReOrderRewardResponseModel? modelReOrderReward)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),

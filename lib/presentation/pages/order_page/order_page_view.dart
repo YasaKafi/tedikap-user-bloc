@@ -131,7 +131,7 @@ class _OrderPageState extends State<OrderPage> {
                                         ),
                                       ),
                                   success: (model, modelReward, filterIndex,
-                                      modelReOrder, modelReOrderReward, modelCart, modelCartReward) {
+                                      modelReOrder, modelReOrderReward) {
                                     if ((model?.orders == null ||
                                             model?.orders?.isEmpty == true) &&
                                         (modelReward?.orders == null ||
@@ -204,7 +204,7 @@ class _OrderPageState extends State<OrderPage> {
                               state.maybeWhen(
                                   orElse: () {},
                                   success: (model, modelReward, filterIndex,
-                                      modelReOrder, modelReOrderReward, modelCart, modelCartReward) {
+                                      modelReOrder, modelReOrderReward) {
 
                                     if (modelReOrder?.cart != null
                                         ) {
@@ -253,7 +253,7 @@ class _OrderPageState extends State<OrderPage> {
                                           ),
                                         ),
                                     success: (model, modelReward, filterIndex,
-                                        modelReOrder, modelReOrderReward, modelCart, modelCartReward) {
+                                        modelReOrder, modelReOrderReward) {
                                       if ((model?.orders == null ||
                                               model?.orders?.isEmpty == true) &&
                                           (modelReward?.orders == null ||

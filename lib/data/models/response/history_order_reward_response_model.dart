@@ -33,6 +33,7 @@ class DataOrderReward {
   String? schedulePickup;
   DateTime? createdAt;
   DateTime? updatedAt;
+  bool? cartItems;
   List<OrderRewardItem>? orderRewardItems;
 
   DataOrderReward({
@@ -44,6 +45,7 @@ class DataOrderReward {
     this.schedulePickup,
     this.createdAt,
     this.updatedAt,
+    this.cartItems,
     this.orderRewardItems,
   });
 
@@ -58,6 +60,7 @@ class DataOrderReward {
     totalPoint: json["total_point"],
     status: json["status"],
     schedulePickup: json["schedule_pickup"],
+    cartItems: json["cart_length"],
     createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
     updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
     orderRewardItems: json["order_reward_items"] == null ? [] : List<OrderRewardItem>.from(json["order_reward_items"]!.map((x) => OrderRewardItem.fromMap(x))),
@@ -70,6 +73,7 @@ class DataOrderReward {
     "total_point": totalPoint,
     "status": status,
     "schedule_pickup": schedulePickup,
+    "cart_length": cartItems,
     "created_at": createdAt?.toIso8601String(),
     "updated_at": updatedAt?.toIso8601String(),
     "order_reward_items": orderRewardItems == null ? [] : List<dynamic>.from(orderRewardItems!.map((x) => x.toMap())),

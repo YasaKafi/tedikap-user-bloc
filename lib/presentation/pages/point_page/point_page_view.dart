@@ -26,7 +26,7 @@ class _PointPageState extends State<PointPage> with SingleTickerProviderStateMix
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 4, vsync: this);
 
     // Listen to tab changes
     _tabController.addListener(() {
@@ -40,7 +40,10 @@ class _PointPageState extends State<PointPage> with SingleTickerProviderStateMix
           context.read<PointBloc>().add(const PointEvent.getFilterCategory('nontea'));
           break;
         case 2:
-          context.read<PointBloc>().add(const PointEvent.getFilterCategory('snack'));
+          context.read<PointBloc>().add(const PointEvent.getFilterCategory('yakult'));
+          break;
+          case 3:
+          context.read<PointBloc>().add(const PointEvent.getFilterCategory('merchandise'));
           break;
       }
     });
@@ -65,7 +68,7 @@ class _PointPageState extends State<PointPage> with SingleTickerProviderStateMix
     double screenHeight = MediaQuery.of(context).size.height;
 
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         backgroundColor: baseColor,
         appBar: AppBar(
@@ -140,7 +143,10 @@ class _PointPageState extends State<PointPage> with SingleTickerProviderStateMix
                         context.read<PointBloc>().add(const PointEvent.getFilterCategory('nontea'));
                         break;
                       case 2:
-                        context.read<PointBloc>().add(const PointEvent.getFilterCategory('snack'));
+                        context.read<PointBloc>().add(const PointEvent.getFilterCategory('yakult'));
+                        break;
+                        case 3:
+                        context.read<PointBloc>().add(const PointEvent.getFilterCategory('merchandise'));
                         break;
                     }
                   },
@@ -158,7 +164,13 @@ class _PointPageState extends State<PointPage> with SingleTickerProviderStateMix
                               color: blackColor)),
                     ),
                     Tab(
-                      child: Text('Snack',
+                      child: Text('Yakult',
+                          style: txtPrimarySubTitle.copyWith(
+                              fontWeight: FontWeight.w500,
+                              color: blackColor)),
+                    ),
+                    Tab(
+                      child: Text('Merchandise',
                           style: txtPrimarySubTitle.copyWith(
                               fontWeight: FontWeight.w500,
                               color: blackColor)),
@@ -170,6 +182,7 @@ class _PointPageState extends State<PointPage> with SingleTickerProviderStateMix
                 child: TabBarView(
                   controller: _tabController,
                   children: [
+                    buildTabGridViewProduct(screenHeight, screenWidth),
                     buildTabGridViewProduct(screenHeight, screenWidth),
                     buildTabGridViewProduct(screenHeight, screenWidth),
                     buildTabGridViewProduct(screenHeight, screenWidth),

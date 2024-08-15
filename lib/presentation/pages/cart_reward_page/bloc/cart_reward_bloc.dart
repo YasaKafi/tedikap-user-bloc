@@ -57,7 +57,6 @@ class CartRewardBloc extends Bloc<CartRewardEvent, CartRewardState> {
     on<_DeleteItem>((event, emit) async {
       final currentState = state;
 
-      // Emit loading state
       emit(const _Loading());
 
       if (currentState is! _Success) {

@@ -95,10 +95,10 @@ class _VoucherPageState extends State<VoucherPage> {
               const SizedBox(
                 height: Dimensions.marginSizeLarge,
               ),
-              InputVoucherCode(screenWidth: screenWidth),
-              const SizedBox(
-                height: Dimensions.marginSizeLarge,
-              ),
+              // InputVoucherCode(screenWidth: screenWidth),
+              // const SizedBox(
+              //   height: Dimensions.marginSizeLarge,
+              // ),
               BlocBuilder<VoucherBloc, VoucherState>(
                 builder: (context, state) {
                   return state.maybeWhen(

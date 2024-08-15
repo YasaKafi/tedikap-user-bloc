@@ -39,6 +39,7 @@ class DetailOrder {
   DateTime? createdAt;
   DateTime? updatedAt;
   String? schedulePickup;
+  bool? cartItems;
   List<DetailOrderItem>? orderItems;
 
   DetailOrder({
