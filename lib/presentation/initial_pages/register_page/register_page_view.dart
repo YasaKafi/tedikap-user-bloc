@@ -81,47 +81,72 @@ class RegisterPage extends StatelessWidget {
                 BlocConsumer<RegisterBloc, RegisterState>(
                   listener: (context, state) {
                     state.maybeWhen(
-                      orElse: (){},
+                      orElse: () {},
                       error: (message) {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text(message!, style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w500, color: baseColor),),
+                          content: Text(
+                            message!,
+                            style: txtSecondaryTitle.copyWith(
+                                fontWeight: FontWeight.w500, color: baseColor),
+                          ),
                           backgroundColor: redMedium,
                         ));
                       },
                       success: (model) {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text(model!.message!, style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w500, color: baseColor),),
+                          content: Text(
+                            model!.message!,
+                            style: txtSecondaryTitle.copyWith(
+                                fontWeight: FontWeight.w500, color: baseColor),
+                          ),
                           backgroundColor: greenMedium,
                         ));
-                        context.goNamed('login');
+                        context.goNamed('dashboard', pathParameters: {'pageIndex' : '0'});
                       },
-
                     );
                   },
                   builder: (context, state) {
                     return state.maybeWhen(
-                      orElse: (){
+                      orElse: () {
                         return CommonButton(
                           text: 'Register',
                           width: MediaQuery.of(context).size.width,
                           onPressed: () {
-
-                            if (usernameController.text.isEmpty || emailController.text.isEmpty || passwordController.text.isEmpty || confirmpasswordController.text.isEmpty) {
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please fill all fields', style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w500, color: baseColor),), backgroundColor: redMedium,));
-
+                            if (usernameController.text.isEmpty ||
+                                emailController.text.isEmpty ||
+                                passwordController.text.isEmpty ||
+                                confirmpasswordController.text.isEmpty) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text(
+                                  'Please fill all fields',
+                                  style: txtSecondaryTitle.copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      color: baseColor),
+                                ),
+                                backgroundColor: redMedium,
+                              ));
+                            } else if (passwordController.text != confirmpasswordController.text){
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text(
+                                  'Confirm Password must be the same as the password',
+                                  style: txtSecondaryTitle.copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      color: baseColor),
+                                ),
+                                backgroundColor: redMedium,
+                              ));
                             } else {
                               final requestModel = RegisterRequestModel(
-                                  name: usernameController.text,
-                                  email: emailController.text,
-                                  password: passwordController.text,
-                                  fcmToken: GlobalVariables.deviceToken,
+                                name: usernameController.text,
+                                email: emailController.text,
+                                password: passwordController.text,
+                                fcmToken: GlobalVariables.deviceToken,
                               );
                               context
                                   .read<RegisterBloc>()
                                   .add(RegisterEvent.doRegister(requestModel));
-
-
-
                             }
                           },
                           borderRadius: 10,
@@ -135,8 +160,6 @@ class RegisterPage extends StatelessWidget {
                         );
                       },
                     );
-
-
                   },
                 ),
                 const SizedBox(height: Dimensions.marginSizeLarge),
@@ -154,9 +177,10 @@ class RegisterPage extends StatelessWidget {
                             color: primaryColor,
                             decoration: TextDecoration.underline,
                           ),
-                          recognizer: TapGestureRecognizer()..onTap = () {
-                            context.goNamed('login');
-                          },
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              context.goNamed('login');
+                            },
                         ),
                       ],
                     ),

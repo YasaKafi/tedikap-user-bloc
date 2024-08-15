@@ -30,13 +30,16 @@ class _SplashPageState extends State<SplashPage> {
   void _checkAuthStatus() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
+    final hasSeenOnboarding = prefs.getBool('hasSeenOnboarding') ?? false;
 
     Future.delayed(const Duration(seconds: 2), () {
       if (mounted) {
         if (token != null) {
           _router?.goNamed('dashboard', pathParameters: {'pageIndex': '0'});
-        } else {
+        } else if (!hasSeenOnboarding) {
           _router?.goNamed('onboard');
+        } else {
+          _router?.goNamed('login');
         }
       }
     });

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/onboard_page/bloc/onboard_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/onboard_page/widgets/item_pageview.dart';
@@ -36,10 +37,12 @@ class OnboardPage extends StatelessWidget {
                     BlocConsumer<OnboardBloc, OnboardState>(
                       builder: (context, state) {
                         return TextButton(
-                            onPressed: () {
+                            onPressed: () async {
                               context
                                   .read<OnboardBloc>()
                                   .add(const OnboardEvent.skipOnboard());
+                              SharedPreferences prefs = await SharedPreferences.getInstance();
+                              await prefs.setBool('hasSeenOnboarding', true);
                             },
                             child: Text(
                               'Skip',
@@ -120,7 +123,10 @@ class OnboardPage extends StatelessWidget {
                           }
                           return CommonButton(
                             text: buttonText,
-                            onPressed: () => context.read<OnboardBloc>().add(const OnboardEvent.onPressedButton()),
+                            onPressed: () async { context.read<OnboardBloc>().add(const OnboardEvent.onPressedButton());
+                            SharedPreferences prefs = await SharedPreferences.getInstance();
+                            await prefs.setBool('hasSeenOnboarding', true);
+                            },
                             borderRadius: 10,
                             width: MediaQuery.of(context).size.width,
                             height: 50,
