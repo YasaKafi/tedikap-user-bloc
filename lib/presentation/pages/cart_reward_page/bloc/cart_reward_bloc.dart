@@ -38,15 +38,45 @@ class CartRewardBloc extends Bloc<CartRewardEvent, CartRewardState> {
     });
 
     on<_PatchQty>((event, emit) async {
+      final currentState = state;
       emit(const _Loading());
+      if ( currentState is! _Success) {
+        emit(const _Error(message: 'Unexpected state type'));
+        return;
+      }
       final result = await cartDatasource.patchQtyReward(event.action!, event.cartRewardItem!);
-      result.fold((l) => emit(const _Error(message: 'Failed to access data order')), (r) => emit(_Success(cartModel: null,  patchQtyModel: r, deleteModel: null, modelPostOrder: null, modelPoint: null)));
+      await result.fold((l) async => emit(const _Error(message: 'Failed to access data order')),
+              (r) async {
+            final updatedCart = await cartDatasource.getCartReward();
+                updatedCart.fold((l) => null, (success) => emit(currentState.copyWith(patchQtyModel: r, cartModel: success)));
+              });
     });
 
+
+
     on<_DeleteItem>((event, emit) async {
+      final currentState = state;
+
       emit(const _Loading());
+
+      if (currentState is! _Success) {
+        emit(const _Error(message: 'Unexpected state type'));
+        return;
+      }
+
       final result = await cartDatasource.deleteItemReward(event.cartItem);
-      result.fold((l) => emit(const _Error(message: 'Failed to access data order')), (r) => emit(_Success(cartModel: null,  patchQtyModel: null, deleteModel: r, modelPostOrder: null, modelPoint: null)));
+      await result.fold(
+            (l) async => emit(const _Error(message: 'Failed to access data order')),
+            (r) async {
+          final updatedCart = await cartDatasource.getCartReward();
+          updatedCart.fold(
+                (failure) =>
+                emit(const _Error(message: 'Failed to fetch updated cart')),
+                (updatedData) => emit(
+                currentState.copyWith(deleteModel: r, cartModel: updatedData)),
+          );
+        },
+      );
     });
 
     on<_PostOrder>((event, emit) async {

@@ -70,15 +70,18 @@ class _BaseSectionState extends State<BaseSection> {
               BlocBuilder<HomeBloc, HomeState>(
                 builder: (context, state) {
                   return state.when(
-                      initial: () =>
-                      const ShimmerUserHome(),
-                      loading: () => const ShimmerUserHome(),
+                      initial: () => Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                      loading: () => ShimmerUserHome(),
                       success:
-                          (model, user, index, pointModel, statusOutletModel,
-                          bannerModel, boxPromoModel) {
+                          (model, user, index, pointModel, statusOutletModel) {
                         if (user != null) {
                           final schedulePickUp =
                               statusOutletModel?.data?.time ?? 'No Schedule';
+
+                          final statusOutlet =
+                              statusOutletModel?.data?.description ?? 'Closed';
 
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,7 +99,7 @@ class _BaseSectionState extends State<BaseSection> {
                                 child: Text(
                                   _isWelcomeMessage
                                       ? 'Selamat Datang'
-                                      : 'Pick Up Sesi 1',
+                                      : statusOutlet,
                                   key: ValueKey<bool>(_isWelcomeMessage),
                                   style: txtPrimarySubTitle.copyWith(
                                       fontWeight: FontWeight.w500,
@@ -140,14 +143,18 @@ class _BaseSectionState extends State<BaseSection> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   ButtonCircleIcon(
-                    routes: 'cart_common',
+                    onTap: () {
+                      context.goNamed('cart_common');
+                    },
                     icon: icCart,
                   ),
                   const SizedBox(
                     width: 12,
                   ),
                   ButtonCircleIcon(
-                    routes: 'notification-page',
+                    onTap: () {
+                      context.pushNamed('notification');
+                    },
                     icon: icNotification,
                   ),
                 ],
@@ -330,21 +337,17 @@ class _BaseSectionState extends State<BaseSection> {
 class ButtonCircleIcon extends StatelessWidget {
   const ButtonCircleIcon({
     super.key,
-    required this.routes,
+    this.onTap,
     required this.icon,
-    this.extra,
   });
 
-  final String routes;
+  final void Function()? onTap;
   final String icon;
-  final Object? extra;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        context.goNamed(routes, extra: extra);
-      },
+      onTap: onTap,
       child: Container(
         padding: const EdgeInsets.all(Dimensions.paddingSizeMedium),
         decoration:

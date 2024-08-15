@@ -4,6 +4,8 @@ part of 'order_bloc.dart';
 class OrderEvent with _$OrderEvent {
   const factory OrderEvent.started() = _Started;
   const factory OrderEvent.getAllHistoryOrder() = _GetAllHistoryOrder;
+  const factory OrderEvent.postReOrder(String? orderId) = _PostReOrder;
+  const factory OrderEvent.postReOrderReward(String? orderRewardId) = _PostReOrderReward;
   const factory OrderEvent.getAllHistoryOrderReward() = _GetAllHistoryOrderReward;
   const factory OrderEvent.getFilterOrder(String query) = _GetCategoryOrder;
   const factory OrderEvent.getFilterOrderReward(String query) = _GetCategoryOrderReward;

@@ -42,7 +42,7 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
           context.read<MenuBloc>().add(const MenuEvent.getFilterCategory('nontea'));
           break;
         case 3:
-          context.read<MenuBloc>().add(const MenuEvent.getFilterCategory('snack'));
+          context.read<MenuBloc>().add(const MenuEvent.getFilterCategory('yakult'));
           break;
       }
     });
@@ -122,7 +122,7 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
                               break;
                             case 3:
                               context.read<MenuBloc>().add(
-                                  const MenuEvent.getFilterCategory('snack'));
+                                  const MenuEvent.getFilterCategory('yakult'));
                               break;
                           }
                         },
@@ -146,7 +146,7 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
                                     color: blackColor)),
                           ),
                           Tab(
-                            child: Text('Snack',
+                            child: Text('Yakult',
                                 style: txtPrimarySubTitle.copyWith(
                                     fontWeight: FontWeight.w500,
                                     color: blackColor)),

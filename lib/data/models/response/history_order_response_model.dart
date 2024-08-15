@@ -38,6 +38,7 @@ class DataOrder {
   DateTime? createdAt;
   DateTime? updatedAt;
   String? schedulePickup;
+  bool? cartItems;
   List<OrderItem>? orderItems;
 
   DataOrder({
@@ -54,6 +55,7 @@ class DataOrder {
     this.createdAt,
     this.updatedAt,
     this.schedulePickup,
+    this.cartItems,
     this.orderItems,
   });
 
@@ -75,6 +77,7 @@ class DataOrder {
     createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
     updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
     schedulePickup: json["schedule_pickup"],
+    cartItems: json["cart_length"],
     orderItems: json["order_items"] == null ? [] : List<OrderItem>.from(json["order_items"]!.map((x) => OrderItem.fromMap(x))),
   );
 
@@ -92,6 +95,7 @@ class DataOrder {
     "created_at": createdAt?.toIso8601String(),
     "updated_at": updatedAt?.toIso8601String(),
     "schedule_pickup": schedulePickup,
+    "cart_length": cartItems,
     "order_items": orderItems == null ? [] : List<dynamic>.from(orderItems!.map((x) => x.toMap())),
   };
 }

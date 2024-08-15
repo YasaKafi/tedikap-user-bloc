@@ -11,7 +11,6 @@ import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/widgets/s
 
 
 import '../../../../../common/theme.dart';
-import '../../../common/dimensions.dart';
 
 class DetailOrderPage extends StatefulWidget {
   final String? orderId;
@@ -24,17 +23,41 @@ class DetailOrderPage extends StatefulWidget {
   _DetailOrderPageState createState() => _DetailOrderPageState();
 }
 
-class _DetailOrderPageState extends State<DetailOrderPage> {
+class _DetailOrderPageState extends State<DetailOrderPage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
     if (widget.orderId != null) {
+      WidgetsBinding.instance.addObserver(this);
       context.read<DetailOrderBloc>().add(DetailOrderEvent.getDetailHistoryOrder(widget.orderId!));
     }
 
     if (widget.orderRewardId != null) {
       context.read<DetailOrderBloc>().add(DetailOrderEvent.getDetailHistoryOrderReward(widget.orderRewardId!));
     }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.resumed) {
+      if (mounted) {
+        if (widget.orderId != null) {
+          WidgetsBinding.instance.addObserver(this);
+          context.read<DetailOrderBloc>().add(DetailOrderEvent.getDetailHistoryOrder(widget.orderId!));
+        }
+
+        if (widget.orderRewardId != null) {
+          context.read<DetailOrderBloc>().add(DetailOrderEvent.getDetailHistoryOrderReward(widget.orderRewardId!));
+        }
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 
   Future<void> _refreshData() async {
@@ -110,7 +133,7 @@ class _DetailOrderPageState extends State<DetailOrderPage> {
                     BoxPaymentDetailOrder(screenWidth: screenWidth),
                     SizedBox(height: 20),
                     BoxKindOfPayment(screenWidth: screenWidth),
-                    SizedBox(height: 20),
+                    SizedBox(height: 80),
                   ],
                 ),
               ),
@@ -122,7 +145,7 @@ class _DetailOrderPageState extends State<DetailOrderPage> {
               bottom: 0,
               right: 0,
               left: 0,
-              child: SectionButton(linkCheckout: widget.linkCheckout),
+              child: SectionButton(linkCheckout: widget.linkCheckout, orderId: widget.orderId, orderRewardId: widget.orderRewardId),
             ),
           ),
         ],

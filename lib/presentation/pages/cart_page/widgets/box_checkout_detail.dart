@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_page/bloc/cart_bloc.dart';
 
@@ -121,9 +122,23 @@ class BoxCheckoutDetail extends StatelessWidget {
                                           ),
                                           InkWell(
                                             onTap: () {
-                                              context.read<CartBloc>().add(
-                                                  CartEvent.deleteItem(
-                                                      cartItem: productItemsCheckout.id));
+                                              _onAlertButtonsPressed(context,
+                                                  title: 'Hapus Item',
+                                                  titleStyle: txtPrimaryTitle.copyWith(
+                                                      fontWeight: FontWeight.w600,
+                                                      color: blackColor),
+                                                  desc: 'Apakah anda yakin ingin menghapus item ini?',
+                                                  descStyle: txtPrimarySubTitle.copyWith(
+                                                      fontWeight: FontWeight.w400,
+                                                      color: blackColor),
+                                                  bgcolor: baseColor,
+                                                  onPressed: () {
+                                                    context.read<CartBloc>().add(
+                                                        CartEvent.deleteItem(
+                                                            cartItem: productItemsCheckout.id));
+                                                    Navigator.pop(context);
+                                                  });
+
                                             },
                                             child: const Icon(
                                               Icons.delete_forever_outlined,
@@ -339,6 +354,50 @@ class BoxCheckoutDetail extends StatelessWidget {
       ),
     );
   }
+
+  _onAlertButtonsPressed(context,
+      {String? title,
+        TextStyle? titleStyle,
+        TextStyle? descStyle,
+        String? desc,
+        String? icon,
+        Color? bgcolor,
+        VoidCallback? onPressed}) {
+    Alert(
+      context: context,
+      title: title,
+      padding: EdgeInsets.all(20),
+      style: AlertStyle(
+        animationType: AnimationType.shrink,
+        isCloseButton: false,
+        backgroundColor: bgcolor,
+        overlayColor: Colors.black38,
+        titleStyle: titleStyle!,
+        descStyle: descStyle!,
+      ),
+      desc: desc,
+
+      buttons: [
+        DialogButton(
+          child: Text(
+            "Cancel",
+            style: txtPrimaryTitle.copyWith(
+                fontWeight: FontWeight.w600, color: baseColor),
+          ),
+          onPressed: () => Navigator.pop(context),
+          color: redMedium,
+        ),
+        DialogButton(
+            child: Text(
+              "Confirm",
+              style: txtPrimaryTitle.copyWith(
+                  fontWeight: FontWeight.w600, color: baseColor),
+            ),
+            color: navyColor,
+            onPressed: onPressed)
+      ],
+    ).show();
+  }
 }
 
 class DottedDivider extends StatelessWidget {
@@ -405,4 +464,5 @@ class _DottedLinePainter extends CustomPainter {
   bool shouldRepaint(CustomPainter oldDelegate) {
     return false;
   }
+
 }

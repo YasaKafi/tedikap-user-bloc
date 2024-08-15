@@ -1,8 +1,6 @@
 
 import 'package:dartz/dartz.dart';
 import 'package:tedikap_user_bloc/data/models/request/post_order_request_model.dart';
-import 'package:tedikap_user_bloc/data/models/request/post_order_reward_request_model.dart';
-import 'package:tedikap_user_bloc/data/models/request/post_payment_request_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/detail_history_order_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/detail_history_order_reward_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/history_order_response_model.dart';
@@ -10,6 +8,8 @@ import 'package:tedikap_user_bloc/data/models/response/history_order_reward_resp
 import 'package:tedikap_user_bloc/data/models/response/post_order_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/post_order_reward_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/post_payment_response_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/post_reorder_response_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/post_reorder_reward_response_model.dart';
 
 import '../dio_instance.dart';
 import '../repository/tedikap_repository.dart';
@@ -93,6 +93,22 @@ class OrderDatasource{
     }
   }
 
+  Future<Either<String, PostReOrderResponseModel>> postReOrder(String id) async {
+    try {
+      final response = await _dioInstance.postRequest(
+        isAuthorize: true,
+        endpoint: '${TedikapApiRepository.postReOrder}/$id',
+      );
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        return Right(PostReOrderResponseModel.fromMap(response.data));
+      } else {
+        return const Left('Failed Re Order');
+      }
+    } catch (e) {
+      return Left('Failed Ordered: ${e.toString()}');
+    }
+  }
+
   Future<Either<String, PostOrderRewardResponseModel>> postOrderReward(
       int? cartId) async {
     try {
@@ -109,6 +125,22 @@ class OrderDatasource{
         return const Left('Your point is not enough');
       } else {
         return const Left('Failed Ordered');
+      }
+    } catch (e) {
+      return Left('Failed Ordered: ${e.toString()}');
+    }
+  }
+
+  Future<Either<String, PostReOrderRewardResponseModel>> postReOrderReward(String id) async {
+    try {
+      final response = await _dioInstance.postRequest(
+        isAuthorize: true,
+        endpoint: '${TedikapApiRepository.postReOrderReward}/$id',
+      );
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        return Right(PostReOrderRewardResponseModel.fromMap(response.data));
+      } else {
+        return const Left('Failed Re Order');
       }
     } catch (e) {
       return Left('Failed Ordered: ${e.toString()}');

@@ -1,4 +1,5 @@
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tedikap_user_bloc/presentation/dashboard/dashboard_page.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/login_page/login_page_view.dart';
@@ -16,6 +17,7 @@ import 'package:tedikap_user_bloc/presentation/pages/information_page/help_cente
 import 'package:tedikap_user_bloc/presentation/pages/information_page/language_setting_page/language_setting_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/setting_page/setting_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/terms_of_serive_page/terms_of_serive_view.dart';
+import 'package:tedikap_user_bloc/presentation/pages/notification_page/notification_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/point_page/point_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/voucher_page/voucher_page_view.dart';
 
@@ -102,6 +104,16 @@ class AppRouter {
         name: 'favorite',
         path: '/favorite',
         builder: (context, state) => FavoritePage(),
+      ),
+      GoRoute(
+        name: 'notification',
+        path: '/notification',
+        builder: (context, state) {
+          final extraData = state.extra as Map<String, dynamic>?;
+          final messageNotification = extraData?['message'] as RemoteMessage? ?? null;
+
+          return NotificationPage(message: messageNotification,);
+        },
       ),
       GoRoute(
         name: 'voucher',

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_reward_page/bloc/cart_reward_bloc.dart';
 
@@ -66,11 +67,12 @@ class BoxCheckoutDetail extends StatelessWidget {
                   initial: () => buildShimmer(),
                   loading: () => buildShimmer(),
                   success: (cartModel,  modelQty, deleteModel, modelPostOrder, modelPoint) {
+                    print('INI CART MODEL ${cartModel!.cart!.cartItems!.length}');
+
                     if (cartModel == null || cartModel.cart == null) {
                       return buildShimmer();
-                    } else if (cartModel.cart!.cartItems!.isEmpty) {
-                      return _buildEmptyCartState(context, screenWidth);
-                    } else {
+                    }
+                    if (cartModel.cart!.cartItems!.isNotEmpty) {
                       final itemCart = cartModel.cart;
                       return Column(
                         children: List.generate(itemCart!.cartItems!.length, (index) {
@@ -114,9 +116,22 @@ class BoxCheckoutDetail extends StatelessWidget {
                                       ),
                                       InkWell(
                                         onTap: () {
-                                          context.read<CartRewardBloc>().add(CartRewardEvent.deleteItem(cartItem: productItemsCheckout.id));
-                                          Future.delayed(Duration(milliseconds: 500), ()=>context.read<CartRewardBloc>().add(CartRewardEvent.getCart())
-                                          );
+                                          _onAlertButtonsPressed(context,
+                                              title: 'Hapus Item',
+                                              titleStyle: txtPrimaryTitle.copyWith(
+                                                  fontWeight: FontWeight.w600,
+                                                  color: blackColor),
+                                              desc: 'Apakah anda yakin ingin menghapus item ini?',
+                                              descStyle: txtPrimarySubTitle.copyWith(
+                                                  fontWeight: FontWeight.w400,
+                                                  color: blackColor),
+                                              bgcolor: baseColor,
+                                              onPressed: () {
+                                                context.read<CartRewardBloc>().add(
+                                                    CartRewardEvent.deleteItem(
+                                                        cartItem: productItemsCheckout.id));
+                                                Navigator.pop(context);
+                                              });
                                         },
                                         child: Icon(
                                           Icons.delete_forever_outlined,
@@ -132,8 +147,7 @@ class BoxCheckoutDetail extends StatelessWidget {
                                           InkWell(
                                             onTap: () {
                                               context.read<CartRewardBloc>().add(CartRewardEvent.patchQty(cartRewardItem: productItemsCheckout.id, action: 'decrement'));
-                                              Future.delayed(Duration(milliseconds: 500), ()=>context.read<CartRewardBloc>().add(CartRewardEvent.getCart())
-                                              );
+
                                             },
                                             child: Icon(
                                               Icons.remove_circle_outline,
@@ -154,8 +168,7 @@ class BoxCheckoutDetail extends StatelessWidget {
                                           InkWell(
                                             onTap: () {
                                               context.read<CartRewardBloc>().add(CartRewardEvent.patchQty(cartRewardItem: productItemsCheckout.id, action: 'increment'));
-                                              Future.delayed(Duration(milliseconds: 500), ()=>context.read<CartRewardBloc>().add(CartRewardEvent.getCart())
-                                              );
+
                                             },
                                             child: Icon(
                                               Icons.add_circle,
@@ -173,6 +186,9 @@ class BoxCheckoutDetail extends StatelessWidget {
                           );
                         }),
                       );
+                    } else {
+                      return _buildEmptyCartState(context, screenWidth);
+
                     }
                   },
                   error: (message) => _buildErrorState(context, message!),
@@ -309,6 +325,49 @@ class BoxCheckoutDetail extends StatelessWidget {
         ],
       ),
     );
+  }
+  _onAlertButtonsPressed(context,
+      {String? title,
+        TextStyle? titleStyle,
+        TextStyle? descStyle,
+        String? desc,
+        String? icon,
+        Color? bgcolor,
+        VoidCallback? onPressed}) {
+    Alert(
+      context: context,
+      title: title,
+      padding: EdgeInsets.all(20),
+      style: AlertStyle(
+        animationType: AnimationType.shrink,
+        isCloseButton: false,
+        backgroundColor: bgcolor,
+        overlayColor: Colors.black38,
+        titleStyle: titleStyle!,
+        descStyle: descStyle!,
+      ),
+      desc: desc,
+
+      buttons: [
+        DialogButton(
+          child: Text(
+            "Cancel",
+            style: txtPrimaryTitle.copyWith(
+                fontWeight: FontWeight.w600, color: baseColor),
+          ),
+          onPressed: () => Navigator.pop(context),
+          color: redMedium,
+        ),
+        DialogButton(
+            child: Text(
+              "Confirm",
+              style: txtPrimaryTitle.copyWith(
+                  fontWeight: FontWeight.w600, color: baseColor),
+            ),
+            color: navyColor,
+            onPressed: onPressed)
+      ],
+    ).show();
   }
 }
 
