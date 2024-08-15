@@ -5,7 +5,7 @@ class HomeState with _$HomeState {
   const factory HomeState.initial() = _Initial;
   const factory HomeState.loading() = _Loading;
   const factory HomeState.success({
-    MostPopularProductResponseModel? model, CurrentUserModel? user, int? newIndex, UserPointResponseModel? pointModel, StatusOutletResponseModel? statusOutletModel
+    MostPopularProductResponseModel? model, CurrentUserModel? user, int? newIndex, UserPointResponseModel? pointModel, StatusOutletResponseModel? statusOutletModel, BannerResponseModel? bannerModel, BoxPromoResponseModel? boxPromoModel,
   }) = _Success;
   const factory HomeState.error({String? message}) = _Error;
 }

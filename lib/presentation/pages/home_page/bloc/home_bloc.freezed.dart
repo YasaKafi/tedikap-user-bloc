@@ -583,7 +583,9 @@ mixin _$HomeState {
             CurrentUserModel? user,
             int? newIndex,
             UserPointResponseModel? pointModel,
-            StatusOutletResponseModel? statusOutletModel)
+            StatusOutletResponseModel? statusOutletModel,
+            BannerResponseModel? bannerModel,
+            BoxPromoResponseModel? boxPromoModel)
         success,
     required TResult Function(String? message) error,
   }) =>
@@ -597,7 +599,9 @@ mixin _$HomeState {
             CurrentUserModel? user,
             int? newIndex,
             UserPointResponseModel? pointModel,
-            StatusOutletResponseModel? statusOutletModel)?
+            StatusOutletResponseModel? statusOutletModel,
+            BannerResponseModel? bannerModel,
+            BoxPromoResponseModel? boxPromoModel)?
         success,
     TResult? Function(String? message)? error,
   }) =>
@@ -611,7 +615,9 @@ mixin _$HomeState {
             CurrentUserModel? user,
             int? newIndex,
             UserPointResponseModel? pointModel,
-            StatusOutletResponseModel? statusOutletModel)?
+            StatusOutletResponseModel? statusOutletModel,
+            BannerResponseModel? bannerModel,
+            BoxPromoResponseModel? boxPromoModel)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -706,7 +712,9 @@ class _$InitialImpl implements _Initial {
             CurrentUserModel? user,
             int? newIndex,
             UserPointResponseModel? pointModel,
-            StatusOutletResponseModel? statusOutletModel)
+            StatusOutletResponseModel? statusOutletModel,
+            BannerResponseModel? bannerModel,
+            BoxPromoResponseModel? boxPromoModel)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -723,7 +731,9 @@ class _$InitialImpl implements _Initial {
             CurrentUserModel? user,
             int? newIndex,
             UserPointResponseModel? pointModel,
-            StatusOutletResponseModel? statusOutletModel)?
+            StatusOutletResponseModel? statusOutletModel,
+            BannerResponseModel? bannerModel,
+            BoxPromoResponseModel? boxPromoModel)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -740,7 +750,9 @@ class _$InitialImpl implements _Initial {
             CurrentUserModel? user,
             int? newIndex,
             UserPointResponseModel? pointModel,
-            StatusOutletResponseModel? statusOutletModel)?
+            StatusOutletResponseModel? statusOutletModel,
+            BannerResponseModel? bannerModel,
+            BoxPromoResponseModel? boxPromoModel)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -838,7 +850,9 @@ class _$LoadingImpl implements _Loading {
             CurrentUserModel? user,
             int? newIndex,
             UserPointResponseModel? pointModel,
-            StatusOutletResponseModel? statusOutletModel)
+            StatusOutletResponseModel? statusOutletModel,
+            BannerResponseModel? bannerModel,
+            BoxPromoResponseModel? boxPromoModel)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -855,7 +869,9 @@ class _$LoadingImpl implements _Loading {
             CurrentUserModel? user,
             int? newIndex,
             UserPointResponseModel? pointModel,
-            StatusOutletResponseModel? statusOutletModel)?
+            StatusOutletResponseModel? statusOutletModel,
+            BannerResponseModel? bannerModel,
+            BoxPromoResponseModel? boxPromoModel)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -872,7 +888,9 @@ class _$LoadingImpl implements _Loading {
             CurrentUserModel? user,
             int? newIndex,
             UserPointResponseModel? pointModel,
-            StatusOutletResponseModel? statusOutletModel)?
+            StatusOutletResponseModel? statusOutletModel,
+            BannerResponseModel? bannerModel,
+            BoxPromoResponseModel? boxPromoModel)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -936,7 +954,9 @@ abstract class _$$SuccessImplCopyWith<$Res> {
       CurrentUserModel? user,
       int? newIndex,
       UserPointResponseModel? pointModel,
-      StatusOutletResponseModel? statusOutletModel});
+      StatusOutletResponseModel? statusOutletModel,
+      BannerResponseModel? bannerModel,
+      BoxPromoResponseModel? boxPromoModel});
 }
 
 /// @nodoc
@@ -955,6 +975,8 @@ class __$$SuccessImplCopyWithImpl<$Res>
     Object? newIndex = freezed,
     Object? pointModel = freezed,
     Object? statusOutletModel = freezed,
+    Object? bannerModel = freezed,
+    Object? boxPromoModel = freezed,
   }) {
     return _then(_$SuccessImpl(
       model: freezed == model
@@ -977,6 +999,14 @@ class __$$SuccessImplCopyWithImpl<$Res>
           ? _value.statusOutletModel
           : statusOutletModel // ignore: cast_nullable_to_non_nullable
               as StatusOutletResponseModel?,
+      bannerModel: freezed == bannerModel
+          ? _value.bannerModel
+          : bannerModel // ignore: cast_nullable_to_non_nullable
+              as BannerResponseModel?,
+      boxPromoModel: freezed == boxPromoModel
+          ? _value.boxPromoModel
+          : boxPromoModel // ignore: cast_nullable_to_non_nullable
+              as BoxPromoResponseModel?,
     ));
   }
 }
@@ -989,7 +1019,9 @@ class _$SuccessImpl implements _Success {
       this.user,
       this.newIndex,
       this.pointModel,
-      this.statusOutletModel});
+      this.statusOutletModel,
+      this.bannerModel,
+      this.boxPromoModel});
 
   @override
   final MostPopularProductResponseModel? model;
@@ -1001,10 +1033,14 @@ class _$SuccessImpl implements _Success {
   final UserPointResponseModel? pointModel;
   @override
   final StatusOutletResponseModel? statusOutletModel;
+  @override
+  final BannerResponseModel? bannerModel;
+  @override
+  final BoxPromoResponseModel? boxPromoModel;
 
   @override
   String toString() {
-    return 'HomeState.success(model: $model, user: $user, newIndex: $newIndex, pointModel: $pointModel, statusOutletModel: $statusOutletModel)';
+    return 'HomeState.success(model: $model, user: $user, newIndex: $newIndex, pointModel: $pointModel, statusOutletModel: $statusOutletModel, bannerModel: $bannerModel, boxPromoModel: $boxPromoModel)';
   }
 
   @override
@@ -1019,12 +1055,16 @@ class _$SuccessImpl implements _Success {
             (identical(other.pointModel, pointModel) ||
                 other.pointModel == pointModel) &&
             (identical(other.statusOutletModel, statusOutletModel) ||
-                other.statusOutletModel == statusOutletModel));
+                other.statusOutletModel == statusOutletModel) &&
+            (identical(other.bannerModel, bannerModel) ||
+                other.bannerModel == bannerModel) &&
+            (identical(other.boxPromoModel, boxPromoModel) ||
+                other.boxPromoModel == boxPromoModel));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, model, user, newIndex, pointModel, statusOutletModel);
+  int get hashCode => Object.hash(runtimeType, model, user, newIndex,
+      pointModel, statusOutletModel, bannerModel, boxPromoModel);
 
   @JsonKey(ignore: true)
   @override
@@ -1042,11 +1082,14 @@ class _$SuccessImpl implements _Success {
             CurrentUserModel? user,
             int? newIndex,
             UserPointResponseModel? pointModel,
-            StatusOutletResponseModel? statusOutletModel)
+            StatusOutletResponseModel? statusOutletModel,
+            BannerResponseModel? bannerModel,
+            BoxPromoResponseModel? boxPromoModel)
         success,
     required TResult Function(String? message) error,
   }) {
-    return success(model, user, newIndex, pointModel, statusOutletModel);
+    return success(model, user, newIndex, pointModel, statusOutletModel,
+        bannerModel, boxPromoModel);
   }
 
   @override
@@ -1059,11 +1102,14 @@ class _$SuccessImpl implements _Success {
             CurrentUserModel? user,
             int? newIndex,
             UserPointResponseModel? pointModel,
-            StatusOutletResponseModel? statusOutletModel)?
+            StatusOutletResponseModel? statusOutletModel,
+            BannerResponseModel? bannerModel,
+            BoxPromoResponseModel? boxPromoModel)?
         success,
     TResult? Function(String? message)? error,
   }) {
-    return success?.call(model, user, newIndex, pointModel, statusOutletModel);
+    return success?.call(model, user, newIndex, pointModel, statusOutletModel,
+        bannerModel, boxPromoModel);
   }
 
   @override
@@ -1076,13 +1122,16 @@ class _$SuccessImpl implements _Success {
             CurrentUserModel? user,
             int? newIndex,
             UserPointResponseModel? pointModel,
-            StatusOutletResponseModel? statusOutletModel)?
+            StatusOutletResponseModel? statusOutletModel,
+            BannerResponseModel? bannerModel,
+            BoxPromoResponseModel? boxPromoModel)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(model, user, newIndex, pointModel, statusOutletModel);
+      return success(model, user, newIndex, pointModel, statusOutletModel,
+          bannerModel, boxPromoModel);
     }
     return orElse();
   }
@@ -1131,13 +1180,17 @@ abstract class _Success implements HomeState {
       final CurrentUserModel? user,
       final int? newIndex,
       final UserPointResponseModel? pointModel,
-      final StatusOutletResponseModel? statusOutletModel}) = _$SuccessImpl;
+      final StatusOutletResponseModel? statusOutletModel,
+      final BannerResponseModel? bannerModel,
+      final BoxPromoResponseModel? boxPromoModel}) = _$SuccessImpl;
 
   MostPopularProductResponseModel? get model;
   CurrentUserModel? get user;
   int? get newIndex;
   UserPointResponseModel? get pointModel;
   StatusOutletResponseModel? get statusOutletModel;
+  BannerResponseModel? get bannerModel;
+  BoxPromoResponseModel? get boxPromoModel;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1214,7 +1267,9 @@ class _$ErrorImpl implements _Error {
             CurrentUserModel? user,
             int? newIndex,
             UserPointResponseModel? pointModel,
-            StatusOutletResponseModel? statusOutletModel)
+            StatusOutletResponseModel? statusOutletModel,
+            BannerResponseModel? bannerModel,
+            BoxPromoResponseModel? boxPromoModel)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -1231,7 +1286,9 @@ class _$ErrorImpl implements _Error {
             CurrentUserModel? user,
             int? newIndex,
             UserPointResponseModel? pointModel,
-            StatusOutletResponseModel? statusOutletModel)?
+            StatusOutletResponseModel? statusOutletModel,
+            BannerResponseModel? bannerModel,
+            BoxPromoResponseModel? boxPromoModel)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -1248,7 +1305,9 @@ class _$ErrorImpl implements _Error {
             CurrentUserModel? user,
             int? newIndex,
             UserPointResponseModel? pointModel,
-            StatusOutletResponseModel? statusOutletModel)?
+            StatusOutletResponseModel? statusOutletModel,
+            BannerResponseModel? bannerModel,
+            BoxPromoResponseModel? boxPromoModel)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),

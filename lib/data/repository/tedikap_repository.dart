@@ -16,6 +16,8 @@ class TedikapApiRepository {
   static String getUserPoint = '$mainUrl/api/point';
   static String getHelpCenter = '$mainUrl/api/help-center';
   static String getStatusOutlet = '$mainUrl/api/status-store';
+  static String getBanner = '$mainUrl/api/banner';
+  static String getBoxPromo = '$mainUrl/api/box-promo';
 
   static String getFilterProduct = '$mainUrl/api/filter/product';
   static String getFilterOrder = '$mainUrl/api/order/history';
@@ -36,6 +38,8 @@ class TedikapApiRepository {
   static String getImagePromo = '$mainUrl/storage/voucher/';
   static String getImageRewardProduct = '$mainUrl/storage/reward-product/';
   static String getImageStatusOrder = '$mainUrl/storage/icon-status-order/';
+  static String getImageBanner = '$mainUrl/storage/banner/';
+  static String getImageBoxPromo = '$mainUrl/storage/box-promo/';
 
   static String postRegister = '$mainUrl/api/user/register';
   static String postLogin = '$mainUrl/api/user/login';
