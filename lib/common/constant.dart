@@ -18,6 +18,13 @@ String gifChecklist = '${images}checklist.gif';
 //CONSTANT SVG
 String icLogoPrimary = '${svgImages}tedikap_logo.svg';
 String icGoogle = '${svgImages}ic_google.svg';
+String icDana = '${svgImages}ic_dana.svg';
+String icLinkAja = '${svgImages}ic_link_aja.svg';
+String icOvo = '${svgImages}ic_ovo.svg';
+String icAstraPay = '${svgImages}ic_astrapay.svg';
+String icJeniusPay = '${svgImages}ic_jenius.svg';
+String icQris = '${svgImages}ic_qris.svg';
+String icShopee = '${svgImages}ic_shopee.svg';
 String icArrowLeft = '${svgImages}ic_arrow_left.svg';
 String icArrowRight = '${svgImages}ic_arrow_right.svg';
 String icHome = '${svgImages}ic_home.svg';

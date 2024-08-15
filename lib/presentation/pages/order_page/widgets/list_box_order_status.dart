@@ -6,9 +6,11 @@ import 'package:intl/intl.dart';
 
 import 'package:tedikap_user_bloc/data/models/response/history_order_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/history_order_reward_response_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../common/constant.dart';
 import '../../../../common/dimensions.dart';
 import '../../../../common/theme.dart';
+import '../../../../data/repository/global_variabel.dart';
 import '../../../global_components/common_button.dart';
 import '../bloc/order_bloc.dart';
 
@@ -49,6 +51,24 @@ class ListBoxMenuStatus extends StatelessWidget {
     }
   }
 
+
+   static String urlWhatsApp( String phone,  String message) {
+      if (phone.isEmpty) {
+        return "https://wa.me/6289525683801?text=I'm%20interested%20in%20your%20car%20for%20sale";
+      } else {
+        return "https://wa.me/$phone?text=${message}";
+      }
+    }
+
+
+  Future<void> launchURL(Uri url) async {
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     String titleCommonButton;
@@ -59,6 +79,9 @@ class ListBoxMenuStatus extends StatelessWidget {
     } else if (status == 'pesanan selesai') {
       backgroundColor = primaryColor;
       titleCommonButton = 'Pesan Ulang';
+    }else if (status == 'menunggu pembayaran') {
+      backgroundColor = navyColor;
+      titleCommonButton = 'Lanjutkan Pembayaran';
     } else {
       backgroundColor = navyColor;
       titleCommonButton = 'Hubungi Admin';
@@ -236,65 +259,91 @@ class ListBoxMenuStatus extends StatelessWidget {
                             return Container();
                           },
                           success: (
-                              model,
-                              modelReward,
-                              filterIndex,
-                              modelReOrder,
-                              modelReOrderReward,
-                              modelCart,
-                              modelCartReward,
-                              ) {
+                            model,
+                            modelReward,
+                            filterIndex,
+                            modelReOrder,
+                            modelReOrderReward,
+                          ) {
+                            bool isModelCartNotEmpty =
+                                model?.orders?.first.cartItems ?? false;
+
+                            bool isModelCartRewardNotEmpty =
+                                modelReward?.orders?.first.cartItems ?? false;
+                            print(
+                                "INI BOOL MODEL REWARD $isModelCartRewardNotEmpty");
                             return CommonButton(
                               text: titleCommonButton,
                               onPressed: () {
-                                // Separate checks for each cart state
-                                bool isModelCartNotEmpty = modelCart?.cart?.cartItems?.isNotEmpty ?? false;
-                                bool isModelCartRewardNotEmpty = modelCartReward?.cart?.cartItems?.isNotEmpty ?? false;
+                                if (model?.orders != null ||
+                                    modelReward?.orders != null) {
+                                  bool isOrderStatusForReorder =
+                                      status == 'pesanan selesai' ||
+                                          status == 'pesanan dibatalkan' ||
+                                          status == 'pesanan ditolak';
 
-                                // Condition for order status checks
-                                bool isOrderStatusForReorder = status == 'pesanan selesai' ||
-                                    status == 'pesanan dibatalkan' ||
-                                    status == 'pesanan ditolak';
+                                  bool isOrderStatusForCallAdmin =
+                                      status == 'pesanan diproses' ||
+                                          status == 'menunggu konfirmasi' ||
+                                          status == 'pesanan siap diambil';
 
-                                // Check conditions for showing bottom sheet
-                                if (isOrderStatusForReorder) {
-                                  if (isModelCartNotEmpty) {
-                                    _showReorderOptions(context, backgroundColor);
-                                  } else if (!isModelCartNotEmpty) {
-                                    if (orderId != null) {
-                                      context.read<OrderBloc>().add(OrderEvent.postReOrder(orderId!));
-                                    } else if (orderRewardId != null) {
-                                      context.read<OrderBloc>().add(OrderEvent.postReOrderReward(orderRewardId!));
+                                  bool isOrderStatusForContinuePayment =
+                                      status == 'menunggu pembayaran';
+
+                                  if (isOrderStatusForReorder) {
+                                    if (isModelCartNotEmpty == true) {
+                                      _showReorderOptions(
+                                          context, backgroundColor);
+                                    } else if (!isModelCartNotEmpty) {
+                                      if (orderId != null) {
+                                        context.read<OrderBloc>().add(
+                                            OrderEvent.postReOrder(orderId!));
+                                      } else if (orderRewardId != null) {
+                                        context.read<OrderBloc>().add(
+                                            OrderEvent.postReOrderReward(
+                                                orderRewardId!));
+                                      }
+                                    } else if (isModelCartRewardNotEmpty ==
+                                        true) {
+                                      _showReorderOptions(
+                                          context, backgroundColor);
+                                      // Check if it's a normal or reward order and trigger the appropriate even
+                                    } else {
+                                      if (orderId != null) {
+                                        context.read<OrderBloc>().add(
+                                            OrderEvent.postReOrder(orderId!));
+                                      } else if (orderRewardId != null) {
+                                        context.read<OrderBloc>().add(
+                                            OrderEvent.postReOrderReward(
+                                                orderRewardId!));
+                                      }
                                     }
-
-                                  } else if (isModelCartRewardNotEmpty) {
-                                    _showReorderOptions(context, backgroundColor);
-                                    // Check if it's a normal or reward order and trigger the appropriate even
+                                  } else if (isOrderStatusForCallAdmin) {
+                                    launchUrl(Uri.parse(urlWhatsApp('6289525683801', 'Halo, saya ingin bertanya tentang pesanan saya dengan ID: ${orderId ?? orderRewardId}')));
                                   } else {
-                                    if (orderId != null) {
-                                      context.read<OrderBloc>().add(OrderEvent.postReOrder(orderId!));
-                                    } else if (orderRewardId != null) {
-                                      context.read<OrderBloc>().add(OrderEvent.postReOrderReward(orderRewardId!));
+                                    if (GlobalVariables.linkCheckoutGlobal !=
+                                        null) {
+                                      launchUrl(Uri.parse(
+                                          GlobalVariables.linkCheckoutGlobal!));
                                     }
+
                                   }
                                 }
                               },
-                              backgroundColor: backgroundColor,
+                              backgroundColor:  backgroundColor,
                               textColor: baseColor,
                               borderRadius: 10,
-                              fontSize: 12,
+                              fontSize: status == 'menunggu pembayaran' ? 10 : 10,
                               fontWeight: FontWeight.w500,
                             );
                           },
                         );
                       },
                     ),
-
-
                     CommonButton(
                       text: 'Detail Pesanan',
                       borderRadius: 10,
-                      fontSize: 12,
+                      fontSize: 10,
                       onPressed: () {
                         context.pushNamed(
                           orderId != null
@@ -321,6 +370,7 @@ class ListBoxMenuStatus extends StatelessWidget {
       ),
     );
   }
+
   void _showReorderOptions(BuildContext context, Color backgroundColor) {
     showModalBottomSheet(
       context: context,
@@ -345,14 +395,15 @@ class ListBoxMenuStatus extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.grey[300],
                       borderRadius: BorderRadius.circular(10),
-                    )
-                ),
+                    )),
               ),
               Padding(
                 padding: EdgeInsets.all(20.0),
                 child: Column(
                   children: [
-                    SvgPicture.asset(icOrderDone, width: MediaQuery.of(context).size.width * 0.35,
+                    SvgPicture.asset(
+                      icOrderDone,
+                      width: MediaQuery.of(context).size.width * 0.35,
                     ),
                     Text(
                       'Pesan ulang pesanan ini?',
@@ -390,9 +441,8 @@ class ListBoxMenuStatus extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                         ),
                         CommonButton(
-                          padding: EdgeInsets.symmetric( vertical: 15),
+                          padding: EdgeInsets.symmetric(vertical: 15),
                           width: MediaQuery.of(context).size.width * 0.4,
-
                           text: 'Pesan Ulang',
                           onPressed: () {
                             Navigator.pop(context);
@@ -402,7 +452,7 @@ class ListBoxMenuStatus extends StatelessWidget {
                               context.read<OrderBloc>().add(orderId != null
                                   ? OrderEvent.postReOrder(orderId!)
                                   : OrderEvent.postReOrderReward(
-                                  orderRewardId!));
+                                      orderRewardId!));
                             }
                           },
                           backgroundColor: primaryColor,
@@ -413,17 +463,13 @@ class ListBoxMenuStatus extends StatelessWidget {
                         ),
                       ],
                     ),
-
                   ],
                 ),
               ),
-
-
             ],
           ),
         );
       },
     );
   }
-
 }

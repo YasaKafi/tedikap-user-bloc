@@ -34,6 +34,7 @@ class DetailOrderReward {
   String? iconStatus;
   DateTime? createdAt;
   DateTime? updatedAt;
+  bool? cartItems;
   List<DetailOrderRewardItem>? orderRewardItems;
 
   DetailOrderReward({

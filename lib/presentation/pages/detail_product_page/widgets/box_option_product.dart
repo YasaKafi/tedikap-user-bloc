@@ -93,7 +93,7 @@ class BoxOptionProduct extends StatelessWidget {
                                   ) {
 
                                 return OptionRow(
-                                  label: 'Temperature',
+                                  label: 'Temp',
                                   option1: 'Hot',
                                   option2: 'Ice',
                                   border1: selectedTemp == 'ice'

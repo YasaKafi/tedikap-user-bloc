@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tedikap_user_bloc/common/theme.dart';
 
 
 class OptionRow extends StatelessWidget {
@@ -36,7 +37,7 @@ class OptionRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        Text(label, style: txtSecondaryTitle.copyWith(fontSize: 18, fontWeight: FontWeight.w600)),
         Row(
           children: [
             InkWell(
