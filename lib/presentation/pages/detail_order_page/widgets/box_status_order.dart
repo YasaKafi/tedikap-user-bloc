@@ -89,12 +89,33 @@ class BoxInfoStatus extends StatelessWidget {
                   SizedBox(
                     height: 5,
                   ),
-                  Text(
-                    'Silahkan buka aplikasi E wallet kamu untuk melakukan pembayaran',
-                    style: txtPrimarySubTitle.copyWith(
-                      fontWeight: FontWeight.w500,
-                      color: grey,
-                    ),
+                  BlocBuilder<DetailOrderBloc, DetailOrderState>(
+                    builder: (context, state) {
+                      return state.maybeWhen(
+                        orElse: () => loadingCard(0.5, 40),
+                        success: (model, rewardModel) {
+                          final detailOrder = model?.order;
+                          final detailOrderReward = rewardModel?.order;
+                          if (detailOrder != null) {
+                            return Text(
+                              detailOrder.statusDescription!.toLowerCase(),
+                                style: txtPrimarySubTitle.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                  color: grey,
+                                ),
+                            );
+                          } else {
+                            return Text(
+                              detailOrderReward!.status!.toLowerCase(),
+                              style: txtPrimarySubTitle.copyWith(
+                                fontWeight: FontWeight.w500,
+                                color: grey,
+                              ),
+                            );
+                          }
+                        },
+                      );
+                    },
                   ),
                   SizedBox(
                     height: 10,
@@ -175,26 +196,27 @@ class BoxInfoStatus extends StatelessWidget {
             BlocBuilder<DetailOrderBloc, DetailOrderState>(
               builder: (context, state) {
                 return state.maybeWhen(
-                  orElse: () => loadingCard(0.12, 50),
-                  success: (model, rewardModel){
-                    final detailOrder = model?.order;
-                    final detailOrderReward = rewardModel?.order;
-                    if (detailOrder != null) {
-                      return SvgPicture.network(
-                        TedikapApiRepository.getImageStatusOrder + detailOrder.iconStatus!,
-                        width: 80,
-                        height: 80,
-                      );
-                    } else {
-                      return SvgPicture.network(
-                        TedikapApiRepository.getImageStatusOrder + detailOrderReward!.iconStatus!,
-                        width: 80,
-                        height: 80,
-                      );
+                    orElse: () => loadingCard(0.12, 50),
+                    success: (model, rewardModel) {
+                      final detailOrder = model?.order;
+                      final detailOrderReward = rewardModel?.order;
+                      if (detailOrder != null) {
+                        return SvgPicture.network(
+                          TedikapApiRepository.getImageStatusOrder +
+                              detailOrder.iconStatus!,
+                          width: 80,
+                          height: 80,
+                        );
+                      } else {
+                        return SvgPicture.network(
+                          TedikapApiRepository.getImageStatusOrder +
+                              detailOrderReward!.iconStatus!,
+                          width: 80,
+                          height: 80,
+                        );
+                      }
                     }
-                  }
                 );
-
               },
             )
           ],

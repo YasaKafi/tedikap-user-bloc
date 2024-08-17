@@ -26,6 +26,7 @@ String icAstraPay = '${svgImages}ic_astrapay.svg';
 String icJeniusPay = '${svgImages}ic_jenius.svg';
 String icQris = '${svgImages}ic_qris.svg';
 String icShopee = '${svgImages}ic_shopee.svg';
+String icFilter = '${svgImages}ic_filter.svg';
 String icArrowLeft = '${svgImages}ic_arrow_left.svg';
 String icArrowRight = '${svgImages}ic_arrow_right.svg';
 String icHome = '${svgImages}ic_home.svg';

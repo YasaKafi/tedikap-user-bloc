@@ -29,7 +29,7 @@ import '../presentation/pages/information_page/privacy_policy_page/privacy_polic
 class AppRouter {
   static final GoRouter router = GoRouter(
     navigatorKey: navigatorKey,
-    initialLocation: '/login',
+    initialLocation: '/splash',
     debugLogDiagnostics: true,
     routes: [
       GoRoute(

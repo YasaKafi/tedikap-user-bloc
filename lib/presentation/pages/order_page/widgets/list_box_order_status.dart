@@ -25,6 +25,7 @@ class ListBoxMenuStatus extends StatelessWidget {
     required this.createdAt,
     this.orderId,
     this.orderRewardId,
+    required this.waLink,
   });
 
   final String status;
@@ -35,6 +36,7 @@ class ListBoxMenuStatus extends StatelessWidget {
   final String createdAt;
   final String? orderId;
   final String? orderRewardId;
+  final String waLink;
 
   String getTimeDifference() {
     DateTime createdTime = DateFormat('yyyy-MM-dd HH:mm:ss').parse(createdAt);
@@ -264,12 +266,19 @@ class ListBoxMenuStatus extends StatelessWidget {
                             filterIndex,
                             modelReOrder,
                             modelReOrderReward,
+                              isMenungguPembayaran,
+                              isMenungguKonfirmasi,
+                              isPesananDiproses,
+                              isPesananSiapDiambil,
+                              isPesananDitolak,
+                              isPesananDibatalkan,
+                              isPesananSelesai
                           ) {
                             bool isModelCartNotEmpty =
                                 model?.orders?.first.cartItems ?? false;
 
                             bool isModelCartRewardNotEmpty =
-                                modelReward?.orders?.first.cartItems ?? false;
+                                modelReward?.orders?.first.cartLength ?? false;
                             print(
                                 "INI BOOL MODEL REWARD $isModelCartRewardNotEmpty");
                             return CommonButton(
@@ -277,6 +286,7 @@ class ListBoxMenuStatus extends StatelessWidget {
                               onPressed: () {
                                 if (model?.orders != null ||
                                     modelReward?.orders != null) {
+
                                   bool isOrderStatusForReorder =
                                       status == 'pesanan selesai' ||
                                           status == 'pesanan dibatalkan' ||
@@ -319,7 +329,7 @@ class ListBoxMenuStatus extends StatelessWidget {
                                       }
                                     }
                                   } else if (isOrderStatusForCallAdmin) {
-                                    launchUrl(Uri.parse(urlWhatsApp('6289525683801', 'Halo, saya ingin bertanya tentang pesanan saya dengan ID: ${orderId ?? orderRewardId}')));
+                                    launchUrl(Uri.parse(waLink));
                                   } else {
                                     if (GlobalVariables.linkCheckoutGlobal !=
                                         null) {
