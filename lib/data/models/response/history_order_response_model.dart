@@ -34,9 +34,12 @@ class DataOrder {
   int? rewardPoint;
   int? originalPrice;
   String? status;
+  String? statusDescription;
   String? paymentChannel;
+  String? whatsappLink;
   DateTime? createdAt;
   DateTime? updatedAt;
+  DateTime? expiredAt;
   String? schedulePickup;
   bool? cartItems;
   List<OrderItem>? orderItems;
@@ -51,9 +54,12 @@ class DataOrder {
     this.rewardPoint,
     this.originalPrice,
     this.status,
+    this.statusDescription,
     this.paymentChannel,
+    this.whatsappLink,
     this.createdAt,
     this.updatedAt,
+    this.expiredAt,
     this.schedulePickup,
     this.cartItems,
     this.orderItems,
@@ -73,9 +79,12 @@ class DataOrder {
     rewardPoint: json["reward_point"],
     originalPrice: json["original_price"],
     status: json["status"],
+    statusDescription: json["status_description"],
     paymentChannel: json["payment_channel"],
+    whatsappLink: json["whatsapp"],
     createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
     updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
+    expiredAt: json["expires_at"] == null ? null : DateTime.parse(json["expires_at"]),
     schedulePickup: json["schedule_pickup"],
     cartItems: json["cart_length"],
     orderItems: json["order_items"] == null ? [] : List<OrderItem>.from(json["order_items"]!.map((x) => OrderItem.fromMap(x))),
@@ -91,9 +100,12 @@ class DataOrder {
     "reward_point": rewardPoint,
     "original_price": originalPrice,
     "status": status,
+    "status_description": statusDescription,
     "payment_channel": paymentChannel,
+    "whatsapp": whatsappLink,
     "created_at": createdAt?.toIso8601String(),
     "updated_at": updatedAt?.toIso8601String(),
+    "expires_at": createdAt?.toIso8601String(),
     "schedule_pickup": schedulePickup,
     "cart_length": cartItems,
     "order_items": orderItems == null ? [] : List<dynamic>.from(orderItems!.map((x) => x.toMap())),

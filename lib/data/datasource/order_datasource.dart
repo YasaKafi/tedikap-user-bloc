@@ -61,6 +61,7 @@ class OrderDatasource{
       return Left('Failed to access data: ${e.toString()}');
     }
   }
+
   Future<Either<String, DetailHistoryOrderRewardResponseModel>> getDetailHistoryOrderReward(String id) async {
     try {
       final response = await _dioInstance.getRequest(
@@ -168,14 +169,15 @@ class OrderDatasource{
     }
   }
 
-  Future<Either<String, HistoryOrderResponseModel>> getFilterTypeOrder(String query) async {
+  Future<Either<String, HistoryOrderResponseModel>> getFilterTypeOrder(String query, String? statusOrder) async {
     try {
       final response = await _dioInstance.getRequest(
         endpoint: TedikapApiRepository.getFilterOrder,
         isAuthorize: true,
         queryParameters: {
-          'type': query
-        },
+          'type': query,
+          'status_order' : statusOrder,
+        }..removeWhere((key, value) => value == null)
       );
       if (response.statusCode == 200) {
         return Right(HistoryOrderResponseModel.fromMap(response.data));

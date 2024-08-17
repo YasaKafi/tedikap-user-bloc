@@ -2,7 +2,7 @@ import 'dart:convert';
 
 class DetailHistoryOrderResponseModel {
   String? message;
-  DetailOrder? order;
+  Order? order;
 
   DetailHistoryOrderResponseModel({
     this.message,
@@ -15,7 +15,7 @@ class DetailHistoryOrderResponseModel {
 
   factory DetailHistoryOrderResponseModel.fromMap(Map<String, dynamic> json) => DetailHistoryOrderResponseModel(
     message: json["message"],
-    order: json["order"] == null ? null : DetailOrder.fromMap(json["order"]),
+    order: json["order"] == null ? null : Order.fromMap(json["order"]),
   );
 
   Map<String, dynamic> toMap() => {
@@ -24,84 +24,111 @@ class DetailHistoryOrderResponseModel {
   };
 }
 
-class DetailOrder {
+class Order {
   String? id;
   int? userId;
   int? cartId;
+  String? name;
+  String? avatar;
   int? voucherId;
   int? totalPrice;
   int? discountAmount;
   int? rewardPoint;
   int? originalPrice;
   String? status;
-  String? paymentChannel;
+  String? statusDescription;
+  String? whatsapp;
+  String? orderType;
+  String? schedulePickup;
   String? iconStatus;
+  String? paymentChannel;
+  bool? cartLength;
   DateTime? createdAt;
   DateTime? updatedAt;
-  String? schedulePickup;
-  bool? cartItems;
-  List<DetailOrderItem>? orderItems;
+  DateTime? expiresAt;
+  List<OrderItem>? orderItems;
 
-  DetailOrder({
+  Order({
     this.id,
     this.userId,
     this.cartId,
+    this.name,
+    this.avatar,
     this.voucherId,
     this.totalPrice,
     this.discountAmount,
     this.rewardPoint,
     this.originalPrice,
     this.status,
-    this.paymentChannel,
+    this.statusDescription,
+    this.whatsapp,
+    this.orderType,
+    this.schedulePickup,
     this.iconStatus,
+    this.paymentChannel,
+    this.cartLength,
     this.createdAt,
     this.updatedAt,
-    this.schedulePickup,
+    this.expiresAt,
     this.orderItems,
   });
 
-  factory DetailOrder.fromJson(String str) => DetailOrder.fromMap(json.decode(str));
+  factory Order.fromJson(String str) => Order.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory DetailOrder.fromMap(Map<String, dynamic> json) => DetailOrder(
+  factory Order.fromMap(Map<String, dynamic> json) => Order(
     id: json["id"],
     userId: json["user_id"],
     cartId: json["cart_id"],
+    name: json["name"],
+    avatar: json["avatar"],
     voucherId: json["voucher_id"],
     totalPrice: json["total_price"],
     discountAmount: json["discount_amount"],
     rewardPoint: json["reward_point"],
     originalPrice: json["original_price"],
     status: json["status"],
-    paymentChannel: json["payment_channel"],
+    statusDescription: json["status_description"],
+    whatsapp: json["whatsapp"],
+    orderType: json["order_type"],
+    schedulePickup: json["schedule_pickup"],
     iconStatus: json["icon_status"],
+    paymentChannel: json["payment_channel"],
+    cartLength: json["cart_length"],
     createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
     updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
-    schedulePickup: json["schedule_pickup"],
-    orderItems: json["order_items"] == null ? [] : List<DetailOrderItem>.from(json["order_items"]!.map((x) => DetailOrderItem.fromMap(x))),
+    expiresAt: json["expires_at"] == null ? null : DateTime.parse(json["expires_at"]),
+    orderItems: json["order_items"] == null ? [] : List<OrderItem>.from(json["order_items"]!.map((x) => OrderItem.fromMap(x))),
   );
 
   Map<String, dynamic> toMap() => {
     "id": id,
     "user_id": userId,
     "cart_id": cartId,
+    "name": name,
+    "avatar": avatar,
     "voucher_id": voucherId,
     "total_price": totalPrice,
     "discount_amount": discountAmount,
     "reward_point": rewardPoint,
     "original_price": originalPrice,
     "status": status,
-    "payment_channel": paymentChannel,
+    "status_description": statusDescription,
+    "whatsapp": whatsapp,
+    "order_type": orderType,
+    "schedule_pickup": schedulePickup,
     "icon_status": iconStatus,
+    "payment_channel": paymentChannel,
+    "cart_length": cartLength,
     "created_at": createdAt?.toIso8601String(),
     "updated_at": updatedAt?.toIso8601String(),
-    "schedule_pickup": schedulePickup,
+    "expires_at": expiresAt?.toIso8601String(),
     "order_items": orderItems == null ? [] : List<dynamic>.from(orderItems!.map((x) => x.toMap())),
   };
 }
 
-class DetailOrderItem {
+class OrderItem {
   int? id;
   int? productId;
   String? productName;
@@ -111,11 +138,11 @@ class DetailOrderItem {
   String? size;
   String? ice;
   String? sugar;
-  String? note;
+  dynamic note;
   int? quantity;
   int? price;
 
-  DetailOrderItem({
+  OrderItem({
     this.id,
     this.productId,
     this.productName,
@@ -130,11 +157,11 @@ class DetailOrderItem {
     this.price,
   });
 
-  factory DetailOrderItem.fromJson(String str) => DetailOrderItem.fromMap(json.decode(str));
+  factory OrderItem.fromJson(String str) => OrderItem.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory DetailOrderItem.fromMap(Map<String, dynamic> json) => DetailOrderItem(
+  factory OrderItem.fromMap(Map<String, dynamic> json) => OrderItem(
     id: json["id"],
     productId: json["product_id"],
     productName: json["product_name"],

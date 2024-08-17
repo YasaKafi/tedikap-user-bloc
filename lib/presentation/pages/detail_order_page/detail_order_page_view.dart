@@ -8,6 +8,7 @@ import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/widgets/b
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/widgets/box_status_order.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/widgets/box_timeline_pickup.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/widgets/section_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 import '../../../../../common/theme.dart';
@@ -71,6 +72,8 @@ class _DetailOrderPageState extends State<DetailOrderPage> with WidgetsBindingOb
     await Future.delayed(const Duration(seconds: 1));
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -132,21 +135,20 @@ class _DetailOrderPageState extends State<DetailOrderPage> with WidgetsBindingOb
                     SizedBox(height: 20),
                     BoxPaymentDetailOrder(screenWidth: screenWidth),
                     SizedBox(height: 20),
-                    BoxKindOfPayment(screenWidth: screenWidth),
+                    Visibility(
+                      visible: widget.orderRewardId == null,
+                        child: BoxKindOfPayment(screenWidth: screenWidth)),
                     SizedBox(height: 80),
                   ],
                 ),
               ),
             ),
           ),
-          Visibility(
-            visible: widget.orderRewardId == null,
-            child: Positioned(
-              bottom: 0,
-              right: 0,
-              left: 0,
-              child: SectionButton(linkCheckout: widget.linkCheckout, orderId: widget.orderId, orderRewardId: widget.orderRewardId),
-            ),
+          Positioned(
+            bottom: 0,
+            right: 0,
+            left: 0,
+            child: SectionButton(linkCheckout: widget.linkCheckout, orderId: widget.orderId, orderRewardId: widget.orderRewardId),
           ),
         ],
       ),

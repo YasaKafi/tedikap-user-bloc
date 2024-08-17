@@ -2,7 +2,7 @@ import 'dart:convert';
 
 class HistoryOrderRewardResponseModel {
   String? message;
-  List<DataOrderReward>? orders;
+  List<Order>? orders;
 
   HistoryOrderRewardResponseModel({
     this.message,
@@ -15,7 +15,7 @@ class HistoryOrderRewardResponseModel {
 
   factory HistoryOrderRewardResponseModel.fromMap(Map<String, dynamic> json) => HistoryOrderRewardResponseModel(
     message: json["message"],
-    orders: json["orders"] == null ? [] : List<DataOrderReward>.from(json["orders"]!.map((x) => DataOrderReward.fromMap(x))),
+    orders: json["orders"] == null ? [] : List<Order>.from(json["orders"]!.map((x) => Order.fromMap(x))),
   );
 
   Map<String, dynamic> toMap() => {
@@ -24,58 +24,86 @@ class HistoryOrderRewardResponseModel {
   };
 }
 
-class DataOrderReward {
+class Order {
   String? id;
   int? userId;
+  String? name;
+  String? avatar;
   int? cartRewardId;
   int? totalPoint;
   String? status;
+  String? statusDescription;
+  String? whatsapp;
+  String? iconStatus;
+  String? orderType;
   String? schedulePickup;
+  bool? cartLength;
   DateTime? createdAt;
   DateTime? updatedAt;
-  bool? cartItems;
+  DateTime? expiresAt;
   List<OrderRewardItem>? orderRewardItems;
 
-  DataOrderReward({
+  Order({
     this.id,
     this.userId,
+    this.name,
+    this.avatar,
     this.cartRewardId,
     this.totalPoint,
     this.status,
+    this.statusDescription,
+    this.whatsapp,
+    this.iconStatus,
+    this.orderType,
     this.schedulePickup,
+    this.cartLength,
     this.createdAt,
     this.updatedAt,
-    this.cartItems,
+    this.expiresAt,
     this.orderRewardItems,
   });
 
-  factory DataOrderReward.fromJson(String str) => DataOrderReward.fromMap(json.decode(str));
+  factory Order.fromJson(String str) => Order.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory DataOrderReward.fromMap(Map<String, dynamic> json) => DataOrderReward(
+  factory Order.fromMap(Map<String, dynamic> json) => Order(
     id: json["id"],
     userId: json["user_id"],
+    name: json["name"],
+    avatar: json["avatar"],
     cartRewardId: json["cart_reward_id"],
     totalPoint: json["total_point"],
     status: json["status"],
+    statusDescription: json["status_description"],
+    whatsapp: json["whatsapp"],
+    iconStatus: json["icon_status"],
+    orderType: json["order_type"],
     schedulePickup: json["schedule_pickup"],
-    cartItems: json["cart_length"],
+    cartLength: json["cart_length"],
     createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
     updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
+    expiresAt: json["expires_at"] == null ? null : DateTime.parse(json["expires_at"]),
     orderRewardItems: json["order_reward_items"] == null ? [] : List<OrderRewardItem>.from(json["order_reward_items"]!.map((x) => OrderRewardItem.fromMap(x))),
   );
 
   Map<String, dynamic> toMap() => {
     "id": id,
     "user_id": userId,
+    "name": name,
+    "avatar": avatar,
     "cart_reward_id": cartRewardId,
     "total_point": totalPoint,
     "status": status,
+    "status_description": statusDescription,
+    "whatsapp": whatsapp,
+    "icon_status": iconStatus,
+    "order_type": orderType,
     "schedule_pickup": schedulePickup,
-    "cart_length": cartItems,
+    "cart_length": cartLength,
     "created_at": createdAt?.toIso8601String(),
     "updated_at": updatedAt?.toIso8601String(),
+    "expires_at": expiresAt?.toIso8601String(),
     "order_reward_items": orderRewardItems == null ? [] : List<dynamic>.from(orderRewardItems!.map((x) => x.toMap())),
   };
 }
@@ -90,7 +118,7 @@ class OrderRewardItem {
   String? size;
   String? ice;
   String? sugar;
-  String? note;
+  dynamic note;
   int? quantity;
   int? points;
   int? totalPoints;
