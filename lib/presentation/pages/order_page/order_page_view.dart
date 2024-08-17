@@ -28,11 +28,15 @@ class _OrderPageState extends State<OrderPage> {
   }
 
   Future<void> _fetchInitialData() async {
-    context.read<OrderBloc>().add(const OrderEvent.getFilterOrder('ongoing', ''));
+    context
+        .read<OrderBloc>()
+        .add(const OrderEvent.getFilterOrder('ongoing', ''));
   }
 
   Future<void> _refreshData(BuildContext context) async {
-    context.read<OrderBloc>().add(const OrderEvent.getFilterOrder('ongoing', ''));
+    context
+        .read<OrderBloc>()
+        .add(const OrderEvent.getFilterOrder('ongoing', ''));
     context
         .read<OrderBloc>()
         .add(const OrderEvent.getFilterOrderReward('ongoing', ''));
@@ -110,146 +114,105 @@ class _OrderPageState extends State<OrderPage> {
                 child: TabBarView(
                   children: [
                     Tab(
-                      child: Stack(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              OrderFilter(
-                                query: 'ongoing',
-                              ),
-                              BlocBuilder<OrderBloc, OrderState>(
-                                builder: (context, state) {
-                                  return state.when(
-                                      initial: () {
-                                        return const Center(
-                                          child: CircularProgressIndicator(),
-                                        );
-                                      },
-                                      loading: () => Expanded(
-                                            child: ListView.builder(
-                                              itemCount: 3,
-                                              itemBuilder: (context, index) =>
-                                                  const ShimmerListBoxMenuStatus(),
-                                            ),
-                                          ),
-                                      success: (model, modelReward, filterIndex,
-                                          modelReOrder, modelReOrderReward,isMenungguPembayaran,
-                                          isMenungguKonfirmasi,
-                                          isPesananDiproses,
-                                          isPesananSiapDiambil,
-                                          isPesananDitolak,
-                                          isPesananDibatalkan,
-                                          isPesananSelesai) {
-                                        if ((model?.orders == null ||
-                                                model?.orders?.isEmpty ==
-                                                    true) &&
-                                            (modelReward?.orders == null ||
-                                                modelReward?.orders?.isEmpty ==
-                                                    true)) {
-                                          return _buildEmptyOrderState(context);
-                                        } else {
-                                          return Expanded(
-                                            child: ListView.builder(
-                                              itemCount: filterIndex == 0
-                                                  ? model?.orders?.length ?? 0
-                                                  : modelReward
-                                                          ?.orders?.length ??
-                                                      0,
-                                              scrollDirection: Axis.vertical,
-                                              itemBuilder: (context, index) {
-                                                if (filterIndex == 0) {
-                                                  final order =
-                                                      model!.orders![index];
-
-                                                  return ListBoxMenuStatus(
-                                                    waLink: order.whatsappLink!,
-                                                    status: order.status!,
-                                                    totalItem: order
-                                                        .orderItems!.length
-                                                        .toString(),
-                                                    totalPrice: order
-                                                        .totalPrice!
-                                                        .toString(),
-                                                    orderItems:
-                                                        order.orderItems,
-                                                    createdAt: order.createdAt
-                                                        .toString(),
-                                                    orderId: order.id!,
-                                                  );
-                                                } else {
-                                                  final order = modelReward!
-                                                      .orders![index];
-
-                                                  return ListBoxMenuStatus(
-                                                    waLink: order.whatsapp!,
-                                                    status: order.status!,
-                                                    totalItem: order
-                                                        .orderRewardItems!
-                                                        .length
-                                                        .toString(),
-                                                    totalPrice: order
-                                                        .totalPoint!
-                                                        .toString(),
-                                                    orderItemsReward:
-                                                        order.orderRewardItems,
-                                                    createdAt: order.createdAt
-                                                        .toString(),
-                                                    orderRewardId: order.id!,
-                                                  );
-                                                }
-                                              },
-                                            ),
-                                          );
-                                        }
-                                      },
-                                      error: (message) =>
-                                          _buildErrorState(context, message!));
-                                },
-                              ),
-                            ],
+                          OrderFilter(
+                            query: 'ongoing',
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 30),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: InkWell(
-                                onTap: () {
-                                  _showReorderOptions(context, 0, 'ongoing');
-                                },
-                                child: Container(
-                                  width: 80,
-                                  height: 40,
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 4),
-                                  decoration: BoxDecoration(
-                                      color: primaryColor,
-                                      borderRadius: BorderRadius.circular(30)),
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        width: 20,
-                                          height: 20,
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 3, vertical: 3),
-                                          decoration: BoxDecoration(
-                                              color: baseColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(10)),
-                                          child: SvgPicture.asset(
-                                            icFilter,
-                                            width: 18,
-                                            height: 18,
-                                            color: primaryColor,
-                                          )),
-                                      SizedBox(width: 7,),
-                                      Text('Filter', style: txtSecondarySubTitle.copyWith(color: baseColor, fontWeight: FontWeight.w500),)
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
+                          BlocBuilder<OrderBloc, OrderState>(
+                            builder: (context, state) {
+                              return state.when(
+                                  initial: () {
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  },
+                                  loading: () => Expanded(
+                                        child: ListView.builder(
+                                          itemCount: 3,
+                                          itemBuilder: (context, index) =>
+                                              const ShimmerListBoxMenuStatus(),
+                                        ),
+                                      ),
+                                  success: (model,
+                                      modelReward,
+                                      filterIndex,
+                                      modelReOrder,
+                                      modelReOrderReward,
+                                      isMenungguPembayaran,
+                                      isMenungguKonfirmasi,
+                                      isPesananDiproses,
+                                      isPesananSiapDiambil,
+                                      isPesananDitolak,
+                                      isPesananDibatalkan,
+                                      isPesananSelesai) {
+                                    if ((model?.orders == null ||
+                                            model?.orders?.isEmpty ==
+                                                true) &&
+                                        (modelReward?.orders == null ||
+                                            modelReward?.orders?.isEmpty ==
+                                                true)) {
+                                      return _buildEmptyOrderState(context);
+                                    } else {
+                                      return Expanded(
+                                        child: ListView.builder(
+                                          itemCount: filterIndex == 0
+                                              ? model?.orders?.length ?? 0
+                                              : modelReward
+                                                      ?.orders?.length ??
+                                                  0,
+                                          scrollDirection: Axis.vertical,
+                                          itemBuilder: (context, index) {
+                                            if (filterIndex == 0) {
+                                              final order =
+                                                  model!.orders![index];
+
+                                              return ListBoxMenuStatus(
+                                                waLink: order.whatsappLink!,
+                                                status: order.status!,
+                                                totalItem: order
+                                                    .orderItems!.length
+                                                    .toString(),
+                                                totalPrice: order
+                                                    .totalPrice!
+                                                    .toString(),
+                                                orderItems:
+                                                    order.orderItems,
+                                                createdAt: order.createdAt
+                                                    .toString(),
+                                                orderId: order.id!,
+                                              );
+                                            } else {
+                                              final order = modelReward!
+                                                  .orders![index];
+
+                                              return ListBoxMenuStatus(
+                                                waLink: order.whatsapp!,
+                                                status: order.status!,
+                                                totalItem: order
+                                                    .orderRewardItems!
+                                                    .length
+                                                    .toString(),
+                                                totalPrice: order
+                                                    .totalPoint!
+                                                    .toString(),
+                                                orderItemsReward:
+                                                    order.orderRewardItems,
+                                                createdAt: order.createdAt
+                                                    .toString(),
+                                                orderRewardId: order.id!,
+                                              );
+                                            }
+                                          },
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  error: (message) =>
+                                      _buildErrorState(context, message!));
+                            },
+                          ),
                         ],
                       ),
                     ),
@@ -265,8 +228,12 @@ class _OrderPageState extends State<OrderPage> {
                                   print('Current state: $state');
                                   state.maybeWhen(
                                       orElse: () {},
-                                      success: (model, modelReward, filterIndex,
-                                          modelReOrder, modelReOrderReward, isMenungguPembayaran,
+                                      success: (model,
+                                          modelReward,
+                                          filterIndex,
+                                          modelReOrder,
+                                          modelReOrderReward,
+                                          isMenungguPembayaran,
                                           isMenungguKonfirmasi,
                                           isPesananDiproses,
                                           isPesananSiapDiambil,
@@ -321,7 +288,8 @@ class _OrderPageState extends State<OrderPage> {
                                             modelReward,
                                             filterIndex,
                                             modelReOrder,
-                                            modelReOrderReward, isMenungguPembayaran,
+                                            modelReOrderReward,
+                                            isMenungguPembayaran,
                                             isMenungguKonfirmasi,
                                             isPesananDiproses,
                                             isPesananSiapDiambil,
@@ -406,7 +374,7 @@ class _OrderPageState extends State<OrderPage> {
                               alignment: Alignment.bottomCenter,
                               child: InkWell(
                                 onTap: () {
-                                  _showReorderOptions(context, 1, 'history');
+                                  _showFilter(context, 1, 'history');
                                 },
                                 child: Container(
                                   width: 80,
@@ -426,15 +394,22 @@ class _OrderPageState extends State<OrderPage> {
                                           decoration: BoxDecoration(
                                               color: baseColor,
                                               borderRadius:
-                                              BorderRadius.circular(10)),
+                                                  BorderRadius.circular(10)),
                                           child: SvgPicture.asset(
                                             icFilter,
                                             width: 18,
                                             height: 18,
                                             color: primaryColor,
                                           )),
-                                      SizedBox(width: 7,),
-                                      Text('Filter', style: txtSecondarySubTitle.copyWith(color: baseColor, fontWeight: FontWeight.w500),)
+                                      SizedBox(
+                                        width: 7,
+                                      ),
+                                      Text(
+                                        'Filter',
+                                        style: txtSecondarySubTitle.copyWith(
+                                            color: baseColor,
+                                            fontWeight: FontWeight.w500),
+                                      )
                                     ],
                                   ),
                                 ),
@@ -521,7 +496,7 @@ class _OrderPageState extends State<OrderPage> {
     );
   }
 
-  void _showReorderOptions(BuildContext context, int? tapIndex, String query) {
+  void _showFilter(BuildContext context, int? tapIndex, String query) {
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
@@ -539,8 +514,7 @@ class _OrderPageState extends State<OrderPage> {
           padding: EdgeInsets.only(top: 10.0),
           child: BlocBuilder<OrderBloc, OrderState>(
             builder: (context, state) {
-              return state.maybeWhen(
-                  orElse: () {
+              return state.maybeWhen(orElse: () {
                 String startDateText = DateFormat('yyyy-MM-dd')
                     .format(DateTime.now().subtract(Duration(days: 365)));
                 String endDateText =
@@ -562,10 +536,10 @@ class _OrderPageState extends State<OrderPage> {
                               )),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+                          padding:
+                              EdgeInsets.only(top: 20, left: 20, right: 20),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-
                             children: [
                               Text(
                                 'Status Pesanan',
@@ -579,7 +553,8 @@ class _OrderPageState extends State<OrderPage> {
                               Visibility(
                                 visible: tapIndex == 0,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Menunggu pembayaran',
@@ -603,7 +578,8 @@ class _OrderPageState extends State<OrderPage> {
                               Visibility(
                                 visible: tapIndex == 0,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Menunguu dikonfirmasi',
@@ -627,7 +603,8 @@ class _OrderPageState extends State<OrderPage> {
                               Visibility(
                                 visible: tapIndex == 0,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Pesanan diproses',
@@ -651,7 +628,8 @@ class _OrderPageState extends State<OrderPage> {
                               Visibility(
                                 visible: tapIndex == 0,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Pesanan siap diambil',
@@ -673,9 +651,10 @@ class _OrderPageState extends State<OrderPage> {
                                 ),
                               ),
                               Visibility(
-                                visible : tapIndex == 1,
+                                visible: tapIndex == 1,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Selesai',
@@ -696,9 +675,10 @@ class _OrderPageState extends State<OrderPage> {
                                 ),
                               ),
                               Visibility(
-                                visible : tapIndex == 1,
+                                visible: tapIndex == 1,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Dibatalkan',
@@ -719,9 +699,10 @@ class _OrderPageState extends State<OrderPage> {
                                 ),
                               ),
                               Visibility(
-                                visible : tapIndex == 1,
+                                visible: tapIndex == 1,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Ditolak',
@@ -752,7 +733,8 @@ class _OrderPageState extends State<OrderPage> {
                               ),
                               SizedBox(height: 10),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   InkWell(
                                     // onTap: () =>
@@ -761,36 +743,39 @@ class _OrderPageState extends State<OrderPage> {
                                       padding: EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 5),
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
-                                          border:
-                                          Border.all(color: grey, width: 1)),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          border: Border.all(
+                                              color: grey, width: 1)),
                                       margin: EdgeInsets.only(top: 10),
                                       child: Row(
                                         children: [
                                           Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 'Mulai',
-                                                style:
-                                                txtSecondarySubTitle.copyWith(
-                                                    color: blackColor,
-                                                    fontWeight:
-                                                    FontWeight.w500),
+                                                style: txtSecondarySubTitle
+                                                    .copyWith(
+                                                        color: blackColor,
+                                                        fontWeight:
+                                                            FontWeight.w500),
                                               ),
                                               SizedBox(height: 5),
                                               Text(
                                                 startDateText,
-                                                style: txtPrimarySubTitle.copyWith(
-                                                    color: blackColor,
-                                                    fontWeight: FontWeight.w500),
+                                                style:
+                                                    txtPrimarySubTitle.copyWith(
+                                                        color: blackColor,
+                                                        fontWeight:
+                                                            FontWeight.w500),
                                               ),
                                             ],
                                           ),
                                           Padding(
                                             padding:
-                                            const EdgeInsets.only(left: 15),
+                                                const EdgeInsets.only(left: 15),
                                             child: Icon(
                                               Icons.calendar_month_outlined,
                                               size: 20,
@@ -802,12 +787,14 @@ class _OrderPageState extends State<OrderPage> {
                                   ),
                                   Center(
                                     child: Container(
-                                        width: MediaQuery.of(context).size.width *
-                                            0.15,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.15,
                                         height: 3,
                                         decoration: BoxDecoration(
                                           color: Colors.grey[200],
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                         )),
                                   ),
                                   InkWell(
@@ -817,35 +804,38 @@ class _OrderPageState extends State<OrderPage> {
                                       padding: EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 5),
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
-                                          border:
-                                          Border.all(color: grey, width: 1)),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          border: Border.all(
+                                              color: grey, width: 1)),
                                       child: Row(
                                         children: [
                                           Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 'Berakhir',
-                                                style:
-                                                txtSecondarySubTitle.copyWith(
-                                                    color: blackColor,
-                                                    fontWeight:
-                                                    FontWeight.w500),
+                                                style: txtSecondarySubTitle
+                                                    .copyWith(
+                                                        color: blackColor,
+                                                        fontWeight:
+                                                            FontWeight.w500),
                                               ),
                                               SizedBox(height: 5),
                                               Text(
                                                 endDateText,
-                                                style: txtPrimarySubTitle.copyWith(
-                                                    color: blackColor,
-                                                    fontWeight: FontWeight.w500),
+                                                style:
+                                                    txtPrimarySubTitle.copyWith(
+                                                        color: blackColor,
+                                                        fontWeight:
+                                                            FontWeight.w500),
                                               ),
                                             ],
                                           ),
                                           Padding(
                                             padding:
-                                            const EdgeInsets.only(left: 15),
+                                                const EdgeInsets.only(left: 15),
                                             child: Icon(
                                               Icons.calendar_month_outlined,
                                               size: 20,
@@ -860,11 +850,13 @@ class _OrderPageState extends State<OrderPage> {
                             ],
                           ),
                         ),
-
                       ],
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20, ),
+                      padding: EdgeInsets.symmetric(
+                        vertical: 20,
+                        horizontal: 20,
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -931,22 +923,26 @@ class _OrderPageState extends State<OrderPage> {
                     ),
                   ],
                 );
-              },
-                  success: (model, modelReward, filterIndex,
-                      modelReOrder, modelReOrderReward, isMenungguPembayaran,
-                      isMenungguKonfirmasi,
-                      isPesananDiproses,
-                      isPesananSiapDiambil,
-                      isPesananDitolak,
-                      isPesananDibatalkan,
-                      isPesananSelesai) {
+              }, success: (model,
+                  modelReward,
+                  filterIndex,
+                  modelReOrder,
+                  modelReOrderReward,
+                  isMenungguPembayaran,
+                  isMenungguKonfirmasi,
+                  isPesananDiproses,
+                  isPesananSiapDiambil,
+                  isPesananDitolak,
+                  isPesananDibatalkan,
+                  isPesananSelesai) {
                 // print('INI BOOL IS INFO  $isInfo');
                 String startDateText = DateFormat('yyyy-MM-dd')
                     .format(DateTime.now().subtract(Duration(days: 365)));
                 String endDateText =
                     DateFormat('yyyy-MM-dd').format(DateTime.now());
 
-                bool isStatusMenungguPembayaran = (filterIndex == 0 && tapIndex == 0);
+                bool isStatusMenungguPembayaran =
+                    (filterIndex == 0 && tapIndex == 0);
 
                 isMenungguPembayaran = tapIndex == 0;
 
@@ -973,7 +969,8 @@ class _OrderPageState extends State<OrderPage> {
                               )),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+                          padding:
+                              EdgeInsets.only(top: 20, left: 20, right: 20),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -989,7 +986,8 @@ class _OrderPageState extends State<OrderPage> {
                               Visibility(
                                 visible: isStatusMenungguPembayaran,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Menunggu pembayaran',
@@ -1013,7 +1011,8 @@ class _OrderPageState extends State<OrderPage> {
                               Visibility(
                                 visible: tapIndex == 0,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Menunguu dikonfirmasi',
@@ -1036,7 +1035,8 @@ class _OrderPageState extends State<OrderPage> {
                               Visibility(
                                 visible: tapIndex == 0,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Pesanan diproses',
@@ -1059,7 +1059,8 @@ class _OrderPageState extends State<OrderPage> {
                               Visibility(
                                 visible: tapIndex == 0,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Pesanan siap diambil',
@@ -1080,9 +1081,10 @@ class _OrderPageState extends State<OrderPage> {
                                 ),
                               ),
                               Visibility(
-                                visible : tapIndex == 1,
+                                visible: tapIndex == 1,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Selesai',
@@ -1103,9 +1105,10 @@ class _OrderPageState extends State<OrderPage> {
                                 ),
                               ),
                               Visibility(
-                                visible : tapIndex == 1,
+                                visible: tapIndex == 1,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Dibatalkan',
@@ -1119,16 +1122,18 @@ class _OrderPageState extends State<OrderPage> {
                                         activeColor: primaryColor,
                                         onChanged: (newValue) {
                                           context.read<OrderBloc>().add(
-                                              OrderEvent.togglePesananDibatalkan(
-                                                  newValue));
+                                              OrderEvent
+                                                  .togglePesananDibatalkan(
+                                                      newValue));
                                         }),
                                   ],
                                 ),
                               ),
                               Visibility(
-                                visible : tapIndex == 1,
+                                visible: tapIndex == 1,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Ditolak',
@@ -1159,7 +1164,8 @@ class _OrderPageState extends State<OrderPage> {
                               ),
                               SizedBox(height: 10),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   InkWell(
                                     // onTap: () =>
@@ -1168,36 +1174,39 @@ class _OrderPageState extends State<OrderPage> {
                                       padding: EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 5),
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
-                                          border:
-                                          Border.all(color: grey, width: 1)),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          border: Border.all(
+                                              color: grey, width: 1)),
                                       margin: EdgeInsets.only(top: 10),
                                       child: Row(
                                         children: [
                                           Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 'Mulai',
-                                                style:
-                                                txtSecondarySubTitle.copyWith(
-                                                    color: blackColor,
-                                                    fontWeight:
-                                                    FontWeight.w500),
+                                                style: txtSecondarySubTitle
+                                                    .copyWith(
+                                                        color: blackColor,
+                                                        fontWeight:
+                                                            FontWeight.w500),
                                               ),
                                               SizedBox(height: 5),
                                               Text(
                                                 startDateText,
-                                                style: txtPrimarySubTitle.copyWith(
-                                                    color: blackColor,
-                                                    fontWeight: FontWeight.w500),
+                                                style:
+                                                    txtPrimarySubTitle.copyWith(
+                                                        color: blackColor,
+                                                        fontWeight:
+                                                            FontWeight.w500),
                                               ),
                                             ],
                                           ),
                                           Padding(
                                             padding:
-                                            const EdgeInsets.only(left: 15),
+                                                const EdgeInsets.only(left: 15),
                                             child: Icon(
                                               Icons.calendar_month_outlined,
                                               size: 20,
@@ -1209,12 +1218,14 @@ class _OrderPageState extends State<OrderPage> {
                                   ),
                                   Center(
                                     child: Container(
-                                        width: MediaQuery.of(context).size.width *
-                                            0.15,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.15,
                                         height: 3,
                                         decoration: BoxDecoration(
                                           color: Colors.grey[200],
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                         )),
                                   ),
                                   InkWell(
@@ -1224,35 +1235,38 @@ class _OrderPageState extends State<OrderPage> {
                                       padding: EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 5),
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
-                                          border:
-                                          Border.all(color: grey, width: 1)),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          border: Border.all(
+                                              color: grey, width: 1)),
                                       child: Row(
                                         children: [
                                           Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 'Berakhir',
-                                                style:
-                                                txtSecondarySubTitle.copyWith(
-                                                    color: blackColor,
-                                                    fontWeight:
-                                                    FontWeight.w500),
+                                                style: txtSecondarySubTitle
+                                                    .copyWith(
+                                                        color: blackColor,
+                                                        fontWeight:
+                                                            FontWeight.w500),
                                               ),
                                               SizedBox(height: 5),
                                               Text(
                                                 endDateText,
-                                                style: txtPrimarySubTitle.copyWith(
-                                                    color: blackColor,
-                                                    fontWeight: FontWeight.w500),
+                                                style:
+                                                    txtPrimarySubTitle.copyWith(
+                                                        color: blackColor,
+                                                        fontWeight:
+                                                            FontWeight.w500),
                                               ),
                                             ],
                                           ),
                                           Padding(
                                             padding:
-                                            const EdgeInsets.only(left: 15),
+                                                const EdgeInsets.only(left: 15),
                                             child: Icon(
                                               Icons.calendar_month_outlined,
                                               size: 20,
@@ -1270,7 +1284,10 @@ class _OrderPageState extends State<OrderPage> {
                       ],
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20, ),
+                      padding: EdgeInsets.symmetric(
+                        vertical: 20,
+                        horizontal: 20,
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -1297,14 +1314,38 @@ class _OrderPageState extends State<OrderPage> {
                             width: MediaQuery.of(context).size.width * 0.4,
                             text: 'Terapkan',
                             onPressed: () {
-                              if (isPesananSelesai == true && isPesananDibatalkan == true && isPesananDitolak == true ) {
-                                context.read<OrderBloc>().add(OrderEvent.doFilterOrder(filterIndex: filterIndex, query: query, statusOrder: ''));
-                              } else if (isPesananSelesai == true && isPesananDibatalkan == false && isPesananDitolak == false ){
-                                context.read<OrderBloc>().add(OrderEvent.doFilterOrder(filterIndex: filterIndex, query: query, statusOrder: 'finished'));
-                              } else if (isPesananSelesai == false && isPesananDibatalkan == true && isPesananDitolak == false){
-                                context.read<OrderBloc>().add(OrderEvent.doFilterOrder(filterIndex: filterIndex, query: query, statusOrder: 'canceled'));
-                              } else if (isPesananSelesai == false && isPesananDibatalkan == false && isPesananDitolak == true) {
-                                context.read<OrderBloc>().add(OrderEvent.doFilterOrder(filterIndex: filterIndex, query: query, statusOrder: 'rejected'));
+                              if (isPesananSelesai == true &&
+                                  isPesananDibatalkan == true &&
+                                  isPesananDitolak == true) {
+                                context.read<OrderBloc>().add(
+                                    OrderEvent.doFilterOrder(
+                                        filterIndex: filterIndex,
+                                        query: query,
+                                        statusOrder: ''));
+                              } else if (isPesananSelesai == true &&
+                                  isPesananDibatalkan == false &&
+                                  isPesananDitolak == false) {
+                                context.read<OrderBloc>().add(
+                                    OrderEvent.doFilterOrder(
+                                        filterIndex: filterIndex,
+                                        query: query,
+                                        statusOrder: 'finished'));
+                              } else if (isPesananSelesai == false &&
+                                  isPesananDibatalkan == true &&
+                                  isPesananDitolak == false) {
+                                context.read<OrderBloc>().add(
+                                    OrderEvent.doFilterOrder(
+                                        filterIndex: filterIndex,
+                                        query: query,
+                                        statusOrder: 'canceled'));
+                              } else if (isPesananSelesai == false &&
+                                  isPesananDibatalkan == false &&
+                                  isPesananDitolak == true) {
+                                context.read<OrderBloc>().add(
+                                    OrderEvent.doFilterOrder(
+                                        filterIndex: filterIndex,
+                                        query: query,
+                                        statusOrder: 'rejected'));
                               }
                               // if (isInfo == false && isVoucher == false) {
                               //   context.read<NotificationBloc>().add(
@@ -1353,4 +1394,5 @@ class _OrderPageState extends State<OrderPage> {
       },
     );
   }
+
 }

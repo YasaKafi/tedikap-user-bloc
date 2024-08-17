@@ -120,7 +120,7 @@ class _NotificationPageState extends State<NotificationPage> {
               ),
               InkWell(
                   onTap: () {
-                    _showReorderOptions(context);
+                    _showFilterNotification(context);
                   },
                   child: Icon(
                     Icons.filter_list,
@@ -163,6 +163,8 @@ class _NotificationPageState extends State<NotificationPage> {
                               (model, isInfo, isVoucher, startDate, endDate) {
                             if (model?.data != null) {
                               // Generate a list of notifications
+                              print('LENGHT DATA NOTIFIKASI : ${model!.data!
+                                  .length}');
                               return ListView.builder(
                                 itemCount: model!.data!.length,
                                 shrinkWrap: true,
@@ -201,7 +203,7 @@ class _NotificationPageState extends State<NotificationPage> {
     );
   }
 
-  void _showReorderOptions(BuildContext context) {
+  void _showFilterNotification(BuildContext context) {
     showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(

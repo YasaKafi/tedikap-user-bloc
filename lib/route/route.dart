@@ -18,6 +18,7 @@ import 'package:tedikap_user_bloc/presentation/pages/information_page/language_s
 import 'package:tedikap_user_bloc/presentation/pages/information_page/setting_page/setting_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/terms_of_serive_page/terms_of_serive_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/notification_page/notification_page_view.dart';
+import 'package:tedikap_user_bloc/presentation/pages/order_page/widgets/review.dart';
 import 'package:tedikap_user_bloc/presentation/pages/point_page/point_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/voucher_page/voucher_page_view.dart';
 
@@ -104,6 +105,11 @@ class AppRouter {
         name: 'favorite',
         path: '/favorite',
         builder: (context, state) => FavoritePage(),
+      ),
+      GoRoute(
+        name: 'review',
+        path: '/review',
+        builder: (context, state) => RateAndReviewSheet(),
       ),
       GoRoute(
         name: 'notification',

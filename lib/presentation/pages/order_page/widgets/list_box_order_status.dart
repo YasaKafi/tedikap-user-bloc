@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import 'package:tedikap_user_bloc/data/models/response/history_order_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/history_order_reward_response_model.dart';
+import 'package:tedikap_user_bloc/presentation/pages/order_page/widgets/review.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../common/constant.dart';
 import '../../../../common/dimensions.dart';
@@ -53,15 +55,13 @@ class ListBoxMenuStatus extends StatelessWidget {
     }
   }
 
-
-   static String urlWhatsApp( String phone,  String message) {
-      if (phone.isEmpty) {
-        return "https://wa.me/6289525683801?text=I'm%20interested%20in%20your%20car%20for%20sale";
-      } else {
-        return "https://wa.me/$phone?text=${message}";
-      }
+  static String urlWhatsApp(String phone, String message) {
+    if (phone.isEmpty) {
+      return "https://wa.me/6289525683801?text=I'm%20interested%20in%20your%20car%20for%20sale";
+    } else {
+      return "https://wa.me/$phone?text=${message}";
     }
-
+  }
 
   Future<void> launchURL(Uri url) async {
     if (await canLaunchUrl(url)) {
@@ -81,7 +81,7 @@ class ListBoxMenuStatus extends StatelessWidget {
     } else if (status == 'pesanan selesai') {
       backgroundColor = primaryColor;
       titleCommonButton = 'Pesan Ulang';
-    }else if (status == 'menunggu pembayaran') {
+    } else if (status == 'menunggu pembayaran') {
       backgroundColor = navyColor;
       titleCommonButton = 'Lanjutkan Pembayaran';
     } else {
@@ -260,20 +260,18 @@ class ListBoxMenuStatus extends StatelessWidget {
                           orElse: () {
                             return Container();
                           },
-                          success: (
-                            model,
-                            modelReward,
-                            filterIndex,
-                            modelReOrder,
-                            modelReOrderReward,
+                          success: (model,
+                              modelReward,
+                              filterIndex,
+                              modelReOrder,
+                              modelReOrderReward,
                               isMenungguPembayaran,
                               isMenungguKonfirmasi,
                               isPesananDiproses,
                               isPesananSiapDiambil,
                               isPesananDitolak,
                               isPesananDibatalkan,
-                              isPesananSelesai
-                          ) {
+                              isPesananSelesai) {
                             bool isModelCartNotEmpty =
                                 model?.orders?.first.cartItems ?? false;
 
@@ -281,76 +279,105 @@ class ListBoxMenuStatus extends StatelessWidget {
                                 modelReward?.orders?.first.cartLength ?? false;
                             print(
                                 "INI BOOL MODEL REWARD $isModelCartRewardNotEmpty");
-                            return CommonButton(
-                              text: titleCommonButton,
-                              onPressed: () {
-                                if (model?.orders != null ||
-                                    modelReward?.orders != null) {
+                            return Row(
+                              children: [
+                                CommonButton(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 8),
+                                  text: titleCommonButton,
+                                  onPressed: () {
+                                    if (model?.orders != null ||
+                                        modelReward?.orders != null) {
+                                      bool isOrderStatusForReorder =
+                                          status == 'pesanan selesai' ||
+                                              status == 'pesanan dibatalkan' ||
+                                              status == 'pesanan ditolak';
 
-                                  bool isOrderStatusForReorder =
-                                      status == 'pesanan selesai' ||
-                                          status == 'pesanan dibatalkan' ||
-                                          status == 'pesanan ditolak';
+                                      bool isOrderStatusForCallAdmin =
+                                          status == 'pesanan diproses' ||
+                                              status == 'menunggu konfirmasi' ||
+                                              status == 'pesanan siap diambil';
 
-                                  bool isOrderStatusForCallAdmin =
-                                      status == 'pesanan diproses' ||
-                                          status == 'menunggu konfirmasi' ||
-                                          status == 'pesanan siap diambil';
+                                      bool isOrderStatusForContinuePayment =
+                                          status == 'menunggu pembayaran';
 
-                                  bool isOrderStatusForContinuePayment =
-                                      status == 'menunggu pembayaran';
-
-                                  if (isOrderStatusForReorder) {
-                                    if (isModelCartNotEmpty == true) {
-                                      _showReorderOptions(
-                                          context, backgroundColor);
-                                    } else if (!isModelCartNotEmpty) {
-                                      if (orderId != null) {
-                                        context.read<OrderBloc>().add(
-                                            OrderEvent.postReOrder(orderId!));
-                                      } else if (orderRewardId != null) {
-                                        context.read<OrderBloc>().add(
-                                            OrderEvent.postReOrderReward(
-                                                orderRewardId!));
-                                      }
-                                    } else if (isModelCartRewardNotEmpty ==
-                                        true) {
-                                      _showReorderOptions(
-                                          context, backgroundColor);
-                                      // Check if it's a normal or reward order and trigger the appropriate even
-                                    } else {
-                                      if (orderId != null) {
-                                        context.read<OrderBloc>().add(
-                                            OrderEvent.postReOrder(orderId!));
-                                      } else if (orderRewardId != null) {
-                                        context.read<OrderBloc>().add(
-                                            OrderEvent.postReOrderReward(
-                                                orderRewardId!));
+                                      if (isOrderStatusForReorder) {
+                                        if (isModelCartNotEmpty == true) {
+                                          _showReorderOptions(
+                                              context, backgroundColor);
+                                        } else if (!isModelCartNotEmpty) {
+                                          if (orderId != null) {
+                                            context.read<OrderBloc>().add(
+                                                OrderEvent.postReOrder(
+                                                    orderId!));
+                                          } else if (orderRewardId != null) {
+                                            context.read<OrderBloc>().add(
+                                                OrderEvent.postReOrderReward(
+                                                    orderRewardId!));
+                                          }
+                                        } else if (isModelCartRewardNotEmpty ==
+                                            true) {
+                                          _showReorderOptions(
+                                              context, backgroundColor);
+                                          // Check if it's a normal or reward order and trigger the appropriate even
+                                        } else {
+                                          if (orderId != null) {
+                                            context.read<OrderBloc>().add(
+                                                OrderEvent.postReOrder(
+                                                    orderId!));
+                                          } else if (orderRewardId != null) {
+                                            context.read<OrderBloc>().add(
+                                                OrderEvent.postReOrderReward(
+                                                    orderRewardId!));
+                                          }
+                                        }
+                                      } else if (isOrderStatusForCallAdmin) {
+                                        launchUrl(Uri.parse(waLink));
+                                      } else {
+                                        if (GlobalVariables
+                                                .linkCheckoutGlobal !=
+                                            null) {
+                                          launchUrl(Uri.parse(GlobalVariables
+                                              .linkCheckoutGlobal!));
+                                        }
                                       }
                                     }
-                                  } else if (isOrderStatusForCallAdmin) {
-                                    launchUrl(Uri.parse(waLink));
-                                  } else {
-                                    if (GlobalVariables.linkCheckoutGlobal !=
-                                        null) {
-                                      launchUrl(Uri.parse(
-                                          GlobalVariables.linkCheckoutGlobal!));
-                                    }
-
-                                  }
-                                }
-                              },
-                              backgroundColor:  backgroundColor,
-                              textColor: baseColor,
-                              borderRadius: 10,
-                              fontSize: status == 'menunggu pembayaran' ? 10 : 10,
-                              fontWeight: FontWeight.w500,
+                                  },
+                                  backgroundColor: backgroundColor,
+                                  textColor: baseColor,
+                                  borderRadius: 10,
+                                  fontSize:
+                                      status == 'menunggu pembayaran' ? 10 : 10,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Visibility(
+                                  child: CommonButton(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 8),
+                                    text: 'Rate Order',
+                                    borderRadius: 10,
+                                    fontSize: 10,
+                                    onPressed: () {
+                                      context.pushNamed('review');
+                                    },
+                                    backgroundColor: backgroundColor,
+                                    textColor: baseColor,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  visible: status == 'pesanan selesai',
+                                ),
+                              ],
                             );
                           },
                         );
                       },
                     ),
                     CommonButton(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                       text: 'Detail Pesanan',
                       borderRadius: 10,
                       fontSize: 10,
@@ -482,4 +509,5 @@ class ListBoxMenuStatus extends StatelessWidget {
       },
     );
   }
+
 }
