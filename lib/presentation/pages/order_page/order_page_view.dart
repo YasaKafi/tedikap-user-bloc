@@ -306,22 +306,9 @@ class _OrderPageState extends State<OrderPage> {
                                             .format(endDate)
                                         : endDateText;
 
-                                    String startDateTextReward = DateFormat('yyyy-MM-dd')
-                                        .format(DateTime.now().subtract(Duration(days: 365)));
-                                    String endDateTextReward =
-                                    DateFormat('yyyy-MM-dd').format(DateTime.now());
-
-                                    startDateTextReward = startDateReward != null
-                                        ? DateFormat('yyyy-MM-dd').format(startDateReward)
-                                        : startDateTextReward;
-                                    endDateTextReward = endDateReward != null
-                                        ? DateFormat('yyyy-MM-dd').format(endDateReward)
-                                        : endDateTextReward;
-
                                     String status = '';
-                                    String statusReward = '';
 
-                                    if (filterIndex == 0) {
+                                    if (filterIndex == 1) {
                                       if (isPesananSelesai == true &&
                                           isPesananDibatalkan == false &&
                                           isPesananDitolak == false) {
@@ -347,32 +334,28 @@ class _OrderPageState extends State<OrderPage> {
                                           isPesananDitolak == true) {
                                         status = 'canceled_rejected';
                                       }
-                                    } else {
+                                    } else if (filterIndex == 0) {
                                       if (isPesananSelesaiReward == true &&
                                           isPesananDitolakReward == false) {
-                                        statusReward = 'pesanan selesai';
+                                        status = 'pesanan selesai';
                                       } else if (isPesananSelesaiReward ==
                                               false &&
                                           isPesananDitolakReward == true) {
-                                        statusReward = 'pesanan ditolak';
+                                        status = 'pesanan ditolak';
                                       } else if (isPesananSelesaiReward ==
                                               true &&
                                           isPesananDitolakReward == true) {
-                                        statusReward = '';
+                                        status = '';
                                       }
                                     }
 
                                     print('VALUE CURRENT STATUS ORDER COMMON $status');
-                                    print('VALUE CURRENT STATUS ORDER REWARD $statusReward');
 
                                     return OrderFilter(
                                       query: 'history',
                                       statusOrder:  status ,
                                       startDate:  startDateText ,
                                       endDate:  endDateText ,
-                                      statusOrderReward: statusReward,
-                                      startDateReward: startDateTextReward,
-                                      endDateReward: endDateTextReward,
                                     );
                                   });
                                 },
@@ -1462,18 +1445,18 @@ class _OrderPageState extends State<OrderPage> {
                                       OrderEvent.doFilterOrder(
                                           filterIndex: filterIndex,
                                           query: query,
-                                          statusOrderReward: 'pesanan selesai',
-                                          startDateReward: startDateTextReward,
-                                          endDateReward: endDateTextReward));
+                                          statusOrder: 'pesanan selesai',
+                                          startDate: startDateTextReward,
+                                          endDate: endDateTextReward));
                                 } else if (isPesananSelesaiReward == false &&
                                     isPesananDitolakReward == true) {
                                   context.read<OrderBloc>().add(
                                       OrderEvent.doFilterOrder(
                                           filterIndex: filterIndex,
                                           query: query,
-                                          statusOrderReward: 'pesanan ditolak',
-                                          startDateReward: startDateTextReward,
-                                          endDateReward: endDateTextReward));
+                                          statusOrder: 'pesanan ditolak',
+                                          startDate: startDateTextReward,
+                                          endDate: endDateTextReward));
                                   print(
                                       'INI VALUE $query dan VALUE START DATE $startDateTextReward');
                                 } else if (isPesananSelesaiReward == true &&
@@ -1482,9 +1465,9 @@ class _OrderPageState extends State<OrderPage> {
                                       OrderEvent.doFilterOrder(
                                           filterIndex: filterIndex,
                                           query: query,
-                                          statusOrderReward: '',
-                                          startDateReward: startDateTextReward,
-                                          endDateReward: endDateTextReward));
+                                          statusOrder: '',
+                                          startDate: startDateTextReward,
+                                          endDate: endDateTextReward));
                                 }
                               }
 

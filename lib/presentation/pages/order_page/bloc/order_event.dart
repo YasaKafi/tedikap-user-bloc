@@ -9,7 +9,7 @@ class OrderEvent with _$OrderEvent {
   const factory OrderEvent.getAllHistoryOrderReward() = _GetAllHistoryOrderReward;
   const factory OrderEvent.getFilterOrder(String query, String? statusOrder, String? startDate, String? endDate) = _GetCategoryOrder;
   const factory OrderEvent.getFilterOrderReward(String query, String? statusOrder, String? startDate, String? endDate) = _GetCategoryOrderReward;
-  const factory OrderEvent.doFilterOrder({required int filterIndex, required String query, String? statusOrder, String? startDate, String? endDate, String? statusOrderReward, String? startDateReward, String? endDateReward}) = _DoFilterOrder;
+  const factory OrderEvent.doFilterOrder({required int filterIndex, required String query, String? statusOrder, String? startDate, String? endDate}) = _DoFilterOrder;
   const factory OrderEvent.togglePesananDitolak(bool? newValue, ) = _ToggleDitolak;
   const factory OrderEvent.togglePesananDitolakReward(bool? newValue, ) = _ToggleDitolakReward;
   const factory OrderEvent.togglePesananDibatalkan(bool? newValue, ) = _ToggleDibatalkan;

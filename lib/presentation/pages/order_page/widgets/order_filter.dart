@@ -12,18 +12,13 @@ class OrderFilter extends StatelessWidget {
       this.query,
       this.statusOrder,
       this.startDate,
-      this.endDate,
-      this.statusOrderReward,
-      this.startDateReward,
-      this.endDateReward});
+      this.endDate,});
 
   final String? query;
   final String? statusOrder;
   final String? startDate;
   final String? endDate;
-  final String? statusOrderReward;
-  final String? startDateReward;
-  final String? endDateReward;
+
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +33,6 @@ class OrderFilter extends StatelessWidget {
           value: filterIndex,
           onChanged: (val) {
             print('VALUE VAL CURRENT : $val');
-            if (val == 0){
               context.read<OrderBloc>().add(OrderEvent.doFilterOrder(
                 filterIndex: val,
                 query: query!,
@@ -47,16 +41,6 @@ class OrderFilter extends StatelessWidget {
                 endDate:  endDate,
               )
               );
-            } else {
-            context.read<OrderBloc>().add(OrderEvent.doFilterOrder(
-                    filterIndex: val,
-                    query: query!,
-              statusOrderReward:  statusOrderReward,
-              startDateReward:  startDate,
-              endDateReward: endDateReward,
-
-                )
-            );}
           },
           choiceItems: C2Choice.listFrom<int, String>(
             source: options,

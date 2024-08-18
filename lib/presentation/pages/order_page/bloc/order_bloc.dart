@@ -220,7 +220,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
           ));
         } else if (filterIndex == 1) {
 
-          final result = await datasource.getFilterTypeOrderReward(event.query, event.statusOrderReward, event.startDateReward, event.endDateReward);
+          final result = await datasource.getFilterTypeOrderReward(event.query, event.statusOrder, event.startDate, event.endDate);
           emit(result.fold(
             (l) => const OrderState.error(
                 message: 'Oops, something went wrong. Please try again later'),
@@ -233,8 +233,8 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
                 isPesananDitolak: isPesananDitolak,
                 isPesananDibatalkan: isPesananDibatalkan,
                 isPesananSelesai: isPesananSelesai,
-              endDate: endDate,
-              startDate: startDate,
+                startDate: startDate,
+                endDate: endDate,
                 isPesananSelesaiReward : isPesananSelesaiReward,
                 isPesananDitolakReward: isPesananDitolakReward,
                 startDateReward: startDateReward,
