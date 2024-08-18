@@ -23,19 +23,25 @@ mixin _$OrderEvent {
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
-    required TResult Function(String query, String? statusOrder) getFilterOrder,
-    required TResult Function(String query, String? statusOrder)
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrder,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
         getFilterOrderReward,
-    required TResult Function(
-            int filterIndex, String query, String? statusOrder)
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
-    required TResult Function(bool? newValue) toggleMenungguPembayaran,
-    required TResult Function(bool? newValue) toggleMenungguKonfirmasi,
-    required TResult Function(bool? newValue) togglePesananDiproses,
-    required TResult Function(bool? newValue) togglePesananSiapDiambil,
     required TResult Function(bool? newValue) togglePesananDitolak,
+    required TResult Function(bool? newValue) togglePesananDitolakReward,
     required TResult Function(bool? newValue) togglePesananDibatalkan,
     required TResult Function(bool? newValue) togglePesananSelesai,
+    required TResult Function(bool? newValue) togglePesananSelesaiReward,
+    required TResult Function(DateTime date) setStartDate,
+    required TResult Function(DateTime date) setStartDateReward,
+    required TResult Function(DateTime date) setEndDate,
+    required TResult Function(DateTime date) setEndDateReward,
+    required TResult Function(String query) resetFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -45,17 +51,25 @@ mixin _$OrderEvent {
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
-    TResult? Function(String query, String? statusOrder)? getFilterOrder,
-    TResult? Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult? Function(int filterIndex, String query, String? statusOrder)?
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
         doFilterOrder,
-    TResult? Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult? Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult? Function(bool? newValue)? togglePesananDiproses,
-    TResult? Function(bool? newValue)? togglePesananSiapDiambil,
     TResult? Function(bool? newValue)? togglePesananDitolak,
+    TResult? Function(bool? newValue)? togglePesananDitolakReward,
     TResult? Function(bool? newValue)? togglePesananDibatalkan,
     TResult? Function(bool? newValue)? togglePesananSelesai,
+    TResult? Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult? Function(DateTime date)? setStartDate,
+    TResult? Function(DateTime date)? setStartDateReward,
+    TResult? Function(DateTime date)? setEndDate,
+    TResult? Function(DateTime date)? setEndDateReward,
+    TResult? Function(String query)? resetFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,17 +79,25 @@ mixin _$OrderEvent {
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
-    TResult Function(String query, String? statusOrder)? getFilterOrder,
-    TResult Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult Function(int filterIndex, String query, String? statusOrder)?
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
         doFilterOrder,
-    TResult Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult Function(bool? newValue)? togglePesananDiproses,
-    TResult Function(bool? newValue)? togglePesananSiapDiambil,
     TResult Function(bool? newValue)? togglePesananDitolak,
+    TResult Function(bool? newValue)? togglePesananDitolakReward,
     TResult Function(bool? newValue)? togglePesananDibatalkan,
     TResult Function(bool? newValue)? togglePesananSelesai,
+    TResult Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult Function(DateTime date)? setStartDate,
+    TResult Function(DateTime date)? setStartDateReward,
+    TResult Function(DateTime date)? setEndDate,
+    TResult Function(DateTime date)? setEndDateReward,
+    TResult Function(String query)? resetFilters,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -91,16 +113,18 @@ mixin _$OrderEvent {
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
-    required TResult Function(_ToggleMenungguPembayaran value)
-        toggleMenungguPembayaran,
-    required TResult Function(_ToggleMenungguKonfirmasi value)
-        toggleMenungguKonfirmasi,
-    required TResult Function(_ToggleDiproses value) togglePesananDiproses,
-    required TResult Function(_ToggleSiapDiambil value)
-        togglePesananSiapDiambil,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
+    required TResult Function(_ToggleDitolakReward value)
+        togglePesananDitolakReward,
     required TResult Function(_ToggleDibatalkan value) togglePesananDibatalkan,
     required TResult Function(_ToggleSelesai value) togglePesananSelesai,
+    required TResult Function(_ToggleSelesaiReward value)
+        togglePesananSelesaiReward,
+    required TResult Function(_SetStartDate value) setStartDate,
+    required TResult Function(_SetStartDateReward value) setStartDateReward,
+    required TResult Function(_SetEndDate value) setEndDate,
+    required TResult Function(_SetEndDateReward value) setEndDateReward,
+    required TResult Function(_ResetFilters value) resetFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -114,15 +138,16 @@ mixin _$OrderEvent {
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
-    TResult? Function(_ToggleMenungguPembayaran value)?
-        toggleMenungguPembayaran,
-    TResult? Function(_ToggleMenungguKonfirmasi value)?
-        toggleMenungguKonfirmasi,
-    TResult? Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult? Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
     TResult? Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
     TResult? Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult? Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult? Function(_SetStartDate value)? setStartDate,
+    TResult? Function(_SetStartDateReward value)? setStartDateReward,
+    TResult? Function(_SetEndDate value)? setEndDate,
+    TResult? Function(_SetEndDateReward value)? setEndDateReward,
+    TResult? Function(_ResetFilters value)? resetFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -135,13 +160,16 @@ mixin _$OrderEvent {
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
-    TResult Function(_ToggleMenungguPembayaran value)? toggleMenungguPembayaran,
-    TResult Function(_ToggleMenungguKonfirmasi value)? toggleMenungguKonfirmasi,
-    TResult Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
     TResult Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
     TResult Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult Function(_SetStartDate value)? setStartDate,
+    TResult Function(_SetStartDateReward value)? setStartDateReward,
+    TResult Function(_SetEndDate value)? setEndDate,
+    TResult Function(_SetEndDateReward value)? setEndDateReward,
+    TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -208,19 +236,25 @@ class _$StartedImpl implements _Started {
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
-    required TResult Function(String query, String? statusOrder) getFilterOrder,
-    required TResult Function(String query, String? statusOrder)
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrder,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
         getFilterOrderReward,
-    required TResult Function(
-            int filterIndex, String query, String? statusOrder)
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
-    required TResult Function(bool? newValue) toggleMenungguPembayaran,
-    required TResult Function(bool? newValue) toggleMenungguKonfirmasi,
-    required TResult Function(bool? newValue) togglePesananDiproses,
-    required TResult Function(bool? newValue) togglePesananSiapDiambil,
     required TResult Function(bool? newValue) togglePesananDitolak,
+    required TResult Function(bool? newValue) togglePesananDitolakReward,
     required TResult Function(bool? newValue) togglePesananDibatalkan,
     required TResult Function(bool? newValue) togglePesananSelesai,
+    required TResult Function(bool? newValue) togglePesananSelesaiReward,
+    required TResult Function(DateTime date) setStartDate,
+    required TResult Function(DateTime date) setStartDateReward,
+    required TResult Function(DateTime date) setEndDate,
+    required TResult Function(DateTime date) setEndDateReward,
+    required TResult Function(String query) resetFilters,
   }) {
     return started();
   }
@@ -233,17 +267,25 @@ class _$StartedImpl implements _Started {
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
-    TResult? Function(String query, String? statusOrder)? getFilterOrder,
-    TResult? Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult? Function(int filterIndex, String query, String? statusOrder)?
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
         doFilterOrder,
-    TResult? Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult? Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult? Function(bool? newValue)? togglePesananDiproses,
-    TResult? Function(bool? newValue)? togglePesananSiapDiambil,
     TResult? Function(bool? newValue)? togglePesananDitolak,
+    TResult? Function(bool? newValue)? togglePesananDitolakReward,
     TResult? Function(bool? newValue)? togglePesananDibatalkan,
     TResult? Function(bool? newValue)? togglePesananSelesai,
+    TResult? Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult? Function(DateTime date)? setStartDate,
+    TResult? Function(DateTime date)? setStartDateReward,
+    TResult? Function(DateTime date)? setEndDate,
+    TResult? Function(DateTime date)? setEndDateReward,
+    TResult? Function(String query)? resetFilters,
   }) {
     return started?.call();
   }
@@ -256,17 +298,25 @@ class _$StartedImpl implements _Started {
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
-    TResult Function(String query, String? statusOrder)? getFilterOrder,
-    TResult Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult Function(int filterIndex, String query, String? statusOrder)?
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
         doFilterOrder,
-    TResult Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult Function(bool? newValue)? togglePesananDiproses,
-    TResult Function(bool? newValue)? togglePesananSiapDiambil,
     TResult Function(bool? newValue)? togglePesananDitolak,
+    TResult Function(bool? newValue)? togglePesananDitolakReward,
     TResult Function(bool? newValue)? togglePesananDibatalkan,
     TResult Function(bool? newValue)? togglePesananSelesai,
+    TResult Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult Function(DateTime date)? setStartDate,
+    TResult Function(DateTime date)? setStartDateReward,
+    TResult Function(DateTime date)? setEndDate,
+    TResult Function(DateTime date)? setEndDateReward,
+    TResult Function(String query)? resetFilters,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -288,16 +338,18 @@ class _$StartedImpl implements _Started {
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
-    required TResult Function(_ToggleMenungguPembayaran value)
-        toggleMenungguPembayaran,
-    required TResult Function(_ToggleMenungguKonfirmasi value)
-        toggleMenungguKonfirmasi,
-    required TResult Function(_ToggleDiproses value) togglePesananDiproses,
-    required TResult Function(_ToggleSiapDiambil value)
-        togglePesananSiapDiambil,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
+    required TResult Function(_ToggleDitolakReward value)
+        togglePesananDitolakReward,
     required TResult Function(_ToggleDibatalkan value) togglePesananDibatalkan,
     required TResult Function(_ToggleSelesai value) togglePesananSelesai,
+    required TResult Function(_ToggleSelesaiReward value)
+        togglePesananSelesaiReward,
+    required TResult Function(_SetStartDate value) setStartDate,
+    required TResult Function(_SetStartDateReward value) setStartDateReward,
+    required TResult Function(_SetEndDate value) setEndDate,
+    required TResult Function(_SetEndDateReward value) setEndDateReward,
+    required TResult Function(_ResetFilters value) resetFilters,
   }) {
     return started(this);
   }
@@ -314,15 +366,16 @@ class _$StartedImpl implements _Started {
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
-    TResult? Function(_ToggleMenungguPembayaran value)?
-        toggleMenungguPembayaran,
-    TResult? Function(_ToggleMenungguKonfirmasi value)?
-        toggleMenungguKonfirmasi,
-    TResult? Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult? Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
     TResult? Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
     TResult? Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult? Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult? Function(_SetStartDate value)? setStartDate,
+    TResult? Function(_SetStartDateReward value)? setStartDateReward,
+    TResult? Function(_SetEndDate value)? setEndDate,
+    TResult? Function(_SetEndDateReward value)? setEndDateReward,
+    TResult? Function(_ResetFilters value)? resetFilters,
   }) {
     return started?.call(this);
   }
@@ -338,13 +391,16 @@ class _$StartedImpl implements _Started {
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
-    TResult Function(_ToggleMenungguPembayaran value)? toggleMenungguPembayaran,
-    TResult Function(_ToggleMenungguKonfirmasi value)? toggleMenungguKonfirmasi,
-    TResult Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
     TResult Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
     TResult Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult Function(_SetStartDate value)? setStartDate,
+    TResult Function(_SetStartDateReward value)? setStartDateReward,
+    TResult Function(_SetEndDate value)? setEndDate,
+    TResult Function(_SetEndDateReward value)? setEndDateReward,
+    TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -401,19 +457,25 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
-    required TResult Function(String query, String? statusOrder) getFilterOrder,
-    required TResult Function(String query, String? statusOrder)
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrder,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
         getFilterOrderReward,
-    required TResult Function(
-            int filterIndex, String query, String? statusOrder)
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
-    required TResult Function(bool? newValue) toggleMenungguPembayaran,
-    required TResult Function(bool? newValue) toggleMenungguKonfirmasi,
-    required TResult Function(bool? newValue) togglePesananDiproses,
-    required TResult Function(bool? newValue) togglePesananSiapDiambil,
     required TResult Function(bool? newValue) togglePesananDitolak,
+    required TResult Function(bool? newValue) togglePesananDitolakReward,
     required TResult Function(bool? newValue) togglePesananDibatalkan,
     required TResult Function(bool? newValue) togglePesananSelesai,
+    required TResult Function(bool? newValue) togglePesananSelesaiReward,
+    required TResult Function(DateTime date) setStartDate,
+    required TResult Function(DateTime date) setStartDateReward,
+    required TResult Function(DateTime date) setEndDate,
+    required TResult Function(DateTime date) setEndDateReward,
+    required TResult Function(String query) resetFilters,
   }) {
     return getAllHistoryOrder();
   }
@@ -426,17 +488,25 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
-    TResult? Function(String query, String? statusOrder)? getFilterOrder,
-    TResult? Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult? Function(int filterIndex, String query, String? statusOrder)?
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
         doFilterOrder,
-    TResult? Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult? Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult? Function(bool? newValue)? togglePesananDiproses,
-    TResult? Function(bool? newValue)? togglePesananSiapDiambil,
     TResult? Function(bool? newValue)? togglePesananDitolak,
+    TResult? Function(bool? newValue)? togglePesananDitolakReward,
     TResult? Function(bool? newValue)? togglePesananDibatalkan,
     TResult? Function(bool? newValue)? togglePesananSelesai,
+    TResult? Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult? Function(DateTime date)? setStartDate,
+    TResult? Function(DateTime date)? setStartDateReward,
+    TResult? Function(DateTime date)? setEndDate,
+    TResult? Function(DateTime date)? setEndDateReward,
+    TResult? Function(String query)? resetFilters,
   }) {
     return getAllHistoryOrder?.call();
   }
@@ -449,17 +519,25 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
-    TResult Function(String query, String? statusOrder)? getFilterOrder,
-    TResult Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult Function(int filterIndex, String query, String? statusOrder)?
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
         doFilterOrder,
-    TResult Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult Function(bool? newValue)? togglePesananDiproses,
-    TResult Function(bool? newValue)? togglePesananSiapDiambil,
     TResult Function(bool? newValue)? togglePesananDitolak,
+    TResult Function(bool? newValue)? togglePesananDitolakReward,
     TResult Function(bool? newValue)? togglePesananDibatalkan,
     TResult Function(bool? newValue)? togglePesananSelesai,
+    TResult Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult Function(DateTime date)? setStartDate,
+    TResult Function(DateTime date)? setStartDateReward,
+    TResult Function(DateTime date)? setEndDate,
+    TResult Function(DateTime date)? setEndDateReward,
+    TResult Function(String query)? resetFilters,
     required TResult orElse(),
   }) {
     if (getAllHistoryOrder != null) {
@@ -481,16 +559,18 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
-    required TResult Function(_ToggleMenungguPembayaran value)
-        toggleMenungguPembayaran,
-    required TResult Function(_ToggleMenungguKonfirmasi value)
-        toggleMenungguKonfirmasi,
-    required TResult Function(_ToggleDiproses value) togglePesananDiproses,
-    required TResult Function(_ToggleSiapDiambil value)
-        togglePesananSiapDiambil,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
+    required TResult Function(_ToggleDitolakReward value)
+        togglePesananDitolakReward,
     required TResult Function(_ToggleDibatalkan value) togglePesananDibatalkan,
     required TResult Function(_ToggleSelesai value) togglePesananSelesai,
+    required TResult Function(_ToggleSelesaiReward value)
+        togglePesananSelesaiReward,
+    required TResult Function(_SetStartDate value) setStartDate,
+    required TResult Function(_SetStartDateReward value) setStartDateReward,
+    required TResult Function(_SetEndDate value) setEndDate,
+    required TResult Function(_SetEndDateReward value) setEndDateReward,
+    required TResult Function(_ResetFilters value) resetFilters,
   }) {
     return getAllHistoryOrder(this);
   }
@@ -507,15 +587,16 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
-    TResult? Function(_ToggleMenungguPembayaran value)?
-        toggleMenungguPembayaran,
-    TResult? Function(_ToggleMenungguKonfirmasi value)?
-        toggleMenungguKonfirmasi,
-    TResult? Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult? Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
     TResult? Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
     TResult? Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult? Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult? Function(_SetStartDate value)? setStartDate,
+    TResult? Function(_SetStartDateReward value)? setStartDateReward,
+    TResult? Function(_SetEndDate value)? setEndDate,
+    TResult? Function(_SetEndDateReward value)? setEndDateReward,
+    TResult? Function(_ResetFilters value)? resetFilters,
   }) {
     return getAllHistoryOrder?.call(this);
   }
@@ -531,13 +612,16 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
-    TResult Function(_ToggleMenungguPembayaran value)? toggleMenungguPembayaran,
-    TResult Function(_ToggleMenungguKonfirmasi value)? toggleMenungguKonfirmasi,
-    TResult Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
     TResult Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
     TResult Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult Function(_SetStartDate value)? setStartDate,
+    TResult Function(_SetStartDateReward value)? setStartDateReward,
+    TResult Function(_SetEndDate value)? setEndDate,
+    TResult Function(_SetEndDateReward value)? setEndDateReward,
+    TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
   }) {
     if (getAllHistoryOrder != null) {
@@ -620,19 +704,25 @@ class _$PostReOrderImpl implements _PostReOrder {
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
-    required TResult Function(String query, String? statusOrder) getFilterOrder,
-    required TResult Function(String query, String? statusOrder)
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrder,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
         getFilterOrderReward,
-    required TResult Function(
-            int filterIndex, String query, String? statusOrder)
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
-    required TResult Function(bool? newValue) toggleMenungguPembayaran,
-    required TResult Function(bool? newValue) toggleMenungguKonfirmasi,
-    required TResult Function(bool? newValue) togglePesananDiproses,
-    required TResult Function(bool? newValue) togglePesananSiapDiambil,
     required TResult Function(bool? newValue) togglePesananDitolak,
+    required TResult Function(bool? newValue) togglePesananDitolakReward,
     required TResult Function(bool? newValue) togglePesananDibatalkan,
     required TResult Function(bool? newValue) togglePesananSelesai,
+    required TResult Function(bool? newValue) togglePesananSelesaiReward,
+    required TResult Function(DateTime date) setStartDate,
+    required TResult Function(DateTime date) setStartDateReward,
+    required TResult Function(DateTime date) setEndDate,
+    required TResult Function(DateTime date) setEndDateReward,
+    required TResult Function(String query) resetFilters,
   }) {
     return postReOrder(orderId);
   }
@@ -645,17 +735,25 @@ class _$PostReOrderImpl implements _PostReOrder {
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
-    TResult? Function(String query, String? statusOrder)? getFilterOrder,
-    TResult? Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult? Function(int filterIndex, String query, String? statusOrder)?
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
         doFilterOrder,
-    TResult? Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult? Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult? Function(bool? newValue)? togglePesananDiproses,
-    TResult? Function(bool? newValue)? togglePesananSiapDiambil,
     TResult? Function(bool? newValue)? togglePesananDitolak,
+    TResult? Function(bool? newValue)? togglePesananDitolakReward,
     TResult? Function(bool? newValue)? togglePesananDibatalkan,
     TResult? Function(bool? newValue)? togglePesananSelesai,
+    TResult? Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult? Function(DateTime date)? setStartDate,
+    TResult? Function(DateTime date)? setStartDateReward,
+    TResult? Function(DateTime date)? setEndDate,
+    TResult? Function(DateTime date)? setEndDateReward,
+    TResult? Function(String query)? resetFilters,
   }) {
     return postReOrder?.call(orderId);
   }
@@ -668,17 +766,25 @@ class _$PostReOrderImpl implements _PostReOrder {
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
-    TResult Function(String query, String? statusOrder)? getFilterOrder,
-    TResult Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult Function(int filterIndex, String query, String? statusOrder)?
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
         doFilterOrder,
-    TResult Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult Function(bool? newValue)? togglePesananDiproses,
-    TResult Function(bool? newValue)? togglePesananSiapDiambil,
     TResult Function(bool? newValue)? togglePesananDitolak,
+    TResult Function(bool? newValue)? togglePesananDitolakReward,
     TResult Function(bool? newValue)? togglePesananDibatalkan,
     TResult Function(bool? newValue)? togglePesananSelesai,
+    TResult Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult Function(DateTime date)? setStartDate,
+    TResult Function(DateTime date)? setStartDateReward,
+    TResult Function(DateTime date)? setEndDate,
+    TResult Function(DateTime date)? setEndDateReward,
+    TResult Function(String query)? resetFilters,
     required TResult orElse(),
   }) {
     if (postReOrder != null) {
@@ -700,16 +806,18 @@ class _$PostReOrderImpl implements _PostReOrder {
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
-    required TResult Function(_ToggleMenungguPembayaran value)
-        toggleMenungguPembayaran,
-    required TResult Function(_ToggleMenungguKonfirmasi value)
-        toggleMenungguKonfirmasi,
-    required TResult Function(_ToggleDiproses value) togglePesananDiproses,
-    required TResult Function(_ToggleSiapDiambil value)
-        togglePesananSiapDiambil,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
+    required TResult Function(_ToggleDitolakReward value)
+        togglePesananDitolakReward,
     required TResult Function(_ToggleDibatalkan value) togglePesananDibatalkan,
     required TResult Function(_ToggleSelesai value) togglePesananSelesai,
+    required TResult Function(_ToggleSelesaiReward value)
+        togglePesananSelesaiReward,
+    required TResult Function(_SetStartDate value) setStartDate,
+    required TResult Function(_SetStartDateReward value) setStartDateReward,
+    required TResult Function(_SetEndDate value) setEndDate,
+    required TResult Function(_SetEndDateReward value) setEndDateReward,
+    required TResult Function(_ResetFilters value) resetFilters,
   }) {
     return postReOrder(this);
   }
@@ -726,15 +834,16 @@ class _$PostReOrderImpl implements _PostReOrder {
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
-    TResult? Function(_ToggleMenungguPembayaran value)?
-        toggleMenungguPembayaran,
-    TResult? Function(_ToggleMenungguKonfirmasi value)?
-        toggleMenungguKonfirmasi,
-    TResult? Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult? Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
     TResult? Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
     TResult? Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult? Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult? Function(_SetStartDate value)? setStartDate,
+    TResult? Function(_SetStartDateReward value)? setStartDateReward,
+    TResult? Function(_SetEndDate value)? setEndDate,
+    TResult? Function(_SetEndDateReward value)? setEndDateReward,
+    TResult? Function(_ResetFilters value)? resetFilters,
   }) {
     return postReOrder?.call(this);
   }
@@ -750,13 +859,16 @@ class _$PostReOrderImpl implements _PostReOrder {
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
-    TResult Function(_ToggleMenungguPembayaran value)? toggleMenungguPembayaran,
-    TResult Function(_ToggleMenungguKonfirmasi value)? toggleMenungguKonfirmasi,
-    TResult Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
     TResult Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
     TResult Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult Function(_SetStartDate value)? setStartDate,
+    TResult Function(_SetStartDateReward value)? setStartDateReward,
+    TResult Function(_SetEndDate value)? setEndDate,
+    TResult Function(_SetEndDateReward value)? setEndDateReward,
+    TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
   }) {
     if (postReOrder != null) {
@@ -846,19 +958,25 @@ class _$PostReOrderRewardImpl implements _PostReOrderReward {
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
-    required TResult Function(String query, String? statusOrder) getFilterOrder,
-    required TResult Function(String query, String? statusOrder)
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrder,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
         getFilterOrderReward,
-    required TResult Function(
-            int filterIndex, String query, String? statusOrder)
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
-    required TResult Function(bool? newValue) toggleMenungguPembayaran,
-    required TResult Function(bool? newValue) toggleMenungguKonfirmasi,
-    required TResult Function(bool? newValue) togglePesananDiproses,
-    required TResult Function(bool? newValue) togglePesananSiapDiambil,
     required TResult Function(bool? newValue) togglePesananDitolak,
+    required TResult Function(bool? newValue) togglePesananDitolakReward,
     required TResult Function(bool? newValue) togglePesananDibatalkan,
     required TResult Function(bool? newValue) togglePesananSelesai,
+    required TResult Function(bool? newValue) togglePesananSelesaiReward,
+    required TResult Function(DateTime date) setStartDate,
+    required TResult Function(DateTime date) setStartDateReward,
+    required TResult Function(DateTime date) setEndDate,
+    required TResult Function(DateTime date) setEndDateReward,
+    required TResult Function(String query) resetFilters,
   }) {
     return postReOrderReward(orderRewardId);
   }
@@ -871,17 +989,25 @@ class _$PostReOrderRewardImpl implements _PostReOrderReward {
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
-    TResult? Function(String query, String? statusOrder)? getFilterOrder,
-    TResult? Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult? Function(int filterIndex, String query, String? statusOrder)?
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
         doFilterOrder,
-    TResult? Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult? Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult? Function(bool? newValue)? togglePesananDiproses,
-    TResult? Function(bool? newValue)? togglePesananSiapDiambil,
     TResult? Function(bool? newValue)? togglePesananDitolak,
+    TResult? Function(bool? newValue)? togglePesananDitolakReward,
     TResult? Function(bool? newValue)? togglePesananDibatalkan,
     TResult? Function(bool? newValue)? togglePesananSelesai,
+    TResult? Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult? Function(DateTime date)? setStartDate,
+    TResult? Function(DateTime date)? setStartDateReward,
+    TResult? Function(DateTime date)? setEndDate,
+    TResult? Function(DateTime date)? setEndDateReward,
+    TResult? Function(String query)? resetFilters,
   }) {
     return postReOrderReward?.call(orderRewardId);
   }
@@ -894,17 +1020,25 @@ class _$PostReOrderRewardImpl implements _PostReOrderReward {
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
-    TResult Function(String query, String? statusOrder)? getFilterOrder,
-    TResult Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult Function(int filterIndex, String query, String? statusOrder)?
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
         doFilterOrder,
-    TResult Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult Function(bool? newValue)? togglePesananDiproses,
-    TResult Function(bool? newValue)? togglePesananSiapDiambil,
     TResult Function(bool? newValue)? togglePesananDitolak,
+    TResult Function(bool? newValue)? togglePesananDitolakReward,
     TResult Function(bool? newValue)? togglePesananDibatalkan,
     TResult Function(bool? newValue)? togglePesananSelesai,
+    TResult Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult Function(DateTime date)? setStartDate,
+    TResult Function(DateTime date)? setStartDateReward,
+    TResult Function(DateTime date)? setEndDate,
+    TResult Function(DateTime date)? setEndDateReward,
+    TResult Function(String query)? resetFilters,
     required TResult orElse(),
   }) {
     if (postReOrderReward != null) {
@@ -926,16 +1060,18 @@ class _$PostReOrderRewardImpl implements _PostReOrderReward {
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
-    required TResult Function(_ToggleMenungguPembayaran value)
-        toggleMenungguPembayaran,
-    required TResult Function(_ToggleMenungguKonfirmasi value)
-        toggleMenungguKonfirmasi,
-    required TResult Function(_ToggleDiproses value) togglePesananDiproses,
-    required TResult Function(_ToggleSiapDiambil value)
-        togglePesananSiapDiambil,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
+    required TResult Function(_ToggleDitolakReward value)
+        togglePesananDitolakReward,
     required TResult Function(_ToggleDibatalkan value) togglePesananDibatalkan,
     required TResult Function(_ToggleSelesai value) togglePesananSelesai,
+    required TResult Function(_ToggleSelesaiReward value)
+        togglePesananSelesaiReward,
+    required TResult Function(_SetStartDate value) setStartDate,
+    required TResult Function(_SetStartDateReward value) setStartDateReward,
+    required TResult Function(_SetEndDate value) setEndDate,
+    required TResult Function(_SetEndDateReward value) setEndDateReward,
+    required TResult Function(_ResetFilters value) resetFilters,
   }) {
     return postReOrderReward(this);
   }
@@ -952,15 +1088,16 @@ class _$PostReOrderRewardImpl implements _PostReOrderReward {
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
-    TResult? Function(_ToggleMenungguPembayaran value)?
-        toggleMenungguPembayaran,
-    TResult? Function(_ToggleMenungguKonfirmasi value)?
-        toggleMenungguKonfirmasi,
-    TResult? Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult? Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
     TResult? Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
     TResult? Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult? Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult? Function(_SetStartDate value)? setStartDate,
+    TResult? Function(_SetStartDateReward value)? setStartDateReward,
+    TResult? Function(_SetEndDate value)? setEndDate,
+    TResult? Function(_SetEndDateReward value)? setEndDateReward,
+    TResult? Function(_ResetFilters value)? resetFilters,
   }) {
     return postReOrderReward?.call(this);
   }
@@ -976,13 +1113,16 @@ class _$PostReOrderRewardImpl implements _PostReOrderReward {
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
-    TResult Function(_ToggleMenungguPembayaran value)? toggleMenungguPembayaran,
-    TResult Function(_ToggleMenungguKonfirmasi value)? toggleMenungguKonfirmasi,
-    TResult Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
     TResult Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
     TResult Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult Function(_SetStartDate value)? setStartDate,
+    TResult Function(_SetStartDateReward value)? setStartDateReward,
+    TResult Function(_SetEndDate value)? setEndDate,
+    TResult Function(_SetEndDateReward value)? setEndDateReward,
+    TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
   }) {
     if (postReOrderReward != null) {
@@ -1048,19 +1188,25 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
-    required TResult Function(String query, String? statusOrder) getFilterOrder,
-    required TResult Function(String query, String? statusOrder)
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrder,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
         getFilterOrderReward,
-    required TResult Function(
-            int filterIndex, String query, String? statusOrder)
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
-    required TResult Function(bool? newValue) toggleMenungguPembayaran,
-    required TResult Function(bool? newValue) toggleMenungguKonfirmasi,
-    required TResult Function(bool? newValue) togglePesananDiproses,
-    required TResult Function(bool? newValue) togglePesananSiapDiambil,
     required TResult Function(bool? newValue) togglePesananDitolak,
+    required TResult Function(bool? newValue) togglePesananDitolakReward,
     required TResult Function(bool? newValue) togglePesananDibatalkan,
     required TResult Function(bool? newValue) togglePesananSelesai,
+    required TResult Function(bool? newValue) togglePesananSelesaiReward,
+    required TResult Function(DateTime date) setStartDate,
+    required TResult Function(DateTime date) setStartDateReward,
+    required TResult Function(DateTime date) setEndDate,
+    required TResult Function(DateTime date) setEndDateReward,
+    required TResult Function(String query) resetFilters,
   }) {
     return getAllHistoryOrderReward();
   }
@@ -1073,17 +1219,25 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
-    TResult? Function(String query, String? statusOrder)? getFilterOrder,
-    TResult? Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult? Function(int filterIndex, String query, String? statusOrder)?
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
         doFilterOrder,
-    TResult? Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult? Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult? Function(bool? newValue)? togglePesananDiproses,
-    TResult? Function(bool? newValue)? togglePesananSiapDiambil,
     TResult? Function(bool? newValue)? togglePesananDitolak,
+    TResult? Function(bool? newValue)? togglePesananDitolakReward,
     TResult? Function(bool? newValue)? togglePesananDibatalkan,
     TResult? Function(bool? newValue)? togglePesananSelesai,
+    TResult? Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult? Function(DateTime date)? setStartDate,
+    TResult? Function(DateTime date)? setStartDateReward,
+    TResult? Function(DateTime date)? setEndDate,
+    TResult? Function(DateTime date)? setEndDateReward,
+    TResult? Function(String query)? resetFilters,
   }) {
     return getAllHistoryOrderReward?.call();
   }
@@ -1096,17 +1250,25 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
-    TResult Function(String query, String? statusOrder)? getFilterOrder,
-    TResult Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult Function(int filterIndex, String query, String? statusOrder)?
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
         doFilterOrder,
-    TResult Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult Function(bool? newValue)? togglePesananDiproses,
-    TResult Function(bool? newValue)? togglePesananSiapDiambil,
     TResult Function(bool? newValue)? togglePesananDitolak,
+    TResult Function(bool? newValue)? togglePesananDitolakReward,
     TResult Function(bool? newValue)? togglePesananDibatalkan,
     TResult Function(bool? newValue)? togglePesananSelesai,
+    TResult Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult Function(DateTime date)? setStartDate,
+    TResult Function(DateTime date)? setStartDateReward,
+    TResult Function(DateTime date)? setEndDate,
+    TResult Function(DateTime date)? setEndDateReward,
+    TResult Function(String query)? resetFilters,
     required TResult orElse(),
   }) {
     if (getAllHistoryOrderReward != null) {
@@ -1128,16 +1290,18 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
-    required TResult Function(_ToggleMenungguPembayaran value)
-        toggleMenungguPembayaran,
-    required TResult Function(_ToggleMenungguKonfirmasi value)
-        toggleMenungguKonfirmasi,
-    required TResult Function(_ToggleDiproses value) togglePesananDiproses,
-    required TResult Function(_ToggleSiapDiambil value)
-        togglePesananSiapDiambil,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
+    required TResult Function(_ToggleDitolakReward value)
+        togglePesananDitolakReward,
     required TResult Function(_ToggleDibatalkan value) togglePesananDibatalkan,
     required TResult Function(_ToggleSelesai value) togglePesananSelesai,
+    required TResult Function(_ToggleSelesaiReward value)
+        togglePesananSelesaiReward,
+    required TResult Function(_SetStartDate value) setStartDate,
+    required TResult Function(_SetStartDateReward value) setStartDateReward,
+    required TResult Function(_SetEndDate value) setEndDate,
+    required TResult Function(_SetEndDateReward value) setEndDateReward,
+    required TResult Function(_ResetFilters value) resetFilters,
   }) {
     return getAllHistoryOrderReward(this);
   }
@@ -1154,15 +1318,16 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
-    TResult? Function(_ToggleMenungguPembayaran value)?
-        toggleMenungguPembayaran,
-    TResult? Function(_ToggleMenungguKonfirmasi value)?
-        toggleMenungguKonfirmasi,
-    TResult? Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult? Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
     TResult? Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
     TResult? Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult? Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult? Function(_SetStartDate value)? setStartDate,
+    TResult? Function(_SetStartDateReward value)? setStartDateReward,
+    TResult? Function(_SetEndDate value)? setEndDate,
+    TResult? Function(_SetEndDateReward value)? setEndDateReward,
+    TResult? Function(_ResetFilters value)? resetFilters,
   }) {
     return getAllHistoryOrderReward?.call(this);
   }
@@ -1178,13 +1343,16 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
-    TResult Function(_ToggleMenungguPembayaran value)? toggleMenungguPembayaran,
-    TResult Function(_ToggleMenungguKonfirmasi value)? toggleMenungguKonfirmasi,
-    TResult Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
     TResult Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
     TResult Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult Function(_SetStartDate value)? setStartDate,
+    TResult Function(_SetStartDateReward value)? setStartDateReward,
+    TResult Function(_SetEndDate value)? setEndDate,
+    TResult Function(_SetEndDateReward value)? setEndDateReward,
+    TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
   }) {
     if (getAllHistoryOrderReward != null) {
@@ -1204,7 +1372,8 @@ abstract class _$$GetCategoryOrderImplCopyWith<$Res> {
           $Res Function(_$GetCategoryOrderImpl) then) =
       __$$GetCategoryOrderImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String query, String? statusOrder});
+  $Res call(
+      {String query, String? statusOrder, String? startDate, String? endDate});
 }
 
 /// @nodoc
@@ -1220,6 +1389,8 @@ class __$$GetCategoryOrderImplCopyWithImpl<$Res>
   $Res call({
     Object? query = null,
     Object? statusOrder = freezed,
+    Object? startDate = freezed,
+    Object? endDate = freezed,
   }) {
     return _then(_$GetCategoryOrderImpl(
       null == query
@@ -1230,6 +1401,14 @@ class __$$GetCategoryOrderImplCopyWithImpl<$Res>
           ? _value.statusOrder
           : statusOrder // ignore: cast_nullable_to_non_nullable
               as String?,
+      freezed == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      freezed == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -1237,16 +1416,21 @@ class __$$GetCategoryOrderImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$GetCategoryOrderImpl implements _GetCategoryOrder {
-  const _$GetCategoryOrderImpl(this.query, this.statusOrder);
+  const _$GetCategoryOrderImpl(
+      this.query, this.statusOrder, this.startDate, this.endDate);
 
   @override
   final String query;
   @override
   final String? statusOrder;
+  @override
+  final String? startDate;
+  @override
+  final String? endDate;
 
   @override
   String toString() {
-    return 'OrderEvent.getFilterOrder(query: $query, statusOrder: $statusOrder)';
+    return 'OrderEvent.getFilterOrder(query: $query, statusOrder: $statusOrder, startDate: $startDate, endDate: $endDate)';
   }
 
   @override
@@ -1256,11 +1440,15 @@ class _$GetCategoryOrderImpl implements _GetCategoryOrder {
             other is _$GetCategoryOrderImpl &&
             (identical(other.query, query) || other.query == query) &&
             (identical(other.statusOrder, statusOrder) ||
-                other.statusOrder == statusOrder));
+                other.statusOrder == statusOrder) &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
+            (identical(other.endDate, endDate) || other.endDate == endDate));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, query, statusOrder);
+  int get hashCode =>
+      Object.hash(runtimeType, query, statusOrder, startDate, endDate);
 
   @JsonKey(ignore: true)
   @override
@@ -1277,21 +1465,27 @@ class _$GetCategoryOrderImpl implements _GetCategoryOrder {
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
-    required TResult Function(String query, String? statusOrder) getFilterOrder,
-    required TResult Function(String query, String? statusOrder)
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrder,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
         getFilterOrderReward,
-    required TResult Function(
-            int filterIndex, String query, String? statusOrder)
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
-    required TResult Function(bool? newValue) toggleMenungguPembayaran,
-    required TResult Function(bool? newValue) toggleMenungguKonfirmasi,
-    required TResult Function(bool? newValue) togglePesananDiproses,
-    required TResult Function(bool? newValue) togglePesananSiapDiambil,
     required TResult Function(bool? newValue) togglePesananDitolak,
+    required TResult Function(bool? newValue) togglePesananDitolakReward,
     required TResult Function(bool? newValue) togglePesananDibatalkan,
     required TResult Function(bool? newValue) togglePesananSelesai,
+    required TResult Function(bool? newValue) togglePesananSelesaiReward,
+    required TResult Function(DateTime date) setStartDate,
+    required TResult Function(DateTime date) setStartDateReward,
+    required TResult Function(DateTime date) setEndDate,
+    required TResult Function(DateTime date) setEndDateReward,
+    required TResult Function(String query) resetFilters,
   }) {
-    return getFilterOrder(query, statusOrder);
+    return getFilterOrder(query, statusOrder, startDate, endDate);
   }
 
   @override
@@ -1302,19 +1496,27 @@ class _$GetCategoryOrderImpl implements _GetCategoryOrder {
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
-    TResult? Function(String query, String? statusOrder)? getFilterOrder,
-    TResult? Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult? Function(int filterIndex, String query, String? statusOrder)?
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
         doFilterOrder,
-    TResult? Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult? Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult? Function(bool? newValue)? togglePesananDiproses,
-    TResult? Function(bool? newValue)? togglePesananSiapDiambil,
     TResult? Function(bool? newValue)? togglePesananDitolak,
+    TResult? Function(bool? newValue)? togglePesananDitolakReward,
     TResult? Function(bool? newValue)? togglePesananDibatalkan,
     TResult? Function(bool? newValue)? togglePesananSelesai,
+    TResult? Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult? Function(DateTime date)? setStartDate,
+    TResult? Function(DateTime date)? setStartDateReward,
+    TResult? Function(DateTime date)? setEndDate,
+    TResult? Function(DateTime date)? setEndDateReward,
+    TResult? Function(String query)? resetFilters,
   }) {
-    return getFilterOrder?.call(query, statusOrder);
+    return getFilterOrder?.call(query, statusOrder, startDate, endDate);
   }
 
   @override
@@ -1325,21 +1527,29 @@ class _$GetCategoryOrderImpl implements _GetCategoryOrder {
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
-    TResult Function(String query, String? statusOrder)? getFilterOrder,
-    TResult Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult Function(int filterIndex, String query, String? statusOrder)?
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
         doFilterOrder,
-    TResult Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult Function(bool? newValue)? togglePesananDiproses,
-    TResult Function(bool? newValue)? togglePesananSiapDiambil,
     TResult Function(bool? newValue)? togglePesananDitolak,
+    TResult Function(bool? newValue)? togglePesananDitolakReward,
     TResult Function(bool? newValue)? togglePesananDibatalkan,
     TResult Function(bool? newValue)? togglePesananSelesai,
+    TResult Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult Function(DateTime date)? setStartDate,
+    TResult Function(DateTime date)? setStartDateReward,
+    TResult Function(DateTime date)? setEndDate,
+    TResult Function(DateTime date)? setEndDateReward,
+    TResult Function(String query)? resetFilters,
     required TResult orElse(),
   }) {
     if (getFilterOrder != null) {
-      return getFilterOrder(query, statusOrder);
+      return getFilterOrder(query, statusOrder, startDate, endDate);
     }
     return orElse();
   }
@@ -1357,16 +1567,18 @@ class _$GetCategoryOrderImpl implements _GetCategoryOrder {
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
-    required TResult Function(_ToggleMenungguPembayaran value)
-        toggleMenungguPembayaran,
-    required TResult Function(_ToggleMenungguKonfirmasi value)
-        toggleMenungguKonfirmasi,
-    required TResult Function(_ToggleDiproses value) togglePesananDiproses,
-    required TResult Function(_ToggleSiapDiambil value)
-        togglePesananSiapDiambil,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
+    required TResult Function(_ToggleDitolakReward value)
+        togglePesananDitolakReward,
     required TResult Function(_ToggleDibatalkan value) togglePesananDibatalkan,
     required TResult Function(_ToggleSelesai value) togglePesananSelesai,
+    required TResult Function(_ToggleSelesaiReward value)
+        togglePesananSelesaiReward,
+    required TResult Function(_SetStartDate value) setStartDate,
+    required TResult Function(_SetStartDateReward value) setStartDateReward,
+    required TResult Function(_SetEndDate value) setEndDate,
+    required TResult Function(_SetEndDateReward value) setEndDateReward,
+    required TResult Function(_ResetFilters value) resetFilters,
   }) {
     return getFilterOrder(this);
   }
@@ -1383,15 +1595,16 @@ class _$GetCategoryOrderImpl implements _GetCategoryOrder {
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
-    TResult? Function(_ToggleMenungguPembayaran value)?
-        toggleMenungguPembayaran,
-    TResult? Function(_ToggleMenungguKonfirmasi value)?
-        toggleMenungguKonfirmasi,
-    TResult? Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult? Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
     TResult? Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
     TResult? Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult? Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult? Function(_SetStartDate value)? setStartDate,
+    TResult? Function(_SetStartDateReward value)? setStartDateReward,
+    TResult? Function(_SetEndDate value)? setEndDate,
+    TResult? Function(_SetEndDateReward value)? setEndDateReward,
+    TResult? Function(_ResetFilters value)? resetFilters,
   }) {
     return getFilterOrder?.call(this);
   }
@@ -1407,13 +1620,16 @@ class _$GetCategoryOrderImpl implements _GetCategoryOrder {
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
-    TResult Function(_ToggleMenungguPembayaran value)? toggleMenungguPembayaran,
-    TResult Function(_ToggleMenungguKonfirmasi value)? toggleMenungguKonfirmasi,
-    TResult Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
     TResult Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
     TResult Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult Function(_SetStartDate value)? setStartDate,
+    TResult Function(_SetStartDateReward value)? setStartDateReward,
+    TResult Function(_SetEndDate value)? setEndDate,
+    TResult Function(_SetEndDateReward value)? setEndDateReward,
+    TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
   }) {
     if (getFilterOrder != null) {
@@ -1424,11 +1640,13 @@ class _$GetCategoryOrderImpl implements _GetCategoryOrder {
 }
 
 abstract class _GetCategoryOrder implements OrderEvent {
-  const factory _GetCategoryOrder(
-      final String query, final String? statusOrder) = _$GetCategoryOrderImpl;
+  const factory _GetCategoryOrder(final String query, final String? statusOrder,
+      final String? startDate, final String? endDate) = _$GetCategoryOrderImpl;
 
   String get query;
   String? get statusOrder;
+  String? get startDate;
+  String? get endDate;
   @JsonKey(ignore: true)
   _$$GetCategoryOrderImplCopyWith<_$GetCategoryOrderImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1441,7 +1659,8 @@ abstract class _$$GetCategoryOrderRewardImplCopyWith<$Res> {
           $Res Function(_$GetCategoryOrderRewardImpl) then) =
       __$$GetCategoryOrderRewardImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String query, String? statusOrder});
+  $Res call(
+      {String query, String? statusOrder, String? startDate, String? endDate});
 }
 
 /// @nodoc
@@ -1458,6 +1677,8 @@ class __$$GetCategoryOrderRewardImplCopyWithImpl<$Res>
   $Res call({
     Object? query = null,
     Object? statusOrder = freezed,
+    Object? startDate = freezed,
+    Object? endDate = freezed,
   }) {
     return _then(_$GetCategoryOrderRewardImpl(
       null == query
@@ -1468,6 +1689,14 @@ class __$$GetCategoryOrderRewardImplCopyWithImpl<$Res>
           ? _value.statusOrder
           : statusOrder // ignore: cast_nullable_to_non_nullable
               as String?,
+      freezed == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      freezed == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -1475,16 +1704,21 @@ class __$$GetCategoryOrderRewardImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$GetCategoryOrderRewardImpl implements _GetCategoryOrderReward {
-  const _$GetCategoryOrderRewardImpl(this.query, this.statusOrder);
+  const _$GetCategoryOrderRewardImpl(
+      this.query, this.statusOrder, this.startDate, this.endDate);
 
   @override
   final String query;
   @override
   final String? statusOrder;
+  @override
+  final String? startDate;
+  @override
+  final String? endDate;
 
   @override
   String toString() {
-    return 'OrderEvent.getFilterOrderReward(query: $query, statusOrder: $statusOrder)';
+    return 'OrderEvent.getFilterOrderReward(query: $query, statusOrder: $statusOrder, startDate: $startDate, endDate: $endDate)';
   }
 
   @override
@@ -1494,11 +1728,15 @@ class _$GetCategoryOrderRewardImpl implements _GetCategoryOrderReward {
             other is _$GetCategoryOrderRewardImpl &&
             (identical(other.query, query) || other.query == query) &&
             (identical(other.statusOrder, statusOrder) ||
-                other.statusOrder == statusOrder));
+                other.statusOrder == statusOrder) &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
+            (identical(other.endDate, endDate) || other.endDate == endDate));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, query, statusOrder);
+  int get hashCode =>
+      Object.hash(runtimeType, query, statusOrder, startDate, endDate);
 
   @JsonKey(ignore: true)
   @override
@@ -1515,21 +1753,27 @@ class _$GetCategoryOrderRewardImpl implements _GetCategoryOrderReward {
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
-    required TResult Function(String query, String? statusOrder) getFilterOrder,
-    required TResult Function(String query, String? statusOrder)
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrder,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
         getFilterOrderReward,
-    required TResult Function(
-            int filterIndex, String query, String? statusOrder)
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
-    required TResult Function(bool? newValue) toggleMenungguPembayaran,
-    required TResult Function(bool? newValue) toggleMenungguKonfirmasi,
-    required TResult Function(bool? newValue) togglePesananDiproses,
-    required TResult Function(bool? newValue) togglePesananSiapDiambil,
     required TResult Function(bool? newValue) togglePesananDitolak,
+    required TResult Function(bool? newValue) togglePesananDitolakReward,
     required TResult Function(bool? newValue) togglePesananDibatalkan,
     required TResult Function(bool? newValue) togglePesananSelesai,
+    required TResult Function(bool? newValue) togglePesananSelesaiReward,
+    required TResult Function(DateTime date) setStartDate,
+    required TResult Function(DateTime date) setStartDateReward,
+    required TResult Function(DateTime date) setEndDate,
+    required TResult Function(DateTime date) setEndDateReward,
+    required TResult Function(String query) resetFilters,
   }) {
-    return getFilterOrderReward(query, statusOrder);
+    return getFilterOrderReward(query, statusOrder, startDate, endDate);
   }
 
   @override
@@ -1540,19 +1784,27 @@ class _$GetCategoryOrderRewardImpl implements _GetCategoryOrderReward {
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
-    TResult? Function(String query, String? statusOrder)? getFilterOrder,
-    TResult? Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult? Function(int filterIndex, String query, String? statusOrder)?
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
         doFilterOrder,
-    TResult? Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult? Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult? Function(bool? newValue)? togglePesananDiproses,
-    TResult? Function(bool? newValue)? togglePesananSiapDiambil,
     TResult? Function(bool? newValue)? togglePesananDitolak,
+    TResult? Function(bool? newValue)? togglePesananDitolakReward,
     TResult? Function(bool? newValue)? togglePesananDibatalkan,
     TResult? Function(bool? newValue)? togglePesananSelesai,
+    TResult? Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult? Function(DateTime date)? setStartDate,
+    TResult? Function(DateTime date)? setStartDateReward,
+    TResult? Function(DateTime date)? setEndDate,
+    TResult? Function(DateTime date)? setEndDateReward,
+    TResult? Function(String query)? resetFilters,
   }) {
-    return getFilterOrderReward?.call(query, statusOrder);
+    return getFilterOrderReward?.call(query, statusOrder, startDate, endDate);
   }
 
   @override
@@ -1563,21 +1815,29 @@ class _$GetCategoryOrderRewardImpl implements _GetCategoryOrderReward {
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
-    TResult Function(String query, String? statusOrder)? getFilterOrder,
-    TResult Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult Function(int filterIndex, String query, String? statusOrder)?
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
         doFilterOrder,
-    TResult Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult Function(bool? newValue)? togglePesananDiproses,
-    TResult Function(bool? newValue)? togglePesananSiapDiambil,
     TResult Function(bool? newValue)? togglePesananDitolak,
+    TResult Function(bool? newValue)? togglePesananDitolakReward,
     TResult Function(bool? newValue)? togglePesananDibatalkan,
     TResult Function(bool? newValue)? togglePesananSelesai,
+    TResult Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult Function(DateTime date)? setStartDate,
+    TResult Function(DateTime date)? setStartDateReward,
+    TResult Function(DateTime date)? setEndDate,
+    TResult Function(DateTime date)? setEndDateReward,
+    TResult Function(String query)? resetFilters,
     required TResult orElse(),
   }) {
     if (getFilterOrderReward != null) {
-      return getFilterOrderReward(query, statusOrder);
+      return getFilterOrderReward(query, statusOrder, startDate, endDate);
     }
     return orElse();
   }
@@ -1595,16 +1855,18 @@ class _$GetCategoryOrderRewardImpl implements _GetCategoryOrderReward {
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
-    required TResult Function(_ToggleMenungguPembayaran value)
-        toggleMenungguPembayaran,
-    required TResult Function(_ToggleMenungguKonfirmasi value)
-        toggleMenungguKonfirmasi,
-    required TResult Function(_ToggleDiproses value) togglePesananDiproses,
-    required TResult Function(_ToggleSiapDiambil value)
-        togglePesananSiapDiambil,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
+    required TResult Function(_ToggleDitolakReward value)
+        togglePesananDitolakReward,
     required TResult Function(_ToggleDibatalkan value) togglePesananDibatalkan,
     required TResult Function(_ToggleSelesai value) togglePesananSelesai,
+    required TResult Function(_ToggleSelesaiReward value)
+        togglePesananSelesaiReward,
+    required TResult Function(_SetStartDate value) setStartDate,
+    required TResult Function(_SetStartDateReward value) setStartDateReward,
+    required TResult Function(_SetEndDate value) setEndDate,
+    required TResult Function(_SetEndDateReward value) setEndDateReward,
+    required TResult Function(_ResetFilters value) resetFilters,
   }) {
     return getFilterOrderReward(this);
   }
@@ -1621,15 +1883,16 @@ class _$GetCategoryOrderRewardImpl implements _GetCategoryOrderReward {
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
-    TResult? Function(_ToggleMenungguPembayaran value)?
-        toggleMenungguPembayaran,
-    TResult? Function(_ToggleMenungguKonfirmasi value)?
-        toggleMenungguKonfirmasi,
-    TResult? Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult? Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
     TResult? Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
     TResult? Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult? Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult? Function(_SetStartDate value)? setStartDate,
+    TResult? Function(_SetStartDateReward value)? setStartDateReward,
+    TResult? Function(_SetEndDate value)? setEndDate,
+    TResult? Function(_SetEndDateReward value)? setEndDateReward,
+    TResult? Function(_ResetFilters value)? resetFilters,
   }) {
     return getFilterOrderReward?.call(this);
   }
@@ -1645,13 +1908,16 @@ class _$GetCategoryOrderRewardImpl implements _GetCategoryOrderReward {
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
-    TResult Function(_ToggleMenungguPembayaran value)? toggleMenungguPembayaran,
-    TResult Function(_ToggleMenungguKonfirmasi value)? toggleMenungguKonfirmasi,
-    TResult Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
     TResult Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
     TResult Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult Function(_SetStartDate value)? setStartDate,
+    TResult Function(_SetStartDateReward value)? setStartDateReward,
+    TResult Function(_SetEndDate value)? setEndDate,
+    TResult Function(_SetEndDateReward value)? setEndDateReward,
+    TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
   }) {
     if (getFilterOrderReward != null) {
@@ -1663,11 +1929,15 @@ class _$GetCategoryOrderRewardImpl implements _GetCategoryOrderReward {
 
 abstract class _GetCategoryOrderReward implements OrderEvent {
   const factory _GetCategoryOrderReward(
-          final String query, final String? statusOrder) =
-      _$GetCategoryOrderRewardImpl;
+      final String query,
+      final String? statusOrder,
+      final String? startDate,
+      final String? endDate) = _$GetCategoryOrderRewardImpl;
 
   String get query;
   String? get statusOrder;
+  String? get startDate;
+  String? get endDate;
   @JsonKey(ignore: true)
   _$$GetCategoryOrderRewardImplCopyWith<_$GetCategoryOrderRewardImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -1679,7 +1949,12 @@ abstract class _$$DoFilterOrderImplCopyWith<$Res> {
           _$DoFilterOrderImpl value, $Res Function(_$DoFilterOrderImpl) then) =
       __$$DoFilterOrderImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({int filterIndex, String query, String? statusOrder});
+  $Res call(
+      {int filterIndex,
+      String query,
+      String? statusOrder,
+      String? startDate,
+      String? endDate});
 }
 
 /// @nodoc
@@ -1696,6 +1971,8 @@ class __$$DoFilterOrderImplCopyWithImpl<$Res>
     Object? filterIndex = null,
     Object? query = null,
     Object? statusOrder = freezed,
+    Object? startDate = freezed,
+    Object? endDate = freezed,
   }) {
     return _then(_$DoFilterOrderImpl(
       filterIndex: null == filterIndex
@@ -1710,6 +1987,14 @@ class __$$DoFilterOrderImplCopyWithImpl<$Res>
           ? _value.statusOrder
           : statusOrder // ignore: cast_nullable_to_non_nullable
               as String?,
+      startDate: freezed == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      endDate: freezed == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -1718,7 +2003,11 @@ class __$$DoFilterOrderImplCopyWithImpl<$Res>
 
 class _$DoFilterOrderImpl implements _DoFilterOrder {
   const _$DoFilterOrderImpl(
-      {required this.filterIndex, required this.query, this.statusOrder});
+      {required this.filterIndex,
+      required this.query,
+      this.statusOrder,
+      this.startDate,
+      this.endDate});
 
   @override
   final int filterIndex;
@@ -1726,10 +2015,14 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
   final String query;
   @override
   final String? statusOrder;
+  @override
+  final String? startDate;
+  @override
+  final String? endDate;
 
   @override
   String toString() {
-    return 'OrderEvent.doFilterOrder(filterIndex: $filterIndex, query: $query, statusOrder: $statusOrder)';
+    return 'OrderEvent.doFilterOrder(filterIndex: $filterIndex, query: $query, statusOrder: $statusOrder, startDate: $startDate, endDate: $endDate)';
   }
 
   @override
@@ -1741,11 +2034,15 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
                 other.filterIndex == filterIndex) &&
             (identical(other.query, query) || other.query == query) &&
             (identical(other.statusOrder, statusOrder) ||
-                other.statusOrder == statusOrder));
+                other.statusOrder == statusOrder) &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
+            (identical(other.endDate, endDate) || other.endDate == endDate));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, filterIndex, query, statusOrder);
+  int get hashCode => Object.hash(
+      runtimeType, filterIndex, query, statusOrder, startDate, endDate);
 
   @JsonKey(ignore: true)
   @override
@@ -1761,21 +2058,27 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
-    required TResult Function(String query, String? statusOrder) getFilterOrder,
-    required TResult Function(String query, String? statusOrder)
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrder,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
         getFilterOrderReward,
-    required TResult Function(
-            int filterIndex, String query, String? statusOrder)
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
-    required TResult Function(bool? newValue) toggleMenungguPembayaran,
-    required TResult Function(bool? newValue) toggleMenungguKonfirmasi,
-    required TResult Function(bool? newValue) togglePesananDiproses,
-    required TResult Function(bool? newValue) togglePesananSiapDiambil,
     required TResult Function(bool? newValue) togglePesananDitolak,
+    required TResult Function(bool? newValue) togglePesananDitolakReward,
     required TResult Function(bool? newValue) togglePesananDibatalkan,
     required TResult Function(bool? newValue) togglePesananSelesai,
+    required TResult Function(bool? newValue) togglePesananSelesaiReward,
+    required TResult Function(DateTime date) setStartDate,
+    required TResult Function(DateTime date) setStartDateReward,
+    required TResult Function(DateTime date) setEndDate,
+    required TResult Function(DateTime date) setEndDateReward,
+    required TResult Function(String query) resetFilters,
   }) {
-    return doFilterOrder(filterIndex, query, statusOrder);
+    return doFilterOrder(filterIndex, query, statusOrder, startDate, endDate);
   }
 
   @override
@@ -1786,19 +2089,28 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
-    TResult? Function(String query, String? statusOrder)? getFilterOrder,
-    TResult? Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult? Function(int filterIndex, String query, String? statusOrder)?
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
         doFilterOrder,
-    TResult? Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult? Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult? Function(bool? newValue)? togglePesananDiproses,
-    TResult? Function(bool? newValue)? togglePesananSiapDiambil,
     TResult? Function(bool? newValue)? togglePesananDitolak,
+    TResult? Function(bool? newValue)? togglePesananDitolakReward,
     TResult? Function(bool? newValue)? togglePesananDibatalkan,
     TResult? Function(bool? newValue)? togglePesananSelesai,
+    TResult? Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult? Function(DateTime date)? setStartDate,
+    TResult? Function(DateTime date)? setStartDateReward,
+    TResult? Function(DateTime date)? setEndDate,
+    TResult? Function(DateTime date)? setEndDateReward,
+    TResult? Function(String query)? resetFilters,
   }) {
-    return doFilterOrder?.call(filterIndex, query, statusOrder);
+    return doFilterOrder?.call(
+        filterIndex, query, statusOrder, startDate, endDate);
   }
 
   @override
@@ -1809,21 +2121,29 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
-    TResult Function(String query, String? statusOrder)? getFilterOrder,
-    TResult Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult Function(int filterIndex, String query, String? statusOrder)?
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
         doFilterOrder,
-    TResult Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult Function(bool? newValue)? togglePesananDiproses,
-    TResult Function(bool? newValue)? togglePesananSiapDiambil,
     TResult Function(bool? newValue)? togglePesananDitolak,
+    TResult Function(bool? newValue)? togglePesananDitolakReward,
     TResult Function(bool? newValue)? togglePesananDibatalkan,
     TResult Function(bool? newValue)? togglePesananSelesai,
+    TResult Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult Function(DateTime date)? setStartDate,
+    TResult Function(DateTime date)? setStartDateReward,
+    TResult Function(DateTime date)? setEndDate,
+    TResult Function(DateTime date)? setEndDateReward,
+    TResult Function(String query)? resetFilters,
     required TResult orElse(),
   }) {
     if (doFilterOrder != null) {
-      return doFilterOrder(filterIndex, query, statusOrder);
+      return doFilterOrder(filterIndex, query, statusOrder, startDate, endDate);
     }
     return orElse();
   }
@@ -1841,16 +2161,18 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
-    required TResult Function(_ToggleMenungguPembayaran value)
-        toggleMenungguPembayaran,
-    required TResult Function(_ToggleMenungguKonfirmasi value)
-        toggleMenungguKonfirmasi,
-    required TResult Function(_ToggleDiproses value) togglePesananDiproses,
-    required TResult Function(_ToggleSiapDiambil value)
-        togglePesananSiapDiambil,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
+    required TResult Function(_ToggleDitolakReward value)
+        togglePesananDitolakReward,
     required TResult Function(_ToggleDibatalkan value) togglePesananDibatalkan,
     required TResult Function(_ToggleSelesai value) togglePesananSelesai,
+    required TResult Function(_ToggleSelesaiReward value)
+        togglePesananSelesaiReward,
+    required TResult Function(_SetStartDate value) setStartDate,
+    required TResult Function(_SetStartDateReward value) setStartDateReward,
+    required TResult Function(_SetEndDate value) setEndDate,
+    required TResult Function(_SetEndDateReward value) setEndDateReward,
+    required TResult Function(_ResetFilters value) resetFilters,
   }) {
     return doFilterOrder(this);
   }
@@ -1867,15 +2189,16 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
-    TResult? Function(_ToggleMenungguPembayaran value)?
-        toggleMenungguPembayaran,
-    TResult? Function(_ToggleMenungguKonfirmasi value)?
-        toggleMenungguKonfirmasi,
-    TResult? Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult? Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
     TResult? Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
     TResult? Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult? Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult? Function(_SetStartDate value)? setStartDate,
+    TResult? Function(_SetStartDateReward value)? setStartDateReward,
+    TResult? Function(_SetEndDate value)? setEndDate,
+    TResult? Function(_SetEndDateReward value)? setEndDateReward,
+    TResult? Function(_ResetFilters value)? resetFilters,
   }) {
     return doFilterOrder?.call(this);
   }
@@ -1891,13 +2214,16 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
-    TResult Function(_ToggleMenungguPembayaran value)? toggleMenungguPembayaran,
-    TResult Function(_ToggleMenungguKonfirmasi value)? toggleMenungguKonfirmasi,
-    TResult Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
     TResult Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
     TResult Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult Function(_SetStartDate value)? setStartDate,
+    TResult Function(_SetStartDateReward value)? setStartDateReward,
+    TResult Function(_SetEndDate value)? setEndDate,
+    TResult Function(_SetEndDateReward value)? setEndDateReward,
+    TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
   }) {
     if (doFilterOrder != null) {
@@ -1911,924 +2237,17 @@ abstract class _DoFilterOrder implements OrderEvent {
   const factory _DoFilterOrder(
       {required final int filterIndex,
       required final String query,
-      final String? statusOrder}) = _$DoFilterOrderImpl;
+      final String? statusOrder,
+      final String? startDate,
+      final String? endDate}) = _$DoFilterOrderImpl;
 
   int get filterIndex;
   String get query;
   String? get statusOrder;
+  String? get startDate;
+  String? get endDate;
   @JsonKey(ignore: true)
   _$$DoFilterOrderImplCopyWith<_$DoFilterOrderImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$ToggleMenungguPembayaranImplCopyWith<$Res> {
-  factory _$$ToggleMenungguPembayaranImplCopyWith(
-          _$ToggleMenungguPembayaranImpl value,
-          $Res Function(_$ToggleMenungguPembayaranImpl) then) =
-      __$$ToggleMenungguPembayaranImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool? newValue});
-}
-
-/// @nodoc
-class __$$ToggleMenungguPembayaranImplCopyWithImpl<$Res>
-    extends _$OrderEventCopyWithImpl<$Res, _$ToggleMenungguPembayaranImpl>
-    implements _$$ToggleMenungguPembayaranImplCopyWith<$Res> {
-  __$$ToggleMenungguPembayaranImplCopyWithImpl(
-      _$ToggleMenungguPembayaranImpl _value,
-      $Res Function(_$ToggleMenungguPembayaranImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? newValue = freezed,
-  }) {
-    return _then(_$ToggleMenungguPembayaranImpl(
-      freezed == newValue
-          ? _value.newValue
-          : newValue // ignore: cast_nullable_to_non_nullable
-              as bool?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$ToggleMenungguPembayaranImpl implements _ToggleMenungguPembayaran {
-  const _$ToggleMenungguPembayaranImpl(this.newValue);
-
-  @override
-  final bool? newValue;
-
-  @override
-  String toString() {
-    return 'OrderEvent.toggleMenungguPembayaran(newValue: $newValue)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ToggleMenungguPembayaranImpl &&
-            (identical(other.newValue, newValue) ||
-                other.newValue == newValue));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, newValue);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ToggleMenungguPembayaranImplCopyWith<_$ToggleMenungguPembayaranImpl>
-      get copyWith => __$$ToggleMenungguPembayaranImplCopyWithImpl<
-          _$ToggleMenungguPembayaranImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function() getAllHistoryOrder,
-    required TResult Function(String? orderId) postReOrder,
-    required TResult Function(String? orderRewardId) postReOrderReward,
-    required TResult Function() getAllHistoryOrderReward,
-    required TResult Function(String query, String? statusOrder) getFilterOrder,
-    required TResult Function(String query, String? statusOrder)
-        getFilterOrderReward,
-    required TResult Function(
-            int filterIndex, String query, String? statusOrder)
-        doFilterOrder,
-    required TResult Function(bool? newValue) toggleMenungguPembayaran,
-    required TResult Function(bool? newValue) toggleMenungguKonfirmasi,
-    required TResult Function(bool? newValue) togglePesananDiproses,
-    required TResult Function(bool? newValue) togglePesananSiapDiambil,
-    required TResult Function(bool? newValue) togglePesananDitolak,
-    required TResult Function(bool? newValue) togglePesananDibatalkan,
-    required TResult Function(bool? newValue) togglePesananSelesai,
-  }) {
-    return toggleMenungguPembayaran(newValue);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function()? getAllHistoryOrder,
-    TResult? Function(String? orderId)? postReOrder,
-    TResult? Function(String? orderRewardId)? postReOrderReward,
-    TResult? Function()? getAllHistoryOrderReward,
-    TResult? Function(String query, String? statusOrder)? getFilterOrder,
-    TResult? Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult? Function(int filterIndex, String query, String? statusOrder)?
-        doFilterOrder,
-    TResult? Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult? Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult? Function(bool? newValue)? togglePesananDiproses,
-    TResult? Function(bool? newValue)? togglePesananSiapDiambil,
-    TResult? Function(bool? newValue)? togglePesananDitolak,
-    TResult? Function(bool? newValue)? togglePesananDibatalkan,
-    TResult? Function(bool? newValue)? togglePesananSelesai,
-  }) {
-    return toggleMenungguPembayaran?.call(newValue);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? getAllHistoryOrder,
-    TResult Function(String? orderId)? postReOrder,
-    TResult Function(String? orderRewardId)? postReOrderReward,
-    TResult Function()? getAllHistoryOrderReward,
-    TResult Function(String query, String? statusOrder)? getFilterOrder,
-    TResult Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult Function(int filterIndex, String query, String? statusOrder)?
-        doFilterOrder,
-    TResult Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult Function(bool? newValue)? togglePesananDiproses,
-    TResult Function(bool? newValue)? togglePesananSiapDiambil,
-    TResult Function(bool? newValue)? togglePesananDitolak,
-    TResult Function(bool? newValue)? togglePesananDibatalkan,
-    TResult Function(bool? newValue)? togglePesananSelesai,
-    required TResult orElse(),
-  }) {
-    if (toggleMenungguPembayaran != null) {
-      return toggleMenungguPembayaran(newValue);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
-    required TResult Function(_PostReOrder value) postReOrder,
-    required TResult Function(_PostReOrderReward value) postReOrderReward,
-    required TResult Function(_GetAllHistoryOrderReward value)
-        getAllHistoryOrderReward,
-    required TResult Function(_GetCategoryOrder value) getFilterOrder,
-    required TResult Function(_GetCategoryOrderReward value)
-        getFilterOrderReward,
-    required TResult Function(_DoFilterOrder value) doFilterOrder,
-    required TResult Function(_ToggleMenungguPembayaran value)
-        toggleMenungguPembayaran,
-    required TResult Function(_ToggleMenungguKonfirmasi value)
-        toggleMenungguKonfirmasi,
-    required TResult Function(_ToggleDiproses value) togglePesananDiproses,
-    required TResult Function(_ToggleSiapDiambil value)
-        togglePesananSiapDiambil,
-    required TResult Function(_ToggleDitolak value) togglePesananDitolak,
-    required TResult Function(_ToggleDibatalkan value) togglePesananDibatalkan,
-    required TResult Function(_ToggleSelesai value) togglePesananSelesai,
-  }) {
-    return toggleMenungguPembayaran(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
-    TResult? Function(_PostReOrder value)? postReOrder,
-    TResult? Function(_PostReOrderReward value)? postReOrderReward,
-    TResult? Function(_GetAllHistoryOrderReward value)?
-        getAllHistoryOrderReward,
-    TResult? Function(_GetCategoryOrder value)? getFilterOrder,
-    TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
-    TResult? Function(_DoFilterOrder value)? doFilterOrder,
-    TResult? Function(_ToggleMenungguPembayaran value)?
-        toggleMenungguPembayaran,
-    TResult? Function(_ToggleMenungguKonfirmasi value)?
-        toggleMenungguKonfirmasi,
-    TResult? Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult? Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
-    TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
-    TResult? Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
-    TResult? Function(_ToggleSelesai value)? togglePesananSelesai,
-  }) {
-    return toggleMenungguPembayaran?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
-    TResult Function(_PostReOrder value)? postReOrder,
-    TResult Function(_PostReOrderReward value)? postReOrderReward,
-    TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
-    TResult Function(_GetCategoryOrder value)? getFilterOrder,
-    TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
-    TResult Function(_DoFilterOrder value)? doFilterOrder,
-    TResult Function(_ToggleMenungguPembayaran value)? toggleMenungguPembayaran,
-    TResult Function(_ToggleMenungguKonfirmasi value)? toggleMenungguKonfirmasi,
-    TResult Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
-    TResult Function(_ToggleDitolak value)? togglePesananDitolak,
-    TResult Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
-    TResult Function(_ToggleSelesai value)? togglePesananSelesai,
-    required TResult orElse(),
-  }) {
-    if (toggleMenungguPembayaran != null) {
-      return toggleMenungguPembayaran(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ToggleMenungguPembayaran implements OrderEvent {
-  const factory _ToggleMenungguPembayaran(final bool? newValue) =
-      _$ToggleMenungguPembayaranImpl;
-
-  bool? get newValue;
-  @JsonKey(ignore: true)
-  _$$ToggleMenungguPembayaranImplCopyWith<_$ToggleMenungguPembayaranImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$ToggleMenungguKonfirmasiImplCopyWith<$Res> {
-  factory _$$ToggleMenungguKonfirmasiImplCopyWith(
-          _$ToggleMenungguKonfirmasiImpl value,
-          $Res Function(_$ToggleMenungguKonfirmasiImpl) then) =
-      __$$ToggleMenungguKonfirmasiImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool? newValue});
-}
-
-/// @nodoc
-class __$$ToggleMenungguKonfirmasiImplCopyWithImpl<$Res>
-    extends _$OrderEventCopyWithImpl<$Res, _$ToggleMenungguKonfirmasiImpl>
-    implements _$$ToggleMenungguKonfirmasiImplCopyWith<$Res> {
-  __$$ToggleMenungguKonfirmasiImplCopyWithImpl(
-      _$ToggleMenungguKonfirmasiImpl _value,
-      $Res Function(_$ToggleMenungguKonfirmasiImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? newValue = freezed,
-  }) {
-    return _then(_$ToggleMenungguKonfirmasiImpl(
-      freezed == newValue
-          ? _value.newValue
-          : newValue // ignore: cast_nullable_to_non_nullable
-              as bool?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$ToggleMenungguKonfirmasiImpl implements _ToggleMenungguKonfirmasi {
-  const _$ToggleMenungguKonfirmasiImpl(this.newValue);
-
-  @override
-  final bool? newValue;
-
-  @override
-  String toString() {
-    return 'OrderEvent.toggleMenungguKonfirmasi(newValue: $newValue)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ToggleMenungguKonfirmasiImpl &&
-            (identical(other.newValue, newValue) ||
-                other.newValue == newValue));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, newValue);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ToggleMenungguKonfirmasiImplCopyWith<_$ToggleMenungguKonfirmasiImpl>
-      get copyWith => __$$ToggleMenungguKonfirmasiImplCopyWithImpl<
-          _$ToggleMenungguKonfirmasiImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function() getAllHistoryOrder,
-    required TResult Function(String? orderId) postReOrder,
-    required TResult Function(String? orderRewardId) postReOrderReward,
-    required TResult Function() getAllHistoryOrderReward,
-    required TResult Function(String query, String? statusOrder) getFilterOrder,
-    required TResult Function(String query, String? statusOrder)
-        getFilterOrderReward,
-    required TResult Function(
-            int filterIndex, String query, String? statusOrder)
-        doFilterOrder,
-    required TResult Function(bool? newValue) toggleMenungguPembayaran,
-    required TResult Function(bool? newValue) toggleMenungguKonfirmasi,
-    required TResult Function(bool? newValue) togglePesananDiproses,
-    required TResult Function(bool? newValue) togglePesananSiapDiambil,
-    required TResult Function(bool? newValue) togglePesananDitolak,
-    required TResult Function(bool? newValue) togglePesananDibatalkan,
-    required TResult Function(bool? newValue) togglePesananSelesai,
-  }) {
-    return toggleMenungguKonfirmasi(newValue);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function()? getAllHistoryOrder,
-    TResult? Function(String? orderId)? postReOrder,
-    TResult? Function(String? orderRewardId)? postReOrderReward,
-    TResult? Function()? getAllHistoryOrderReward,
-    TResult? Function(String query, String? statusOrder)? getFilterOrder,
-    TResult? Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult? Function(int filterIndex, String query, String? statusOrder)?
-        doFilterOrder,
-    TResult? Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult? Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult? Function(bool? newValue)? togglePesananDiproses,
-    TResult? Function(bool? newValue)? togglePesananSiapDiambil,
-    TResult? Function(bool? newValue)? togglePesananDitolak,
-    TResult? Function(bool? newValue)? togglePesananDibatalkan,
-    TResult? Function(bool? newValue)? togglePesananSelesai,
-  }) {
-    return toggleMenungguKonfirmasi?.call(newValue);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? getAllHistoryOrder,
-    TResult Function(String? orderId)? postReOrder,
-    TResult Function(String? orderRewardId)? postReOrderReward,
-    TResult Function()? getAllHistoryOrderReward,
-    TResult Function(String query, String? statusOrder)? getFilterOrder,
-    TResult Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult Function(int filterIndex, String query, String? statusOrder)?
-        doFilterOrder,
-    TResult Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult Function(bool? newValue)? togglePesananDiproses,
-    TResult Function(bool? newValue)? togglePesananSiapDiambil,
-    TResult Function(bool? newValue)? togglePesananDitolak,
-    TResult Function(bool? newValue)? togglePesananDibatalkan,
-    TResult Function(bool? newValue)? togglePesananSelesai,
-    required TResult orElse(),
-  }) {
-    if (toggleMenungguKonfirmasi != null) {
-      return toggleMenungguKonfirmasi(newValue);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
-    required TResult Function(_PostReOrder value) postReOrder,
-    required TResult Function(_PostReOrderReward value) postReOrderReward,
-    required TResult Function(_GetAllHistoryOrderReward value)
-        getAllHistoryOrderReward,
-    required TResult Function(_GetCategoryOrder value) getFilterOrder,
-    required TResult Function(_GetCategoryOrderReward value)
-        getFilterOrderReward,
-    required TResult Function(_DoFilterOrder value) doFilterOrder,
-    required TResult Function(_ToggleMenungguPembayaran value)
-        toggleMenungguPembayaran,
-    required TResult Function(_ToggleMenungguKonfirmasi value)
-        toggleMenungguKonfirmasi,
-    required TResult Function(_ToggleDiproses value) togglePesananDiproses,
-    required TResult Function(_ToggleSiapDiambil value)
-        togglePesananSiapDiambil,
-    required TResult Function(_ToggleDitolak value) togglePesananDitolak,
-    required TResult Function(_ToggleDibatalkan value) togglePesananDibatalkan,
-    required TResult Function(_ToggleSelesai value) togglePesananSelesai,
-  }) {
-    return toggleMenungguKonfirmasi(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
-    TResult? Function(_PostReOrder value)? postReOrder,
-    TResult? Function(_PostReOrderReward value)? postReOrderReward,
-    TResult? Function(_GetAllHistoryOrderReward value)?
-        getAllHistoryOrderReward,
-    TResult? Function(_GetCategoryOrder value)? getFilterOrder,
-    TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
-    TResult? Function(_DoFilterOrder value)? doFilterOrder,
-    TResult? Function(_ToggleMenungguPembayaran value)?
-        toggleMenungguPembayaran,
-    TResult? Function(_ToggleMenungguKonfirmasi value)?
-        toggleMenungguKonfirmasi,
-    TResult? Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult? Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
-    TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
-    TResult? Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
-    TResult? Function(_ToggleSelesai value)? togglePesananSelesai,
-  }) {
-    return toggleMenungguKonfirmasi?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
-    TResult Function(_PostReOrder value)? postReOrder,
-    TResult Function(_PostReOrderReward value)? postReOrderReward,
-    TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
-    TResult Function(_GetCategoryOrder value)? getFilterOrder,
-    TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
-    TResult Function(_DoFilterOrder value)? doFilterOrder,
-    TResult Function(_ToggleMenungguPembayaran value)? toggleMenungguPembayaran,
-    TResult Function(_ToggleMenungguKonfirmasi value)? toggleMenungguKonfirmasi,
-    TResult Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
-    TResult Function(_ToggleDitolak value)? togglePesananDitolak,
-    TResult Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
-    TResult Function(_ToggleSelesai value)? togglePesananSelesai,
-    required TResult orElse(),
-  }) {
-    if (toggleMenungguKonfirmasi != null) {
-      return toggleMenungguKonfirmasi(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ToggleMenungguKonfirmasi implements OrderEvent {
-  const factory _ToggleMenungguKonfirmasi(final bool? newValue) =
-      _$ToggleMenungguKonfirmasiImpl;
-
-  bool? get newValue;
-  @JsonKey(ignore: true)
-  _$$ToggleMenungguKonfirmasiImplCopyWith<_$ToggleMenungguKonfirmasiImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$ToggleDiprosesImplCopyWith<$Res> {
-  factory _$$ToggleDiprosesImplCopyWith(_$ToggleDiprosesImpl value,
-          $Res Function(_$ToggleDiprosesImpl) then) =
-      __$$ToggleDiprosesImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool? newValue});
-}
-
-/// @nodoc
-class __$$ToggleDiprosesImplCopyWithImpl<$Res>
-    extends _$OrderEventCopyWithImpl<$Res, _$ToggleDiprosesImpl>
-    implements _$$ToggleDiprosesImplCopyWith<$Res> {
-  __$$ToggleDiprosesImplCopyWithImpl(
-      _$ToggleDiprosesImpl _value, $Res Function(_$ToggleDiprosesImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? newValue = freezed,
-  }) {
-    return _then(_$ToggleDiprosesImpl(
-      freezed == newValue
-          ? _value.newValue
-          : newValue // ignore: cast_nullable_to_non_nullable
-              as bool?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$ToggleDiprosesImpl implements _ToggleDiproses {
-  const _$ToggleDiprosesImpl(this.newValue);
-
-  @override
-  final bool? newValue;
-
-  @override
-  String toString() {
-    return 'OrderEvent.togglePesananDiproses(newValue: $newValue)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ToggleDiprosesImpl &&
-            (identical(other.newValue, newValue) ||
-                other.newValue == newValue));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, newValue);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ToggleDiprosesImplCopyWith<_$ToggleDiprosesImpl> get copyWith =>
-      __$$ToggleDiprosesImplCopyWithImpl<_$ToggleDiprosesImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function() getAllHistoryOrder,
-    required TResult Function(String? orderId) postReOrder,
-    required TResult Function(String? orderRewardId) postReOrderReward,
-    required TResult Function() getAllHistoryOrderReward,
-    required TResult Function(String query, String? statusOrder) getFilterOrder,
-    required TResult Function(String query, String? statusOrder)
-        getFilterOrderReward,
-    required TResult Function(
-            int filterIndex, String query, String? statusOrder)
-        doFilterOrder,
-    required TResult Function(bool? newValue) toggleMenungguPembayaran,
-    required TResult Function(bool? newValue) toggleMenungguKonfirmasi,
-    required TResult Function(bool? newValue) togglePesananDiproses,
-    required TResult Function(bool? newValue) togglePesananSiapDiambil,
-    required TResult Function(bool? newValue) togglePesananDitolak,
-    required TResult Function(bool? newValue) togglePesananDibatalkan,
-    required TResult Function(bool? newValue) togglePesananSelesai,
-  }) {
-    return togglePesananDiproses(newValue);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function()? getAllHistoryOrder,
-    TResult? Function(String? orderId)? postReOrder,
-    TResult? Function(String? orderRewardId)? postReOrderReward,
-    TResult? Function()? getAllHistoryOrderReward,
-    TResult? Function(String query, String? statusOrder)? getFilterOrder,
-    TResult? Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult? Function(int filterIndex, String query, String? statusOrder)?
-        doFilterOrder,
-    TResult? Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult? Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult? Function(bool? newValue)? togglePesananDiproses,
-    TResult? Function(bool? newValue)? togglePesananSiapDiambil,
-    TResult? Function(bool? newValue)? togglePesananDitolak,
-    TResult? Function(bool? newValue)? togglePesananDibatalkan,
-    TResult? Function(bool? newValue)? togglePesananSelesai,
-  }) {
-    return togglePesananDiproses?.call(newValue);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? getAllHistoryOrder,
-    TResult Function(String? orderId)? postReOrder,
-    TResult Function(String? orderRewardId)? postReOrderReward,
-    TResult Function()? getAllHistoryOrderReward,
-    TResult Function(String query, String? statusOrder)? getFilterOrder,
-    TResult Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult Function(int filterIndex, String query, String? statusOrder)?
-        doFilterOrder,
-    TResult Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult Function(bool? newValue)? togglePesananDiproses,
-    TResult Function(bool? newValue)? togglePesananSiapDiambil,
-    TResult Function(bool? newValue)? togglePesananDitolak,
-    TResult Function(bool? newValue)? togglePesananDibatalkan,
-    TResult Function(bool? newValue)? togglePesananSelesai,
-    required TResult orElse(),
-  }) {
-    if (togglePesananDiproses != null) {
-      return togglePesananDiproses(newValue);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
-    required TResult Function(_PostReOrder value) postReOrder,
-    required TResult Function(_PostReOrderReward value) postReOrderReward,
-    required TResult Function(_GetAllHistoryOrderReward value)
-        getAllHistoryOrderReward,
-    required TResult Function(_GetCategoryOrder value) getFilterOrder,
-    required TResult Function(_GetCategoryOrderReward value)
-        getFilterOrderReward,
-    required TResult Function(_DoFilterOrder value) doFilterOrder,
-    required TResult Function(_ToggleMenungguPembayaran value)
-        toggleMenungguPembayaran,
-    required TResult Function(_ToggleMenungguKonfirmasi value)
-        toggleMenungguKonfirmasi,
-    required TResult Function(_ToggleDiproses value) togglePesananDiproses,
-    required TResult Function(_ToggleSiapDiambil value)
-        togglePesananSiapDiambil,
-    required TResult Function(_ToggleDitolak value) togglePesananDitolak,
-    required TResult Function(_ToggleDibatalkan value) togglePesananDibatalkan,
-    required TResult Function(_ToggleSelesai value) togglePesananSelesai,
-  }) {
-    return togglePesananDiproses(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
-    TResult? Function(_PostReOrder value)? postReOrder,
-    TResult? Function(_PostReOrderReward value)? postReOrderReward,
-    TResult? Function(_GetAllHistoryOrderReward value)?
-        getAllHistoryOrderReward,
-    TResult? Function(_GetCategoryOrder value)? getFilterOrder,
-    TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
-    TResult? Function(_DoFilterOrder value)? doFilterOrder,
-    TResult? Function(_ToggleMenungguPembayaran value)?
-        toggleMenungguPembayaran,
-    TResult? Function(_ToggleMenungguKonfirmasi value)?
-        toggleMenungguKonfirmasi,
-    TResult? Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult? Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
-    TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
-    TResult? Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
-    TResult? Function(_ToggleSelesai value)? togglePesananSelesai,
-  }) {
-    return togglePesananDiproses?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
-    TResult Function(_PostReOrder value)? postReOrder,
-    TResult Function(_PostReOrderReward value)? postReOrderReward,
-    TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
-    TResult Function(_GetCategoryOrder value)? getFilterOrder,
-    TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
-    TResult Function(_DoFilterOrder value)? doFilterOrder,
-    TResult Function(_ToggleMenungguPembayaran value)? toggleMenungguPembayaran,
-    TResult Function(_ToggleMenungguKonfirmasi value)? toggleMenungguKonfirmasi,
-    TResult Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
-    TResult Function(_ToggleDitolak value)? togglePesananDitolak,
-    TResult Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
-    TResult Function(_ToggleSelesai value)? togglePesananSelesai,
-    required TResult orElse(),
-  }) {
-    if (togglePesananDiproses != null) {
-      return togglePesananDiproses(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ToggleDiproses implements OrderEvent {
-  const factory _ToggleDiproses(final bool? newValue) = _$ToggleDiprosesImpl;
-
-  bool? get newValue;
-  @JsonKey(ignore: true)
-  _$$ToggleDiprosesImplCopyWith<_$ToggleDiprosesImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$ToggleSiapDiambilImplCopyWith<$Res> {
-  factory _$$ToggleSiapDiambilImplCopyWith(_$ToggleSiapDiambilImpl value,
-          $Res Function(_$ToggleSiapDiambilImpl) then) =
-      __$$ToggleSiapDiambilImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool? newValue});
-}
-
-/// @nodoc
-class __$$ToggleSiapDiambilImplCopyWithImpl<$Res>
-    extends _$OrderEventCopyWithImpl<$Res, _$ToggleSiapDiambilImpl>
-    implements _$$ToggleSiapDiambilImplCopyWith<$Res> {
-  __$$ToggleSiapDiambilImplCopyWithImpl(_$ToggleSiapDiambilImpl _value,
-      $Res Function(_$ToggleSiapDiambilImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? newValue = freezed,
-  }) {
-    return _then(_$ToggleSiapDiambilImpl(
-      freezed == newValue
-          ? _value.newValue
-          : newValue // ignore: cast_nullable_to_non_nullable
-              as bool?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$ToggleSiapDiambilImpl implements _ToggleSiapDiambil {
-  const _$ToggleSiapDiambilImpl(this.newValue);
-
-  @override
-  final bool? newValue;
-
-  @override
-  String toString() {
-    return 'OrderEvent.togglePesananSiapDiambil(newValue: $newValue)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ToggleSiapDiambilImpl &&
-            (identical(other.newValue, newValue) ||
-                other.newValue == newValue));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, newValue);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ToggleSiapDiambilImplCopyWith<_$ToggleSiapDiambilImpl> get copyWith =>
-      __$$ToggleSiapDiambilImplCopyWithImpl<_$ToggleSiapDiambilImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function() getAllHistoryOrder,
-    required TResult Function(String? orderId) postReOrder,
-    required TResult Function(String? orderRewardId) postReOrderReward,
-    required TResult Function() getAllHistoryOrderReward,
-    required TResult Function(String query, String? statusOrder) getFilterOrder,
-    required TResult Function(String query, String? statusOrder)
-        getFilterOrderReward,
-    required TResult Function(
-            int filterIndex, String query, String? statusOrder)
-        doFilterOrder,
-    required TResult Function(bool? newValue) toggleMenungguPembayaran,
-    required TResult Function(bool? newValue) toggleMenungguKonfirmasi,
-    required TResult Function(bool? newValue) togglePesananDiproses,
-    required TResult Function(bool? newValue) togglePesananSiapDiambil,
-    required TResult Function(bool? newValue) togglePesananDitolak,
-    required TResult Function(bool? newValue) togglePesananDibatalkan,
-    required TResult Function(bool? newValue) togglePesananSelesai,
-  }) {
-    return togglePesananSiapDiambil(newValue);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function()? getAllHistoryOrder,
-    TResult? Function(String? orderId)? postReOrder,
-    TResult? Function(String? orderRewardId)? postReOrderReward,
-    TResult? Function()? getAllHistoryOrderReward,
-    TResult? Function(String query, String? statusOrder)? getFilterOrder,
-    TResult? Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult? Function(int filterIndex, String query, String? statusOrder)?
-        doFilterOrder,
-    TResult? Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult? Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult? Function(bool? newValue)? togglePesananDiproses,
-    TResult? Function(bool? newValue)? togglePesananSiapDiambil,
-    TResult? Function(bool? newValue)? togglePesananDitolak,
-    TResult? Function(bool? newValue)? togglePesananDibatalkan,
-    TResult? Function(bool? newValue)? togglePesananSelesai,
-  }) {
-    return togglePesananSiapDiambil?.call(newValue);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? getAllHistoryOrder,
-    TResult Function(String? orderId)? postReOrder,
-    TResult Function(String? orderRewardId)? postReOrderReward,
-    TResult Function()? getAllHistoryOrderReward,
-    TResult Function(String query, String? statusOrder)? getFilterOrder,
-    TResult Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult Function(int filterIndex, String query, String? statusOrder)?
-        doFilterOrder,
-    TResult Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult Function(bool? newValue)? togglePesananDiproses,
-    TResult Function(bool? newValue)? togglePesananSiapDiambil,
-    TResult Function(bool? newValue)? togglePesananDitolak,
-    TResult Function(bool? newValue)? togglePesananDibatalkan,
-    TResult Function(bool? newValue)? togglePesananSelesai,
-    required TResult orElse(),
-  }) {
-    if (togglePesananSiapDiambil != null) {
-      return togglePesananSiapDiambil(newValue);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
-    required TResult Function(_PostReOrder value) postReOrder,
-    required TResult Function(_PostReOrderReward value) postReOrderReward,
-    required TResult Function(_GetAllHistoryOrderReward value)
-        getAllHistoryOrderReward,
-    required TResult Function(_GetCategoryOrder value) getFilterOrder,
-    required TResult Function(_GetCategoryOrderReward value)
-        getFilterOrderReward,
-    required TResult Function(_DoFilterOrder value) doFilterOrder,
-    required TResult Function(_ToggleMenungguPembayaran value)
-        toggleMenungguPembayaran,
-    required TResult Function(_ToggleMenungguKonfirmasi value)
-        toggleMenungguKonfirmasi,
-    required TResult Function(_ToggleDiproses value) togglePesananDiproses,
-    required TResult Function(_ToggleSiapDiambil value)
-        togglePesananSiapDiambil,
-    required TResult Function(_ToggleDitolak value) togglePesananDitolak,
-    required TResult Function(_ToggleDibatalkan value) togglePesananDibatalkan,
-    required TResult Function(_ToggleSelesai value) togglePesananSelesai,
-  }) {
-    return togglePesananSiapDiambil(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
-    TResult? Function(_PostReOrder value)? postReOrder,
-    TResult? Function(_PostReOrderReward value)? postReOrderReward,
-    TResult? Function(_GetAllHistoryOrderReward value)?
-        getAllHistoryOrderReward,
-    TResult? Function(_GetCategoryOrder value)? getFilterOrder,
-    TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
-    TResult? Function(_DoFilterOrder value)? doFilterOrder,
-    TResult? Function(_ToggleMenungguPembayaran value)?
-        toggleMenungguPembayaran,
-    TResult? Function(_ToggleMenungguKonfirmasi value)?
-        toggleMenungguKonfirmasi,
-    TResult? Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult? Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
-    TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
-    TResult? Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
-    TResult? Function(_ToggleSelesai value)? togglePesananSelesai,
-  }) {
-    return togglePesananSiapDiambil?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
-    TResult Function(_PostReOrder value)? postReOrder,
-    TResult Function(_PostReOrderReward value)? postReOrderReward,
-    TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
-    TResult Function(_GetCategoryOrder value)? getFilterOrder,
-    TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
-    TResult Function(_DoFilterOrder value)? doFilterOrder,
-    TResult Function(_ToggleMenungguPembayaran value)? toggleMenungguPembayaran,
-    TResult Function(_ToggleMenungguKonfirmasi value)? toggleMenungguKonfirmasi,
-    TResult Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
-    TResult Function(_ToggleDitolak value)? togglePesananDitolak,
-    TResult Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
-    TResult Function(_ToggleSelesai value)? togglePesananSelesai,
-    required TResult orElse(),
-  }) {
-    if (togglePesananSiapDiambil != null) {
-      return togglePesananSiapDiambil(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ToggleSiapDiambil implements OrderEvent {
-  const factory _ToggleSiapDiambil(final bool? newValue) =
-      _$ToggleSiapDiambilImpl;
-
-  bool? get newValue;
-  @JsonKey(ignore: true)
-  _$$ToggleSiapDiambilImplCopyWith<_$ToggleSiapDiambilImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2902,19 +2321,25 @@ class _$ToggleDitolakImpl implements _ToggleDitolak {
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
-    required TResult Function(String query, String? statusOrder) getFilterOrder,
-    required TResult Function(String query, String? statusOrder)
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrder,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
         getFilterOrderReward,
-    required TResult Function(
-            int filterIndex, String query, String? statusOrder)
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
-    required TResult Function(bool? newValue) toggleMenungguPembayaran,
-    required TResult Function(bool? newValue) toggleMenungguKonfirmasi,
-    required TResult Function(bool? newValue) togglePesananDiproses,
-    required TResult Function(bool? newValue) togglePesananSiapDiambil,
     required TResult Function(bool? newValue) togglePesananDitolak,
+    required TResult Function(bool? newValue) togglePesananDitolakReward,
     required TResult Function(bool? newValue) togglePesananDibatalkan,
     required TResult Function(bool? newValue) togglePesananSelesai,
+    required TResult Function(bool? newValue) togglePesananSelesaiReward,
+    required TResult Function(DateTime date) setStartDate,
+    required TResult Function(DateTime date) setStartDateReward,
+    required TResult Function(DateTime date) setEndDate,
+    required TResult Function(DateTime date) setEndDateReward,
+    required TResult Function(String query) resetFilters,
   }) {
     return togglePesananDitolak(newValue);
   }
@@ -2927,17 +2352,25 @@ class _$ToggleDitolakImpl implements _ToggleDitolak {
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
-    TResult? Function(String query, String? statusOrder)? getFilterOrder,
-    TResult? Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult? Function(int filterIndex, String query, String? statusOrder)?
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
         doFilterOrder,
-    TResult? Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult? Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult? Function(bool? newValue)? togglePesananDiproses,
-    TResult? Function(bool? newValue)? togglePesananSiapDiambil,
     TResult? Function(bool? newValue)? togglePesananDitolak,
+    TResult? Function(bool? newValue)? togglePesananDitolakReward,
     TResult? Function(bool? newValue)? togglePesananDibatalkan,
     TResult? Function(bool? newValue)? togglePesananSelesai,
+    TResult? Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult? Function(DateTime date)? setStartDate,
+    TResult? Function(DateTime date)? setStartDateReward,
+    TResult? Function(DateTime date)? setEndDate,
+    TResult? Function(DateTime date)? setEndDateReward,
+    TResult? Function(String query)? resetFilters,
   }) {
     return togglePesananDitolak?.call(newValue);
   }
@@ -2950,17 +2383,25 @@ class _$ToggleDitolakImpl implements _ToggleDitolak {
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
-    TResult Function(String query, String? statusOrder)? getFilterOrder,
-    TResult Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult Function(int filterIndex, String query, String? statusOrder)?
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
         doFilterOrder,
-    TResult Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult Function(bool? newValue)? togglePesananDiproses,
-    TResult Function(bool? newValue)? togglePesananSiapDiambil,
     TResult Function(bool? newValue)? togglePesananDitolak,
+    TResult Function(bool? newValue)? togglePesananDitolakReward,
     TResult Function(bool? newValue)? togglePesananDibatalkan,
     TResult Function(bool? newValue)? togglePesananSelesai,
+    TResult Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult Function(DateTime date)? setStartDate,
+    TResult Function(DateTime date)? setStartDateReward,
+    TResult Function(DateTime date)? setEndDate,
+    TResult Function(DateTime date)? setEndDateReward,
+    TResult Function(String query)? resetFilters,
     required TResult orElse(),
   }) {
     if (togglePesananDitolak != null) {
@@ -2982,16 +2423,18 @@ class _$ToggleDitolakImpl implements _ToggleDitolak {
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
-    required TResult Function(_ToggleMenungguPembayaran value)
-        toggleMenungguPembayaran,
-    required TResult Function(_ToggleMenungguKonfirmasi value)
-        toggleMenungguKonfirmasi,
-    required TResult Function(_ToggleDiproses value) togglePesananDiproses,
-    required TResult Function(_ToggleSiapDiambil value)
-        togglePesananSiapDiambil,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
+    required TResult Function(_ToggleDitolakReward value)
+        togglePesananDitolakReward,
     required TResult Function(_ToggleDibatalkan value) togglePesananDibatalkan,
     required TResult Function(_ToggleSelesai value) togglePesananSelesai,
+    required TResult Function(_ToggleSelesaiReward value)
+        togglePesananSelesaiReward,
+    required TResult Function(_SetStartDate value) setStartDate,
+    required TResult Function(_SetStartDateReward value) setStartDateReward,
+    required TResult Function(_SetEndDate value) setEndDate,
+    required TResult Function(_SetEndDateReward value) setEndDateReward,
+    required TResult Function(_ResetFilters value) resetFilters,
   }) {
     return togglePesananDitolak(this);
   }
@@ -3008,15 +2451,16 @@ class _$ToggleDitolakImpl implements _ToggleDitolak {
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
-    TResult? Function(_ToggleMenungguPembayaran value)?
-        toggleMenungguPembayaran,
-    TResult? Function(_ToggleMenungguKonfirmasi value)?
-        toggleMenungguKonfirmasi,
-    TResult? Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult? Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
     TResult? Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
     TResult? Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult? Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult? Function(_SetStartDate value)? setStartDate,
+    TResult? Function(_SetStartDateReward value)? setStartDateReward,
+    TResult? Function(_SetEndDate value)? setEndDate,
+    TResult? Function(_SetEndDateReward value)? setEndDateReward,
+    TResult? Function(_ResetFilters value)? resetFilters,
   }) {
     return togglePesananDitolak?.call(this);
   }
@@ -3032,13 +2476,16 @@ class _$ToggleDitolakImpl implements _ToggleDitolak {
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
-    TResult Function(_ToggleMenungguPembayaran value)? toggleMenungguPembayaran,
-    TResult Function(_ToggleMenungguKonfirmasi value)? toggleMenungguKonfirmasi,
-    TResult Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
     TResult Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
     TResult Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult Function(_SetStartDate value)? setStartDate,
+    TResult Function(_SetStartDateReward value)? setStartDateReward,
+    TResult Function(_SetEndDate value)? setEndDate,
+    TResult Function(_SetEndDateReward value)? setEndDateReward,
+    TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
   }) {
     if (togglePesananDitolak != null) {
@@ -3054,6 +2501,261 @@ abstract class _ToggleDitolak implements OrderEvent {
   bool? get newValue;
   @JsonKey(ignore: true)
   _$$ToggleDitolakImplCopyWith<_$ToggleDitolakImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ToggleDitolakRewardImplCopyWith<$Res> {
+  factory _$$ToggleDitolakRewardImplCopyWith(_$ToggleDitolakRewardImpl value,
+          $Res Function(_$ToggleDitolakRewardImpl) then) =
+      __$$ToggleDitolakRewardImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool? newValue});
+}
+
+/// @nodoc
+class __$$ToggleDitolakRewardImplCopyWithImpl<$Res>
+    extends _$OrderEventCopyWithImpl<$Res, _$ToggleDitolakRewardImpl>
+    implements _$$ToggleDitolakRewardImplCopyWith<$Res> {
+  __$$ToggleDitolakRewardImplCopyWithImpl(_$ToggleDitolakRewardImpl _value,
+      $Res Function(_$ToggleDitolakRewardImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? newValue = freezed,
+  }) {
+    return _then(_$ToggleDitolakRewardImpl(
+      freezed == newValue
+          ? _value.newValue
+          : newValue // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ToggleDitolakRewardImpl implements _ToggleDitolakReward {
+  const _$ToggleDitolakRewardImpl(this.newValue);
+
+  @override
+  final bool? newValue;
+
+  @override
+  String toString() {
+    return 'OrderEvent.togglePesananDitolakReward(newValue: $newValue)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ToggleDitolakRewardImpl &&
+            (identical(other.newValue, newValue) ||
+                other.newValue == newValue));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, newValue);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ToggleDitolakRewardImplCopyWith<_$ToggleDitolakRewardImpl> get copyWith =>
+      __$$ToggleDitolakRewardImplCopyWithImpl<_$ToggleDitolakRewardImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId) postReOrder,
+    required TResult Function(String? orderRewardId) postReOrderReward,
+    required TResult Function() getAllHistoryOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrder,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrderReward,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        doFilterOrder,
+    required TResult Function(bool? newValue) togglePesananDitolak,
+    required TResult Function(bool? newValue) togglePesananDitolakReward,
+    required TResult Function(bool? newValue) togglePesananDibatalkan,
+    required TResult Function(bool? newValue) togglePesananSelesai,
+    required TResult Function(bool? newValue) togglePesananSelesaiReward,
+    required TResult Function(DateTime date) setStartDate,
+    required TResult Function(DateTime date) setStartDateReward,
+    required TResult Function(DateTime date) setEndDate,
+    required TResult Function(DateTime date) setEndDateReward,
+    required TResult Function(String query) resetFilters,
+  }) {
+    return togglePesananDitolakReward(newValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId)? postReOrder,
+    TResult? Function(String? orderRewardId)? postReOrderReward,
+    TResult? Function()? getAllHistoryOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        doFilterOrder,
+    TResult? Function(bool? newValue)? togglePesananDitolak,
+    TResult? Function(bool? newValue)? togglePesananDitolakReward,
+    TResult? Function(bool? newValue)? togglePesananDibatalkan,
+    TResult? Function(bool? newValue)? togglePesananSelesai,
+    TResult? Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult? Function(DateTime date)? setStartDate,
+    TResult? Function(DateTime date)? setStartDateReward,
+    TResult? Function(DateTime date)? setEndDate,
+    TResult? Function(DateTime date)? setEndDateReward,
+    TResult? Function(String query)? resetFilters,
+  }) {
+    return togglePesananDitolakReward?.call(newValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId)? postReOrder,
+    TResult Function(String? orderRewardId)? postReOrderReward,
+    TResult Function()? getAllHistoryOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        doFilterOrder,
+    TResult Function(bool? newValue)? togglePesananDitolak,
+    TResult Function(bool? newValue)? togglePesananDitolakReward,
+    TResult Function(bool? newValue)? togglePesananDibatalkan,
+    TResult Function(bool? newValue)? togglePesananSelesai,
+    TResult Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult Function(DateTime date)? setStartDate,
+    TResult Function(DateTime date)? setStartDateReward,
+    TResult Function(DateTime date)? setEndDate,
+    TResult Function(DateTime date)? setEndDateReward,
+    TResult Function(String query)? resetFilters,
+    required TResult orElse(),
+  }) {
+    if (togglePesananDitolakReward != null) {
+      return togglePesananDitolakReward(newValue);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReOrder value) postReOrder,
+    required TResult Function(_PostReOrderReward value) postReOrderReward,
+    required TResult Function(_GetAllHistoryOrderReward value)
+        getAllHistoryOrderReward,
+    required TResult Function(_GetCategoryOrder value) getFilterOrder,
+    required TResult Function(_GetCategoryOrderReward value)
+        getFilterOrderReward,
+    required TResult Function(_DoFilterOrder value) doFilterOrder,
+    required TResult Function(_ToggleDitolak value) togglePesananDitolak,
+    required TResult Function(_ToggleDitolakReward value)
+        togglePesananDitolakReward,
+    required TResult Function(_ToggleDibatalkan value) togglePesananDibatalkan,
+    required TResult Function(_ToggleSelesai value) togglePesananSelesai,
+    required TResult Function(_ToggleSelesaiReward value)
+        togglePesananSelesaiReward,
+    required TResult Function(_SetStartDate value) setStartDate,
+    required TResult Function(_SetStartDateReward value) setStartDateReward,
+    required TResult Function(_SetEndDate value) setEndDate,
+    required TResult Function(_SetEndDateReward value) setEndDateReward,
+    required TResult Function(_ResetFilters value) resetFilters,
+  }) {
+    return togglePesananDitolakReward(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReOrder value)? postReOrder,
+    TResult? Function(_PostReOrderReward value)? postReOrderReward,
+    TResult? Function(_GetAllHistoryOrderReward value)?
+        getAllHistoryOrderReward,
+    TResult? Function(_GetCategoryOrder value)? getFilterOrder,
+    TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_DoFilterOrder value)? doFilterOrder,
+    TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
+    TResult? Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
+    TResult? Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult? Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult? Function(_SetStartDate value)? setStartDate,
+    TResult? Function(_SetStartDateReward value)? setStartDateReward,
+    TResult? Function(_SetEndDate value)? setEndDate,
+    TResult? Function(_SetEndDateReward value)? setEndDateReward,
+    TResult? Function(_ResetFilters value)? resetFilters,
+  }) {
+    return togglePesananDitolakReward?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReOrder value)? postReOrder,
+    TResult Function(_PostReOrderReward value)? postReOrderReward,
+    TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
+    TResult Function(_GetCategoryOrder value)? getFilterOrder,
+    TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_DoFilterOrder value)? doFilterOrder,
+    TResult Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
+    TResult Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
+    TResult Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult Function(_SetStartDate value)? setStartDate,
+    TResult Function(_SetStartDateReward value)? setStartDateReward,
+    TResult Function(_SetEndDate value)? setEndDate,
+    TResult Function(_SetEndDateReward value)? setEndDateReward,
+    TResult Function(_ResetFilters value)? resetFilters,
+    required TResult orElse(),
+  }) {
+    if (togglePesananDitolakReward != null) {
+      return togglePesananDitolakReward(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ToggleDitolakReward implements OrderEvent {
+  const factory _ToggleDitolakReward(final bool? newValue) =
+      _$ToggleDitolakRewardImpl;
+
+  bool? get newValue;
+  @JsonKey(ignore: true)
+  _$$ToggleDitolakRewardImplCopyWith<_$ToggleDitolakRewardImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -3128,19 +2830,25 @@ class _$ToggleDibatalkanImpl implements _ToggleDibatalkan {
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
-    required TResult Function(String query, String? statusOrder) getFilterOrder,
-    required TResult Function(String query, String? statusOrder)
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrder,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
         getFilterOrderReward,
-    required TResult Function(
-            int filterIndex, String query, String? statusOrder)
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
-    required TResult Function(bool? newValue) toggleMenungguPembayaran,
-    required TResult Function(bool? newValue) toggleMenungguKonfirmasi,
-    required TResult Function(bool? newValue) togglePesananDiproses,
-    required TResult Function(bool? newValue) togglePesananSiapDiambil,
     required TResult Function(bool? newValue) togglePesananDitolak,
+    required TResult Function(bool? newValue) togglePesananDitolakReward,
     required TResult Function(bool? newValue) togglePesananDibatalkan,
     required TResult Function(bool? newValue) togglePesananSelesai,
+    required TResult Function(bool? newValue) togglePesananSelesaiReward,
+    required TResult Function(DateTime date) setStartDate,
+    required TResult Function(DateTime date) setStartDateReward,
+    required TResult Function(DateTime date) setEndDate,
+    required TResult Function(DateTime date) setEndDateReward,
+    required TResult Function(String query) resetFilters,
   }) {
     return togglePesananDibatalkan(newValue);
   }
@@ -3153,17 +2861,25 @@ class _$ToggleDibatalkanImpl implements _ToggleDibatalkan {
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
-    TResult? Function(String query, String? statusOrder)? getFilterOrder,
-    TResult? Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult? Function(int filterIndex, String query, String? statusOrder)?
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
         doFilterOrder,
-    TResult? Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult? Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult? Function(bool? newValue)? togglePesananDiproses,
-    TResult? Function(bool? newValue)? togglePesananSiapDiambil,
     TResult? Function(bool? newValue)? togglePesananDitolak,
+    TResult? Function(bool? newValue)? togglePesananDitolakReward,
     TResult? Function(bool? newValue)? togglePesananDibatalkan,
     TResult? Function(bool? newValue)? togglePesananSelesai,
+    TResult? Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult? Function(DateTime date)? setStartDate,
+    TResult? Function(DateTime date)? setStartDateReward,
+    TResult? Function(DateTime date)? setEndDate,
+    TResult? Function(DateTime date)? setEndDateReward,
+    TResult? Function(String query)? resetFilters,
   }) {
     return togglePesananDibatalkan?.call(newValue);
   }
@@ -3176,17 +2892,25 @@ class _$ToggleDibatalkanImpl implements _ToggleDibatalkan {
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
-    TResult Function(String query, String? statusOrder)? getFilterOrder,
-    TResult Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult Function(int filterIndex, String query, String? statusOrder)?
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
         doFilterOrder,
-    TResult Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult Function(bool? newValue)? togglePesananDiproses,
-    TResult Function(bool? newValue)? togglePesananSiapDiambil,
     TResult Function(bool? newValue)? togglePesananDitolak,
+    TResult Function(bool? newValue)? togglePesananDitolakReward,
     TResult Function(bool? newValue)? togglePesananDibatalkan,
     TResult Function(bool? newValue)? togglePesananSelesai,
+    TResult Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult Function(DateTime date)? setStartDate,
+    TResult Function(DateTime date)? setStartDateReward,
+    TResult Function(DateTime date)? setEndDate,
+    TResult Function(DateTime date)? setEndDateReward,
+    TResult Function(String query)? resetFilters,
     required TResult orElse(),
   }) {
     if (togglePesananDibatalkan != null) {
@@ -3208,16 +2932,18 @@ class _$ToggleDibatalkanImpl implements _ToggleDibatalkan {
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
-    required TResult Function(_ToggleMenungguPembayaran value)
-        toggleMenungguPembayaran,
-    required TResult Function(_ToggleMenungguKonfirmasi value)
-        toggleMenungguKonfirmasi,
-    required TResult Function(_ToggleDiproses value) togglePesananDiproses,
-    required TResult Function(_ToggleSiapDiambil value)
-        togglePesananSiapDiambil,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
+    required TResult Function(_ToggleDitolakReward value)
+        togglePesananDitolakReward,
     required TResult Function(_ToggleDibatalkan value) togglePesananDibatalkan,
     required TResult Function(_ToggleSelesai value) togglePesananSelesai,
+    required TResult Function(_ToggleSelesaiReward value)
+        togglePesananSelesaiReward,
+    required TResult Function(_SetStartDate value) setStartDate,
+    required TResult Function(_SetStartDateReward value) setStartDateReward,
+    required TResult Function(_SetEndDate value) setEndDate,
+    required TResult Function(_SetEndDateReward value) setEndDateReward,
+    required TResult Function(_ResetFilters value) resetFilters,
   }) {
     return togglePesananDibatalkan(this);
   }
@@ -3234,15 +2960,16 @@ class _$ToggleDibatalkanImpl implements _ToggleDibatalkan {
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
-    TResult? Function(_ToggleMenungguPembayaran value)?
-        toggleMenungguPembayaran,
-    TResult? Function(_ToggleMenungguKonfirmasi value)?
-        toggleMenungguKonfirmasi,
-    TResult? Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult? Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
     TResult? Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
     TResult? Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult? Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult? Function(_SetStartDate value)? setStartDate,
+    TResult? Function(_SetStartDateReward value)? setStartDateReward,
+    TResult? Function(_SetEndDate value)? setEndDate,
+    TResult? Function(_SetEndDateReward value)? setEndDateReward,
+    TResult? Function(_ResetFilters value)? resetFilters,
   }) {
     return togglePesananDibatalkan?.call(this);
   }
@@ -3258,13 +2985,16 @@ class _$ToggleDibatalkanImpl implements _ToggleDibatalkan {
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
-    TResult Function(_ToggleMenungguPembayaran value)? toggleMenungguPembayaran,
-    TResult Function(_ToggleMenungguKonfirmasi value)? toggleMenungguKonfirmasi,
-    TResult Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
     TResult Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
     TResult Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult Function(_SetStartDate value)? setStartDate,
+    TResult Function(_SetStartDateReward value)? setStartDateReward,
+    TResult Function(_SetEndDate value)? setEndDate,
+    TResult Function(_SetEndDateReward value)? setEndDateReward,
+    TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
   }) {
     if (togglePesananDibatalkan != null) {
@@ -3354,19 +3084,25 @@ class _$ToggleSelesaiImpl implements _ToggleSelesai {
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
-    required TResult Function(String query, String? statusOrder) getFilterOrder,
-    required TResult Function(String query, String? statusOrder)
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrder,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
         getFilterOrderReward,
-    required TResult Function(
-            int filterIndex, String query, String? statusOrder)
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
-    required TResult Function(bool? newValue) toggleMenungguPembayaran,
-    required TResult Function(bool? newValue) toggleMenungguKonfirmasi,
-    required TResult Function(bool? newValue) togglePesananDiproses,
-    required TResult Function(bool? newValue) togglePesananSiapDiambil,
     required TResult Function(bool? newValue) togglePesananDitolak,
+    required TResult Function(bool? newValue) togglePesananDitolakReward,
     required TResult Function(bool? newValue) togglePesananDibatalkan,
     required TResult Function(bool? newValue) togglePesananSelesai,
+    required TResult Function(bool? newValue) togglePesananSelesaiReward,
+    required TResult Function(DateTime date) setStartDate,
+    required TResult Function(DateTime date) setStartDateReward,
+    required TResult Function(DateTime date) setEndDate,
+    required TResult Function(DateTime date) setEndDateReward,
+    required TResult Function(String query) resetFilters,
   }) {
     return togglePesananSelesai(newValue);
   }
@@ -3379,17 +3115,25 @@ class _$ToggleSelesaiImpl implements _ToggleSelesai {
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
-    TResult? Function(String query, String? statusOrder)? getFilterOrder,
-    TResult? Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult? Function(int filterIndex, String query, String? statusOrder)?
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
         doFilterOrder,
-    TResult? Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult? Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult? Function(bool? newValue)? togglePesananDiproses,
-    TResult? Function(bool? newValue)? togglePesananSiapDiambil,
     TResult? Function(bool? newValue)? togglePesananDitolak,
+    TResult? Function(bool? newValue)? togglePesananDitolakReward,
     TResult? Function(bool? newValue)? togglePesananDibatalkan,
     TResult? Function(bool? newValue)? togglePesananSelesai,
+    TResult? Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult? Function(DateTime date)? setStartDate,
+    TResult? Function(DateTime date)? setStartDateReward,
+    TResult? Function(DateTime date)? setEndDate,
+    TResult? Function(DateTime date)? setEndDateReward,
+    TResult? Function(String query)? resetFilters,
   }) {
     return togglePesananSelesai?.call(newValue);
   }
@@ -3402,17 +3146,25 @@ class _$ToggleSelesaiImpl implements _ToggleSelesai {
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
-    TResult Function(String query, String? statusOrder)? getFilterOrder,
-    TResult Function(String query, String? statusOrder)? getFilterOrderReward,
-    TResult Function(int filterIndex, String query, String? statusOrder)?
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
         doFilterOrder,
-    TResult Function(bool? newValue)? toggleMenungguPembayaran,
-    TResult Function(bool? newValue)? toggleMenungguKonfirmasi,
-    TResult Function(bool? newValue)? togglePesananDiproses,
-    TResult Function(bool? newValue)? togglePesananSiapDiambil,
     TResult Function(bool? newValue)? togglePesananDitolak,
+    TResult Function(bool? newValue)? togglePesananDitolakReward,
     TResult Function(bool? newValue)? togglePesananDibatalkan,
     TResult Function(bool? newValue)? togglePesananSelesai,
+    TResult Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult Function(DateTime date)? setStartDate,
+    TResult Function(DateTime date)? setStartDateReward,
+    TResult Function(DateTime date)? setEndDate,
+    TResult Function(DateTime date)? setEndDateReward,
+    TResult Function(String query)? resetFilters,
     required TResult orElse(),
   }) {
     if (togglePesananSelesai != null) {
@@ -3434,16 +3186,18 @@ class _$ToggleSelesaiImpl implements _ToggleSelesai {
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
-    required TResult Function(_ToggleMenungguPembayaran value)
-        toggleMenungguPembayaran,
-    required TResult Function(_ToggleMenungguKonfirmasi value)
-        toggleMenungguKonfirmasi,
-    required TResult Function(_ToggleDiproses value) togglePesananDiproses,
-    required TResult Function(_ToggleSiapDiambil value)
-        togglePesananSiapDiambil,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
+    required TResult Function(_ToggleDitolakReward value)
+        togglePesananDitolakReward,
     required TResult Function(_ToggleDibatalkan value) togglePesananDibatalkan,
     required TResult Function(_ToggleSelesai value) togglePesananSelesai,
+    required TResult Function(_ToggleSelesaiReward value)
+        togglePesananSelesaiReward,
+    required TResult Function(_SetStartDate value) setStartDate,
+    required TResult Function(_SetStartDateReward value) setStartDateReward,
+    required TResult Function(_SetEndDate value) setEndDate,
+    required TResult Function(_SetEndDateReward value) setEndDateReward,
+    required TResult Function(_ResetFilters value) resetFilters,
   }) {
     return togglePesananSelesai(this);
   }
@@ -3460,15 +3214,16 @@ class _$ToggleSelesaiImpl implements _ToggleSelesai {
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
-    TResult? Function(_ToggleMenungguPembayaran value)?
-        toggleMenungguPembayaran,
-    TResult? Function(_ToggleMenungguKonfirmasi value)?
-        toggleMenungguKonfirmasi,
-    TResult? Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult? Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
     TResult? Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
     TResult? Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult? Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult? Function(_SetStartDate value)? setStartDate,
+    TResult? Function(_SetStartDateReward value)? setStartDateReward,
+    TResult? Function(_SetEndDate value)? setEndDate,
+    TResult? Function(_SetEndDateReward value)? setEndDateReward,
+    TResult? Function(_ResetFilters value)? resetFilters,
   }) {
     return togglePesananSelesai?.call(this);
   }
@@ -3484,13 +3239,16 @@ class _$ToggleSelesaiImpl implements _ToggleSelesai {
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
-    TResult Function(_ToggleMenungguPembayaran value)? toggleMenungguPembayaran,
-    TResult Function(_ToggleMenungguKonfirmasi value)? toggleMenungguKonfirmasi,
-    TResult Function(_ToggleDiproses value)? togglePesananDiproses,
-    TResult Function(_ToggleSiapDiambil value)? togglePesananSiapDiambil,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
     TResult Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
     TResult Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult Function(_SetStartDate value)? setStartDate,
+    TResult Function(_SetStartDateReward value)? setStartDateReward,
+    TResult Function(_SetEndDate value)? setEndDate,
+    TResult Function(_SetEndDateReward value)? setEndDateReward,
+    TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
   }) {
     if (togglePesananSelesai != null) {
@@ -3510,6 +3268,1524 @@ abstract class _ToggleSelesai implements OrderEvent {
 }
 
 /// @nodoc
+abstract class _$$ToggleSelesaiRewardImplCopyWith<$Res> {
+  factory _$$ToggleSelesaiRewardImplCopyWith(_$ToggleSelesaiRewardImpl value,
+          $Res Function(_$ToggleSelesaiRewardImpl) then) =
+      __$$ToggleSelesaiRewardImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool? newValue});
+}
+
+/// @nodoc
+class __$$ToggleSelesaiRewardImplCopyWithImpl<$Res>
+    extends _$OrderEventCopyWithImpl<$Res, _$ToggleSelesaiRewardImpl>
+    implements _$$ToggleSelesaiRewardImplCopyWith<$Res> {
+  __$$ToggleSelesaiRewardImplCopyWithImpl(_$ToggleSelesaiRewardImpl _value,
+      $Res Function(_$ToggleSelesaiRewardImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? newValue = freezed,
+  }) {
+    return _then(_$ToggleSelesaiRewardImpl(
+      freezed == newValue
+          ? _value.newValue
+          : newValue // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ToggleSelesaiRewardImpl implements _ToggleSelesaiReward {
+  const _$ToggleSelesaiRewardImpl(this.newValue);
+
+  @override
+  final bool? newValue;
+
+  @override
+  String toString() {
+    return 'OrderEvent.togglePesananSelesaiReward(newValue: $newValue)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ToggleSelesaiRewardImpl &&
+            (identical(other.newValue, newValue) ||
+                other.newValue == newValue));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, newValue);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ToggleSelesaiRewardImplCopyWith<_$ToggleSelesaiRewardImpl> get copyWith =>
+      __$$ToggleSelesaiRewardImplCopyWithImpl<_$ToggleSelesaiRewardImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId) postReOrder,
+    required TResult Function(String? orderRewardId) postReOrderReward,
+    required TResult Function() getAllHistoryOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrder,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrderReward,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        doFilterOrder,
+    required TResult Function(bool? newValue) togglePesananDitolak,
+    required TResult Function(bool? newValue) togglePesananDitolakReward,
+    required TResult Function(bool? newValue) togglePesananDibatalkan,
+    required TResult Function(bool? newValue) togglePesananSelesai,
+    required TResult Function(bool? newValue) togglePesananSelesaiReward,
+    required TResult Function(DateTime date) setStartDate,
+    required TResult Function(DateTime date) setStartDateReward,
+    required TResult Function(DateTime date) setEndDate,
+    required TResult Function(DateTime date) setEndDateReward,
+    required TResult Function(String query) resetFilters,
+  }) {
+    return togglePesananSelesaiReward(newValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId)? postReOrder,
+    TResult? Function(String? orderRewardId)? postReOrderReward,
+    TResult? Function()? getAllHistoryOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        doFilterOrder,
+    TResult? Function(bool? newValue)? togglePesananDitolak,
+    TResult? Function(bool? newValue)? togglePesananDitolakReward,
+    TResult? Function(bool? newValue)? togglePesananDibatalkan,
+    TResult? Function(bool? newValue)? togglePesananSelesai,
+    TResult? Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult? Function(DateTime date)? setStartDate,
+    TResult? Function(DateTime date)? setStartDateReward,
+    TResult? Function(DateTime date)? setEndDate,
+    TResult? Function(DateTime date)? setEndDateReward,
+    TResult? Function(String query)? resetFilters,
+  }) {
+    return togglePesananSelesaiReward?.call(newValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId)? postReOrder,
+    TResult Function(String? orderRewardId)? postReOrderReward,
+    TResult Function()? getAllHistoryOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        doFilterOrder,
+    TResult Function(bool? newValue)? togglePesananDitolak,
+    TResult Function(bool? newValue)? togglePesananDitolakReward,
+    TResult Function(bool? newValue)? togglePesananDibatalkan,
+    TResult Function(bool? newValue)? togglePesananSelesai,
+    TResult Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult Function(DateTime date)? setStartDate,
+    TResult Function(DateTime date)? setStartDateReward,
+    TResult Function(DateTime date)? setEndDate,
+    TResult Function(DateTime date)? setEndDateReward,
+    TResult Function(String query)? resetFilters,
+    required TResult orElse(),
+  }) {
+    if (togglePesananSelesaiReward != null) {
+      return togglePesananSelesaiReward(newValue);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReOrder value) postReOrder,
+    required TResult Function(_PostReOrderReward value) postReOrderReward,
+    required TResult Function(_GetAllHistoryOrderReward value)
+        getAllHistoryOrderReward,
+    required TResult Function(_GetCategoryOrder value) getFilterOrder,
+    required TResult Function(_GetCategoryOrderReward value)
+        getFilterOrderReward,
+    required TResult Function(_DoFilterOrder value) doFilterOrder,
+    required TResult Function(_ToggleDitolak value) togglePesananDitolak,
+    required TResult Function(_ToggleDitolakReward value)
+        togglePesananDitolakReward,
+    required TResult Function(_ToggleDibatalkan value) togglePesananDibatalkan,
+    required TResult Function(_ToggleSelesai value) togglePesananSelesai,
+    required TResult Function(_ToggleSelesaiReward value)
+        togglePesananSelesaiReward,
+    required TResult Function(_SetStartDate value) setStartDate,
+    required TResult Function(_SetStartDateReward value) setStartDateReward,
+    required TResult Function(_SetEndDate value) setEndDate,
+    required TResult Function(_SetEndDateReward value) setEndDateReward,
+    required TResult Function(_ResetFilters value) resetFilters,
+  }) {
+    return togglePesananSelesaiReward(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReOrder value)? postReOrder,
+    TResult? Function(_PostReOrderReward value)? postReOrderReward,
+    TResult? Function(_GetAllHistoryOrderReward value)?
+        getAllHistoryOrderReward,
+    TResult? Function(_GetCategoryOrder value)? getFilterOrder,
+    TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_DoFilterOrder value)? doFilterOrder,
+    TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
+    TResult? Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
+    TResult? Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult? Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult? Function(_SetStartDate value)? setStartDate,
+    TResult? Function(_SetStartDateReward value)? setStartDateReward,
+    TResult? Function(_SetEndDate value)? setEndDate,
+    TResult? Function(_SetEndDateReward value)? setEndDateReward,
+    TResult? Function(_ResetFilters value)? resetFilters,
+  }) {
+    return togglePesananSelesaiReward?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReOrder value)? postReOrder,
+    TResult Function(_PostReOrderReward value)? postReOrderReward,
+    TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
+    TResult Function(_GetCategoryOrder value)? getFilterOrder,
+    TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_DoFilterOrder value)? doFilterOrder,
+    TResult Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
+    TResult Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
+    TResult Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult Function(_SetStartDate value)? setStartDate,
+    TResult Function(_SetStartDateReward value)? setStartDateReward,
+    TResult Function(_SetEndDate value)? setEndDate,
+    TResult Function(_SetEndDateReward value)? setEndDateReward,
+    TResult Function(_ResetFilters value)? resetFilters,
+    required TResult orElse(),
+  }) {
+    if (togglePesananSelesaiReward != null) {
+      return togglePesananSelesaiReward(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ToggleSelesaiReward implements OrderEvent {
+  const factory _ToggleSelesaiReward(final bool? newValue) =
+      _$ToggleSelesaiRewardImpl;
+
+  bool? get newValue;
+  @JsonKey(ignore: true)
+  _$$ToggleSelesaiRewardImplCopyWith<_$ToggleSelesaiRewardImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SetStartDateImplCopyWith<$Res> {
+  factory _$$SetStartDateImplCopyWith(
+          _$SetStartDateImpl value, $Res Function(_$SetStartDateImpl) then) =
+      __$$SetStartDateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({DateTime date});
+}
+
+/// @nodoc
+class __$$SetStartDateImplCopyWithImpl<$Res>
+    extends _$OrderEventCopyWithImpl<$Res, _$SetStartDateImpl>
+    implements _$$SetStartDateImplCopyWith<$Res> {
+  __$$SetStartDateImplCopyWithImpl(
+      _$SetStartDateImpl _value, $Res Function(_$SetStartDateImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? date = null,
+  }) {
+    return _then(_$SetStartDateImpl(
+      null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetStartDateImpl implements _SetStartDate {
+  const _$SetStartDateImpl(this.date);
+
+  @override
+  final DateTime date;
+
+  @override
+  String toString() {
+    return 'OrderEvent.setStartDate(date: $date)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SetStartDateImpl &&
+            (identical(other.date, date) || other.date == date));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, date);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetStartDateImplCopyWith<_$SetStartDateImpl> get copyWith =>
+      __$$SetStartDateImplCopyWithImpl<_$SetStartDateImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId) postReOrder,
+    required TResult Function(String? orderRewardId) postReOrderReward,
+    required TResult Function() getAllHistoryOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrder,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrderReward,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        doFilterOrder,
+    required TResult Function(bool? newValue) togglePesananDitolak,
+    required TResult Function(bool? newValue) togglePesananDitolakReward,
+    required TResult Function(bool? newValue) togglePesananDibatalkan,
+    required TResult Function(bool? newValue) togglePesananSelesai,
+    required TResult Function(bool? newValue) togglePesananSelesaiReward,
+    required TResult Function(DateTime date) setStartDate,
+    required TResult Function(DateTime date) setStartDateReward,
+    required TResult Function(DateTime date) setEndDate,
+    required TResult Function(DateTime date) setEndDateReward,
+    required TResult Function(String query) resetFilters,
+  }) {
+    return setStartDate(date);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId)? postReOrder,
+    TResult? Function(String? orderRewardId)? postReOrderReward,
+    TResult? Function()? getAllHistoryOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        doFilterOrder,
+    TResult? Function(bool? newValue)? togglePesananDitolak,
+    TResult? Function(bool? newValue)? togglePesananDitolakReward,
+    TResult? Function(bool? newValue)? togglePesananDibatalkan,
+    TResult? Function(bool? newValue)? togglePesananSelesai,
+    TResult? Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult? Function(DateTime date)? setStartDate,
+    TResult? Function(DateTime date)? setStartDateReward,
+    TResult? Function(DateTime date)? setEndDate,
+    TResult? Function(DateTime date)? setEndDateReward,
+    TResult? Function(String query)? resetFilters,
+  }) {
+    return setStartDate?.call(date);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId)? postReOrder,
+    TResult Function(String? orderRewardId)? postReOrderReward,
+    TResult Function()? getAllHistoryOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        doFilterOrder,
+    TResult Function(bool? newValue)? togglePesananDitolak,
+    TResult Function(bool? newValue)? togglePesananDitolakReward,
+    TResult Function(bool? newValue)? togglePesananDibatalkan,
+    TResult Function(bool? newValue)? togglePesananSelesai,
+    TResult Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult Function(DateTime date)? setStartDate,
+    TResult Function(DateTime date)? setStartDateReward,
+    TResult Function(DateTime date)? setEndDate,
+    TResult Function(DateTime date)? setEndDateReward,
+    TResult Function(String query)? resetFilters,
+    required TResult orElse(),
+  }) {
+    if (setStartDate != null) {
+      return setStartDate(date);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReOrder value) postReOrder,
+    required TResult Function(_PostReOrderReward value) postReOrderReward,
+    required TResult Function(_GetAllHistoryOrderReward value)
+        getAllHistoryOrderReward,
+    required TResult Function(_GetCategoryOrder value) getFilterOrder,
+    required TResult Function(_GetCategoryOrderReward value)
+        getFilterOrderReward,
+    required TResult Function(_DoFilterOrder value) doFilterOrder,
+    required TResult Function(_ToggleDitolak value) togglePesananDitolak,
+    required TResult Function(_ToggleDitolakReward value)
+        togglePesananDitolakReward,
+    required TResult Function(_ToggleDibatalkan value) togglePesananDibatalkan,
+    required TResult Function(_ToggleSelesai value) togglePesananSelesai,
+    required TResult Function(_ToggleSelesaiReward value)
+        togglePesananSelesaiReward,
+    required TResult Function(_SetStartDate value) setStartDate,
+    required TResult Function(_SetStartDateReward value) setStartDateReward,
+    required TResult Function(_SetEndDate value) setEndDate,
+    required TResult Function(_SetEndDateReward value) setEndDateReward,
+    required TResult Function(_ResetFilters value) resetFilters,
+  }) {
+    return setStartDate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReOrder value)? postReOrder,
+    TResult? Function(_PostReOrderReward value)? postReOrderReward,
+    TResult? Function(_GetAllHistoryOrderReward value)?
+        getAllHistoryOrderReward,
+    TResult? Function(_GetCategoryOrder value)? getFilterOrder,
+    TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_DoFilterOrder value)? doFilterOrder,
+    TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
+    TResult? Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
+    TResult? Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult? Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult? Function(_SetStartDate value)? setStartDate,
+    TResult? Function(_SetStartDateReward value)? setStartDateReward,
+    TResult? Function(_SetEndDate value)? setEndDate,
+    TResult? Function(_SetEndDateReward value)? setEndDateReward,
+    TResult? Function(_ResetFilters value)? resetFilters,
+  }) {
+    return setStartDate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReOrder value)? postReOrder,
+    TResult Function(_PostReOrderReward value)? postReOrderReward,
+    TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
+    TResult Function(_GetCategoryOrder value)? getFilterOrder,
+    TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_DoFilterOrder value)? doFilterOrder,
+    TResult Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
+    TResult Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
+    TResult Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult Function(_SetStartDate value)? setStartDate,
+    TResult Function(_SetStartDateReward value)? setStartDateReward,
+    TResult Function(_SetEndDate value)? setEndDate,
+    TResult Function(_SetEndDateReward value)? setEndDateReward,
+    TResult Function(_ResetFilters value)? resetFilters,
+    required TResult orElse(),
+  }) {
+    if (setStartDate != null) {
+      return setStartDate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetStartDate implements OrderEvent {
+  const factory _SetStartDate(final DateTime date) = _$SetStartDateImpl;
+
+  DateTime get date;
+  @JsonKey(ignore: true)
+  _$$SetStartDateImplCopyWith<_$SetStartDateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SetStartDateRewardImplCopyWith<$Res> {
+  factory _$$SetStartDateRewardImplCopyWith(_$SetStartDateRewardImpl value,
+          $Res Function(_$SetStartDateRewardImpl) then) =
+      __$$SetStartDateRewardImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({DateTime date});
+}
+
+/// @nodoc
+class __$$SetStartDateRewardImplCopyWithImpl<$Res>
+    extends _$OrderEventCopyWithImpl<$Res, _$SetStartDateRewardImpl>
+    implements _$$SetStartDateRewardImplCopyWith<$Res> {
+  __$$SetStartDateRewardImplCopyWithImpl(_$SetStartDateRewardImpl _value,
+      $Res Function(_$SetStartDateRewardImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? date = null,
+  }) {
+    return _then(_$SetStartDateRewardImpl(
+      null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetStartDateRewardImpl implements _SetStartDateReward {
+  const _$SetStartDateRewardImpl(this.date);
+
+  @override
+  final DateTime date;
+
+  @override
+  String toString() {
+    return 'OrderEvent.setStartDateReward(date: $date)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SetStartDateRewardImpl &&
+            (identical(other.date, date) || other.date == date));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, date);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetStartDateRewardImplCopyWith<_$SetStartDateRewardImpl> get copyWith =>
+      __$$SetStartDateRewardImplCopyWithImpl<_$SetStartDateRewardImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId) postReOrder,
+    required TResult Function(String? orderRewardId) postReOrderReward,
+    required TResult Function() getAllHistoryOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrder,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrderReward,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        doFilterOrder,
+    required TResult Function(bool? newValue) togglePesananDitolak,
+    required TResult Function(bool? newValue) togglePesananDitolakReward,
+    required TResult Function(bool? newValue) togglePesananDibatalkan,
+    required TResult Function(bool? newValue) togglePesananSelesai,
+    required TResult Function(bool? newValue) togglePesananSelesaiReward,
+    required TResult Function(DateTime date) setStartDate,
+    required TResult Function(DateTime date) setStartDateReward,
+    required TResult Function(DateTime date) setEndDate,
+    required TResult Function(DateTime date) setEndDateReward,
+    required TResult Function(String query) resetFilters,
+  }) {
+    return setStartDateReward(date);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId)? postReOrder,
+    TResult? Function(String? orderRewardId)? postReOrderReward,
+    TResult? Function()? getAllHistoryOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        doFilterOrder,
+    TResult? Function(bool? newValue)? togglePesananDitolak,
+    TResult? Function(bool? newValue)? togglePesananDitolakReward,
+    TResult? Function(bool? newValue)? togglePesananDibatalkan,
+    TResult? Function(bool? newValue)? togglePesananSelesai,
+    TResult? Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult? Function(DateTime date)? setStartDate,
+    TResult? Function(DateTime date)? setStartDateReward,
+    TResult? Function(DateTime date)? setEndDate,
+    TResult? Function(DateTime date)? setEndDateReward,
+    TResult? Function(String query)? resetFilters,
+  }) {
+    return setStartDateReward?.call(date);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId)? postReOrder,
+    TResult Function(String? orderRewardId)? postReOrderReward,
+    TResult Function()? getAllHistoryOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        doFilterOrder,
+    TResult Function(bool? newValue)? togglePesananDitolak,
+    TResult Function(bool? newValue)? togglePesananDitolakReward,
+    TResult Function(bool? newValue)? togglePesananDibatalkan,
+    TResult Function(bool? newValue)? togglePesananSelesai,
+    TResult Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult Function(DateTime date)? setStartDate,
+    TResult Function(DateTime date)? setStartDateReward,
+    TResult Function(DateTime date)? setEndDate,
+    TResult Function(DateTime date)? setEndDateReward,
+    TResult Function(String query)? resetFilters,
+    required TResult orElse(),
+  }) {
+    if (setStartDateReward != null) {
+      return setStartDateReward(date);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReOrder value) postReOrder,
+    required TResult Function(_PostReOrderReward value) postReOrderReward,
+    required TResult Function(_GetAllHistoryOrderReward value)
+        getAllHistoryOrderReward,
+    required TResult Function(_GetCategoryOrder value) getFilterOrder,
+    required TResult Function(_GetCategoryOrderReward value)
+        getFilterOrderReward,
+    required TResult Function(_DoFilterOrder value) doFilterOrder,
+    required TResult Function(_ToggleDitolak value) togglePesananDitolak,
+    required TResult Function(_ToggleDitolakReward value)
+        togglePesananDitolakReward,
+    required TResult Function(_ToggleDibatalkan value) togglePesananDibatalkan,
+    required TResult Function(_ToggleSelesai value) togglePesananSelesai,
+    required TResult Function(_ToggleSelesaiReward value)
+        togglePesananSelesaiReward,
+    required TResult Function(_SetStartDate value) setStartDate,
+    required TResult Function(_SetStartDateReward value) setStartDateReward,
+    required TResult Function(_SetEndDate value) setEndDate,
+    required TResult Function(_SetEndDateReward value) setEndDateReward,
+    required TResult Function(_ResetFilters value) resetFilters,
+  }) {
+    return setStartDateReward(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReOrder value)? postReOrder,
+    TResult? Function(_PostReOrderReward value)? postReOrderReward,
+    TResult? Function(_GetAllHistoryOrderReward value)?
+        getAllHistoryOrderReward,
+    TResult? Function(_GetCategoryOrder value)? getFilterOrder,
+    TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_DoFilterOrder value)? doFilterOrder,
+    TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
+    TResult? Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
+    TResult? Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult? Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult? Function(_SetStartDate value)? setStartDate,
+    TResult? Function(_SetStartDateReward value)? setStartDateReward,
+    TResult? Function(_SetEndDate value)? setEndDate,
+    TResult? Function(_SetEndDateReward value)? setEndDateReward,
+    TResult? Function(_ResetFilters value)? resetFilters,
+  }) {
+    return setStartDateReward?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReOrder value)? postReOrder,
+    TResult Function(_PostReOrderReward value)? postReOrderReward,
+    TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
+    TResult Function(_GetCategoryOrder value)? getFilterOrder,
+    TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_DoFilterOrder value)? doFilterOrder,
+    TResult Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
+    TResult Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
+    TResult Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult Function(_SetStartDate value)? setStartDate,
+    TResult Function(_SetStartDateReward value)? setStartDateReward,
+    TResult Function(_SetEndDate value)? setEndDate,
+    TResult Function(_SetEndDateReward value)? setEndDateReward,
+    TResult Function(_ResetFilters value)? resetFilters,
+    required TResult orElse(),
+  }) {
+    if (setStartDateReward != null) {
+      return setStartDateReward(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetStartDateReward implements OrderEvent {
+  const factory _SetStartDateReward(final DateTime date) =
+      _$SetStartDateRewardImpl;
+
+  DateTime get date;
+  @JsonKey(ignore: true)
+  _$$SetStartDateRewardImplCopyWith<_$SetStartDateRewardImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SetEndDateImplCopyWith<$Res> {
+  factory _$$SetEndDateImplCopyWith(
+          _$SetEndDateImpl value, $Res Function(_$SetEndDateImpl) then) =
+      __$$SetEndDateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({DateTime date});
+}
+
+/// @nodoc
+class __$$SetEndDateImplCopyWithImpl<$Res>
+    extends _$OrderEventCopyWithImpl<$Res, _$SetEndDateImpl>
+    implements _$$SetEndDateImplCopyWith<$Res> {
+  __$$SetEndDateImplCopyWithImpl(
+      _$SetEndDateImpl _value, $Res Function(_$SetEndDateImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? date = null,
+  }) {
+    return _then(_$SetEndDateImpl(
+      null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetEndDateImpl implements _SetEndDate {
+  const _$SetEndDateImpl(this.date);
+
+  @override
+  final DateTime date;
+
+  @override
+  String toString() {
+    return 'OrderEvent.setEndDate(date: $date)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SetEndDateImpl &&
+            (identical(other.date, date) || other.date == date));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, date);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetEndDateImplCopyWith<_$SetEndDateImpl> get copyWith =>
+      __$$SetEndDateImplCopyWithImpl<_$SetEndDateImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId) postReOrder,
+    required TResult Function(String? orderRewardId) postReOrderReward,
+    required TResult Function() getAllHistoryOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrder,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrderReward,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        doFilterOrder,
+    required TResult Function(bool? newValue) togglePesananDitolak,
+    required TResult Function(bool? newValue) togglePesananDitolakReward,
+    required TResult Function(bool? newValue) togglePesananDibatalkan,
+    required TResult Function(bool? newValue) togglePesananSelesai,
+    required TResult Function(bool? newValue) togglePesananSelesaiReward,
+    required TResult Function(DateTime date) setStartDate,
+    required TResult Function(DateTime date) setStartDateReward,
+    required TResult Function(DateTime date) setEndDate,
+    required TResult Function(DateTime date) setEndDateReward,
+    required TResult Function(String query) resetFilters,
+  }) {
+    return setEndDate(date);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId)? postReOrder,
+    TResult? Function(String? orderRewardId)? postReOrderReward,
+    TResult? Function()? getAllHistoryOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        doFilterOrder,
+    TResult? Function(bool? newValue)? togglePesananDitolak,
+    TResult? Function(bool? newValue)? togglePesananDitolakReward,
+    TResult? Function(bool? newValue)? togglePesananDibatalkan,
+    TResult? Function(bool? newValue)? togglePesananSelesai,
+    TResult? Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult? Function(DateTime date)? setStartDate,
+    TResult? Function(DateTime date)? setStartDateReward,
+    TResult? Function(DateTime date)? setEndDate,
+    TResult? Function(DateTime date)? setEndDateReward,
+    TResult? Function(String query)? resetFilters,
+  }) {
+    return setEndDate?.call(date);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId)? postReOrder,
+    TResult Function(String? orderRewardId)? postReOrderReward,
+    TResult Function()? getAllHistoryOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        doFilterOrder,
+    TResult Function(bool? newValue)? togglePesananDitolak,
+    TResult Function(bool? newValue)? togglePesananDitolakReward,
+    TResult Function(bool? newValue)? togglePesananDibatalkan,
+    TResult Function(bool? newValue)? togglePesananSelesai,
+    TResult Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult Function(DateTime date)? setStartDate,
+    TResult Function(DateTime date)? setStartDateReward,
+    TResult Function(DateTime date)? setEndDate,
+    TResult Function(DateTime date)? setEndDateReward,
+    TResult Function(String query)? resetFilters,
+    required TResult orElse(),
+  }) {
+    if (setEndDate != null) {
+      return setEndDate(date);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReOrder value) postReOrder,
+    required TResult Function(_PostReOrderReward value) postReOrderReward,
+    required TResult Function(_GetAllHistoryOrderReward value)
+        getAllHistoryOrderReward,
+    required TResult Function(_GetCategoryOrder value) getFilterOrder,
+    required TResult Function(_GetCategoryOrderReward value)
+        getFilterOrderReward,
+    required TResult Function(_DoFilterOrder value) doFilterOrder,
+    required TResult Function(_ToggleDitolak value) togglePesananDitolak,
+    required TResult Function(_ToggleDitolakReward value)
+        togglePesananDitolakReward,
+    required TResult Function(_ToggleDibatalkan value) togglePesananDibatalkan,
+    required TResult Function(_ToggleSelesai value) togglePesananSelesai,
+    required TResult Function(_ToggleSelesaiReward value)
+        togglePesananSelesaiReward,
+    required TResult Function(_SetStartDate value) setStartDate,
+    required TResult Function(_SetStartDateReward value) setStartDateReward,
+    required TResult Function(_SetEndDate value) setEndDate,
+    required TResult Function(_SetEndDateReward value) setEndDateReward,
+    required TResult Function(_ResetFilters value) resetFilters,
+  }) {
+    return setEndDate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReOrder value)? postReOrder,
+    TResult? Function(_PostReOrderReward value)? postReOrderReward,
+    TResult? Function(_GetAllHistoryOrderReward value)?
+        getAllHistoryOrderReward,
+    TResult? Function(_GetCategoryOrder value)? getFilterOrder,
+    TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_DoFilterOrder value)? doFilterOrder,
+    TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
+    TResult? Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
+    TResult? Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult? Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult? Function(_SetStartDate value)? setStartDate,
+    TResult? Function(_SetStartDateReward value)? setStartDateReward,
+    TResult? Function(_SetEndDate value)? setEndDate,
+    TResult? Function(_SetEndDateReward value)? setEndDateReward,
+    TResult? Function(_ResetFilters value)? resetFilters,
+  }) {
+    return setEndDate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReOrder value)? postReOrder,
+    TResult Function(_PostReOrderReward value)? postReOrderReward,
+    TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
+    TResult Function(_GetCategoryOrder value)? getFilterOrder,
+    TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_DoFilterOrder value)? doFilterOrder,
+    TResult Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
+    TResult Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
+    TResult Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult Function(_SetStartDate value)? setStartDate,
+    TResult Function(_SetStartDateReward value)? setStartDateReward,
+    TResult Function(_SetEndDate value)? setEndDate,
+    TResult Function(_SetEndDateReward value)? setEndDateReward,
+    TResult Function(_ResetFilters value)? resetFilters,
+    required TResult orElse(),
+  }) {
+    if (setEndDate != null) {
+      return setEndDate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetEndDate implements OrderEvent {
+  const factory _SetEndDate(final DateTime date) = _$SetEndDateImpl;
+
+  DateTime get date;
+  @JsonKey(ignore: true)
+  _$$SetEndDateImplCopyWith<_$SetEndDateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SetEndDateRewardImplCopyWith<$Res> {
+  factory _$$SetEndDateRewardImplCopyWith(_$SetEndDateRewardImpl value,
+          $Res Function(_$SetEndDateRewardImpl) then) =
+      __$$SetEndDateRewardImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({DateTime date});
+}
+
+/// @nodoc
+class __$$SetEndDateRewardImplCopyWithImpl<$Res>
+    extends _$OrderEventCopyWithImpl<$Res, _$SetEndDateRewardImpl>
+    implements _$$SetEndDateRewardImplCopyWith<$Res> {
+  __$$SetEndDateRewardImplCopyWithImpl(_$SetEndDateRewardImpl _value,
+      $Res Function(_$SetEndDateRewardImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? date = null,
+  }) {
+    return _then(_$SetEndDateRewardImpl(
+      null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetEndDateRewardImpl implements _SetEndDateReward {
+  const _$SetEndDateRewardImpl(this.date);
+
+  @override
+  final DateTime date;
+
+  @override
+  String toString() {
+    return 'OrderEvent.setEndDateReward(date: $date)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SetEndDateRewardImpl &&
+            (identical(other.date, date) || other.date == date));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, date);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetEndDateRewardImplCopyWith<_$SetEndDateRewardImpl> get copyWith =>
+      __$$SetEndDateRewardImplCopyWithImpl<_$SetEndDateRewardImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId) postReOrder,
+    required TResult Function(String? orderRewardId) postReOrderReward,
+    required TResult Function() getAllHistoryOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrder,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrderReward,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        doFilterOrder,
+    required TResult Function(bool? newValue) togglePesananDitolak,
+    required TResult Function(bool? newValue) togglePesananDitolakReward,
+    required TResult Function(bool? newValue) togglePesananDibatalkan,
+    required TResult Function(bool? newValue) togglePesananSelesai,
+    required TResult Function(bool? newValue) togglePesananSelesaiReward,
+    required TResult Function(DateTime date) setStartDate,
+    required TResult Function(DateTime date) setStartDateReward,
+    required TResult Function(DateTime date) setEndDate,
+    required TResult Function(DateTime date) setEndDateReward,
+    required TResult Function(String query) resetFilters,
+  }) {
+    return setEndDateReward(date);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId)? postReOrder,
+    TResult? Function(String? orderRewardId)? postReOrderReward,
+    TResult? Function()? getAllHistoryOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        doFilterOrder,
+    TResult? Function(bool? newValue)? togglePesananDitolak,
+    TResult? Function(bool? newValue)? togglePesananDitolakReward,
+    TResult? Function(bool? newValue)? togglePesananDibatalkan,
+    TResult? Function(bool? newValue)? togglePesananSelesai,
+    TResult? Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult? Function(DateTime date)? setStartDate,
+    TResult? Function(DateTime date)? setStartDateReward,
+    TResult? Function(DateTime date)? setEndDate,
+    TResult? Function(DateTime date)? setEndDateReward,
+    TResult? Function(String query)? resetFilters,
+  }) {
+    return setEndDateReward?.call(date);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId)? postReOrder,
+    TResult Function(String? orderRewardId)? postReOrderReward,
+    TResult Function()? getAllHistoryOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        doFilterOrder,
+    TResult Function(bool? newValue)? togglePesananDitolak,
+    TResult Function(bool? newValue)? togglePesananDitolakReward,
+    TResult Function(bool? newValue)? togglePesananDibatalkan,
+    TResult Function(bool? newValue)? togglePesananSelesai,
+    TResult Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult Function(DateTime date)? setStartDate,
+    TResult Function(DateTime date)? setStartDateReward,
+    TResult Function(DateTime date)? setEndDate,
+    TResult Function(DateTime date)? setEndDateReward,
+    TResult Function(String query)? resetFilters,
+    required TResult orElse(),
+  }) {
+    if (setEndDateReward != null) {
+      return setEndDateReward(date);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReOrder value) postReOrder,
+    required TResult Function(_PostReOrderReward value) postReOrderReward,
+    required TResult Function(_GetAllHistoryOrderReward value)
+        getAllHistoryOrderReward,
+    required TResult Function(_GetCategoryOrder value) getFilterOrder,
+    required TResult Function(_GetCategoryOrderReward value)
+        getFilterOrderReward,
+    required TResult Function(_DoFilterOrder value) doFilterOrder,
+    required TResult Function(_ToggleDitolak value) togglePesananDitolak,
+    required TResult Function(_ToggleDitolakReward value)
+        togglePesananDitolakReward,
+    required TResult Function(_ToggleDibatalkan value) togglePesananDibatalkan,
+    required TResult Function(_ToggleSelesai value) togglePesananSelesai,
+    required TResult Function(_ToggleSelesaiReward value)
+        togglePesananSelesaiReward,
+    required TResult Function(_SetStartDate value) setStartDate,
+    required TResult Function(_SetStartDateReward value) setStartDateReward,
+    required TResult Function(_SetEndDate value) setEndDate,
+    required TResult Function(_SetEndDateReward value) setEndDateReward,
+    required TResult Function(_ResetFilters value) resetFilters,
+  }) {
+    return setEndDateReward(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReOrder value)? postReOrder,
+    TResult? Function(_PostReOrderReward value)? postReOrderReward,
+    TResult? Function(_GetAllHistoryOrderReward value)?
+        getAllHistoryOrderReward,
+    TResult? Function(_GetCategoryOrder value)? getFilterOrder,
+    TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_DoFilterOrder value)? doFilterOrder,
+    TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
+    TResult? Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
+    TResult? Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult? Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult? Function(_SetStartDate value)? setStartDate,
+    TResult? Function(_SetStartDateReward value)? setStartDateReward,
+    TResult? Function(_SetEndDate value)? setEndDate,
+    TResult? Function(_SetEndDateReward value)? setEndDateReward,
+    TResult? Function(_ResetFilters value)? resetFilters,
+  }) {
+    return setEndDateReward?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReOrder value)? postReOrder,
+    TResult Function(_PostReOrderReward value)? postReOrderReward,
+    TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
+    TResult Function(_GetCategoryOrder value)? getFilterOrder,
+    TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_DoFilterOrder value)? doFilterOrder,
+    TResult Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
+    TResult Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
+    TResult Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult Function(_SetStartDate value)? setStartDate,
+    TResult Function(_SetStartDateReward value)? setStartDateReward,
+    TResult Function(_SetEndDate value)? setEndDate,
+    TResult Function(_SetEndDateReward value)? setEndDateReward,
+    TResult Function(_ResetFilters value)? resetFilters,
+    required TResult orElse(),
+  }) {
+    if (setEndDateReward != null) {
+      return setEndDateReward(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetEndDateReward implements OrderEvent {
+  const factory _SetEndDateReward(final DateTime date) = _$SetEndDateRewardImpl;
+
+  DateTime get date;
+  @JsonKey(ignore: true)
+  _$$SetEndDateRewardImplCopyWith<_$SetEndDateRewardImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ResetFiltersImplCopyWith<$Res> {
+  factory _$$ResetFiltersImplCopyWith(
+          _$ResetFiltersImpl value, $Res Function(_$ResetFiltersImpl) then) =
+      __$$ResetFiltersImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String query});
+}
+
+/// @nodoc
+class __$$ResetFiltersImplCopyWithImpl<$Res>
+    extends _$OrderEventCopyWithImpl<$Res, _$ResetFiltersImpl>
+    implements _$$ResetFiltersImplCopyWith<$Res> {
+  __$$ResetFiltersImplCopyWithImpl(
+      _$ResetFiltersImpl _value, $Res Function(_$ResetFiltersImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? query = null,
+  }) {
+    return _then(_$ResetFiltersImpl(
+      null == query
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ResetFiltersImpl implements _ResetFilters {
+  const _$ResetFiltersImpl(this.query);
+
+  @override
+  final String query;
+
+  @override
+  String toString() {
+    return 'OrderEvent.resetFilters(query: $query)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ResetFiltersImpl &&
+            (identical(other.query, query) || other.query == query));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, query);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ResetFiltersImplCopyWith<_$ResetFiltersImpl> get copyWith =>
+      __$$ResetFiltersImplCopyWithImpl<_$ResetFiltersImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId) postReOrder,
+    required TResult Function(String? orderRewardId) postReOrderReward,
+    required TResult Function() getAllHistoryOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrder,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrderReward,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        doFilterOrder,
+    required TResult Function(bool? newValue) togglePesananDitolak,
+    required TResult Function(bool? newValue) togglePesananDitolakReward,
+    required TResult Function(bool? newValue) togglePesananDibatalkan,
+    required TResult Function(bool? newValue) togglePesananSelesai,
+    required TResult Function(bool? newValue) togglePesananSelesaiReward,
+    required TResult Function(DateTime date) setStartDate,
+    required TResult Function(DateTime date) setStartDateReward,
+    required TResult Function(DateTime date) setEndDate,
+    required TResult Function(DateTime date) setEndDateReward,
+    required TResult Function(String query) resetFilters,
+  }) {
+    return resetFilters(query);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId)? postReOrder,
+    TResult? Function(String? orderRewardId)? postReOrderReward,
+    TResult? Function()? getAllHistoryOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        doFilterOrder,
+    TResult? Function(bool? newValue)? togglePesananDitolak,
+    TResult? Function(bool? newValue)? togglePesananDitolakReward,
+    TResult? Function(bool? newValue)? togglePesananDibatalkan,
+    TResult? Function(bool? newValue)? togglePesananSelesai,
+    TResult? Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult? Function(DateTime date)? setStartDate,
+    TResult? Function(DateTime date)? setStartDateReward,
+    TResult? Function(DateTime date)? setEndDate,
+    TResult? Function(DateTime date)? setEndDateReward,
+    TResult? Function(String query)? resetFilters,
+  }) {
+    return resetFilters?.call(query);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId)? postReOrder,
+    TResult Function(String? orderRewardId)? postReOrderReward,
+    TResult Function()? getAllHistoryOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        doFilterOrder,
+    TResult Function(bool? newValue)? togglePesananDitolak,
+    TResult Function(bool? newValue)? togglePesananDitolakReward,
+    TResult Function(bool? newValue)? togglePesananDibatalkan,
+    TResult Function(bool? newValue)? togglePesananSelesai,
+    TResult Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult Function(DateTime date)? setStartDate,
+    TResult Function(DateTime date)? setStartDateReward,
+    TResult Function(DateTime date)? setEndDate,
+    TResult Function(DateTime date)? setEndDateReward,
+    TResult Function(String query)? resetFilters,
+    required TResult orElse(),
+  }) {
+    if (resetFilters != null) {
+      return resetFilters(query);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReOrder value) postReOrder,
+    required TResult Function(_PostReOrderReward value) postReOrderReward,
+    required TResult Function(_GetAllHistoryOrderReward value)
+        getAllHistoryOrderReward,
+    required TResult Function(_GetCategoryOrder value) getFilterOrder,
+    required TResult Function(_GetCategoryOrderReward value)
+        getFilterOrderReward,
+    required TResult Function(_DoFilterOrder value) doFilterOrder,
+    required TResult Function(_ToggleDitolak value) togglePesananDitolak,
+    required TResult Function(_ToggleDitolakReward value)
+        togglePesananDitolakReward,
+    required TResult Function(_ToggleDibatalkan value) togglePesananDibatalkan,
+    required TResult Function(_ToggleSelesai value) togglePesananSelesai,
+    required TResult Function(_ToggleSelesaiReward value)
+        togglePesananSelesaiReward,
+    required TResult Function(_SetStartDate value) setStartDate,
+    required TResult Function(_SetStartDateReward value) setStartDateReward,
+    required TResult Function(_SetEndDate value) setEndDate,
+    required TResult Function(_SetEndDateReward value) setEndDateReward,
+    required TResult Function(_ResetFilters value) resetFilters,
+  }) {
+    return resetFilters(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReOrder value)? postReOrder,
+    TResult? Function(_PostReOrderReward value)? postReOrderReward,
+    TResult? Function(_GetAllHistoryOrderReward value)?
+        getAllHistoryOrderReward,
+    TResult? Function(_GetCategoryOrder value)? getFilterOrder,
+    TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_DoFilterOrder value)? doFilterOrder,
+    TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
+    TResult? Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
+    TResult? Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult? Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult? Function(_SetStartDate value)? setStartDate,
+    TResult? Function(_SetStartDateReward value)? setStartDateReward,
+    TResult? Function(_SetEndDate value)? setEndDate,
+    TResult? Function(_SetEndDateReward value)? setEndDateReward,
+    TResult? Function(_ResetFilters value)? resetFilters,
+  }) {
+    return resetFilters?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReOrder value)? postReOrder,
+    TResult Function(_PostReOrderReward value)? postReOrderReward,
+    TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
+    TResult Function(_GetCategoryOrder value)? getFilterOrder,
+    TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_DoFilterOrder value)? doFilterOrder,
+    TResult Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
+    TResult Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
+    TResult Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult Function(_SetStartDate value)? setStartDate,
+    TResult Function(_SetStartDateReward value)? setStartDateReward,
+    TResult Function(_SetEndDate value)? setEndDate,
+    TResult Function(_SetEndDateReward value)? setEndDateReward,
+    TResult Function(_ResetFilters value)? resetFilters,
+    required TResult orElse(),
+  }) {
+    if (resetFilters != null) {
+      return resetFilters(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ResetFilters implements OrderEvent {
+  const factory _ResetFilters(final String query) = _$ResetFiltersImpl;
+
+  String get query;
+  @JsonKey(ignore: true)
+  _$$ResetFiltersImplCopyWith<_$ResetFiltersImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$OrderState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -3521,13 +4797,15 @@ mixin _$OrderState {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
-            bool? isMenungguPembayaran,
-            bool? isMenungguKonfirmasi,
-            bool? isPesananDiproses,
-            bool? isPesananSiapDiambil,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
-            bool? isPesananSelesai)
+            bool? isPesananSelesai,
+            DateTime? startDate,
+            DateTime? endDate,
+            bool? isPesananDitolakReward,
+            bool? isPesananSelesaiReward,
+            DateTime? startDateReward,
+            DateTime? endDateReward)
         success,
     required TResult Function(String? message) error,
   }) =>
@@ -3542,13 +4820,15 @@ mixin _$OrderState {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
-            bool? isMenungguPembayaran,
-            bool? isMenungguKonfirmasi,
-            bool? isPesananDiproses,
-            bool? isPesananSiapDiambil,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
-            bool? isPesananSelesai)?
+            bool? isPesananSelesai,
+            DateTime? startDate,
+            DateTime? endDate,
+            bool? isPesananDitolakReward,
+            bool? isPesananSelesaiReward,
+            DateTime? startDateReward,
+            DateTime? endDateReward)?
         success,
     TResult? Function(String? message)? error,
   }) =>
@@ -3563,13 +4843,15 @@ mixin _$OrderState {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
-            bool? isMenungguPembayaran,
-            bool? isMenungguKonfirmasi,
-            bool? isPesananDiproses,
-            bool? isPesananSiapDiambil,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
-            bool? isPesananSelesai)?
+            bool? isPesananSelesai,
+            DateTime? startDate,
+            DateTime? endDate,
+            bool? isPesananDitolakReward,
+            bool? isPesananSelesaiReward,
+            DateTime? startDateReward,
+            DateTime? endDateReward)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -3666,13 +4948,15 @@ class _$InitialImpl implements _Initial {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
-            bool? isMenungguPembayaran,
-            bool? isMenungguKonfirmasi,
-            bool? isPesananDiproses,
-            bool? isPesananSiapDiambil,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
-            bool? isPesananSelesai)
+            bool? isPesananSelesai,
+            DateTime? startDate,
+            DateTime? endDate,
+            bool? isPesananDitolakReward,
+            bool? isPesananSelesaiReward,
+            DateTime? startDateReward,
+            DateTime? endDateReward)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -3690,13 +4974,15 @@ class _$InitialImpl implements _Initial {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
-            bool? isMenungguPembayaran,
-            bool? isMenungguKonfirmasi,
-            bool? isPesananDiproses,
-            bool? isPesananSiapDiambil,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
-            bool? isPesananSelesai)?
+            bool? isPesananSelesai,
+            DateTime? startDate,
+            DateTime? endDate,
+            bool? isPesananDitolakReward,
+            bool? isPesananSelesaiReward,
+            DateTime? startDateReward,
+            DateTime? endDateReward)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -3714,13 +5000,15 @@ class _$InitialImpl implements _Initial {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
-            bool? isMenungguPembayaran,
-            bool? isMenungguKonfirmasi,
-            bool? isPesananDiproses,
-            bool? isPesananSiapDiambil,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
-            bool? isPesananSelesai)?
+            bool? isPesananSelesai,
+            DateTime? startDate,
+            DateTime? endDate,
+            bool? isPesananDitolakReward,
+            bool? isPesananSelesaiReward,
+            DateTime? startDateReward,
+            DateTime? endDateReward)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -3819,13 +5107,15 @@ class _$LoadingImpl implements _Loading {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
-            bool? isMenungguPembayaran,
-            bool? isMenungguKonfirmasi,
-            bool? isPesananDiproses,
-            bool? isPesananSiapDiambil,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
-            bool? isPesananSelesai)
+            bool? isPesananSelesai,
+            DateTime? startDate,
+            DateTime? endDate,
+            bool? isPesananDitolakReward,
+            bool? isPesananSelesaiReward,
+            DateTime? startDateReward,
+            DateTime? endDateReward)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -3843,13 +5133,15 @@ class _$LoadingImpl implements _Loading {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
-            bool? isMenungguPembayaran,
-            bool? isMenungguKonfirmasi,
-            bool? isPesananDiproses,
-            bool? isPesananSiapDiambil,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
-            bool? isPesananSelesai)?
+            bool? isPesananSelesai,
+            DateTime? startDate,
+            DateTime? endDate,
+            bool? isPesananDitolakReward,
+            bool? isPesananSelesaiReward,
+            DateTime? startDateReward,
+            DateTime? endDateReward)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -3867,13 +5159,15 @@ class _$LoadingImpl implements _Loading {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
-            bool? isMenungguPembayaran,
-            bool? isMenungguKonfirmasi,
-            bool? isPesananDiproses,
-            bool? isPesananSiapDiambil,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
-            bool? isPesananSelesai)?
+            bool? isPesananSelesai,
+            DateTime? startDate,
+            DateTime? endDate,
+            bool? isPesananDitolakReward,
+            bool? isPesananSelesaiReward,
+            DateTime? startDateReward,
+            DateTime? endDateReward)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -3938,13 +5232,15 @@ abstract class _$$SuccessImplCopyWith<$Res> {
       int filterIndex,
       PostReOrderResponseModel? modelPostReOrder,
       PostReOrderRewardResponseModel? modelReOrderReward,
-      bool? isMenungguPembayaran,
-      bool? isMenungguKonfirmasi,
-      bool? isPesananDiproses,
-      bool? isPesananSiapDiambil,
       bool? isPesananDitolak,
       bool? isPesananDibatalkan,
-      bool? isPesananSelesai});
+      bool? isPesananSelesai,
+      DateTime? startDate,
+      DateTime? endDate,
+      bool? isPesananDitolakReward,
+      bool? isPesananSelesaiReward,
+      DateTime? startDateReward,
+      DateTime? endDateReward});
 }
 
 /// @nodoc
@@ -3963,13 +5259,15 @@ class __$$SuccessImplCopyWithImpl<$Res>
     Object? filterIndex = null,
     Object? modelPostReOrder = freezed,
     Object? modelReOrderReward = freezed,
-    Object? isMenungguPembayaran = freezed,
-    Object? isMenungguKonfirmasi = freezed,
-    Object? isPesananDiproses = freezed,
-    Object? isPesananSiapDiambil = freezed,
     Object? isPesananDitolak = freezed,
     Object? isPesananDibatalkan = freezed,
     Object? isPesananSelesai = freezed,
+    Object? startDate = freezed,
+    Object? endDate = freezed,
+    Object? isPesananDitolakReward = freezed,
+    Object? isPesananSelesaiReward = freezed,
+    Object? startDateReward = freezed,
+    Object? endDateReward = freezed,
   }) {
     return _then(_$SuccessImpl(
       freezed == model
@@ -3992,22 +5290,6 @@ class __$$SuccessImplCopyWithImpl<$Res>
           ? _value.modelReOrderReward
           : modelReOrderReward // ignore: cast_nullable_to_non_nullable
               as PostReOrderRewardResponseModel?,
-      isMenungguPembayaran: freezed == isMenungguPembayaran
-          ? _value.isMenungguPembayaran
-          : isMenungguPembayaran // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      isMenungguKonfirmasi: freezed == isMenungguKonfirmasi
-          ? _value.isMenungguKonfirmasi
-          : isMenungguKonfirmasi // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      isPesananDiproses: freezed == isPesananDiproses
-          ? _value.isPesananDiproses
-          : isPesananDiproses // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      isPesananSiapDiambil: freezed == isPesananSiapDiambil
-          ? _value.isPesananSiapDiambil
-          : isPesananSiapDiambil // ignore: cast_nullable_to_non_nullable
-              as bool?,
       isPesananDitolak: freezed == isPesananDitolak
           ? _value.isPesananDitolak
           : isPesananDitolak // ignore: cast_nullable_to_non_nullable
@@ -4020,6 +5302,30 @@ class __$$SuccessImplCopyWithImpl<$Res>
           ? _value.isPesananSelesai
           : isPesananSelesai // ignore: cast_nullable_to_non_nullable
               as bool?,
+      startDate: freezed == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      endDate: freezed == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      isPesananDitolakReward: freezed == isPesananDitolakReward
+          ? _value.isPesananDitolakReward
+          : isPesananDitolakReward // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isPesananSelesaiReward: freezed == isPesananSelesaiReward
+          ? _value.isPesananSelesaiReward
+          : isPesananSelesaiReward // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      startDateReward: freezed == startDateReward
+          ? _value.startDateReward
+          : startDateReward // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      endDateReward: freezed == endDateReward
+          ? _value.endDateReward
+          : endDateReward // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -4029,13 +5335,15 @@ class __$$SuccessImplCopyWithImpl<$Res>
 class _$SuccessImpl implements _Success {
   const _$SuccessImpl(this.model, this.modelReward, this.filterIndex,
       this.modelPostReOrder, this.modelReOrderReward,
-      {this.isMenungguPembayaran,
-      this.isMenungguKonfirmasi,
-      this.isPesananDiproses,
-      this.isPesananSiapDiambil,
-      this.isPesananDitolak,
+      {this.isPesananDitolak,
       this.isPesananDibatalkan,
-      this.isPesananSelesai});
+      this.isPesananSelesai,
+      this.startDate,
+      this.endDate,
+      this.isPesananDitolakReward,
+      this.isPesananSelesaiReward,
+      this.startDateReward,
+      this.endDateReward});
 
   @override
   final HistoryOrderResponseModel? model;
@@ -4048,23 +5356,28 @@ class _$SuccessImpl implements _Success {
   @override
   final PostReOrderRewardResponseModel? modelReOrderReward;
   @override
-  final bool? isMenungguPembayaran;
-  @override
-  final bool? isMenungguKonfirmasi;
-  @override
-  final bool? isPesananDiproses;
-  @override
-  final bool? isPesananSiapDiambil;
-  @override
   final bool? isPesananDitolak;
   @override
   final bool? isPesananDibatalkan;
   @override
   final bool? isPesananSelesai;
+  @override
+  final DateTime? startDate;
+  @override
+  final DateTime? endDate;
+//Filter Order Reward
+  @override
+  final bool? isPesananDitolakReward;
+  @override
+  final bool? isPesananSelesaiReward;
+  @override
+  final DateTime? startDateReward;
+  @override
+  final DateTime? endDateReward;
 
   @override
   String toString() {
-    return 'OrderState.success(model: $model, modelReward: $modelReward, filterIndex: $filterIndex, modelPostReOrder: $modelPostReOrder, modelReOrderReward: $modelReOrderReward, isMenungguPembayaran: $isMenungguPembayaran, isMenungguKonfirmasi: $isMenungguKonfirmasi, isPesananDiproses: $isPesananDiproses, isPesananSiapDiambil: $isPesananSiapDiambil, isPesananDitolak: $isPesananDitolak, isPesananDibatalkan: $isPesananDibatalkan, isPesananSelesai: $isPesananSelesai)';
+    return 'OrderState.success(model: $model, modelReward: $modelReward, filterIndex: $filterIndex, modelPostReOrder: $modelPostReOrder, modelReOrderReward: $modelReOrderReward, isPesananDitolak: $isPesananDitolak, isPesananDibatalkan: $isPesananDibatalkan, isPesananSelesai: $isPesananSelesai, startDate: $startDate, endDate: $endDate, isPesananDitolakReward: $isPesananDitolakReward, isPesananSelesaiReward: $isPesananSelesaiReward, startDateReward: $startDateReward, endDateReward: $endDateReward)';
   }
 
   @override
@@ -4081,20 +5394,23 @@ class _$SuccessImpl implements _Success {
                 other.modelPostReOrder == modelPostReOrder) &&
             (identical(other.modelReOrderReward, modelReOrderReward) ||
                 other.modelReOrderReward == modelReOrderReward) &&
-            (identical(other.isMenungguPembayaran, isMenungguPembayaran) ||
-                other.isMenungguPembayaran == isMenungguPembayaran) &&
-            (identical(other.isMenungguKonfirmasi, isMenungguKonfirmasi) ||
-                other.isMenungguKonfirmasi == isMenungguKonfirmasi) &&
-            (identical(other.isPesananDiproses, isPesananDiproses) ||
-                other.isPesananDiproses == isPesananDiproses) &&
-            (identical(other.isPesananSiapDiambil, isPesananSiapDiambil) ||
-                other.isPesananSiapDiambil == isPesananSiapDiambil) &&
             (identical(other.isPesananDitolak, isPesananDitolak) ||
                 other.isPesananDitolak == isPesananDitolak) &&
             (identical(other.isPesananDibatalkan, isPesananDibatalkan) ||
                 other.isPesananDibatalkan == isPesananDibatalkan) &&
             (identical(other.isPesananSelesai, isPesananSelesai) ||
-                other.isPesananSelesai == isPesananSelesai));
+                other.isPesananSelesai == isPesananSelesai) &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
+            (identical(other.endDate, endDate) || other.endDate == endDate) &&
+            (identical(other.isPesananDitolakReward, isPesananDitolakReward) ||
+                other.isPesananDitolakReward == isPesananDitolakReward) &&
+            (identical(other.isPesananSelesaiReward, isPesananSelesaiReward) ||
+                other.isPesananSelesaiReward == isPesananSelesaiReward) &&
+            (identical(other.startDateReward, startDateReward) ||
+                other.startDateReward == startDateReward) &&
+            (identical(other.endDateReward, endDateReward) ||
+                other.endDateReward == endDateReward));
   }
 
   @override
@@ -4105,13 +5421,15 @@ class _$SuccessImpl implements _Success {
       filterIndex,
       modelPostReOrder,
       modelReOrderReward,
-      isMenungguPembayaran,
-      isMenungguKonfirmasi,
-      isPesananDiproses,
-      isPesananSiapDiambil,
       isPesananDitolak,
       isPesananDibatalkan,
-      isPesananSelesai);
+      isPesananSelesai,
+      startDate,
+      endDate,
+      isPesananDitolakReward,
+      isPesananSelesaiReward,
+      startDateReward,
+      endDateReward);
 
   @JsonKey(ignore: true)
   @override
@@ -4130,13 +5448,15 @@ class _$SuccessImpl implements _Success {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
-            bool? isMenungguPembayaran,
-            bool? isMenungguKonfirmasi,
-            bool? isPesananDiproses,
-            bool? isPesananSiapDiambil,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
-            bool? isPesananSelesai)
+            bool? isPesananSelesai,
+            DateTime? startDate,
+            DateTime? endDate,
+            bool? isPesananDitolakReward,
+            bool? isPesananSelesaiReward,
+            DateTime? startDateReward,
+            DateTime? endDateReward)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -4146,13 +5466,15 @@ class _$SuccessImpl implements _Success {
         filterIndex,
         modelPostReOrder,
         modelReOrderReward,
-        isMenungguPembayaran,
-        isMenungguKonfirmasi,
-        isPesananDiproses,
-        isPesananSiapDiambil,
         isPesananDitolak,
         isPesananDibatalkan,
-        isPesananSelesai);
+        isPesananSelesai,
+        startDate,
+        endDate,
+        isPesananDitolakReward,
+        isPesananSelesaiReward,
+        startDateReward,
+        endDateReward);
   }
 
   @override
@@ -4166,13 +5488,15 @@ class _$SuccessImpl implements _Success {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
-            bool? isMenungguPembayaran,
-            bool? isMenungguKonfirmasi,
-            bool? isPesananDiproses,
-            bool? isPesananSiapDiambil,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
-            bool? isPesananSelesai)?
+            bool? isPesananSelesai,
+            DateTime? startDate,
+            DateTime? endDate,
+            bool? isPesananDitolakReward,
+            bool? isPesananSelesaiReward,
+            DateTime? startDateReward,
+            DateTime? endDateReward)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -4182,13 +5506,15 @@ class _$SuccessImpl implements _Success {
         filterIndex,
         modelPostReOrder,
         modelReOrderReward,
-        isMenungguPembayaran,
-        isMenungguKonfirmasi,
-        isPesananDiproses,
-        isPesananSiapDiambil,
         isPesananDitolak,
         isPesananDibatalkan,
-        isPesananSelesai);
+        isPesananSelesai,
+        startDate,
+        endDate,
+        isPesananDitolakReward,
+        isPesananSelesaiReward,
+        startDateReward,
+        endDateReward);
   }
 
   @override
@@ -4202,13 +5528,15 @@ class _$SuccessImpl implements _Success {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
-            bool? isMenungguPembayaran,
-            bool? isMenungguKonfirmasi,
-            bool? isPesananDiproses,
-            bool? isPesananSiapDiambil,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
-            bool? isPesananSelesai)?
+            bool? isPesananSelesai,
+            DateTime? startDate,
+            DateTime? endDate,
+            bool? isPesananDitolakReward,
+            bool? isPesananSelesaiReward,
+            DateTime? startDateReward,
+            DateTime? endDateReward)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -4220,13 +5548,15 @@ class _$SuccessImpl implements _Success {
           filterIndex,
           modelPostReOrder,
           modelReOrderReward,
-          isMenungguPembayaran,
-          isMenungguKonfirmasi,
-          isPesananDiproses,
-          isPesananSiapDiambil,
           isPesananDitolak,
           isPesananDibatalkan,
-          isPesananSelesai);
+          isPesananSelesai,
+          startDate,
+          endDate,
+          isPesananDitolakReward,
+          isPesananSelesaiReward,
+          startDateReward,
+          endDateReward);
     }
     return orElse();
   }
@@ -4276,26 +5606,30 @@ abstract class _Success implements OrderState {
       final int filterIndex,
       final PostReOrderResponseModel? modelPostReOrder,
       final PostReOrderRewardResponseModel? modelReOrderReward,
-      {final bool? isMenungguPembayaran,
-      final bool? isMenungguKonfirmasi,
-      final bool? isPesananDiproses,
-      final bool? isPesananSiapDiambil,
-      final bool? isPesananDitolak,
+      {final bool? isPesananDitolak,
       final bool? isPesananDibatalkan,
-      final bool? isPesananSelesai}) = _$SuccessImpl;
+      final bool? isPesananSelesai,
+      final DateTime? startDate,
+      final DateTime? endDate,
+      final bool? isPesananDitolakReward,
+      final bool? isPesananSelesaiReward,
+      final DateTime? startDateReward,
+      final DateTime? endDateReward}) = _$SuccessImpl;
 
   HistoryOrderResponseModel? get model;
   HistoryOrderRewardResponseModel? get modelReward;
   int get filterIndex;
   PostReOrderResponseModel? get modelPostReOrder;
   PostReOrderRewardResponseModel? get modelReOrderReward;
-  bool? get isMenungguPembayaran;
-  bool? get isMenungguKonfirmasi;
-  bool? get isPesananDiproses;
-  bool? get isPesananSiapDiambil;
   bool? get isPesananDitolak;
   bool? get isPesananDibatalkan;
   bool? get isPesananSelesai;
+  DateTime? get startDate;
+  DateTime? get endDate; //Filter Order Reward
+  bool? get isPesananDitolakReward;
+  bool? get isPesananSelesaiReward;
+  DateTime? get startDateReward;
+  DateTime? get endDateReward;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -4373,13 +5707,15 @@ class _$ErrorImpl implements _Error {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
-            bool? isMenungguPembayaran,
-            bool? isMenungguKonfirmasi,
-            bool? isPesananDiproses,
-            bool? isPesananSiapDiambil,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
-            bool? isPesananSelesai)
+            bool? isPesananSelesai,
+            DateTime? startDate,
+            DateTime? endDate,
+            bool? isPesananDitolakReward,
+            bool? isPesananSelesaiReward,
+            DateTime? startDateReward,
+            DateTime? endDateReward)
         success,
     required TResult Function(String? message) error,
   }) {
@@ -4397,13 +5733,15 @@ class _$ErrorImpl implements _Error {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
-            bool? isMenungguPembayaran,
-            bool? isMenungguKonfirmasi,
-            bool? isPesananDiproses,
-            bool? isPesananSiapDiambil,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
-            bool? isPesananSelesai)?
+            bool? isPesananSelesai,
+            DateTime? startDate,
+            DateTime? endDate,
+            bool? isPesananDitolakReward,
+            bool? isPesananSelesaiReward,
+            DateTime? startDateReward,
+            DateTime? endDateReward)?
         success,
     TResult? Function(String? message)? error,
   }) {
@@ -4421,13 +5759,15 @@ class _$ErrorImpl implements _Error {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
-            bool? isMenungguPembayaran,
-            bool? isMenungguKonfirmasi,
-            bool? isPesananDiproses,
-            bool? isPesananSiapDiambil,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
-            bool? isPesananSelesai)?
+            bool? isPesananSelesai,
+            DateTime? startDate,
+            DateTime? endDate,
+            bool? isPesananDitolakReward,
+            bool? isPesananSelesaiReward,
+            DateTime? startDateReward,
+            DateTime? endDateReward)?
         success,
     TResult Function(String? message)? error,
     required TResult orElse(),

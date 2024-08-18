@@ -265,13 +265,16 @@ class ListBoxMenuStatus extends StatelessWidget {
                               filterIndex,
                               modelReOrder,
                               modelReOrderReward,
-                              isMenungguPembayaran,
-                              isMenungguKonfirmasi,
-                              isPesananDiproses,
-                              isPesananSiapDiambil,
                               isPesananDitolak,
                               isPesananDibatalkan,
-                              isPesananSelesai) {
+                              isPesananSelesai,
+                              startDate,
+                              endDate,
+                              isPesananDitolakReward,
+                              isPesananSelesaiReward,
+                              startDateReward,
+                              endDateReward,
+                              ) {
                             bool isModelCartNotEmpty =
                                 model?.orders?.first.cartItems ?? false;
 

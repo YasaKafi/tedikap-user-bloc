@@ -7,9 +7,18 @@ import '../bloc/order_bloc.dart';
 class OrderFilter extends StatelessWidget {
   final List<String> options = ['Common Product', 'Point Product'];
 
-  OrderFilter({super.key, this.query});
+  OrderFilter(
+      {super.key,
+      this.query,
+      this.statusOrder,
+      this.startDate,
+      this.endDate,});
 
   final String? query;
+  final String? statusOrder;
+  final String? startDate;
+  final String? endDate;
+
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +32,15 @@ class OrderFilter extends StatelessWidget {
         return ChipsChoice<int>.single(
           value: filterIndex,
           onChanged: (val) {
-            context.read<OrderBloc>().add(OrderEvent.doFilterOrder(filterIndex: val, query: query!));
+            print('VALUE VAL CURRENT : $val');
+              context.read<OrderBloc>().add(OrderEvent.doFilterOrder(
+                filterIndex: val,
+                query: query!,
+                statusOrder:  statusOrder,
+                startDate:  startDate,
+                endDate:  endDate,
+              )
+              );
           },
           choiceItems: C2Choice.listFrom<int, String>(
             source: options,
@@ -32,7 +49,8 @@ class OrderFilter extends StatelessWidget {
           ),
           choiceStyle: C2ChipStyle.outlined(
             borderRadius: const BorderRadius.all(Radius.circular(25)),
-            foregroundStyle: txtPrimarySubTitle.copyWith(fontWeight: FontWeight.w500, color: Colors.black38),
+            foregroundStyle: txtPrimarySubTitle.copyWith(
+                fontWeight: FontWeight.w500, color: Colors.black38),
             color: Colors.black12,
             avatarForegroundColor: Colors.black12,
             borderStyle: BorderStyle.solid,
@@ -40,7 +58,8 @@ class OrderFilter extends StatelessWidget {
             selectedStyle: C2ChipStyle(
               checkmarkColor: primaryColor,
               checkmarkStyle: C2ChipCheckmarkStyle.round,
-              foregroundStyle: txtPrimarySubTitle.copyWith(fontWeight: FontWeight.w500, color: primaryColor),
+              foregroundStyle: txtPrimarySubTitle.copyWith(
+                  fontWeight: FontWeight.w500, color: primaryColor),
               borderRadius: const BorderRadius.all(Radius.circular(25)),
               borderColor: primaryColor,
               borderWidth: 2,
