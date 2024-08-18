@@ -30,17 +30,66 @@ class _OrderPageState extends State<OrderPage> {
   Future<void> _fetchInitialData() async {
     context
         .read<OrderBloc>()
-        .add(const OrderEvent.getFilterOrder('ongoing', ''));
+        .add(const OrderEvent.getFilterOrder('ongoing', '', '', ''));
   }
 
-  Future<void> _refreshData(BuildContext context) async {
-    context
-        .read<OrderBloc>()
-        .add(const OrderEvent.getFilterOrder('ongoing', ''));
-    context
-        .read<OrderBloc>()
-        .add(const OrderEvent.getFilterOrderReward('ongoing', ''));
-    await Future.delayed(Duration(seconds: 1));
+  // Future<void> _refreshData(BuildContext context) async {
+  //   context
+  //       .read<OrderBloc>()
+  //       .add(const OrderEvent.getFilterOrder('ongoing', ''));
+  //   context
+  //       .read<OrderBloc>()
+  //       .add(const OrderEvent.getFilterOrderReward('ongoing', ''));
+  //   await Future.delayed(Duration(seconds: 1));
+  // }
+
+  Future<void> _selectDate(BuildContext context,
+      {required bool isStartDate, required int filterIndex}) async {
+    DateTime initialDate = isStartDate
+        ? DateTime.now().subtract(const Duration(days: 365))
+        : DateTime.now();
+    DateTime firstDate = DateTime(2000);
+    DateTime lastDate = DateTime(2100);
+
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: initialDate,
+      firstDate: firstDate,
+      lastDate: lastDate,
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: primaryColor, // header background color
+              onPrimary: baseColor, // header text color
+              onSurface: blackColor, // body text color
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: primaryColor, // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    if (picked != null) {
+      if (isStartDate) {
+        filterIndex == 0
+            ? context.read<OrderBloc>().add(OrderEvent.setStartDate(picked))
+            : context
+                .read<OrderBloc>()
+                .add(OrderEvent.setStartDateReward(picked));
+      } else {
+        filterIndex == 0
+            ? context.read<OrderBloc>().add(OrderEvent.setEndDate(picked))
+            : context
+                .read<OrderBloc>()
+                .add(OrderEvent.setEndDateReward(picked));
+      }
+    }
   }
 
   @override
@@ -86,7 +135,7 @@ class _OrderPageState extends State<OrderPage> {
                     final query = index == 0 ? 'ongoing' : 'history';
                     context
                         .read<OrderBloc>()
-                        .add(OrderEvent.getFilterOrder(query, ''));
+                        .add(OrderEvent.getFilterOrder(query, '', '', ''));
                   },
                   tabs: [
                     Tab(
@@ -140,16 +189,17 @@ class _OrderPageState extends State<OrderPage> {
                                       filterIndex,
                                       modelReOrder,
                                       modelReOrderReward,
-                                      isMenungguPembayaran,
-                                      isMenungguKonfirmasi,
-                                      isPesananDiproses,
-                                      isPesananSiapDiambil,
                                       isPesananDitolak,
                                       isPesananDibatalkan,
-                                      isPesananSelesai) {
+                                      isPesananSelesai,
+                                      startDate,
+                                      endDate,
+                                      isPesananDitolakReward,
+                                      isPesananSelesaiReward,
+                                      startDateReward,
+                                      endDateReward) {
                                     if ((model?.orders == null ||
-                                            model?.orders?.isEmpty ==
-                                                true) &&
+                                            model?.orders?.isEmpty == true) &&
                                         (modelReward?.orders == null ||
                                             modelReward?.orders?.isEmpty ==
                                                 true)) {
@@ -159,8 +209,7 @@ class _OrderPageState extends State<OrderPage> {
                                         child: ListView.builder(
                                           itemCount: filterIndex == 0
                                               ? model?.orders?.length ?? 0
-                                              : modelReward
-                                                      ?.orders?.length ??
+                                              : modelReward?.orders?.length ??
                                                   0,
                                           scrollDirection: Axis.vertical,
                                           itemBuilder: (context, index) {
@@ -174,33 +223,29 @@ class _OrderPageState extends State<OrderPage> {
                                                 totalItem: order
                                                     .orderItems!.length
                                                     .toString(),
-                                                totalPrice: order
-                                                    .totalPrice!
+                                                totalPrice: order.totalPrice!
                                                     .toString(),
-                                                orderItems:
-                                                    order.orderItems,
-                                                createdAt: order.createdAt
-                                                    .toString(),
+                                                orderItems: order.orderItems,
+                                                createdAt:
+                                                    order.createdAt.toString(),
                                                 orderId: order.id!,
                                               );
                                             } else {
-                                              final order = modelReward!
-                                                  .orders![index];
+                                              final order =
+                                                  modelReward!.orders![index];
 
                                               return ListBoxMenuStatus(
                                                 waLink: order.whatsapp!,
                                                 status: order.status!,
                                                 totalItem: order
-                                                    .orderRewardItems!
-                                                    .length
+                                                    .orderRewardItems!.length
                                                     .toString(),
-                                                totalPrice: order
-                                                    .totalPoint!
+                                                totalPrice: order.totalPoint!
                                                     .toString(),
                                                 orderItemsReward:
                                                     order.orderRewardItems,
-                                                createdAt: order.createdAt
-                                                    .toString(),
+                                                createdAt:
+                                                    order.createdAt.toString(),
                                                 orderRewardId: order.id!,
                                               );
                                             }
@@ -222,7 +267,116 @@ class _OrderPageState extends State<OrderPage> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              OrderFilter(query: 'history'),
+                              BlocBuilder<OrderBloc, OrderState>(
+                                builder: (context, state) {
+                                  return state.maybeWhen(orElse: () {
+                                    return OrderFilter(
+                                      query: 'history',
+                                      statusOrder: '',
+                                    );
+                                  }, success: (model,
+                                      modelReward,
+                                      filterIndex,
+                                      modelReOrder,
+                                      modelReOrderReward,
+                                      isPesananDitolak,
+                                      isPesananDibatalkan,
+                                      isPesananSelesai,
+                                      startDate,
+                                      endDate,
+                                      isPesananDitolakReward,
+                                      isPesananSelesaiReward,
+                                      startDateReward,
+                                      endDateReward) {
+
+                                    String startDateText =
+                                        DateFormat('yyyy-MM-dd').format(
+                                            DateTime.now()
+                                                .subtract(Duration(days: 365)));
+                                    String endDateText =
+                                        DateFormat('yyyy-MM-dd')
+                                            .format(DateTime.now());
+
+                                    startDateText = startDate != null
+                                        ? DateFormat('yyyy-MM-dd')
+                                            .format(startDate)
+                                        : startDateText;
+                                    endDateText = endDate != null
+                                        ? DateFormat('yyyy-MM-dd')
+                                            .format(endDate)
+                                        : endDateText;
+
+                                    String startDateTextReward = DateFormat('yyyy-MM-dd')
+                                        .format(DateTime.now().subtract(Duration(days: 365)));
+                                    String endDateTextReward =
+                                    DateFormat('yyyy-MM-dd').format(DateTime.now());
+
+                                    startDateTextReward = startDateReward != null
+                                        ? DateFormat('yyyy-MM-dd').format(startDateReward)
+                                        : startDateTextReward;
+                                    endDateTextReward = endDateReward != null
+                                        ? DateFormat('yyyy-MM-dd').format(endDateReward)
+                                        : endDateTextReward;
+
+                                    String status = '';
+                                    String statusReward = '';
+
+                                    if (filterIndex == 0) {
+                                      if (isPesananSelesai == true &&
+                                          isPesananDibatalkan == false &&
+                                          isPesananDitolak == false) {
+                                        status = 'pesanan selesai';
+                                      } else if (isPesananDibatalkan == true &&
+                                          isPesananSelesai == false &&
+                                          isPesananDitolak == false) {
+                                        status = 'pesanan dibatalkan';
+                                      } else if (isPesananDitolak == true &&
+                                          isPesananSelesai == false &&
+                                          isPesananDibatalkan == false) {
+                                        status = 'pesanan ditolak';
+                                      } else if (isPesananSelesai == true &&
+                                          isPesananDibatalkan == true &&
+                                          isPesananDitolak == false) {
+                                        status = 'finished_canceled';
+                                      } else if (isPesananSelesai == true &&
+                                          isPesananDibatalkan == false &&
+                                          isPesananDitolak == true) {
+                                        status = 'finished_rejected';
+                                      } else if (isPesananSelesai == false &&
+                                          isPesananDibatalkan == true &&
+                                          isPesananDitolak == true) {
+                                        status = 'canceled_rejected';
+                                      }
+                                    } else {
+                                      if (isPesananSelesaiReward == true &&
+                                          isPesananDitolakReward == false) {
+                                        statusReward = 'pesanan selesai';
+                                      } else if (isPesananSelesaiReward ==
+                                              false &&
+                                          isPesananDitolakReward == true) {
+                                        statusReward = 'pesanan ditolak';
+                                      } else if (isPesananSelesaiReward ==
+                                              true &&
+                                          isPesananDitolakReward == true) {
+                                        statusReward = '';
+                                      }
+                                    }
+
+                                    print('VALUE CURRENT STATUS ORDER COMMON $status');
+                                    print('VALUE CURRENT STATUS ORDER REWARD $statusReward');
+
+                                    return OrderFilter(
+                                      query: 'history',
+                                      statusOrder:  status ,
+                                      startDate:  startDateText ,
+                                      endDate:  endDateText ,
+                                      statusOrderReward: statusReward,
+                                      startDateReward: startDateTextReward,
+                                      endDateReward: endDateTextReward,
+                                    );
+                                  });
+                                },
+                              ),
                               BlocListener<OrderBloc, OrderState>(
                                 listener: (context, state) {
                                   print('Current state: $state');
@@ -233,13 +387,15 @@ class _OrderPageState extends State<OrderPage> {
                                           filterIndex,
                                           modelReOrder,
                                           modelReOrderReward,
-                                          isMenungguPembayaran,
-                                          isMenungguKonfirmasi,
-                                          isPesananDiproses,
-                                          isPesananSiapDiambil,
                                           isPesananDitolak,
                                           isPesananDibatalkan,
-                                          isPesananSelesai) {
+                                          isPesananSelesai,
+                                          startDate,
+                                          endDate,
+                                          isPesananDitolakReward,
+                                          isPesananSelesaiReward,
+                                          startDateReward,
+                                          endDateReward) {
                                         if (modelReOrder?.cart != null) {
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(SnackBar(
@@ -289,13 +445,15 @@ class _OrderPageState extends State<OrderPage> {
                                             filterIndex,
                                             modelReOrder,
                                             modelReOrderReward,
-                                            isMenungguPembayaran,
-                                            isMenungguKonfirmasi,
-                                            isPesananDiproses,
-                                            isPesananSiapDiambil,
                                             isPesananDitolak,
                                             isPesananDibatalkan,
-                                            isPesananSelesai) {
+                                            isPesananSelesai,
+                                            startDate,
+                                            endDate,
+                                            isPesananDitolakReward,
+                                            isPesananSelesaiReward,
+                                            startDateReward,
+                                            endDateReward) {
                                           if ((model?.orders == null ||
                                                   model?.orders?.isEmpty ==
                                                       true) &&
@@ -514,7 +672,9 @@ class _OrderPageState extends State<OrderPage> {
           padding: EdgeInsets.only(top: 10.0),
           child: BlocBuilder<OrderBloc, OrderState>(
             builder: (context, state) {
-              return state.maybeWhen(orElse: () {
+              return state.maybeWhen(
+
+                  orElse: () {
                 String startDateText = DateFormat('yyyy-MM-dd')
                     .format(DateTime.now().subtract(Duration(days: 365)));
                 String endDateText =
@@ -883,32 +1043,7 @@ class _OrderPageState extends State<OrderPage> {
                             width: MediaQuery.of(context).size.width * 0.4,
                             text: 'Terapkan',
                             onPressed: () {
-                              // if (isInfo == false && isVoucher == false) {
-                              //   context.read<NotificationBloc>().add(
-                              //       NotificationEvent.getFilterNotification(
-                              //           'null',
-                              //           startDateText,
-                              //           endDateText));
-                              // } else if (isInfo == true &&
-                              //     isVoucher == false) {
-                              //   context.read<NotificationBloc>().add(
-                              //       NotificationEvent.getFilterNotification(
-                              //           'common',
-                              //           startDateText,
-                              //           endDateText));
-                              // } else if (isInfo == false &&
-                              //     isVoucher == true) {
-                              //   context.read<NotificationBloc>().add(
-                              //       NotificationEvent.getFilterNotification(
-                              //           'voucher',
-                              //           startDateText,
-                              //           endDateText));
-                              // } else if (isInfo == true &&
-                              //     isVoucher == true) {
-                              //   context.read<NotificationBloc>().add(
-                              //       const NotificationEvent
-                              //           .getNotification());
-                              // }
+
 
                               Navigator.pop(context);
                             },
@@ -928,30 +1063,39 @@ class _OrderPageState extends State<OrderPage> {
                   filterIndex,
                   modelReOrder,
                   modelReOrderReward,
-                  isMenungguPembayaran,
-                  isMenungguKonfirmasi,
-                  isPesananDiproses,
-                  isPesananSiapDiambil,
                   isPesananDitolak,
                   isPesananDibatalkan,
-                  isPesananSelesai) {
-                // print('INI BOOL IS INFO  $isInfo');
+                  isPesananSelesai,
+                  startDate,
+                  endDate,
+                  isPesananDitolakReward,
+                  isPesananSelesaiReward,
+                  startDateReward,
+                  endDateReward) {
                 String startDateText = DateFormat('yyyy-MM-dd')
                     .format(DateTime.now().subtract(Duration(days: 365)));
                 String endDateText =
                     DateFormat('yyyy-MM-dd').format(DateTime.now());
 
-                bool isStatusMenungguPembayaran =
-                    (filterIndex == 0 && tapIndex == 0);
+                startDateText = startDate != null
+                    ? DateFormat('yyyy-MM-dd').format(startDate)
+                    : startDateText;
+                endDateText = endDate != null
+                    ? DateFormat('yyyy-MM-dd').format(endDate)
+                    : endDateText;
 
-                isMenungguPembayaran = tapIndex == 0;
+                String startDateTextReward = DateFormat('yyyy-MM-dd')
+                    .format(DateTime.now().subtract(Duration(days: 365)));
+                String endDateTextReward =
+                    DateFormat('yyyy-MM-dd').format(DateTime.now());
 
-                // startDateText = startDate != null
-                //     ? DateFormat('yyyy-MM-dd').format(startDate)
-                //     : startDateText;
-                // endDateText = endDate != null
-                //     ? DateFormat('yyyy-MM-dd').format(endDate)
-                //     : endDateText;
+                startDateTextReward = startDateReward != null
+                    ? DateFormat('yyyy-MM-dd').format(startDateReward)
+                    : startDateTextReward;
+                endDateTextReward = endDateReward != null
+                    ? DateFormat('yyyy-MM-dd').format(endDateReward)
+                    : endDateTextReward;
+
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -984,103 +1128,6 @@ class _OrderPageState extends State<OrderPage> {
                               ),
                               SizedBox(height: 10),
                               Visibility(
-                                visible: isStatusMenungguPembayaran,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Menunggu pembayaran',
-                                      style: txtPrimarySubTitle.copyWith(
-                                        fontWeight: FontWeight.w500,
-                                        color: blackColor,
-                                      ),
-                                    ),
-                                    Checkbox(
-                                        value: true,
-                                        activeColor: primaryColor,
-                                        tristate: true,
-                                        onChanged: (newValue) {
-                                          // context.read<NotificationBloc>().add(
-                                          //     NotificationEvent.toggleInfo(
-                                          //         newValue, newValue));
-                                        }),
-                                  ],
-                                ),
-                              ),
-                              Visibility(
-                                visible: tapIndex == 0,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Menunguu dikonfirmasi',
-                                      style: txtPrimarySubTitle.copyWith(
-                                        fontWeight: FontWeight.w500,
-                                        color: blackColor,
-                                      ),
-                                    ),
-                                    Checkbox(
-                                        value: false,
-                                        activeColor: primaryColor,
-                                        onChanged: (newValue) {
-                                          // context.read<NotificationBloc>().add(
-                                          //     NotificationEvent.toggleInfo(
-                                          //         newValue, newValue));
-                                        }),
-                                  ],
-                                ),
-                              ),
-                              Visibility(
-                                visible: tapIndex == 0,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Pesanan diproses',
-                                      style: txtPrimarySubTitle.copyWith(
-                                        fontWeight: FontWeight.w500,
-                                        color: blackColor,
-                                      ),
-                                    ),
-                                    Checkbox(
-                                        value: false,
-                                        activeColor: primaryColor,
-                                        onChanged: (newValue) {
-                                          // context.read<NotificationBloc>().add(
-                                          //     NotificationEvent.toggleInfo(
-                                          //         newValue, newValue));
-                                        }),
-                                  ],
-                                ),
-                              ),
-                              Visibility(
-                                visible: tapIndex == 0,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Pesanan siap diambil',
-                                      style: txtPrimarySubTitle.copyWith(
-                                        fontWeight: FontWeight.w500,
-                                        color: blackColor,
-                                      ),
-                                    ),
-                                    Checkbox(
-                                        value: false,
-                                        activeColor: primaryColor,
-                                        onChanged: (newValue) {
-                                          // context.read<NotificationBloc>().add(
-                                          //     NotificationEvent.toggleInfo(
-                                          //         newValue, newValue));
-                                        }),
-                                  ],
-                                ),
-                              ),
-                              Visibility(
                                 visible: tapIndex == 1,
                                 child: Row(
                                   mainAxisAlignment:
@@ -1094,18 +1141,26 @@ class _OrderPageState extends State<OrderPage> {
                                       ),
                                     ),
                                     Checkbox(
-                                        value: isPesananSelesai,
-                                        activeColor: primaryColor,
-                                        onChanged: (newValue) {
-                                          context.read<OrderBloc>().add(
-                                              OrderEvent.togglePesananSelesai(
-                                                  newValue));
-                                        }),
+                                      value: filterIndex == 0
+                                          ? (isPesananSelesai ?? true)
+                                          : (isPesananSelesaiReward ?? true),
+                                      activeColor: primaryColor,
+                                      onChanged: (newValue) {
+                                        filterIndex == 0
+                                            ? context.read<OrderBloc>().add(
+                                                OrderEvent.togglePesananSelesai(
+                                                    newValue))
+                                            : context.read<OrderBloc>().add(
+                                                OrderEvent
+                                                    .togglePesananSelesaiReward(
+                                                        newValue));
+                                      },
+                                    ),
                                   ],
                                 ),
                               ),
                               Visibility(
-                                visible: tapIndex == 1,
+                                visible: filterIndex == 0,
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -1118,7 +1173,7 @@ class _OrderPageState extends State<OrderPage> {
                                       ),
                                     ),
                                     Checkbox(
-                                        value: isPesananDibatalkan,
+                                        value: isPesananDibatalkan ?? false,
                                         activeColor: primaryColor,
                                         onChanged: (newValue) {
                                           context.read<OrderBloc>().add(
@@ -1143,12 +1198,20 @@ class _OrderPageState extends State<OrderPage> {
                                       ),
                                     ),
                                     Checkbox(
-                                        value: isPesananDitolak,
+                                        value: filterIndex == 0
+                                            ? (isPesananDitolak ?? true)
+                                            : (isPesananDitolakReward ?? true),
                                         activeColor: primaryColor,
                                         onChanged: (newValue) {
-                                          context.read<OrderBloc>().add(
-                                              OrderEvent.togglePesananDitolak(
-                                                  newValue));
+                                          filterIndex == 0
+                                              ? context.read<OrderBloc>().add(
+                                                  OrderEvent
+                                                      .togglePesananDitolak(
+                                                          newValue))
+                                              : context.read<OrderBloc>().add(
+                                                  OrderEvent
+                                                      .togglePesananDitolakReward(
+                                                          newValue));
                                         }),
                                   ],
                                 ),
@@ -1168,8 +1231,11 @@ class _OrderPageState extends State<OrderPage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   InkWell(
-                                    // onTap: () =>
-                                    //     _selectDate(context, isStartDate: true),
+                                    onTap: () => filterIndex == 0
+                                        ? _selectDate(context,
+                                            isStartDate: true, filterIndex: 0)
+                                        : _selectDate(context,
+                                            isStartDate: true, filterIndex: 1),
                                     child: Container(
                                       padding: EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 5),
@@ -1229,8 +1295,11 @@ class _OrderPageState extends State<OrderPage> {
                                         )),
                                   ),
                                   InkWell(
-                                    // onTap: () =>
-                                    //     _selectDate(context, isStartDate: false),
+                                    onTap: () => filterIndex == 0
+                                        ? _selectDate(context,
+                                            isStartDate: false, filterIndex: 0)
+                                        : _selectDate(context,
+                                            isStartDate: false, filterIndex: 1),
                                     child: Container(
                                       padding: EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 5),
@@ -1314,65 +1383,110 @@ class _OrderPageState extends State<OrderPage> {
                             width: MediaQuery.of(context).size.width * 0.4,
                             text: 'Terapkan',
                             onPressed: () {
-                              if (isPesananSelesai == true &&
-                                  isPesananDibatalkan == true &&
-                                  isPesananDitolak == true) {
-                                context.read<OrderBloc>().add(
-                                    OrderEvent.doFilterOrder(
-                                        filterIndex: filterIndex,
-                                        query: query,
-                                        statusOrder: ''));
-                              } else if (isPesananSelesai == true &&
-                                  isPesananDibatalkan == false &&
-                                  isPesananDitolak == false) {
-                                context.read<OrderBloc>().add(
-                                    OrderEvent.doFilterOrder(
-                                        filterIndex: filterIndex,
-                                        query: query,
-                                        statusOrder: 'finished'));
-                              } else if (isPesananSelesai == false &&
-                                  isPesananDibatalkan == true &&
-                                  isPesananDitolak == false) {
-                                context.read<OrderBloc>().add(
-                                    OrderEvent.doFilterOrder(
-                                        filterIndex: filterIndex,
-                                        query: query,
-                                        statusOrder: 'canceled'));
-                              } else if (isPesananSelesai == false &&
-                                  isPesananDibatalkan == false &&
-                                  isPesananDitolak == true) {
-                                context.read<OrderBloc>().add(
-                                    OrderEvent.doFilterOrder(
-                                        filterIndex: filterIndex,
-                                        query: query,
-                                        statusOrder: 'rejected'));
+                              print(
+                                  'isPesananSelesaiReward: $isPesananSelesaiReward, isPesananDitolakReward: $isPesananDitolakReward');
+                              if (filterIndex == 0) {
+                                if (isPesananSelesai == true &&
+                                    isPesananDibatalkan == true &&
+                                    isPesananDitolak == true) {
+                                  context.read<OrderBloc>().add(
+                                      OrderEvent.doFilterOrder(
+                                          filterIndex: filterIndex,
+                                          query: query,
+                                          statusOrder: ''));
+                                } else if (isPesananSelesai == true &&
+                                    isPesananDibatalkan == false &&
+                                    isPesananDitolak == false) {
+                                  context.read<OrderBloc>().add(
+                                      OrderEvent.doFilterOrder(
+                                          filterIndex: filterIndex,
+                                          query: query,
+                                          statusOrder: 'pesanan selesai',
+                                          startDate: startDateText,
+                                          endDate: endDateText));
+                                } else if (isPesananSelesai == false &&
+                                    isPesananDibatalkan == true &&
+                                    isPesananDitolak == false) {
+                                  context.read<OrderBloc>().add(
+                                      OrderEvent.doFilterOrder(
+                                          filterIndex: filterIndex,
+                                          query: query,
+                                          statusOrder: 'pesanan dibatalkan',
+                                          startDate: startDateText,
+                                          endDate: endDateText));
+                                } else if (isPesananSelesai == false &&
+                                    isPesananDibatalkan == false &&
+                                    isPesananDitolak == true) {
+                                  context.read<OrderBloc>().add(
+                                      OrderEvent.doFilterOrder(
+                                          filterIndex: filterIndex,
+                                          query: query,
+                                          statusOrder: 'pesanan ditolak',
+                                          startDate: startDateText,
+                                          endDate: endDateText));
+                                } else if (isPesananSelesai == true &&
+                                    isPesananDibatalkan == true &&
+                                    isPesananDitolak == false) {
+                                  context.read<OrderBloc>().add(
+                                      OrderEvent.doFilterOrder(
+                                          filterIndex: filterIndex,
+                                          query: query,
+                                          statusOrder: 'finished_canceled',
+                                          startDate: startDateText,
+                                          endDate: endDateText));
+                                } else if (isPesananSelesai == true &&
+                                    isPesananDibatalkan == false &&
+                                    isPesananDitolak == true) {
+                                  context.read<OrderBloc>().add(
+                                      OrderEvent.doFilterOrder(
+                                          filterIndex: filterIndex,
+                                          query: query,
+                                          statusOrder: 'finished_rejected',
+                                          startDate: startDateText,
+                                          endDate: endDateText));
+                                } else if (isPesananSelesai == false &&
+                                    isPesananDibatalkan == true &&
+                                    isPesananDitolak == true) {
+                                  context.read<OrderBloc>().add(
+                                      OrderEvent.doFilterOrder(
+                                          filterIndex: filterIndex,
+                                          query: query,
+                                          statusOrder: 'canceled_rejected',
+                                          startDate: startDateText,
+                                          endDate: endDateText));
+                                }
+                              } else if (filterIndex == 1) {
+                                if (isPesananSelesaiReward == true &&
+                                    isPesananDitolakReward == false) {
+                                  context.read<OrderBloc>().add(
+                                      OrderEvent.doFilterOrder(
+                                          filterIndex: filterIndex,
+                                          query: query,
+                                          statusOrderReward: 'pesanan selesai',
+                                          startDateReward: startDateTextReward,
+                                          endDateReward: endDateTextReward));
+                                } else if (isPesananSelesaiReward == false &&
+                                    isPesananDitolakReward == true) {
+                                  context.read<OrderBloc>().add(
+                                      OrderEvent.doFilterOrder(
+                                          filterIndex: filterIndex,
+                                          query: query,
+                                          statusOrderReward: 'pesanan ditolak',
+                                          startDateReward: startDateTextReward,
+                                          endDateReward: endDateTextReward));
+                                  print(
+                                      'INI VALUE $query dan VALUE START DATE $startDateTextReward');
+                                } else if (isPesananSelesaiReward == true &&
+                                    isPesananDitolakReward == true) {
+                                  context.read<OrderBloc>().add(
+                                      OrderEvent.doFilterOrder(
+                                          filterIndex: filterIndex,
+                                          query: query,
+                                          statusOrderReward: '',
+                                          startDateReward: startDateTextReward,
+                                          endDateReward: endDateTextReward));
+                                }
                               }
-                              // if (isInfo == false && isVoucher == false) {
-                              //   context.read<NotificationBloc>().add(
-                              //       NotificationEvent.getFilterNotification(
-                              //           'null',
-                              //           startDateText,
-                              //           endDateText));
-                              // } else if (isInfo == true &&
-                              //     isVoucher == false) {
-                              //   context.read<NotificationBloc>().add(
-                              //       NotificationEvent.getFilterNotification(
-                              //           'common',
-                              //           startDateText,
-                              //           endDateText));
-                              // } else if (isInfo == false &&
-                              //     isVoucher == true) {
-                              //   context.read<NotificationBloc>().add(
-                              //       NotificationEvent.getFilterNotification(
-                              //           'voucher',
-                              //           startDateText,
-                              //           endDateText));
-                              // } else if (isInfo == true &&
-                              //     isVoucher == true) {
-                              //   context.read<NotificationBloc>().add(
-                              //       const NotificationEvent
-                              //           .getNotification());
-                              // }
 
                               Navigator.pop(context);
                             },
@@ -1394,5 +1508,4 @@ class _OrderPageState extends State<OrderPage> {
       },
     );
   }
-
 }

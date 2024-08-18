@@ -169,16 +169,24 @@ class OrderDatasource{
     }
   }
 
-  Future<Either<String, HistoryOrderResponseModel>> getFilterTypeOrder(String query, String? statusOrder) async {
+  Future<Either<String, HistoryOrderResponseModel>> getFilterTypeOrder(String query, String? statusOrder, String? startDate, String? endDate) async {
     try {
+
+      final queryParameters = {
+        'type': query,
+        'status_order' : statusOrder,
+        'start_date' : startDate,
+        'end_date' : endDate,
+      }..removeWhere((key, value) => value == null);
+
+      print(' HALOOOOO VALUE DARI PARAMS : $queryParameters');
+
       final response = await _dioInstance.getRequest(
         endpoint: TedikapApiRepository.getFilterOrder,
         isAuthorize: true,
-        queryParameters: {
-          'type': query,
-          'status_order' : statusOrder,
-        }..removeWhere((key, value) => value == null)
+        queryParameters: queryParameters
       );
+
       if (response.statusCode == 200) {
         return Right(HistoryOrderResponseModel.fromMap(response.data));
       } else {
@@ -189,14 +197,24 @@ class OrderDatasource{
     }
   }
 
-  Future<Either<String, HistoryOrderRewardResponseModel>> getFilterTypeOrderReward(String query) async {
+  Future<Either<String, HistoryOrderRewardResponseModel>> getFilterTypeOrderReward(String query, String? statusOrder, String? startDate, String? endDate) async {
     try {
+
+      final queryParameters = {
+        'type': query,
+        'status_order' : statusOrder,
+        'start_date' : startDate,
+        'end_date' : endDate,
+      }..removeWhere((key, value) => value == null);
+
+      print(' HALOOOOO VALUE DARI PARAMS Reward : $queryParameters');
+
+
       final response = await _dioInstance.getRequest(
         endpoint: TedikapApiRepository.getFilterOrderReward,
         isAuthorize: true,
-        queryParameters: {
-          'type': query
-        },
+        queryParameters: queryParameters
+
       );
       if (response.statusCode == 200) {
         return Right(HistoryOrderRewardResponseModel.fromMap(response.data));
