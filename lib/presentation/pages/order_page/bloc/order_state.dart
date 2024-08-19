@@ -9,7 +9,9 @@ class OrderState with _$OrderState {
     HistoryOrderRewardResponseModel? modelReward,
     int filterIndex,
     PostReOrderResponseModel? modelPostReOrder,
-    PostReOrderRewardResponseModel? modelReOrderReward, {
+    PostReOrderRewardResponseModel? modelReOrderReward,
+      PostReviewResponseModel? modelReview,
+      {
     bool? isPesananDitolak,
     bool? isPesananDibatalkan,
     bool? isPesananSelesai,
@@ -20,6 +22,7 @@ class OrderState with _$OrderState {
     bool? isPesananSelesaiReward,
     DateTime? startDateReward,
     DateTime? endDateReward,
+
   }) = _Success;
   const factory OrderState.error({String? message}) = _Error;
 }

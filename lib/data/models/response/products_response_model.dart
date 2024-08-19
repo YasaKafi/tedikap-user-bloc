@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class ProductsResponseModel {
-  List<DataProduct>? data;
+  List<Datum>? data;
 
   ProductsResponseModel({
     this.data,
@@ -12,7 +12,7 @@ class ProductsResponseModel {
   String toJson() => json.encode(toMap());
 
   factory ProductsResponseModel.fromMap(Map<String, dynamic> json) => ProductsResponseModel(
-    data: json["data"] == null ? [] : List<DataProduct>.from(json["data"]!.map((x) => DataProduct.fromMap(x))),
+    data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromMap(x))),
   );
 
   Map<String, dynamic> toMap() => {
@@ -20,7 +20,7 @@ class ProductsResponseModel {
   };
 }
 
-class DataProduct {
+class Datum {
   int? id;
   String? name;
   String? description;
@@ -28,8 +28,11 @@ class DataProduct {
   int? largePrice;
   String? category;
   String? image;
+  bool? isLiked;
+  int? favoritesCount;
+  bool? stock;
 
-  DataProduct({
+  Datum({
     this.id,
     this.name,
     this.description,
@@ -37,13 +40,16 @@ class DataProduct {
     this.largePrice,
     this.category,
     this.image,
+    this.isLiked,
+    this.favoritesCount,
+    this.stock,
   });
 
-  factory DataProduct.fromJson(String str) => DataProduct.fromMap(json.decode(str));
+  factory Datum.fromJson(String str) => Datum.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory DataProduct.fromMap(Map<String, dynamic> json) => DataProduct(
+  factory Datum.fromMap(Map<String, dynamic> json) => Datum(
     id: json["id"],
     name: json["name"],
     description: json["description"],
@@ -51,6 +57,9 @@ class DataProduct {
     largePrice: json["large_price"],
     category: json["category"],
     image: json["image"],
+    isLiked: json["isLiked"],
+    favoritesCount: json["favorites_count"],
+    stock: json["stock"],
   );
 
   Map<String, dynamic> toMap() => {
@@ -61,5 +70,8 @@ class DataProduct {
     "large_price": largePrice,
     "category": category,
     "image": image,
+    "isLiked": isLiked,
+    "favorites_count": favoritesCount,
+    "stock": stock,
   };
 }

@@ -147,6 +147,21 @@ class BoxBottomPrice extends StatelessWidget {
 
 
                   int itemPrice;
+                  final itemStockCommon = modelProduct?.data?.stock;
+                  final itemStockReward = modelProductReward?.data?.stock;
+                  final bool? itemStock = modelProduct?.data?.stock != null
+                      ? itemStockCommon
+                      : itemStockReward;
+
+                  String txtButton;
+
+                  if (cartItemId != null || cartItemRewardId != null) {
+                    txtButton = 'Update Cart';
+                  } else if (itemStock == false){
+                    txtButton = 'Out of Stock';
+                  } else {
+                    txtButton = 'Add to Cart';
+                  }
 
                   if (modelProduct != null) {
                     itemPrice = selectedSize == 'regular'
@@ -158,6 +173,7 @@ class BoxBottomPrice extends StatelessWidget {
                         : modelProductReward?.data?.largePoint ?? 0;
                   }
                   totalPrice = itemPrice * qty;
+
 
                   return Column(
                     children: [
@@ -247,74 +263,75 @@ class BoxBottomPrice extends StatelessWidget {
                           print('INI TOTAL PRICE : $totalPrice');
                           print('INI PRICE SEKARANG : $itemPrice');
 
+                          if (itemStock == true) {
+                            if (modelProduct != null) {
+                              final itemProductCommon = modelProduct.data;
+                              final requestModel = PostCartRequestModel(
+                                productId: itemProductCommon!.id,
+                                temperatur: selectedTemp,
+                                size: selectedSize,
+                                ice: selectedIce,
+                                sugar: selectedSugar,
+                                note: noteController.text,
+                                quantity: qty,
+                              );
 
-                          if (modelProduct != null) {
-                            final itemProductCommon = modelProduct.data;
-                            final requestModel = PostCartRequestModel(
-                              productId: itemProductCommon!.id,
-                              temperatur: selectedTemp,
-                              size: selectedSize,
-                              ice: selectedIce,
-                              sugar: selectedSugar,
-                              note: noteController.text,
-                              quantity: qty,
-                            );
-
-                            final requestUpdateModel = PostCartRequestModel(
-                              productId: itemProductCommon.id,
-                              temperatur: selectedTemp,
-                              size: selectedSize,
-                              ice: selectedIce,
-                              sugar: selectedSugar,
-                              note: noteController.text,
-                              quantity: qty,
-                            );
-
-
-                            cartItemId != null
-                                ? context.read<DetailProductBloc>().add(
-                                DetailProductEvent.updateCart(
-                                    requestUpdateModel, cartItemId!))
-                                : context.read<DetailProductBloc>().add(
-                                DetailProductEvent.postCart(
-                                    requestModel));
+                              final requestUpdateModel = PostCartRequestModel(
+                                productId: itemProductCommon.id,
+                                temperatur: selectedTemp,
+                                size: selectedSize,
+                                ice: selectedIce,
+                                sugar: selectedSugar,
+                                note: noteController.text,
+                                quantity: qty,
+                              );
 
 
-                          } else {
+                              cartItemId != null
+                                  ? context.read<DetailProductBloc>().add(
+                                  DetailProductEvent.updateCart(
+                                      requestUpdateModel, cartItemId!))
+                                  : context.read<DetailProductBloc>().add(
+                                  DetailProductEvent.postCart(
+                                      requestModel));
 
 
-                            final itemProductReward = modelProductReward!.data;
-                            note = noteController.text;
-                            final requestModel = PostCartRewardRequestModel(
-                              rewardProductId: itemProductReward!.id,
-                              temperatur: selectedTemp,
-                              size: selectedSize,
-                              ice: selectedIce,
-                              sugar: selectedSugar,
-                              note: noteController.text,
-                              quantity: qty,
-                              points: itemPrice,
-                            );
+                            } else {
 
-                            final requestUpdateModel =
-                            PostCartRewardRequestModel(
-                              temperatur: selectedTemp,
-                              size: selectedSize,
-                              ice: selectedIce,
-                              sugar: selectedSugar,
-                              note: noteController.text,
-                              quantity: qty,
-                              points: itemPrice,
-                            );
-                            cartItemRewardId != null
-                                ? context.read<DetailProductBloc>().add(
-                                DetailProductEvent.updateCartReward(
-                                    requestUpdateModel,
-                                    cartItemRewardId!))
-                                : context.read<DetailProductBloc>().add(
-                                DetailProductEvent.postCartReward(
-                                    requestModel));
+                              final itemProductReward = modelProductReward!.data;
+                              note = noteController.text;
+                              final requestModel = PostCartRewardRequestModel(
+                                rewardProductId: itemProductReward!.id,
+                                temperatur: selectedTemp,
+                                size: selectedSize,
+                                ice: selectedIce,
+                                sugar: selectedSugar,
+                                note: noteController.text,
+                                quantity: qty,
+                                points: itemPrice,
+                              );
+
+                              final requestUpdateModel =
+                              PostCartRewardRequestModel(
+                                temperatur: selectedTemp,
+                                size: selectedSize,
+                                ice: selectedIce,
+                                sugar: selectedSugar,
+                                note: noteController.text,
+                                quantity: qty,
+                                points: itemPrice,
+                              );
+                              cartItemRewardId != null
+                                  ? context.read<DetailProductBloc>().add(
+                                  DetailProductEvent.updateCartReward(
+                                      requestUpdateModel,
+                                      cartItemRewardId!))
+                                  : context.read<DetailProductBloc>().add(
+                                  DetailProductEvent.postCartReward(
+                                      requestModel));
+                            }
                           }
+
                         },
 
 
@@ -323,15 +340,13 @@ class BoxBottomPrice extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               vertical: Dimensions.paddingSizeDefault),
                           decoration: BoxDecoration(
-                            color: navyColor,
+                            color: itemStock! ? navyColor : grey,
                             borderRadius:
                             const BorderRadius.all(Radius.circular(20)),
                           ),
                           child: Center(
                             child: Text(
-                              cartItemId != null || cartItemRewardId != null
-                                  ? 'Update Cart'
-                                  : 'Add to Cart',
+                              txtButton ,
                               style: txtPrimaryTitle.copyWith(
                                   fontWeight: FontWeight.w600,
                                   color: baseColor),

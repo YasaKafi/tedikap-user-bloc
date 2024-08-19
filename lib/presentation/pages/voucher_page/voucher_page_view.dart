@@ -160,7 +160,7 @@ class _VoucherPageState extends State<VoucherPage> {
                               String formattedMaxDiscount = NumberFormat('#,##0').format(item.maxDiscount);
                               String formattedMinTransaction = NumberFormat('#,##0').format(item.minTransaction);
                               voucherLength = itemVoucher.length;
-                              bool? isCurrentlyUsedVoucher = itemVoucherCart == item.id && widget.isFromCart! ? true : false;
+                              bool? isCurrentlyUsedVoucher = item.isUsed! && widget.isFromCart! ? true : false;
                               bool isEligible = cartModel!.cart!.originalPrice! < item.minTransaction! || widget.isFromCart == false ? false : true;
 
                               return Stack(

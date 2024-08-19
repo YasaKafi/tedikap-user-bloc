@@ -64,8 +64,7 @@ class SectionBaseProfile extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               InkWell(
-                                onTap: () {
-                                },
+                                onTap: () {},
                                 child: CircleAvatar(
                                   radius: 28,
                                   backgroundColor: grey,
@@ -83,7 +82,7 @@ class SectionBaseProfile extends StatelessWidget {
                           );
                         },
                         loaded: (user, _) {
-                          if(user?.data != null){
+                          if (user?.data != null) {
                             return Column(
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,8 +101,9 @@ class SectionBaseProfile extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 6),
                                 Text(
-                                  user.data == null ? 'Hi, unknown user' :
-                                  'Hi, ${user.data!.name!}',
+                                  user.data == null
+                                      ? 'Hi, unknown user'
+                                      : 'Hi, ${user.data!.name!}',
                                   style: txtSecondaryTitle.copyWith(
                                     fontWeight: FontWeight.w600,
                                     color: blackColor,
@@ -111,15 +111,13 @@ class SectionBaseProfile extends StatelessWidget {
                                 ),
                               ],
                             );
-
                           } else {
                             return Column(
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 InkWell(
-                                  onTap: () {
-                                  },
+                                  onTap: () {},
                                   child: CircleAvatar(
                                     radius: 28,
                                     backgroundColor: grey,
@@ -135,7 +133,6 @@ class SectionBaseProfile extends StatelessWidget {
                                 ),
                               ],
                             );
-
                           }
                         },
                       );
@@ -161,7 +158,29 @@ class SectionBaseProfile extends StatelessWidget {
             ],
           ),
         ),
-        BoxHelpSupport(screenwWidth: screenwWidth),
+        BlocBuilder<ProfileBloc, ProfileState>(
+          builder: (context, state) {
+            return state.maybeWhen(
+              loaded: (user, logout) {
+                if (user?.data != null) {
+                  final itemWa = user?.data?.whatsapp;
+                  return BoxHelpSupport(
+                    screenwWidth: screenwWidth,
+                    waLink: itemWa,
+                  );
+                } else {
+                  return BoxHelpSupport(
+                    screenwWidth: screenwWidth,
+                    waLink: 'https://wa.me/62895395343223?text=Halo+Tedikap%2C+Saya+membutuhkan+bantuan',
+                  );
+                }
+              },
+              orElse: () {
+                return const SizedBox();
+              },
+            );
+          },
+        ),
         const SizedBox(height: 20),
       ],
     );

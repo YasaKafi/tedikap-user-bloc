@@ -2,7 +2,7 @@ import 'dart:convert';
 
 class HistoryOrderResponseModel {
   String? message;
-  List<DataOrder>? orders;
+  List<Order>? orders;
 
   HistoryOrderResponseModel({
     this.message,
@@ -15,7 +15,7 @@ class HistoryOrderResponseModel {
 
   factory HistoryOrderResponseModel.fromMap(Map<String, dynamic> json) => HistoryOrderResponseModel(
     message: json["message"],
-    orders: json["orders"] == null ? [] : List<DataOrder>.from(json["orders"]!.map((x) => DataOrder.fromMap(x))),
+    orders: json["orders"] == null ? [] : List<Order>.from(json["orders"]!.map((x) => Order.fromMap(x))),
   );
 
   Map<String, dynamic> toMap() => {
@@ -24,30 +24,37 @@ class HistoryOrderResponseModel {
   };
 }
 
-class DataOrder {
+class Order {
   String? id;
   int? userId;
   int? cartId;
-  int? voucherId;
+  String? name;
+  String? avatar;
+  dynamic voucherId;
   int? totalPrice;
   int? discountAmount;
   int? rewardPoint;
   int? originalPrice;
   String? status;
   String? statusDescription;
+  String? whatsapp;
+  String? orderType;
+  String? schedulePickup;
+  String? iconStatus;
   String? paymentChannel;
-  String? whatsappLink;
+  bool? cartLength;
+  double? rating;
   DateTime? createdAt;
   DateTime? updatedAt;
-  DateTime? expiredAt;
-  String? schedulePickup;
-  bool? cartItems;
+  DateTime? expiresAt;
   List<OrderItem>? orderItems;
 
-  DataOrder({
+  Order({
     this.id,
     this.userId,
     this.cartId,
+    this.name,
+    this.avatar,
     this.voucherId,
     this.totalPrice,
     this.discountAmount,
@@ -55,24 +62,29 @@ class DataOrder {
     this.originalPrice,
     this.status,
     this.statusDescription,
+    this.whatsapp,
+    this.orderType,
+    this.schedulePickup,
+    this.iconStatus,
     this.paymentChannel,
-    this.whatsappLink,
+    this.cartLength,
+    this.rating,
     this.createdAt,
     this.updatedAt,
-    this.expiredAt,
-    this.schedulePickup,
-    this.cartItems,
+    this.expiresAt,
     this.orderItems,
   });
 
-  factory DataOrder.fromJson(String str) => DataOrder.fromMap(json.decode(str));
+  factory Order.fromJson(String str) => Order.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory DataOrder.fromMap(Map<String, dynamic> json) => DataOrder(
+  factory Order.fromMap(Map<String, dynamic> json) => Order(
     id: json["id"],
     userId: json["user_id"],
     cartId: json["cart_id"],
+    name: json["name"],
+    avatar: json["avatar"],
     voucherId: json["voucher_id"],
     totalPrice: json["total_price"],
     discountAmount: json["discount_amount"],
@@ -80,13 +92,16 @@ class DataOrder {
     originalPrice: json["original_price"],
     status: json["status"],
     statusDescription: json["status_description"],
+    whatsapp: json["whatsapp"],
+    orderType: json["order_type"],
+    schedulePickup: json["schedule_pickup"],
+    iconStatus: json["icon_status"],
     paymentChannel: json["payment_channel"],
-    whatsappLink: json["whatsapp"],
+    cartLength: json["cart_length"],
+    rating: json["rating"]?.toDouble(),
     createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
     updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
-    expiredAt: json["expires_at"] == null ? null : DateTime.parse(json["expires_at"]),
-    schedulePickup: json["schedule_pickup"],
-    cartItems: json["cart_length"],
+    expiresAt: json["expires_at"] == null ? null : DateTime.parse(json["expires_at"]),
     orderItems: json["order_items"] == null ? [] : List<OrderItem>.from(json["order_items"]!.map((x) => OrderItem.fromMap(x))),
   );
 
@@ -94,6 +109,8 @@ class DataOrder {
     "id": id,
     "user_id": userId,
     "cart_id": cartId,
+    "name": name,
+    "avatar": avatar,
     "voucher_id": voucherId,
     "total_price": totalPrice,
     "discount_amount": discountAmount,
@@ -101,13 +118,16 @@ class DataOrder {
     "original_price": originalPrice,
     "status": status,
     "status_description": statusDescription,
+    "whatsapp": whatsapp,
+    "order_type": orderType,
+    "schedule_pickup": schedulePickup,
+    "icon_status": iconStatus,
     "payment_channel": paymentChannel,
-    "whatsapp": whatsappLink,
+    "cart_length": cartLength,
+    "rating": rating,
     "created_at": createdAt?.toIso8601String(),
     "updated_at": updatedAt?.toIso8601String(),
-    "expires_at": createdAt?.toIso8601String(),
-    "schedule_pickup": schedulePickup,
-    "cart_length": cartItems,
+    "expires_at": expiresAt?.toIso8601String(),
     "order_items": orderItems == null ? [] : List<dynamic>.from(orderItems!.map((x) => x.toMap())),
   };
 }
@@ -122,7 +142,7 @@ class OrderItem {
   String? size;
   String? ice;
   String? sugar;
-  String? note;
+  dynamic note;
   int? quantity;
   int? price;
 

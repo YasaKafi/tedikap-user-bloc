@@ -3,7 +3,7 @@ import 'dart:convert';
 class DetailProductRewardResponseModel {
   String? status;
   String? message;
-  DetailDataProductReward? data;
+  Data? data;
 
   DetailProductRewardResponseModel({
     this.status,
@@ -18,7 +18,7 @@ class DetailProductRewardResponseModel {
   factory DetailProductRewardResponseModel.fromMap(Map<String, dynamic> json) => DetailProductRewardResponseModel(
     status: json["status"],
     message: json["message"],
-    data: json["data"] == null ? null : DetailDataProductReward.fromMap(json["data"]),
+    data: json["data"] == null ? null : Data.fromMap(json["data"]),
   );
 
   Map<String, dynamic> toMap() => {
@@ -28,7 +28,7 @@ class DetailProductRewardResponseModel {
   };
 }
 
-class DetailDataProductReward {
+class Data {
   int? id;
   String? name;
   String? description;
@@ -36,10 +36,11 @@ class DetailDataProductReward {
   int? regularPoint;
   int? largePoint;
   String? category;
+  bool? stock;
   DateTime? createdAt;
   DateTime? updatedAt;
 
-  DetailDataProductReward({
+  Data({
     this.id,
     this.name,
     this.description,
@@ -47,15 +48,16 @@ class DetailDataProductReward {
     this.regularPoint,
     this.largePoint,
     this.category,
+    this.stock,
     this.createdAt,
     this.updatedAt,
   });
 
-  factory DetailDataProductReward.fromJson(String str) => DetailDataProductReward.fromMap(json.decode(str));
+  factory Data.fromJson(String str) => Data.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory DetailDataProductReward.fromMap(Map<String, dynamic> json) => DetailDataProductReward(
+  factory Data.fromMap(Map<String, dynamic> json) => Data(
     id: json["id"],
     name: json["name"],
     description: json["description"],
@@ -63,6 +65,7 @@ class DetailDataProductReward {
     regularPoint: json["regular_point"],
     largePoint: json["large_point"],
     category: json["category"],
+    stock: json["stock"],
     createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
     updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
   );
@@ -75,6 +78,7 @@ class DetailDataProductReward {
     "regular_point": regularPoint,
     "large_point": largePoint,
     "category": category,
+    "stock": stock,
     "created_at": createdAt?.toIso8601String(),
     "updated_at": updatedAt?.toIso8601String(),
   };

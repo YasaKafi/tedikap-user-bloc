@@ -131,6 +131,7 @@ class ProductDatasource {
         return const Left('Oops, something went wrong. Please try again later');
       }
     } catch (e) {
+      print('EXCEPTION: $e');
       return Left('Failed to access data: ${e.toString()}');
     }
   }

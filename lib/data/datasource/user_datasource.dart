@@ -70,6 +70,7 @@ class UserDatasource {
         return const Left('Failed to access data');
       }
     } catch (e) {
+      print('EXCEPTION POIN : $e');
       return Left('Failed to access data: ${e.toString()}');
     }
   }

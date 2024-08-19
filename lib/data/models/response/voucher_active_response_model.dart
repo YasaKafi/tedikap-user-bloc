@@ -28,6 +28,7 @@ class ActiveVoucher {
   int? discount;
   int? minTransaction;
   int? maxDiscount;
+  bool? isUsed;
   DateTime? startDate;
   DateTime? endDate;
 
@@ -39,6 +40,7 @@ class ActiveVoucher {
     this.discount,
     this.minTransaction,
     this.maxDiscount,
+    this.isUsed,
     this.startDate,
     this.endDate,
   });
@@ -55,6 +57,7 @@ class ActiveVoucher {
     discount: json["discount"],
     minTransaction: json["min_transaction"],
     maxDiscount: json["max_discount"],
+    isUsed: json["is_used"],
     startDate: json["start_date"] == null ? null : DateTime.parse(json["start_date"]),
     endDate: json["end_date"] == null ? null : DateTime.parse(json["end_date"]),
   );
@@ -67,6 +70,7 @@ class ActiveVoucher {
     "discount": discount,
     "min_transaction": minTransaction,
     "max_discount": maxDiscount,
+    "is_used": isUsed,
     "start_date": "${startDate!.year.toString().padLeft(4, '0')}-${startDate!.month.toString().padLeft(2, '0')}-${startDate!.day.toString().padLeft(2, '0')}",
     "end_date": "${endDate!.year.toString().padLeft(4, '0')}-${endDate!.month.toString().padLeft(2, '0')}-${endDate!.day.toString().padLeft(2, '0')}",
   };

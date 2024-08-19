@@ -27,7 +27,7 @@ class ListBoxMenuStatus extends StatelessWidget {
     required this.createdAt,
     this.orderId,
     this.orderRewardId,
-    required this.waLink,
+    required this.waLink, required this.rating,
   });
 
   final String status;
@@ -39,6 +39,7 @@ class ListBoxMenuStatus extends StatelessWidget {
   final String? orderId;
   final String? orderRewardId;
   final String waLink;
+  final double? rating;
 
   String getTimeDifference() {
     DateTime createdTime = DateFormat('yyyy-MM-dd HH:mm:ss').parse(createdAt);
@@ -55,13 +56,6 @@ class ListBoxMenuStatus extends StatelessWidget {
     }
   }
 
-  static String urlWhatsApp(String phone, String message) {
-    if (phone.isEmpty) {
-      return "https://wa.me/6289525683801?text=I'm%20interested%20in%20your%20car%20for%20sale";
-    } else {
-      return "https://wa.me/$phone?text=${message}";
-    }
-  }
 
   Future<void> launchURL(Uri url) async {
     if (await canLaunchUrl(url)) {
@@ -76,10 +70,10 @@ class ListBoxMenuStatus extends StatelessWidget {
     String titleCommonButton;
     Color backgroundColor;
     if (status == 'pesanan dibatalkan' || status == 'pesanan ditolak') {
-      backgroundColor = redDark;
+      backgroundColor = navyColor;
       titleCommonButton = 'Pesan Ulang';
     } else if (status == 'pesanan selesai') {
-      backgroundColor = primaryColor;
+      backgroundColor = navyColor;
       titleCommonButton = 'Pesan Ulang';
     } else if (status == 'menunggu pembayaran') {
       backgroundColor = navyColor;
@@ -125,12 +119,25 @@ class ListBoxMenuStatus extends StatelessWidget {
               color: backgroundColor,
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   status,
                   style: txtSecondaryTitle.copyWith(
                       fontWeight: FontWeight.w600, color: baseColor),
+                ),
+                Visibility(
+                  visible: status == 'pesanan selesai',
+                  child: RatingBarIndicator(
+                    rating: rating ?? 0,
+                    unratedColor: grey,
+                    itemSize: 20,
+                      itemBuilder: (context, index) => const Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                          ),
+                    itemCount: 5,
+                  ),
                 ),
               ],
             ),
@@ -265,6 +272,7 @@ class ListBoxMenuStatus extends StatelessWidget {
                               filterIndex,
                               modelReOrder,
                               modelReOrderReward,
+                              modelReview,
                               isPesananDitolak,
                               isPesananDibatalkan,
                               isPesananSelesai,
@@ -276,7 +284,7 @@ class ListBoxMenuStatus extends StatelessWidget {
                               endDateReward,
                               ) {
                             bool isModelCartNotEmpty =
-                                model?.orders?.first.cartItems ?? false;
+                                model?.orders?.first.cartLength ?? false;
 
                             bool isModelCartRewardNotEmpty =
                                 modelReward?.orders?.first.cartLength ?? false;
@@ -364,7 +372,12 @@ class ListBoxMenuStatus extends StatelessWidget {
                                     borderRadius: 10,
                                     fontSize: 10,
                                     onPressed: () {
-                                      context.pushNamed('review');
+                                      if (orderId != null || orderRewardId != null) {
+                                        context.pushNamed('review', extra: {'orderId': orderId, 'orderRewardId': orderRewardId});
+                                      } else {
+                                        // Handle null values here if needed
+                                        print('Order ID or Order Reward ID is null');
+                                      }
                                     },
                                     backgroundColor: backgroundColor,
                                     textColor: baseColor,
