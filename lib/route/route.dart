@@ -109,7 +109,12 @@ class AppRouter {
       GoRoute(
         name: 'review',
         path: '/review',
-        builder: (context, state) => RateAndReviewSheet(),
+        builder: (context, state) {
+          final extraData = state.extra as Map<String, dynamic>?;
+          final orderId = extraData?['orderId'] as String? ?? '0';
+          final orderRewardId = extraData?['orderRewardId'] as String? ?? '0';
+          return RateAndReviewSheet(orderId: orderId, orderRewardId: orderRewardId, );
+        }
       ),
       GoRoute(
         name: 'notification',

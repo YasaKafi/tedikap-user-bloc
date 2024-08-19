@@ -4,6 +4,7 @@ part of 'order_bloc.dart';
 class OrderEvent with _$OrderEvent {
   const factory OrderEvent.started() = _Started;
   const factory OrderEvent.getAllHistoryOrder() = _GetAllHistoryOrder;
+  const factory OrderEvent.postReview(String? orderId, PostReviewRequestModel? model) = _PostReview;
   const factory OrderEvent.postReOrder(String? orderId) = _PostReOrder;
   const factory OrderEvent.postReOrderReward(String? orderRewardId) = _PostReOrderReward;
   const factory OrderEvent.getAllHistoryOrderReward() = _GetAllHistoryOrderReward;

@@ -16,18 +16,15 @@ class PointBloc extends Bloc<PointEvent, PointState> {
 
   PointBloc(this.datasource, this.userDatasource)
       : super(const PointState.initial()) {
+
+
     on<_GetFilterCategory>((event, emit) async {
       emit(const _Loading());
 
-      final ProductsRewardResponseModel? products;
-      final UserPointResponseModel? points;
 
-      if (state is _Success && (state as _Success).poinModel != null) {
-        points = (state as _Success).poinModel;
-      } else {
         final pointResult = await userDatasource.getPointUser();
-        points = pointResult.fold((l) => null, (success) => success);
-      }
+        final points = pointResult.fold((l) => null, (success) => success);
+
 
       final productResult = await datasource.getFilterCategoryReward(event.query);
       productResult.fold(

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class DetailProductResponseModel {
-  DetailDataProduct? data;
+  Data? data;
 
   DetailProductResponseModel({
     this.data,
@@ -12,7 +12,7 @@ class DetailProductResponseModel {
   String toJson() => json.encode(toMap());
 
   factory DetailProductResponseModel.fromMap(Map<String, dynamic> json) => DetailProductResponseModel(
-    data: json["data"] == null ? null : DetailDataProduct.fromMap(json["data"]),
+    data: json["data"] == null ? null : Data.fromMap(json["data"]),
   );
 
   Map<String, dynamic> toMap() => {
@@ -20,7 +20,7 @@ class DetailProductResponseModel {
   };
 }
 
-class DetailDataProduct {
+class Data {
   int? id;
   String? name;
   String? description;
@@ -29,9 +29,10 @@ class DetailDataProduct {
   String? category;
   String? image;
   bool? isLiked;
-  dynamic favoritesCount;
+  int? favoritesCount;
+  bool? stock;
 
-  DetailDataProduct({
+  Data({
     this.id,
     this.name,
     this.description,
@@ -41,13 +42,14 @@ class DetailDataProduct {
     this.image,
     this.isLiked,
     this.favoritesCount,
+    this.stock,
   });
 
-  factory DetailDataProduct.fromJson(String str) => DetailDataProduct.fromMap(json.decode(str));
+  factory Data.fromJson(String str) => Data.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory DetailDataProduct.fromMap(Map<String, dynamic> json) => DetailDataProduct(
+  factory Data.fromMap(Map<String, dynamic> json) => Data(
     id: json["id"],
     name: json["name"],
     description: json["description"],
@@ -57,6 +59,7 @@ class DetailDataProduct {
     image: json["image"],
     isLiked: json["isLiked"],
     favoritesCount: json["favorites_count"],
+    stock: json["stock"],
   );
 
   Map<String, dynamic> toMap() => {
@@ -69,5 +72,6 @@ class DetailDataProduct {
     "image": image,
     "isLiked": isLiked,
     "favorites_count": favoritesCount,
+    "stock": stock,
   };
 }

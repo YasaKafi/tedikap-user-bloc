@@ -26,6 +26,7 @@ class Data {
   String? name;
   String? avatar;
   String? gender;
+  String? whatsapp;
   String? role;
 
   Data({
@@ -34,6 +35,7 @@ class Data {
     this.name,
     this.avatar,
     this.gender,
+    this.whatsapp,
     this.role,
   });
 
@@ -47,6 +49,7 @@ class Data {
     name: json["name"],
     avatar: json["avatar"],
     gender: json["gender"],
+    whatsapp: json["whatsapp_service"],
     role: json["role"],
   );
 
@@ -56,6 +59,7 @@ class Data {
     "name": name,
     "avatar": avatar,
     "gender": gender,
+    "whatsapp_service": whatsapp,
     "role": role,
   };
 }

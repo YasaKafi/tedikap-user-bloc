@@ -199,6 +199,7 @@ class _PointPageState extends State<PointPage> with SingleTickerProviderStateMix
   Widget buildTabGridViewProduct(double screenHeight, double screenWidth) {
     return BlocBuilder<PointBloc, PointState>(
       builder: (context, state) {
+        print('CURRENT STATE: $state');
         return state.when(
           initial: () => buildShimmer(screenHeight, screenWidth),
           success: (model, pointModel, ) {

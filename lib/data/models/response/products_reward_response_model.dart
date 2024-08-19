@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class ProductsRewardResponseModel {
-  List<DataRewardProduct>? data;
+  List<Datum>? data;
 
   ProductsRewardResponseModel({
     this.data,
@@ -12,7 +12,7 @@ class ProductsRewardResponseModel {
   String toJson() => json.encode(toMap());
 
   factory ProductsRewardResponseModel.fromMap(Map<String, dynamic> json) => ProductsRewardResponseModel(
-    data: json["data"] == null ? [] : List<DataRewardProduct>.from(json["data"]!.map((x) => DataRewardProduct.fromMap(x))),
+    data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromMap(x))),
   );
 
   Map<String, dynamic> toMap() => {
@@ -20,7 +20,7 @@ class ProductsRewardResponseModel {
   };
 }
 
-class DataRewardProduct {
+class Datum {
   int? id;
   String? name;
   String? description;
@@ -28,8 +28,9 @@ class DataRewardProduct {
   int? largePoint;
   String? category;
   String? image;
+  bool? stock;
 
-  DataRewardProduct({
+  Datum({
     this.id,
     this.name,
     this.description,
@@ -37,13 +38,14 @@ class DataRewardProduct {
     this.largePoint,
     this.category,
     this.image,
+    this.stock,
   });
 
-  factory DataRewardProduct.fromJson(String str) => DataRewardProduct.fromMap(json.decode(str));
+  factory Datum.fromJson(String str) => Datum.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory DataRewardProduct.fromMap(Map<String, dynamic> json) => DataRewardProduct(
+  factory Datum.fromMap(Map<String, dynamic> json) => Datum(
     id: json["id"],
     name: json["name"],
     description: json["description"],
@@ -51,6 +53,7 @@ class DataRewardProduct {
     largePoint: json["large_point"],
     category: json["category"],
     image: json["image"],
+    stock: json["stock"],
   );
 
   Map<String, dynamic> toMap() => {
@@ -61,5 +64,6 @@ class DataRewardProduct {
     "large_point": largePoint,
     "category": category,
     "image": image,
+    "stock": stock,
   };
 }

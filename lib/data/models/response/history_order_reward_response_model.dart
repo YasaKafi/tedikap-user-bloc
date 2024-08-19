@@ -38,6 +38,7 @@ class Order {
   String? orderType;
   String? schedulePickup;
   bool? cartLength;
+  double? rating;
   DateTime? createdAt;
   DateTime? updatedAt;
   DateTime? expiresAt;
@@ -57,6 +58,7 @@ class Order {
     this.orderType,
     this.schedulePickup,
     this.cartLength,
+    this.rating,
     this.createdAt,
     this.updatedAt,
     this.expiresAt,
@@ -81,6 +83,7 @@ class Order {
     orderType: json["order_type"],
     schedulePickup: json["schedule_pickup"],
     cartLength: json["cart_length"],
+    rating: json["rating"]?.toDouble(),
     createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
     updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
     expiresAt: json["expires_at"] == null ? null : DateTime.parse(json["expires_at"]),
@@ -101,6 +104,7 @@ class Order {
     "order_type": orderType,
     "schedule_pickup": schedulePickup,
     "cart_length": cartLength,
+    "rating": rating,
     "created_at": createdAt?.toIso8601String(),
     "updated_at": updatedAt?.toIso8601String(),
     "expires_at": expiresAt?.toIso8601String(),

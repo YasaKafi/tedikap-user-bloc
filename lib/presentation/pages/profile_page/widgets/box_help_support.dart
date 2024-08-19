@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../common/constant.dart';
 import '../../../../../common/dimensions.dart';
@@ -10,13 +11,23 @@ import 'box_helper.dart';
 class BoxHelpSupport extends StatelessWidget {
   const BoxHelpSupport({
     super.key,
-    required this.screenwWidth,
+    required this.screenwWidth, this.waLink,
   });
 
   final double screenwWidth;
+  final String? waLink;
+
+  Future<void> launchURL(Uri url) async {
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -99,7 +110,6 @@ class BoxHelpSupport extends StatelessWidget {
               InkWell(
                 onTap: (){
                   context.pushNamed('setting');
-
                 },
                 child: BoxHelper(
                   iconPath: icSetting,
@@ -109,64 +119,69 @@ class BoxHelpSupport extends StatelessWidget {
             ],
           ),
         ),
-        Container(
-          width: screenwWidth,
-          margin: const EdgeInsets.only(
-              left: Dimensions.marginSizeLarge,
-              right: Dimensions.marginSizeLarge,
-              top: 20),
-          padding: const EdgeInsets.only(
-              top: Dimensions.paddingSizeLarge,
-              bottom: Dimensions.paddingSizeLarge,
-              left: Dimensions.paddingSizeLarge,
-              right: Dimensions.paddingSizeLarge),
-          decoration: BoxDecoration(
-            color: baseColor,
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
-                spreadRadius: 1,
-                blurRadius: 10,
-                offset: const Offset(0, 6),
-              ),
-            ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'Butuh Bantuan?',
-                style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w600, color: blackColor),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      SvgPicture.asset(
-                        icCustomerService,
-                        width: 32,
-                        height: 32,
-                      ),
-                      const SizedBox(
-                        width: 12,
-                      ),
-                      Text('Tedikap Customer Service ( chat only )', style: txtSecondarySubTitle.copyWith(fontWeight: FontWeight.w400, color: blackColor))
-                    ],
-                  ),
-                  SvgPicture.asset(
-                    icArrowRight, // Replace with your actual asset path
-                    width: 24,
-                    height: 24,
-                  )
-                ],
-              ),
-            ],
+        InkWell(
+          onTap: () {
+            launchURL(Uri.parse(waLink!));
+          },
+          child: Container(
+            width: screenwWidth,
+            margin: const EdgeInsets.only(
+                left: Dimensions.marginSizeLarge,
+                right: Dimensions.marginSizeLarge,
+                top: 20),
+            padding: const EdgeInsets.only(
+                top: Dimensions.paddingSizeLarge,
+                bottom: Dimensions.paddingSizeLarge,
+                left: Dimensions.paddingSizeLarge,
+                right: Dimensions.paddingSizeLarge),
+            decoration: BoxDecoration(
+              color: baseColor,
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 1,
+                  blurRadius: 10,
+                  offset: const Offset(0, 6),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Butuh Bantuan?',
+                  style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w600, color: blackColor),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        SvgPicture.asset(
+                          icCustomerService,
+                          width: 32,
+                          height: 32,
+                        ),
+                        const SizedBox(
+                          width: 12,
+                        ),
+                        Text('Tedikap Customer Service ( chat only )', style: txtSecondarySubTitle.copyWith(fontWeight: FontWeight.w400, color: blackColor))
+                      ],
+                    ),
+                    SvgPicture.asset(
+                      icArrowRight, // Replace with your actual asset path
+                      width: 24,
+                      height: 24,
+                    )
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ],

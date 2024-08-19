@@ -189,6 +189,7 @@ class _OrderPageState extends State<OrderPage> {
                                       filterIndex,
                                       modelReOrder,
                                       modelReOrderReward,
+                                      modelReview,
                                       isPesananDitolak,
                                       isPesananDibatalkan,
                                       isPesananSelesai,
@@ -218,7 +219,8 @@ class _OrderPageState extends State<OrderPage> {
                                                   model!.orders![index];
 
                                               return ListBoxMenuStatus(
-                                                waLink: order.whatsappLink!,
+                                                rating: order.rating ?? 0,
+                                                waLink: order.whatsapp!,
                                                 status: order.status!,
                                                 totalItem: order
                                                     .orderItems!.length
@@ -235,6 +237,7 @@ class _OrderPageState extends State<OrderPage> {
                                                   modelReward!.orders![index];
 
                                               return ListBoxMenuStatus(
+                                                rating: order.rating ?? 0,
                                                 waLink: order.whatsapp!,
                                                 status: order.status!,
                                                 totalItem: order
@@ -279,6 +282,7 @@ class _OrderPageState extends State<OrderPage> {
                                       filterIndex,
                                       modelReOrder,
                                       modelReOrderReward,
+                                      modelReview,
                                       isPesananDitolak,
                                       isPesananDibatalkan,
                                       isPesananSelesai,
@@ -370,6 +374,7 @@ class _OrderPageState extends State<OrderPage> {
                                           filterIndex,
                                           modelReOrder,
                                           modelReOrderReward,
+                                          modelReview,
                                           isPesananDitolak,
                                           isPesananDibatalkan,
                                           isPesananSelesai,
@@ -428,6 +433,7 @@ class _OrderPageState extends State<OrderPage> {
                                             filterIndex,
                                             modelReOrder,
                                             modelReOrderReward,
+                                            modelReview,
                                             isPesananDitolak,
                                             isPesananDibatalkan,
                                             isPesananSelesai,
@@ -461,6 +467,7 @@ class _OrderPageState extends State<OrderPage> {
                                                         model!.orders![index];
 
                                                     return ListBoxMenuStatus(
+                                                      rating: order.rating ?? 0,
                                                       orderId: order.id!,
                                                       status: order.status!,
                                                       totalItem: order
@@ -472,7 +479,7 @@ class _OrderPageState extends State<OrderPage> {
                                                       orderItems:
                                                           order.orderItems,
                                                       waLink:
-                                                          order.whatsappLink!,
+                                                          order.whatsapp!,
                                                       createdAt: order.createdAt
                                                           .toString(),
                                                     );
@@ -481,6 +488,7 @@ class _OrderPageState extends State<OrderPage> {
                                                         .orders![index];
 
                                                     return ListBoxMenuStatus(
+                                                      rating: order.rating ?? 0,
                                                       waLink: order.whatsapp!,
                                                       status: order.status!,
                                                       totalItem: order
@@ -1046,6 +1054,7 @@ class _OrderPageState extends State<OrderPage> {
                   filterIndex,
                   modelReOrder,
                   modelReOrderReward,
+                  modelReview,
                   isPesananDitolak,
                   isPesananDibatalkan,
                   isPesananSelesai,

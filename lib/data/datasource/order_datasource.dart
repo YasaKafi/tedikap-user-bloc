@@ -1,6 +1,7 @@
 
 import 'package:dartz/dartz.dart';
 import 'package:tedikap_user_bloc/data/models/request/post_order_request_model.dart';
+import 'package:tedikap_user_bloc/data/models/request/post_review_request_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/detail_history_order_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/detail_history_order_reward_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/history_order_response_model.dart';
@@ -10,6 +11,7 @@ import 'package:tedikap_user_bloc/data/models/response/post_order_reward_respons
 import 'package:tedikap_user_bloc/data/models/response/post_payment_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/post_reorder_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/post_reorder_reward_response_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/post_review_response_model.dart';
 
 import '../dio_instance.dart';
 import '../repository/tedikap_repository.dart';
@@ -144,6 +146,28 @@ class OrderDatasource{
         return const Left('Failed Re Order');
       }
     } catch (e) {
+      return Left('Failed Ordered: ${e.toString()}');
+    }
+  }
+
+  Future<Either<String, PostReviewResponseModel>> postReviewAndRating(String id, PostReviewRequestModel model) async {
+    try {
+      final response = await _dioInstance.postRequest(
+        isAuthorize: true,
+        data: model.toJson(),
+        endpoint: '${TedikapApiRepository.postReviewAndRating}/$id',
+      );
+
+      print('Status Code: ${response.statusCode}');
+      print('Response Data: ${response.data}');
+
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        return Right(PostReviewResponseModel.fromMap(response.data));
+      } else {
+        return const Left('Failed Re Order');
+      }
+    } catch (e) {
+      print('Exception caught: ${e.toString()}');
       return Left('Failed Ordered: ${e.toString()}');
     }
   }

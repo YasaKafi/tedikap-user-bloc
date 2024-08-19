@@ -33,6 +33,7 @@ class TedikapApiRepository {
   static String getCartItem= '$mainUrl/api/cart/item';
   static String getCartItemReward= '$mainUrl/api/cart-reward/item';
   static String postProductFavorite = '$mainUrl/api/product/favorite';
+  static String postReviewAndRating = '$mainUrl/api/review';
 
   static String getImage = '$mainUrl/storage/product/';
   static String getAvatarProfile = '$mainUrl/storage/avatar/';
@@ -54,7 +55,7 @@ class TedikapApiRepository {
   static String postOrder = '$mainUrl/api/order/store';
   static String postReOrder = '$mainUrl/api/reorder';
   static String postOrderReward = '$mainUrl/api/order-reward/store';
-  static String postReOrderReward = '$mainUrl/api/reorder-reward';
+  static String postReOrderReward = '$mainUrl/api/reorder/reward';
 
   static String putCart = '$mainUrl/api/cart/update';
   static String putCartReward = '$mainUrl/api/cart-reward/update';

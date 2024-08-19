@@ -2,10 +2,12 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tedikap_user_bloc/data/datasource/cart_datasource.dart';
 import 'package:tedikap_user_bloc/data/datasource/order_datasource.dart';
+import 'package:tedikap_user_bloc/data/models/request/post_review_request_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/history_order_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/history_order_reward_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/post_reorder_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/post_reorder_reward_response_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/post_review_response_model.dart';
 
 part 'order_event.dart';
 part 'order_state.dart';
@@ -47,6 +49,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
             0,
             null,
             null,
+              null,
               isPesananDitolak: isPesananDitolak,
               isPesananDibatalkan: isPesananDibatalkan,
               isPesananSelesai: isPesananSelesai,
@@ -71,7 +74,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         result.fold(
           (l) => emit(const _Error(
               message: 'Oops, something went wrong. Please try again later')),
-          (r) => emit(OrderState.success(null, null, 0, r, null)),
+          (r) => emit(OrderState.success(null, null, 0, r, null, null)),
         );
       } catch (e) {
         emit(_Error(message: e.toString()));
@@ -83,21 +86,41 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       try {
         final result = await datasource.postReOrderReward(event.orderRewardId!);
 
-        result.fold(
-          (l) => emit(const _Error(
+        await result.fold(
+          (l) async => emit(const _Error(
               message: 'Oops, something went wrong. Please try again later')),
-          (r) => emit(OrderState.success(
+          (r) async => emit(OrderState.success(
             null,
             null,
             0,
             null,
             r,
+            null,
           )),
         );
       } catch (e) {
         emit(_Error(message: e.toString()));
       }
     });
+
+    on<_PostReview>((event, emit) async {
+      final currentState = state;
+      if (currentState is _Success) {
+        emit(const _Loading());
+        try {
+          final result = await datasource.postReviewAndRating(event.orderId!, event.model!);
+
+          result.fold(
+                (l) => emit(const _Error(
+                message: 'Oops, cannot sent review. Please try again later')),
+                (r) => emit(currentState.copyWith(modelReview: r)),
+          );
+        } catch (e) {
+          emit(_Error(message: e.toString()));
+        }
+      }
+    });
+
 
     on<_GetAllHistoryOrderReward>((event, emit) async {
       emit(const _Loading());
@@ -113,6 +136,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
             1,
             null,
             null,
+              null,
               isPesananDitolak: isPesananDitolak,
               isPesananDibatalkan: isPesananDibatalkan,
               isPesananSelesai: isPesananSelesai,
@@ -143,6 +167,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
             0,
             null,
             null,
+              null,
               isPesananDitolak: isPesananDitolak,
               isPesananDibatalkan: isPesananDibatalkan,
               isPesananSelesai: isPesananSelesai,
@@ -174,6 +199,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
             0,
             null,
             null,
+              null,
               isPesananDitolak: isPesananDitolak,
               isPesananDibatalkan: isPesananDibatalkan,
               isPesananSelesai: isPesananSelesai,
@@ -206,6 +232,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
               filterIndex,
               null,
               null,
+                null,
                 isPesananDitolak: isPesananDitolak,
                 isPesananDibatalkan: isPesananDibatalkan,
                 isPesananSelesai: isPesananSelesai,
@@ -230,6 +257,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
               filterIndex,
               null,
               null,
+                null,
                 isPesananDitolak: isPesananDitolak,
                 isPesananDibatalkan: isPesananDibatalkan,
                 isPesananSelesai: isPesananSelesai,
@@ -319,54 +347,6 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         emit(currentState.copyWith(endDateReward: event.date));
       }
     });
-
-    // on<_ResetFilters>((event, emit) async {
-    //   startDate = DateTime.now().subtract(Duration(days: 365));
-    //   endDate = DateTime.now();
-    //   isPesananSelesai = true;
-    //   isPesananDibatalkan = true;
-    //   isPesananDitolak = true;
-    //
-    //   emit(const OrderState.loading());
-    //   final filterIndex = event.filterIndex;
-    //   try {
-    //     if (filterIndex == 0) {
-    //       final result = await datasource.getFilterTypeOrder(event.query, event.statusOrder);
-    //       emit(result.fold(
-    //             (l) => const OrderState.error(
-    //             message: 'Oops, something went wrong. Please try again later'),
-    //             (r) => OrderState.success(
-    //             r,
-    //             null,
-    //             filterIndex,
-    //             null,
-    //             null,
-    //             isPesananDitolak: isPesananDitolak,
-    //             isPesananDibatalkan: isPesananDibatalkan,
-    //             isPesananSelesai: isPesananSelesai
-    //         ),
-    //       ));
-    //     } else {
-    //       final result = await datasource.getFilterTypeOrderReward(event.query);
-    //       emit(result.fold(
-    //             (l) => const OrderState.error(
-    //             message: 'Oops, something went wrong. Please try again later'),
-    //             (r) => OrderState.success(
-    //             null,
-    //             r,
-    //             filterIndex,
-    //             null,
-    //             null,
-    //             isPesananDitolak: isPesananDitolak,
-    //             isPesananDibatalkan: isPesananDibatalkan,
-    //             isPesananSelesai: isPesananSelesai
-    //         ),
-    //       ));
-    //     }
-    //   } catch (e) {
-    //     emit(OrderState.error(message: e.toString()));
-    //   }
-    // });
 
   }
 }

@@ -20,6 +20,8 @@ mixin _$OrderEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId, PostReviewRequestModel? model)
+        postReview,
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
@@ -48,6 +50,8 @@ mixin _$OrderEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
@@ -76,6 +80,8 @@ mixin _$OrderEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
@@ -105,6 +111,7 @@ mixin _$OrderEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReview value) postReview,
     required TResult Function(_PostReOrder value) postReOrder,
     required TResult Function(_PostReOrderReward value) postReOrderReward,
     required TResult Function(_GetAllHistoryOrderReward value)
@@ -131,6 +138,7 @@ mixin _$OrderEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReview value)? postReview,
     TResult? Function(_PostReOrder value)? postReOrder,
     TResult? Function(_PostReOrderReward value)? postReOrderReward,
     TResult? Function(_GetAllHistoryOrderReward value)?
@@ -154,6 +162,7 @@ mixin _$OrderEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReview value)? postReview,
     TResult Function(_PostReOrder value)? postReOrder,
     TResult Function(_PostReOrderReward value)? postReOrderReward,
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
@@ -233,6 +242,8 @@ class _$StartedImpl implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId, PostReviewRequestModel? model)
+        postReview,
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
@@ -264,6 +275,8 @@ class _$StartedImpl implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
@@ -295,6 +308,8 @@ class _$StartedImpl implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
@@ -330,6 +345,7 @@ class _$StartedImpl implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReview value) postReview,
     required TResult Function(_PostReOrder value) postReOrder,
     required TResult Function(_PostReOrderReward value) postReOrderReward,
     required TResult Function(_GetAllHistoryOrderReward value)
@@ -359,6 +375,7 @@ class _$StartedImpl implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReview value)? postReview,
     TResult? Function(_PostReOrder value)? postReOrder,
     TResult? Function(_PostReOrderReward value)? postReOrderReward,
     TResult? Function(_GetAllHistoryOrderReward value)?
@@ -385,6 +402,7 @@ class _$StartedImpl implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReview value)? postReview,
     TResult Function(_PostReOrder value)? postReOrder,
     TResult Function(_PostReOrderReward value)? postReOrderReward,
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
@@ -454,6 +472,8 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId, PostReviewRequestModel? model)
+        postReview,
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
@@ -485,6 +505,8 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
@@ -516,6 +538,8 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
@@ -551,6 +575,7 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReview value) postReview,
     required TResult Function(_PostReOrder value) postReOrder,
     required TResult Function(_PostReOrderReward value) postReOrderReward,
     required TResult Function(_GetAllHistoryOrderReward value)
@@ -580,6 +605,7 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReview value)? postReview,
     TResult? Function(_PostReOrder value)? postReOrder,
     TResult? Function(_PostReOrderReward value)? postReOrderReward,
     TResult? Function(_GetAllHistoryOrderReward value)?
@@ -606,6 +632,7 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReview value)? postReview,
     TResult Function(_PostReOrder value)? postReOrder,
     TResult Function(_PostReOrderReward value)? postReOrderReward,
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
@@ -633,6 +660,278 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
 
 abstract class _GetAllHistoryOrder implements OrderEvent {
   const factory _GetAllHistoryOrder() = _$GetAllHistoryOrderImpl;
+}
+
+/// @nodoc
+abstract class _$$PostReviewImplCopyWith<$Res> {
+  factory _$$PostReviewImplCopyWith(
+          _$PostReviewImpl value, $Res Function(_$PostReviewImpl) then) =
+      __$$PostReviewImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String? orderId, PostReviewRequestModel? model});
+}
+
+/// @nodoc
+class __$$PostReviewImplCopyWithImpl<$Res>
+    extends _$OrderEventCopyWithImpl<$Res, _$PostReviewImpl>
+    implements _$$PostReviewImplCopyWith<$Res> {
+  __$$PostReviewImplCopyWithImpl(
+      _$PostReviewImpl _value, $Res Function(_$PostReviewImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? orderId = freezed,
+    Object? model = freezed,
+  }) {
+    return _then(_$PostReviewImpl(
+      freezed == orderId
+          ? _value.orderId
+          : orderId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      freezed == model
+          ? _value.model
+          : model // ignore: cast_nullable_to_non_nullable
+              as PostReviewRequestModel?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$PostReviewImpl implements _PostReview {
+  const _$PostReviewImpl(this.orderId, this.model);
+
+  @override
+  final String? orderId;
+  @override
+  final PostReviewRequestModel? model;
+
+  @override
+  String toString() {
+    return 'OrderEvent.postReview(orderId: $orderId, model: $model)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PostReviewImpl &&
+            (identical(other.orderId, orderId) || other.orderId == orderId) &&
+            (identical(other.model, model) || other.model == model));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, orderId, model);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PostReviewImplCopyWith<_$PostReviewImpl> get copyWith =>
+      __$$PostReviewImplCopyWithImpl<_$PostReviewImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId, PostReviewRequestModel? model)
+        postReview,
+    required TResult Function(String? orderId) postReOrder,
+    required TResult Function(String? orderRewardId) postReOrderReward,
+    required TResult Function() getAllHistoryOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrder,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrderReward,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        doFilterOrder,
+    required TResult Function(bool? newValue) togglePesananDitolak,
+    required TResult Function(bool? newValue) togglePesananDitolakReward,
+    required TResult Function(bool? newValue) togglePesananDibatalkan,
+    required TResult Function(bool? newValue) togglePesananSelesai,
+    required TResult Function(bool? newValue) togglePesananSelesaiReward,
+    required TResult Function(DateTime date) setStartDate,
+    required TResult Function(DateTime date) setStartDateReward,
+    required TResult Function(DateTime date) setEndDate,
+    required TResult Function(DateTime date) setEndDateReward,
+    required TResult Function(String query) resetFilters,
+  }) {
+    return postReview(orderId, model);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
+    TResult? Function(String? orderId)? postReOrder,
+    TResult? Function(String? orderRewardId)? postReOrderReward,
+    TResult? Function()? getAllHistoryOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        doFilterOrder,
+    TResult? Function(bool? newValue)? togglePesananDitolak,
+    TResult? Function(bool? newValue)? togglePesananDitolakReward,
+    TResult? Function(bool? newValue)? togglePesananDibatalkan,
+    TResult? Function(bool? newValue)? togglePesananSelesai,
+    TResult? Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult? Function(DateTime date)? setStartDate,
+    TResult? Function(DateTime date)? setStartDateReward,
+    TResult? Function(DateTime date)? setEndDate,
+    TResult? Function(DateTime date)? setEndDateReward,
+    TResult? Function(String query)? resetFilters,
+  }) {
+    return postReview?.call(orderId, model);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
+    TResult Function(String? orderId)? postReOrder,
+    TResult Function(String? orderRewardId)? postReOrderReward,
+    TResult Function()? getAllHistoryOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        doFilterOrder,
+    TResult Function(bool? newValue)? togglePesananDitolak,
+    TResult Function(bool? newValue)? togglePesananDitolakReward,
+    TResult Function(bool? newValue)? togglePesananDibatalkan,
+    TResult Function(bool? newValue)? togglePesananSelesai,
+    TResult Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult Function(DateTime date)? setStartDate,
+    TResult Function(DateTime date)? setStartDateReward,
+    TResult Function(DateTime date)? setEndDate,
+    TResult Function(DateTime date)? setEndDateReward,
+    TResult Function(String query)? resetFilters,
+    required TResult orElse(),
+  }) {
+    if (postReview != null) {
+      return postReview(orderId, model);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReview value) postReview,
+    required TResult Function(_PostReOrder value) postReOrder,
+    required TResult Function(_PostReOrderReward value) postReOrderReward,
+    required TResult Function(_GetAllHistoryOrderReward value)
+        getAllHistoryOrderReward,
+    required TResult Function(_GetCategoryOrder value) getFilterOrder,
+    required TResult Function(_GetCategoryOrderReward value)
+        getFilterOrderReward,
+    required TResult Function(_DoFilterOrder value) doFilterOrder,
+    required TResult Function(_ToggleDitolak value) togglePesananDitolak,
+    required TResult Function(_ToggleDitolakReward value)
+        togglePesananDitolakReward,
+    required TResult Function(_ToggleDibatalkan value) togglePesananDibatalkan,
+    required TResult Function(_ToggleSelesai value) togglePesananSelesai,
+    required TResult Function(_ToggleSelesaiReward value)
+        togglePesananSelesaiReward,
+    required TResult Function(_SetStartDate value) setStartDate,
+    required TResult Function(_SetStartDateReward value) setStartDateReward,
+    required TResult Function(_SetEndDate value) setEndDate,
+    required TResult Function(_SetEndDateReward value) setEndDateReward,
+    required TResult Function(_ResetFilters value) resetFilters,
+  }) {
+    return postReview(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReview value)? postReview,
+    TResult? Function(_PostReOrder value)? postReOrder,
+    TResult? Function(_PostReOrderReward value)? postReOrderReward,
+    TResult? Function(_GetAllHistoryOrderReward value)?
+        getAllHistoryOrderReward,
+    TResult? Function(_GetCategoryOrder value)? getFilterOrder,
+    TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_DoFilterOrder value)? doFilterOrder,
+    TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
+    TResult? Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
+    TResult? Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult? Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult? Function(_SetStartDate value)? setStartDate,
+    TResult? Function(_SetStartDateReward value)? setStartDateReward,
+    TResult? Function(_SetEndDate value)? setEndDate,
+    TResult? Function(_SetEndDateReward value)? setEndDateReward,
+    TResult? Function(_ResetFilters value)? resetFilters,
+  }) {
+    return postReview?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReview value)? postReview,
+    TResult Function(_PostReOrder value)? postReOrder,
+    TResult Function(_PostReOrderReward value)? postReOrderReward,
+    TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
+    TResult Function(_GetCategoryOrder value)? getFilterOrder,
+    TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_DoFilterOrder value)? doFilterOrder,
+    TResult Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
+    TResult Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
+    TResult Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult Function(_SetStartDate value)? setStartDate,
+    TResult Function(_SetStartDateReward value)? setStartDateReward,
+    TResult Function(_SetEndDate value)? setEndDate,
+    TResult Function(_SetEndDateReward value)? setEndDateReward,
+    TResult Function(_ResetFilters value)? resetFilters,
+    required TResult orElse(),
+  }) {
+    if (postReview != null) {
+      return postReview(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PostReview implements OrderEvent {
+  const factory _PostReview(
+          final String? orderId, final PostReviewRequestModel? model) =
+      _$PostReviewImpl;
+
+  String? get orderId;
+  PostReviewRequestModel? get model;
+  @JsonKey(ignore: true)
+  _$$PostReviewImplCopyWith<_$PostReviewImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -701,6 +1000,8 @@ class _$PostReOrderImpl implements _PostReOrder {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId, PostReviewRequestModel? model)
+        postReview,
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
@@ -732,6 +1033,8 @@ class _$PostReOrderImpl implements _PostReOrder {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
@@ -763,6 +1066,8 @@ class _$PostReOrderImpl implements _PostReOrder {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
@@ -798,6 +1103,7 @@ class _$PostReOrderImpl implements _PostReOrder {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReview value) postReview,
     required TResult Function(_PostReOrder value) postReOrder,
     required TResult Function(_PostReOrderReward value) postReOrderReward,
     required TResult Function(_GetAllHistoryOrderReward value)
@@ -827,6 +1133,7 @@ class _$PostReOrderImpl implements _PostReOrder {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReview value)? postReview,
     TResult? Function(_PostReOrder value)? postReOrder,
     TResult? Function(_PostReOrderReward value)? postReOrderReward,
     TResult? Function(_GetAllHistoryOrderReward value)?
@@ -853,6 +1160,7 @@ class _$PostReOrderImpl implements _PostReOrder {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReview value)? postReview,
     TResult Function(_PostReOrder value)? postReOrder,
     TResult Function(_PostReOrderReward value)? postReOrderReward,
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
@@ -955,6 +1263,8 @@ class _$PostReOrderRewardImpl implements _PostReOrderReward {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId, PostReviewRequestModel? model)
+        postReview,
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
@@ -986,6 +1296,8 @@ class _$PostReOrderRewardImpl implements _PostReOrderReward {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
@@ -1017,6 +1329,8 @@ class _$PostReOrderRewardImpl implements _PostReOrderReward {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
@@ -1052,6 +1366,7 @@ class _$PostReOrderRewardImpl implements _PostReOrderReward {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReview value) postReview,
     required TResult Function(_PostReOrder value) postReOrder,
     required TResult Function(_PostReOrderReward value) postReOrderReward,
     required TResult Function(_GetAllHistoryOrderReward value)
@@ -1081,6 +1396,7 @@ class _$PostReOrderRewardImpl implements _PostReOrderReward {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReview value)? postReview,
     TResult? Function(_PostReOrder value)? postReOrder,
     TResult? Function(_PostReOrderReward value)? postReOrderReward,
     TResult? Function(_GetAllHistoryOrderReward value)?
@@ -1107,6 +1423,7 @@ class _$PostReOrderRewardImpl implements _PostReOrderReward {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReview value)? postReview,
     TResult Function(_PostReOrder value)? postReOrder,
     TResult Function(_PostReOrderReward value)? postReOrderReward,
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
@@ -1185,6 +1502,8 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId, PostReviewRequestModel? model)
+        postReview,
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
@@ -1216,6 +1535,8 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
@@ -1247,6 +1568,8 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
@@ -1282,6 +1605,7 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReview value) postReview,
     required TResult Function(_PostReOrder value) postReOrder,
     required TResult Function(_PostReOrderReward value) postReOrderReward,
     required TResult Function(_GetAllHistoryOrderReward value)
@@ -1311,6 +1635,7 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReview value)? postReview,
     TResult? Function(_PostReOrder value)? postReOrder,
     TResult? Function(_PostReOrderReward value)? postReOrderReward,
     TResult? Function(_GetAllHistoryOrderReward value)?
@@ -1337,6 +1662,7 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReview value)? postReview,
     TResult Function(_PostReOrder value)? postReOrder,
     TResult Function(_PostReOrderReward value)? postReOrderReward,
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
@@ -1462,6 +1788,8 @@ class _$GetCategoryOrderImpl implements _GetCategoryOrder {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId, PostReviewRequestModel? model)
+        postReview,
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
@@ -1493,6 +1821,8 @@ class _$GetCategoryOrderImpl implements _GetCategoryOrder {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
@@ -1524,6 +1854,8 @@ class _$GetCategoryOrderImpl implements _GetCategoryOrder {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
@@ -1559,6 +1891,7 @@ class _$GetCategoryOrderImpl implements _GetCategoryOrder {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReview value) postReview,
     required TResult Function(_PostReOrder value) postReOrder,
     required TResult Function(_PostReOrderReward value) postReOrderReward,
     required TResult Function(_GetAllHistoryOrderReward value)
@@ -1588,6 +1921,7 @@ class _$GetCategoryOrderImpl implements _GetCategoryOrder {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReview value)? postReview,
     TResult? Function(_PostReOrder value)? postReOrder,
     TResult? Function(_PostReOrderReward value)? postReOrderReward,
     TResult? Function(_GetAllHistoryOrderReward value)?
@@ -1614,6 +1948,7 @@ class _$GetCategoryOrderImpl implements _GetCategoryOrder {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReview value)? postReview,
     TResult Function(_PostReOrder value)? postReOrder,
     TResult Function(_PostReOrderReward value)? postReOrderReward,
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
@@ -1750,6 +2085,8 @@ class _$GetCategoryOrderRewardImpl implements _GetCategoryOrderReward {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId, PostReviewRequestModel? model)
+        postReview,
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
@@ -1781,6 +2118,8 @@ class _$GetCategoryOrderRewardImpl implements _GetCategoryOrderReward {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
@@ -1812,6 +2151,8 @@ class _$GetCategoryOrderRewardImpl implements _GetCategoryOrderReward {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
@@ -1847,6 +2188,7 @@ class _$GetCategoryOrderRewardImpl implements _GetCategoryOrderReward {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReview value) postReview,
     required TResult Function(_PostReOrder value) postReOrder,
     required TResult Function(_PostReOrderReward value) postReOrderReward,
     required TResult Function(_GetAllHistoryOrderReward value)
@@ -1876,6 +2218,7 @@ class _$GetCategoryOrderRewardImpl implements _GetCategoryOrderReward {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReview value)? postReview,
     TResult? Function(_PostReOrder value)? postReOrder,
     TResult? Function(_PostReOrderReward value)? postReOrderReward,
     TResult? Function(_GetAllHistoryOrderReward value)?
@@ -1902,6 +2245,7 @@ class _$GetCategoryOrderRewardImpl implements _GetCategoryOrderReward {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReview value)? postReview,
     TResult Function(_PostReOrder value)? postReOrder,
     TResult Function(_PostReOrderReward value)? postReOrderReward,
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
@@ -2055,6 +2399,8 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId, PostReviewRequestModel? model)
+        postReview,
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
@@ -2086,6 +2432,8 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
@@ -2118,6 +2466,8 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
@@ -2153,6 +2503,7 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReview value) postReview,
     required TResult Function(_PostReOrder value) postReOrder,
     required TResult Function(_PostReOrderReward value) postReOrderReward,
     required TResult Function(_GetAllHistoryOrderReward value)
@@ -2182,6 +2533,7 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReview value)? postReview,
     TResult? Function(_PostReOrder value)? postReOrder,
     TResult? Function(_PostReOrderReward value)? postReOrderReward,
     TResult? Function(_GetAllHistoryOrderReward value)?
@@ -2208,6 +2560,7 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReview value)? postReview,
     TResult Function(_PostReOrder value)? postReOrder,
     TResult Function(_PostReOrderReward value)? postReOrderReward,
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
@@ -2318,6 +2671,8 @@ class _$ToggleDitolakImpl implements _ToggleDitolak {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId, PostReviewRequestModel? model)
+        postReview,
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
@@ -2349,6 +2704,8 @@ class _$ToggleDitolakImpl implements _ToggleDitolak {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
@@ -2380,6 +2737,8 @@ class _$ToggleDitolakImpl implements _ToggleDitolak {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
@@ -2415,6 +2774,7 @@ class _$ToggleDitolakImpl implements _ToggleDitolak {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReview value) postReview,
     required TResult Function(_PostReOrder value) postReOrder,
     required TResult Function(_PostReOrderReward value) postReOrderReward,
     required TResult Function(_GetAllHistoryOrderReward value)
@@ -2444,6 +2804,7 @@ class _$ToggleDitolakImpl implements _ToggleDitolak {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReview value)? postReview,
     TResult? Function(_PostReOrder value)? postReOrder,
     TResult? Function(_PostReOrderReward value)? postReOrderReward,
     TResult? Function(_GetAllHistoryOrderReward value)?
@@ -2470,6 +2831,7 @@ class _$ToggleDitolakImpl implements _ToggleDitolak {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReview value)? postReview,
     TResult Function(_PostReOrder value)? postReOrder,
     TResult Function(_PostReOrderReward value)? postReOrderReward,
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
@@ -2572,6 +2934,8 @@ class _$ToggleDitolakRewardImpl implements _ToggleDitolakReward {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId, PostReviewRequestModel? model)
+        postReview,
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
@@ -2603,6 +2967,8 @@ class _$ToggleDitolakRewardImpl implements _ToggleDitolakReward {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
@@ -2634,6 +3000,8 @@ class _$ToggleDitolakRewardImpl implements _ToggleDitolakReward {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
@@ -2669,6 +3037,7 @@ class _$ToggleDitolakRewardImpl implements _ToggleDitolakReward {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReview value) postReview,
     required TResult Function(_PostReOrder value) postReOrder,
     required TResult Function(_PostReOrderReward value) postReOrderReward,
     required TResult Function(_GetAllHistoryOrderReward value)
@@ -2698,6 +3067,7 @@ class _$ToggleDitolakRewardImpl implements _ToggleDitolakReward {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReview value)? postReview,
     TResult? Function(_PostReOrder value)? postReOrder,
     TResult? Function(_PostReOrderReward value)? postReOrderReward,
     TResult? Function(_GetAllHistoryOrderReward value)?
@@ -2724,6 +3094,7 @@ class _$ToggleDitolakRewardImpl implements _ToggleDitolakReward {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReview value)? postReview,
     TResult Function(_PostReOrder value)? postReOrder,
     TResult Function(_PostReOrderReward value)? postReOrderReward,
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
@@ -2827,6 +3198,8 @@ class _$ToggleDibatalkanImpl implements _ToggleDibatalkan {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId, PostReviewRequestModel? model)
+        postReview,
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
@@ -2858,6 +3231,8 @@ class _$ToggleDibatalkanImpl implements _ToggleDibatalkan {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
@@ -2889,6 +3264,8 @@ class _$ToggleDibatalkanImpl implements _ToggleDibatalkan {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
@@ -2924,6 +3301,7 @@ class _$ToggleDibatalkanImpl implements _ToggleDibatalkan {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReview value) postReview,
     required TResult Function(_PostReOrder value) postReOrder,
     required TResult Function(_PostReOrderReward value) postReOrderReward,
     required TResult Function(_GetAllHistoryOrderReward value)
@@ -2953,6 +3331,7 @@ class _$ToggleDibatalkanImpl implements _ToggleDibatalkan {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReview value)? postReview,
     TResult? Function(_PostReOrder value)? postReOrder,
     TResult? Function(_PostReOrderReward value)? postReOrderReward,
     TResult? Function(_GetAllHistoryOrderReward value)?
@@ -2979,6 +3358,7 @@ class _$ToggleDibatalkanImpl implements _ToggleDibatalkan {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReview value)? postReview,
     TResult Function(_PostReOrder value)? postReOrder,
     TResult Function(_PostReOrderReward value)? postReOrderReward,
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
@@ -3081,6 +3461,8 @@ class _$ToggleSelesaiImpl implements _ToggleSelesai {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId, PostReviewRequestModel? model)
+        postReview,
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
@@ -3112,6 +3494,8 @@ class _$ToggleSelesaiImpl implements _ToggleSelesai {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
@@ -3143,6 +3527,8 @@ class _$ToggleSelesaiImpl implements _ToggleSelesai {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
@@ -3178,6 +3564,7 @@ class _$ToggleSelesaiImpl implements _ToggleSelesai {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReview value) postReview,
     required TResult Function(_PostReOrder value) postReOrder,
     required TResult Function(_PostReOrderReward value) postReOrderReward,
     required TResult Function(_GetAllHistoryOrderReward value)
@@ -3207,6 +3594,7 @@ class _$ToggleSelesaiImpl implements _ToggleSelesai {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReview value)? postReview,
     TResult? Function(_PostReOrder value)? postReOrder,
     TResult? Function(_PostReOrderReward value)? postReOrderReward,
     TResult? Function(_GetAllHistoryOrderReward value)?
@@ -3233,6 +3621,7 @@ class _$ToggleSelesaiImpl implements _ToggleSelesai {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReview value)? postReview,
     TResult Function(_PostReOrder value)? postReOrder,
     TResult Function(_PostReOrderReward value)? postReOrderReward,
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
@@ -3335,6 +3724,8 @@ class _$ToggleSelesaiRewardImpl implements _ToggleSelesaiReward {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId, PostReviewRequestModel? model)
+        postReview,
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
@@ -3366,6 +3757,8 @@ class _$ToggleSelesaiRewardImpl implements _ToggleSelesaiReward {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
@@ -3397,6 +3790,8 @@ class _$ToggleSelesaiRewardImpl implements _ToggleSelesaiReward {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
@@ -3432,6 +3827,7 @@ class _$ToggleSelesaiRewardImpl implements _ToggleSelesaiReward {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReview value) postReview,
     required TResult Function(_PostReOrder value) postReOrder,
     required TResult Function(_PostReOrderReward value) postReOrderReward,
     required TResult Function(_GetAllHistoryOrderReward value)
@@ -3461,6 +3857,7 @@ class _$ToggleSelesaiRewardImpl implements _ToggleSelesaiReward {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReview value)? postReview,
     TResult? Function(_PostReOrder value)? postReOrder,
     TResult? Function(_PostReOrderReward value)? postReOrderReward,
     TResult? Function(_GetAllHistoryOrderReward value)?
@@ -3487,6 +3884,7 @@ class _$ToggleSelesaiRewardImpl implements _ToggleSelesaiReward {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReview value)? postReview,
     TResult Function(_PostReOrder value)? postReOrder,
     TResult Function(_PostReOrderReward value)? postReOrderReward,
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
@@ -3588,6 +3986,8 @@ class _$SetStartDateImpl implements _SetStartDate {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId, PostReviewRequestModel? model)
+        postReview,
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
@@ -3619,6 +4019,8 @@ class _$SetStartDateImpl implements _SetStartDate {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
@@ -3650,6 +4052,8 @@ class _$SetStartDateImpl implements _SetStartDate {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
@@ -3685,6 +4089,7 @@ class _$SetStartDateImpl implements _SetStartDate {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReview value) postReview,
     required TResult Function(_PostReOrder value) postReOrder,
     required TResult Function(_PostReOrderReward value) postReOrderReward,
     required TResult Function(_GetAllHistoryOrderReward value)
@@ -3714,6 +4119,7 @@ class _$SetStartDateImpl implements _SetStartDate {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReview value)? postReview,
     TResult? Function(_PostReOrder value)? postReOrder,
     TResult? Function(_PostReOrderReward value)? postReOrderReward,
     TResult? Function(_GetAllHistoryOrderReward value)?
@@ -3740,6 +4146,7 @@ class _$SetStartDateImpl implements _SetStartDate {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReview value)? postReview,
     TResult Function(_PostReOrder value)? postReOrder,
     TResult Function(_PostReOrderReward value)? postReOrderReward,
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
@@ -3841,6 +4248,8 @@ class _$SetStartDateRewardImpl implements _SetStartDateReward {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId, PostReviewRequestModel? model)
+        postReview,
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
@@ -3872,6 +4281,8 @@ class _$SetStartDateRewardImpl implements _SetStartDateReward {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
@@ -3903,6 +4314,8 @@ class _$SetStartDateRewardImpl implements _SetStartDateReward {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
@@ -3938,6 +4351,7 @@ class _$SetStartDateRewardImpl implements _SetStartDateReward {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReview value) postReview,
     required TResult Function(_PostReOrder value) postReOrder,
     required TResult Function(_PostReOrderReward value) postReOrderReward,
     required TResult Function(_GetAllHistoryOrderReward value)
@@ -3967,6 +4381,7 @@ class _$SetStartDateRewardImpl implements _SetStartDateReward {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReview value)? postReview,
     TResult? Function(_PostReOrder value)? postReOrder,
     TResult? Function(_PostReOrderReward value)? postReOrderReward,
     TResult? Function(_GetAllHistoryOrderReward value)?
@@ -3993,6 +4408,7 @@ class _$SetStartDateRewardImpl implements _SetStartDateReward {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReview value)? postReview,
     TResult Function(_PostReOrder value)? postReOrder,
     TResult Function(_PostReOrderReward value)? postReOrderReward,
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
@@ -4094,6 +4510,8 @@ class _$SetEndDateImpl implements _SetEndDate {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId, PostReviewRequestModel? model)
+        postReview,
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
@@ -4125,6 +4543,8 @@ class _$SetEndDateImpl implements _SetEndDate {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
@@ -4156,6 +4576,8 @@ class _$SetEndDateImpl implements _SetEndDate {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
@@ -4191,6 +4613,7 @@ class _$SetEndDateImpl implements _SetEndDate {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReview value) postReview,
     required TResult Function(_PostReOrder value) postReOrder,
     required TResult Function(_PostReOrderReward value) postReOrderReward,
     required TResult Function(_GetAllHistoryOrderReward value)
@@ -4220,6 +4643,7 @@ class _$SetEndDateImpl implements _SetEndDate {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReview value)? postReview,
     TResult? Function(_PostReOrder value)? postReOrder,
     TResult? Function(_PostReOrderReward value)? postReOrderReward,
     TResult? Function(_GetAllHistoryOrderReward value)?
@@ -4246,6 +4670,7 @@ class _$SetEndDateImpl implements _SetEndDate {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReview value)? postReview,
     TResult Function(_PostReOrder value)? postReOrder,
     TResult Function(_PostReOrderReward value)? postReOrderReward,
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
@@ -4347,6 +4772,8 @@ class _$SetEndDateRewardImpl implements _SetEndDateReward {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId, PostReviewRequestModel? model)
+        postReview,
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
@@ -4378,6 +4805,8 @@ class _$SetEndDateRewardImpl implements _SetEndDateReward {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
@@ -4409,6 +4838,8 @@ class _$SetEndDateRewardImpl implements _SetEndDateReward {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
@@ -4444,6 +4875,7 @@ class _$SetEndDateRewardImpl implements _SetEndDateReward {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReview value) postReview,
     required TResult Function(_PostReOrder value) postReOrder,
     required TResult Function(_PostReOrderReward value) postReOrderReward,
     required TResult Function(_GetAllHistoryOrderReward value)
@@ -4473,6 +4905,7 @@ class _$SetEndDateRewardImpl implements _SetEndDateReward {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReview value)? postReview,
     TResult? Function(_PostReOrder value)? postReOrder,
     TResult? Function(_PostReOrderReward value)? postReOrderReward,
     TResult? Function(_GetAllHistoryOrderReward value)?
@@ -4499,6 +4932,7 @@ class _$SetEndDateRewardImpl implements _SetEndDateReward {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReview value)? postReview,
     TResult Function(_PostReOrder value)? postReOrder,
     TResult Function(_PostReOrderReward value)? postReOrderReward,
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
@@ -4599,6 +5033,8 @@ class _$ResetFiltersImpl implements _ResetFilters {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId, PostReviewRequestModel? model)
+        postReview,
     required TResult Function(String? orderId) postReOrder,
     required TResult Function(String? orderRewardId) postReOrderReward,
     required TResult Function() getAllHistoryOrderReward,
@@ -4630,6 +5066,8 @@ class _$ResetFiltersImpl implements _ResetFilters {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult? Function(String? orderId)? postReOrder,
     TResult? Function(String? orderRewardId)? postReOrderReward,
     TResult? Function()? getAllHistoryOrderReward,
@@ -4661,6 +5099,8 @@ class _$ResetFiltersImpl implements _ResetFilters {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
     TResult Function(String? orderId)? postReOrder,
     TResult Function(String? orderRewardId)? postReOrderReward,
     TResult Function()? getAllHistoryOrderReward,
@@ -4696,6 +5136,7 @@ class _$ResetFiltersImpl implements _ResetFilters {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReview value) postReview,
     required TResult Function(_PostReOrder value) postReOrder,
     required TResult Function(_PostReOrderReward value) postReOrderReward,
     required TResult Function(_GetAllHistoryOrderReward value)
@@ -4725,6 +5166,7 @@ class _$ResetFiltersImpl implements _ResetFilters {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReview value)? postReview,
     TResult? Function(_PostReOrder value)? postReOrder,
     TResult? Function(_PostReOrderReward value)? postReOrderReward,
     TResult? Function(_GetAllHistoryOrderReward value)?
@@ -4751,6 +5193,7 @@ class _$ResetFiltersImpl implements _ResetFilters {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReview value)? postReview,
     TResult Function(_PostReOrder value)? postReOrder,
     TResult Function(_PostReOrderReward value)? postReOrderReward,
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
@@ -4797,6 +5240,7 @@ mixin _$OrderState {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
+            PostReviewResponseModel? modelReview,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
             bool? isPesananSelesai,
@@ -4820,6 +5264,7 @@ mixin _$OrderState {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
+            PostReviewResponseModel? modelReview,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
             bool? isPesananSelesai,
@@ -4843,6 +5288,7 @@ mixin _$OrderState {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
+            PostReviewResponseModel? modelReview,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
             bool? isPesananSelesai,
@@ -4948,6 +5394,7 @@ class _$InitialImpl implements _Initial {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
+            PostReviewResponseModel? modelReview,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
             bool? isPesananSelesai,
@@ -4974,6 +5421,7 @@ class _$InitialImpl implements _Initial {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
+            PostReviewResponseModel? modelReview,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
             bool? isPesananSelesai,
@@ -5000,6 +5448,7 @@ class _$InitialImpl implements _Initial {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
+            PostReviewResponseModel? modelReview,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
             bool? isPesananSelesai,
@@ -5107,6 +5556,7 @@ class _$LoadingImpl implements _Loading {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
+            PostReviewResponseModel? modelReview,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
             bool? isPesananSelesai,
@@ -5133,6 +5583,7 @@ class _$LoadingImpl implements _Loading {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
+            PostReviewResponseModel? modelReview,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
             bool? isPesananSelesai,
@@ -5159,6 +5610,7 @@ class _$LoadingImpl implements _Loading {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
+            PostReviewResponseModel? modelReview,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
             bool? isPesananSelesai,
@@ -5232,6 +5684,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
       int filterIndex,
       PostReOrderResponseModel? modelPostReOrder,
       PostReOrderRewardResponseModel? modelReOrderReward,
+      PostReviewResponseModel? modelReview,
       bool? isPesananDitolak,
       bool? isPesananDibatalkan,
       bool? isPesananSelesai,
@@ -5259,6 +5712,7 @@ class __$$SuccessImplCopyWithImpl<$Res>
     Object? filterIndex = null,
     Object? modelPostReOrder = freezed,
     Object? modelReOrderReward = freezed,
+    Object? modelReview = freezed,
     Object? isPesananDitolak = freezed,
     Object? isPesananDibatalkan = freezed,
     Object? isPesananSelesai = freezed,
@@ -5290,6 +5744,10 @@ class __$$SuccessImplCopyWithImpl<$Res>
           ? _value.modelReOrderReward
           : modelReOrderReward // ignore: cast_nullable_to_non_nullable
               as PostReOrderRewardResponseModel?,
+      freezed == modelReview
+          ? _value.modelReview
+          : modelReview // ignore: cast_nullable_to_non_nullable
+              as PostReviewResponseModel?,
       isPesananDitolak: freezed == isPesananDitolak
           ? _value.isPesananDitolak
           : isPesananDitolak // ignore: cast_nullable_to_non_nullable
@@ -5334,7 +5792,7 @@ class __$$SuccessImplCopyWithImpl<$Res>
 
 class _$SuccessImpl implements _Success {
   const _$SuccessImpl(this.model, this.modelReward, this.filterIndex,
-      this.modelPostReOrder, this.modelReOrderReward,
+      this.modelPostReOrder, this.modelReOrderReward, this.modelReview,
       {this.isPesananDitolak,
       this.isPesananDibatalkan,
       this.isPesananSelesai,
@@ -5355,6 +5813,8 @@ class _$SuccessImpl implements _Success {
   final PostReOrderResponseModel? modelPostReOrder;
   @override
   final PostReOrderRewardResponseModel? modelReOrderReward;
+  @override
+  final PostReviewResponseModel? modelReview;
   @override
   final bool? isPesananDitolak;
   @override
@@ -5377,7 +5837,7 @@ class _$SuccessImpl implements _Success {
 
   @override
   String toString() {
-    return 'OrderState.success(model: $model, modelReward: $modelReward, filterIndex: $filterIndex, modelPostReOrder: $modelPostReOrder, modelReOrderReward: $modelReOrderReward, isPesananDitolak: $isPesananDitolak, isPesananDibatalkan: $isPesananDibatalkan, isPesananSelesai: $isPesananSelesai, startDate: $startDate, endDate: $endDate, isPesananDitolakReward: $isPesananDitolakReward, isPesananSelesaiReward: $isPesananSelesaiReward, startDateReward: $startDateReward, endDateReward: $endDateReward)';
+    return 'OrderState.success(model: $model, modelReward: $modelReward, filterIndex: $filterIndex, modelPostReOrder: $modelPostReOrder, modelReOrderReward: $modelReOrderReward, modelReview: $modelReview, isPesananDitolak: $isPesananDitolak, isPesananDibatalkan: $isPesananDibatalkan, isPesananSelesai: $isPesananSelesai, startDate: $startDate, endDate: $endDate, isPesananDitolakReward: $isPesananDitolakReward, isPesananSelesaiReward: $isPesananSelesaiReward, startDateReward: $startDateReward, endDateReward: $endDateReward)';
   }
 
   @override
@@ -5394,6 +5854,8 @@ class _$SuccessImpl implements _Success {
                 other.modelPostReOrder == modelPostReOrder) &&
             (identical(other.modelReOrderReward, modelReOrderReward) ||
                 other.modelReOrderReward == modelReOrderReward) &&
+            (identical(other.modelReview, modelReview) ||
+                other.modelReview == modelReview) &&
             (identical(other.isPesananDitolak, isPesananDitolak) ||
                 other.isPesananDitolak == isPesananDitolak) &&
             (identical(other.isPesananDibatalkan, isPesananDibatalkan) ||
@@ -5421,6 +5883,7 @@ class _$SuccessImpl implements _Success {
       filterIndex,
       modelPostReOrder,
       modelReOrderReward,
+      modelReview,
       isPesananDitolak,
       isPesananDibatalkan,
       isPesananSelesai,
@@ -5448,6 +5911,7 @@ class _$SuccessImpl implements _Success {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
+            PostReviewResponseModel? modelReview,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
             bool? isPesananSelesai,
@@ -5466,6 +5930,7 @@ class _$SuccessImpl implements _Success {
         filterIndex,
         modelPostReOrder,
         modelReOrderReward,
+        modelReview,
         isPesananDitolak,
         isPesananDibatalkan,
         isPesananSelesai,
@@ -5488,6 +5953,7 @@ class _$SuccessImpl implements _Success {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
+            PostReviewResponseModel? modelReview,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
             bool? isPesananSelesai,
@@ -5506,6 +5972,7 @@ class _$SuccessImpl implements _Success {
         filterIndex,
         modelPostReOrder,
         modelReOrderReward,
+        modelReview,
         isPesananDitolak,
         isPesananDibatalkan,
         isPesananSelesai,
@@ -5528,6 +5995,7 @@ class _$SuccessImpl implements _Success {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
+            PostReviewResponseModel? modelReview,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
             bool? isPesananSelesai,
@@ -5548,6 +6016,7 @@ class _$SuccessImpl implements _Success {
           filterIndex,
           modelPostReOrder,
           modelReOrderReward,
+          modelReview,
           isPesananDitolak,
           isPesananDibatalkan,
           isPesananSelesai,
@@ -5606,6 +6075,7 @@ abstract class _Success implements OrderState {
       final int filterIndex,
       final PostReOrderResponseModel? modelPostReOrder,
       final PostReOrderRewardResponseModel? modelReOrderReward,
+      final PostReviewResponseModel? modelReview,
       {final bool? isPesananDitolak,
       final bool? isPesananDibatalkan,
       final bool? isPesananSelesai,
@@ -5621,6 +6091,7 @@ abstract class _Success implements OrderState {
   int get filterIndex;
   PostReOrderResponseModel? get modelPostReOrder;
   PostReOrderRewardResponseModel? get modelReOrderReward;
+  PostReviewResponseModel? get modelReview;
   bool? get isPesananDitolak;
   bool? get isPesananDibatalkan;
   bool? get isPesananSelesai;
@@ -5707,6 +6178,7 @@ class _$ErrorImpl implements _Error {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
+            PostReviewResponseModel? modelReview,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
             bool? isPesananSelesai,
@@ -5733,6 +6205,7 @@ class _$ErrorImpl implements _Error {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
+            PostReviewResponseModel? modelReview,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
             bool? isPesananSelesai,
@@ -5759,6 +6232,7 @@ class _$ErrorImpl implements _Error {
             int filterIndex,
             PostReOrderResponseModel? modelPostReOrder,
             PostReOrderRewardResponseModel? modelReOrderReward,
+            PostReviewResponseModel? modelReview,
             bool? isPesananDitolak,
             bool? isPesananDibatalkan,
             bool? isPesananSelesai,

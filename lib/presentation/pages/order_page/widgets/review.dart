@@ -2,19 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:tedikap_user_bloc/data/models/request/post_review_request_model.dart';
 
 import '../../../../common/theme.dart';
 import '../../../global_components/common_button.dart';
 import '../bloc/order_bloc.dart';
 
 class RateAndReviewSheet extends StatelessWidget {
-  const RateAndReviewSheet({Key? key}) : super(key: key);
+  final String? orderId;
+  final String? orderRewardId;
+  final TextEditingController _noteController = TextEditingController();
+  final ValueNotifier<double> _staffServiceRating = ValueNotifier(0);
+  final ValueNotifier<double> _productQualityRating = ValueNotifier(0);
+
+  RateAndReviewSheet({Key? key, required this.orderId, this.orderRewardId, }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SingleChildScrollView(
-        physics: AlwaysScrollableScrollPhysics(), // Ensures scrolling is always possible
+        physics: AlwaysScrollableScrollPhysics(),
         child: BlocBuilder<OrderBloc, OrderState>(
           builder: (context, state) {
             return Container(
@@ -72,7 +81,7 @@ class RateAndReviewSheet extends StatelessWidget {
                               SizedBox(height: 10),
                               _buildOrderDetailRow(
                                 title: 'Waktu Pick Up',
-                                value: '15:15',
+                                value: '${orderRewardId}',
                               ),
                             ],
                           ),
@@ -104,17 +113,72 @@ class RateAndReviewSheet extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 20),
-                    child: CommonButton(
-                      width: double.infinity,
-                      padding: EdgeInsets.symmetric(
-                          vertical: 15, horizontal: 15),
-                      text: 'Pesan Ulang',
-                      onPressed: () {},
-                      backgroundColor: primaryColor,
-                      textColor: baseColor,
-                      borderRadius: 30,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
+                    child: BlocConsumer<OrderBloc, OrderState>(
+                      listener: (context, state) {
+                        print('State: $state');
+                        state.maybeWhen(
+                            orElse: (){},
+                            success: (model,
+                                modelReward,
+                                filterIndex,
+                                modelReOrder,
+                                modelReOrderReward,
+                                modelReview,
+                                isPesananDitolak,
+                                isPesananDibatalkan,
+                                isPesananSelesai,
+                                startDate,
+                                endDate,
+                                isPesananDitolakReward,
+                                isPesananSelesaiReward,
+                                startDateReward,
+                                endDateReward) {
+                              print('modelReview: ${modelReview?.data}');
+                              if (modelReview?.data != null) {
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                  content: Text(
+                                    'Review success!',
+                                    style: txtSecondaryTitle.copyWith(
+                                        fontWeight: FontWeight.w500, color: baseColor),
+                                  ),
+                                  backgroundColor: greenMedium,
+                                ));
+                                context.goNamed('dashboard', pathParameters: {'pageIndex': '2'});
+                              }
+                            }
+                        );
+                      },
+
+                      builder: (context, state){
+                        return CommonButton(
+                          width: double.infinity,
+                          padding:
+                          EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                          text: 'Kirim Ulasan',
+                          onPressed: () {
+                            final modelPostReview = PostReviewRequestModel(
+                              staffService: _staffServiceRating.value,
+                              productQuality: _productQualityRating.value,
+                              note: _noteController.text,
+                            );
+
+                            if (orderId != null && orderId != '0') {
+                              context.read<OrderBloc>().add(OrderEvent.postReview(orderId!, modelPostReview));
+                            } else if (orderRewardId != null && orderRewardId != '0') {
+                              context.read<OrderBloc>().add(OrderEvent.postReview(orderRewardId!, modelPostReview));
+                            } else {
+                              print('ORDER ID NULL');
+                            }
+                          },
+
+                          backgroundColor: primaryColor,
+                          textColor: baseColor,
+                          borderRadius: 30,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        );
+                      },
+
                     ),
                   ),
                 ],
@@ -154,14 +218,14 @@ class RateAndReviewSheet extends StatelessWidget {
       children: [
         _buildRatingQuestion(
           question: '1. Pelayanan staf?',
-          onRatingUpdate: (rating) => print(rating),
+          ratingNotifier: _staffServiceRating,
         ),
         SizedBox(height: 10),
         Divider(color: Colors.grey[200], height: 2),
         SizedBox(height: 10),
         _buildRatingQuestion(
           question: '2. Kualitas Produk?',
-          onRatingUpdate: (rating) => print(rating),
+          ratingNotifier: _productQualityRating,
         ),
         SizedBox(height: 10),
         Divider(color: Colors.grey[200], height: 2),
@@ -178,6 +242,7 @@ class RateAndReviewSheet extends StatelessWidget {
             ),
             SizedBox(height: 10),
             TextFormField(
+              controller: _noteController,
               maxLength: 200,
               maxLines: 6,
               minLines: 1,
@@ -199,9 +264,28 @@ class RateAndReviewSheet extends StatelessWidget {
     );
   }
 
+  Widget buildLoadingShimmer(double screenWidth) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Column(
+        children: [
+          Container(
+            width: screenWidth * 0.8,
+            height: 40.0,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Colors.grey,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildRatingQuestion({
     required String question,
-    required void Function(double rating) onRatingUpdate,
+    required ValueNotifier<double> ratingNotifier,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -213,19 +297,26 @@ class RateAndReviewSheet extends StatelessWidget {
             color: blackColor,
           ),
         ),
-        RatingBar.builder(
-          initialRating: 0,
-          minRating: 1,
-          direction: Axis.horizontal,
-          allowHalfRating: true,
-          itemCount: 5,
-          itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-          itemBuilder: (context, _) => Icon(
-            Icons.star_rate_rounded,
-            color: primaryColor,
-            size: 16,
-          ),
-          onRatingUpdate: onRatingUpdate,
+        ValueListenableBuilder<double>(
+          valueListenable: ratingNotifier,
+          builder: (context, rating, child) {
+            return RatingBar.builder(
+              initialRating: rating,
+              minRating: 1,
+              direction: Axis.horizontal,
+              allowHalfRating: true,
+              itemCount: 5,
+              itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
+              itemBuilder: (context, _) => Icon(
+                Icons.star_rate_rounded,
+                color: primaryColor,
+                size: 16,
+              ),
+              onRatingUpdate: (newRating) {
+                ratingNotifier.value = newRating;
+              },
+            );
+          },
         ),
       ],
     );

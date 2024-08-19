@@ -67,12 +67,10 @@ class BoxCheckoutDetail extends StatelessWidget {
                   initial: () => buildShimmer(),
                   loading: () => buildShimmer(),
                   success: (cartModel,  modelQty, deleteModel, modelPostOrder, modelPoint) {
-                    print('INI CART MODEL ${cartModel!.cart!.cartItems!.length}');
-
-                    if (cartModel == null || cartModel.cart == null) {
+                    if (cartModel?.cart == null) {
                       return buildShimmer();
-                    }
-                    if (cartModel.cart!.cartItems!.isNotEmpty) {
+                    } else
+                    if (cartModel!.cart!.cartItems!.isNotEmpty) {
                       final itemCart = cartModel.cart;
                       return Column(
                         children: List.generate(itemCart!.cartItems!.length, (index) {
@@ -188,7 +186,6 @@ class BoxCheckoutDetail extends StatelessWidget {
                       );
                     } else {
                       return _buildEmptyCartState(context, screenWidth);
-
                     }
                   },
                   error: (message) => _buildErrorState(context, message!),
