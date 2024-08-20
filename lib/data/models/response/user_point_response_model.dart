@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class UserPointResponseModel {
-  List<Data>? data;
+  Data? data;
 
   UserPointResponseModel({
     this.data,
@@ -12,11 +12,11 @@ class UserPointResponseModel {
   String toJson() => json.encode(toMap());
 
   factory UserPointResponseModel.fromMap(Map<String, dynamic> json) => UserPointResponseModel(
-    data: json["data"] == null ? [] : List<Data>.from(json["data"]!.map((x) => Data.fromMap(x))),
+    data: json["data"] == null ? null : Data.fromMap(json["data"]),
   );
 
   Map<String, dynamic> toMap() => {
-    "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toMap())),
+    "data": data?.toMap(),
   };
 }
 

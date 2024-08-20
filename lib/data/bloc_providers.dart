@@ -66,7 +66,7 @@ class AppProviders{
       create: (context) => DetailVoucherBloc(VoucherDatasource()),
     ),
     BlocProvider<VoucherBloc>(
-      create: (context) => VoucherBloc(VoucherDatasource(), CartDatasource()),
+      create: (context) => VoucherBloc(VoucherDatasource(), ),
     ),
     BlocProvider<FavoriteBloc>(
       create: (context) => FavoriteBloc(FavoriteDatasource(), ProductDatasource()),
@@ -78,7 +78,7 @@ class AppProviders{
       create: (context) => CartBloc(productDatasource: ProductDatasource(), cartDatasource: CartDatasource(), orderDatasource: OrderDatasource()),
     ),
     BlocProvider<CartRewardBloc>(
-      create: (context) => CartRewardBloc(productDatasource: ProductDatasource(), cartDatasource: CartDatasource(), orderDatasource: OrderDatasource(), userDatasource: UserDatasource()),
+      create: (context) => CartRewardBloc(productDatasource: ProductDatasource(), cartDatasource: CartDatasource(), orderDatasource: OrderDatasource()),
     ),
     BlocProvider<HomeBloc>(
       create: (context) => HomeBloc(datasource: UserDatasource(), productDatasource: ProductDatasource()),

@@ -340,7 +340,7 @@ class BoxBottomPrice extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               vertical: Dimensions.paddingSizeDefault),
                           decoration: BoxDecoration(
-                            color: itemStock! ? navyColor : grey,
+                            color: (itemStock ?? false) ? navyColor : grey,
                             borderRadius:
                             const BorderRadius.all(Radius.circular(20)),
                           ),

@@ -17,12 +17,12 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    context.read<HomeBloc>().add(HomeEvent.getUser());
+    context.read<HomeBloc>().add(const HomeEvent.getUser());
   }
 
   Future<void> _refreshData() async {
-    context.read<HomeBloc>().add(HomeEvent.getUser());
-    await Future.delayed(Duration(seconds: 1));
+    context.read<HomeBloc>().add(const HomeEvent.getUser());
+    await Future.delayed(const Duration(seconds: 1));
   }
 
   @override
@@ -34,13 +34,13 @@ class _HomePageState extends State<HomePage> {
       body: RefreshIndicator(
         onRefresh: _refreshData,
         child: SingleChildScrollView(
-          physics: AlwaysScrollableScrollPhysics(), // Ensures scrolling is always possible
+          physics: const AlwaysScrollableScrollPhysics(), // Ensures scrolling is always possible
           child: Stack(
             children: [
               BaseSection(
                 screenWidth: screenWidth,
               ),
-              PoinSection(),
+              const PoinSection(),
             ],
           ),
         ),

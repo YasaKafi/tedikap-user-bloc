@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/presentation/pages/home_page/bloc/home_bloc.dart';
+import 'package:tedikap_user_bloc/presentation/pages/home_page/widgets/shimmer_widget_home.dart';
 
 import '../../../../../common/constant.dart';
 import '../../../../../common/theme.dart';
@@ -31,7 +31,7 @@ class PoinSection extends StatelessWidget {
                     0, 4),
               ),
             ],
-            borderRadius: BorderRadius.all(Radius.circular(12))),
+            borderRadius: const BorderRadius.all(Radius.circular(12))),
         margin: const EdgeInsets.only(top: 100, left: 20, right: 20),
         padding:
         const EdgeInsets.only(top: 12, bottom: 12, left: 16, right: 16),
@@ -56,25 +56,24 @@ class PoinSection extends StatelessWidget {
                   BlocBuilder<HomeBloc, HomeState>(
                     builder: (context, state) {
                       return state.when(
-                          initial: () => ShimmerUserHome(),
-                          loading: () => ShimmerUserHome(),
+                          initial: () => ShimmerWidgetsHome.point(),
+                          loading: () => ShimmerWidgetsHome.point(),
                           success: (model, user, index, pointModel, statusOutletModel, bannerModel, boxPromoModel) {
-                            final point = pointModel?.data;
-                            if (point != null && point.isNotEmpty){
-                              final itemPoint = point.first.point;
+                            if (pointModel?.data != null){
+                              final itemPoint = pointModel?.data?.point!;
                               return Text(
-                                '$itemPoint Poin',
+                                '$itemPoint Point',
                                 style: txtSecondaryTitle.copyWith(
                                     fontWeight: FontWeight.w500, color: blackColor),
                               );
                             } else {
-                              return Text('0 Poin',
+                              return Text('0 Point',
                                 style: txtSecondaryTitle.copyWith(
                                     fontWeight: FontWeight.w500, color: blackColor),
                               );
                             }
                           },
-                          error: (message) => ShimmerUserHome()
+                          error: (message) => ShimmerWidgetsHome.point()
                       );
                     },
                   )
@@ -95,7 +94,7 @@ class PoinSection extends StatelessWidget {
                 children: [
                   Flexible(
                     child: Text(
-                      'Tukarkan poinmu dengan hadiah menarik',
+                      'Redeem your points for exciting rewards',
                       style: txtSecondarySubTitle.copyWith(
                           fontWeight: FontWeight.w500, color: blackColor),
                     ),
@@ -110,25 +109,5 @@ class PoinSection extends StatelessWidget {
             ],
           ),
         ));
-  }
-}
-
-class ShimmerUserHome extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Shimmer.fromColors(
-      baseColor: Colors.grey[300]!,
-      highlightColor: Colors.grey[100]!,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 100,
-            height: 16,
-            color: Colors.grey[300],
-          ),
-        ],
-      ),
-    );
   }
 }

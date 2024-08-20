@@ -110,7 +110,7 @@ class _VoucherPageState extends State<VoucherPage> {
                                 color: blackColor)),
                       ),
                       success: (modelVoucher, modelCart, modelApplyRemove,
-                          isUseVoucher, cartModel, currentVoucherId) {
+                          isUseVoucher,) {
                         return Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -147,7 +147,7 @@ class _VoucherPageState extends State<VoucherPage> {
                         )),
                       ),
                       success: (modelVoucher, modelCart, modelApplyRemove,
-                          isUseVoucher, cartModel, currentVoucherId) {
+                          isUseVoucher, ) {
                         if (modelVoucher!.activeVouchers!.isEmpty) {
                           return _buildEmptyVoucherState(context);
                         } else {
@@ -161,7 +161,7 @@ class _VoucherPageState extends State<VoucherPage> {
                               String formattedMinTransaction = NumberFormat('#,##0').format(item.minTransaction);
                               voucherLength = itemVoucher.length;
                               bool? isCurrentlyUsedVoucher = item.isUsed! && widget.isFromCart! ? true : false;
-                              bool isEligible = cartModel!.cart!.originalPrice! < item.minTransaction! || widget.isFromCart == false ? false : true;
+                                bool isEligible = 500 < item.minTransaction! || widget.isFromCart == false ? false : true;
 
                               return Stack(
                                 children: [

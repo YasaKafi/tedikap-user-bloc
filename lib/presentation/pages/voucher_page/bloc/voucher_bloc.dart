@@ -13,9 +13,8 @@ part 'voucher_bloc.freezed.dart';
 
 class VoucherBloc extends Bloc<VoucherEvent, VoucherState> {
   final VoucherDatasource voucherDatasource;
-  final CartDatasource cartDatasource;
 
-  VoucherBloc(this.voucherDatasource, this.cartDatasource) : super(const VoucherState.initial()) {
+  VoucherBloc(this.voucherDatasource) : super(const VoucherState.initial()) {
 
     on<_GetVoucher>((event, emit) async {
       emit(const _Loading());
@@ -24,24 +23,18 @@ class VoucherBloc extends Bloc<VoucherEvent, VoucherState> {
         await result.fold(
                 (l) async => emit(_Error(message: 'Failed to access data voucher')),
                 (r) async {
-                  final getCartResult = await cartDatasource.getCart();
-                  final getCartDetails = getCartResult.fold((l) => null, (cart) => cart);
-                  final isUseVoucher = getCartDetails?.cart?.voucherId != null ;
-
-                  emit(_Success(
-                      modelVoucher: r,
-                      modelCart: getCartDetails,
-                      modelVoucherAppliedRemove: null,
-                    isUseVoucher: isUseVoucher,
-                    cartModel: getCartDetails
-                  ));
-                } // Update products in _Success state
+              emit(_Success(
+                  modelVoucher: r,
+                  modelCart: null,
+                  modelVoucherAppliedRemove: null,
+                  isUseVoucher: false,
+              ));
+            }
         );
       } catch (e) {
         emit(const VoucherState.error(message: 'Failed to access data voucher wkkw'));
       }
     });
-
 
     on<_ApplyVoucher>((event, emit) async {
       final currentState = state;
@@ -50,22 +43,17 @@ class VoucherBloc extends Bloc<VoucherEvent, VoucherState> {
         try {
           final response = await voucherDatasource.postApplyVoucher(event.voucherId!);
           await response.fold(
-                (l) async => emit(_Error(message: l)),
-                (r) async{
-                  final updatedVoucherResult = await voucherDatasource.getVoucher();
-                  final updatedVoucherDetails = updatedVoucherResult.fold((l) => null, (voucher) => voucher);
+                  (l) async => emit(_Error(message: l)),
+                  (r) async {
+                final updatedVoucherResult = await voucherDatasource.getVoucher();
+                final updatedVoucherDetails = updatedVoucherResult.fold((l) => null, (voucher) => voucher);
 
-                  final getCartResult = await cartDatasource.getCart();
-                  final getCartDetails = getCartResult.fold((l) => null, (cart) => cart);
-
-                  emit((currentState.copyWith(
-                      modelVoucher: updatedVoucherDetails,
-                      modelCart: getCartDetails,
-                      modelVoucherAppliedRemove: r,
-                      isUseVoucher: true,
-                    currentVoucherId: event.voucherId,
-                  )));
-                }
+                emit((currentState.copyWith(
+                  modelVoucher: updatedVoucherDetails,
+                  modelVoucherAppliedRemove: r,
+                  isUseVoucher: true,
+                )));
+              }
           );
         } catch (e) {
           emit(_Error(message: 'An error occurred: $e'));
@@ -80,23 +68,17 @@ class VoucherBloc extends Bloc<VoucherEvent, VoucherState> {
         try {
           final response = await voucherDatasource.postRemoveVoucher(event.voucherId!);
           await response.fold(
-                (l) async => emit(_Error(message: l)),
-                (r) async{
-                  final updatedVoucherResult = await voucherDatasource.getVoucher();
-                  final updatedVoucherDetails = updatedVoucherResult.fold((l) => null, (voucher) => voucher);
+                  (l) async => emit(_Error(message: l)),
+                  (r) async {
+                final updatedVoucherResult = await voucherDatasource.getVoucher();
+                final updatedVoucherDetails = updatedVoucherResult.fold((l) => null, (voucher) => voucher);
 
-                  final getCartResult = await cartDatasource.getCart();
-                  final getCartDetails = getCartResult.fold((l) => null, (cart) => cart);
-
-                  emit((currentState.copyWith(
-                      modelVoucher: updatedVoucherDetails,
-                      modelCart: getCartDetails,
-                      modelVoucherAppliedRemove: r,
-                      isUseVoucher: false,
-                    currentVoucherId: event.voucherId,
-                  )));
-                }
-
+                emit((currentState.copyWith(
+                  modelVoucher: updatedVoucherDetails,
+                  modelVoucherAppliedRemove: r,
+                  isUseVoucher: false,
+                )));
+              }
           );
         } catch (e) {
           emit(_Error(message: 'An error occurred: $e'));

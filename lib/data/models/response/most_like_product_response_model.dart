@@ -30,6 +30,7 @@ class Datum {
   String? image;
   bool? isLiked;
   int? favoritesCount;
+  bool? stock;
 
   Datum({
     this.id,
@@ -41,6 +42,7 @@ class Datum {
     this.image,
     this.isLiked,
     this.favoritesCount,
+    this.stock,
   });
 
   factory Datum.fromJson(String str) => Datum.fromMap(json.decode(str));
@@ -57,6 +59,7 @@ class Datum {
     image: json["image"],
     isLiked: json["isLiked"],
     favoritesCount: json["favorites_count"],
+    stock: json["stock"],
   );
 
   Map<String, dynamic> toMap() => {
@@ -69,5 +72,6 @@ class Datum {
     "image": image,
     "isLiked": isLiked,
     "favorites_count": favoritesCount,
+    "stock": stock,
   };
 }

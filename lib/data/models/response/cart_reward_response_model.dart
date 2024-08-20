@@ -25,6 +25,7 @@ class Cart {
   int? userId;
   int? totalPoints;
   String? schedulePickup;
+  bool? pointsEnough;
   List<CartItem>? cartItems;
 
   Cart({
@@ -32,6 +33,7 @@ class Cart {
     this.userId,
     this.totalPoints,
     this.schedulePickup,
+    this.pointsEnough,
     this.cartItems,
   });
 
@@ -44,6 +46,7 @@ class Cart {
     userId: json["user_id"],
     totalPoints: json["total_points"],
     schedulePickup: json["schedule_pickup"],
+    pointsEnough: json["points_enough"],
     cartItems: json["cart_items"] == null ? [] : List<CartItem>.from(json["cart_items"]!.map((x) => CartItem.fromMap(x))),
   );
 
@@ -52,6 +55,7 @@ class Cart {
     "user_id": userId,
     "total_points": totalPoints,
     "schedule_pickup": schedulePickup,
+    "points_enough": pointsEnough,
     "cart_items": cartItems == null ? [] : List<dynamic>.from(cartItems!.map((x) => x.toMap())),
   };
 }
@@ -65,7 +69,7 @@ class CartItem {
   String? size;
   String? ice;
   String? sugar;
-  String? note;
+  dynamic note;
   int? quantity;
   int? points;
   int? totalPoints;
