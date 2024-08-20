@@ -72,8 +72,8 @@ class BoxInformationPoin extends StatelessWidget {
                               fontWeight: FontWeight.w600, color: primaryColor),
                         );
                       }, success: (productModel, userPointModel) {
-                        if (userPointModel != null && userPointModel.data!.isNotEmpty) {
-                          final point = userPointModel.data!.first.point;
+                        if (userPointModel?.data != null) {
+                          final point = userPointModel?.data?.point!;
                           return Text(
                             '$point Poin',
                             style: txtPrimaryHeader.copyWith(

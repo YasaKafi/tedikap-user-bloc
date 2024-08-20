@@ -4,15 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/common/constant.dart';
-import 'package:tedikap_user_bloc/data/repository/tedikap_repository.dart';
 import 'package:tedikap_user_bloc/presentation/pages/home_page/bloc/home_bloc.dart';
+import 'package:tedikap_user_bloc/presentation/pages/home_page/widgets/box_promo.dart';
+import 'package:tedikap_user_bloc/presentation/pages/home_page/widgets/shimmer_widget_home.dart';
 import 'package:tedikap_user_bloc/presentation/pages/home_page/widgets/slider_promo.dart';
 
 import '../../../../common/dimensions.dart';
 import '../../../../common/theme.dart';
-import '../data/mockup_data.dart';
 import 'list_view_product.dart';
 
 // ignore: must_be_immutable
@@ -52,8 +51,6 @@ class _BaseSectionState extends State<BaseSection> {
 
   @override
   Widget build(BuildContext context) {
-    List carouselImageStrings = carouselImage.map((i) => i['image']).toList();
-
     return Column(
       children: [
         Container(
@@ -70,10 +67,8 @@ class _BaseSectionState extends State<BaseSection> {
               BlocBuilder<HomeBloc, HomeState>(
                 builder: (context, state) {
                   return state.when(
-                      initial: () => Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                      loading: () => ShimmerUserHome(),
+                      initial: () => ShimmerWidgetsHome.userHome(),
+                      loading: () => ShimmerWidgetsHome.userHome(),
                       success:
                           (model, user, index, pointModel, statusOutletModel, bannerModel, boxPromoModel) {
                         if (user != null) {
@@ -134,8 +129,8 @@ class _BaseSectionState extends State<BaseSection> {
                           );
                         }
                       },
-                      error: (message) =>
-                      const ShimmerUserHome());
+                      error: (message) => ShimmerWidgetsHome.userHome()
+                  );
                 },
               ),
               Row(
@@ -170,8 +165,18 @@ class _BaseSectionState extends State<BaseSection> {
             ),
             child: BlocBuilder<HomeBloc, HomeState>(
               builder: (context, state) {
-                return CarouselSliderWidget(
-                  screenWidth: widget.screenWidth,
+                return state.maybeWhen(
+                    orElse: (){
+                      return Visibility(visible: false, child: Container());
+                    },
+                  success: (model, user, index, pointModel, statusOutletModel, bannerModel, boxPromoModel){
+                      if ( bannerModel!.data!.isEmpty) {
+                        return Container();
+                      }
+                    return CarouselSliderWidget(
+                      screenWidth: widget.screenWidth,
+                    );
+                  }
                 );
               },
             )),
@@ -179,60 +184,28 @@ class _BaseSectionState extends State<BaseSection> {
           builder: (context, state) {
             return state.when(
                 initial: (){
-                  return _buildShimmerLoading(widget.screenWidth);
+                  return ShimmerWidgetsHome.boxPromo(widget.screenWidth);
                 },
                 loading: (){
-                  return _buildShimmerLoading(widget.screenWidth);
+                  return ShimmerWidgetsHome.boxPromo(widget.screenWidth);
                 },
                 success: (model, user, index, pointModel, statusOutletModel,
                     bannerModel, boxPromoModel){
-                  if (boxPromoModel != null){
-                    return Container(
-                      width: widget.screenWidth,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: Dimensions.paddingSizeSmall,
-                          horizontal: Dimensions.paddingSizeLarge),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            boxPromoModel.data?.the1?.title ?? 'No Title',
-                            style: txtSecondaryHeader.copyWith(
-                                fontWeight: FontWeight.w600, color: blackColor),
-                          ),
-                          const SizedBox(
-                            height: Dimensions.paddingSizeExtraSmall,
-                          ),
-                          Text(
-                            boxPromoModel.data?.the1?.subtitle ?? 'No Description',
-                            style: txtPrimarySubTitle.copyWith(
-                                fontWeight: FontWeight.w400, color: blackColor),
-                          ),
-                          const SizedBox(
-                            height: Dimensions.paddingSizeDefault,
-                          ),
-                          Container(
-                            width: widget.screenWidth,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: Image.network(
-                                TedikapApiRepository.getImageBoxPromo + boxPromoModel.data!.the1!.image!,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                  if (boxPromoModel?.data != null){
+                    final promoData = boxPromoModel?.data?['1'];
+                    return BoxPromoWidget(
+                        screenWidth: widget.screenWidth,
+                        title: promoData!.title ?? 'No Title',
+                        subtitle: promoData.subtitle ?? 'No Description',
+                        imageUrl: promoData.image ?? 'No Image'
                     );
 
                   } else {
                     return Container();
                   }
-
                 },
                 error: (message){
-                  return _buildShimmerLoading(widget.screenWidth);
-
+                  return ShimmerWidgetsHome.boxPromo(widget.screenWidth);
                 }
             );
           },
@@ -241,12 +214,12 @@ class _BaseSectionState extends State<BaseSection> {
           padding: const EdgeInsets.only(
               left: Dimensions.paddingSizeLarge,
               top: Dimensions.paddingSizeSmall),
-          child: Container(
+          child: SizedBox(
             width: widget.screenWidth,
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Menu Terfavorit',
+                'Most Favorite Menu',
                 style: txtSecondaryHeader.copyWith(
                     fontWeight: FontWeight.w600, color: blackColor),
               ),
@@ -255,6 +228,36 @@ class _BaseSectionState extends State<BaseSection> {
         ),
         ListViewProduct(
           screenWidth: widget.screenWidth,
+        ),
+        BlocBuilder<HomeBloc, HomeState>(
+          builder: (context, state) {
+            return state.when(
+                initial: (){
+                  return ShimmerWidgetsHome.boxPromo(widget.screenWidth);
+                },
+                loading: (){
+                  return ShimmerWidgetsHome.boxPromo(widget.screenWidth);
+                },
+                success: (model, user, index, pointModel, statusOutletModel,
+                    bannerModel, boxPromoModel){
+                  if (boxPromoModel?.data != null){
+                    final promoData = boxPromoModel?.data?['2'];
+                    return BoxPromoWidget(
+                        screenWidth: widget.screenWidth,
+                        title: promoData!.title ?? 'No Title',
+                        subtitle: promoData.subtitle ?? 'No Description',
+                        imageUrl: promoData.image ?? 'No Image'
+                    );
+
+                  } else {
+                    return Container();
+                  }
+                },
+                error: (message){
+                  return ShimmerWidgetsHome.boxPromo(widget.screenWidth);
+                }
+            );
+          },
         ),
         Container(
           width: widget.screenWidth,
@@ -273,64 +276,6 @@ class _BaseSectionState extends State<BaseSection> {
       ],
     );
   }
-  Widget _buildShimmerLoading(double screenWidth) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-          vertical: Dimensions.paddingSizeSmall,
-          horizontal: Dimensions.paddingSizeLarge),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Shimmer.fromColors(
-            baseColor: Colors.grey.shade300,
-            highlightColor: Colors.grey.shade100,
-            child: Container(
-              width: screenWidth * 0.3,
-              height: 20.0,
-              decoration:  BoxDecoration(
-                color: baseColor,
-                borderRadius: BorderRadius.circular(5),
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: Dimensions.paddingSizeExtraSmall,
-          ),
-          Shimmer.fromColors(
-            baseColor: Colors.grey.shade300,
-            highlightColor: Colors.grey.shade100,
-            child: Container(
-              width: screenWidth * 0.5,
-              height: 15.0,
-              decoration:  BoxDecoration(
-                color: baseColor,
-                borderRadius: BorderRadius.circular(5),
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: Dimensions.paddingSizeDefault,
-          ),
-          Shimmer.fromColors(
-            baseColor: Colors.grey.shade300,
-            highlightColor: Colors.grey.shade100,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Container(
-                width: screenWidth,
-                height: 200.0,
-                decoration:  BoxDecoration(
-                  color: baseColor,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
 
 }
 
@@ -361,30 +306,3 @@ class ButtonCircleIcon extends StatelessWidget {
   }
 }
 
-class ShimmerUserHome extends StatelessWidget {
-  const ShimmerUserHome({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Shimmer.fromColors(
-      baseColor: Colors.grey[300]!,
-      highlightColor: Colors.grey[100]!,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 150,
-            height: 16,
-            color: Colors.grey[300],
-          ),
-          const SizedBox(height: 6),
-          Container(
-            width: 100,
-            height: 16,
-            color: Colors.grey[300],
-          ),
-        ],
-      ),
-    );
-  }
-}

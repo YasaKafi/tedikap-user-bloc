@@ -44,10 +44,9 @@ class BoxCheckoutSummary extends StatelessWidget {
                 listener: (context, state) {
                   state.maybeWhen(
                     success: (cartModel, modelQty, deleteModel, modelPostOrder,
-                        modelPoint) {
-                      if(modelPoint!.data!.isNotEmpty){
-                        if (modelPoint.data!.first.point! <=
-                            cartModel!.cart!.totalPoints!) {
+                        ) {
+                      if(cartModel != null){
+                        if (cartModel.cart!.pointsEnough! == false) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text(
                               'Your Point is not enough',
@@ -68,7 +67,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                     initial: () => _buildShimmerEffect(context),
                     loading: () => _buildShimmerEffect(context),
                     success: (cartModel, modelQty, deleteModel, modelPostOrder,
-                        modelPoint) {
+                        ) {
                       if (cartModel != null) {
                         final itemCart = cartModel.cart;
                         final isCartItemEmpty =
@@ -132,8 +131,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                                 'Kamu tidak dapat melakukan pembatalan atau perubahan apapun pada pesanan setelah melakukan pembayaran.',
                                             icon: icAlert,
                                         onPressed: () {
-                                            if (modelPoint!.data![0].point! <=
-                                                cartModel.cart!.totalPoints!) {
+                                            if (cartModel.cart!.pointsEnough! == false) {
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(SnackBar(
                                                 content: Text(

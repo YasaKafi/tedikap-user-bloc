@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tedikap_user_bloc/data/datasource/product_datasource.dart';
 import 'package:tedikap_user_bloc/data/models/response/banner_response_model.dart';
@@ -9,7 +9,6 @@ import 'package:tedikap_user_bloc/data/models/response/user_point_response_model
 
 import '../../../../data/datasource/user_datasource.dart';
 import '../../../../data/models/response/current_user_response_model.dart';
-import '../../../../data/models/response/products_response_model.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
@@ -21,6 +20,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   HomeBloc({required this.datasource, required this.productDatasource})
       : super(const HomeState.initial()) {
+
     on<_ChangeIndex>((event, emit) {
       if (state is _Success) {
         final currentState = state as _Success;

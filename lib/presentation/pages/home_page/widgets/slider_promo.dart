@@ -1,17 +1,16 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tedikap_user_bloc/data/models/response/banner_response_model.dart';
 import 'package:tedikap_user_bloc/data/repository/tedikap_repository.dart';
 import 'package:tedikap_user_bloc/presentation/pages/home_page/bloc/home_bloc.dart';
+import 'package:tedikap_user_bloc/presentation/pages/home_page/widgets/shimmer_widget_home.dart';
 
 import '../../../../common/dimensions.dart';
 import '../../../../common/theme.dart';
 
-import 'package:shimmer/shimmer.dart';
 
 class CarouselSliderWidget extends StatelessWidget {
-  CarouselSliderWidget({
+  const CarouselSliderWidget({
     super.key,
     required this.screenWidth,
   });
@@ -37,8 +36,8 @@ class CarouselSliderWidget extends StatelessWidget {
               child: BlocBuilder<HomeBloc, HomeState>(
                 builder: (context, state) {
                   return state.when(
-                      initial: () => _buildShimmerCarousel(),
-                      loading: () => _buildShimmerCarousel(),
+                      initial: () => ShimmerWidgetsHome.carousel(width: screenWidth, height: 150),
+                      loading: () => ShimmerWidgetsHome.carousel(width: screenWidth, height: 150),
                       success: (model, user, index, pointModel, statusOutletModel, bannerModel, boxPromoModel) {
                         int currentIndex = index ?? 0;
                         if (bannerModel?.data != null){
@@ -47,8 +46,8 @@ class CarouselSliderWidget extends StatelessWidget {
                               CarouselSlider(
                                 options: CarouselOptions(
                                   autoPlay: true,
-                                  autoPlayInterval: Duration(seconds: 5),
-                                  autoPlayAnimationDuration: Duration(milliseconds: 600),
+                                  autoPlayInterval: const Duration(seconds: 5),
+                                  autoPlayAnimationDuration: const Duration(milliseconds: 600),
                                   viewportFraction: 1.0,
                                   aspectRatio: 23 / 9,
                                   enlargeCenterPage: true,
@@ -92,12 +91,12 @@ class CarouselSliderWidget extends StatelessWidget {
                             ],
                           );
                         } else {
-                          return Container();
+                          return Visibility(visible: false, child: Container());
                         }
 
                       },
                       error: (message) {
-                        return _buildShimmerCarousel();
+                        return ShimmerWidgetsHome.carousel(width: screenWidth, height: 150);
                       }
                   );
                 },
@@ -109,38 +108,5 @@ class CarouselSliderWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildShimmerCarousel() {
-    return Shimmer.fromColors(
-      baseColor: Colors.grey[300]!,
-      highlightColor: Colors.grey[100]!,
-      child: Column(
-        children: [
-          Container(
-            width: screenWidth,
-            height: 150,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: baseColor
-            ),
-          ),
-          const SizedBox(height: Dimensions.paddingSizeSmall),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(3, (index) {
-              return Container(
-                width: 8.0,
-                height: 8.0,
-                margin: const EdgeInsets.symmetric(vertical: Dimensions.fontSizeExtraSmall, horizontal: 2.0),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                ),
-              );
-            }),
-          )
-        ],
-      ),
-    );
-  }
 }
 

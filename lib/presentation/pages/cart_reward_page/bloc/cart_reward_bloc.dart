@@ -19,61 +19,68 @@ part 'cart_reward_bloc.freezed.dart';
 
 class CartRewardBloc extends Bloc<CartRewardEvent, CartRewardState> {
   final CartDatasource cartDatasource;
-  final UserDatasource userDatasource;
   final ProductDatasource productDatasource;
   final OrderDatasource orderDatasource;
-  CartRewardBloc({required this.cartDatasource, required this.productDatasource, required this.orderDatasource, required this.userDatasource}) : super(const CartRewardState.initial()) {
+
+  CartRewardBloc({
+    required this.cartDatasource,
+    required this.productDatasource,
+    required this.orderDatasource,
+  }) : super(const CartRewardState.initial()) {
+
     on<_GetCart>((event, emit) async {
       emit(const _Loading());
       final result = await cartDatasource.getCartReward();
-       await result.fold((l) async {
-        emit(const _Error(message: 'Failed to access data order'));
-      }, (r) async  {
-         if (r.cart != null) {
-           final result = await userDatasource.getPointUser();
-           final resultPoint = result.fold((l) => null, (success) => success);
-           emit(_Success(cartModel: r, patchQtyModel: null, deleteModel: null, modelPostOrder: null, modelPoint: resultPoint));
-         }
-      });
+      await result.fold(
+            (l) async {
+          emit(const _Error(message: 'Failed to access data order'));
+        },
+            (r) async {
+          emit(_Success(
+            cartModel: r,
+            patchQtyModel: null,
+            deleteModel: null,
+            modelPostOrder: null,
+          ));
+        },
+      );
     });
 
     on<_PatchQty>((event, emit) async {
       final currentState = state;
       emit(const _Loading());
-      if ( currentState is! _Success) {
-        emit(const _Error(message: 'Unexpected state type'));
-        return;
-      }
-      final result = await cartDatasource.patchQtyReward(event.action!, event.cartRewardItem!);
-      await result.fold((l) async => emit(const _Error(message: 'Failed to access data order')),
-              (r) async {
-            final updatedCart = await cartDatasource.getCartReward();
-                updatedCart.fold((l) => null, (success) => emit(currentState.copyWith(patchQtyModel: r, cartModel: success)));
-              });
-    });
-
-
-
-    on<_DeleteItem>((event, emit) async {
-      final currentState = state;
-
-      emit(const _Loading());
-
       if (currentState is! _Success) {
         emit(const _Error(message: 'Unexpected state type'));
         return;
       }
+      final result = await cartDatasource.patchQtyReward(event.action!, event.cartRewardItem!);
+      await result.fold(
+            (l) async => emit(const _Error(message: 'Failed to access data order')),
+            (r) async {
+          final updatedCart = await cartDatasource.getCartReward();
+          updatedCart.fold(
+                (l) => null,
+                (success) => emit(currentState.copyWith(patchQtyModel: r, cartModel: success)),
+          );
+        },
+      );
+    });
 
+    on<_DeleteItem>((event, emit) async {
+      final currentState = state;
+      emit(const _Loading());
+      if (currentState is! _Success) {
+        emit(const _Error(message: 'Unexpected state type'));
+        return;
+      }
       final result = await cartDatasource.deleteItemReward(event.cartItem);
       await result.fold(
             (l) async => emit(const _Error(message: 'Failed to access data order')),
             (r) async {
           final updatedCart = await cartDatasource.getCartReward();
           updatedCart.fold(
-                (failure) =>
-                emit(const _Error(message: 'Failed to fetch updated cart')),
-                (updatedData) => emit(
-                currentState.copyWith(deleteModel: r, cartModel: updatedData)),
+                (failure) => emit(const _Error(message: 'Failed to fetch updated cart')),
+                (updatedData) => emit(currentState.copyWith(deleteModel: r, cartModel: updatedData)),
           );
         },
       );
@@ -82,7 +89,15 @@ class CartRewardBloc extends Bloc<CartRewardEvent, CartRewardState> {
     on<_PostOrder>((event, emit) async {
       emit(const _Loading());
       final result = await orderDatasource.postOrderReward(event.cartId!);
-      result.fold((l) => emit(const _Error(message: 'Failed to access data order')), (r) => emit(_Success(cartModel: null,  patchQtyModel: null, deleteModel: null, modelPostOrder: r, modelPoint: null)));
+      result.fold(
+            (l) => emit(const _Error(message: 'Failed to access data order')),
+            (r) => emit(_Success(
+          cartModel: null,
+          patchQtyModel: null,
+          deleteModel: null,
+          modelPostOrder: r,
+        )),
+      );
     });
   }
 }

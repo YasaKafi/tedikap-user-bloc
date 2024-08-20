@@ -172,17 +172,17 @@ class BoxEstimationPickup extends StatelessWidget {
                                         },
                                       success: (cartModel, modelQty, deleteModel, modelPostOrder,
                                           modelPostPayment, orderId){
-                                          final itemCart = cartModel?.cart;
+                                          final itemCart = cartModel?.cart?.schedulePickup;
                                           if (itemCart != null){
                                             return Text(
-                                              itemCart.schedulePickup!,
+                                              itemCart,
                                               style: txtPrimaryTitle.copyWith(
                                                   fontWeight: FontWeight.w600,
                                                   color: blackColor),
                                             );
                                           } else {
                                             return Text(
-                                              'Failed access data',
+                                              'CLOSED',
                                               style: txtPrimaryTitle.copyWith(
                                                   fontWeight: FontWeight.w600,
                                                   color: blackColor),
