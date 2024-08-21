@@ -103,7 +103,7 @@ class _DetailOrderPageState extends State<DetailOrderPage> with WidgetsBindingOb
                 },
               ),
               Text(
-                'Detail Status Order',
+                'Order Status Detail',
                 style: txtSecondaryHeader.copyWith(fontWeight: FontWeight.w600, color: blackColor),
               ),
               Container(

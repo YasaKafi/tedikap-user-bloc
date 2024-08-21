@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tedikap_user_bloc/data/models/response/detail_history_order_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/detail_history_order_reward_response_model.dart';

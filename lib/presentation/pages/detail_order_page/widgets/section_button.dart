@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/common/theme.dart';
 import 'package:tedikap_user_bloc/data/repository/global_variabel.dart';
 import 'package:tedikap_user_bloc/presentation/global_components/common_button.dart';
@@ -76,7 +77,7 @@ class _SectionButtonState extends State<SectionButton> {
     return BlocBuilder<DetailOrderBloc, DetailOrderState>(
       builder: (context, state) {
         return state.maybeWhen(
-            orElse: () => Center(child: CircularProgressIndicator()),
+            orElse: () =>  buildShimmer(width: screenWidth, height: 50),
             success: (model, modelReward) {
               if (model != null && model.order != null) {
                 final isPayment = model.order?.paymentChannel == null;
@@ -354,6 +355,23 @@ class _SectionButtonState extends State<SectionButton> {
               }
             });
       },
+    );
+  }
+
+  Widget buildShimmer({double? width, double? height}) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Container(
+        margin: const EdgeInsets.symmetric(
+            horizontal: 20, vertical: 15),
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          color: Colors.grey[300],
+          borderRadius: BorderRadius.circular(15),
+        )
+      ),
     );
   }
 

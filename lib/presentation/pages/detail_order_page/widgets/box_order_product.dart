@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/data/models/response/detail_history_order_response_model.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/bloc/detail_order_bloc.dart';
@@ -76,47 +77,61 @@ class BoxProductOrder extends StatelessWidget {
                             .length, (index) {
                           final detailOrderItem = model.order!
                               .orderItems![index];
+                          final formattedPriceCommon = NumberFormat.currency(
+                            locale: 'id_ID',
+                            symbol: 'Rp',
+                            decimalDigits: 0, // Tidak ada digit desimal
+                          ).format(int.parse(detailOrderItem.price.toString()));
                           return Column(
                             children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Image.network(
-                                    TedikapApiRepository.getImage + detailOrderItem.productImage!,
-                                    width: 80,
-                                    height: 80,
-                                  ),
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment
-                                          .start,
-                                      crossAxisAlignment: CrossAxisAlignment
-                                          .start,
-                                      children: [
-                                        Text(detailOrderItem.productName!,
-                                            style: txtSecondaryTitle.copyWith(
-                                                fontWeight: FontWeight.w600,
-                                                color: blackColor)),
-                                        Text(
-                                            ' ${detailOrderItem
-                                                .temperatur} temp, ${detailOrderItem
-                                                .size} size, ${detailOrderItem
-                                                .ice} ice, ${detailOrderItem
-                                                .sugar} sugar',
-                                            style: txtPrimarySubTitle.copyWith(
-                                                fontWeight: FontWeight.w500,
-                                                color: Colors.black38)),
-                                      ],
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: Dimensions.marginSizeSmall),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Container(
+                                      width: 70,
+                                      height: 70,
+                                      decoration: ShapeDecoration(
+                                        color: const Color(0x0C56473C),
+                                        shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(Radius.circular(12))),
+                                        image: DecorationImage(
+                                          image: NetworkImage(TedikapApiRepository.getImage + detailOrderItem.productImage!),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
                                     ),
-                                  )
-                                ],
+                                    SizedBox(
+                                      width: 15,
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment
+                                            .start,
+                                        crossAxisAlignment: CrossAxisAlignment
+                                            .start,
+                                        children: [
+                                          Text(detailOrderItem.productName!,
+                                              style: txtSecondaryTitle.copyWith(
+                                                  fontWeight: FontWeight.w600,
+                                                  color: blackColor)),
+                                          Text(
+                                              '${detailOrderItem
+                                                  .temperatur} temp, ${detailOrderItem
+                                                  .size} size, ${detailOrderItem
+                                                  .ice} ice, ${detailOrderItem
+                                                  .sugar} sugar',
+                                              style: txtPrimarySubTitle.copyWith(
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.black38)),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
-                              SizedBox(
-                                height: 10,
-                              ),
+                              detailOrderItem.note == null ? SizedBox() :
                               Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -158,13 +173,13 @@ class BoxProductOrder extends StatelessWidget {
                                 ],
                               ),
                               SizedBox(
-                                height: 20,
+                                height: 15,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment
                                     .spaceBetween,
                                 children: [
-                                  Text('Rp ${detailOrderItem.price}',
+                                  Text(formattedPriceCommon,
                                       style: txtSecondaryTitle.copyWith(
                                           fontWeight: FontWeight.w600,
                                           color: blackColor)),
@@ -278,10 +293,16 @@ class BoxProductOrder extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment
                                     .spaceBetween,
                                 children: [
-                                  Text('Rp ${detailOrderItemReward.points}',
-                                      style: txtSecondaryTitle.copyWith(
-                                          fontWeight: FontWeight.w600,
-                                          color: blackColor)),
+                                  Row(
+                                    children: [
+                                      SvgPicture.asset(icLogoPrimary, width: 24, height: 24),
+                                      const SizedBox(width: 5),
+                                      Text('${detailOrderItemReward.points}',
+                                          style: txtSecondaryTitle.copyWith(
+                                              fontWeight: FontWeight.w600,
+                                              color: blackColor)),
+                                    ],
+                                  ),
                                   Text('${detailOrderItemReward.quantity}x',
                                       style: txtSecondaryTitle.copyWith(
                                           fontWeight: FontWeight.w600,

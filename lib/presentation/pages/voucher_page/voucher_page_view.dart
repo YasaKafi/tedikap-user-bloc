@@ -155,13 +155,13 @@ class _VoucherPageState extends State<VoucherPage> {
                           return Column(
                             children: List.generate(itemVoucher!.length, (index) {
                               final item = itemVoucher[index];
-                              final itemVoucherCart = modelCart?.cart?.voucherId;
                               String formattedDate = DateFormat('dd MMM yyyy').format(item.endDate!);
                               String formattedMaxDiscount = NumberFormat('#,##0').format(item.maxDiscount);
                               String formattedMinTransaction = NumberFormat('#,##0').format(item.minTransaction);
+
                               voucherLength = itemVoucher.length;
                               bool? isCurrentlyUsedVoucher = item.isUsed! && widget.isFromCart! ? true : false;
-                                bool isEligible = 500 < item.minTransaction! || widget.isFromCart == false ? false : true;
+                              bool isEligible = item.isEligible == false || widget.isFromCart == false ? false : true;
 
                               return Stack(
                                 children: [

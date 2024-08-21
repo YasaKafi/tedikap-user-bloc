@@ -16,28 +16,28 @@ class RateAndReviewSheet extends StatelessWidget {
   final ValueNotifier<double> _staffServiceRating = ValueNotifier(0);
   final ValueNotifier<double> _productQualityRating = ValueNotifier(0);
 
-  RateAndReviewSheet({Key? key, required this.orderId, this.orderRewardId, }) : super(key: key);
+  RateAndReviewSheet({super.key, required this.orderId, this.orderRewardId, });
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
       body: SingleChildScrollView(
-        physics: AlwaysScrollableScrollPhysics(),
+        physics: const AlwaysScrollableScrollPhysics(),
         child: BlocBuilder<OrderBloc, OrderState>(
           builder: (context, state) {
             return Container(
               height: MediaQuery.of(context).size.height,
               width: double.infinity,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: baseColor,
               ),
-              padding: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.only(top: 10.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -63,22 +63,22 @@ class RateAndReviewSheet extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               Divider(
                                 color: Colors.grey[200],
                                 height: 2,
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               _buildOrderDetailRow(
                                 title: 'Tanggal Pesanan',
                                 value: '17 August 2024 | 15:06',
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               _buildOrderDetailRow(
                                 title: 'Outlet Name',
                                 value: 'Tedikap RUS (Raden Umar Said)',
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               _buildOrderDetailRow(
                                 title: 'Waktu Pick Up',
                                 value: '${orderRewardId}',
@@ -102,7 +102,7 @@ class RateAndReviewSheet extends StatelessWidget {
                                   color: blackColor,
                                 ),
                               ),
-                              SizedBox(height: 15),
+                              const SizedBox(height: 15),
                               _buildRatingSection(context),
                             ],
                           ),
@@ -133,7 +133,6 @@ class RateAndReviewSheet extends StatelessWidget {
                                 isPesananSelesaiReward,
                                 startDateReward,
                                 endDateReward) {
-                              print('modelReview: ${modelReview?.data}');
                               if (modelReview?.data != null) {
                                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                   content: Text(
@@ -152,7 +151,7 @@ class RateAndReviewSheet extends StatelessWidget {
                       builder: (context, state){
                         return state.maybeWhen(
                             orElse: (){
-                              return Center(child: CircularProgressIndicator(),);
+                              return const Center(child: CircularProgressIndicator(),);
                             },
                           success: (model,
                               modelReward,
@@ -172,7 +171,7 @@ class RateAndReviewSheet extends StatelessWidget {
                             return CommonButton(
                               width: double.infinity,
                               padding:
-                              EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                              const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                               text: 'Kirim Ulasan',
                               onPressed: () {
                                 final modelPostReview = PostReviewRequestModel(
@@ -242,16 +241,16 @@ class RateAndReviewSheet extends StatelessWidget {
           question: '1. Pelayanan staf?',
           ratingNotifier: _staffServiceRating,
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Divider(color: Colors.grey[200], height: 2),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         _buildRatingQuestion(
           question: '2. Kualitas Produk?',
           ratingNotifier: _productQualityRating,
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Divider(color: Colors.grey[200], height: 2),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -262,7 +261,7 @@ class RateAndReviewSheet extends StatelessWidget {
                 color: blackColor,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextFormField(
               controller: _noteController,
               maxLength: 200,
@@ -276,7 +275,7 @@ class RateAndReviewSheet extends StatelessWidget {
                     fontWeight: FontWeight.w500, color: blackColor),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5),
-                  borderSide: BorderSide(color: grey),
+                  borderSide: const BorderSide(color: grey),
                 ),
               ),
             ),
@@ -328,8 +327,8 @@ class RateAndReviewSheet extends StatelessWidget {
               direction: Axis.horizontal,
               allowHalfRating: true,
               itemCount: 5,
-              itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-              itemBuilder: (context, _) => Icon(
+              itemPadding: const EdgeInsets.symmetric(horizontal: 2.0),
+              itemBuilder: (context, _) => const Icon(
                 Icons.star_rate_rounded,
                 color: primaryColor,
                 size: 16,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../../common/dimensions.dart';
@@ -58,7 +59,12 @@ class BoxPaymentDetailOrder extends StatelessWidget {
                     success: (model, modelReward) {
                       if (model != null) {
                         final order = model.order!;
-                        return Text('Rp ${order.originalPrice}', style: txtPrimarySubTitle.copyWith(
+                        final formattedPriceCommon = NumberFormat.currency(
+                          locale: 'id_ID',
+                          symbol: 'Rp',
+                          decimalDigits: 0, // Tidak ada digit desimal
+                        ).format(int.parse(order.originalPrice.toString()));
+                        return Text(formattedPriceCommon, style: txtPrimarySubTitle.copyWith(
                             fontWeight: FontWeight.w500, color: blackColor));
                       } else if (modelReward != null) {
                         final order = modelReward.order!;
@@ -99,6 +105,11 @@ class BoxPaymentDetailOrder extends StatelessWidget {
                 success: (model, modelReward) {
                   if (model != null && model.order!.voucherId != null) {
                     final order = model.order!;
+                    final formattedDiscountCommon = NumberFormat.currency(
+                      locale: 'id_ID',
+                      symbol: 'Rp',
+                      decimalDigits: 0, // Tidak ada digit desimal
+                    ).format(int.parse(order.discountAmount.toString()));
                     return Visibility(
                       visible: order.voucherId != null,
                       child: Row(
@@ -106,7 +117,7 @@ class BoxPaymentDetailOrder extends StatelessWidget {
                         children: [
                           Text('Diskon', style: txtPrimarySubTitle.copyWith(
                               fontWeight: FontWeight.w500, color: redMedium)),
-                          Text('- Rp ${order.discountAmount}', style: txtPrimarySubTitle.copyWith(
+                          Text('- ${formattedDiscountCommon}', style: txtPrimarySubTitle.copyWith(
                               fontWeight: FontWeight.w500, color: redMedium)),
                         ],
                       ),
@@ -151,7 +162,12 @@ class BoxPaymentDetailOrder extends StatelessWidget {
                     success: (model, modelReward) {
                       if (model != null) {
                         final order = model.order!;
-                        return Text('Rp ${order.totalPrice}', style: txtPrimarySubTitle.copyWith(
+                        final formattedTotalCommon = NumberFormat.currency(
+                          locale: 'id_ID',
+                          symbol: 'Rp',
+                          decimalDigits: 0, // Tidak ada digit desimal
+                        ).format(int.parse(order.totalPrice.toString()));
+                        return Text(formattedTotalCommon, style: txtPrimarySubTitle.copyWith(
                             fontWeight: FontWeight.w600, color: blackColor));
                       } else if (modelReward != null) {
                         final order = modelReward.order!;

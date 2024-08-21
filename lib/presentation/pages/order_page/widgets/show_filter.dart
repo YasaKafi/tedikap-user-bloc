@@ -38,7 +38,7 @@ class ShowFilter {
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
+            colorScheme: const ColorScheme.light(
               primary: primaryColor, // header background color
               onPrimary: baseColor, // header text color
               onSurface: blackColor, // body text color
@@ -75,25 +75,25 @@ class ShowFilter {
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
       ),
       builder: (BuildContext context) {
         return Container(
           height: MediaQuery.of(context).size.height * 0.7,
           width: double.infinity,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: baseColor,
             borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
           ),
-          padding: EdgeInsets.only(top: 10.0),
+          padding: const EdgeInsets.only(top: 10.0),
           child: BlocBuilder<OrderBloc, OrderState>(
             builder: (context, state) {
               return state.maybeWhen(
 
                   orElse: () {
                     String startDateText = DateFormat('yyyy-MM-dd')
-                        .format(DateTime.now().subtract(Duration(days: 365)));
+                        .format(DateTime.now().subtract(const Duration(days: 365)));
                     String endDateText =
                     DateFormat('yyyy-MM-dd').format(DateTime.now());
                     return Column(
@@ -114,7 +114,7 @@ class ShowFilter {
                             ),
                             Padding(
                               padding:
-                              EdgeInsets.only(top: 20, left: 20, right: 20),
+                              const EdgeInsets.only(top: 20, left: 20, right: 20),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -126,7 +126,7 @@ class ShowFilter {
                                     ),
                                     textAlign: TextAlign.start,
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   Visibility(
                                     visible: tapIndex == 0,
                                     child: Row(
@@ -293,7 +293,7 @@ class ShowFilter {
                                       ],
                                     ),
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   Text(
                                     'Periode Pesanan',
                                     style: txtPrimaryTitle.copyWith(
@@ -302,7 +302,7 @@ class ShowFilter {
                                     ),
                                     textAlign: TextAlign.start,
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   Row(
                                     mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -311,14 +311,14 @@ class ShowFilter {
                                         // onTap: () =>
                                         //     _selectDate(context, isStartDate: true),
                                         child: Container(
-                                          padding: EdgeInsets.symmetric(
+                                          padding: const EdgeInsets.symmetric(
                                               horizontal: 10, vertical: 5),
                                           decoration: BoxDecoration(
                                               borderRadius:
                                               BorderRadius.circular(10),
                                               border: Border.all(
                                                   color: grey, width: 1)),
-                                          margin: EdgeInsets.only(top: 10),
+                                          margin: const EdgeInsets.only(top: 10),
                                           child: Row(
                                             children: [
                                               Column(
@@ -333,7 +333,7 @@ class ShowFilter {
                                                         fontWeight:
                                                         FontWeight.w500),
                                                   ),
-                                                  SizedBox(height: 5),
+                                                  const SizedBox(height: 5),
                                                   Text(
                                                     startDateText,
                                                     style:
@@ -344,9 +344,9 @@ class ShowFilter {
                                                   ),
                                                 ],
                                               ),
-                                              Padding(
+                                              const Padding(
                                                 padding:
-                                                const EdgeInsets.only(left: 15),
+                                                EdgeInsets.only(left: 15),
                                                 child: Icon(
                                                   Icons.calendar_month_outlined,
                                                   size: 20,
@@ -372,7 +372,7 @@ class ShowFilter {
                                         // onTap: () =>
                                         //     _selectDate(context, isStartDate: false),
                                         child: Container(
-                                          padding: EdgeInsets.symmetric(
+                                          padding: const EdgeInsets.symmetric(
                                               horizontal: 10, vertical: 5),
                                           decoration: BoxDecoration(
                                               borderRadius:
@@ -393,7 +393,7 @@ class ShowFilter {
                                                         fontWeight:
                                                         FontWeight.w500),
                                                   ),
-                                                  SizedBox(height: 5),
+                                                  const SizedBox(height: 5),
                                                   Text(
                                                     endDateText,
                                                     style:
@@ -404,9 +404,9 @@ class ShowFilter {
                                                   ),
                                                 ],
                                               ),
-                                              Padding(
+                                              const Padding(
                                                 padding:
-                                                const EdgeInsets.only(left: 15),
+                                                EdgeInsets.only(left: 15),
                                                 child: Icon(
                                                   Icons.calendar_month_outlined,
                                                   size: 20,
@@ -424,7 +424,7 @@ class ShowFilter {
                           ],
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                             vertical: 20,
                             horizontal: 20,
                           ),
@@ -432,14 +432,14 @@ class ShowFilter {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               CommonButton(
-                                padding: EdgeInsets.symmetric(vertical: 15),
+                                padding: const EdgeInsets.symmetric(vertical: 15),
                                 width: MediaQuery.of(context).size.width * 0.4,
                                 borderColor: blackColor,
                                 borderWidth: 1,
                                 text: 'Reset',
                                 onPressed: () {
                                   // context.read<NotificationBloc>().add(NotificationEvent.resetFilters());
-                                  Future.delayed(Duration(seconds: 2), () {
+                                  Future.delayed(const Duration(seconds: 2), () {
                                     context.pop();
                                   });
                                 },
@@ -450,7 +450,7 @@ class ShowFilter {
                                 fontWeight: FontWeight.w400,
                               ),
                               CommonButton(
-                                padding: EdgeInsets.symmetric(vertical: 15),
+                                padding: const EdgeInsets.symmetric(vertical: 15),
                                 width: MediaQuery.of(context).size.width * 0.4,
                                 text: 'Terapkan',
                                 onPressed: () {
@@ -487,7 +487,7 @@ class ShowFilter {
 
 
                 String startDateText = DateFormat('yyyy-MM-dd')
-                    .format(DateTime.now().subtract(Duration(days: 365)));
+                    .format(DateTime.now().subtract(const Duration(days: 365)));
                 String endDateText =
                 DateFormat('yyyy-MM-dd').format(DateTime.now());
 
@@ -499,7 +499,7 @@ class ShowFilter {
                     : endDateText;
 
                 String startDateTextReward = DateFormat('yyyy-MM-dd')
-                    .format(DateTime.now().subtract(Duration(days: 365)));
+                    .format(DateTime.now().subtract(const Duration(days: 365)));
                 String endDateTextReward =
                 DateFormat('yyyy-MM-dd').format(DateTime.now());
 
@@ -528,7 +528,7 @@ class ShowFilter {
                         ),
                         Padding(
                           padding:
-                          EdgeInsets.only(top: 20, left: 20, right: 20),
+                          const EdgeInsets.only(top: 20, left: 20, right: 20),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -540,7 +540,7 @@ class ShowFilter {
                                 ),
                                 textAlign: TextAlign.start,
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               Visibility(
                                 visible: tapIndex == 1,
                                 child: Row(
@@ -630,7 +630,7 @@ class ShowFilter {
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               Text(
                                 'Periode Pesanan',
                                 style: txtPrimaryTitle.copyWith(
@@ -639,7 +639,7 @@ class ShowFilter {
                                 ),
                                 textAlign: TextAlign.start,
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               Row(
                                 mainAxisAlignment:
                                 MainAxisAlignment.spaceBetween,
@@ -651,14 +651,14 @@ class ShowFilter {
                                         : _selectDate(context,
                                         isStartDate: true, filterIndex: 1),
                                     child: Container(
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 5),
                                       decoration: BoxDecoration(
                                           borderRadius:
                                           BorderRadius.circular(10),
                                           border: Border.all(
                                               color: grey, width: 1)),
-                                      margin: EdgeInsets.only(top: 10),
+                                      margin: const EdgeInsets.only(top: 10),
                                       child: Row(
                                         children: [
                                           Column(
@@ -673,7 +673,7 @@ class ShowFilter {
                                                     fontWeight:
                                                     FontWeight.w500),
                                               ),
-                                              SizedBox(height: 5),
+                                              const SizedBox(height: 5),
                                               Text(
                                                 filterIndex == 0
                                                     ? startDateText
@@ -686,9 +686,9 @@ class ShowFilter {
                                               ),
                                             ],
                                           ),
-                                          Padding(
+                                          const Padding(
                                             padding:
-                                            const EdgeInsets.only(left: 15),
+                                            EdgeInsets.only(left: 15),
                                             child: Icon(
                                               Icons.calendar_month_outlined,
                                               size: 20,
@@ -717,7 +717,7 @@ class ShowFilter {
                                         : _selectDate(context,
                                         isStartDate: false, filterIndex: 1),
                                     child: Container(
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 5),
                                       decoration: BoxDecoration(
                                           borderRadius:
@@ -738,7 +738,7 @@ class ShowFilter {
                                                     fontWeight:
                                                     FontWeight.w500),
                                               ),
-                                              SizedBox(height: 5),
+                                              const SizedBox(height: 5),
                                               Text(
                                                 filterIndex == 0 ?
                                                 endDateText : endDateTextReward,
@@ -750,9 +750,9 @@ class ShowFilter {
                                               ),
                                             ],
                                           ),
-                                          Padding(
+                                          const Padding(
                                             padding:
-                                            const EdgeInsets.only(left: 15),
+                                            EdgeInsets.only(left: 15),
                                             child: Icon(
                                               Icons.calendar_month_outlined,
                                               size: 20,
@@ -770,7 +770,7 @@ class ShowFilter {
                       ],
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         vertical: 20,
                         horizontal: 20,
                       ),
@@ -778,7 +778,7 @@ class ShowFilter {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CommonButton(
-                            padding: EdgeInsets.symmetric(vertical: 15),
+                            padding: const EdgeInsets.symmetric(vertical: 15),
                             width: MediaQuery.of(context).size.width * 0.4,
                             borderColor: blackColor,
                             borderWidth: 1,
@@ -787,7 +787,7 @@ class ShowFilter {
                               if (filterIndex == 0) {
                                 context.read<OrderBloc>().add(
                                     OrderEvent.resetFilters(filterIndex, query, '', '', ''));
-                                Future.delayed(Duration(milliseconds: 1500), () {
+                                Future.delayed(const Duration(milliseconds: 1500), () {
                                   if (mounted){
                                     context.pop();
                                   }
@@ -795,7 +795,7 @@ class ShowFilter {
                               } else if (filterIndex == 1) {
                                 context.read<OrderBloc>().add(
                                     OrderEvent.resetFilters(filterIndex, query, '', '', ''));
-                                Future.delayed(Duration(milliseconds: 1500), () {
+                                Future.delayed(const Duration(milliseconds: 1500), () {
                                   if (mounted){
                                     context.pop();
                                   }
@@ -810,12 +810,10 @@ class ShowFilter {
                             fontWeight: FontWeight.w400,
                           ),
                           CommonButton(
-                            padding: EdgeInsets.symmetric(vertical: 15),
+                            padding: const EdgeInsets.symmetric(vertical: 15),
                             width: MediaQuery.of(context).size.width * 0.4,
                             text: 'Terapkan',
                             onPressed: () {
-                              print(
-                                  'isPesananSelesaiReward: $isPesananSelesaiReward, isPesananDitolakReward: $isPesananDitolakReward');
                               if (filterIndex == 0) {
                                 if (isPesananSelesai == true &&
                                     isPesananDibatalkan == true &&
@@ -905,8 +903,6 @@ class ShowFilter {
                                           statusOrder: 'pesanan ditolak',
                                           startDate: startDateTextReward,
                                           endDate: endDateTextReward));
-                                  print(
-                                      'INI VALUE $query dan VALUE START DATE $startDateTextReward');
                                 } else if (isPesananSelesaiReward == true &&
                                     isPesananDitolakReward == true) {
                                   context.read<OrderBloc>().add(

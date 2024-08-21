@@ -5,8 +5,8 @@ import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/data/repository/tedikap_repository.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/bloc/detail_order_bloc.dart';
+import 'package:flutter/services.dart';
 
-import '../../../../../common/constant.dart';
 import '../../../../../common/dimensions.dart';
 import '../../../../../common/theme.dart';
 
@@ -22,6 +22,10 @@ class BoxInfoStatus extends StatelessWidget {
     DateTime dateTime = DateTime.parse(dateString);
     String formattedDate = DateFormat('dd MMM yyyy | HH.mm').format(dateTime);
     return formattedDate;
+  }
+
+  void copyToClipboard(String textToCopy) {
+    Clipboard.setData(ClipboardData(text: textToCopy));
   }
 
   Widget loadingCard(double width, double height) {
@@ -124,38 +128,65 @@ class BoxInfoStatus extends StatelessWidget {
                     children: [
                       BlocBuilder<DetailOrderBloc, DetailOrderState>(
                         builder: (context, state) {
-                          return state.maybeWhen(
-                            orElse: () => loadingCard(0.5, 20),
-                            success: (model, rewardModel) {
-                              final detailOrder = model?.order;
-                              final detailOrderReward = rewardModel?.order;
-                              if (detailOrder != null) {
-                                return Text(
-                                  'ORDER ID: ${detailOrder.id}',
-                                  style: txtSecondarySubTitle.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    color: blackColor,
-                                  ),
-                                );
-                              }
-                              return Text(
-                                'ORDER ID: ${detailOrderReward!.id}',
-                                style: txtSecondarySubTitle.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  color: blackColor,
+                          return Row(
+                            children: [
+                              state.maybeWhen(
+                                orElse: () => loadingCard(0.5, 20),
+                                success: (model, rewardModel) {
+                                  final detailOrder = model?.order;
+                                  final detailOrderReward = rewardModel?.order;
+                                  if (detailOrder != null) {
+                                    return Text(
+                                      'ORDER ID: ${detailOrder.id}',
+                                      style: txtSecondarySubTitle.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                        color: blackColor,
+                                      ),
+                                    );
+                                  }
+                                  return Text(
+                                    'ORDER ID: ${detailOrderReward!.id}',
+                                    style: txtSecondarySubTitle.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: blackColor,
+                                    ),
+                                  );
+                                },
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  final orderId = state.maybeWhen(
+                                    success: (model, rewardModel) {
+                                      final detailOrder = model?.order;
+                                      final detailOrderReward = rewardModel?.order;
+                                      if (detailOrder != null) {
+                                        return detailOrder.id;
+                                      } else {
+                                        return detailOrderReward!.id;
+                                      }
+                                    },
+                                    orElse: () => null,
+                                  );
+
+                                  if (orderId != null) {
+                                    copyToClipboard(orderId);
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text('Order ID copied to clipboard')),
+                                    );
+                                  }
+                                },
+                                child: Icon(
+                                  Icons.copy,
+                                  size: 14,
+                                  weight: 50,
                                 ),
-                              );
-                            },
+                              ),
+                            ],
                           );
                         },
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Icon(
-                        Icons.copy,
-                        size: 14,
-                        weight: 50,
                       ),
                     ],
                   ),
