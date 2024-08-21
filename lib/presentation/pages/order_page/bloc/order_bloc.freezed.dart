@@ -31,6 +31,9 @@ mixin _$OrderEvent {
     required TResult Function(String query, String? statusOrder,
             String? startDate, String? endDate)
         getFilterOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getAllFilterOrder,
     required TResult Function(int filterIndex, String query,
             String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
@@ -43,7 +46,9 @@ mixin _$OrderEvent {
     required TResult Function(DateTime date) setStartDateReward,
     required TResult Function(DateTime date) setEndDate,
     required TResult Function(DateTime date) setEndDateReward,
-    required TResult Function(String query) resetFilters,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        resetFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,6 +66,9 @@ mixin _$OrderEvent {
     TResult? Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult? Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -73,7 +81,9 @@ mixin _$OrderEvent {
     TResult? Function(DateTime date)? setStartDateReward,
     TResult? Function(DateTime date)? setEndDate,
     TResult? Function(DateTime date)? setEndDateReward,
-    TResult? Function(String query)? resetFilters,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -91,6 +101,9 @@ mixin _$OrderEvent {
     TResult Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -103,7 +116,9 @@ mixin _$OrderEvent {
     TResult Function(DateTime date)? setStartDateReward,
     TResult Function(DateTime date)? setEndDate,
     TResult Function(DateTime date)? setEndDateReward,
-    TResult Function(String query)? resetFilters,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -119,6 +134,7 @@ mixin _$OrderEvent {
     required TResult Function(_GetCategoryOrder value) getFilterOrder,
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
+    required TResult Function(_GetAllFilterOrder value) getAllFilterOrder,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
     required TResult Function(_ToggleDitolakReward value)
@@ -145,6 +161,7 @@ mixin _$OrderEvent {
         getAllHistoryOrderReward,
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -168,6 +185,7 @@ mixin _$OrderEvent {
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -253,6 +271,9 @@ class _$StartedImpl implements _Started {
     required TResult Function(String query, String? statusOrder,
             String? startDate, String? endDate)
         getFilterOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getAllFilterOrder,
     required TResult Function(int filterIndex, String query,
             String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
@@ -265,7 +286,9 @@ class _$StartedImpl implements _Started {
     required TResult Function(DateTime date) setStartDateReward,
     required TResult Function(DateTime date) setEndDate,
     required TResult Function(DateTime date) setEndDateReward,
-    required TResult Function(String query) resetFilters,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        resetFilters,
   }) {
     return started();
   }
@@ -286,6 +309,9 @@ class _$StartedImpl implements _Started {
     TResult? Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult? Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -298,7 +324,9 @@ class _$StartedImpl implements _Started {
     TResult? Function(DateTime date)? setStartDateReward,
     TResult? Function(DateTime date)? setEndDate,
     TResult? Function(DateTime date)? setEndDateReward,
-    TResult? Function(String query)? resetFilters,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
   }) {
     return started?.call();
   }
@@ -319,6 +347,9 @@ class _$StartedImpl implements _Started {
     TResult Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -331,7 +362,9 @@ class _$StartedImpl implements _Started {
     TResult Function(DateTime date)? setStartDateReward,
     TResult Function(DateTime date)? setEndDate,
     TResult Function(DateTime date)? setEndDateReward,
-    TResult Function(String query)? resetFilters,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -353,6 +386,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(_GetCategoryOrder value) getFilterOrder,
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
+    required TResult Function(_GetAllFilterOrder value) getAllFilterOrder,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
     required TResult Function(_ToggleDitolakReward value)
@@ -382,6 +416,7 @@ class _$StartedImpl implements _Started {
         getAllHistoryOrderReward,
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -408,6 +443,7 @@ class _$StartedImpl implements _Started {
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -483,6 +519,9 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
     required TResult Function(String query, String? statusOrder,
             String? startDate, String? endDate)
         getFilterOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getAllFilterOrder,
     required TResult Function(int filterIndex, String query,
             String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
@@ -495,7 +534,9 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
     required TResult Function(DateTime date) setStartDateReward,
     required TResult Function(DateTime date) setEndDate,
     required TResult Function(DateTime date) setEndDateReward,
-    required TResult Function(String query) resetFilters,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        resetFilters,
   }) {
     return getAllHistoryOrder();
   }
@@ -516,6 +557,9 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
     TResult? Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult? Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -528,7 +572,9 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
     TResult? Function(DateTime date)? setStartDateReward,
     TResult? Function(DateTime date)? setEndDate,
     TResult? Function(DateTime date)? setEndDateReward,
-    TResult? Function(String query)? resetFilters,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
   }) {
     return getAllHistoryOrder?.call();
   }
@@ -549,6 +595,9 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
     TResult Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -561,7 +610,9 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
     TResult Function(DateTime date)? setStartDateReward,
     TResult Function(DateTime date)? setEndDate,
     TResult Function(DateTime date)? setEndDateReward,
-    TResult Function(String query)? resetFilters,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
     required TResult orElse(),
   }) {
     if (getAllHistoryOrder != null) {
@@ -583,6 +634,7 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
     required TResult Function(_GetCategoryOrder value) getFilterOrder,
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
+    required TResult Function(_GetAllFilterOrder value) getAllFilterOrder,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
     required TResult Function(_ToggleDitolakReward value)
@@ -612,6 +664,7 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
         getAllHistoryOrderReward,
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -638,6 +691,7 @@ class _$GetAllHistoryOrderImpl implements _GetAllHistoryOrder {
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -747,6 +801,9 @@ class _$PostReviewImpl implements _PostReview {
     required TResult Function(String query, String? statusOrder,
             String? startDate, String? endDate)
         getFilterOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getAllFilterOrder,
     required TResult Function(int filterIndex, String query,
             String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
@@ -759,7 +816,9 @@ class _$PostReviewImpl implements _PostReview {
     required TResult Function(DateTime date) setStartDateReward,
     required TResult Function(DateTime date) setEndDate,
     required TResult Function(DateTime date) setEndDateReward,
-    required TResult Function(String query) resetFilters,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        resetFilters,
   }) {
     return postReview(orderId, model);
   }
@@ -780,6 +839,9 @@ class _$PostReviewImpl implements _PostReview {
     TResult? Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult? Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -792,7 +854,9 @@ class _$PostReviewImpl implements _PostReview {
     TResult? Function(DateTime date)? setStartDateReward,
     TResult? Function(DateTime date)? setEndDate,
     TResult? Function(DateTime date)? setEndDateReward,
-    TResult? Function(String query)? resetFilters,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
   }) {
     return postReview?.call(orderId, model);
   }
@@ -813,6 +877,9 @@ class _$PostReviewImpl implements _PostReview {
     TResult Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -825,7 +892,9 @@ class _$PostReviewImpl implements _PostReview {
     TResult Function(DateTime date)? setStartDateReward,
     TResult Function(DateTime date)? setEndDate,
     TResult Function(DateTime date)? setEndDateReward,
-    TResult Function(String query)? resetFilters,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
     required TResult orElse(),
   }) {
     if (postReview != null) {
@@ -847,6 +916,7 @@ class _$PostReviewImpl implements _PostReview {
     required TResult Function(_GetCategoryOrder value) getFilterOrder,
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
+    required TResult Function(_GetAllFilterOrder value) getAllFilterOrder,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
     required TResult Function(_ToggleDitolakReward value)
@@ -876,6 +946,7 @@ class _$PostReviewImpl implements _PostReview {
         getAllHistoryOrderReward,
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -902,6 +973,7 @@ class _$PostReviewImpl implements _PostReview {
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -1011,6 +1083,9 @@ class _$PostReOrderImpl implements _PostReOrder {
     required TResult Function(String query, String? statusOrder,
             String? startDate, String? endDate)
         getFilterOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getAllFilterOrder,
     required TResult Function(int filterIndex, String query,
             String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
@@ -1023,7 +1098,9 @@ class _$PostReOrderImpl implements _PostReOrder {
     required TResult Function(DateTime date) setStartDateReward,
     required TResult Function(DateTime date) setEndDate,
     required TResult Function(DateTime date) setEndDateReward,
-    required TResult Function(String query) resetFilters,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        resetFilters,
   }) {
     return postReOrder(orderId);
   }
@@ -1044,6 +1121,9 @@ class _$PostReOrderImpl implements _PostReOrder {
     TResult? Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult? Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -1056,7 +1136,9 @@ class _$PostReOrderImpl implements _PostReOrder {
     TResult? Function(DateTime date)? setStartDateReward,
     TResult? Function(DateTime date)? setEndDate,
     TResult? Function(DateTime date)? setEndDateReward,
-    TResult? Function(String query)? resetFilters,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
   }) {
     return postReOrder?.call(orderId);
   }
@@ -1077,6 +1159,9 @@ class _$PostReOrderImpl implements _PostReOrder {
     TResult Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -1089,7 +1174,9 @@ class _$PostReOrderImpl implements _PostReOrder {
     TResult Function(DateTime date)? setStartDateReward,
     TResult Function(DateTime date)? setEndDate,
     TResult Function(DateTime date)? setEndDateReward,
-    TResult Function(String query)? resetFilters,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
     required TResult orElse(),
   }) {
     if (postReOrder != null) {
@@ -1111,6 +1198,7 @@ class _$PostReOrderImpl implements _PostReOrder {
     required TResult Function(_GetCategoryOrder value) getFilterOrder,
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
+    required TResult Function(_GetAllFilterOrder value) getAllFilterOrder,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
     required TResult Function(_ToggleDitolakReward value)
@@ -1140,6 +1228,7 @@ class _$PostReOrderImpl implements _PostReOrder {
         getAllHistoryOrderReward,
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -1166,6 +1255,7 @@ class _$PostReOrderImpl implements _PostReOrder {
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -1274,6 +1364,9 @@ class _$PostReOrderRewardImpl implements _PostReOrderReward {
     required TResult Function(String query, String? statusOrder,
             String? startDate, String? endDate)
         getFilterOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getAllFilterOrder,
     required TResult Function(int filterIndex, String query,
             String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
@@ -1286,7 +1379,9 @@ class _$PostReOrderRewardImpl implements _PostReOrderReward {
     required TResult Function(DateTime date) setStartDateReward,
     required TResult Function(DateTime date) setEndDate,
     required TResult Function(DateTime date) setEndDateReward,
-    required TResult Function(String query) resetFilters,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        resetFilters,
   }) {
     return postReOrderReward(orderRewardId);
   }
@@ -1307,6 +1402,9 @@ class _$PostReOrderRewardImpl implements _PostReOrderReward {
     TResult? Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult? Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -1319,7 +1417,9 @@ class _$PostReOrderRewardImpl implements _PostReOrderReward {
     TResult? Function(DateTime date)? setStartDateReward,
     TResult? Function(DateTime date)? setEndDate,
     TResult? Function(DateTime date)? setEndDateReward,
-    TResult? Function(String query)? resetFilters,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
   }) {
     return postReOrderReward?.call(orderRewardId);
   }
@@ -1340,6 +1440,9 @@ class _$PostReOrderRewardImpl implements _PostReOrderReward {
     TResult Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -1352,7 +1455,9 @@ class _$PostReOrderRewardImpl implements _PostReOrderReward {
     TResult Function(DateTime date)? setStartDateReward,
     TResult Function(DateTime date)? setEndDate,
     TResult Function(DateTime date)? setEndDateReward,
-    TResult Function(String query)? resetFilters,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
     required TResult orElse(),
   }) {
     if (postReOrderReward != null) {
@@ -1374,6 +1479,7 @@ class _$PostReOrderRewardImpl implements _PostReOrderReward {
     required TResult Function(_GetCategoryOrder value) getFilterOrder,
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
+    required TResult Function(_GetAllFilterOrder value) getAllFilterOrder,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
     required TResult Function(_ToggleDitolakReward value)
@@ -1403,6 +1509,7 @@ class _$PostReOrderRewardImpl implements _PostReOrderReward {
         getAllHistoryOrderReward,
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -1429,6 +1536,7 @@ class _$PostReOrderRewardImpl implements _PostReOrderReward {
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -1513,6 +1621,9 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
     required TResult Function(String query, String? statusOrder,
             String? startDate, String? endDate)
         getFilterOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getAllFilterOrder,
     required TResult Function(int filterIndex, String query,
             String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
@@ -1525,7 +1636,9 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
     required TResult Function(DateTime date) setStartDateReward,
     required TResult Function(DateTime date) setEndDate,
     required TResult Function(DateTime date) setEndDateReward,
-    required TResult Function(String query) resetFilters,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        resetFilters,
   }) {
     return getAllHistoryOrderReward();
   }
@@ -1546,6 +1659,9 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
     TResult? Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult? Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -1558,7 +1674,9 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
     TResult? Function(DateTime date)? setStartDateReward,
     TResult? Function(DateTime date)? setEndDate,
     TResult? Function(DateTime date)? setEndDateReward,
-    TResult? Function(String query)? resetFilters,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
   }) {
     return getAllHistoryOrderReward?.call();
   }
@@ -1579,6 +1697,9 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
     TResult Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -1591,7 +1712,9 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
     TResult Function(DateTime date)? setStartDateReward,
     TResult Function(DateTime date)? setEndDate,
     TResult Function(DateTime date)? setEndDateReward,
-    TResult Function(String query)? resetFilters,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
     required TResult orElse(),
   }) {
     if (getAllHistoryOrderReward != null) {
@@ -1613,6 +1736,7 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
     required TResult Function(_GetCategoryOrder value) getFilterOrder,
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
+    required TResult Function(_GetAllFilterOrder value) getAllFilterOrder,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
     required TResult Function(_ToggleDitolakReward value)
@@ -1642,6 +1766,7 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
         getAllHistoryOrderReward,
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -1668,6 +1793,7 @@ class _$GetAllHistoryOrderRewardImpl implements _GetAllHistoryOrderReward {
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -1799,6 +1925,9 @@ class _$GetCategoryOrderImpl implements _GetCategoryOrder {
     required TResult Function(String query, String? statusOrder,
             String? startDate, String? endDate)
         getFilterOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getAllFilterOrder,
     required TResult Function(int filterIndex, String query,
             String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
@@ -1811,7 +1940,9 @@ class _$GetCategoryOrderImpl implements _GetCategoryOrder {
     required TResult Function(DateTime date) setStartDateReward,
     required TResult Function(DateTime date) setEndDate,
     required TResult Function(DateTime date) setEndDateReward,
-    required TResult Function(String query) resetFilters,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        resetFilters,
   }) {
     return getFilterOrder(query, statusOrder, startDate, endDate);
   }
@@ -1832,6 +1963,9 @@ class _$GetCategoryOrderImpl implements _GetCategoryOrder {
     TResult? Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult? Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -1844,7 +1978,9 @@ class _$GetCategoryOrderImpl implements _GetCategoryOrder {
     TResult? Function(DateTime date)? setStartDateReward,
     TResult? Function(DateTime date)? setEndDate,
     TResult? Function(DateTime date)? setEndDateReward,
-    TResult? Function(String query)? resetFilters,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
   }) {
     return getFilterOrder?.call(query, statusOrder, startDate, endDate);
   }
@@ -1865,6 +2001,9 @@ class _$GetCategoryOrderImpl implements _GetCategoryOrder {
     TResult Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -1877,7 +2016,9 @@ class _$GetCategoryOrderImpl implements _GetCategoryOrder {
     TResult Function(DateTime date)? setStartDateReward,
     TResult Function(DateTime date)? setEndDate,
     TResult Function(DateTime date)? setEndDateReward,
-    TResult Function(String query)? resetFilters,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
     required TResult orElse(),
   }) {
     if (getFilterOrder != null) {
@@ -1899,6 +2040,7 @@ class _$GetCategoryOrderImpl implements _GetCategoryOrder {
     required TResult Function(_GetCategoryOrder value) getFilterOrder,
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
+    required TResult Function(_GetAllFilterOrder value) getAllFilterOrder,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
     required TResult Function(_ToggleDitolakReward value)
@@ -1928,6 +2070,7 @@ class _$GetCategoryOrderImpl implements _GetCategoryOrder {
         getAllHistoryOrderReward,
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -1954,6 +2097,7 @@ class _$GetCategoryOrderImpl implements _GetCategoryOrder {
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -2096,6 +2240,9 @@ class _$GetCategoryOrderRewardImpl implements _GetCategoryOrderReward {
     required TResult Function(String query, String? statusOrder,
             String? startDate, String? endDate)
         getFilterOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getAllFilterOrder,
     required TResult Function(int filterIndex, String query,
             String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
@@ -2108,7 +2255,9 @@ class _$GetCategoryOrderRewardImpl implements _GetCategoryOrderReward {
     required TResult Function(DateTime date) setStartDateReward,
     required TResult Function(DateTime date) setEndDate,
     required TResult Function(DateTime date) setEndDateReward,
-    required TResult Function(String query) resetFilters,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        resetFilters,
   }) {
     return getFilterOrderReward(query, statusOrder, startDate, endDate);
   }
@@ -2129,6 +2278,9 @@ class _$GetCategoryOrderRewardImpl implements _GetCategoryOrderReward {
     TResult? Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult? Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -2141,7 +2293,9 @@ class _$GetCategoryOrderRewardImpl implements _GetCategoryOrderReward {
     TResult? Function(DateTime date)? setStartDateReward,
     TResult? Function(DateTime date)? setEndDate,
     TResult? Function(DateTime date)? setEndDateReward,
-    TResult? Function(String query)? resetFilters,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
   }) {
     return getFilterOrderReward?.call(query, statusOrder, startDate, endDate);
   }
@@ -2162,6 +2316,9 @@ class _$GetCategoryOrderRewardImpl implements _GetCategoryOrderReward {
     TResult Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -2174,7 +2331,9 @@ class _$GetCategoryOrderRewardImpl implements _GetCategoryOrderReward {
     TResult Function(DateTime date)? setStartDateReward,
     TResult Function(DateTime date)? setEndDate,
     TResult Function(DateTime date)? setEndDateReward,
-    TResult Function(String query)? resetFilters,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
     required TResult orElse(),
   }) {
     if (getFilterOrderReward != null) {
@@ -2196,6 +2355,7 @@ class _$GetCategoryOrderRewardImpl implements _GetCategoryOrderReward {
     required TResult Function(_GetCategoryOrder value) getFilterOrder,
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
+    required TResult Function(_GetAllFilterOrder value) getAllFilterOrder,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
     required TResult Function(_ToggleDitolakReward value)
@@ -2225,6 +2385,7 @@ class _$GetCategoryOrderRewardImpl implements _GetCategoryOrderReward {
         getAllHistoryOrderReward,
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -2251,6 +2412,7 @@ class _$GetCategoryOrderRewardImpl implements _GetCategoryOrderReward {
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -2285,6 +2447,322 @@ abstract class _GetCategoryOrderReward implements OrderEvent {
   @JsonKey(ignore: true)
   _$$GetCategoryOrderRewardImplCopyWith<_$GetCategoryOrderRewardImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetAllFilterOrderImplCopyWith<$Res> {
+  factory _$$GetAllFilterOrderImplCopyWith(_$GetAllFilterOrderImpl value,
+          $Res Function(_$GetAllFilterOrderImpl) then) =
+      __$$GetAllFilterOrderImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {String query, String? statusOrder, String? startDate, String? endDate});
+}
+
+/// @nodoc
+class __$$GetAllFilterOrderImplCopyWithImpl<$Res>
+    extends _$OrderEventCopyWithImpl<$Res, _$GetAllFilterOrderImpl>
+    implements _$$GetAllFilterOrderImplCopyWith<$Res> {
+  __$$GetAllFilterOrderImplCopyWithImpl(_$GetAllFilterOrderImpl _value,
+      $Res Function(_$GetAllFilterOrderImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? query = null,
+    Object? statusOrder = freezed,
+    Object? startDate = freezed,
+    Object? endDate = freezed,
+  }) {
+    return _then(_$GetAllFilterOrderImpl(
+      null == query
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+      freezed == statusOrder
+          ? _value.statusOrder
+          : statusOrder // ignore: cast_nullable_to_non_nullable
+              as String?,
+      freezed == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      freezed == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetAllFilterOrderImpl implements _GetAllFilterOrder {
+  const _$GetAllFilterOrderImpl(
+      this.query, this.statusOrder, this.startDate, this.endDate);
+
+  @override
+  final String query;
+  @override
+  final String? statusOrder;
+  @override
+  final String? startDate;
+  @override
+  final String? endDate;
+
+  @override
+  String toString() {
+    return 'OrderEvent.getAllFilterOrder(query: $query, statusOrder: $statusOrder, startDate: $startDate, endDate: $endDate)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetAllFilterOrderImpl &&
+            (identical(other.query, query) || other.query == query) &&
+            (identical(other.statusOrder, statusOrder) ||
+                other.statusOrder == statusOrder) &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
+            (identical(other.endDate, endDate) || other.endDate == endDate));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, query, statusOrder, startDate, endDate);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetAllFilterOrderImplCopyWith<_$GetAllFilterOrderImpl> get copyWith =>
+      __$$GetAllFilterOrderImplCopyWithImpl<_$GetAllFilterOrderImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() getAllHistoryOrder,
+    required TResult Function(String? orderId, PostReviewRequestModel? model)
+        postReview,
+    required TResult Function(String? orderId) postReOrder,
+    required TResult Function(String? orderRewardId) postReOrderReward,
+    required TResult Function() getAllHistoryOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrder,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getFilterOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getAllFilterOrder,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        doFilterOrder,
+    required TResult Function(bool? newValue) togglePesananDitolak,
+    required TResult Function(bool? newValue) togglePesananDitolakReward,
+    required TResult Function(bool? newValue) togglePesananDibatalkan,
+    required TResult Function(bool? newValue) togglePesananSelesai,
+    required TResult Function(bool? newValue) togglePesananSelesaiReward,
+    required TResult Function(DateTime date) setStartDate,
+    required TResult Function(DateTime date) setStartDateReward,
+    required TResult Function(DateTime date) setEndDate,
+    required TResult Function(DateTime date) setEndDateReward,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        resetFilters,
+  }) {
+    return getAllFilterOrder(query, statusOrder, startDate, endDate);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? getAllHistoryOrder,
+    TResult? Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
+    TResult? Function(String? orderId)? postReOrder,
+    TResult? Function(String? orderRewardId)? postReOrderReward,
+    TResult? Function()? getAllHistoryOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        doFilterOrder,
+    TResult? Function(bool? newValue)? togglePesananDitolak,
+    TResult? Function(bool? newValue)? togglePesananDitolakReward,
+    TResult? Function(bool? newValue)? togglePesananDibatalkan,
+    TResult? Function(bool? newValue)? togglePesananSelesai,
+    TResult? Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult? Function(DateTime date)? setStartDate,
+    TResult? Function(DateTime date)? setStartDateReward,
+    TResult? Function(DateTime date)? setEndDate,
+    TResult? Function(DateTime date)? setEndDateReward,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
+  }) {
+    return getAllFilterOrder?.call(query, statusOrder, startDate, endDate);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? getAllHistoryOrder,
+    TResult Function(String? orderId, PostReviewRequestModel? model)?
+        postReview,
+    TResult Function(String? orderId)? postReOrder,
+    TResult Function(String? orderRewardId)? postReOrderReward,
+    TResult Function()? getAllHistoryOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrder,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getFilterOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        doFilterOrder,
+    TResult Function(bool? newValue)? togglePesananDitolak,
+    TResult Function(bool? newValue)? togglePesananDitolakReward,
+    TResult Function(bool? newValue)? togglePesananDibatalkan,
+    TResult Function(bool? newValue)? togglePesananSelesai,
+    TResult Function(bool? newValue)? togglePesananSelesaiReward,
+    TResult Function(DateTime date)? setStartDate,
+    TResult Function(DateTime date)? setStartDateReward,
+    TResult Function(DateTime date)? setEndDate,
+    TResult Function(DateTime date)? setEndDateReward,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
+    required TResult orElse(),
+  }) {
+    if (getAllFilterOrder != null) {
+      return getAllFilterOrder(query, statusOrder, startDate, endDate);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetAllHistoryOrder value) getAllHistoryOrder,
+    required TResult Function(_PostReview value) postReview,
+    required TResult Function(_PostReOrder value) postReOrder,
+    required TResult Function(_PostReOrderReward value) postReOrderReward,
+    required TResult Function(_GetAllHistoryOrderReward value)
+        getAllHistoryOrderReward,
+    required TResult Function(_GetCategoryOrder value) getFilterOrder,
+    required TResult Function(_GetCategoryOrderReward value)
+        getFilterOrderReward,
+    required TResult Function(_GetAllFilterOrder value) getAllFilterOrder,
+    required TResult Function(_DoFilterOrder value) doFilterOrder,
+    required TResult Function(_ToggleDitolak value) togglePesananDitolak,
+    required TResult Function(_ToggleDitolakReward value)
+        togglePesananDitolakReward,
+    required TResult Function(_ToggleDibatalkan value) togglePesananDibatalkan,
+    required TResult Function(_ToggleSelesai value) togglePesananSelesai,
+    required TResult Function(_ToggleSelesaiReward value)
+        togglePesananSelesaiReward,
+    required TResult Function(_SetStartDate value) setStartDate,
+    required TResult Function(_SetStartDateReward value) setStartDateReward,
+    required TResult Function(_SetEndDate value) setEndDate,
+    required TResult Function(_SetEndDateReward value) setEndDateReward,
+    required TResult Function(_ResetFilters value) resetFilters,
+  }) {
+    return getAllFilterOrder(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult? Function(_PostReview value)? postReview,
+    TResult? Function(_PostReOrder value)? postReOrder,
+    TResult? Function(_PostReOrderReward value)? postReOrderReward,
+    TResult? Function(_GetAllHistoryOrderReward value)?
+        getAllHistoryOrderReward,
+    TResult? Function(_GetCategoryOrder value)? getFilterOrder,
+    TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_GetAllFilterOrder value)? getAllFilterOrder,
+    TResult? Function(_DoFilterOrder value)? doFilterOrder,
+    TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
+    TResult? Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
+    TResult? Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult? Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult? Function(_SetStartDate value)? setStartDate,
+    TResult? Function(_SetStartDateReward value)? setStartDateReward,
+    TResult? Function(_SetEndDate value)? setEndDate,
+    TResult? Function(_SetEndDateReward value)? setEndDateReward,
+    TResult? Function(_ResetFilters value)? resetFilters,
+  }) {
+    return getAllFilterOrder?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetAllHistoryOrder value)? getAllHistoryOrder,
+    TResult Function(_PostReview value)? postReview,
+    TResult Function(_PostReOrder value)? postReOrder,
+    TResult Function(_PostReOrderReward value)? postReOrderReward,
+    TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
+    TResult Function(_GetCategoryOrder value)? getFilterOrder,
+    TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_GetAllFilterOrder value)? getAllFilterOrder,
+    TResult Function(_DoFilterOrder value)? doFilterOrder,
+    TResult Function(_ToggleDitolak value)? togglePesananDitolak,
+    TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
+    TResult Function(_ToggleDibatalkan value)? togglePesananDibatalkan,
+    TResult Function(_ToggleSelesai value)? togglePesananSelesai,
+    TResult Function(_ToggleSelesaiReward value)? togglePesananSelesaiReward,
+    TResult Function(_SetStartDate value)? setStartDate,
+    TResult Function(_SetStartDateReward value)? setStartDateReward,
+    TResult Function(_SetEndDate value)? setEndDate,
+    TResult Function(_SetEndDateReward value)? setEndDateReward,
+    TResult Function(_ResetFilters value)? resetFilters,
+    required TResult orElse(),
+  }) {
+    if (getAllFilterOrder != null) {
+      return getAllFilterOrder(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetAllFilterOrder implements OrderEvent {
+  const factory _GetAllFilterOrder(
+      final String query,
+      final String? statusOrder,
+      final String? startDate,
+      final String? endDate) = _$GetAllFilterOrderImpl;
+
+  String get query;
+  String? get statusOrder;
+  String? get startDate;
+  String? get endDate;
+  @JsonKey(ignore: true)
+  _$$GetAllFilterOrderImplCopyWith<_$GetAllFilterOrderImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -2410,6 +2888,9 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
     required TResult Function(String query, String? statusOrder,
             String? startDate, String? endDate)
         getFilterOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getAllFilterOrder,
     required TResult Function(int filterIndex, String query,
             String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
@@ -2422,7 +2903,9 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
     required TResult Function(DateTime date) setStartDateReward,
     required TResult Function(DateTime date) setEndDate,
     required TResult Function(DateTime date) setEndDateReward,
-    required TResult Function(String query) resetFilters,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        resetFilters,
   }) {
     return doFilterOrder(filterIndex, query, statusOrder, startDate, endDate);
   }
@@ -2443,6 +2926,9 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
     TResult? Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult? Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -2455,7 +2941,9 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
     TResult? Function(DateTime date)? setStartDateReward,
     TResult? Function(DateTime date)? setEndDate,
     TResult? Function(DateTime date)? setEndDateReward,
-    TResult? Function(String query)? resetFilters,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
   }) {
     return doFilterOrder?.call(
         filterIndex, query, statusOrder, startDate, endDate);
@@ -2477,6 +2965,9 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
     TResult Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -2489,7 +2980,9 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
     TResult Function(DateTime date)? setStartDateReward,
     TResult Function(DateTime date)? setEndDate,
     TResult Function(DateTime date)? setEndDateReward,
-    TResult Function(String query)? resetFilters,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
     required TResult orElse(),
   }) {
     if (doFilterOrder != null) {
@@ -2511,6 +3004,7 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
     required TResult Function(_GetCategoryOrder value) getFilterOrder,
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
+    required TResult Function(_GetAllFilterOrder value) getAllFilterOrder,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
     required TResult Function(_ToggleDitolakReward value)
@@ -2540,6 +3034,7 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
         getAllHistoryOrderReward,
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -2566,6 +3061,7 @@ class _$DoFilterOrderImpl implements _DoFilterOrder {
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -2682,6 +3178,9 @@ class _$ToggleDitolakImpl implements _ToggleDitolak {
     required TResult Function(String query, String? statusOrder,
             String? startDate, String? endDate)
         getFilterOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getAllFilterOrder,
     required TResult Function(int filterIndex, String query,
             String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
@@ -2694,7 +3193,9 @@ class _$ToggleDitolakImpl implements _ToggleDitolak {
     required TResult Function(DateTime date) setStartDateReward,
     required TResult Function(DateTime date) setEndDate,
     required TResult Function(DateTime date) setEndDateReward,
-    required TResult Function(String query) resetFilters,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        resetFilters,
   }) {
     return togglePesananDitolak(newValue);
   }
@@ -2715,6 +3216,9 @@ class _$ToggleDitolakImpl implements _ToggleDitolak {
     TResult? Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult? Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -2727,7 +3231,9 @@ class _$ToggleDitolakImpl implements _ToggleDitolak {
     TResult? Function(DateTime date)? setStartDateReward,
     TResult? Function(DateTime date)? setEndDate,
     TResult? Function(DateTime date)? setEndDateReward,
-    TResult? Function(String query)? resetFilters,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
   }) {
     return togglePesananDitolak?.call(newValue);
   }
@@ -2748,6 +3254,9 @@ class _$ToggleDitolakImpl implements _ToggleDitolak {
     TResult Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -2760,7 +3269,9 @@ class _$ToggleDitolakImpl implements _ToggleDitolak {
     TResult Function(DateTime date)? setStartDateReward,
     TResult Function(DateTime date)? setEndDate,
     TResult Function(DateTime date)? setEndDateReward,
-    TResult Function(String query)? resetFilters,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
     required TResult orElse(),
   }) {
     if (togglePesananDitolak != null) {
@@ -2782,6 +3293,7 @@ class _$ToggleDitolakImpl implements _ToggleDitolak {
     required TResult Function(_GetCategoryOrder value) getFilterOrder,
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
+    required TResult Function(_GetAllFilterOrder value) getAllFilterOrder,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
     required TResult Function(_ToggleDitolakReward value)
@@ -2811,6 +3323,7 @@ class _$ToggleDitolakImpl implements _ToggleDitolak {
         getAllHistoryOrderReward,
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -2837,6 +3350,7 @@ class _$ToggleDitolakImpl implements _ToggleDitolak {
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -2945,6 +3459,9 @@ class _$ToggleDitolakRewardImpl implements _ToggleDitolakReward {
     required TResult Function(String query, String? statusOrder,
             String? startDate, String? endDate)
         getFilterOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getAllFilterOrder,
     required TResult Function(int filterIndex, String query,
             String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
@@ -2957,7 +3474,9 @@ class _$ToggleDitolakRewardImpl implements _ToggleDitolakReward {
     required TResult Function(DateTime date) setStartDateReward,
     required TResult Function(DateTime date) setEndDate,
     required TResult Function(DateTime date) setEndDateReward,
-    required TResult Function(String query) resetFilters,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        resetFilters,
   }) {
     return togglePesananDitolakReward(newValue);
   }
@@ -2978,6 +3497,9 @@ class _$ToggleDitolakRewardImpl implements _ToggleDitolakReward {
     TResult? Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult? Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -2990,7 +3512,9 @@ class _$ToggleDitolakRewardImpl implements _ToggleDitolakReward {
     TResult? Function(DateTime date)? setStartDateReward,
     TResult? Function(DateTime date)? setEndDate,
     TResult? Function(DateTime date)? setEndDateReward,
-    TResult? Function(String query)? resetFilters,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
   }) {
     return togglePesananDitolakReward?.call(newValue);
   }
@@ -3011,6 +3535,9 @@ class _$ToggleDitolakRewardImpl implements _ToggleDitolakReward {
     TResult Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -3023,7 +3550,9 @@ class _$ToggleDitolakRewardImpl implements _ToggleDitolakReward {
     TResult Function(DateTime date)? setStartDateReward,
     TResult Function(DateTime date)? setEndDate,
     TResult Function(DateTime date)? setEndDateReward,
-    TResult Function(String query)? resetFilters,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
     required TResult orElse(),
   }) {
     if (togglePesananDitolakReward != null) {
@@ -3045,6 +3574,7 @@ class _$ToggleDitolakRewardImpl implements _ToggleDitolakReward {
     required TResult Function(_GetCategoryOrder value) getFilterOrder,
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
+    required TResult Function(_GetAllFilterOrder value) getAllFilterOrder,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
     required TResult Function(_ToggleDitolakReward value)
@@ -3074,6 +3604,7 @@ class _$ToggleDitolakRewardImpl implements _ToggleDitolakReward {
         getAllHistoryOrderReward,
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -3100,6 +3631,7 @@ class _$ToggleDitolakRewardImpl implements _ToggleDitolakReward {
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -3209,6 +3741,9 @@ class _$ToggleDibatalkanImpl implements _ToggleDibatalkan {
     required TResult Function(String query, String? statusOrder,
             String? startDate, String? endDate)
         getFilterOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getAllFilterOrder,
     required TResult Function(int filterIndex, String query,
             String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
@@ -3221,7 +3756,9 @@ class _$ToggleDibatalkanImpl implements _ToggleDibatalkan {
     required TResult Function(DateTime date) setStartDateReward,
     required TResult Function(DateTime date) setEndDate,
     required TResult Function(DateTime date) setEndDateReward,
-    required TResult Function(String query) resetFilters,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        resetFilters,
   }) {
     return togglePesananDibatalkan(newValue);
   }
@@ -3242,6 +3779,9 @@ class _$ToggleDibatalkanImpl implements _ToggleDibatalkan {
     TResult? Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult? Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -3254,7 +3794,9 @@ class _$ToggleDibatalkanImpl implements _ToggleDibatalkan {
     TResult? Function(DateTime date)? setStartDateReward,
     TResult? Function(DateTime date)? setEndDate,
     TResult? Function(DateTime date)? setEndDateReward,
-    TResult? Function(String query)? resetFilters,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
   }) {
     return togglePesananDibatalkan?.call(newValue);
   }
@@ -3275,6 +3817,9 @@ class _$ToggleDibatalkanImpl implements _ToggleDibatalkan {
     TResult Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -3287,7 +3832,9 @@ class _$ToggleDibatalkanImpl implements _ToggleDibatalkan {
     TResult Function(DateTime date)? setStartDateReward,
     TResult Function(DateTime date)? setEndDate,
     TResult Function(DateTime date)? setEndDateReward,
-    TResult Function(String query)? resetFilters,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
     required TResult orElse(),
   }) {
     if (togglePesananDibatalkan != null) {
@@ -3309,6 +3856,7 @@ class _$ToggleDibatalkanImpl implements _ToggleDibatalkan {
     required TResult Function(_GetCategoryOrder value) getFilterOrder,
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
+    required TResult Function(_GetAllFilterOrder value) getAllFilterOrder,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
     required TResult Function(_ToggleDitolakReward value)
@@ -3338,6 +3886,7 @@ class _$ToggleDibatalkanImpl implements _ToggleDibatalkan {
         getAllHistoryOrderReward,
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -3364,6 +3913,7 @@ class _$ToggleDibatalkanImpl implements _ToggleDibatalkan {
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -3472,6 +4022,9 @@ class _$ToggleSelesaiImpl implements _ToggleSelesai {
     required TResult Function(String query, String? statusOrder,
             String? startDate, String? endDate)
         getFilterOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getAllFilterOrder,
     required TResult Function(int filterIndex, String query,
             String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
@@ -3484,7 +4037,9 @@ class _$ToggleSelesaiImpl implements _ToggleSelesai {
     required TResult Function(DateTime date) setStartDateReward,
     required TResult Function(DateTime date) setEndDate,
     required TResult Function(DateTime date) setEndDateReward,
-    required TResult Function(String query) resetFilters,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        resetFilters,
   }) {
     return togglePesananSelesai(newValue);
   }
@@ -3505,6 +4060,9 @@ class _$ToggleSelesaiImpl implements _ToggleSelesai {
     TResult? Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult? Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -3517,7 +4075,9 @@ class _$ToggleSelesaiImpl implements _ToggleSelesai {
     TResult? Function(DateTime date)? setStartDateReward,
     TResult? Function(DateTime date)? setEndDate,
     TResult? Function(DateTime date)? setEndDateReward,
-    TResult? Function(String query)? resetFilters,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
   }) {
     return togglePesananSelesai?.call(newValue);
   }
@@ -3538,6 +4098,9 @@ class _$ToggleSelesaiImpl implements _ToggleSelesai {
     TResult Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -3550,7 +4113,9 @@ class _$ToggleSelesaiImpl implements _ToggleSelesai {
     TResult Function(DateTime date)? setStartDateReward,
     TResult Function(DateTime date)? setEndDate,
     TResult Function(DateTime date)? setEndDateReward,
-    TResult Function(String query)? resetFilters,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
     required TResult orElse(),
   }) {
     if (togglePesananSelesai != null) {
@@ -3572,6 +4137,7 @@ class _$ToggleSelesaiImpl implements _ToggleSelesai {
     required TResult Function(_GetCategoryOrder value) getFilterOrder,
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
+    required TResult Function(_GetAllFilterOrder value) getAllFilterOrder,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
     required TResult Function(_ToggleDitolakReward value)
@@ -3601,6 +4167,7 @@ class _$ToggleSelesaiImpl implements _ToggleSelesai {
         getAllHistoryOrderReward,
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -3627,6 +4194,7 @@ class _$ToggleSelesaiImpl implements _ToggleSelesai {
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -3735,6 +4303,9 @@ class _$ToggleSelesaiRewardImpl implements _ToggleSelesaiReward {
     required TResult Function(String query, String? statusOrder,
             String? startDate, String? endDate)
         getFilterOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getAllFilterOrder,
     required TResult Function(int filterIndex, String query,
             String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
@@ -3747,7 +4318,9 @@ class _$ToggleSelesaiRewardImpl implements _ToggleSelesaiReward {
     required TResult Function(DateTime date) setStartDateReward,
     required TResult Function(DateTime date) setEndDate,
     required TResult Function(DateTime date) setEndDateReward,
-    required TResult Function(String query) resetFilters,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        resetFilters,
   }) {
     return togglePesananSelesaiReward(newValue);
   }
@@ -3768,6 +4341,9 @@ class _$ToggleSelesaiRewardImpl implements _ToggleSelesaiReward {
     TResult? Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult? Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -3780,7 +4356,9 @@ class _$ToggleSelesaiRewardImpl implements _ToggleSelesaiReward {
     TResult? Function(DateTime date)? setStartDateReward,
     TResult? Function(DateTime date)? setEndDate,
     TResult? Function(DateTime date)? setEndDateReward,
-    TResult? Function(String query)? resetFilters,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
   }) {
     return togglePesananSelesaiReward?.call(newValue);
   }
@@ -3801,6 +4379,9 @@ class _$ToggleSelesaiRewardImpl implements _ToggleSelesaiReward {
     TResult Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -3813,7 +4394,9 @@ class _$ToggleSelesaiRewardImpl implements _ToggleSelesaiReward {
     TResult Function(DateTime date)? setStartDateReward,
     TResult Function(DateTime date)? setEndDate,
     TResult Function(DateTime date)? setEndDateReward,
-    TResult Function(String query)? resetFilters,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
     required TResult orElse(),
   }) {
     if (togglePesananSelesaiReward != null) {
@@ -3835,6 +4418,7 @@ class _$ToggleSelesaiRewardImpl implements _ToggleSelesaiReward {
     required TResult Function(_GetCategoryOrder value) getFilterOrder,
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
+    required TResult Function(_GetAllFilterOrder value) getAllFilterOrder,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
     required TResult Function(_ToggleDitolakReward value)
@@ -3864,6 +4448,7 @@ class _$ToggleSelesaiRewardImpl implements _ToggleSelesaiReward {
         getAllHistoryOrderReward,
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -3890,6 +4475,7 @@ class _$ToggleSelesaiRewardImpl implements _ToggleSelesaiReward {
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -3997,6 +4583,9 @@ class _$SetStartDateImpl implements _SetStartDate {
     required TResult Function(String query, String? statusOrder,
             String? startDate, String? endDate)
         getFilterOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getAllFilterOrder,
     required TResult Function(int filterIndex, String query,
             String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
@@ -4009,7 +4598,9 @@ class _$SetStartDateImpl implements _SetStartDate {
     required TResult Function(DateTime date) setStartDateReward,
     required TResult Function(DateTime date) setEndDate,
     required TResult Function(DateTime date) setEndDateReward,
-    required TResult Function(String query) resetFilters,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        resetFilters,
   }) {
     return setStartDate(date);
   }
@@ -4030,6 +4621,9 @@ class _$SetStartDateImpl implements _SetStartDate {
     TResult? Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult? Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -4042,7 +4636,9 @@ class _$SetStartDateImpl implements _SetStartDate {
     TResult? Function(DateTime date)? setStartDateReward,
     TResult? Function(DateTime date)? setEndDate,
     TResult? Function(DateTime date)? setEndDateReward,
-    TResult? Function(String query)? resetFilters,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
   }) {
     return setStartDate?.call(date);
   }
@@ -4063,6 +4659,9 @@ class _$SetStartDateImpl implements _SetStartDate {
     TResult Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -4075,7 +4674,9 @@ class _$SetStartDateImpl implements _SetStartDate {
     TResult Function(DateTime date)? setStartDateReward,
     TResult Function(DateTime date)? setEndDate,
     TResult Function(DateTime date)? setEndDateReward,
-    TResult Function(String query)? resetFilters,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
     required TResult orElse(),
   }) {
     if (setStartDate != null) {
@@ -4097,6 +4698,7 @@ class _$SetStartDateImpl implements _SetStartDate {
     required TResult Function(_GetCategoryOrder value) getFilterOrder,
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
+    required TResult Function(_GetAllFilterOrder value) getAllFilterOrder,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
     required TResult Function(_ToggleDitolakReward value)
@@ -4126,6 +4728,7 @@ class _$SetStartDateImpl implements _SetStartDate {
         getAllHistoryOrderReward,
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -4152,6 +4755,7 @@ class _$SetStartDateImpl implements _SetStartDate {
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -4259,6 +4863,9 @@ class _$SetStartDateRewardImpl implements _SetStartDateReward {
     required TResult Function(String query, String? statusOrder,
             String? startDate, String? endDate)
         getFilterOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getAllFilterOrder,
     required TResult Function(int filterIndex, String query,
             String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
@@ -4271,7 +4878,9 @@ class _$SetStartDateRewardImpl implements _SetStartDateReward {
     required TResult Function(DateTime date) setStartDateReward,
     required TResult Function(DateTime date) setEndDate,
     required TResult Function(DateTime date) setEndDateReward,
-    required TResult Function(String query) resetFilters,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        resetFilters,
   }) {
     return setStartDateReward(date);
   }
@@ -4292,6 +4901,9 @@ class _$SetStartDateRewardImpl implements _SetStartDateReward {
     TResult? Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult? Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -4304,7 +4916,9 @@ class _$SetStartDateRewardImpl implements _SetStartDateReward {
     TResult? Function(DateTime date)? setStartDateReward,
     TResult? Function(DateTime date)? setEndDate,
     TResult? Function(DateTime date)? setEndDateReward,
-    TResult? Function(String query)? resetFilters,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
   }) {
     return setStartDateReward?.call(date);
   }
@@ -4325,6 +4939,9 @@ class _$SetStartDateRewardImpl implements _SetStartDateReward {
     TResult Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -4337,7 +4954,9 @@ class _$SetStartDateRewardImpl implements _SetStartDateReward {
     TResult Function(DateTime date)? setStartDateReward,
     TResult Function(DateTime date)? setEndDate,
     TResult Function(DateTime date)? setEndDateReward,
-    TResult Function(String query)? resetFilters,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
     required TResult orElse(),
   }) {
     if (setStartDateReward != null) {
@@ -4359,6 +4978,7 @@ class _$SetStartDateRewardImpl implements _SetStartDateReward {
     required TResult Function(_GetCategoryOrder value) getFilterOrder,
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
+    required TResult Function(_GetAllFilterOrder value) getAllFilterOrder,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
     required TResult Function(_ToggleDitolakReward value)
@@ -4388,6 +5008,7 @@ class _$SetStartDateRewardImpl implements _SetStartDateReward {
         getAllHistoryOrderReward,
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -4414,6 +5035,7 @@ class _$SetStartDateRewardImpl implements _SetStartDateReward {
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -4521,6 +5143,9 @@ class _$SetEndDateImpl implements _SetEndDate {
     required TResult Function(String query, String? statusOrder,
             String? startDate, String? endDate)
         getFilterOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getAllFilterOrder,
     required TResult Function(int filterIndex, String query,
             String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
@@ -4533,7 +5158,9 @@ class _$SetEndDateImpl implements _SetEndDate {
     required TResult Function(DateTime date) setStartDateReward,
     required TResult Function(DateTime date) setEndDate,
     required TResult Function(DateTime date) setEndDateReward,
-    required TResult Function(String query) resetFilters,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        resetFilters,
   }) {
     return setEndDate(date);
   }
@@ -4554,6 +5181,9 @@ class _$SetEndDateImpl implements _SetEndDate {
     TResult? Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult? Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -4566,7 +5196,9 @@ class _$SetEndDateImpl implements _SetEndDate {
     TResult? Function(DateTime date)? setStartDateReward,
     TResult? Function(DateTime date)? setEndDate,
     TResult? Function(DateTime date)? setEndDateReward,
-    TResult? Function(String query)? resetFilters,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
   }) {
     return setEndDate?.call(date);
   }
@@ -4587,6 +5219,9 @@ class _$SetEndDateImpl implements _SetEndDate {
     TResult Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -4599,7 +5234,9 @@ class _$SetEndDateImpl implements _SetEndDate {
     TResult Function(DateTime date)? setStartDateReward,
     TResult Function(DateTime date)? setEndDate,
     TResult Function(DateTime date)? setEndDateReward,
-    TResult Function(String query)? resetFilters,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
     required TResult orElse(),
   }) {
     if (setEndDate != null) {
@@ -4621,6 +5258,7 @@ class _$SetEndDateImpl implements _SetEndDate {
     required TResult Function(_GetCategoryOrder value) getFilterOrder,
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
+    required TResult Function(_GetAllFilterOrder value) getAllFilterOrder,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
     required TResult Function(_ToggleDitolakReward value)
@@ -4650,6 +5288,7 @@ class _$SetEndDateImpl implements _SetEndDate {
         getAllHistoryOrderReward,
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -4676,6 +5315,7 @@ class _$SetEndDateImpl implements _SetEndDate {
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -4783,6 +5423,9 @@ class _$SetEndDateRewardImpl implements _SetEndDateReward {
     required TResult Function(String query, String? statusOrder,
             String? startDate, String? endDate)
         getFilterOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getAllFilterOrder,
     required TResult Function(int filterIndex, String query,
             String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
@@ -4795,7 +5438,9 @@ class _$SetEndDateRewardImpl implements _SetEndDateReward {
     required TResult Function(DateTime date) setStartDateReward,
     required TResult Function(DateTime date) setEndDate,
     required TResult Function(DateTime date) setEndDateReward,
-    required TResult Function(String query) resetFilters,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        resetFilters,
   }) {
     return setEndDateReward(date);
   }
@@ -4816,6 +5461,9 @@ class _$SetEndDateRewardImpl implements _SetEndDateReward {
     TResult? Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult? Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -4828,7 +5476,9 @@ class _$SetEndDateRewardImpl implements _SetEndDateReward {
     TResult? Function(DateTime date)? setStartDateReward,
     TResult? Function(DateTime date)? setEndDate,
     TResult? Function(DateTime date)? setEndDateReward,
-    TResult? Function(String query)? resetFilters,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
   }) {
     return setEndDateReward?.call(date);
   }
@@ -4849,6 +5499,9 @@ class _$SetEndDateRewardImpl implements _SetEndDateReward {
     TResult Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -4861,7 +5514,9 @@ class _$SetEndDateRewardImpl implements _SetEndDateReward {
     TResult Function(DateTime date)? setStartDateReward,
     TResult Function(DateTime date)? setEndDate,
     TResult Function(DateTime date)? setEndDateReward,
-    TResult Function(String query)? resetFilters,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
     required TResult orElse(),
   }) {
     if (setEndDateReward != null) {
@@ -4883,6 +5538,7 @@ class _$SetEndDateRewardImpl implements _SetEndDateReward {
     required TResult Function(_GetCategoryOrder value) getFilterOrder,
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
+    required TResult Function(_GetAllFilterOrder value) getAllFilterOrder,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
     required TResult Function(_ToggleDitolakReward value)
@@ -4912,6 +5568,7 @@ class _$SetEndDateRewardImpl implements _SetEndDateReward {
         getAllHistoryOrderReward,
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -4938,6 +5595,7 @@ class _$SetEndDateRewardImpl implements _SetEndDateReward {
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -4973,7 +5631,12 @@ abstract class _$$ResetFiltersImplCopyWith<$Res> {
           _$ResetFiltersImpl value, $Res Function(_$ResetFiltersImpl) then) =
       __$$ResetFiltersImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String query});
+  $Res call(
+      {int filterIndex,
+      String query,
+      String? statusOrder,
+      String? startDate,
+      String? endDate});
 }
 
 /// @nodoc
@@ -4987,13 +5650,33 @@ class __$$ResetFiltersImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? filterIndex = null,
     Object? query = null,
+    Object? statusOrder = freezed,
+    Object? startDate = freezed,
+    Object? endDate = freezed,
   }) {
     return _then(_$ResetFiltersImpl(
+      null == filterIndex
+          ? _value.filterIndex
+          : filterIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       null == query
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
               as String,
+      freezed == statusOrder
+          ? _value.statusOrder
+          : statusOrder // ignore: cast_nullable_to_non_nullable
+              as String?,
+      freezed == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      freezed == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -5001,14 +5684,23 @@ class __$$ResetFiltersImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ResetFiltersImpl implements _ResetFilters {
-  const _$ResetFiltersImpl(this.query);
+  const _$ResetFiltersImpl(this.filterIndex, this.query, this.statusOrder,
+      this.startDate, this.endDate);
 
   @override
+  final int filterIndex;
+  @override
   final String query;
+  @override
+  final String? statusOrder;
+  @override
+  final String? startDate;
+  @override
+  final String? endDate;
 
   @override
   String toString() {
-    return 'OrderEvent.resetFilters(query: $query)';
+    return 'OrderEvent.resetFilters(filterIndex: $filterIndex, query: $query, statusOrder: $statusOrder, startDate: $startDate, endDate: $endDate)';
   }
 
   @override
@@ -5016,11 +5708,19 @@ class _$ResetFiltersImpl implements _ResetFilters {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ResetFiltersImpl &&
-            (identical(other.query, query) || other.query == query));
+            (identical(other.filterIndex, filterIndex) ||
+                other.filterIndex == filterIndex) &&
+            (identical(other.query, query) || other.query == query) &&
+            (identical(other.statusOrder, statusOrder) ||
+                other.statusOrder == statusOrder) &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
+            (identical(other.endDate, endDate) || other.endDate == endDate));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, query);
+  int get hashCode => Object.hash(
+      runtimeType, filterIndex, query, statusOrder, startDate, endDate);
 
   @JsonKey(ignore: true)
   @override
@@ -5044,6 +5744,9 @@ class _$ResetFiltersImpl implements _ResetFilters {
     required TResult Function(String query, String? statusOrder,
             String? startDate, String? endDate)
         getFilterOrderReward,
+    required TResult Function(String query, String? statusOrder,
+            String? startDate, String? endDate)
+        getAllFilterOrder,
     required TResult Function(int filterIndex, String query,
             String? statusOrder, String? startDate, String? endDate)
         doFilterOrder,
@@ -5056,9 +5759,11 @@ class _$ResetFiltersImpl implements _ResetFilters {
     required TResult Function(DateTime date) setStartDateReward,
     required TResult Function(DateTime date) setEndDate,
     required TResult Function(DateTime date) setEndDateReward,
-    required TResult Function(String query) resetFilters,
+    required TResult Function(int filterIndex, String query,
+            String? statusOrder, String? startDate, String? endDate)
+        resetFilters,
   }) {
-    return resetFilters(query);
+    return resetFilters(filterIndex, query, statusOrder, startDate, endDate);
   }
 
   @override
@@ -5077,6 +5782,9 @@ class _$ResetFiltersImpl implements _ResetFilters {
     TResult? Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult? Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult? Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -5089,9 +5797,12 @@ class _$ResetFiltersImpl implements _ResetFilters {
     TResult? Function(DateTime date)? setStartDateReward,
     TResult? Function(DateTime date)? setEndDate,
     TResult? Function(DateTime date)? setEndDateReward,
-    TResult? Function(String query)? resetFilters,
+    TResult? Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
   }) {
-    return resetFilters?.call(query);
+    return resetFilters?.call(
+        filterIndex, query, statusOrder, startDate, endDate);
   }
 
   @override
@@ -5110,6 +5821,9 @@ class _$ResetFiltersImpl implements _ResetFilters {
     TResult Function(String query, String? statusOrder, String? startDate,
             String? endDate)?
         getFilterOrderReward,
+    TResult Function(String query, String? statusOrder, String? startDate,
+            String? endDate)?
+        getAllFilterOrder,
     TResult Function(int filterIndex, String query, String? statusOrder,
             String? startDate, String? endDate)?
         doFilterOrder,
@@ -5122,11 +5836,13 @@ class _$ResetFiltersImpl implements _ResetFilters {
     TResult Function(DateTime date)? setStartDateReward,
     TResult Function(DateTime date)? setEndDate,
     TResult Function(DateTime date)? setEndDateReward,
-    TResult Function(String query)? resetFilters,
+    TResult Function(int filterIndex, String query, String? statusOrder,
+            String? startDate, String? endDate)?
+        resetFilters,
     required TResult orElse(),
   }) {
     if (resetFilters != null) {
-      return resetFilters(query);
+      return resetFilters(filterIndex, query, statusOrder, startDate, endDate);
     }
     return orElse();
   }
@@ -5144,6 +5860,7 @@ class _$ResetFiltersImpl implements _ResetFilters {
     required TResult Function(_GetCategoryOrder value) getFilterOrder,
     required TResult Function(_GetCategoryOrderReward value)
         getFilterOrderReward,
+    required TResult Function(_GetAllFilterOrder value) getAllFilterOrder,
     required TResult Function(_DoFilterOrder value) doFilterOrder,
     required TResult Function(_ToggleDitolak value) togglePesananDitolak,
     required TResult Function(_ToggleDitolakReward value)
@@ -5173,6 +5890,7 @@ class _$ResetFiltersImpl implements _ResetFilters {
         getAllHistoryOrderReward,
     TResult? Function(_GetCategoryOrder value)? getFilterOrder,
     TResult? Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult? Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult? Function(_DoFilterOrder value)? doFilterOrder,
     TResult? Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult? Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -5199,6 +5917,7 @@ class _$ResetFiltersImpl implements _ResetFilters {
     TResult Function(_GetAllHistoryOrderReward value)? getAllHistoryOrderReward,
     TResult Function(_GetCategoryOrder value)? getFilterOrder,
     TResult Function(_GetCategoryOrderReward value)? getFilterOrderReward,
+    TResult Function(_GetAllFilterOrder value)? getAllFilterOrder,
     TResult Function(_DoFilterOrder value)? doFilterOrder,
     TResult Function(_ToggleDitolak value)? togglePesananDitolak,
     TResult Function(_ToggleDitolakReward value)? togglePesananDitolakReward,
@@ -5220,9 +5939,18 @@ class _$ResetFiltersImpl implements _ResetFilters {
 }
 
 abstract class _ResetFilters implements OrderEvent {
-  const factory _ResetFilters(final String query) = _$ResetFiltersImpl;
+  const factory _ResetFilters(
+      final int filterIndex,
+      final String query,
+      final String? statusOrder,
+      final String? startDate,
+      final String? endDate) = _$ResetFiltersImpl;
 
+  int get filterIndex;
   String get query;
+  String? get statusOrder;
+  String? get startDate;
+  String? get endDate;
   @JsonKey(ignore: true)
   _$$ResetFiltersImplCopyWith<_$ResetFiltersImpl> get copyWith =>
       throw _privateConstructorUsedError;

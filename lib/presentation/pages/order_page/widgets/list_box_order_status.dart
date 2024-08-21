@@ -7,7 +7,6 @@ import 'package:intl/intl.dart';
 
 import 'package:tedikap_user_bloc/data/models/response/history_order_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/history_order_reward_response_model.dart';
-import 'package:tedikap_user_bloc/presentation/pages/order_page/widgets/review.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../common/constant.dart';
 import '../../../../common/dimensions.dart';
@@ -48,14 +47,13 @@ class ListBoxMenuStatus extends StatelessWidget {
     if (difference.inMinutes < 1) {
       return 'Just now';
     } else if (difference.inMinutes < 60) {
-      return '${difference.inMinutes} mnt yg lalu';
+      return '${difference.inMinutes} minutes ago';
     } else if (difference.inHours < 24) {
-      return '${difference.inHours} jam yg lalu';
+      return '${difference.inHours} hours ago';
     } else {
-      return '${difference.inDays} hari yg lalu';
+      return '${difference.inDays} days ago';
     }
   }
-
 
   Future<void> launchURL(Uri url) async {
     if (await canLaunchUrl(url)) {
@@ -69,6 +67,8 @@ class ListBoxMenuStatus extends StatelessWidget {
   Widget build(BuildContext context) {
     String titleCommonButton;
     Color backgroundColor;
+    print('CURRENT VALUE RATING : $rating');
+
     if (status == 'pesanan dibatalkan' || status == 'pesanan ditolak') {
       backgroundColor = navyColor;
       titleCommonButton = 'Pesan Ulang';
@@ -160,11 +160,22 @@ class ListBoxMenuStatus extends StatelessWidget {
                     ),
                   ],
                 ),
+                orderId != null ?
                 Text(
-                  'Rp$totalPrice',
+                  totalPrice,
                   style: txtPrimarySubTitle.copyWith(
                       fontWeight: FontWeight.w500, color: blackColor),
-                ),
+                ) : Row(
+                  children: [
+                    SvgPicture.asset(icLogoPrimary, width: 20, height: 20),
+                    const SizedBox(width: 5),
+                    Text(
+                      totalPrice,
+                      style: txtPrimarySubTitle.copyWith(
+                          fontWeight: FontWeight.w500, color: blackColor),
+                    ),
+                  ],
+                )
               ],
             ),
           ),
@@ -288,17 +299,14 @@ class ListBoxMenuStatus extends StatelessWidget {
 
                             bool isModelCartRewardNotEmpty =
                                 modelReward?.orders?.first.cartLength ?? false;
-                            print(
-                                "INI BOOL MODEL REWARD $isModelCartRewardNotEmpty");
                             return Row(
                               children: [
                                 CommonButton(
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                       horizontal: 10, vertical: 8),
                                   text: titleCommonButton,
                                   onPressed: () {
-                                    if (model?.orders != null ||
-                                        modelReward?.orders != null) {
+                                    if (model?.orders != null || modelReward?.orders != null) {
                                       bool isOrderStatusForReorder =
                                           status == 'pesanan selesai' ||
                                               status == 'pesanan dibatalkan' ||
@@ -309,47 +317,29 @@ class ListBoxMenuStatus extends StatelessWidget {
                                               status == 'menunggu konfirmasi' ||
                                               status == 'pesanan siap diambil';
 
-                                      bool isOrderStatusForContinuePayment =
-                                          status == 'menunggu pembayaran';
-
                                       if (isOrderStatusForReorder) {
-                                        if (isModelCartNotEmpty == true) {
-                                          _showReorderOptions(
-                                              context, backgroundColor);
-                                        } else if (!isModelCartNotEmpty) {
-                                          if (orderId != null) {
-                                            context.read<OrderBloc>().add(
-                                                OrderEvent.postReOrder(
-                                                    orderId!));
-                                          } else if (orderRewardId != null) {
-                                            context.read<OrderBloc>().add(
-                                                OrderEvent.postReOrderReward(
-                                                    orderRewardId!));
-                                          }
-                                        } else if (isModelCartRewardNotEmpty ==
-                                            true) {
-                                          _showReorderOptions(
-                                              context, backgroundColor);
-                                          // Check if it's a normal or reward order and trigger the appropriate even
+                                        if (isModelCartNotEmpty) {
+                                          _showReorderOptions(context, backgroundColor);
+                                        } else if (isModelCartRewardNotEmpty) {
+                                          _showReorderOptions(context, backgroundColor);
                                         } else {
                                           if (orderId != null) {
-                                            context.read<OrderBloc>().add(
-                                                OrderEvent.postReOrder(
-                                                    orderId!));
+                                            context.read<OrderBloc>().add(OrderEvent.postReOrder(orderId!));
                                           } else if (orderRewardId != null) {
-                                            context.read<OrderBloc>().add(
-                                                OrderEvent.postReOrderReward(
-                                                    orderRewardId!));
+                                            context.read<OrderBloc>().add(OrderEvent.postReOrderReward(orderRewardId!));
                                           }
                                         }
                                       } else if (isOrderStatusForCallAdmin) {
-                                        launchUrl(Uri.parse(waLink));
+                                        if (waLink != null) {
+                                          launchUrl(Uri.parse(waLink));
+                                        } else {
+                                          print("waLink is null");
+                                        }
                                       } else {
-                                        if (GlobalVariables
-                                                .linkCheckoutGlobal !=
-                                            null) {
-                                          launchUrl(Uri.parse(GlobalVariables
-                                              .linkCheckoutGlobal!));
+                                        if (GlobalVariables.linkCheckoutGlobal != null) {
+                                          launchUrl(Uri.parse(GlobalVariables.linkCheckoutGlobal!));
+                                        } else {
+                                          print("GlobalVariables.linkCheckoutGlobal is null");
                                         }
                                       }
                                     }
@@ -361,21 +351,21 @@ class ListBoxMenuStatus extends StatelessWidget {
                                       status == 'menunggu pembayaran' ? 10 : 10,
                                   fontWeight: FontWeight.w500,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
                                 Visibility(
+                                  visible: (status == 'pesanan selesai') && (rating == 0),
                                   child: CommonButton(
-                                    padding: EdgeInsets.symmetric(
+                                    padding: const EdgeInsets.symmetric(
                                         horizontal: 10, vertical: 8),
                                     text: 'Rate Order',
                                     borderRadius: 10,
                                     fontSize: 10,
                                     onPressed: () {
                                       if (orderId != null || orderRewardId != null) {
-                                        context.pushNamed('review', extra: {'orderId': orderId, 'orderRewardId': orderRewardId});
+                                        context.pushReplacementNamed('review', extra: {'orderId': orderId, 'orderRewardId': orderRewardId});
                                       } else {
-                                        // Handle null values here if needed
                                         print('Order ID or Order Reward ID is null');
                                       }
                                     },
@@ -383,7 +373,6 @@ class ListBoxMenuStatus extends StatelessWidget {
                                     textColor: baseColor,
                                     fontWeight: FontWeight.w500,
                                   ),
-                                  visible: status == 'pesanan selesai',
                                 ),
                               ],
                             );
@@ -393,7 +382,7 @@ class ListBoxMenuStatus extends StatelessWidget {
                     ),
                     CommonButton(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                          const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                       text: 'Detail Pesanan',
                       borderRadius: 10,
                       fontSize: 10,
@@ -427,17 +416,17 @@ class ListBoxMenuStatus extends StatelessWidget {
   void _showReorderOptions(BuildContext context, Color backgroundColor) {
     showModalBottomSheet(
       context: context,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
       ),
       builder: (BuildContext context) {
         return Container(
           width: double.infinity,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: baseColor,
             borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
           ),
-          padding: EdgeInsets.only(top: 10.0),
+          padding: const EdgeInsets.only(top: 10.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -451,7 +440,7 @@ class ListBoxMenuStatus extends StatelessWidget {
                     )),
               ),
               Padding(
-                padding: EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
                     SvgPicture.asset(
@@ -465,7 +454,7 @@ class ListBoxMenuStatus extends StatelessWidget {
                         color: blackColor,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Text(
                       'Keranjang anda sudah terisi dengan produk lain. Pesan ulang akan mengganti isi keranjang anda.',
                       style: txtSecondarySubTitle.copyWith(
@@ -474,12 +463,12 @@ class ListBoxMenuStatus extends StatelessWidget {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CommonButton(
-                          padding: EdgeInsets.symmetric(vertical: 15),
+                          padding: const EdgeInsets.symmetric(vertical: 15),
                           width: MediaQuery.of(context).size.width * 0.4,
                           borderColor: blackColor,
                           borderWidth: 1,
@@ -494,7 +483,7 @@ class ListBoxMenuStatus extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                         ),
                         CommonButton(
-                          padding: EdgeInsets.symmetric(vertical: 15),
+                          padding: const EdgeInsets.symmetric(vertical: 15),
                           width: MediaQuery.of(context).size.width * 0.4,
                           text: 'Pesan Ulang',
                           onPressed: () {

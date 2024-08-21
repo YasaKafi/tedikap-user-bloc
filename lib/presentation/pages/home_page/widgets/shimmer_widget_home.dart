@@ -47,6 +47,12 @@ class ShimmerWidgetsHome {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
+            width: 120,
+            height: 16,
+            color: Colors.grey[300],
+          ),
+          const SizedBox(height: 10,),
+          Container(
             width: 100,
             height: 16,
             color: Colors.grey[300],
