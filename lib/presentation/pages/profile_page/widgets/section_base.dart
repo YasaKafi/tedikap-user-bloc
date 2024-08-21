@@ -158,28 +158,10 @@ class SectionBaseProfile extends StatelessWidget {
             ],
           ),
         ),
-        BlocBuilder<ProfileBloc, ProfileState>(
-          builder: (context, state) {
-            return state.maybeWhen(
-              loaded: (user, logout) {
-                if (user?.data != null) {
-                  final itemWa = user?.data?.whatsapp;
-                  return BoxHelpSupport(
-                    screenwWidth: screenwWidth,
-                    waLink: itemWa,
-                  );
-                } else {
-                  return BoxHelpSupport(
-                    screenwWidth: screenwWidth,
-                    waLink: 'https://wa.me/62895395343223?text=Halo+Tedikap%2C+Saya+membutuhkan+bantuan',
-                  );
-                }
-              },
-              orElse: () {
-                return const SizedBox();
-              },
-            );
-          },
+        BoxHelpSupport(
+          screenwWidth: screenwWidth,
+          waLink:
+              'https://wa.me/62895395343223?text=Halo+Tedikap%2C+Saya+membutuhkan+bantuan',
         ),
         const SizedBox(height: 20),
       ],

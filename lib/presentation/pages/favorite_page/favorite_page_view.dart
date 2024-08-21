@@ -192,7 +192,11 @@ class _FavoritePageState extends State<FavoritePage> {
                       final item = itemFavorite[index];
                       final itemFav = item.product!;
                       return InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          context.pushNamed('detail_product_common',
+                              pathParameters: {
+                                'productId': itemFav.id!.toString()
+                              });                        },
                         child: ListBoxProductFavorite(
                           screenHeight: screenHeight,
                           screenWidth: screenWidth,

@@ -53,7 +53,8 @@ class ListBoxProductFavorite extends StatelessWidget {
                   height: 70,
                   decoration: ShapeDecoration(
                     color: const Color(0x0C56473C),
-                    shape: const OvalBorder(),
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(12))),
                     image: DecorationImage(
                       image: NetworkImage(TedikapApiRepository.getImage + image),
                       fit: BoxFit.cover,
