@@ -13,8 +13,6 @@ class ListBoxProductMenu extends StatelessWidget {
     required this.screenHeight,
     required this.image,
     required this.title,
-    required this.rating,
-    required this.category,
     required this.price,
   });
 
@@ -22,9 +20,7 @@ class ListBoxProductMenu extends StatelessWidget {
   final double screenHeight;
   final String image;
   final String title;
-  final double rating;
-  final int price;
-  final String category;
+  final String price;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +41,8 @@ class ListBoxProductMenu extends StatelessWidget {
                 height: 70,
                 decoration: ShapeDecoration(
                   color: const Color(0x0C56473C),
-                  shape: const OvalBorder(),
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(12))),
                   image: DecorationImage(
                     image: NetworkImage(TedikapApiRepository.getImage + image),
                     fit: BoxFit.cover,
@@ -68,7 +65,7 @@ class ListBoxProductMenu extends StatelessWidget {
                   height: 5,
                 ),
                 Container(
-                  width: screenWidth * 0.45,
+                  width: screenWidth * 0.4,
                   child: Text(
                     'Racikan teh spesial Tedikap dari beberapa daun teh kering pilihan terbaik.',
                     style: txtSecondarySubTitle.copyWith(
@@ -83,9 +80,15 @@ class ListBoxProductMenu extends StatelessWidget {
                 child: Container(
                     height: screenHeight,
                     child: Center(
-                      child: Text('Rp${price.toString()}',
-                          style: txtPrimarySubTitle.copyWith(
-                              fontWeight: FontWeight.w500, color: blackColor)),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10,  vertical: 5),
+                        decoration: BoxDecoration(
+                            color: price == 'Out of stock' ? redLight : Colors.transparent,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Text(price,
+                            style: (price == 'Out of stock' ? txtSecondarySubTitle : txtPrimarySubTitle).copyWith(
+                                fontWeight: FontWeight.w500, color: price == 'Out of stock' ? redMedium : blackColor)),
+                      ),
                     )))
           ],
         ));

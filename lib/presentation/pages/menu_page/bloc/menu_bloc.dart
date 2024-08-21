@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tedikap_user_bloc/data/models/response/products_response_model.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
@@ -15,27 +15,35 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
     on<_GetProduct>((event, emit) async {
       emit(const _Loading());
       final result = await datasource.getAllProduct();
-      result.fold((l) => emit(_Error(message: 'Oops, something went wrong. Please try again later')), (r) => emit(_Success(r)));
+      result.fold(
+          (l) => emit(_Error(
+              message: 'Oops, something went wrong. Please try again later')),
+          (r) => emit(_Success(r)));
     }, transformer: droppable());
 
     on<_GetFilterCategory>((event, emit) async {
       emit(const _Loading());
       final result = await datasource.getFilterCategory(event.query);
-      result.fold((l) => emit(_Error(message: 'Oops, something went wrong. Please try again later')), (r) => emit(_Success(r)));
+      result.fold(
+          (l) => emit(_Error(
+              message: 'Oops, something went wrong. Please try again later')),
+          (r) => emit(_Success(r)));
     }, transformer: droppable());
 
     on<_GetSearchCategory>((event, emit) async {
       emit((state as _Success).copyWith(isSearching: true));
       final result = await datasource.getFilterSearch(event.query);
       result.fold(
-            (l) {
-          if (l.contains('Failed to access data: Exception: Failed to connect to the server.')) {
+        (l) {
+          if (l.contains(
+              'Failed to access data: Exception: Failed to connect to the server.')) {
             emit(_Empty());
           } else {
-            emit(_Error(message: 'Oops, something went wrong. Please try again later'));
+            emit(_Error(
+                message: 'Oops, something went wrong. Please try again later'));
           }
         },
-            (r) {
+        (r) {
           if (r.data!.isEmpty) {
             emit(_Empty());
           } else {
@@ -61,7 +69,5 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
           break;
       }
     }, transformer: droppable());
-
   }
 }
-
