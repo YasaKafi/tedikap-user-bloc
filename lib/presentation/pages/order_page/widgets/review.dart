@@ -150,32 +150,54 @@ class RateAndReviewSheet extends StatelessWidget {
                       },
 
                       builder: (context, state){
-                        return CommonButton(
-                          width: double.infinity,
-                          padding:
-                          EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-                          text: 'Kirim Ulasan',
-                          onPressed: () {
-                            final modelPostReview = PostReviewRequestModel(
-                              staffService: _staffServiceRating.value,
-                              productQuality: _productQualityRating.value,
-                              note: _noteController.text,
+                        return state.maybeWhen(
+                            orElse: (){
+                              return Center(child: CircularProgressIndicator(),);
+                            },
+                          success: (model,
+                              modelReward,
+                              filterIndex,
+                              modelReOrder,
+                              modelReOrderReward,
+                              modelReview,
+                              isPesananDitolak,
+                              isPesananDibatalkan,
+                              isPesananSelesai,
+                              startDate,
+                              endDate,
+                              isPesananDitolakReward,
+                              isPesananSelesaiReward,
+                              startDateReward,
+                              endDateReward) {
+                            return CommonButton(
+                              width: double.infinity,
+                              padding:
+                              EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                              text: 'Kirim Ulasan',
+                              onPressed: () {
+                                final modelPostReview = PostReviewRequestModel(
+                                  staffService: _staffServiceRating.value,
+                                  productQuality: _productQualityRating.value,
+                                  note: _noteController.text,
+                                );
+
+                                if (orderId != null && orderId != '0') {
+                                  context.read<OrderBloc>().add(OrderEvent.postReview(orderId!, modelPostReview));
+                                } else if (orderRewardId != null && orderRewardId != '0') {
+                                  context.read<OrderBloc>().add(OrderEvent.postReview(orderRewardId!, modelPostReview));
+                                } else {
+                                  print('ORDER ID NULL');
+                                }
+                              },
+
+                              backgroundColor: primaryColor,
+                              textColor: baseColor,
+                              borderRadius: 30,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
                             );
 
-                            if (orderId != null && orderId != '0') {
-                              context.read<OrderBloc>().add(OrderEvent.postReview(orderId!, modelPostReview));
-                            } else if (orderRewardId != null && orderRewardId != '0') {
-                              context.read<OrderBloc>().add(OrderEvent.postReview(orderRewardId!, modelPostReview));
-                            } else {
-                              print('ORDER ID NULL');
-                            }
-                          },
-
-                          backgroundColor: primaryColor,
-                          textColor: baseColor,
-                          borderRadius: 30,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
+                          }
                         );
                       },
 

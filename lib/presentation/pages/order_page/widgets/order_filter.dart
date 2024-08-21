@@ -5,20 +5,20 @@ import '../../../../../common/theme.dart';
 import '../bloc/order_bloc.dart';
 
 class OrderFilter extends StatelessWidget {
-  final List<String> options = ['Common Product', 'Point Product'];
+  final List<String> options = ['Common Order', 'Reward Order'];
 
-  OrderFilter(
-      {super.key,
-      this.query,
-      this.statusOrder,
-      this.startDate,
-      this.endDate,});
+  OrderFilter({
+    super.key,
+    this.query,
+    this.statusOrder,
+    this.startDate,
+    this.endDate,
+  });
 
   final String? query;
   final String? statusOrder;
   final String? startDate;
   final String? endDate;
-
 
   @override
   Widget build(BuildContext context) {
@@ -28,19 +28,28 @@ class OrderFilter extends StatelessWidget {
           success: (successState) => successState.filterIndex,
           orElse: () => 0,
         );
-
         return ChipsChoice<int>.single(
           value: filterIndex,
           onChanged: (val) {
-            print('VALUE VAL CURRENT : $val');
-              context.read<OrderBloc>().add(OrderEvent.doFilterOrder(
-                filterIndex: val,
-                query: query!,
-                statusOrder:  statusOrder,
-                startDate:  startDate,
-                endDate:  endDate,
-              )
-              );
+            if (val != filterIndex) {
+              if (query == 'history') {
+                context.read<OrderBloc>().add(OrderEvent.doFilterOrder(
+                      filterIndex: val,
+                      query: query!,
+                      statusOrder: statusOrder,
+                      startDate: startDate,
+                      endDate: endDate,
+                    ));
+              } else {
+                context.read<OrderBloc>().add(OrderEvent.doFilterOrder(
+                      filterIndex: val,
+                      query: query!,
+                  statusOrder: '',
+                  endDate: '',
+                  startDate: '',
+                    ));
+              }
+            }
           },
           choiceItems: C2Choice.listFrom<int, String>(
             source: options,

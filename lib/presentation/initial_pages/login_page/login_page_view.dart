@@ -143,6 +143,9 @@ class LoginPage extends StatelessWidget {
                         loading: () {
                           return const Center(child: CircularProgressIndicator());
                         },
+                      error: (message) {
+                          return const Center(child: CircularProgressIndicator());
+                        },
                     );
 
                   },
