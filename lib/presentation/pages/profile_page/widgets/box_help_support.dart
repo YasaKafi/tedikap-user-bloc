@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tedikap_user_bloc/presentation/pages/profile_page/bloc/profile_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../common/constant.dart';
@@ -27,7 +29,6 @@ class BoxHelpSupport extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -72,7 +73,6 @@ class BoxHelpSupport extends StatelessWidget {
               InkWell(
                 onTap: () {
                   context.pushNamed('language_setting');
-
                 },
                 child: BoxHelper(
                   iconPath: icGlobe,
@@ -97,7 +97,6 @@ class BoxHelpSupport extends StatelessWidget {
               InkWell(
                 onTap: () {
                   context.pushNamed('privacy_policy');
-
                 },
                 child: BoxHelper(
                   iconPath: icPrivacyPolicy,
@@ -108,7 +107,7 @@ class BoxHelpSupport extends StatelessWidget {
                 height: 30,
               ),
               InkWell(
-                onTap: (){
+                onTap: () {
                   context.pushNamed('setting');
                 },
                 child: BoxHelper(
@@ -119,70 +118,159 @@ class BoxHelpSupport extends StatelessWidget {
             ],
           ),
         ),
-        InkWell(
-          onTap: () {
-            launchURL(Uri.parse(waLink!));
-          },
-          child: Container(
-            width: screenwWidth,
-            margin: const EdgeInsets.only(
-                left: Dimensions.marginSizeLarge,
-                right: Dimensions.marginSizeLarge,
-                top: 20),
-            padding: const EdgeInsets.only(
-                top: Dimensions.paddingSizeLarge,
-                bottom: Dimensions.paddingSizeLarge,
-                left: Dimensions.paddingSizeLarge,
-                right: Dimensions.paddingSizeLarge),
-            decoration: BoxDecoration(
-              color: baseColor,
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.2),
-                  spreadRadius: 1,
-                  blurRadius: 10,
-                  offset: const Offset(0, 6),
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'Butuh Bantuan?',
-                  style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w600, color: blackColor),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        SvgPicture.asset(
-                          icCustomerService,
-                          width: 32,
-                          height: 32,
-                        ),
-                        const SizedBox(
-                          width: 12,
-                        ),
-                        Text('Tedikap Customer Service ( chat only )', style: txtSecondarySubTitle.copyWith(fontWeight: FontWeight.w400, color: blackColor))
-                      ],
+        BlocBuilder<ProfileBloc, ProfileState>(
+          builder: (context, state) {
+            return state.maybeWhen(
+                orElse: (){
+                  return InkWell(
+                    onTap: () {
+                      launchURL(Uri.parse(waLink!));
+                    },
+                    child: Container(
+                      width: screenwWidth,
+                      margin: const EdgeInsets.only(
+                          left: Dimensions.marginSizeLarge,
+                          right: Dimensions.marginSizeLarge,
+                          top: 20),
+                      padding: const EdgeInsets.only(
+                          top: Dimensions.paddingSizeLarge,
+                          bottom: Dimensions.paddingSizeLarge,
+                          left: Dimensions.paddingSizeLarge,
+                          right: Dimensions.paddingSizeLarge),
+                      decoration: BoxDecoration(
+                        color: baseColor,
+                        borderRadius: const BorderRadius.all(Radius.circular(20)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.2),
+                            spreadRadius: 1,
+                            blurRadius: 10,
+                            offset: const Offset(0, 6),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Butuh Bantuan?',
+                            style: txtSecondaryTitle.copyWith(
+                                fontWeight: FontWeight.w600, color: blackColor),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    icCustomerService,
+                                    width: 32,
+                                    height: 32,
+                                  ),
+                                  const SizedBox(
+                                    width: 12,
+                                  ),
+                                  Text('Tedikap Customer Service ( chat only )',
+                                      style: txtSecondarySubTitle.copyWith(
+                                          fontWeight: FontWeight.w400,
+                                          color: blackColor))
+                                ],
+                              ),
+                              SvgPicture.asset(
+                                icArrowRight, // Replace with your actual asset path
+                                width: 24,
+                                height: 24,
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                    SvgPicture.asset(
-                      icArrowRight, // Replace with your actual asset path
-                      width: 24,
-                      height: 24,
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ),
+                  );
+                },
+              loaded: (user,logout) {
+                  if (user?.data != null){
+                    final itemWa = user!.data!.whatsapp;
+                    return InkWell(
+
+                      onTap: () {
+                        launchURL(Uri.parse(itemWa!));
+                      },
+                      child: Container(
+                        width: screenwWidth,
+                        margin: const EdgeInsets.only(
+                            left: Dimensions.marginSizeLarge,
+                            right: Dimensions.marginSizeLarge,
+                            top: 20),
+                        padding: const EdgeInsets.only(
+                            top: Dimensions.paddingSizeLarge,
+                            bottom: Dimensions.paddingSizeLarge,
+                            left: Dimensions.paddingSizeLarge,
+                            right: Dimensions.paddingSizeLarge),
+                        decoration: BoxDecoration(
+                          color: baseColor,
+                          borderRadius: const BorderRadius.all(Radius.circular(20)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.2),
+                              spreadRadius: 1,
+                              blurRadius: 10,
+                              offset: const Offset(0, 6),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'Butuh Bantuan?',
+                              style: txtSecondaryTitle.copyWith(
+                                  fontWeight: FontWeight.w600, color: blackColor),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                      icCustomerService,
+                                      width: 32,
+                                      height: 32,
+                                    ),
+                                    const SizedBox(
+                                      width: 12,
+                                    ),
+                                    Text('Tedikap Customer Service ( chat only )',
+                                        style: txtSecondarySubTitle.copyWith(
+                                            fontWeight: FontWeight.w400,
+                                            color: blackColor))
+                                  ],
+                                ),
+                                SvgPicture.asset(
+                                  icArrowRight, // Replace with your actual asset path
+                                  width: 24,
+                                  height: 24,
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  } else {
+                    return const SizedBox();
+                  }
+              }
+            );
+          },
         ),
       ],
     );
