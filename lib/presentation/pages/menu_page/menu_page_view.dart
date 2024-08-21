@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:tedikap_user_bloc/common/error_state.dart';
 import 'package:tedikap_user_bloc/presentation/pages/menu_page/bloc/menu_bloc.dart';
 
 import '../../../common/constant.dart';
@@ -196,7 +198,8 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
                       height: 70,
                       decoration: const ShapeDecoration(
                         color: grey,
-                        shape: OvalBorder(),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(12))),
                       ),
                     ),
                   ),
@@ -264,6 +267,12 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
               itemCount: model!.data!.length,
               itemBuilder: (context, index) {
                 final itemProduct = model.data![index];
+                final formattedPrice = NumberFormat.currency(
+                  locale: 'id_ID',
+                  symbol: 'Rp',
+                  decimalDigits: 0, // Tidak ada digit desimal
+                ).format(int.parse(itemProduct.regularPrice.toString()));
+                final String priceProduct = itemProduct.stock == true ? formattedPrice : 'Out of stock';
                 if (model.data != null) {
                   return InkWell(
                     onTap: () {
@@ -273,10 +282,8 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
                       screenHeight: MediaQuery.of(context).size.height,
                       screenWidth: MediaQuery.of(context).size.width,
                       image: itemProduct.image!,
-                      category: itemProduct.category!,
                       title: itemProduct.name!,
-                      rating: 4.5,
-                      price: itemProduct.regularPrice!,
+                      price: priceProduct,
                     ),
                   );
                 } else {
@@ -293,35 +300,10 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
               return loadingCard();
             },
           ),
-          error: (message) => _buildErrorState(context, message!),
+          error: (message) => ErrorWidgetStatic.buildErrorState(context, message!),
           empty: () => _buildEmptySearchState(context, query),
         );
       },
-    );
-  }
-
-  Widget _buildErrorState(BuildContext context, String message) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SvgPicture.asset(icServerError, width: screenWidth * 0.5),
-          const SizedBox(height: 10),
-          SizedBox(
-            width: screenWidth * 0.7,
-            child: Text(
-              message,
-              style: txtPrimaryTitle.copyWith(
-                fontWeight: FontWeight.w500,
-                color: blackColor,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ],
-      ),
     );
   }
 
