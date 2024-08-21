@@ -67,7 +67,6 @@ class ListBoxMenuStatus extends StatelessWidget {
   Widget build(BuildContext context) {
     String titleCommonButton;
     Color backgroundColor;
-    print('CURRENT VALUE RATING : $rating');
 
     if (status == 'pesanan dibatalkan' || status == 'pesanan ditolak') {
       backgroundColor = navyColor;
@@ -330,7 +329,7 @@ class ListBoxMenuStatus extends StatelessWidget {
                                           }
                                         }
                                       } else if (isOrderStatusForCallAdmin) {
-                                        if (waLink != null) {
+                                        if (waLink != '') {
                                           launchUrl(Uri.parse(waLink));
                                         } else {
                                           print("waLink is null");

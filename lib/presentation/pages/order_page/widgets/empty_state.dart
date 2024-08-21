@@ -8,8 +8,8 @@ class EmptyOrderWidget extends StatelessWidget {
 
 
   const EmptyOrderWidget({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

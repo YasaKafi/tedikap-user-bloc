@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:tedikap_user_bloc/common/constant.dart';
 
 import '../../../../../common/dimensions.dart';
@@ -58,6 +59,12 @@ class BoxKindOfPayment extends StatelessWidget {
                     logoPayment = icQris;
                   }
 
+                  final formattedTotalCommon = NumberFormat.currency(
+                    locale: 'id_ID',
+                    symbol: 'Rp',
+                    decimalDigits: 0, // Tidak ada digit desimal
+                  ).format(int.parse(order.totalPrice.toString()));
+
                   if (order.paymentChannel != null) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +88,7 @@ class BoxKindOfPayment extends StatelessWidget {
                                         color: blackColor)),
                               ],
                             ),
-                            Text('Rp ${order.totalPrice}',
+                            Text(formattedTotalCommon,
                                 style: txtPrimarySubTitle.copyWith(
                                     fontWeight: FontWeight.w500,
                                     color: blackColor)),
