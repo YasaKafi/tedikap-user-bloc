@@ -31,6 +31,7 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
         email: event.email,
         gender: event.gender,
         name: event.name,
+        phoneNumber: event.phoneNumber,
         imageFile: event.imageFile,
       );
       await result.fold(

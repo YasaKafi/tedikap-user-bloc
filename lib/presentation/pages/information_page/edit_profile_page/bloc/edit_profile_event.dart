@@ -6,6 +6,7 @@ class EditProfileEvent with _$EditProfileEvent {
   const factory EditProfileEvent.doEditProfile({ String? name,
      String? email,
      String? gender,
+    String? phoneNumber,
     File? imageFile,}) = _DoEditProfile;
   const factory EditProfileEvent.getUser() = _GetUser;
   const factory EditProfileEvent.changeOption(String? newValue) = _ChangeOption;

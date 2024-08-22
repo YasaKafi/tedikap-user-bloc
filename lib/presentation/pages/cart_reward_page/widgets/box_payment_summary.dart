@@ -117,54 +117,48 @@ class BoxCheckoutSummary extends StatelessWidget {
                                     isCartItemEmpty
                                         ? null
                                         : _onAlertButtonsPressed(context,
-                                            bgcolor: baseColor,
-                                            title: 'Kebijakan Privasi',
-                                            titleStyle:
-                                                txtSecondaryHeader.copyWith(
-                                                    fontWeight: FontWeight.w600,
-                                                    color: blackColor),
-                                            descStyle:
-                                                txtPrimarySubTitle.copyWith(
-                                                    fontWeight: FontWeight.w500,
-                                                    color: blackColor),
-                                            desc:
-                                                'Kamu tidak dapat melakukan pembatalan atau perubahan apapun pada pesanan setelah melakukan pembayaran.',
-                                            icon: icAlert,
+                                        bgcolor: baseColor,
+                                        title: 'Kebijakan Privasi',
+                                        titleStyle: txtSecondaryHeader.copyWith(
+                                            fontWeight: FontWeight.w600, color: blackColor),
+                                        descStyle: txtPrimarySubTitle.copyWith(
+                                            fontWeight: FontWeight.w500, color: blackColor),
+                                        desc: 'Kamu tidak dapat melakukan pembatalan atau perubahan apapun pada pesanan setelah melakukan pembayaran.',
+                                        icon: icAlert,
                                         onPressed: () {
-                                            if (cartModel.cart!.pointsEnough! == false) {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(SnackBar(
-                                                content: Text(
-                                                  'Your Point is not enough',
-                                                  style: txtSecondaryTitle
-                                                      .copyWith(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: baseColor),
-                                                ),
-                                                backgroundColor: redMedium,
-                                              ));
-                                              context.pop();
-                                            } else {
-                                              context
-                                                  .read<CartRewardBloc>()
-                                                  .add(
-                                                      CartRewardEvent.postOrder(
-                                                          cartId: itemCart.id));
-                                              context.goNamed('dashboard',
-                                                  pathParameters: {
-                                                    'pageIndex': '2'
-                                                  });
-                                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                                content: Text(
-                                                  'Successfully order reward product',
-                                                  style: txtSecondaryTitle.copyWith(
-                                                      fontWeight: FontWeight.w500, color: baseColor),
-                                                ),
-                                                backgroundColor: greenMedium,
-                                              ));
-                                            }
-                                          });
+                                          if (cartModel.cart!.pointsEnough! == false) {
+                                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                              content: Text(
+                                                'Your Point is not enough',
+                                                style: txtSecondaryTitle.copyWith(
+                                                    fontWeight: FontWeight.w500, color: baseColor),
+                                              ),
+                                              backgroundColor: redMedium,
+                                            ));
+                                            context.pop();
+                                          } else {
+                                            context.read<CartRewardBloc>().add(
+                                                CartRewardEvent.postOrder(
+                                                  cartId: itemCart.id,
+                                                  onOrderSuccess: (orderId) {
+                                                    // Pastikan ini dipanggil
+                                                    print("Order ID: $orderId");
+                                                    context.goNamed(
+                                                      'detail_order_reward',
+                                                      pathParameters: {'orderRewardId': orderId},
+                                                    );
+                                                  },
+                                                ));
+                                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                              content: Text(
+                                                'Successfully order reward product',
+                                                style: txtSecondaryTitle.copyWith(
+                                                    fontWeight: FontWeight.w500, color: baseColor),
+                                              ),
+                                              backgroundColor: greenMedium,
+                                            ));
+                                          }
+                                        });
                                   },
                                   child: Container(
                                     padding: EdgeInsets.symmetric(

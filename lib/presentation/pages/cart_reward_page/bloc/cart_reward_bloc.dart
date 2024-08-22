@@ -89,14 +89,21 @@ class CartRewardBloc extends Bloc<CartRewardEvent, CartRewardState> {
     on<_PostOrder>((event, emit) async {
       emit(const _Loading());
       final result = await orderDatasource.postOrderReward(event.cartId!);
+
       result.fold(
             (l) => emit(const _Error(message: 'Failed to access data order')),
-            (r) => emit(_Success(
-          cartModel: null,
-          patchQtyModel: null,
-          deleteModel: null,
-          modelPostOrder: r,
-        )),
+            (r) {
+          emit(_Success(
+            cartModel: null,
+            patchQtyModel: null,
+            deleteModel: null,
+            modelPostOrder: r,
+          ));
+          // Pastikan onOrderSuccess dipanggil di luar `emit`
+          if (r.order != null) {
+            event.onOrderSuccess(r.order!.id!);
+          }
+        },
       );
     });
   }

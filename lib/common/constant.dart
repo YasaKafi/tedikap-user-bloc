@@ -19,6 +19,7 @@ String bannerCallCenter = '${images}banner_call_center.png';
 //CONSTANT SVG
 String icLogoPrimary = '${svgImages}tedikap_logo.svg';
 String icGoogle = '${svgImages}ic_google.svg';
+String icWhatsApp = '${svgImages}ic_whatsapp.svg';
 String icDana = '${svgImages}ic_dana.svg';
 String icLinkAja = '${svgImages}ic_link_aja.svg';
 String icOvo = '${svgImages}ic_ovo.svg';

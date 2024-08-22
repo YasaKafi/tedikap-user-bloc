@@ -22,7 +22,8 @@ mixin _$CartRewardEvent {
     required TResult Function() getCart,
     required TResult Function(int? cartRewardItem, String? action) patchQty,
     required TResult Function(int? cartItem) deleteItem,
-    required TResult Function(int? cartId) postOrder,
+    required TResult Function(int? cartId, void Function(String) onOrderSuccess)
+        postOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -31,7 +32,8 @@ mixin _$CartRewardEvent {
     TResult? Function()? getCart,
     TResult? Function(int? cartRewardItem, String? action)? patchQty,
     TResult? Function(int? cartItem)? deleteItem,
-    TResult? Function(int? cartId)? postOrder,
+    TResult? Function(int? cartId, void Function(String) onOrderSuccess)?
+        postOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,7 +42,8 @@ mixin _$CartRewardEvent {
     TResult Function()? getCart,
     TResult Function(int? cartRewardItem, String? action)? patchQty,
     TResult Function(int? cartItem)? deleteItem,
-    TResult Function(int? cartId)? postOrder,
+    TResult Function(int? cartId, void Function(String) onOrderSuccess)?
+        postOrder,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -134,7 +137,8 @@ class _$StartedImpl implements _Started {
     required TResult Function() getCart,
     required TResult Function(int? cartRewardItem, String? action) patchQty,
     required TResult Function(int? cartItem) deleteItem,
-    required TResult Function(int? cartId) postOrder,
+    required TResult Function(int? cartId, void Function(String) onOrderSuccess)
+        postOrder,
   }) {
     return started();
   }
@@ -146,7 +150,8 @@ class _$StartedImpl implements _Started {
     TResult? Function()? getCart,
     TResult? Function(int? cartRewardItem, String? action)? patchQty,
     TResult? Function(int? cartItem)? deleteItem,
-    TResult? Function(int? cartId)? postOrder,
+    TResult? Function(int? cartId, void Function(String) onOrderSuccess)?
+        postOrder,
   }) {
     return started?.call();
   }
@@ -158,7 +163,8 @@ class _$StartedImpl implements _Started {
     TResult Function()? getCart,
     TResult Function(int? cartRewardItem, String? action)? patchQty,
     TResult Function(int? cartItem)? deleteItem,
-    TResult Function(int? cartId)? postOrder,
+    TResult Function(int? cartId, void Function(String) onOrderSuccess)?
+        postOrder,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -254,7 +260,8 @@ class _$GetCartImpl implements _GetCart {
     required TResult Function() getCart,
     required TResult Function(int? cartRewardItem, String? action) patchQty,
     required TResult Function(int? cartItem) deleteItem,
-    required TResult Function(int? cartId) postOrder,
+    required TResult Function(int? cartId, void Function(String) onOrderSuccess)
+        postOrder,
   }) {
     return getCart();
   }
@@ -266,7 +273,8 @@ class _$GetCartImpl implements _GetCart {
     TResult? Function()? getCart,
     TResult? Function(int? cartRewardItem, String? action)? patchQty,
     TResult? Function(int? cartItem)? deleteItem,
-    TResult? Function(int? cartId)? postOrder,
+    TResult? Function(int? cartId, void Function(String) onOrderSuccess)?
+        postOrder,
   }) {
     return getCart?.call();
   }
@@ -278,7 +286,8 @@ class _$GetCartImpl implements _GetCart {
     TResult Function()? getCart,
     TResult Function(int? cartRewardItem, String? action)? patchQty,
     TResult Function(int? cartItem)? deleteItem,
-    TResult Function(int? cartId)? postOrder,
+    TResult Function(int? cartId, void Function(String) onOrderSuccess)?
+        postOrder,
     required TResult orElse(),
   }) {
     if (getCart != null) {
@@ -409,7 +418,8 @@ class _$PatchQtyImpl implements _PatchQty {
     required TResult Function() getCart,
     required TResult Function(int? cartRewardItem, String? action) patchQty,
     required TResult Function(int? cartItem) deleteItem,
-    required TResult Function(int? cartId) postOrder,
+    required TResult Function(int? cartId, void Function(String) onOrderSuccess)
+        postOrder,
   }) {
     return patchQty(cartRewardItem, action);
   }
@@ -421,7 +431,8 @@ class _$PatchQtyImpl implements _PatchQty {
     TResult? Function()? getCart,
     TResult? Function(int? cartRewardItem, String? action)? patchQty,
     TResult? Function(int? cartItem)? deleteItem,
-    TResult? Function(int? cartId)? postOrder,
+    TResult? Function(int? cartId, void Function(String) onOrderSuccess)?
+        postOrder,
   }) {
     return patchQty?.call(cartRewardItem, action);
   }
@@ -433,7 +444,8 @@ class _$PatchQtyImpl implements _PatchQty {
     TResult Function()? getCart,
     TResult Function(int? cartRewardItem, String? action)? patchQty,
     TResult Function(int? cartItem)? deleteItem,
-    TResult Function(int? cartId)? postOrder,
+    TResult Function(int? cartId, void Function(String) onOrderSuccess)?
+        postOrder,
     required TResult orElse(),
   }) {
     if (patchQty != null) {
@@ -564,7 +576,8 @@ class _$DeleteItemImpl implements _DeleteItem {
     required TResult Function() getCart,
     required TResult Function(int? cartRewardItem, String? action) patchQty,
     required TResult Function(int? cartItem) deleteItem,
-    required TResult Function(int? cartId) postOrder,
+    required TResult Function(int? cartId, void Function(String) onOrderSuccess)
+        postOrder,
   }) {
     return deleteItem(cartItem);
   }
@@ -576,7 +589,8 @@ class _$DeleteItemImpl implements _DeleteItem {
     TResult? Function()? getCart,
     TResult? Function(int? cartRewardItem, String? action)? patchQty,
     TResult? Function(int? cartItem)? deleteItem,
-    TResult? Function(int? cartId)? postOrder,
+    TResult? Function(int? cartId, void Function(String) onOrderSuccess)?
+        postOrder,
   }) {
     return deleteItem?.call(cartItem);
   }
@@ -588,7 +602,8 @@ class _$DeleteItemImpl implements _DeleteItem {
     TResult Function()? getCart,
     TResult Function(int? cartRewardItem, String? action)? patchQty,
     TResult Function(int? cartItem)? deleteItem,
-    TResult Function(int? cartId)? postOrder,
+    TResult Function(int? cartId, void Function(String) onOrderSuccess)?
+        postOrder,
     required TResult orElse(),
   }) {
     if (deleteItem != null) {
@@ -653,7 +668,7 @@ abstract class _$$PostOrderImplCopyWith<$Res> {
           _$PostOrderImpl value, $Res Function(_$PostOrderImpl) then) =
       __$$PostOrderImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({int? cartId});
+  $Res call({int? cartId, void Function(String) onOrderSuccess});
 }
 
 /// @nodoc
@@ -668,12 +683,17 @@ class __$$PostOrderImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? cartId = freezed,
+    Object? onOrderSuccess = null,
   }) {
     return _then(_$PostOrderImpl(
       cartId: freezed == cartId
           ? _value.cartId
           : cartId // ignore: cast_nullable_to_non_nullable
               as int?,
+      onOrderSuccess: null == onOrderSuccess
+          ? _value.onOrderSuccess
+          : onOrderSuccess // ignore: cast_nullable_to_non_nullable
+              as void Function(String),
     ));
   }
 }
@@ -681,14 +701,16 @@ class __$$PostOrderImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$PostOrderImpl implements _PostOrder {
-  const _$PostOrderImpl({required this.cartId});
+  const _$PostOrderImpl({required this.cartId, required this.onOrderSuccess});
 
   @override
   final int? cartId;
+  @override
+  final void Function(String) onOrderSuccess;
 
   @override
   String toString() {
-    return 'CartRewardEvent.postOrder(cartId: $cartId)';
+    return 'CartRewardEvent.postOrder(cartId: $cartId, onOrderSuccess: $onOrderSuccess)';
   }
 
   @override
@@ -696,11 +718,13 @@ class _$PostOrderImpl implements _PostOrder {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PostOrderImpl &&
-            (identical(other.cartId, cartId) || other.cartId == cartId));
+            (identical(other.cartId, cartId) || other.cartId == cartId) &&
+            (identical(other.onOrderSuccess, onOrderSuccess) ||
+                other.onOrderSuccess == onOrderSuccess));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, cartId);
+  int get hashCode => Object.hash(runtimeType, cartId, onOrderSuccess);
 
   @JsonKey(ignore: true)
   @override
@@ -715,9 +739,10 @@ class _$PostOrderImpl implements _PostOrder {
     required TResult Function() getCart,
     required TResult Function(int? cartRewardItem, String? action) patchQty,
     required TResult Function(int? cartItem) deleteItem,
-    required TResult Function(int? cartId) postOrder,
+    required TResult Function(int? cartId, void Function(String) onOrderSuccess)
+        postOrder,
   }) {
-    return postOrder(cartId);
+    return postOrder(cartId, onOrderSuccess);
   }
 
   @override
@@ -727,9 +752,10 @@ class _$PostOrderImpl implements _PostOrder {
     TResult? Function()? getCart,
     TResult? Function(int? cartRewardItem, String? action)? patchQty,
     TResult? Function(int? cartItem)? deleteItem,
-    TResult? Function(int? cartId)? postOrder,
+    TResult? Function(int? cartId, void Function(String) onOrderSuccess)?
+        postOrder,
   }) {
-    return postOrder?.call(cartId);
+    return postOrder?.call(cartId, onOrderSuccess);
   }
 
   @override
@@ -739,11 +765,12 @@ class _$PostOrderImpl implements _PostOrder {
     TResult Function()? getCart,
     TResult Function(int? cartRewardItem, String? action)? patchQty,
     TResult Function(int? cartItem)? deleteItem,
-    TResult Function(int? cartId)? postOrder,
+    TResult Function(int? cartId, void Function(String) onOrderSuccess)?
+        postOrder,
     required TResult orElse(),
   }) {
     if (postOrder != null) {
-      return postOrder(cartId);
+      return postOrder(cartId, onOrderSuccess);
     }
     return orElse();
   }
@@ -790,9 +817,12 @@ class _$PostOrderImpl implements _PostOrder {
 }
 
 abstract class _PostOrder implements CartRewardEvent {
-  const factory _PostOrder({required final int? cartId}) = _$PostOrderImpl;
+  const factory _PostOrder(
+      {required final int? cartId,
+      required final void Function(String) onOrderSuccess}) = _$PostOrderImpl;
 
   int? get cartId;
+  void Function(String) get onOrderSuccess;
   @JsonKey(ignore: true)
   _$$PostOrderImplCopyWith<_$PostOrderImpl> get copyWith =>
       throw _privateConstructorUsedError;

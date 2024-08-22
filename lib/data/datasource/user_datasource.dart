@@ -151,14 +151,16 @@ class UserDatasource {
     String? name,
     String? email,
     String? gender,
+    String? phoneNumber,
     File? imageFile,
   }) async {
     try {
       // Manually print out the request data
-      print('Request Data:');
+      print('Request Data: ');
       if (name != null) print('Name: $name');
       if (email != null) print('Email: $email');
       if (gender != null) print('Gender: $gender');
+      if (phoneNumber != null) print('Gender: $phoneNumber');
       if (imageFile != null) {
         print('Avatar: ${imageFile.path.split('/').last}');
       }
@@ -168,6 +170,7 @@ class UserDatasource {
       if (name != null) formData.fields.add(MapEntry('name', name));
       if (email != null) formData.fields.add(MapEntry('email', email));
       if (gender != null) formData.fields.add(MapEntry('gender', gender));
+      if (phoneNumber != null) formData.fields.add(MapEntry('whatsapp_number', '62$phoneNumber'));
       if (imageFile != null) {
         formData.files.add(MapEntry(
           'avatar',
