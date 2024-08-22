@@ -88,11 +88,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
               // Lakukan routing di sini menggunakan context dari event
               event.onOrderSuccess(r.orderId!, r.checkoutLink!);
-              GoRouter.of(event.context).goNamed(
-                'detail_order_common',
-                pathParameters: {'orderId': r.orderId!},
-                extra: r.checkoutLink,
-              );
+
             });
           } else {
             emit(const _Error(message: 'No items in cart'));
