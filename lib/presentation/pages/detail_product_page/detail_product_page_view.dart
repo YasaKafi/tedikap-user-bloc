@@ -33,6 +33,7 @@ class DetailProductPage extends StatefulWidget {
 
 class _DetailProductPageState extends State<DetailProductPage> {
   late TextEditingController notesController;
+  bool isFirstLoad = true;
 
   @override
   void initState() {
@@ -214,32 +215,30 @@ class _DetailProductPageState extends State<DetailProductPage> {
         ),
       ),
       backgroundColor: baseColor50,
-      body: Container(
+      body: SizedBox(
         width: screenWidth,
         height: screenHeight,
         child: Stack(
           children: [
             SingleChildScrollView(
-              child: Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(Dimensions.paddingSizeLarge),
-                  child: Align(
-                    alignment: Alignment.topCenter,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        BoxInfoProduct(
-                          screenWidth: screenWidth,
-                        ),
-                        const SizedBox(height: 20),
-                        BoxOptionProduct(),
-                        const SizedBox(height: 20),
-                        InputNotes(
-                          notesController: notesController,
-                        ),
-                        const SizedBox(height: 120),
-                      ],
-                    ),
+              child: Padding(
+                padding: const EdgeInsets.all(Dimensions.paddingSizeLarge),
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      BoxInfoProduct(
+                        screenWidth: screenWidth,
+                      ),
+                      const SizedBox(height: 20),
+                      const BoxOptionProduct(),
+                      const SizedBox(height: 20),
+                      InputNotes(
+                        notesController: notesController, isFirstLoad: isFirstLoad,
+                      ),
+                      const SizedBox(height: 120),
+                    ],
                   ),
                 ),
               ),

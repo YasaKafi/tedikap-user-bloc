@@ -17,7 +17,7 @@ class OptionRow extends StatelessWidget {
   final VoidCallback onTap2;
 
 
-  OptionRow({
+  const OptionRow({super.key,
     required this.label,
     required this.option1,
     required this.option2,
@@ -53,7 +53,7 @@ class OptionRow extends StatelessWidget {
                 child: Center(child: Text(option1, style: option1Style)),
               ),
             ),
-            SizedBox(width: 20),
+            const SizedBox(width: 20),
             InkWell(
               onTap: onTap2,
               child: Container(

@@ -8,8 +8,10 @@ import '../../../../../common/theme.dart';
 
 class InputNotes extends StatelessWidget {
   final TextEditingController notesController;
+  bool? isFirstLoad ;
 
-  InputNotes({super.key, required this.notesController});
+
+   InputNotes({super.key, required this.notesController,  this.isFirstLoad});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class InputNotes extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          padding: EdgeInsets.all(Dimensions.paddingSizeLarge),
+          padding: const EdgeInsets.all(Dimensions.paddingSizeLarge),
           decoration: BoxDecoration(
             color: baseColor,
             borderRadius: BorderRadius.circular(20),
@@ -30,7 +32,7 @@ class InputNotes extends StatelessWidget {
                   Text('Notes',
                       style: txtSecondaryTitle.copyWith(
                           fontWeight: FontWeight.w600, color: blackColor)),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Text('(Optional)',
@@ -38,7 +40,7 @@ class InputNotes extends StatelessWidget {
                           fontWeight: FontWeight.w500, color: blackColor)),
                 ],
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               BlocBuilder<DetailProductBloc, DetailProductState>(
                 builder: (context, state) {
                   return state.when(
@@ -67,11 +69,17 @@ class InputNotes extends StatelessWidget {
                         totalPrice,
                         note,
                         ) {
-                      if (modelCartItem != null) {
-                        notesController.text = note;
-                      } else if (modelCartItemReward != null) {
-                        notesController.text = note;
+
+                      if(isFirstLoad!){
+                        if (modelCartItem != null) {
+                          notesController.text = note;
+                          isFirstLoad = false;
+                        } else if (modelCartItemReward != null) {
+                          notesController.text = note;
+                          isFirstLoad = false;
+                        }
                       }
+
                       return TextFormField(
                         controller: notesController,
                         maxLength: 50,
@@ -83,7 +91,7 @@ class InputNotes extends StatelessWidget {
                               fontWeight: FontWeight.w500, color: blackColor),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
-                            borderSide: BorderSide(color: grey),
+                            borderSide: const BorderSide(color: grey),
                           ),
                         ),
                       );
@@ -118,7 +126,7 @@ class InputNotes extends StatelessWidget {
               color: Colors.grey,
             ),
           ),
-          SizedBox(height: 10.0),
+          const SizedBox(height: 10.0),
           Container(
             width: screenWidth * 0.8,
             height: 40.0,
