@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:tedikap_user_bloc/common/error_state.dart';
 import 'package:tedikap_user_bloc/presentation/pages/point_page/bloc/point_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/point_page/widgets/box_information_poin.dart';
 import 'package:tedikap_user_bloc/presentation/pages/point_page/widgets/list_box_product_poin.dart';
@@ -117,21 +118,14 @@ class _PointPageState extends State<PointPage> with SingleTickerProviderStateMix
               const SizedBox(
                 height: 30,
               ),
-              SizedBox(
+              Container(
+                margin: EdgeInsets.only(bottom: 20),
                 width: screenWidth,
                 child: TabBar(
                   controller: _tabController,
-                  indicatorPadding: const EdgeInsets.symmetric(horizontal: -10, vertical: 5),
-                  indicator: BoxDecoration(
-                    border: Border.all(color: primaryColor),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: Dimensions.paddingSizeLarge,
-                  ),
                   dividerHeight: 2,
-                  dividerColor: Colors.transparent,
-                  indicatorColor: Colors.transparent,
+                  dividerColor: grey,
+                  indicatorColor: blackColor,
                   labelColor: blackColor,
                   unselectedLabelColor: grey,
                   onTap: (index) {
@@ -228,18 +222,12 @@ class _PointPageState extends State<PointPage> with SingleTickerProviderStateMix
                 crossAxisCount: 2,
                 childAspectRatio: 0.75,
                 mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
+                crossAxisSpacing: 20,
               ),
             );
           },
           loading: () => buildShimmer(screenHeight, screenWidth),
-          error: (message) => Center(
-            child: Text(
-              message!,
-              style: txtSecondaryTitle.copyWith(
-                  fontWeight: FontWeight.w600, color: blackColor),
-            ),
-          ),
+          error: (message) => ErrorWidgetStatic.buildErrorState(context, message!)
         );
       },
     );

@@ -16,32 +16,45 @@ class PointBloc extends Bloc<PointEvent, PointState> {
 
   PointBloc(this.datasource, this.userDatasource)
       : super(const PointState.initial()) {
-
-
     on<_GetFilterCategory>((event, emit) async {
+
       emit(const _Loading());
-
-
+      try {
         final pointResult = await userDatasource.getPointUser();
         final points = pointResult.fold((l) => null, (success) => success);
 
+        final productResult = await datasource.getFilterCategoryReward(event.query);
+        productResult.fold(
+              (l) => emit(const _Error(message: 'Oops, something went wrong. Please try again later')),
+              (r) => emit(_Success(r, points)),
+        );
+      }catch (e){
+        emit(const _Error(message: 'Oops, something went wrong. Please try again later'));
+      }
 
-      final productResult = await datasource.getFilterCategoryReward(event.query);
-      productResult.fold(
-            (l) => emit(const _Error(message: 'Failed to access data product')),
-            (r) => emit(_Success(r, points)),
-      );
     });
 
     // on<_GetPointUser>((event, emit) async {
+    //   emit(const _Loading());
     //   final result = await userDatasource.getPointUser();
-    //   result.fold((l) => emit(const _Error(message: 'Failed to get data user')), (r) => emit(_Success(null, r)));
+    //   result.fold((l) => emit(const _Error(message: 'Failed to get data user')),
+    //       (r) => emit(_Success(null, r)));
     // });
     //
     // on<_GetFilterCategory>((event, emit) async {
-    //   emit(const _Loading());
-    //   final productResult = await datasource.getFilterCategoryReward(event.query);
-    //   productResult.fold((l) => emit(const _Error(message: 'Failed to get data user')), (r) => emit(_Success(r, null)));
+    //   final currentState = state;
+    //   if (currentState is _Success) {
+    //     try {
+    //       final productResult =
+    //           await datasource.getFilterCategoryReward(event.query);
+    //       productResult.fold(
+    //           (l) => emit(const _Error(message: 'Failed to get data user')),
+    //           (r) => emit(currentState.copyWith(
+    //               model: r,)));
+    //     } catch (e) {
+    //       emit(const _Error(message: 'Failed to get data user'));
+    //     }
+    //   }
     // });
   }
 }

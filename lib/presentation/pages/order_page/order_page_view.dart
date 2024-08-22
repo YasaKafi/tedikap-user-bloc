@@ -122,6 +122,7 @@ class _OrderPageState extends State<OrderPage> {
               ),
               Expanded(
                 child: TabBarView(
+                  physics: NeverScrollableScrollPhysics(),
                   children: [
                     Tab(
                       child: RefreshIndicator(

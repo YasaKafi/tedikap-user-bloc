@@ -67,7 +67,7 @@ class BoxInformationPoin extends StatelessWidget {
                     builder: (context, state) {
                       return state.maybeWhen(orElse: () {
                         return Text(
-                          'Memuat.. Poin',
+                          'Memuat..',
                           style: txtPrimaryHeader.copyWith(
                               fontWeight: FontWeight.w600, color: primaryColor),
                         );
@@ -75,14 +75,14 @@ class BoxInformationPoin extends StatelessWidget {
                         if (userPointModel?.data != null) {
                           final point = userPointModel?.data?.point!;
                           return Text(
-                            '$point Poin',
+                            '$point Point',
                             style: txtPrimaryHeader.copyWith(
                                 fontWeight: FontWeight.w600,
                                 color: primaryColor),
                           );
                         } else {
                           return Text(
-                            '0 Poin',
+                            '0 Point',
                             style: txtPrimaryHeader.copyWith(
                                 fontWeight: FontWeight.w600,
                                 color: primaryColor),
