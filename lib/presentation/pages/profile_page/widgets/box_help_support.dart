@@ -194,7 +194,7 @@ class BoxHelpSupport extends StatelessWidget {
                 },
               loaded: (user,logout) {
                   if (user?.data != null){
-                    final itemWa = user!.data!.whatsapp;
+                    final itemWa = user!.data!.whatsappService;
                     return InkWell(
 
                       onTap: () {

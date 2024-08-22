@@ -26,8 +26,10 @@ class Data {
   String? name;
   String? avatar;
   String? gender;
-  String? whatsapp;
   String? role;
+  dynamic whatsappNumber;
+  String? whatsappService;
+  String? fcmToken;
 
   Data({
     this.id,
@@ -35,8 +37,10 @@ class Data {
     this.name,
     this.avatar,
     this.gender,
-    this.whatsapp,
     this.role,
+    this.whatsappNumber,
+    this.whatsappService,
+    this.fcmToken,
   });
 
   factory Data.fromJson(String str) => Data.fromMap(json.decode(str));
@@ -49,8 +53,10 @@ class Data {
     name: json["name"],
     avatar: json["avatar"],
     gender: json["gender"],
-    whatsapp: json["whatsapp_service"],
     role: json["role"],
+    whatsappNumber: json["whatsapp_number"],
+    whatsappService: json["whatsapp_service"],
+    fcmToken: json["fcm_token"],
   );
 
   Map<String, dynamic> toMap() => {
@@ -59,7 +65,9 @@ class Data {
     "name": name,
     "avatar": avatar,
     "gender": gender,
-    "whatsapp_service": whatsapp,
     "role": role,
+    "whatsapp_number": whatsappNumber,
+    "whatsapp_service": whatsappService,
+    "fcm_token": fcmToken,
   };
 }

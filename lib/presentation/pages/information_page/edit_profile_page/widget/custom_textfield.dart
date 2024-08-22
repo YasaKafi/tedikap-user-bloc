@@ -3,11 +3,18 @@ import 'package:flutter/services.dart';
 
 import '../../../../../common/theme.dart';
 
+import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
+
 class CustomTextField extends StatelessWidget {
   final String hintText;
   final TextInputType keyboardType;
-  int? maxTextLength;
+  final int? maxTextLength;
   final TextEditingController? controller;
+  final List<TextInputFormatter>? inputFormatters;
+  final Widget? icon;
+  final Widget? prefix;
+  final void Function(String)? onChanged;
 
   CustomTextField({
     Key? key,
@@ -15,15 +22,21 @@ class CustomTextField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.maxTextLength,
     this.controller,
+    this.inputFormatters,
+    this.icon, this.prefix, this.onChanged,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+
       controller: controller,
-      inputFormatters: [LengthLimitingTextInputFormatter(maxTextLength)],
+      inputFormatters: inputFormatters,
       decoration: InputDecoration(
-        hintStyle: txtPrimarySubTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor),
+        prefix: prefix,
+        icon: icon,
+        hintStyle: txtPrimarySubTitle.copyWith(
+            fontWeight: FontWeight.w500, color: blackColor),
         hintText: hintText,
         focusColor: primaryColor,
         labelText: hintText,
@@ -32,10 +45,10 @@ class CustomTextField extends StatelessWidget {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
         ),
-        // Customize other InputDecoration properties as needed
       ),
+      onChanged: onChanged,
       keyboardType: keyboardType,
-      // Customize other TextField properties as needed
     );
   }
 }
+

@@ -7,6 +7,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/data/models/request/post_order_request_model.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_page/bloc/cart_bloc.dart';
+import 'package:tedikap_user_bloc/presentation/pages/cart_page/widgets/process_screen.dart';
 
 import '../../../../../common/constant.dart';
 import '../../../../../common/dimensions.dart';
@@ -41,14 +42,11 @@ class BoxCheckoutSummary extends StatelessWidget {
           ),
           child: BlocBuilder<CartBloc, CartState>(
             builder: (context, state) {
-              return state.maybeWhen(
-                  orElse: () {
+              return state.maybeWhen(orElse: () {
                 return Column(
                   children: [
                     InkWell(
-                      onTap: () {
-
-                      },
+                      onTap: () {},
                       child: Container(
                         width: screenWidth,
                         padding: EdgeInsets.symmetric(
@@ -241,7 +239,8 @@ class BoxCheckoutSummary extends StatelessWidget {
                       onTap: () {
                         isCartItemEmpty
                             ? null
-                            : context.pushReplacementNamed('voucher', extra: {'isFromCart': true});
+                            : context.pushReplacementNamed('voucher',
+                                extra: {'isFromCart': true});
                       },
                       child: Container(
                         width: screenWidth,
@@ -373,6 +372,11 @@ class BoxCheckoutSummary extends StatelessWidget {
                                                         itemCart.voucherId ??
                                                             null,
                                                   );
+                                                  // Navigator.of(context).push(
+                                                  //   MaterialPageRoute(
+                                                  //     builder: (context) => LoadingScreen(),
+                                                  //   ),
+                                                  // );
                                                   context.read<CartBloc>().add(
                                                       CartEvent.postOrder(
                                                           modelOrder:
@@ -389,8 +393,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                                                       orderId
                                                                 },
                                                                 extra:
-                                                                      linkCheckout
-                                                                );
+                                                                    linkCheckout);
                                                           }));
                                                 });
                                         },

@@ -2,9 +2,12 @@ import 'dart:io' as i;
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:tedikap_user_bloc/common/constant.dart';
 import 'package:tedikap_user_bloc/data/models/response/current_user_response_model.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/edit_profile_page/bloc/edit_profile_bloc.dart';
 
@@ -26,6 +29,7 @@ class EditProfilePage extends StatefulWidget {
 class _EditProfilePageState extends State<EditProfilePage> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
   String gender = '';
   ValueNotifier<String> defaultImagePath = ValueNotifier<String>('');
   bool isFirstLoad = true;
@@ -40,6 +44,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   void dispose() {
     usernameController.dispose();
     emailController.dispose();
+    phoneNumberController.dispose();
     super.dispose();
   }
 
@@ -94,6 +99,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           // Initialize values only on first load
                           usernameController.text = user?.data?.name ?? '';
                           emailController.text = user?.data?.email ?? '';
+                          phoneNumberController.text = user?.data?.whatsappNumber ?? '';
                           gender = user?.data?.gender ?? '';
                           defaultImagePath.value = imagePath ?? user?.data?.avatar ?? '';
                           isFirstLoad = false;
@@ -160,9 +166,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             loading: () => _buildShimmerTextField(),
                             loaded: (user, n, o, modelEdit) {
                               return CustomTextField(
+                                icon: Icon(Icons.person),
                                 hintText: 'Username',
                                 keyboardType: TextInputType.text,
                                 controller: usernameController,
+                                inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))],
                                 maxTextLength: 12,
                               );
                             },
@@ -178,6 +186,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         },
                       ),
                       const SizedBox(height: 30),
+
                       BlocBuilder<EditProfileBloc, EditProfileState>(
                         builder: (context, state) {
                           return state.maybeWhen(
@@ -185,6 +194,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             loading: () => _buildShimmerTextField(),
                             loaded: (user, n, o, modelEdit) {
                               return CustomTextField(
+                                icon: Icon(Icons.email),
                                 hintText: 'Email',
                                 keyboardType: TextInputType.emailAddress,
                                 controller: emailController,
@@ -201,18 +211,69 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           );
                         },
                       ),
+
+                      const SizedBox(height: 30),
+
+                      BlocBuilder<EditProfileBloc, EditProfileState>(
+                        builder: (context, state) {
+                          return state.maybeWhen(
+                            orElse: () => _buildShimmerTextField(),
+                            loading: () => _buildShimmerTextField(),
+                            loaded: (user, n, o, modelEdit) {
+                              return CustomTextField(
+                                icon: SvgPicture.asset(icWhatsApp, width: 26,),
+                                hintText: 'Whatsapp Number',
+                                prefix: Text('+62 ', style: txtPrimarySubTitle.copyWith(
+                                    fontWeight: FontWeight.w500, color: blackColor)),
+                                keyboardType: TextInputType.phone,
+                                controller: phoneNumberController,
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(12),
+                                  FilteringTextInputFormatter.digitsOnly, // Aturan default hanya angka
+                                ],
+                                onChanged: (value) {
+                                  if (value.startsWith('0')) {
+                                    phoneNumberController.text = value.substring(1); // Hapus '0' dari awal
+                                    phoneNumberController.selection = TextSelection.fromPosition(
+                                      TextPosition(offset: phoneNumberController.text.length),
+                                    );
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Nomor sudah diformat untuk Indonesia, tidak perlu diawali dengan "0".',
+                                          style: txtSecondaryTitle.copyWith(
+                                              fontWeight: FontWeight.w600, color: blackColor),
+                                        ),
+                                        backgroundColor: redMedium,
+                                      ),
+                                    );
+                                  }
+                                },
+                              );
+
+                            },
+                            error: (message) => Center(
+                              child: Text(
+                                message,
+                                style: txtSecondaryTitle.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: blackColor),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                     ],
                   ),
                   const SizedBox(height: 30),
-                  CustomDropDown(
-                    gender: gender,
-                    onChanged: (newValue) {
-                      setState(() {
-                        gender = newValue!;
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 30),
+                  // CustomDropDown(
+                  //   gender: gender,
+                  //   onChanged: (newValue) {
+                  //     setState(() {
+                  //       gender = newValue!;
+                  //     });
+                  //   },
+                  // ),
                   BlocConsumer<EditProfileBloc, EditProfileState>(
                     listener: (context, state) {
                       state.maybeWhen(
@@ -251,13 +312,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       return state.maybeWhen(
                         orElse: () => const Center(child: CircularProgressIndicator()),
                         loaded: (user, o, imagePath, modelEdit) => Container(
-                          margin: const EdgeInsets.only(top: Dimensions.marginSizeExtraLarge),
+                          margin: const EdgeInsets.only(top: Dimensions.marginSizeExtraLarge, bottom: Dimensions.marginSizeExtraLarge),
                           child: SaveButton(
                             onPressed: () {
                               if (usernameController.text.isNotEmpty &&
-                                  emailController.text.isNotEmpty) {
+                                  emailController.text.isNotEmpty && phoneNumberController.text.isNotEmpty ) {
                                 String? updatedName = usernameController.text;
                                 String? updatedEmail = emailController.text;
+                                String? updatedPhoneNumber = phoneNumberController.text;
                                 String? updatedGender = o;
 
                                 File? fileToUpload;
@@ -271,6 +333,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     name: updatedName,
                                     email: updatedEmail,
                                     gender: updatedGender,
+                                    phoneNumber: updatedPhoneNumber,
                                     imageFile: fileToUpload,
                                   ),
                                 );
