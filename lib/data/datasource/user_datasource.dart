@@ -67,11 +67,11 @@ class UserDatasource {
       if (response.statusCode == 200) {
         return Right(UserPointResponseModel.fromMap(response.data));
       } else {
-        return const Left('Failed to access data');
+        return const Left('Oops, something went wrong. Please try again later');
       }
     } catch (e) {
       print('EXCEPTION POIN : $e');
-      return Left('Failed to access data: ${e.toString()}');
+      return Left('Oops, something went wrong. Please try again later: ${e.toString()}');
     }
   }
 
