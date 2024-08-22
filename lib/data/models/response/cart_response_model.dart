@@ -23,12 +23,13 @@ class CartResponseModel {
 class Cart {
   int? id;
   int? userId;
-  int? voucherId;
+  dynamic voucherId;
   int? totalPrice;
   int? discountAmount;
   int? originalPrice;
   int? rewardPoint;
   String? schedulePickup;
+  bool? isPhone;
   List<CartItem>? cartItems;
 
   Cart({
@@ -40,6 +41,7 @@ class Cart {
     this.originalPrice,
     this.rewardPoint,
     this.schedulePickup,
+    this.isPhone,
     this.cartItems,
   });
 
@@ -56,6 +58,7 @@ class Cart {
     originalPrice: json["original_price"],
     rewardPoint: json["reward_point"],
     schedulePickup: json["schedule_pickup"],
+    isPhone: json["is_phone"],
     cartItems: json["cart_items"] == null ? [] : List<CartItem>.from(json["cart_items"]!.map((x) => CartItem.fromMap(x))),
   );
 
@@ -68,6 +71,7 @@ class Cart {
     "original_price": originalPrice,
     "reward_point": rewardPoint,
     "schedule_pickup": schedulePickup,
+    "is_phone": isPhone,
     "cart_items": cartItems == null ? [] : List<dynamic>.from(cartItems!.map((x) => x.toMap())),
   };
 }
@@ -81,7 +85,7 @@ class CartItem {
   String? size;
   String? ice;
   String? sugar;
-  String? note;
+  dynamic note;
   int? quantity;
   int? price;
   int? totalPrice;
