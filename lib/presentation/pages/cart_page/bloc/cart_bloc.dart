@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tedikap_user_bloc/data/datasource/order_datasource.dart';
@@ -66,7 +67,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             final cartId = postOrderModel.order!.id;
             final paymentResult = await orderDatasource.postPayment(cartId);
             final paymentDetails =
-                paymentResult.fold((l) => null, (payment) => payment);
+            paymentResult.fold((l) => null, (payment) => payment);
             if (paymentDetails != null) {
               GlobalVariables.linkCheckoutGlobal = paymentDetails.checkoutLink;
               final url = Uri.parse(paymentDetails.checkoutLink!);
@@ -83,7 +84,15 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 orderId: r.orderId,
               ));
 
+              print("Order Success, Order ID: ${r.orderId}, Checkout Link: ${r.checkoutLink}");
+
+              // Lakukan routing di sini menggunakan context dari event
               event.onOrderSuccess(r.orderId!, r.checkoutLink!);
+              GoRouter.of(event.context).goNamed(
+                'detail_order_common',
+                pathParameters: {'orderId': r.orderId!},
+                extra: r.checkoutLink,
+              );
             });
           } else {
             emit(const _Error(message: 'No items in cart'));
@@ -93,6 +102,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         emit(_Error(message: 'An error occurred: $e'));
       }
     });
+
 
     on<_PatchQty>((event, emit) async {
       // Ensure the current state is handled properly

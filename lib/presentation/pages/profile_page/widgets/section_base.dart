@@ -89,7 +89,7 @@ class SectionBaseProfile extends StatelessWidget {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    context.pushNamed('edit_profile');
+                                    context.pushReplacementNamed('edit_profile');
                                   },
                                   child: CircleAvatar(
                                     radius: 28,
