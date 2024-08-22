@@ -174,20 +174,36 @@ class RateAndReviewSheet extends StatelessWidget {
                               const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                               text: 'Kirim Ulasan',
                               onPressed: () {
-                                final modelPostReview = PostReviewRequestModel(
-                                  staffService: _staffServiceRating.value,
-                                  productQuality: _productQualityRating.value,
-                                  note: _noteController.text,
-                                );
-
-                                if (orderId != null && orderId != '0') {
-                                  context.read<OrderBloc>().add(OrderEvent.postReview(orderId!, modelPostReview));
-                                } else if (orderRewardId != null && orderRewardId != '0') {
-                                  context.read<OrderBloc>().add(OrderEvent.postReview(orderRewardId!, modelPostReview));
+                                if (_staffServiceRating.value == 0 || _productQualityRating.value == 0) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'Tolong beri rating untuk Staff Service dan Product Quality.',
+                                        style: txtSecondaryTitle.copyWith(
+                                          fontWeight: FontWeight.w500,
+                                          color: baseColor,
+                                        ),
+                                      ),
+                                      backgroundColor: redMedium,
+                                    ),
+                                  );
                                 } else {
-                                  print('ORDER ID NULL');
+                                  final modelPostReview = PostReviewRequestModel(
+                                    staffService: _staffServiceRating.value,
+                                    productQuality: _productQualityRating.value,
+                                    note: _noteController.text,
+                                  );
+
+                                  if (orderId != null && orderId != '0') {
+                                    context.read<OrderBloc>().add(OrderEvent.postReview(orderId!, modelPostReview));
+                                  } else if (orderRewardId != null && orderRewardId != '0') {
+                                    context.read<OrderBloc>().add(OrderEvent.postReview(orderRewardId!, modelPostReview));
+                                  } else {
+                                    print('ORDER ID NULL');
+                                  }
                                 }
                               },
+
 
                               backgroundColor: primaryColor,
                               textColor: baseColor,
