@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/data/models/request/post_cart_request_model.dart';
@@ -42,7 +41,7 @@ class BoxBottomPrice extends StatelessWidget {
               ),
             ],
             color: baseColor,
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(20), topLeft: Radius.circular(20)),
           ),
           child: BlocConsumer<DetailProductBloc, DetailProductState>(
@@ -226,13 +225,13 @@ class BoxBottomPrice extends StatelessWidget {
                                 onPressed: () {
                                   context
                                       .read<DetailProductBloc>()
-                                      .add(DetailProductEvent.decrement());
+                                      .add(const DetailProductEvent.decrement());
                                 },
                                 icon: const Icon(
                                   Icons.remove_circle_outline,
                                   size: 28,
                                 ),
-                                color: grey,
+                                color: qty != 1 ? navyColor : grey,
                               ),
                               const SizedBox(width: 10),
                               Text(qty.toString(),
@@ -244,7 +243,7 @@ class BoxBottomPrice extends StatelessWidget {
                                 onPressed: () {
                                   context
                                       .read<DetailProductBloc>()
-                                      .add(DetailProductEvent.increment());
+                                      .add(const DetailProductEvent.increment());
                                 },
                                 icon: const Icon(
                                   Icons.add_circle,
@@ -259,10 +258,6 @@ class BoxBottomPrice extends StatelessWidget {
                       const SizedBox(height: 20),
                       InkWell(
                         onTap: () {
-
-                          print('INI TOTAL PRICE : $totalPrice');
-                          print('INI PRICE SEKARANG : $itemPrice');
-
                           if (itemStock == true) {
                             if (modelProduct != null) {
                               final itemProductCommon = modelProduct.data;

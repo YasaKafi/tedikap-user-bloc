@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../../../common/dimensions.dart';
@@ -19,7 +17,7 @@ class BoxOptionProduct extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          padding: EdgeInsets.all(Dimensions.paddingSizeLarge),
+          padding: const EdgeInsets.all(Dimensions.paddingSizeLarge),
           decoration: BoxDecoration(
             color: baseColor,
             borderRadius: BorderRadius.circular(20),
@@ -61,10 +59,10 @@ class BoxOptionProduct extends StatelessWidget {
                         BlocBuilder<DetailProductBloc, DetailProductState>(
                           builder: (context, state) {
                             return state.when(
-                              initial: () => Center(
+                              initial: () => const Center(
                                 child: CircularProgressIndicator(),
                               ),
-                              loading: () => Center(
+                              loading: () => const Center(
                                 child: CircularProgressIndicator(),
                               ),
                               success: (
@@ -124,12 +122,12 @@ class BoxOptionProduct extends StatelessWidget {
                                   onTap1: () {
                                     context
                                         .read<DetailProductBloc>()
-                                        .add(DetailProductEvent.toggleTemp());
+                                        .add(const DetailProductEvent.toggleTemp());
                                   },
                                   onTap2: () {
                                     context
                                         .read<DetailProductBloc>()
-                                        .add(DetailProductEvent.toggleTemp());
+                                        .add(const DetailProductEvent.toggleTemp());
                                   },
                                 );
                               },
@@ -139,16 +137,16 @@ class BoxOptionProduct extends StatelessWidget {
                             );
                           },
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         BlocBuilder<DetailProductBloc, DetailProductState>(
                           builder: (context, state) {
                             return state.when(
-                              initial: () => Center(
+                              initial: () => const Center(
                                 child: CircularProgressIndicator(),
                               ),
-                              loading: () => Center(
+                              loading: () => const Center(
                                 child: CircularProgressIndicator(),
                               ),
                               success: (
@@ -208,12 +206,12 @@ class BoxOptionProduct extends StatelessWidget {
                                   onTap1: () {
                                     context
                                         .read<DetailProductBloc>()
-                                        .add(DetailProductEvent.toggleSize());
+                                        .add(const DetailProductEvent.toggleSize());
                                   },
                                   onTap2: () {
                                     context
                                         .read<DetailProductBloc>()
-                                        .add(DetailProductEvent.toggleSize());
+                                        .add(const DetailProductEvent.toggleSize());
                                   },
                                 );
                               },
@@ -225,7 +223,7 @@ class BoxOptionProduct extends StatelessWidget {
                         ),
                         Visibility(
                           visible: selectedTemp == 'hot' ? false : true,
-                          child: SizedBox(
+                          child: const SizedBox(
                             height: 20,
                           ),
                         ),
@@ -234,10 +232,10 @@ class BoxOptionProduct extends StatelessWidget {
                           child: BlocBuilder<DetailProductBloc, DetailProductState>(
                             builder: (context, state) {
                               return state.when(
-                                initial: () => Center(
+                                initial: () => const Center(
                                   child: CircularProgressIndicator(),
                                 ),
-                                loading: () => Center(
+                                loading: () => const Center(
                                   child: CircularProgressIndicator(),
                                 ),
                                 success: (
@@ -296,12 +294,12 @@ class BoxOptionProduct extends StatelessWidget {
                                     onTap1: () {
                                       context
                                           .read<DetailProductBloc>()
-                                          .add(DetailProductEvent.toggleIce());
+                                          .add(const DetailProductEvent.toggleIce());
                                     },
                                     onTap2: () {
                                       context
                                           .read<DetailProductBloc>()
-                                          .add(DetailProductEvent.toggleIce());
+                                          .add(const DetailProductEvent.toggleIce());
                                     },
                                   );
                                 },
@@ -312,16 +310,16 @@ class BoxOptionProduct extends StatelessWidget {
                             },
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         BlocBuilder<DetailProductBloc, DetailProductState>(
                           builder: (context, state) {
                             return state.when(
-                              initial: () => Center(
+                              initial: () => const Center(
                                 child: CircularProgressIndicator(),
                               ),
-                              loading: () => Center(
+                              loading: () => const Center(
                                 child: CircularProgressIndicator(),
                               ),
                               success: (
@@ -381,12 +379,12 @@ class BoxOptionProduct extends StatelessWidget {
                                   onTap1: () {
                                     context
                                         .read<DetailProductBloc>()
-                                        .add(DetailProductEvent.toggleSugar());
+                                        .add(const DetailProductEvent.toggleSugar());
                                   },
                                   onTap2: () {
                                     context
                                         .read<DetailProductBloc>()
-                                        .add(DetailProductEvent.toggleSugar());
+                                        .add(const DetailProductEvent.toggleSugar());
                                   },
                                 );
                               },

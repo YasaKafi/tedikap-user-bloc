@@ -10,7 +10,7 @@ import '../../../../data/repository/tedikap_repository.dart';
 class BoxInfoProduct extends StatelessWidget {
   final double screenWidth;
 
-  BoxInfoProduct({Key? key, required this.screenWidth}) : super(key: key);
+  const BoxInfoProduct({super.key, required this.screenWidth});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class BoxInfoProduct extends StatelessWidget {
           ),
           width: screenWidth,
           child: Padding(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: Dimensions.paddingSizeLarge,
               vertical: Dimensions.paddingSizeLarge,
             ),
@@ -86,7 +86,7 @@ class BoxInfoProduct extends StatelessWidget {
                         if (imageUrl != null)
                           Center(
                             child: Container(
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 boxShadow: [
                                   BoxShadow(
@@ -122,7 +122,7 @@ class BoxInfoProduct extends StatelessWidget {
                             ),
                           ),
                         const SizedBox(height: 15),
-                        Divider(
+                        const Divider(
                           height: 5,
                           color: grey,
                         ),
@@ -166,7 +166,7 @@ class BoxInfoProduct extends StatelessWidget {
         children: [
           Center(
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: grey,
               ),
@@ -193,7 +193,7 @@ class BoxInfoProduct extends StatelessWidget {
             width: screenWidth * 0.3,
           ),
           const SizedBox(height: 15),
-          Divider(
+          const Divider(
             height: 5,
             color: grey,
           ),

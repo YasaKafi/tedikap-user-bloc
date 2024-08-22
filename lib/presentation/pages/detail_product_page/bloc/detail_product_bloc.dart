@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tedikap_user_bloc/data/datasource/cart_datasource.dart';
 import 'package:tedikap_user_bloc/data/datasource/favorite_datasource.dart';
@@ -260,6 +260,31 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
       }
     });
 
+    on<_PostFavorite>((event, emit) async {
+      final currentState = state;
+      if (currentState is _Success)  {
+        emit(const _Loading());
+        try {
+          final response = await favoriteDatasource.postFavoriteProduct(event.productId!);
+          await response.fold(
+                  (l) async =>  emit(_Error(message: l)),
+                  (r) async {
+                final responseDetailProduct = await datasource.getDetailProductByID(event.productId!);
+                final productDetails = responseDetailProduct.fold((l) => null, (product) => product);
+                emit(currentState.copyWith(
+                    modelPostFavorite: r,
+                    model: productDetails
+                ));
+              }
+          );
+        } catch (e) {
+          emit(_Error(message: 'An error occurred: $e'));
+        }
+      }
+    });
+
+    //Toggle
+
     on<_ToggleTemperature>((event, emit) {
       final currentState = state;
       if (currentState is _Success) {
@@ -304,7 +329,7 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
         emit(currentState.copyWith(
           isSugarSelected: !currentState.isSugarSelected,
           selectedSugar: newSugar,
-            modelPostFavorite: null
+            modelPostFavorite: null,
 
         ));
       }
@@ -329,30 +354,6 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
             modelPostFavorite: null
 
         ));
-      }
-    });
-
-
-    on<_PostFavorite>((event, emit) async {
-      final currentState = state;
-      if (currentState is _Success)  {
-        emit(const _Loading());
-        try {
-          final response = await favoriteDatasource.postFavoriteProduct(event.productId!);
-          await response.fold(
-                (l) async =>  emit(_Error(message: l)),
-                (r) async {
-                  final responseDetailProduct = await datasource.getDetailProductByID(event.productId!);
-                  final productDetails = responseDetailProduct.fold((l) => null, (product) => product);
-                  emit(currentState.copyWith(
-                    modelPostFavorite: r,
-                    model: productDetails
-                  ));
-                }
-          );
-        } catch (e) {
-          emit(_Error(message: 'An error occurred: $e'));
-        }
       }
     });
 
