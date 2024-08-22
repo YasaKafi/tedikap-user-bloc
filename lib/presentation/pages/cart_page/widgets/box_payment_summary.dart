@@ -7,7 +7,6 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/data/models/request/post_order_request_model.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_page/bloc/cart_bloc.dart';
-import 'package:tedikap_user_bloc/presentation/pages/cart_page/widgets/process_screen.dart';
 
 import '../../../../../common/constant.dart';
 import '../../../../../common/dimensions.dart';
@@ -44,194 +43,197 @@ class BoxCheckoutSummary extends StatelessWidget {
             builder: (context, state) {
               return state.maybeWhen(
                   orElse: () {
-                return Column(
-                  children: [
-                    InkWell(
-                      onTap: () {},
-                      child: Container(
-                        width: screenWidth,
-                        padding: EdgeInsets.symmetric(
-                            vertical: Dimensions.paddingSizeSmall,
-                            horizontal: Dimensions.paddingSizeDefault),
-                        decoration: BoxDecoration(
-                          color: baseColor,
-                          border: Border.all(color: blackColor, width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(15)),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
+                    return Column(
+                      children: [
+                        InkWell(
+                          onTap: () {
+
+                          },
+                          child: Container(
+                            width: screenWidth,
+                            padding: EdgeInsets.symmetric(
+                                vertical: Dimensions.paddingSizeSmall,
+                                horizontal: Dimensions.paddingSizeDefault),
+                            decoration: BoxDecoration(
+                              color: baseColor,
+                              border: Border.all(color: blackColor, width: 1),
+                              borderRadius: BorderRadius.all(Radius.circular(15)),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                SvgPicture.asset(
-                                  icDiscountActive,
-                                  width: 32,
-                                  height: 32,
+                                Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                      icDiscountActive,
+                                      width: 32,
+                                      height: 32,
+                                    ),
+                                    SizedBox(
+                                      width: 15,
+                                    ),
+                                    Text(
+                                      'Makin hemat pakai promo',
+                                      style: txtPrimarySubTitle.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          color: blackColor),
+                                    ),
+                                  ],
                                 ),
-                                SizedBox(
-                                  width: 15,
-                                ),
-                                Text(
-                                  'Makin hemat pakai promo',
-                                  style: txtPrimarySubTitle.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      color: blackColor),
-                                ),
+                                Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                  size: 20,
+                                  color: blackColor,
+                                )
                               ],
                             ),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: 20,
-                              color: blackColor,
-                            )
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    BlocBuilder<CartBloc, CartState>(
-                      builder: (context, state) {
-                        return state.when(
-                          initial: () => _buildShimmerEffect(context),
-                          loading: () => _buildShimmerEffect(context),
-                          success: (cartModel, modelQty, deleteModel,
-                              modelPostOrder, modelPostPayment, orderId) {
-                            final itemCart = cartModel?.cart;
-                            final isCartItemEmpty =
-                                itemCart?.cartItems?.isEmpty ?? true;
-                            if (cartModel != null) {
-                              return Row(
-                                mainAxisAlignment:
+                        SizedBox(
+                          height: 20,
+                        ),
+                        BlocBuilder<CartBloc, CartState>(
+                          builder: (context, state) {
+                            return state.when(
+                              initial: () => _buildShimmerEffect(context),
+                              loading: () => _buildShimmerEffect(context),
+                              success: (cartModel, modelQty, deleteModel,
+                                  modelPostOrder, modelPostPayment, orderId) {
+                                final itemCart = cartModel?.cart;
+                                final isCartItemEmpty =
+                                    itemCart?.cartItems?.isEmpty ?? true;
+                                if (cartModel != null) {
+                                  return Row(
+                                    mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        'Total Price',
-                                        style: txtPrimarySubTitle.copyWith(
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.black38),
-                                      ),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                      Row(
+                                      Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'Rp',
-                                            style:
+                                            'Total Price',
+                                            style: txtPrimarySubTitle.copyWith(
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.black38),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Row(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Rp',
+                                                style:
                                                 txtSecondarySubTitle.copyWith(
                                                     fontWeight: FontWeight.w500,
                                                     color: Colors.black38),
+                                              ),
+                                              const SizedBox(
+                                                width: 3,
+                                              ),
+                                              Text(
+                                                itemCart!.totalPrice.toString(),
+                                                style: txtPrimaryHeader.copyWith(
+                                                    fontWeight: FontWeight.w600,
+                                                    color: blackColor),
+                                              )
+                                            ],
                                           ),
-                                          const SizedBox(
-                                            width: 3,
+                                        ],
+                                      ),
+                                      Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              if (!isCartItemEmpty){
+                                                _onAlertButtonsPressed(context,
+                                                    bgcolor: baseColor,
+                                                    title: 'Kebijakan Privasi',
+                                                    titleStyle: txtSecondaryHeader
+                                                        .copyWith(
+                                                        fontWeight:
+                                                        FontWeight.w600,
+                                                        color: blackColor),
+                                                    descStyle: txtPrimarySubTitle
+                                                        .copyWith(
+                                                        fontWeight:
+                                                        FontWeight.w500,
+                                                        color: blackColor),
+                                                    desc:
+                                                    'Kamu tidak dapat melakukan pembatalan atau perubahan apapun pada pesanan setelah melakukan pembayaran.',
+                                                    icon: icAlert, onPressed: () {
+                                                      final modelRequestOrder =
+                                                      PostOrderRequestModel(
+                                                        cartId: itemCart.id,
+                                                        voucherId:
+                                                        itemCart.voucherId ??
+                                                            null,
+                                                      );
+                                                      context.read<CartBloc>().add(
+                                                          CartEvent.postOrder(
+                                                              modelOrder:
+                                                              modelRequestOrder,
+                                                              onOrderSuccess:
+                                                                  (or, op) {}));
+                                                    });
+                                              }
+
+                                            },
+                                            child: Container(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical:
+                                                  Dimensions.paddingSizeDefault,
+                                                  horizontal:
+                                                  Dimensions.paddingSizeLarge),
+                                              decoration: BoxDecoration(
+                                                color: isCartItemEmpty
+                                                    ? grey
+                                                    : navyColor,
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(25)),
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  SvgPicture.asset(
+                                                    icMoney,
+                                                    width: 24,
+                                                    height: 24,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  Text(
+                                                    'Select Payment',
+                                                    style:
+                                                    txtSecondaryTitle.copyWith(
+                                                        fontWeight:
+                                                        FontWeight.w600,
+                                                        color: baseColor),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
                                           ),
-                                          Text(
-                                            itemCart!.totalPrice.toString(),
-                                            style: txtPrimaryHeader.copyWith(
-                                                fontWeight: FontWeight.w600,
-                                                color: blackColor),
-                                          )
                                         ],
                                       ),
                                     ],
-                                  ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      InkWell(
-                                        onTap: () {
-                                          isCartItemEmpty
-                                              ? null
-                                              : _onAlertButtonsPressed(context,
-                                                  bgcolor: baseColor,
-                                                  title: 'Kebijakan Privasi',
-                                                  titleStyle: txtSecondaryHeader
-                                                      .copyWith(
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color: blackColor),
-                                                  descStyle: txtPrimarySubTitle
-                                                      .copyWith(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: blackColor),
-                                                  desc:
-                                                      'Kamu tidak dapat melakukan pembatalan atau perubahan apapun pada pesanan setelah melakukan pembayaran.',
-                                                  icon: icAlert, onPressed: () {
-                                                  final modelRequestOrder =
-                                                      PostOrderRequestModel(
-                                                    cartId: itemCart.id,
-                                                    voucherId:
-                                                        itemCart.voucherId ??
-                                                            null,
-                                                  );
-                                                  context.read<CartBloc>().add(
-                                                      CartEvent.postOrder(
-                                                        context: context,
-                                                          modelOrder:
-                                                              modelRequestOrder,
-                                                          onOrderSuccess:
-                                                              (or, op) {}));
-                                                });
-                                        },
-                                        child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical:
-                                                  Dimensions.paddingSizeDefault,
-                                              horizontal:
-                                                  Dimensions.paddingSizeLarge),
-                                          decoration: BoxDecoration(
-                                            color: isCartItemEmpty
-                                                ? grey
-                                                : navyColor,
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(25)),
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              SvgPicture.asset(
-                                                icMoney,
-                                                width: 24,
-                                                height: 24,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text(
-                                                'Select Payment',
-                                                style:
-                                                    txtSecondaryTitle.copyWith(
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        color: baseColor),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              );
-                            } else {
-                              return _buildShimmerEffect(context);
-                            }
+                                  );
+                                } else {
+                                  return _buildShimmerEffect(context);
+                                }
+                              },
+                              error: (message) => _buildShimmerEffect(context),
+                            );
                           },
-                          error: (message) => _buildShimmerEffect(context),
-                        );
-                      },
-                    ),
-                  ],
-                );
-              },
+                        ),
+                      ],
+                    );
+                  },
+
                   success: (cartModel, modelQty, deleteModel, modelPostOrder,
                   modelPostPayment, orderId) {
                 final itemCart = cartModel?.cart;
@@ -242,8 +244,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                       onTap: () {
                         isCartItemEmpty
                             ? null
-                            : context.pushReplacementNamed('voucher',
-                                extra: {'isFromCart': true});
+                            : context.pushReplacementNamed('voucher', extra: {'isFromCart': true});
                       },
                       child: Container(
                         width: screenWidth,
@@ -276,7 +277,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                   style: txtPrimarySubTitle.copyWith(
                                       fontWeight: FontWeight.w600,
                                       color:
-                                          isCartItemEmpty ? grey : blackColor),
+                                      isCartItemEmpty ? grey : blackColor),
                                 ),
                               ],
                             ),
@@ -302,14 +303,15 @@ class BoxCheckoutSummary extends StatelessWidget {
                             final itemCart = cartModel?.cart;
                             final isCartItemEmpty =
                                 itemCart?.cartItems?.isEmpty ?? true;
+                            final isPhone = cartModel?.cart!.isPhone;
                             if (cartModel != null) {
                               return Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Column(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Total Price',
@@ -322,14 +324,14 @@ class BoxCheckoutSummary extends StatelessWidget {
                                       ),
                                       Row(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             'Rp',
                                             style:
-                                                txtSecondarySubTitle.copyWith(
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Colors.black38),
+                                            txtSecondarySubTitle.copyWith(
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.black38),
                                           ),
                                           const SizedBox(
                                             width: 3,
@@ -347,113 +349,90 @@ class BoxCheckoutSummary extends StatelessWidget {
                                   Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      BlocListener<CartBloc, CartState>(
-                                        listener: (context, state) {
-                                          state.maybeWhen(
-                                            success: (cartModel, modelQty, deleteModel, modelPostOrder, modelPostPayment, orderId) {
-                                              if (orderId != null) {
-                                                // Tampilkan Snackbar
-                                                ScaffoldMessenger.of(context).showSnackBar(
-                                                  SnackBar(
-                                                    content: Text('Order placed successfully! Order ID: $orderId'),
-                                                  ),
-                                                );
-
-                                                // Lakukan routing ke detail_order_common
-                                                context.goNamed(
-                                                  'detail_order_common',
-                                                  pathParameters: {'orderId': orderId},
-                                                  extra: modelPostPayment?.checkoutLink, // Assuming you want to pass the checkout link here
-                                                );
-                                              }
-                                            },
-                                            orElse: () {},
-                                          );
-                                        },
-                                        child: BlocBuilder<CartBloc, CartState>(
-                                          builder: (context, state) {
-                                            return InkWell(
-                                              onTap: () {
-                                                if (!isCartItemEmpty) {
-                                                  state.maybeWhen(
-                                                    orElse: () {},
-                                                    success: (cartModel, modelQty, deleteModel, modelPostOrder, modelPostPayment, orderId,) {
-                                                      if (cartModel?.cart != null) {
-                                                        final isPhone = cartModel?.cart!.isPhone;
-                                                        if (isPhone == true) {
-                                                          _onAlertButtonsPressed(
-                                                            context,
-                                                            bgcolor: baseColor,
-                                                            title: 'Kebijakan Privasi',
-                                                            titleStyle: txtSecondaryHeader.copyWith(
-                                                              fontWeight: FontWeight.w600,
-                                                              color: blackColor,
-                                                            ),
-                                                            descStyle: txtPrimarySubTitle.copyWith(
-                                                              fontWeight: FontWeight.w500,
-                                                              color: blackColor,
-                                                            ),
-                                                            desc: 'Kamu tidak dapat melakukan pembatalan atau perubahan apapun pada pesanan setelah melakukan pembayaran.',
-                                                            icon: icAlert,
-                                                            onPressed: () {
-                                                              final modelRequestOrder = PostOrderRequestModel(
-                                                                cartId: itemCart.id,
-                                                                voucherId: itemCart.voucherId ?? null,
-                                                              );
-
-                                                              context.read<CartBloc>().add(
-                                                                CartEvent.postOrder(
-                                                                  context: context,
-                                                                  modelOrder: modelRequestOrder,
-                                                                  onOrderSuccess: (orderId, linkCheckout) {
-                                                                    print("Navigating to detail_order_common with Order ID: $orderId and Checkout Link: $linkCheckout");
-
-                                                                    // Kode routing dipindahkan ke BlocListener
-                                                                    context.goNamed(
-                                                                      'detail_order_common',
-                                                                      pathParameters: {'orderId': orderId},
-                                                                      extra: linkCheckout, // Assuming you want to pass the checkout link here
-                                                                    );                                                                  },
-                                                                ),
-                                                              );
-                                                            },
-                                                          );
-                                                        } else {
-                                                          _showPhoneRequiredAlert(context);
-                                                        }
-                                                      }
-                                                    },
+                                      InkWell(
+                                        onTap: () {
+                                          if (!isCartItemEmpty) {
+                                            isPhone == true ?
+                                            _onAlertButtonsPressed(context,
+                                                bgcolor: baseColor,
+                                                title: 'Kebijakan Privasi',
+                                                titleStyle: txtSecondaryHeader
+                                                    .copyWith(
+                                                    fontWeight:
+                                                    FontWeight.w600,
+                                                    color: blackColor),
+                                                descStyle: txtPrimarySubTitle
+                                                    .copyWith(
+                                                    fontWeight:
+                                                    FontWeight.w500,
+                                                    color: blackColor),
+                                                desc:
+                                                'Kamu tidak dapat melakukan pembatalan atau perubahan apapun pada pesanan setelah melakukan pembayaran.',
+                                                icon: icAlert, onPressed: () {
+                                                  final modelRequestOrder =
+                                                  PostOrderRequestModel(
+                                                    cartId: itemCart.id,
+                                                    voucherId:
+                                                    itemCart.voucherId ??
+                                                        null,
                                                   );
-                                                }
-                                              },
-                                              child: Container(
-                                                padding: EdgeInsets.symmetric(
-                                                  vertical: Dimensions.paddingSizeDefault,
-                                                  horizontal: Dimensions.paddingSizeLarge,
-                                                ),
-                                                decoration: BoxDecoration(
-                                                  color: isCartItemEmpty ? grey : navyColor,
-                                                  borderRadius: BorderRadius.all(Radius.circular(25)),
-                                                ),
-                                                child: Row(
-                                                  children: [
-                                                    SvgPicture.asset(icMoney, width: 24, height: 24),
-                                                    SizedBox(width: 10),
-                                                    Text(
-                                                      'Select Payment',
-                                                      style: txtSecondaryTitle.copyWith(
-                                                        fontWeight: FontWeight.w600,
-                                                        color: baseColor,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
+                                                  context.read<CartBloc>().add(
+                                                      CartEvent.postOrder(
+                                                          modelOrder:
+                                                          modelRequestOrder,
+                                                          onOrderSuccess:
+                                                              (orderId,
+                                                              linkCheckout) {
+                                                            print(
+                                                                "INI ORDER ID : $orderId");
+                                                            context.goNamed(
+                                                                'detail_order_common',
+                                                                pathParameters: {
+                                                                  'orderId':
+                                                                  orderId
+                                                                },
+                                                                extra:
+                                                                linkCheckout
+                                                            );
+                                                          }));
+                                                }) : _showPhoneRequiredAlert(context);
+                                          }
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical:
+                                              Dimensions.paddingSizeDefault,
+                                              horizontal:
+                                              Dimensions.paddingSizeLarge),
+                                          decoration: BoxDecoration(
+                                            color: isCartItemEmpty
+                                                ? grey
+                                                : navyColor,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(25)),
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              SvgPicture.asset(
+                                                icMoney,
+                                                width: 24,
+                                                height: 24,
                                               ),
-                                            );
-                                          },
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text(
+                                                'Select Payment',
+                                                style:
+                                                txtSecondaryTitle.copyWith(
+                                                    fontWeight:
+                                                    FontWeight.w600,
+                                                    color: baseColor),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      )
-
+                                      ),
                                     ],
                                   ),
                                 ],
@@ -476,56 +455,7 @@ class BoxCheckoutSummary extends StatelessWidget {
     );
   }
 
-
-  _onAlertButtonsPressed(context,
-      {String? title,
-      TextStyle? titleStyle,
-      TextStyle? descStyle,
-      String? desc,
-      String? icon,
-      Color? bgcolor,
-      VoidCallback? onPressed}) {
-    Alert(
-      context: context,
-      title: title,
-      padding: EdgeInsets.all(20),
-      style: AlertStyle(
-        animationType: AnimationType.shrink,
-        isCloseButton: false,
-        backgroundColor: bgcolor,
-        overlayColor: Colors.black38,
-        titleStyle: titleStyle!,
-        descStyle: descStyle!,
-      ),
-      desc: desc,
-      image: SvgPicture.asset(
-        icon!,
-        width: 80,
-        height: 80,
-      ),
-      buttons: [
-        DialogButton(
-          child: Text(
-            "Cancel",
-            style: txtPrimaryTitle.copyWith(
-                fontWeight: FontWeight.w600, color: baseColor),
-          ),
-          onPressed: () => Navigator.pop(context),
-          color: redMedium,
-        ),
-        DialogButton(
-            child: Text(
-              "Confirm",
-              style: txtPrimaryTitle.copyWith(
-                  fontWeight: FontWeight.w600, color: baseColor),
-            ),
-            color: navyColor,
-            onPressed: onPressed)
-      ],
-    ).show();
-  }
-
-  _showPhoneRequiredAlert(context) {
+  _showPhoneRequiredAlert(BuildContext context) {
     Alert(
       context: context,
       title: 'Phone Number Required',
@@ -576,7 +506,7 @@ class BoxCheckoutSummary extends StatelessWidget {
             color: navyColor,
             onPressed: (){
               Navigator.of(context).pop(); // Menutup dialog
-              context.goNamed('edit_profile');
+              context.pushNamed('edit_profile');
             })
       ],
     ).show();
@@ -671,54 +601,52 @@ class BoxCheckoutSummary extends StatelessWidget {
     );
   }
 
-// void _showPhoneRequiredAlert(BuildContext context) {
-//   showDialog(
-//     context: context,
-//     builder: (BuildContext context) {
-//       return AlertDialog(
-//         title: Text(
-//           'Phone Number Required',
-//           style: txtSecondaryHeader.copyWith(
-//             fontWeight: FontWeight.w600,
-//             color: blackColor,
-//           ),
-//         ),
-//         content: Text(
-//           'Please fill your phone number before proceeding with the payment.',
-//           style: txtPrimarySubTitle.copyWith(
-//             fontWeight: FontWeight.w500,
-//             color: blackColor,
-//           ),
-//         ),
-//         actions: <Widget>[
-//           TextButton(
-//             child: Text(
-//               'Cancel',
-//               style: txtPrimaryTitle.copyWith(
-//                 fontWeight: FontWeight.w600,
-//                 color: redMedium,
-//               ),
-//             ),
-//             onPressed: () {
-//               Navigator.of(context).pop(); // Menutup dialog
-//             },
-//           ),
-//           TextButton(
-//             child: Text(
-//               'Edit Profile',
-//               style: txtPrimaryTitle.copyWith(
-//                 fontWeight: FontWeight.w600,
-//                 color: navyColor,
-//               ),
-//             ),
-//             onPressed: () {
-//               Navigator.of(context).pop(); // Menutup dialog
-//               context.goNamed('edit_profile'); // Navigasi ke halaman Edit Profile
-//             },
-//           ),
-//         ],
-//       );
-//     },
-//   );
-// }
+
+  _onAlertButtonsPressed(context,
+      {String? title,
+        TextStyle? titleStyle,
+        TextStyle? descStyle,
+        String? desc,
+        String? icon,
+        Color? bgcolor,
+        VoidCallback? onPressed}) {
+    Alert(
+      context: context,
+      title: title,
+      padding: EdgeInsets.all(20),
+      style: AlertStyle(
+        animationType: AnimationType.shrink,
+        isCloseButton: false,
+        backgroundColor: bgcolor,
+        overlayColor: Colors.black38,
+        titleStyle: titleStyle!,
+        descStyle: descStyle!,
+      ),
+      desc: desc,
+      image: SvgPicture.asset(
+        icon!,
+        width: 80,
+        height: 80,
+      ),
+      buttons: [
+        DialogButton(
+          child: Text(
+            "Cancel",
+            style: txtPrimaryTitle.copyWith(
+                fontWeight: FontWeight.w600, color: baseColor),
+          ),
+          onPressed: () => Navigator.pop(context),
+          color: redMedium,
+        ),
+        DialogButton(
+            child: Text(
+              "Confirm",
+              style: txtPrimaryTitle.copyWith(
+                  fontWeight: FontWeight.w600, color: baseColor),
+            ),
+            color: navyColor,
+            onPressed: onPressed)
+      ],
+    ).show();
+  }
 }
