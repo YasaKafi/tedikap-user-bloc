@@ -25,7 +25,10 @@ class Cart {
   int? userId;
   int? totalPoints;
   String? schedulePickup;
+  String? session1;
+  String? session2;
   bool? pointsEnough;
+  bool? isPhone;
   List<CartItem>? cartItems;
 
   Cart({
@@ -33,7 +36,10 @@ class Cart {
     this.userId,
     this.totalPoints,
     this.schedulePickup,
+    this.session1,
+    this.session2,
     this.pointsEnough,
+    this.isPhone,
     this.cartItems,
   });
 
@@ -46,7 +52,10 @@ class Cart {
     userId: json["user_id"],
     totalPoints: json["total_points"],
     schedulePickup: json["schedule_pickup"],
+    session1: json["session_1"],
+    session2: json["session_2"],
     pointsEnough: json["points_enough"],
+    isPhone: json["is_phone"],
     cartItems: json["cart_items"] == null ? [] : List<CartItem>.from(json["cart_items"]!.map((x) => CartItem.fromMap(x))),
   );
 
@@ -55,7 +64,10 @@ class Cart {
     "user_id": userId,
     "total_points": totalPoints,
     "schedule_pickup": schedulePickup,
+    "session_1": session1,
+    "session_2": session2,
     "points_enough": pointsEnough,
+    "is_phone": isPhone,
     "cart_items": cartItems == null ? [] : List<dynamic>.from(cartItems!.map((x) => x.toMap())),
   };
 }
@@ -65,6 +77,7 @@ class CartItem {
   int? productId;
   String? productName;
   String? productImage;
+  bool? stock;
   String? temperatur;
   String? size;
   String? ice;
@@ -79,6 +92,7 @@ class CartItem {
     this.productId,
     this.productName,
     this.productImage,
+    this.stock,
     this.temperatur,
     this.size,
     this.ice,
@@ -98,6 +112,7 @@ class CartItem {
     productId: json["product_id"],
     productName: json["product_name"],
     productImage: json["product_image"],
+    stock: json["stock"],
     temperatur: json["temperatur"],
     size: json["size"],
     ice: json["ice"],
@@ -113,6 +128,7 @@ class CartItem {
     "product_id": productId,
     "product_name": productName,
     "product_image": productImage,
+    "stock": stock,
     "temperatur": temperatur,
     "size": size,
     "ice": ice,

@@ -12,7 +12,7 @@ import '../../../../../common/dimensions.dart';
 import '../../../../../common/theme.dart';
 
 class BoxCheckoutSummary extends StatelessWidget {
-  BoxCheckoutSummary({
+  const BoxCheckoutSummary({
     super.key,
     required this.screenWidth,
   });
@@ -70,8 +70,10 @@ class BoxCheckoutSummary extends StatelessWidget {
                         ) {
                       if (cartModel != null) {
                         final itemCart = cartModel.cart;
+                        final isPhone = cartModel.cart?.isPhone;
                         final isCartItemEmpty =
                             itemCart?.cartItems?.isEmpty ?? true;
+                        final isStockItemEmpty = itemCart?.cartItems?.any((e) => e.stock == false) ?? false;
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -84,18 +86,13 @@ class BoxCheckoutSummary extends StatelessWidget {
                                       fontWeight: FontWeight.w500,
                                       color: Colors.black38),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      'Rp',
-                                      style: txtSecondarySubTitle.copyWith(
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.black38),
-                                    ),
+                                    SvgPicture.asset(icLogoPrimary, width: 18,),
                                     const SizedBox(
                                       width: 3,
                                     ),
@@ -114,61 +111,75 @@ class BoxCheckoutSummary extends StatelessWidget {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    isCartItemEmpty
-                                        ? null
-                                        : _onAlertButtonsPressed(context,
-                                        bgcolor: baseColor,
-                                        title: 'Kebijakan Privasi',
-                                        titleStyle: txtSecondaryHeader.copyWith(
-                                            fontWeight: FontWeight.w600, color: blackColor),
-                                        descStyle: txtPrimarySubTitle.copyWith(
-                                            fontWeight: FontWeight.w500, color: blackColor),
-                                        desc: 'Kamu tidak dapat melakukan pembatalan atau perubahan apapun pada pesanan setelah melakukan pembayaran.',
-                                        icon: icAlert,
-                                        onPressed: () {
-                                          if (cartModel.cart!.pointsEnough! == false) {
-                                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                              content: Text(
-                                                'Your Point is not enough',
-                                                style: txtSecondaryTitle.copyWith(
-                                                    fontWeight: FontWeight.w500, color: baseColor),
-                                              ),
-                                              backgroundColor: redMedium,
-                                            ));
-                                            context.pop();
-                                          } else {
-                                            context.read<CartRewardBloc>().add(
-                                                CartRewardEvent.postOrder(
-                                                  cartId: itemCart.id,
-                                                  onOrderSuccess: (orderId) {
-                                                    // Pastikan ini dipanggil
-                                                    print("Order ID: $orderId");
-                                                    context.goNamed(
-                                                      'detail_order_reward',
-                                                      pathParameters: {'orderRewardId': orderId},
-                                                    );
-                                                  },
+                                    if (!isCartItemEmpty) {
+                                      if (isStockItemEmpty) {
+                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                          content: Text(
+                                            'Stock product is out of stock',
+                                            style: txtSecondaryTitle.copyWith(
+                                                fontWeight: FontWeight.w500, color: baseColor),
+                                          ),
+                                          backgroundColor: redMedium,
+                                        ));
+                                      } else {
+                                        isPhone == true ?
+                                        _onAlertButtonsPressed(context,
+                                            bgcolor: baseColor,
+                                            title: 'Kebijakan Privasi',
+                                            titleStyle: txtSecondaryHeader.copyWith(
+                                                fontWeight: FontWeight.w600, color: blackColor),
+                                            descStyle: txtPrimarySubTitle.copyWith(
+                                                fontWeight: FontWeight.w500, color: blackColor),
+                                            desc: 'Kamu tidak dapat melakukan pembatalan atau perubahan apapun pada pesanan setelah melakukan pembayaran.',
+                                            icon: icAlert,
+                                            onPressed: () {
+                                              if (cartModel.cart!.pointsEnough! == false) {
+                                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                                  content: Text(
+                                                    'Your Point is not enough',
+                                                    style: txtSecondaryTitle.copyWith(
+                                                        fontWeight: FontWeight.w500, color: baseColor),
+                                                  ),
+                                                  backgroundColor: redMedium,
                                                 ));
-                                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                              content: Text(
-                                                'Successfully order reward product',
-                                                style: txtSecondaryTitle.copyWith(
-                                                    fontWeight: FontWeight.w500, color: baseColor),
-                                              ),
-                                              backgroundColor: greenMedium,
-                                            ));
-                                          }
-                                        });
+                                                context.pop();
+                                              } else {
+
+                                                _showLoadingDialog(context);
+                                                context.read<CartRewardBloc>().add(
+                                                    CartRewardEvent.postOrder(
+                                                      cartId: itemCart.id,
+                                                      onOrderSuccess: (orderId) {
+                                                        // Pastikan ini dipanggil
+                                                        context.goNamed(
+                                                          'detail_order_reward',
+                                                          pathParameters: {'orderRewardId': orderId},
+                                                        );
+                                                      },
+                                                    ));
+                                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                                  content: Text(
+                                                    'Successfully order reward product',
+                                                    style: txtSecondaryTitle.copyWith(
+                                                        fontWeight: FontWeight.w500, color: baseColor),
+                                                  ),
+                                                  backgroundColor: greenMedium,
+                                                ));
+                                              }
+                                            }) : _showPhoneRequiredAlert(context);
+                                      }
+
+                                    }
                                   },
                                   child: Container(
-                                    padding: EdgeInsets.symmetric(
+                                    padding: const EdgeInsets.symmetric(
                                         vertical: Dimensions.paddingSizeDefault,
                                         horizontal:
                                             Dimensions.paddingSizeLarge),
                                     decoration: BoxDecoration(
                                       color: isCartItemEmpty ? grey : navyColor,
                                       borderRadius:
-                                          BorderRadius.all(Radius.circular(25)),
+                                          const BorderRadius.all(Radius.circular(25)),
                                     ),
                                     child: Row(
                                       children: [
@@ -177,11 +188,11 @@ class BoxCheckoutSummary extends StatelessWidget {
                                           width: 24,
                                           height: 24,
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 10,
                                         ),
                                         Text(
-                                          'Select Payment',
+                                          'Pay',
                                           style: txtSecondaryTitle.copyWith(
                                               fontWeight: FontWeight.w600,
                                               color: baseColor),
@@ -209,6 +220,98 @@ class BoxCheckoutSummary extends StatelessWidget {
     );
   }
 
+  _showPhoneRequiredAlert(BuildContext context) {
+    Alert(
+      context: context,
+      title: 'Phone Number Required',
+      padding: const EdgeInsets.all(20),
+      style: AlertStyle(
+        animationType: AnimationType.shrink,
+        isCloseButton: false,
+        backgroundColor: baseColor,
+        overlayColor: Colors.black38,
+        titleStyle:
+        txtSecondaryHeader
+            .copyWith(
+            fontWeight:
+            FontWeight
+                .w600,
+            color:
+            blackColor),
+        descStyle: txtPrimarySubTitle
+            .copyWith(
+            fontWeight:
+            FontWeight
+                .w400,
+            color:
+            blackColor),
+      ),
+      desc: 'Please fill your phone number before proceeding with the payment',
+      image: SvgPicture.asset(
+        icPhoneNumberEmpty,
+        width: 120,
+        height: 120,
+      ),
+      buttons: [
+        DialogButton(
+          onPressed: () => Navigator.pop(context),
+          color: redMedium,
+          child: Text(
+            "Cancel",
+            style: txtPrimaryTitle.copyWith(
+                fontWeight: FontWeight.w600, color: baseColor),
+          ),
+        ),
+        DialogButton(
+            color: navyColor,
+            onPressed: (){
+              Navigator.of(context).pop(); // Menutup dialog
+              context.pushNamed('edit_profile');
+            },
+            child: Text(
+              "Edit Profile",
+              style: txtPrimaryTitle.copyWith(
+                  fontWeight: FontWeight.w600, color: baseColor),
+            ))
+      ],
+    ).show();
+  }
+
+  void _showLoadingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(0),
+          ),
+          insetPadding: EdgeInsets.zero,
+          backgroundColor: baseColor,
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            alignment: Alignment.center,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(navyColor),
+                  ),
+                  const SizedBox(height: 20,),
+                  Text('Harap tunggu...', style: txtSecondaryTitle.copyWith(
+                      fontWeight: FontWeight.w600, color: blackColor),),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   Widget _buildShimmerEffect(BuildContext context) {
     return Shimmer.fromColors(
       baseColor: Colors.grey[300]!,
@@ -224,7 +327,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                 height: 20,
                 color: Colors.grey,
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -233,7 +336,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                     height: 20,
                     color: Colors.grey,
                   ),
-                  SizedBox(width: 3),
+                  const SizedBox(width: 3),
                   Container(
                     width: 100,
                     height: 20,
@@ -247,10 +350,10 @@ class BoxCheckoutSummary extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                     vertical: Dimensions.paddingSizeDefault,
                     horizontal: Dimensions.paddingSizeLarge),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.grey,
                   borderRadius: BorderRadius.all(Radius.circular(25)),
                 ),
@@ -261,7 +364,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                       height: 24,
                       color: Colors.grey,
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Container(
                       width: 100,
                       height: 20,
@@ -288,7 +391,7 @@ class BoxCheckoutSummary extends StatelessWidget {
     Alert(
       context: context,
       title: title,
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       style: AlertStyle(
         animationType: AnimationType.shrink,
         isCloseButton: false,
@@ -305,40 +408,24 @@ class BoxCheckoutSummary extends StatelessWidget {
       ),
       buttons: [
         DialogButton(
+          onPressed: () => Navigator.pop(context),
+          color: redMedium,
           child: Text(
             "Cancel",
             style: txtPrimaryTitle.copyWith(
                 fontWeight: FontWeight.w600, color: baseColor),
           ),
-          onPressed: () => Navigator.pop(context),
-          color: redMedium,
         ),
         DialogButton(
+            color: navyColor,
+            onPressed: onPressed,
             child: Text(
               "Confirm",
               style: txtPrimaryTitle.copyWith(
                   fontWeight: FontWeight.w600, color: baseColor),
-            ),
-            color: navyColor,
-            onPressed: onPressed)
+            ))
       ],
     ).show();
   }
 }
 
-void _showConfirmationDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        content: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: Center(
-            child: CircularProgressIndicator(),
-          ),
-        ),
-      );
-    },
-  );
-}

@@ -5,8 +5,6 @@ import '../../../../common/constant.dart';
 import '../../../../common/theme.dart';
 
 class EmptyOrderWidget extends StatelessWidget {
-
-
   const EmptyOrderWidget({
     super.key,
   });

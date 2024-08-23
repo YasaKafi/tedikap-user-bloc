@@ -21,12 +21,13 @@ class InputVoucherCode extends StatelessWidget {
               color: Colors.transparent,
               border: Border.all(color: grey, width: 1),
               borderRadius: BorderRadius.circular(10)),
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
               horizontal: Dimensions.paddingSizeDefault),
           width: screenWidth,
           child: Row(
             children: [
-              Container(
+              SizedBox(
+                width: screenWidth * 0.65,
                 child: TextField(
                   style: txtPrimarySubTitle.copyWith(fontWeight: FontWeight.w600, color: blackColor),
                   textAlign: TextAlign.start,
@@ -37,9 +38,8 @@ class InputVoucherCode extends StatelessWidget {
                       focusColor: Colors.transparent
                   ),
                 ),
-                width: screenWidth * 0.65,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               InkWell(

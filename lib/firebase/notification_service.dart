@@ -68,10 +68,9 @@ class NotificationService {
   void firebaseInit(BuildContext context) {
     FirebaseMessaging.onMessage.listen((message) {
       RemoteNotification? notification = message.notification;
-      AndroidNotification? android = message.notification!.android;
 
       print("Notification title: ${notification!.title}");
-      print("Notification body: ${notification!.body}");
+      print("Notification body: ${notification.body}");
       print("Data: ${message.data.toString()}");
 
       // For IoS

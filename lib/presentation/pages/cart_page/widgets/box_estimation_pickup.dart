@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_page/bloc/cart_bloc.dart';
 
@@ -131,14 +132,14 @@ class BoxEstimationPickup extends StatelessWidget {
                                           fontWeight: FontWeight.w500,
                                           color: blackColor),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10,
                                     ),
                                     InkWell(
                                         onTap: () {
                                           _onAlertButtonsPressed(context,
-                                              title: 'Halooo',
-                                              desc: 'kwokwowo',
+                                              title: 'Pick-Up Schedule Information',
+                                              desc: "The pick-up schedule in this application is divided into 2 sessions: \n \n• Session 1 : 09:40 - 10:00 \n• Session 2 : 12:00 - 12:30 \n \nIf you place an order before 09:20, your order will be included in Session 1. If the order is placed after 09:20, it will be included in Session 2.",
                                               titleStyle:
                                                   txtSecondaryHeader.copyWith(
                                                 fontWeight: FontWeight.w600,
@@ -150,7 +151,7 @@ class BoxEstimationPickup extends StatelessWidget {
                                                           FontWeight.w500,
                                                       color: blackColor));
                                         },
-                                        child: Icon(
+                                        child: const Icon(
                                           Icons.info_outline_rounded,
                                           size: 18,
                                         )),
@@ -214,28 +215,49 @@ class BoxEstimationPickup extends StatelessWidget {
         ));
   }
 
-  _onAlertButtonsPressed(context,
+  _onAlertButtonsPressed(BuildContext context,
       {String? title,
       TextStyle? titleStyle,
       TextStyle? descStyle,
       String? desc,
-      String? icon,
-      Color? bgcolor,
-      VoidCallback? onPressed}) {
+      }) {
     Alert(
       context: context,
       title: title,
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       style: AlertStyle(
         animationType: AnimationType.grow,
         isCloseButton: false,
-        isButtonVisible: false,
-        backgroundColor: bgcolor,
+        backgroundColor: baseColor,
         overlayColor: Colors.black38,
         titleStyle: titleStyle!,
         descStyle: descStyle!,
+        descTextAlign: TextAlign.start
       ),
       desc: desc,
+      buttons: [
+        DialogButton(
+            color: baseColor,
+            border: Border.all(color: navyColor, width: 1),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text(
+              "OK",
+              style: txtPrimaryTitle.copyWith(
+                  fontWeight: FontWeight.w600, color: navyColor),
+            )),
+        DialogButton(
+            color: navyColor,
+            onPressed: () {
+              context.pushNamed('help_center');
+            },
+            child: Text(
+              "More Info",
+              style: txtPrimaryTitle.copyWith(
+                  fontWeight: FontWeight.w600, color: baseColor),
+            )),
+      ],
     ).show();
   }
 }

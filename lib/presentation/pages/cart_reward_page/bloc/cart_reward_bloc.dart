@@ -1,12 +1,8 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tedikap_user_bloc/data/datasource/order_datasource.dart';
-import 'package:tedikap_user_bloc/data/datasource/user_datasource.dart';
-import 'package:tedikap_user_bloc/data/models/request/post_order_reward_request_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/cart_reward_response_model.dart';
-import 'package:tedikap_user_bloc/data/models/response/detail_product_reward_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/post_order_reward_response_model.dart';
-import 'package:tedikap_user_bloc/data/models/response/user_point_response_model.dart';
 
 import '../../../../data/datasource/cart_datasource.dart';
 import '../../../../data/datasource/product_datasource.dart';

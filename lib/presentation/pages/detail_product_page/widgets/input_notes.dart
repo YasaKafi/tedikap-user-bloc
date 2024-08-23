@@ -6,6 +6,7 @@ import 'package:tedikap_user_bloc/presentation/pages/detail_product_page/bloc/de
 import '../../../../../common/dimensions.dart';
 import '../../../../../common/theme.dart';
 
+// ignore: must_be_immutable
 class InputNotes extends StatelessWidget {
   final TextEditingController notesController;
   bool? isFirstLoad ;

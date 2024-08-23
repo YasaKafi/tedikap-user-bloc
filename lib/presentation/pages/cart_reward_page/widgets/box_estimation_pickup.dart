@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_reward_page/bloc/cart_reward_bloc.dart';
-import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/bloc/detail_order_bloc.dart';
 
 import '../../../../../common/constant.dart';
 import '../../../../../common/dimensions.dart';
@@ -12,9 +11,9 @@ import '../../../../../common/theme.dart';
 
 class BoxEstimationPickup extends StatelessWidget {
   const BoxEstimationPickup({
-    Key? key,
+    super.key,
     required this.screenWidth,
-  }) : super(key: key);
+  });
 
   final double screenWidth;
 
@@ -27,7 +26,7 @@ class BoxEstimationPickup extends StatelessWidget {
         ),
         width: screenWidth,
         child: Padding(
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
               horizontal: Dimensions.paddingSizeLarge,
               vertical: Dimensions.paddingSizeLarge),
           child: Column(
@@ -39,13 +38,13 @@ class BoxEstimationPickup extends StatelessWidget {
                 style: txtPrimaryTitle.copyWith(
                     fontWeight: FontWeight.w600, color: blackColor),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Container(
+                  SizedBox(
                     width: screenWidth,
                     child: Row(
                       children: [
@@ -57,17 +56,17 @@ class BoxEstimationPickup extends StatelessWidget {
                               height: 32,
                               width: 32,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
-                            DottedDivider(
+                            const DottedDivider(
                               color: primaryColor,
                               dashWidth: 6,
                               dashSpace: 8,
                               thickness: 2,
                               height: 60,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             SvgPicture.asset(
@@ -77,7 +76,7 @@ class BoxEstimationPickup extends StatelessWidget {
                             )
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         Column(
@@ -95,7 +94,7 @@ class BoxEstimationPickup extends StatelessWidget {
                                       fontWeight: FontWeight.w500,
                                       color: blackColor),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 3,
                                 ),
                                 Text(
@@ -104,7 +103,7 @@ class BoxEstimationPickup extends StatelessWidget {
                                       fontWeight: FontWeight.w600,
                                       color: blackColor),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 1,
                                 ),
                                 Text(
@@ -115,19 +114,48 @@ class BoxEstimationPickup extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Waktu Pick Up',
-                                  style: txtPrimarySubTitle.copyWith(
-                                      fontWeight: FontWeight.w500,
-                                      color: blackColor),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      'Waktu Pick Up',
+                                      style: txtPrimarySubTitle.copyWith(
+                                          fontWeight: FontWeight.w500,
+                                          color: blackColor),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    InkWell(
+                                        onTap: () {
+                                          _onAlertButtonsPressed(context,
+                                              title: 'Pick-Up Schedule Information',
+                                              desc: "The pick-up schedule in this application is divided into 2 sessions: \n \n• Session 1 : 09:40 - 10:00 \n• Session 2 : 12:00 - 12:30 \n \nIf you place an order before 09:20, your order will be included in Session 1. If the order is placed after 09:20, it will be included in Session 2.",
+                                              titleStyle:
+                                              txtSecondaryHeader.copyWith(
+                                                fontWeight: FontWeight.w600,
+                                                color: blackColor,
+                                              ),
+                                              descStyle:
+                                              txtPrimarySubTitle.copyWith(
+                                                  fontWeight:
+                                                  FontWeight.w500,
+                                                  color: blackColor));
+                                        },
+                                        child: const Icon(
+                                          Icons.info_outline_rounded,
+                                          size: 18,
+                                        )),
+                                  ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 3,
                                 ),
                                 BlocBuilder<CartRewardBloc, CartRewardState>(
@@ -186,6 +214,52 @@ class BoxEstimationPickup extends StatelessWidget {
   }
 }
 
+_onAlertButtonsPressed(BuildContext context,
+    {String? title,
+      TextStyle? titleStyle,
+      TextStyle? descStyle,
+      String? desc,
+    }) {
+  Alert(
+    context: context,
+    title: title,
+    padding: const EdgeInsets.all(20),
+    style: AlertStyle(
+        animationType: AnimationType.grow,
+        isCloseButton: false,
+        backgroundColor: baseColor,
+        overlayColor: Colors.black38,
+        titleStyle: titleStyle!,
+        descStyle: descStyle!,
+        descTextAlign: TextAlign.start
+    ),
+    desc: desc,
+    buttons: [
+      DialogButton(
+          color: baseColor,
+          border: Border.all(color: navyColor, width: 1),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text(
+            "OK",
+            style: txtPrimaryTitle.copyWith(
+                fontWeight: FontWeight.w600, color: navyColor),
+          )),
+      DialogButton(
+          color: navyColor,
+          onPressed: () {
+            context.pushNamed('help_center');
+          },
+          child: Text(
+            "More Info",
+            style: txtPrimaryTitle.copyWith(
+                fontWeight: FontWeight.w600, color: baseColor),
+          )),
+    ],
+  ).show();
+}
+
 class DottedDivider extends StatelessWidget {
   final double height;
   final double thickness;
@@ -194,17 +268,17 @@ class DottedDivider extends StatelessWidget {
   final double dashSpace;
 
   const DottedDivider({
-    Key? key,
+    super.key,
     this.height = 1,
     this.thickness = 1,
     this.color = Colors.black,
     this.dashWidth = 3,
     this.dashSpace = 2,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: height,
       child: CustomPaint(
         painter: _DottedLinePainter(
@@ -216,6 +290,7 @@ class DottedDivider extends StatelessWidget {
       ),
     );
   }
+
 }
 
 class _DottedLinePainter extends CustomPainter {

@@ -18,18 +18,18 @@ class AlertBox extends StatelessWidget {
       decoration: BoxDecoration(
           color: primaryColor2,
           borderRadius: BorderRadius.circular(10)),
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
           horizontal: Dimensions.paddingSizeLarge,
           vertical: Dimensions.paddingSizeDefault),
       width: screenWidth,
       child: Row(
         children: [
-          Icon(
+          const Icon(
             Icons.info_outline_rounded,
             size: 28,
             color: primaryColor,
           ),
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
           Flexible(

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tedikap_user_bloc/data/repository/tedikap_repository.dart';
 import '../../../../common/dimensions.dart';
 import '../../../../common/theme.dart';
-import 'package:intl/intl.dart';
 
 class ListBoxProduct extends StatelessWidget {
   const ListBoxProduct({

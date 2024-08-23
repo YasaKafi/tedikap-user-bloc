@@ -14,6 +14,7 @@ import 'dart:async';
 
 import '../../order_page/bloc/order_bloc.dart';
 
+// ignore: must_be_immutable
 class SectionButton extends StatefulWidget {
   SectionButton(
       {super.key, this.linkCheckout, this.orderId, this.orderRewardId});
@@ -308,7 +309,7 @@ class _SectionButtonState extends State<SectionButton> {
                             text: 'Pesan Ulang',
                             onPressed: () {
                               if (model?.order != null ||
-                                  modelReward?.order != null) {
+                                  modelReward.order != null) {
                                 if (isCartItemEmpty == true) {
                                   _showReorderOptions(context);
                                 } else if (!isCartItemEmpty) {

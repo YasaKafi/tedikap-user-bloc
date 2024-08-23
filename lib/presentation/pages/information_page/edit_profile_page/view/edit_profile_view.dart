@@ -15,7 +15,6 @@ import '../../../../../common/dimensions.dart';
 import '../../../../../common/theme.dart';
 import '../../../../../data/repository/tedikap_repository.dart';
 import '../widget/custom_textfield.dart';
-import '../widget/dropdown_gender_input.dart';
 import '../widget/editimage_button.dart';
 import '../widget/save_button.dart';
 

@@ -1,7 +1,8 @@
+// ignore_for_file: unused_import
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:go_router/go_router.dart';
 import 'package:tedikap_user_bloc/data/datasource/order_datasource.dart';
 import 'package:tedikap_user_bloc/data/datasource/product_datasource.dart';
 import 'package:tedikap_user_bloc/data/models/request/post_order_request_model.dart';
@@ -101,33 +102,23 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
 
     on<_PatchQty>((event, emit) async {
-      // Ensure the current state is handled properly
-      await state.maybeWhen(
-        success: (cartModel, patchQtyModel, deleteModel, modelPostOrder,
-            modelPostPayment, orderId) async {
-          // Patch the quantity and await the result
-          final result =
-              await cartDatasource.patchQty(event.action!, event.cartItem!);
 
-          // Await the fold to ensure the emit happens before the handler completes
-          await result.fold(
-            (l) async =>
-                emit(const _Error(message: 'Failed to access data order')),
-            (r) async => emit(_Success(
-              cartModel: cartModel,
-              patchQtyModel: r,
-              deleteModel: deleteModel,
-              modelPostOrder: modelPostOrder,
-              modelPostPayment: modelPostPayment,
-              orderId: orderId,
-            )),
-          );
-        },
-        orElse: () async {
-          emit(const _Error(message: 'Unexpected state type'));
+      // Emit loading state
+      emit(const _Loading());
+
+      final result =
+      await cartDatasource.patchQty(event.action!, event.cartItem!);
+      await result.fold(
+            (l) async => emit(const _Error(message: 'Failed to access data order')),
+            (r) async {
+          final updatedCart = await cartDatasource.getCart();
+          final resultUpdatedCart = updatedCart.fold((l) => null, (success) => success);
+
+          emit(_Success(cartModel: resultUpdatedCart, patchQtyModel: r, deleteModel: null, modelPostOrder: null, modelPostPayment: null, orderId: ''));
         },
       );
     });
+
 
     on<_DeleteItem>((event, emit) async {
       final currentState = state;

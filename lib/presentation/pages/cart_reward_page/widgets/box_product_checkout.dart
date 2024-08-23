@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:tedikap_user_bloc/data/models/response/detail_product_reward_response_model.dart';
 
 import '../../../../../common/constant.dart';
 import '../../../../../common/dimensions.dart';
@@ -45,10 +44,18 @@ class BoxProductCheckout extends StatelessWidget {
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.network(
-              TedikapApiRepository.getImageRewardProduct + item.productImage! ?? '',
-              width: 80,
-              height: 80,
+            Container(
+              width: 75,
+              height: 75,
+              decoration: ShapeDecoration(
+                color: const Color(0x0C56473C),
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(12))),
+                image: DecorationImage(
+                  image: NetworkImage(TedikapApiRepository.getImageRewardProduct + item.productImage!),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
             const SizedBox(
               width: 15,
@@ -78,14 +85,14 @@ class BoxProductCheckout extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-
+        item.note == null ? SizedBox() :
         Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: greybgNote,
-                borderRadius: const BorderRadius.all(Radius.circular(8)),
+                borderRadius: BorderRadius.all(Radius.circular(8)),
               ),
               width: screenWidth,
               padding: const EdgeInsets.symmetric(

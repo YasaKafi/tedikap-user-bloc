@@ -11,9 +11,8 @@ import 'package:tedikap_user_bloc/presentation/pages/order_page/widgets/shimmer_
 import 'package:tedikap_user_bloc/presentation/pages/order_page/widgets/show_filter.dart';
 
 import '../../../common/dimensions.dart';
-import '../../../common/error_state.dart';
+import '../../global_components/error_state.dart';
 import '../../../common/theme.dart';
-import '../../global_components/common_button.dart';
 import 'widgets/list_box_order_status.dart';
 
 class OrderPage extends StatefulWidget {
@@ -468,7 +467,14 @@ class _OrderPageState extends State<OrderPage> {
                                                       ).format(int.parse(order.totalPrice!
                                                           .toString()));
 
+                                                      String formatDate(String dateString) {
+                                                        DateTime date = DateTime.parse(dateString);
+                                                        String formattedDate = DateFormat('d MMMM yyyy • HH.mm').format(date);
+                                                        return formattedDate;
+                                                      }
+
                                                       return ListBoxMenuStatus(
+                                                        pickUpTime: formatDate(order.updatedAt.toString()),
                                                         rating: order.rating ?? 0,
                                                         orderId: order.id!,
                                                         status: order.status!,
@@ -487,7 +493,13 @@ class _OrderPageState extends State<OrderPage> {
                                                       final order = modelReward!
                                                           .orders![index];
 
+                                                      String formatDate(String dateString) {
+                                                        DateTime date = DateTime.parse(dateString);
+                                                        String formattedDate = DateFormat('d MMMM yyyy • HH.mm').format(date);
+                                                        return formattedDate;
+                                                      }
                                                       return ListBoxMenuStatus(
+                                                        pickUpTime: formatDate(order.updatedAt.toString()),
                                                         rating: order.rating ?? 0,
                                                         waLink: order.whatsapp!,
                                                         status: order.status!,

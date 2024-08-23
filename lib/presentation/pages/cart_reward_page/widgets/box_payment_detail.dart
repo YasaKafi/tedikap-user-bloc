@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:tedikap_user_bloc/presentation/pages/cart_page/bloc/cart_bloc.dart';
 
 import '../../../../../common/dimensions.dart';
 import '../../../../../common/theme.dart';
+import '../../../../common/constant.dart';
 import '../bloc/cart_reward_bloc.dart';
 
 class BoxPaymentDetail extends StatelessWidget {
@@ -19,7 +20,7 @@ class BoxPaymentDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: screenWidth,
-      padding: EdgeInsets.all(Dimensions.paddingSizeLarge),
+      padding: const EdgeInsets.all(Dimensions.paddingSizeLarge),
       decoration: BoxDecoration(
         color: baseColor,
         borderRadius: BorderRadius.circular(15),
@@ -30,7 +31,7 @@ class BoxPaymentDetail extends StatelessWidget {
           Text('Rincian Pembayaran',
               style: txtPrimaryTitle.copyWith(
                   fontWeight: FontWeight.w600, color: blackColor)),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           BlocBuilder<CartRewardBloc, CartRewardState>(
@@ -41,6 +42,7 @@ class BoxPaymentDetail extends StatelessWidget {
                   success: (cartModel,  modelQty, deleteModel, modelPostOrder, ){
                     if(cartModel != null){
                       final itemCart = cartModel.cart;
+
                       return Column(
                         children: [
                           Row(
@@ -49,20 +51,26 @@ class BoxPaymentDetail extends StatelessWidget {
                               Text('Subtotal',
                                   style: txtPrimarySubTitle.copyWith(
                                       fontWeight: FontWeight.w500, color: blackColor)),
-                              Text('Rp ${itemCart!.totalPoints.toString()}',
-                                  style: txtPrimarySubTitle.copyWith(
-                                      fontWeight: FontWeight.w500, color: blackColor)),
+                              Row(
+                                children: [
+                                  SvgPicture.asset(icLogoPrimary, width: 18,),
+                                  SizedBox(width: 5,),
+                                  Text('${itemCart!.totalPoints.toString()}',
+                                      style: txtPrimarySubTitle.copyWith(
+                                          fontWeight: FontWeight.w500, color: blackColor)),
+                                ],
+                              ),
                             ],
                           ),
 
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
-                          Divider(
+                          const Divider(
                             height: 1,
                             color: grey,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                           Row(
@@ -71,9 +79,15 @@ class BoxPaymentDetail extends StatelessWidget {
                               Text('Total Pembayaran',
                                   style: txtPrimarySubTitle.copyWith(
                                       fontWeight: FontWeight.w600, color: blackColor)),
-                              Text('Rp ${itemCart.totalPoints}',
-                                  style: txtPrimarySubTitle.copyWith(
-                                      fontWeight: FontWeight.w600, color: blackColor)),
+                              Row(
+                                children: [
+                                  SvgPicture.asset(icLogoPrimary, width: 18,),
+                                  SizedBox(width: 5,),
+                                  Text('${itemCart.totalPoints}',
+                                      style: txtPrimarySubTitle.copyWith(
+                                          fontWeight: FontWeight.w600, color: blackColor)),
+                                ],
+                              ),
                             ],
                           ),
                         ],

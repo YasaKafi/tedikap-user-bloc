@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shimmer/shimmer.dart';
@@ -13,7 +14,7 @@ import '../../../../../common/dimensions.dart';
 import '../../../../../common/theme.dart';
 
 class BoxCheckoutSummary extends StatelessWidget {
-  BoxCheckoutSummary({
+  const BoxCheckoutSummary({
     super.key,
     required this.screenWidth,
   });
@@ -51,13 +52,13 @@ class BoxCheckoutSummary extends StatelessWidget {
                           },
                           child: Container(
                             width: screenWidth,
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 vertical: Dimensions.paddingSizeSmall,
                                 horizontal: Dimensions.paddingSizeDefault),
                             decoration: BoxDecoration(
                               color: baseColor,
                               border: Border.all(color: blackColor, width: 1),
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
+                              borderRadius: const BorderRadius.all(Radius.circular(15)),
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -69,7 +70,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                       width: 32,
                                       height: 32,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 15,
                                     ),
                                     Text(
@@ -80,7 +81,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                Icon(
+                                const Icon(
                                   Icons.arrow_forward_ios_rounded,
                                   size: 20,
                                   color: blackColor,
@@ -89,7 +90,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         BlocBuilder<CartBloc, CartState>(
@@ -117,7 +118,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                                 fontWeight: FontWeight.w500,
                                                 color: Colors.black38),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 5,
                                           ),
                                           Row(
@@ -170,8 +171,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                                       PostOrderRequestModel(
                                                         cartId: itemCart.id,
                                                         voucherId:
-                                                        itemCart.voucherId ??
-                                                            null,
+                                                        itemCart.voucherId,
                                                       );
                                                       context.read<CartBloc>().add(
                                                           CartEvent.postOrder(
@@ -184,7 +184,7 @@ class BoxCheckoutSummary extends StatelessWidget {
 
                                             },
                                             child: Container(
-                                              padding: EdgeInsets.symmetric(
+                                              padding: const EdgeInsets.symmetric(
                                                   vertical:
                                                   Dimensions.paddingSizeDefault,
                                                   horizontal:
@@ -193,7 +193,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                                 color: isCartItemEmpty
                                                     ? grey
                                                     : navyColor,
-                                                borderRadius: BorderRadius.all(
+                                                borderRadius: const BorderRadius.all(
                                                     Radius.circular(25)),
                                               ),
                                               child: Row(
@@ -203,7 +203,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                                     width: 24,
                                                     height: 24,
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 10,
                                                   ),
                                                   Text(
@@ -248,7 +248,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                       },
                       child: Container(
                         width: screenWidth,
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                             vertical: Dimensions.paddingSizeSmall,
                             horizontal: Dimensions.paddingSizeDefault),
                         decoration: BoxDecoration(
@@ -256,7 +256,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                           border: Border.all(
                               color: isCartItemEmpty ? grey : blackColor,
                               width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                          borderRadius: const BorderRadius.all(Radius.circular(15)),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -269,7 +269,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                   height: 32,
                                   color: isCartItemEmpty ? grey : navyColor,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 15,
                                 ),
                                 Text(
@@ -290,7 +290,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     BlocBuilder<CartBloc, CartState>(
@@ -300,11 +300,19 @@ class BoxCheckoutSummary extends StatelessWidget {
                           loading: () => _buildShimmerEffect(context),
                           success: (cartModel, modelQty, deleteModel,
                               modelPostOrder, modelPostPayment, orderId) {
-                            final itemCart = cartModel?.cart;
-                            final isCartItemEmpty =
-                                itemCart?.cartItems?.isEmpty ?? true;
-                            final isPhone = cartModel?.cart!.isPhone;
+
+
                             if (cartModel != null) {
+                              final itemCart = cartModel.cart;
+                              final isCartItemEmpty =
+                                  itemCart?.cartItems?.isEmpty ?? true;
+                              final isStockItemEmpty = itemCart?.cartItems?.any((e) => e.stock == false) ?? false;
+                              final isPhone = cartModel.cart!.isPhone;
+                              final formattedTotal = NumberFormat.currency(
+                                locale: 'id_ID',
+                                symbol: '',
+                                decimalDigits: 0, // Tidak ada digit desimal
+                              ).format(int.parse(itemCart!.totalPrice.toString()));
                               return Row(
                                 mainAxisAlignment:
                                 MainAxisAlignment.spaceBetween,
@@ -319,7 +327,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                             fontWeight: FontWeight.w500,
                                             color: Colors.black38),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 5,
                                       ),
                                       Row(
@@ -337,7 +345,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                             width: 3,
                                           ),
                                           Text(
-                                            itemCart!.totalPrice.toString(),
+                                            formattedTotal,
                                             style: txtPrimaryHeader.copyWith(
                                                 fontWeight: FontWeight.w600,
                                                 color: blackColor),
@@ -351,55 +359,68 @@ class BoxCheckoutSummary extends StatelessWidget {
                                     children: [
                                       InkWell(
                                         onTap: () {
+                                          print('VALUE DARI STOCK $isStockItemEmpty');
                                           if (!isCartItemEmpty) {
-                                            isPhone == true ?
-                                            _onAlertButtonsPressed(context,
-                                                bgcolor: baseColor,
-                                                title: 'Kebijakan Privasi',
-                                                titleStyle: txtSecondaryHeader
-                                                    .copyWith(
-                                                    fontWeight:
-                                                    FontWeight.w600,
-                                                    color: blackColor),
-                                                descStyle: txtPrimarySubTitle
-                                                    .copyWith(
-                                                    fontWeight:
-                                                    FontWeight.w500,
-                                                    color: blackColor),
-                                                desc:
-                                                'Kamu tidak dapat melakukan pembatalan atau perubahan apapun pada pesanan setelah melakukan pembayaran.',
-                                                icon: icAlert, onPressed: () {
-                                                  final modelRequestOrder =
-                                                  PostOrderRequestModel(
-                                                    cartId: itemCart.id,
-                                                    voucherId:
-                                                    itemCart.voucherId ??
-                                                        null,
-                                                  );
-                                                  context.read<CartBloc>().add(
-                                                      CartEvent.postOrder(
-                                                          modelOrder:
-                                                          modelRequestOrder,
-                                                          onOrderSuccess:
-                                                              (orderId,
-                                                              linkCheckout) {
-                                                            print(
-                                                                "INI ORDER ID : $orderId");
-                                                            context.goNamed(
-                                                                'detail_order_common',
-                                                                pathParameters: {
-                                                                  'orderId':
-                                                                  orderId
-                                                                },
-                                                                extra:
-                                                                linkCheckout
-                                                            );
-                                                          }));
-                                                }) : _showPhoneRequiredAlert(context);
+                                            if (isStockItemEmpty) {
+                                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                                content: Text(
+                                                  'Stock product is out of stock',
+                                                  style: txtSecondaryTitle.copyWith(
+                                                      fontWeight: FontWeight.w500, color: baseColor),
+                                                ),
+                                                backgroundColor: redMedium,
+                                              ));
+                                            } else {
+                                              isPhone == true ?
+                                              _onAlertButtonsPressed(context,
+                                                  bgcolor: baseColor,
+                                                  title: 'Kebijakan Privasi',
+                                                  titleStyle: txtSecondaryHeader
+                                                      .copyWith(
+                                                      fontWeight:
+                                                      FontWeight.w600,
+                                                      color: blackColor),
+                                                  descStyle: txtPrimarySubTitle
+                                                      .copyWith(
+                                                      fontWeight:
+                                                      FontWeight.w500,
+                                                      color: blackColor),
+                                                  desc:
+                                                  'Kamu tidak dapat melakukan pembatalan atau perubahan apapun pada pesanan setelah melakukan pembayaran.',
+                                                  icon: icAlert,
+                                                  onPressed: () {
+                                                    final modelRequestOrder =
+                                                    PostOrderRequestModel(
+                                                      cartId: itemCart.id,
+                                                      voucherId:
+                                                      itemCart.voucherId,
+                                                    );
+
+                                                    _showLoadingDialog(context);
+                                                    context.read<CartBloc>().add(
+                                                        CartEvent.postOrder(
+                                                            modelOrder:
+                                                            modelRequestOrder,
+                                                            onOrderSuccess:
+                                                                (orderId,
+                                                                linkCheckout) {
+                                                              context.goNamed(
+                                                                  'detail_order_common',
+                                                                  pathParameters: {
+                                                                    'orderId':
+                                                                    orderId
+                                                                  },
+                                                                  extra:
+                                                                  linkCheckout
+                                                              );
+                                                            }));
+                                                  }) : _showPhoneRequiredAlert(context);
+                                            }
+
                                           }
                                         },
                                         child: Container(
-                                          padding: EdgeInsets.symmetric(
+                                          padding: const EdgeInsets.symmetric(
                                               vertical:
                                               Dimensions.paddingSizeDefault,
                                               horizontal:
@@ -408,7 +429,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                             color: isCartItemEmpty
                                                 ? grey
                                                 : navyColor,
-                                            borderRadius: BorderRadius.all(
+                                            borderRadius: const BorderRadius.all(
                                                 Radius.circular(25)),
                                           ),
                                           child: Row(
@@ -418,7 +439,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                                 width: 24,
                                                 height: 24,
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 10,
                                               ),
                                               Text(
@@ -459,7 +480,7 @@ class BoxCheckoutSummary extends StatelessWidget {
     Alert(
       context: context,
       title: 'Phone Number Required',
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       style: AlertStyle(
         animationType: AnimationType.shrink,
         isCloseButton: false,
@@ -483,31 +504,31 @@ class BoxCheckoutSummary extends StatelessWidget {
       ),
       desc: 'Please fill your phone number before proceeding with the payment',
       image: SvgPicture.asset(
-        icPhoneNumberEmpty!,
+        icPhoneNumberEmpty,
         width: 120,
         height: 120,
       ),
       buttons: [
         DialogButton(
+          onPressed: () => Navigator.pop(context),
+          color: redMedium,
           child: Text(
             "Cancel",
             style: txtPrimaryTitle.copyWith(
                 fontWeight: FontWeight.w600, color: baseColor),
           ),
-          onPressed: () => Navigator.pop(context),
-          color: redMedium,
         ),
         DialogButton(
-            child: Text(
-              "Edit Profile",
-              style: txtPrimaryTitle.copyWith(
-                  fontWeight: FontWeight.w600, color: baseColor),
-            ),
             color: navyColor,
             onPressed: (){
               Navigator.of(context).pop(); // Menutup dialog
               context.pushNamed('edit_profile');
-            })
+            },
+            child: Text(
+              "Edit Profile",
+              style: txtPrimaryTitle.copyWith(
+                  fontWeight: FontWeight.w600, color: baseColor),
+            ))
       ],
     ).show();
   }
@@ -515,16 +536,31 @@ class BoxCheckoutSummary extends StatelessWidget {
   void _showLoadingDialog(BuildContext context) {
     showDialog(
       context: context,
-      barrierDismissible: false, // Prevents closing the dialog by tapping outside
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return Dialog(
-          backgroundColor: redMedium,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(0),
+          ),
+          insetPadding: EdgeInsets.zero,
+          backgroundColor: baseColor,
           child: Container(
-            width: double.infinity,
-            height: double.infinity,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
             alignment: Alignment.center,
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(navyColor),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(navyColor),
+                  ),
+                  const SizedBox(height: 20,),
+                  Text('Harap tunggu...', style: txtSecondaryTitle.copyWith(
+                      fontWeight: FontWeight.w600, color: blackColor),),
+                ],
+              ),
             ),
           ),
         );
@@ -548,7 +584,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                 height: 20,
                 color: Colors.grey,
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -557,7 +593,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                     height: 20,
                     color: Colors.grey,
                   ),
-                  SizedBox(width: 3),
+                  const SizedBox(width: 3),
                   Container(
                     width: 100,
                     height: 20,
@@ -571,10 +607,10 @@ class BoxCheckoutSummary extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                     vertical: Dimensions.paddingSizeDefault,
                     horizontal: Dimensions.paddingSizeLarge),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.grey,
                   borderRadius: BorderRadius.all(Radius.circular(25)),
                 ),
@@ -585,7 +621,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                       height: 24,
                       color: Colors.grey,
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Container(
                       width: 100,
                       height: 20,
@@ -601,7 +637,6 @@ class BoxCheckoutSummary extends StatelessWidget {
     );
   }
 
-
   _onAlertButtonsPressed(context,
       {String? title,
         TextStyle? titleStyle,
@@ -613,7 +648,7 @@ class BoxCheckoutSummary extends StatelessWidget {
     Alert(
       context: context,
       title: title,
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       style: AlertStyle(
         animationType: AnimationType.shrink,
         isCloseButton: false,
@@ -630,22 +665,22 @@ class BoxCheckoutSummary extends StatelessWidget {
       ),
       buttons: [
         DialogButton(
+          onPressed: () => Navigator.pop(context),
+          color: redMedium,
           child: Text(
             "Cancel",
             style: txtPrimaryTitle.copyWith(
                 fontWeight: FontWeight.w600, color: baseColor),
           ),
-          onPressed: () => Navigator.pop(context),
-          color: redMedium,
         ),
         DialogButton(
+            color: navyColor,
+            onPressed: onPressed,
             child: Text(
               "Confirm",
               style: txtPrimaryTitle.copyWith(
                   fontWeight: FontWeight.w600, color: baseColor),
-            ),
-            color: navyColor,
-            onPressed: onPressed)
+            )),
       ],
     ).show();
   }

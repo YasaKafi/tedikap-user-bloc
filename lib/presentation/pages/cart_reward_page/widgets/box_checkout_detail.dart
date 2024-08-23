@@ -11,11 +11,10 @@ import '../../../../../common/theme.dart';
 import '../../../../common/constant.dart';
 import 'box_product_checkout.dart';
 
-
 class BoxCheckoutDetail extends StatelessWidget {
   final double screenWidth;
 
-  BoxCheckoutDetail({super.key, required this.screenWidth});
+  const BoxCheckoutDetail({super.key, required this.screenWidth});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,7 @@ class BoxCheckoutDetail extends StatelessWidget {
       ),
       width: screenWidth,
       child: Padding(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
             horizontal: Dimensions.paddingSizeLarge,
             vertical: Dimensions.paddingSizeLarge),
         child: Column(
@@ -46,9 +45,9 @@ class BoxCheckoutDetail extends StatelessWidget {
                     context.goNamed('point');
                   },
                   child: Container(
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                         vertical: 8, horizontal: Dimensions.paddingSizeDefault),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: navyColor,
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
@@ -66,14 +65,14 @@ class BoxCheckoutDetail extends StatelessWidget {
                 return state.when(
                   initial: () => buildShimmer(),
                   loading: () => buildShimmer(),
-                  success: (cartModel,  modelQty, deleteModel, modelPostOrder) {
+                  success: (cartModel, modelQty, deleteModel, modelPostOrder) {
                     if (cartModel?.cart == null) {
                       return buildShimmer();
-                    } else
-                    if (cartModel!.cart!.cartItems!.isNotEmpty) {
+                    } else if (cartModel!.cart!.cartItems!.isNotEmpty) {
                       final itemCart = cartModel.cart;
                       return Column(
-                        children: List.generate(itemCart!.cartItems!.length, (index) {
+                        children:
+                            List.generate(itemCart!.cartItems!.length, (index) {
                           var productItemsCheckout = itemCart.cartItems![index];
 
                           return Column(
@@ -82,95 +81,156 @@ class BoxCheckoutDetail extends StatelessWidget {
                                 item: productItemsCheckout,
                                 screenWidth: screenWidth,
                               ),
-                              Divider(
+                              const Divider(
                                 height: 1,
                                 color: grey,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('Rp ${productItemsCheckout.totalPoints}',
-                                      style: txtPrimaryTitle.copyWith(
-                                          fontWeight: FontWeight.w600,
-                                          color: blackColor)),
+                                  productItemsCheckout.stock == false
+                                      ? Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10, vertical: 5),
+                                          decoration: BoxDecoration(
+                                              color: redLight,
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                          child: Text('Out of stock',
+                                              style:
+                                                  txtSecondarySubTitle.copyWith(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: redMedium)))
+                                      : Row(
+                                          children: [
+                                            SvgPicture.asset(
+                                              icLogoPrimary,
+                                              width: 24,
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                                '${productItemsCheckout.totalPoints}',
+                                                style: txtPrimaryTitle.copyWith(
+                                                    fontWeight: FontWeight.w600,
+                                                    color: blackColor)),
+                                          ],
+                                        ),
                                   Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       InkWell(
                                         onTap: () {
-                                          context.goNamed('detail_product_reward', extra: productItemsCheckout.id!.toString(),  pathParameters: {'productRewardId': productItemsCheckout.productId!.toString()});
+                                          context.goNamed(
+                                              'detail_product_reward',
+                                              extra: productItemsCheckout.id!
+                                                  .toString(),
+                                              pathParameters: {
+                                                'productRewardId':
+                                                    productItemsCheckout
+                                                        .productId!
+                                                        .toString()
+                                              });
                                         },
-                                        child: Icon(
+                                        child: const Icon(
                                           Icons.mode_edit_outlined,
                                           size: 28,
                                           color: navyColor,
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 10,
                                       ),
                                       InkWell(
                                         onTap: () {
                                           _onAlertButtonsPressed(context,
                                               title: 'Hapus Item',
-                                              titleStyle: txtPrimaryTitle.copyWith(
-                                                  fontWeight: FontWeight.w600,
-                                                  color: blackColor),
-                                              desc: 'Apakah anda yakin ingin menghapus item ini?',
-                                              descStyle: txtPrimarySubTitle.copyWith(
-                                                  fontWeight: FontWeight.w400,
-                                                  color: blackColor),
+                                              titleStyle:
+                                                  txtPrimaryTitle.copyWith(
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: blackColor),
+                                              desc:
+                                                  'Apakah anda yakin ingin menghapus item ini?',
+                                              descStyle:
+                                                  txtPrimarySubTitle.copyWith(
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: blackColor),
                                               bgcolor: baseColor,
                                               onPressed: () {
-                                                context.read<CartRewardBloc>().add(
-                                                    CartRewardEvent.deleteItem(
-                                                        cartItem: productItemsCheckout.id));
-                                                Navigator.pop(context);
-                                              });
+                                            context.read<CartRewardBloc>().add(
+                                                CartRewardEvent.deleteItem(
+                                                    cartItem:
+                                                        productItemsCheckout
+                                                            .id));
+                                            Navigator.pop(context);
+                                          });
                                         },
-                                        child: Icon(
+                                        child: const Icon(
                                           Icons.delete_forever_outlined,
                                           size: 28,
                                           color: navyColor,
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 10,
                                       ),
                                       Row(
                                         children: [
                                           InkWell(
                                             onTap: () {
-                                              context.read<CartRewardBloc>().add(CartRewardEvent.patchQty(cartRewardItem: productItemsCheckout.id, action: 'decrement'));
-
+                                              productItemsCheckout.quantity! > 1 ?
+                                              context
+                                                  .read<CartRewardBloc>()
+                                                  .add(CartRewardEvent.patchQty(
+                                                      cartRewardItem:
+                                                          productItemsCheckout
+                                                              .id,
+                                                      action: 'decrement')) : null;
                                             },
                                             child: Icon(
                                               Icons.remove_circle_outline,
-                                              color: navyColor,
+                                              color: productItemsCheckout.quantity! > 1 ? navyColor : grey,
                                               size: 28,
                                             ),
                                           ),
                                           const SizedBox(
                                             width: 10,
                                           ),
-                                          Text(productItemsCheckout.quantity.toString(),
+                                          Text(
+                                              productItemsCheckout.quantity
+                                                  .toString(),
                                               style: txtSecondaryTitle.copyWith(
                                                   fontWeight: FontWeight.w600,
-                                                  color: blackColor)),
+                                                  color: productItemsCheckout.stock ==
+                                                      true ? blackColor : grey)),
                                           const SizedBox(
                                             width: 10,
                                           ),
                                           InkWell(
                                             onTap: () {
-                                              context.read<CartRewardBloc>().add(CartRewardEvent.patchQty(cartRewardItem: productItemsCheckout.id, action: 'increment'));
-
+                                              productItemsCheckout.stock ==
+                                                  true ?
+                                              context
+                                                  .read<CartRewardBloc>()
+                                                  .add(CartRewardEvent.patchQty(
+                                                      cartRewardItem:
+                                                          productItemsCheckout
+                                                              .id,
+                                                      action: 'increment')) : null;
                                             },
-                                            child: Icon(
+                                            child:  Icon(
                                               Icons.add_circle,
-                                              color: navyColor,
+                                              color: productItemsCheckout.stock ==
+                                                  true ? navyColor : grey,
                                               size: 28,
                                             ),
                                           ),
@@ -323,18 +383,18 @@ class BoxCheckoutDetail extends StatelessWidget {
       ),
     );
   }
+
   _onAlertButtonsPressed(context,
       {String? title,
-        TextStyle? titleStyle,
-        TextStyle? descStyle,
-        String? desc,
-        String? icon,
-        Color? bgcolor,
-        VoidCallback? onPressed}) {
+      TextStyle? titleStyle,
+      TextStyle? descStyle,
+      String? desc,
+      Color? bgcolor,
+      VoidCallback? onPressed}) {
     Alert(
       context: context,
       title: title,
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       style: AlertStyle(
         animationType: AnimationType.shrink,
         isCloseButton: false,
@@ -344,30 +404,28 @@ class BoxCheckoutDetail extends StatelessWidget {
         descStyle: descStyle!,
       ),
       desc: desc,
-
       buttons: [
         DialogButton(
+          onPressed: () => Navigator.pop(context),
+          color: redMedium,
           child: Text(
             "Cancel",
             style: txtPrimaryTitle.copyWith(
                 fontWeight: FontWeight.w600, color: baseColor),
           ),
-          onPressed: () => Navigator.pop(context),
-          color: redMedium,
         ),
         DialogButton(
+            color: navyColor,
+            onPressed: onPressed,
             child: Text(
               "Confirm",
               style: txtPrimaryTitle.copyWith(
                   fontWeight: FontWeight.w600, color: baseColor),
-            ),
-            color: navyColor,
-            onPressed: onPressed)
+            ))
       ],
     ).show();
   }
 }
-
 
 class DottedDivider extends StatelessWidget {
   final double width;
@@ -377,17 +435,17 @@ class DottedDivider extends StatelessWidget {
   final double dashSpace;
 
   const DottedDivider({
-    Key? key,
+    super.key,
     this.width = double.infinity,
     this.thickness = 1,
     this.color = Colors.black,
     this.dashWidth = 3,
     this.dashSpace = 2,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: width,
       child: CustomPaint(
         painter: _DottedLinePainter(

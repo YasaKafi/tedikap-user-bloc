@@ -4,7 +4,6 @@ import 'package:tedikap_user_bloc/data/models/request/login_request_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/login_response_model.dart';
 
 import '../../../../data/datasource/auth_datasource.dart';
-import '../../../../data/models/response/update_fcm_token_response_model.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';

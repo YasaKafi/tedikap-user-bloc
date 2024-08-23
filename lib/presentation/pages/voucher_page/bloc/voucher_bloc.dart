@@ -1,6 +1,5 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:tedikap_user_bloc/data/datasource/cart_datasource.dart';
 import 'package:tedikap_user_bloc/data/models/response/cart_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/voucher_active_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/voucher_applied_remove_response_model.dart';
@@ -21,7 +20,7 @@ class VoucherBloc extends Bloc<VoucherEvent, VoucherState> {
       try {
         final result = await voucherDatasource.getVoucher();
         await result.fold(
-                (l) async => emit(_Error(message: 'Failed to access data voucher')),
+                (l) async => emit(const _Error(message: 'Failed to access data voucher')),
                 (r) async {
               emit(_Success(
                   modelVoucher: r,
