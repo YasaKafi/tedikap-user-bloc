@@ -135,26 +135,42 @@ class BoxEstimationPickup extends StatelessWidget {
                                     const SizedBox(
                                       width: 10,
                                     ),
-                                    InkWell(
-                                        onTap: () {
-                                          _onAlertButtonsPressed(context,
-                                              title: 'Pick-Up Schedule Information',
-                                              desc: "The pick-up schedule in this application is divided into 2 sessions: \n \n• Session 1 : 09:40 - 10:00 \n• Session 2 : 12:00 - 12:30 \n \nIf you place an order before 09:20, your order will be included in Session 1. If the order is placed after 09:20, it will be included in Session 2.",
-                                              titleStyle:
-                                                  txtSecondaryHeader.copyWith(
-                                                fontWeight: FontWeight.w600,
-                                                color: blackColor,
-                                              ),
-                                              descStyle:
-                                                  txtPrimarySubTitle.copyWith(
-                                                      fontWeight:
+                                    BlocBuilder<CartBloc, CartState>(
+                                      builder: (context, state) {
+                                        return InkWell(
+                                            onTap: () {
+                                              state.maybeWhen(
+                                                  orElse: (){},
+                                                success: (cartModel, modelQty,
+                                                    deleteModel, modelPostOrder,
+                                                    modelPostPayment, orderId){
+                                                    if (cartModel?.cart != null) {
+                                                      final session1 = cartModel?.cart!.session1;
+                                                      final session2 = cartModel?.cart!.session2;
+                                                  _onAlertButtonsPressed(context,
+                                                      title: 'Pick-Up Schedule Information',
+                                                      desc: "The pick-up schedule in this application is divided into 2 sessions: \n \n• Session 1 : $session1 \n• Session 2 : $session2 \n \nIf you place an order before 09:20, your order will be included in Session 1. If the order is placed after 09:20, it will be included in Session 2.",
+                                                      titleStyle:
+                                                      txtSecondaryHeader.copyWith(
+                                                        fontWeight: FontWeight.w600,
+                                                        color: blackColor,
+                                                      ),
+                                                      descStyle:
+                                                      txtPrimarySubTitle.copyWith(
+                                                          fontWeight:
                                                           FontWeight.w500,
-                                                      color: blackColor));
-                                        },
-                                        child: const Icon(
-                                          Icons.info_outline_rounded,
-                                          size: 18,
-                                        )),
+                                                          color: blackColor));
+                                                }
+                                                  }
+                                              );
+
+                                            },
+                                            child: const Icon(
+                                              Icons.info_outline_rounded,
+                                              size: 18,
+                                            ));
+                                      },
+                                    ),
                                   ],
                                 ),
                                 const SizedBox(
@@ -163,7 +179,7 @@ class BoxEstimationPickup extends StatelessWidget {
                                 BlocBuilder<CartBloc, CartState>(
                                   builder: (context, state) {
                                     return state.maybeWhen(
-                                        orElse: (){
+                                        orElse: () {
                                           return Text(
                                             'Failed access data',
                                             style: txtPrimaryTitle.copyWith(
@@ -171,10 +187,12 @@ class BoxEstimationPickup extends StatelessWidget {
                                                 color: blackColor),
                                           );
                                         },
-                                      success: (cartModel, modelQty, deleteModel, modelPostOrder,
-                                          modelPostPayment, orderId){
-                                          final itemCart = cartModel?.cart?.schedulePickup;
-                                          if (itemCart != null){
+                                        success: (cartModel, modelQty,
+                                            deleteModel, modelPostOrder,
+                                            modelPostPayment, orderId) {
+                                          final itemCart = cartModel?.cart
+                                              ?.schedulePickup;
+                                          if (itemCart != null) {
                                             return Text(
                                               itemCart,
                                               style: txtPrimaryTitle.copyWith(
@@ -189,15 +207,15 @@ class BoxEstimationPickup extends StatelessWidget {
                                                   color: blackColor),
                                             );
                                           }
-                                      },
-                                      loading: () {
-                                        return Text(
-                                          'Loading...',
-                                          style: txtPrimaryTitle.copyWith(
-                                              fontWeight: FontWeight.w600,
-                                              color: blackColor),
-                                        );
-                                      }
+                                        },
+                                        loading: () {
+                                          return Text(
+                                            'Loading...',
+                                            style: txtPrimaryTitle.copyWith(
+                                                fontWeight: FontWeight.w600,
+                                                color: blackColor),
+                                          );
+                                        }
                                     );
                                   },
                                 ),
@@ -217,22 +235,22 @@ class BoxEstimationPickup extends StatelessWidget {
 
   _onAlertButtonsPressed(BuildContext context,
       {String? title,
-      TextStyle? titleStyle,
-      TextStyle? descStyle,
-      String? desc,
+        TextStyle? titleStyle,
+        TextStyle? descStyle,
+        String? desc,
       }) {
     Alert(
       context: context,
       title: title,
       padding: const EdgeInsets.all(20),
       style: AlertStyle(
-        animationType: AnimationType.grow,
-        isCloseButton: false,
-        backgroundColor: baseColor,
-        overlayColor: Colors.black38,
-        titleStyle: titleStyle!,
-        descStyle: descStyle!,
-        descTextAlign: TextAlign.start
+          animationType: AnimationType.grow,
+          isCloseButton: false,
+          backgroundColor: baseColor,
+          overlayColor: Colors.black38,
+          titleStyle: titleStyle!,
+          descStyle: descStyle!,
+          descTextAlign: TextAlign.start
       ),
       desc: desc,
       buttons: [

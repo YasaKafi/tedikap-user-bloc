@@ -13,7 +13,8 @@ import 'box_helper.dart';
 class BoxHelpSupport extends StatelessWidget {
   const BoxHelpSupport({
     super.key,
-    required this.screenwWidth, this.waLink,
+    required this.screenwWidth,
+    this.waLink,
   });
 
   final double screenwWidth;
@@ -120,155 +121,81 @@ class BoxHelpSupport extends StatelessWidget {
         ),
         BlocBuilder<ProfileBloc, ProfileState>(
           builder: (context, state) {
-            return state.maybeWhen(
-                orElse: (){
-                  return InkWell(
-                    onTap: () {
-                      launchURL(Uri.parse(waLink!));
-                    },
-                    child: Container(
-                      width: screenwWidth,
-                      margin: const EdgeInsets.only(
-                          left: Dimensions.marginSizeLarge,
-                          right: Dimensions.marginSizeLarge,
-                          top: 20),
-                      padding: const EdgeInsets.only(
-                          top: Dimensions.paddingSizeLarge,
-                          bottom: Dimensions.paddingSizeLarge,
-                          left: Dimensions.paddingSizeLarge,
-                          right: Dimensions.paddingSizeLarge),
-                      decoration: BoxDecoration(
-                        color: baseColor,
-                        borderRadius: const BorderRadius.all(Radius.circular(20)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
-                            spreadRadius: 1,
-                            blurRadius: 10,
-                            offset: const Offset(0, 6),
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'Butuh Bantuan?',
-                            style: txtSecondaryTitle.copyWith(
-                                fontWeight: FontWeight.w600, color: blackColor),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    icCustomerService,
-                                    width: 32,
-                                    height: 32,
-                                  ),
-                                  const SizedBox(
-                                    width: 12,
-                                  ),
-                                  Text('Tedikap Customer Service ( chat only )',
-                                      style: txtSecondarySubTitle.copyWith(
-                                          fontWeight: FontWeight.w400,
-                                          color: blackColor))
-                                ],
-                              ),
-                              SvgPicture.asset(
-                                icArrowRight, // Replace with your actual asset path
-                                width: 24,
-                                height: 24,
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
+            return Container(
+              width: screenwWidth,
+              margin: const EdgeInsets.only(
+                  left: Dimensions.marginSizeLarge,
+                  right: Dimensions.marginSizeLarge,
+                  top: 20),
+              padding: const EdgeInsets.only(
+                  top: Dimensions.paddingSizeLarge,
+                  bottom: Dimensions.paddingSizeLarge,
+                  left: Dimensions.paddingSizeLarge,
+                  right: Dimensions.paddingSizeLarge),
+              decoration: BoxDecoration(
+                color: baseColor,
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 1,
+                    blurRadius: 10,
+                    offset: const Offset(0, 6),
+                  ),
+                ],
+              ),
+              child: InkWell(
+                onTap: () {
+                  state.maybeWhen(
+                      orElse: () {},
+                      loaded: (user, logout) {
+                        if (user?.data != null) {
+                          final waLink = user?.data!.whatsappService;
+                          launchURL(Uri.parse(waLink!));
+                        }
+                      });
                 },
-              loaded: (user,logout) {
-                  if (user?.data != null){
-                    final itemWa = user!.data!.whatsappService;
-                    return InkWell(
-
-                      onTap: () {
-                        launchURL(Uri.parse(itemWa!));
-                      },
-                      child: Container(
-                        width: screenwWidth,
-                        margin: const EdgeInsets.only(
-                            left: Dimensions.marginSizeLarge,
-                            right: Dimensions.marginSizeLarge,
-                            top: 20),
-                        padding: const EdgeInsets.only(
-                            top: Dimensions.paddingSizeLarge,
-                            bottom: Dimensions.paddingSizeLarge,
-                            left: Dimensions.paddingSizeLarge,
-                            right: Dimensions.paddingSizeLarge),
-                        decoration: BoxDecoration(
-                          color: baseColor,
-                          borderRadius: const BorderRadius.all(Radius.circular(20)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.2),
-                              spreadRadius: 1,
-                              blurRadius: 10,
-                              offset: const Offset(0, 6),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'Butuh Bantuan?',
+                      style: txtSecondaryTitle.copyWith(
+                          fontWeight: FontWeight.w600, color: blackColor),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
                           children: [
-                            Text(
-                              'Butuh Bantuan?',
-                              style: txtSecondaryTitle.copyWith(
-                                  fontWeight: FontWeight.w600, color: blackColor),
+                            SvgPicture.asset(
+                              icCustomerService,
+                              width: 32,
+                              height: 32,
                             ),
                             const SizedBox(
-                              height: 20,
+                              width: 12,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    SvgPicture.asset(
-                                      icCustomerService,
-                                      width: 32,
-                                      height: 32,
-                                    ),
-                                    const SizedBox(
-                                      width: 12,
-                                    ),
-                                    Text('Tedikap Customer Service ( chat only )',
-                                        style: txtSecondarySubTitle.copyWith(
-                                            fontWeight: FontWeight.w400,
-                                            color: blackColor))
-                                  ],
-                                ),
-                                SvgPicture.asset(
-                                  icArrowRight, // Replace with your actual asset path
-                                  width: 24,
-                                  height: 24,
-                                )
-                              ],
-                            ),
+                            Text('Tedikap Customer Service (chat only)',
+                                style: txtSecondarySubTitle.copyWith(
+                                    fontWeight: FontWeight.w400,
+                                    color: blackColor))
                           ],
                         ),
-                      ),
-                    );
-                  } else {
-                    return const SizedBox();
-                  }
-              }
+                        SvgPicture.asset(
+                          icArrowRight, // Replace with your actual asset path
+                          width: 24,
+                          height: 24,
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             );
           },
         ),

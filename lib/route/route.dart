@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tedikap_user_bloc/presentation/dashboard/dashboard_page.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/login_page/login_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/onboard_page/onboard_page_view.dart';
+import 'package:tedikap_user_bloc/presentation/initial_pages/otp_verification_page/otp_verification_view_page.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/register_page/register_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/splash_page/splash_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_page/cart_page_view.dart';
@@ -30,7 +31,7 @@ import '../presentation/pages/information_page/privacy_policy_page/privacy_polic
 class AppRouter {
   static final GoRouter router = GoRouter(
     navigatorKey: navigatorKey,
-    initialLocation: '/dashboard/0',
+    initialLocation: '/otp_verification',
     debugLogDiagnostics: true,
     routes: [
       GoRoute(
@@ -47,6 +48,11 @@ class AppRouter {
         name: 'register',
         path: '/register',
         builder: (context, state) => const RegisterPage(),
+      ),
+      GoRoute(
+        name: 'otp_verification',
+        path: '/otp_verification',
+        builder: (context, state) => const OtpPageView(),
       ),
       GoRoute(
         name: 'login',

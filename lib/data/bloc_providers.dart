@@ -6,6 +6,7 @@ import 'package:tedikap_user_bloc/data/datasource/product_datasource.dart';
 import 'package:tedikap_user_bloc/data/datasource/user_datasource.dart';
 import 'package:tedikap_user_bloc/data/datasource/voucher_datasource.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/login_page/bloc/login_bloc.dart';
+import 'package:tedikap_user_bloc/presentation/initial_pages/otp_verification_page/bloc/otp_verification_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_page/bloc/cart_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_reward_page/bloc/cart_reward_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/bloc/detail_order_bloc.dart';
@@ -37,6 +38,9 @@ class AppProviders{
     ),
     BlocProvider<LoginBloc>(
       create: (context) => LoginBloc(AuthDatasource()),
+    ),
+    BlocProvider<OtpVerificationBloc>(
+      create: (context) => OtpVerificationBloc(),
     ),
     BlocProvider<HelpCenterBloc>(
       create: (context) => HelpCenterBloc(UserDatasource()),
