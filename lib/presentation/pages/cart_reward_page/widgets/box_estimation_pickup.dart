@@ -133,26 +133,40 @@ class BoxEstimationPickup extends StatelessWidget {
                                     const SizedBox(
                                       width: 10,
                                     ),
-                                    InkWell(
-                                        onTap: () {
-                                          _onAlertButtonsPressed(context,
-                                              title: 'Pick-Up Schedule Information',
-                                              desc: "The pick-up schedule in this application is divided into 2 sessions: \n \n• Session 1 : 09:40 - 10:00 \n• Session 2 : 12:00 - 12:30 \n \nIf you place an order before 09:20, your order will be included in Session 1. If the order is placed after 09:20, it will be included in Session 2.",
-                                              titleStyle:
-                                              txtSecondaryHeader.copyWith(
-                                                fontWeight: FontWeight.w600,
-                                                color: blackColor,
-                                              ),
-                                              descStyle:
-                                              txtPrimarySubTitle.copyWith(
-                                                  fontWeight:
-                                                  FontWeight.w500,
-                                                  color: blackColor));
-                                        },
-                                        child: const Icon(
-                                          Icons.info_outline_rounded,
-                                          size: 18,
-                                        )),
+                                    BlocBuilder<CartRewardBloc, CartRewardState>(
+                                      builder: (context, state) {
+                                        return InkWell(
+                                            onTap: () {
+                                              state.maybeWhen(
+                                                  orElse: (){},
+                                                  success: (cartModel, modelQty, deleteModel, modelPostOrder){
+                                                    if (cartModel?.cart != null) {
+                                                      final session1 = cartModel?.cart!.session1;
+                                                      final session2 = cartModel?.cart!.session2;
+                                                      _onAlertButtonsPressed(context,
+                                                          title: 'Pick-Up Schedule Information',
+                                                          desc: "The pick-up schedule in this application is divided into 2 sessions: \n \n• Session 1 : $session1 \n• Session 2 : $session2 \n \nIf you place an order before 09:20, your order will be included in Session 1. If the order is placed after 09:20, it will be included in Session 2.",
+                                                          titleStyle:
+                                                          txtSecondaryHeader.copyWith(
+                                                            fontWeight: FontWeight.w600,
+                                                            color: blackColor,
+                                                          ),
+                                                          descStyle:
+                                                          txtPrimarySubTitle.copyWith(
+                                                              fontWeight:
+                                                              FontWeight.w500,
+                                                              color: blackColor));
+                                                    }
+                                                  }
+                                              );
+
+                                            },
+                                            child: const Icon(
+                                              Icons.info_outline_rounded,
+                                              size: 18,
+                                            ));
+                                      },
+                                    ),
                                   ],
                                 ),
                                 const SizedBox(
