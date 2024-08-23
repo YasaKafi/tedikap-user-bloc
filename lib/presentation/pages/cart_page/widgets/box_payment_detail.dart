@@ -5,6 +5,7 @@ import 'package:tedikap_user_bloc/presentation/pages/cart_page/bloc/cart_bloc.da
 
 import '../../../../../common/dimensions.dart';
 import '../../../../../common/theme.dart';
+import '../../../global_components/currency_formatter.dart';
 
 class BoxPaymentDetail extends StatelessWidget {
   const BoxPaymentDetail({
@@ -41,6 +42,9 @@ class BoxPaymentDetail extends StatelessWidget {
                     modelPostPayment, orderId) {
                   if (cartModel != null) {
                     final itemCart = cartModel.cart;
+                    final formattedsubTotal = CurrencyFormatter.formatToCurrency(itemCart!.originalPrice!);
+                    final formattedDiscount = CurrencyFormatter.formatToCurrency(itemCart.discountAmount!);
+                    final formattedTotalPrice = CurrencyFormatter.formatToCurrency(itemCart.totalPrice!);
                     return Column(
                       children: [
                         Row(
@@ -50,7 +54,7 @@ class BoxPaymentDetail extends StatelessWidget {
                                 style: txtPrimarySubTitle.copyWith(
                                     fontWeight: FontWeight.w500,
                                     color: blackColor)),
-                            Text('Rp ${itemCart!.originalPrice.toString()}',
+                            Text(formattedsubTotal,
                                 style: txtPrimarySubTitle.copyWith(
                                     fontWeight: FontWeight.w500,
                                     color: blackColor)),
@@ -72,7 +76,7 @@ class BoxPaymentDetail extends StatelessWidget {
                                   style: txtPrimarySubTitle.copyWith(
                                       fontWeight: FontWeight.w500,
                                       color: redMedium)),
-                              Text('- ${itemCart.discountAmount ?? 0}',
+                              Text('- $formattedDiscount',
                                   style: txtPrimarySubTitle.copyWith(
                                       fontWeight: FontWeight.w500,
                                       color: redMedium)),
@@ -96,7 +100,7 @@ class BoxPaymentDetail extends StatelessWidget {
                                 style: txtPrimarySubTitle.copyWith(
                                     fontWeight: FontWeight.w600,
                                     color: blackColor)),
-                            Text('Rp ${itemCart.totalPrice}',
+                            Text(formattedTotalPrice,
                                 style: txtPrimarySubTitle.copyWith(
                                     fontWeight: FontWeight.w600,
                                     color: blackColor)),

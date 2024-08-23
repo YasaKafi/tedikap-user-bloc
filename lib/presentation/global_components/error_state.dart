@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tedikap_user_bloc/common/theme.dart';
 
-import 'constant.dart';
+import '../../common/constant.dart';
 
 class ErrorWidgetStatic {
   static Widget buildErrorState(BuildContext context, String message, {double? width}) {

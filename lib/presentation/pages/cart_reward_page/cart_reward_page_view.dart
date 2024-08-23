@@ -28,7 +28,7 @@ class _CartRewardPageState extends State<CartRewardPage> {
 
   void _fetchInitialData() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<CartRewardBloc>().add(CartRewardEvent.getCart());
+      context.read<CartRewardBloc>().add(const CartRewardEvent.getCart());
     });
   }
 

@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:tedikap_user_bloc/presentation/global_components/error_state.dart';
 import 'package:tedikap_user_bloc/presentation/pages/notification_page/bloc/notification_bloc.dart';
+import 'package:tedikap_user_bloc/presentation/pages/notification_page/widgets/notification_shimer.dart';
 
 import '../../../common/constant.dart';
 import '../../../common/dimensions.dart';
@@ -13,7 +15,7 @@ import '../../global_components/common_button.dart';
 import 'widgets/notification_box.dart';
 
 class NotificationPage extends StatefulWidget {
-  const NotificationPage({Key? key, this.message}) : super(key: key);
+  const NotificationPage({super.key, this.message});
 
   final RemoteMessage? message;
 
@@ -53,7 +55,7 @@ class _NotificationPageState extends State<NotificationPage> {
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
+            colorScheme: const ColorScheme.light(
               primary: primaryColor, // header background color
               onPrimary: baseColor, // header text color
               onSurface: blackColor, // body text color
@@ -122,7 +124,7 @@ class _NotificationPageState extends State<NotificationPage> {
                   onTap: () {
                     _showFilterNotification(context);
                   },
-                  child: Icon(
+                  child: const Icon(
                     Icons.filter_list,
                     size: 26,
                     color: primaryColor,
@@ -135,14 +137,10 @@ class _NotificationPageState extends State<NotificationPage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: Dimensions.paddingSizeLarge),
-              // Align(
-              //   alignment: Alignment.centerLeft,
-              //   child: NotificationFilter(),
-              // ),
-              SizedBox(height: Dimensions.paddingSizeLarge),
+              const SizedBox(height: Dimensions.paddingSizeLarge),
+              const SizedBox(height: Dimensions.paddingSizeLarge),
               Padding(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                     horizontal: Dimensions.paddingSizeLarge),
                 child: Column(
                   children: [
@@ -150,25 +148,61 @@ class _NotificationPageState extends State<NotificationPage> {
                       builder: (context, state) {
                         return state.when(
                           initial: () {
-                            return Center(
-                              child: CircularProgressIndicator(),
-                            );
+                            return const NotificationShimmer();
                           },
                           loading: () {
-                            return Center(
-                              child: CircularProgressIndicator(),
-                            );
+                            return const NotificationShimmer();
                           },
                           success:
                               (model, isInfo, isVoucher, startDate, endDate) {
                             if (model?.data != null) {
-                              // Generate a list of notifications
                               print('LENGHT DATA NOTIFIKASI : ${model!.data!
                                   .length}');
+                              if (model.data!.isEmpty) {
+                                return SizedBox(
+                                  width: screenWidth,
+                                  height: screenHeight * 0.7,
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        SvgPicture.asset(icNotificationEmpty,
+                                            width: screenWidth * 0.5),
+                                        const SizedBox(height: 10),
+                                        SizedBox(
+                                          width: screenWidth * 0.8,
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                'No notification yet',
+                                                style: txtPrimaryTitle.copyWith(
+                                                  fontWeight: FontWeight.w500,
+                                                  color: blackColor,
+                                                ),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                              const SizedBox(height: 5),
+                                              Text(
+                                                'You have not have notifications right now \n Come back later',
+                                                style: txtSecondarySubTitle.copyWith(
+                                                  fontWeight: FontWeight.w400,
+                                                  color: blackColor,
+                                                ),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              }
                               return ListView.builder(
-                                itemCount: model!.data!.length,
+                                itemCount: model.data!.length,
                                 shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
+                                physics: const NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {
                                   final notificationData = model.data![index];
                                   return BoxNotification(
@@ -186,9 +220,7 @@ class _NotificationPageState extends State<NotificationPage> {
                             }
                           },
                           error: (message) {
-                            return Center(
-                              child: Text(message!),
-                            );
+                            return ErrorWidgetStatic.buildErrorState(context, message!);
                           },
                         );
                       },
@@ -206,17 +238,17 @@ class _NotificationPageState extends State<NotificationPage> {
   void _showFilterNotification(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
       ),
       builder: (BuildContext context) {
         return Container(
           width: double.infinity,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: baseColor,
             borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
           ),
-          padding: EdgeInsets.only(top: 10.0),
+          padding: const EdgeInsets.only(top: 10.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -230,13 +262,13 @@ class _NotificationPageState extends State<NotificationPage> {
                     )),
               ),
               Padding(
-                padding: EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(20.0),
                 child: BlocBuilder<NotificationBloc, NotificationState>(
                   builder: (context, state) {
                     return state.maybeWhen(
                         orElse: () {
                       String startDateText = DateFormat('yyyy-MM-dd')
-                          .format(DateTime.now().subtract(Duration(days: 365)));
+                          .format(DateTime.now().subtract(const Duration(days: 365)));
                       String endDateText =
                       DateFormat('yyyy-MM-dd').format(DateTime.now());
                       return Column(
@@ -250,7 +282,7 @@ class _NotificationPageState extends State<NotificationPage> {
                             ),
                             textAlign: TextAlign.start,
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -294,7 +326,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                   }),
                             ],
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Text(
                             'Periode Notifikasi',
                             style: txtPrimaryTitle.copyWith(
@@ -303,7 +335,7 @@ class _NotificationPageState extends State<NotificationPage> {
                             ),
                             textAlign: TextAlign.start,
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -311,13 +343,13 @@ class _NotificationPageState extends State<NotificationPage> {
                                 onTap: () =>
                                     _selectDate(context, isStartDate: true),
                                 child: Container(
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                       horizontal: 10, vertical: 5),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       border:
                                       Border.all(color: grey, width: 1)),
-                                  margin: EdgeInsets.only(top: 10),
+                                  margin: const EdgeInsets.only(top: 10),
                                   child: Row(
                                     children: [
                                       Column(
@@ -332,7 +364,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                                 fontWeight:
                                                 FontWeight.w500),
                                           ),
-                                          SizedBox(height: 5),
+                                          const SizedBox(height: 5),
                                           Text(
                                             startDateText,
                                             style: txtPrimarySubTitle.copyWith(
@@ -341,9 +373,9 @@ class _NotificationPageState extends State<NotificationPage> {
                                           ),
                                         ],
                                       ),
-                                      Padding(
+                                      const Padding(
                                         padding:
-                                        const EdgeInsets.only(left: 15),
+                                        EdgeInsets.only(left: 15),
                                         child: Icon(
                                           Icons.calendar_month_outlined,
                                           size: 20,
@@ -367,7 +399,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                 onTap: () =>
                                     _selectDate(context, isStartDate: false),
                                 child: Container(
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                       horizontal: 10, vertical: 5),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
@@ -387,7 +419,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                                 fontWeight:
                                                 FontWeight.w500),
                                           ),
-                                          SizedBox(height: 5),
+                                          const SizedBox(height: 5),
                                           Text(
                                             endDateText,
                                             style: txtPrimarySubTitle.copyWith(
@@ -396,9 +428,9 @@ class _NotificationPageState extends State<NotificationPage> {
                                           ),
                                         ],
                                       ),
-                                      Padding(
+                                      const Padding(
                                         padding:
-                                        const EdgeInsets.only(left: 15),
+                                        EdgeInsets.only(left: 15),
                                         child: Icon(
                                           Icons.calendar_month_outlined,
                                           size: 20,
@@ -410,14 +442,14 @@ class _NotificationPageState extends State<NotificationPage> {
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 45,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               CommonButton(
-                                padding: EdgeInsets.symmetric(vertical: 15),
+                                padding: const EdgeInsets.symmetric(vertical: 15),
                                 width: MediaQuery.of(context).size.width * 0.4,
                                 borderColor: blackColor,
                                 borderWidth: 1,
@@ -432,7 +464,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                 fontWeight: FontWeight.w400,
                               ),
                               CommonButton(
-                                padding: EdgeInsets.symmetric(vertical: 15),
+                                padding: const EdgeInsets.symmetric(vertical: 15),
                                 width: MediaQuery.of(context).size.width * 0.4,
                                 text: 'Terapkan',
                                 onPressed: () {
@@ -451,7 +483,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     }, success: (model, isInfo, isVoucher, startDate, endDate) {
                       print('INI BOOL IS INFO  $isInfo');
                       String startDateText = DateFormat('yyyy-MM-dd')
-                          .format(DateTime.now().subtract(Duration(days: 365)));
+                          .format(DateTime.now().subtract(const Duration(days: 365)));
                       String endDateText =
                           DateFormat('yyyy-MM-dd').format(DateTime.now());
 
@@ -473,7 +505,7 @@ class _NotificationPageState extends State<NotificationPage> {
                             ),
                             textAlign: TextAlign.start,
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -514,7 +546,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                   }),
                             ],
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Text(
                             'Periode Notifikasi',
                             style: txtPrimaryTitle.copyWith(
@@ -523,7 +555,7 @@ class _NotificationPageState extends State<NotificationPage> {
                             ),
                             textAlign: TextAlign.start,
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -531,13 +563,13 @@ class _NotificationPageState extends State<NotificationPage> {
                                 onTap: () =>
                                     _selectDate(context, isStartDate: true),
                                 child: Container(
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                       horizontal: 10, vertical: 5),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       border:
                                           Border.all(color: grey, width: 1)),
-                                  margin: EdgeInsets.only(top: 10),
+                                  margin: const EdgeInsets.only(top: 10),
                                   child: Row(
                                     children: [
                                       Column(
@@ -552,7 +584,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                                     fontWeight:
                                                         FontWeight.w500),
                                           ),
-                                          SizedBox(height: 5),
+                                          const SizedBox(height: 5),
                                           Text(
                                             startDateText,
                                             style: txtPrimarySubTitle.copyWith(
@@ -561,9 +593,9 @@ class _NotificationPageState extends State<NotificationPage> {
                                           ),
                                         ],
                                       ),
-                                      Padding(
+                                      const Padding(
                                         padding:
-                                            const EdgeInsets.only(left: 15),
+                                            EdgeInsets.only(left: 15),
                                         child: Icon(
                                           Icons.calendar_month_outlined,
                                           size: 20,
@@ -587,7 +619,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                 onTap: () =>
                                     _selectDate(context, isStartDate: false),
                                 child: Container(
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                       horizontal: 10, vertical: 5),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
@@ -607,7 +639,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                                     fontWeight:
                                                         FontWeight.w500),
                                           ),
-                                          SizedBox(height: 5),
+                                          const SizedBox(height: 5),
                                           Text(
                                             endDateText,
                                             style: txtPrimarySubTitle.copyWith(
@@ -616,9 +648,9 @@ class _NotificationPageState extends State<NotificationPage> {
                                           ),
                                         ],
                                       ),
-                                      Padding(
+                                      const Padding(
                                         padding:
-                                            const EdgeInsets.only(left: 15),
+                                            EdgeInsets.only(left: 15),
                                         child: Icon(
                                           Icons.calendar_month_outlined,
                                           size: 20,
@@ -630,21 +662,21 @@ class _NotificationPageState extends State<NotificationPage> {
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 45,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               CommonButton(
-                                padding: EdgeInsets.symmetric(vertical: 15),
+                                padding: const EdgeInsets.symmetric(vertical: 15),
                                 width: MediaQuery.of(context).size.width * 0.4,
                                 borderColor: blackColor,
                                 borderWidth: 1,
                                 text: 'Reset',
                                 onPressed: () {
-                                  context.read<NotificationBloc>().add(NotificationEvent.resetFilters());
-                                  Future.delayed(Duration(seconds: 2), (){
+                                  context.read<NotificationBloc>().add(const NotificationEvent.resetFilters());
+                                  Future.delayed(const Duration(seconds: 2), (){
                                     context.pop();
                                   });
                                 },
@@ -655,7 +687,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                 fontWeight: FontWeight.w400,
                               ),
                               CommonButton(
-                                padding: EdgeInsets.symmetric(vertical: 15),
+                                padding: const EdgeInsets.symmetric(vertical: 15),
                                 width: MediaQuery.of(context).size.width * 0.4,
                                 text: 'Terapkan',
                                 onPressed: () {

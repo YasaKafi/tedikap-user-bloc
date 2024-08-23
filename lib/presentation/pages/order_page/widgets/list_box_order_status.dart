@@ -26,7 +26,9 @@ class ListBoxMenuStatus extends StatelessWidget {
     required this.createdAt,
     this.orderId,
     this.orderRewardId,
-    required this.waLink, required this.rating,
+    required this.waLink,
+    required this.rating,
+    this.pickUpTime,
   });
 
   final String status;
@@ -38,6 +40,7 @@ class ListBoxMenuStatus extends StatelessWidget {
   final String? orderId;
   final String? orderRewardId;
   final String waLink;
+  final String? pickUpTime;
   final double? rating;
 
   String getTimeDifference() {
@@ -293,11 +296,27 @@ class ListBoxMenuStatus extends StatelessWidget {
                               startDateReward,
                               endDateReward,
                               ) {
-                            bool isModelCartNotEmpty =
-                                model?.orders?.first.cartLength ?? false;
 
-                            bool isModelCartRewardNotEmpty =
-                                modelReward?.orders?.first.cartLength ?? false;
+                            bool? isModelCartNotEmpty;
+                            bool? isModelCartRewardNotEmpty;
+
+
+
+                            if (model != null) {
+                              if (model.orders!.isNotEmpty) {
+                                isModelCartNotEmpty =
+                                    model.orders?.first.cartLength;
+                              }
+                            }
+
+
+                            if (modelReward != null) {
+                              if (modelReward.orders!.isNotEmpty) {
+                                isModelCartRewardNotEmpty =
+                                    modelReward.orders?.first.cartLength;
+                              }
+                            }
+
                             return Row(
                               children: [
                                 CommonButton(
@@ -317,9 +336,9 @@ class ListBoxMenuStatus extends StatelessWidget {
                                               status == 'pesanan siap diambil';
 
                                       if (isOrderStatusForReorder) {
-                                        if (isModelCartNotEmpty) {
+                                        if (isModelCartNotEmpty!) {
                                           _showReorderOptions(context, backgroundColor);
-                                        } else if (isModelCartRewardNotEmpty) {
+                                        } else if (isModelCartRewardNotEmpty!) {
                                           _showReorderOptions(context, backgroundColor);
                                         } else {
                                           if (orderId != null) {
@@ -362,8 +381,10 @@ class ListBoxMenuStatus extends StatelessWidget {
                                     borderRadius: 10,
                                     fontSize: 10,
                                     onPressed: () {
-                                      if (orderId != null || orderRewardId != null) {
-                                        context.pushReplacementNamed('review', extra: {'orderId': orderId, 'orderRewardId': orderRewardId});
+                                      print('VALUE DARI PICK UP TIME $pickUpTime');
+                                      if (orderId != null || orderRewardId != null || pickUpTime != null) {
+                                        context.pushNamed('review', extra: {'orderId': orderId, 'orderRewardId': orderRewardId, 'pickUpTime': pickUpTime});
+
                                       } else {
                                         print('Order ID or Order Reward ID is null');
                                       }

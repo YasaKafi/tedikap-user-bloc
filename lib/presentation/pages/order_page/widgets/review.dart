@@ -10,16 +10,18 @@ import '../../../global_components/common_button.dart';
 import '../bloc/order_bloc.dart';
 
 class RateAndReviewSheet extends StatelessWidget {
+  final String? pickUpTime;
   final String? orderId;
   final String? orderRewardId;
   final TextEditingController _noteController = TextEditingController();
   final ValueNotifier<double> _staffServiceRating = ValueNotifier(0);
   final ValueNotifier<double> _productQualityRating = ValueNotifier(0);
 
-  RateAndReviewSheet({super.key, required this.orderId, this.orderRewardId, });
+  RateAndReviewSheet({super.key, this.orderId, this.pickUpTime, this.orderRewardId, });
 
   @override
   Widget build(BuildContext context) {
+    print('VALUE PICK UP DI ROUTE EXTRA DATA $pickUpTime');
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -70,18 +72,13 @@ class RateAndReviewSheet extends StatelessWidget {
                               ),
                               const SizedBox(height: 10),
                               _buildOrderDetailRow(
-                                title: 'Tanggal Pesanan',
-                                value: '17 August 2024 | 15:06',
-                              ),
-                              const SizedBox(height: 10),
-                              _buildOrderDetailRow(
                                 title: 'Outlet Name',
                                 value: 'Tedikap RUS (Raden Umar Said)',
                               ),
                               const SizedBox(height: 10),
                               _buildOrderDetailRow(
-                                title: 'Waktu Pick Up',
-                                value: '${orderRewardId}',
+                                title: 'Order Id',
+                                value: orderId ?? orderRewardId ?? '0',
                               ),
                             ],
                           ),

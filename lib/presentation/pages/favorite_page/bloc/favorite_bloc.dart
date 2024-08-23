@@ -1,7 +1,6 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tedikap_user_bloc/data/datasource/product_datasource.dart';
-import 'package:tedikap_user_bloc/data/models/response/products_response_model.dart';
 
 import '../../../../data/datasource/favorite_datasource.dart';
 import '../../../../data/models/response/check_if_favorite_response_model.dart';

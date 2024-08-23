@@ -22,10 +22,10 @@ class _DashboardPageState extends State<DashboardPage> {
   int? _selectedIndex;
 
   final List<Widget> _pages = [
-    HomePage(),
-    MenuPage(),
-    OrderPage(),
-    ProfilePage(),
+    const HomePage(),
+    const MenuPage(),
+    const OrderPage(),
+    const ProfilePage(),
   ];
 
   @override

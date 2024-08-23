@@ -9,6 +9,7 @@ import 'package:tedikap_user_bloc/presentation/pages/cart_page/bloc/cart_bloc.da
 import '../../../../../common/dimensions.dart';
 import '../../../../../common/theme.dart';
 import '../../../../common/constant.dart';
+import '../../../global_components/currency_formatter.dart';
 import 'box_product_checkout.dart';
 
 class BoxCheckoutDetail extends StatelessWidget {
@@ -81,6 +82,10 @@ class BoxCheckoutDetail extends StatelessWidget {
                         children:
                             List.generate(itemCart.cartItems!.length, (index) {
                           var productItemsCheckout = itemCart.cartItems![index];
+                          final formattedTotalPriceItem =
+                              CurrencyFormatter.formatToCurrency(
+                                  productItemsCheckout.totalPrice!);
+
                           return Column(
                             children: [
                               BoxProductCheckout(
@@ -90,24 +95,47 @@ class BoxCheckoutDetail extends StatelessWidget {
                               BlocBuilder<CartBloc, CartState>(
                                 builder: (context, state) {
                                   return Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        'Rp ${productItemsCheckout.totalPrice}',
-                                        style: txtPrimaryTitle.copyWith(
-                                            fontWeight: FontWeight.w600,
-                                            color: blackColor),
-                                      ),
+                                      productItemsCheckout.stock == false
+                                          ? Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 10,
+                                                      vertical: 5),
+                                              decoration: BoxDecoration(
+                                                  color: redLight,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10)),
+                                              child: Text('Out of stock',
+                                                  style: txtSecondarySubTitle
+                                                      .copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: redMedium)))
+                                          : Text(
+                                              formattedTotalPriceItem,
+                                              style: txtPrimaryTitle.copyWith(
+                                                  fontWeight: FontWeight.w600,
+                                                  color: blackColor),
+                                            ),
                                       Row(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           InkWell(
                                             onTap: () {
                                               context.goNamed(
                                                 'detail_product_common',
-                                                extra: productItemsCheckout.id!.toString(),
+                                                extra: productItemsCheckout.id!
+                                                    .toString(),
                                                 pathParameters: {
-                                                  'productId': productItemsCheckout.productId!.toString()
+                                                  'productId':
+                                                      productItemsCheckout
+                                                          .productId!
+                                                          .toString()
                                                 },
                                               );
                                             },
@@ -124,21 +152,27 @@ class BoxCheckoutDetail extends StatelessWidget {
                                             onTap: () {
                                               _onAlertButtonsPressed(context,
                                                   title: 'Hapus Item',
-                                                  titleStyle: txtPrimaryTitle.copyWith(
-                                                      fontWeight: FontWeight.w600,
-                                                      color: blackColor),
-                                                  desc: 'Apakah anda yakin ingin menghapus item ini?',
-                                                  descStyle: txtPrimarySubTitle.copyWith(
-                                                      fontWeight: FontWeight.w400,
-                                                      color: blackColor),
+                                                  titleStyle:
+                                                      txtPrimaryTitle.copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color: blackColor),
+                                                  desc:
+                                                      'Apakah anda yakin ingin menghapus item ini?',
+                                                  descStyle: txtPrimarySubTitle
+                                                      .copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: blackColor),
                                                   bgcolor: baseColor,
                                                   onPressed: () {
-                                                    context.read<CartBloc>().add(
-                                                        CartEvent.deleteItem(
-                                                            cartItem: productItemsCheckout.id));
-                                                    Navigator.pop(context);
-                                                  });
-
+                                                context.read<CartBloc>().add(
+                                                    CartEvent.deleteItem(
+                                                        cartItem:
+                                                            productItemsCheckout
+                                                                .id));
+                                                Navigator.pop(context);
+                                              });
                                             },
                                             child: const Icon(
                                               Icons.delete_forever_outlined,
@@ -153,14 +187,17 @@ class BoxCheckoutDetail extends StatelessWidget {
                                             children: [
                                               InkWell(
                                                 onTap: () {
+                                                  productItemsCheckout.quantity! > 1 ?
                                                   context.read<CartBloc>().add(
                                                       CartEvent.patchQty(
-                                                          cartItem: productItemsCheckout.id,
-                                                          action: 'decrement'));
+                                                          cartItem:
+                                                              productItemsCheckout
+                                                                  .id,
+                                                          action: 'decrement')) : null;
                                                 },
-                                                child: const Icon(
+                                                child:  Icon(
                                                   Icons.remove_circle_outline,
-                                                  color: navyColor,
+                                                  color: productItemsCheckout.quantity! > 1 ? navyColor : grey,
                                                   size: 28,
                                                 ),
                                               ),
@@ -168,29 +205,47 @@ class BoxCheckoutDetail extends StatelessWidget {
                                                 width: 10,
                                               ),
                                               Text(
-                                                productItemsCheckout.quantity.toString(),
-                                                style: txtSecondaryTitle.copyWith(
-                                                    fontWeight: FontWeight.w600,
-                                                    color: blackColor),
+                                                productItemsCheckout.quantity
+                                                    .toString(),
+                                                style:
+                                                    txtSecondaryTitle.copyWith(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        color: productItemsCheckout.stock ==
+                                                            true ? blackColor : grey),
                                               ),
                                               const SizedBox(
                                                 width: 10,
                                               ),
                                               InkWell(
                                                 onTap: () {
-                                                  context.read<CartBloc>().add(
-                                                      CartEvent.patchQty(
-                                                          cartItem: productItemsCheckout.id,
-                                                          action: 'increment'));
-                                                  Future.delayed(
-                                                      const Duration(milliseconds: 500),
-                                                          () => context
+                                                  productItemsCheckout.stock ==
+                                                          true
+                                                      ? context
                                                           .read<CartBloc>()
-                                                          .add(const CartEvent.getCart()));
+                                                          .add(CartEvent.patchQty(
+                                                              cartItem:
+                                                                  productItemsCheckout
+                                                                      .id,
+                                                              action:
+                                                                  'increment'))
+                                                      : null;
+                                                  productItemsCheckout.stock ==
+                                                          true
+                                                      ? Future.delayed(
+                                                          const Duration(
+                                                              milliseconds:
+                                                                  500),
+                                                          () => context
+                                                              .read<CartBloc>()
+                                                              .add(const CartEvent
+                                                                  .getCart()))
+                                                      : null;
                                                 },
-                                                child: const Icon(
+                                                child: Icon(
                                                   Icons.add_circle,
-                                                  color: navyColor,
+                                                  color: productItemsCheckout.stock ==
+                                                      true ? navyColor : grey,
                                                   size: 28,
                                                 ),
                                               ),
@@ -202,7 +257,6 @@ class BoxCheckoutDetail extends StatelessWidget {
                                   );
                                 },
                               ),
-
                               const SizedBox(
                                 height: 20,
                               ),
@@ -357,16 +411,15 @@ class BoxCheckoutDetail extends StatelessWidget {
 
   _onAlertButtonsPressed(context,
       {String? title,
-        TextStyle? titleStyle,
-        TextStyle? descStyle,
-        String? desc,
-        String? icon,
-        Color? bgcolor,
-        VoidCallback? onPressed}) {
+      TextStyle? titleStyle,
+      TextStyle? descStyle,
+      String? desc,
+      Color? bgcolor,
+      VoidCallback? onPressed}) {
     Alert(
       context: context,
       title: title,
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       style: AlertStyle(
         animationType: AnimationType.shrink,
         isCloseButton: false,
@@ -376,25 +429,24 @@ class BoxCheckoutDetail extends StatelessWidget {
         descStyle: descStyle!,
       ),
       desc: desc,
-
       buttons: [
         DialogButton(
+          onPressed: () => Navigator.pop(context),
+          color: redMedium,
           child: Text(
             "Cancel",
             style: txtPrimaryTitle.copyWith(
                 fontWeight: FontWeight.w600, color: baseColor),
           ),
-          onPressed: () => Navigator.pop(context),
-          color: redMedium,
         ),
         DialogButton(
+            color: navyColor,
+            onPressed: onPressed,
             child: Text(
               "Confirm",
               style: txtPrimaryTitle.copyWith(
                   fontWeight: FontWeight.w600, color: baseColor),
-            ),
-            color: navyColor,
-            onPressed: onPressed)
+            ))
       ],
     ).show();
   }
@@ -408,17 +460,17 @@ class DottedDivider extends StatelessWidget {
   final double dashSpace;
 
   const DottedDivider({
-    Key? key,
+    super.key,
     this.width = double.infinity,
     this.thickness = 1,
     this.color = Colors.black,
     this.dashWidth = 3,
     this.dashSpace = 2,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: width,
       child: CustomPaint(
         painter: _DottedLinePainter(
@@ -464,5 +516,4 @@ class _DottedLinePainter extends CustomPainter {
   bool shouldRepaint(CustomPainter oldDelegate) {
     return false;
   }
-
 }

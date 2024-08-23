@@ -53,10 +53,10 @@ class SectionBaseProfile extends StatelessWidget {
                     builder: (context, state) {
                       return state.when(
                         initial: () {
-                          return ShimmerProfile();
+                          return const ShimmerProfile();
                         },
                         loading: () {
-                          return ShimmerProfile();
+                          return const ShimmerProfile();
                         },
                         error: (message) {
                           return Column(
@@ -65,7 +65,7 @@ class SectionBaseProfile extends StatelessWidget {
                             children: [
                               InkWell(
                                 onTap: () {},
-                                child: CircleAvatar(
+                                child: const CircleAvatar(
                                   radius: 28,
                                   backgroundColor: grey,
                                 ),
@@ -118,7 +118,7 @@ class SectionBaseProfile extends StatelessWidget {
                               children: [
                                 InkWell(
                                   onTap: () {},
-                                  child: CircleAvatar(
+                                  child: const CircleAvatar(
                                     radius: 28,
                                     backgroundColor: grey,
                                   ),

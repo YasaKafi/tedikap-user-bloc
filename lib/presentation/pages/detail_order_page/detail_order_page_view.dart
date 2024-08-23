@@ -8,7 +8,6 @@ import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/widgets/b
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/widgets/box_status_order.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/widgets/box_timeline_pickup.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/widgets/section_button.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 
 import '../../../../../common/theme.dart';

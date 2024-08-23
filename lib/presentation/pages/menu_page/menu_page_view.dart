@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:tedikap_user_bloc/common/error_state.dart';
+import 'package:tedikap_user_bloc/presentation/global_components/error_state.dart';
 import 'package:tedikap_user_bloc/presentation/pages/menu_page/bloc/menu_bloc.dart';
 
 import '../../../common/constant.dart';

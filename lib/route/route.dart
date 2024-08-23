@@ -89,31 +89,32 @@ class AppRouter {
       GoRoute(
         name: 'edit_profile',
         path: '/edit_profile',
-        builder: (context, state) => EditProfilePage(),
+        builder: (context, state) => const EditProfilePage(),
       ),
       GoRoute(
         name: 'detail_point',
         path: '/detail_point',
-        builder: (context, state) => DetailPointPage(),
+        builder: (context, state) => const DetailPointPage(),
       ),
       GoRoute(
         name: 'point',
         path: '/point',
-        builder: (context, state) => PointPage(),
+        builder: (context, state) => const PointPage(),
       ),
       GoRoute(
         name: 'favorite',
         path: '/favorite',
-        builder: (context, state) => FavoritePage(),
+        builder: (context, state) => const FavoritePage(),
       ),
       GoRoute(
         name: 'review',
         path: '/review',
         builder: (context, state) {
-          final extraData = state.extra as Map<String, dynamic>?;
-          final orderId = extraData?['orderId'] as String? ?? '0';
-          final orderRewardId = extraData?['orderRewardId'] as String? ?? '0';
-          return RateAndReviewSheet(orderId: orderId, orderRewardId: orderRewardId, );
+          final extraData = state.extra as Map<String, String?>?;
+          final orderId = extraData?['orderId'] ?? '0';
+          final orderRewardId = extraData?['orderRewardId'] ?? '0';
+          final pickUpTime = extraData?['pickUpTime']?? '0';
+          return RateAndReviewSheet(orderId: orderId, orderRewardId: orderRewardId, pickUpTime: 'haloo',);
         }
       ),
       GoRoute(
@@ -121,7 +122,7 @@ class AppRouter {
         path: '/notification',
         builder: (context, state) {
           final extraData = state.extra as Map<String, dynamic>?;
-          final messageNotification = extraData?['message'] as RemoteMessage? ?? null;
+          final messageNotification = extraData?['message'] as RemoteMessage?;
 
           return NotificationPage(message: messageNotification,);
         },
