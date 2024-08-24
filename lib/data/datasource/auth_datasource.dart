@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tedikap_user_bloc/data/models/request/login_request_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/login_response_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/otp_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/update_fcm_token_response_model.dart';
 import 'package:tedikap_user_bloc/data/repository/tedikap_repository.dart';
 
@@ -53,6 +54,25 @@ class AuthDatasource {
       }
     } catch (e) {
       return Left('Failed to login: ${e.toString()}');
+    }
+  }
+
+  Future<Either<String, OtpResponseModel>> postOtp(
+      String email) async {
+    try {
+      final response = await _dioInstance.postRequest(
+        endpoint: TedikapApiRepository.postOtpVerification,
+        data: {
+          'email': email,
+        },
+      );
+      if (response.statusCode == 200) {
+        return Right(OtpResponseModel.fromMap(response.data));
+      } else {
+        return const Left('Failed get OTP');
+      }
+    } catch (e) {
+      return Left('get OTP: ${e.toString()}');
     }
   }
 

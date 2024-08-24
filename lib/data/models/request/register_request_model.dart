@@ -4,12 +4,14 @@ class RegisterRequestModel {
   String? name;
   String? email;
   String? password;
+  String? otp;
   String? fcmToken;
 
   RegisterRequestModel({
     this.name,
     this.email,
     this.password,
+    this.otp,
     this.fcmToken,
   });
 
@@ -21,6 +23,7 @@ class RegisterRequestModel {
     name: json["name"],
     email: json["email"],
     password: json["password"],
+    otp: json["otp"],
     fcmToken: json["fcm_token"],
   );
 
@@ -28,6 +31,7 @@ class RegisterRequestModel {
     "name": name,
     "email": email,
     "password": password,
+    "otp": otp,
     "fcm_token": fcmToken,
   };
 }

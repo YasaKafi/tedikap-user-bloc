@@ -18,38 +18,39 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$RegisterEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function(String? email) postEmailVerification,
     required TResult Function(RegisterRequestModel? data) doRegister,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function(String? email)? postEmailVerification,
     TResult? Function(RegisterRequestModel? data)? doRegister,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function(String? email)? postEmailVerification,
     TResult Function(RegisterRequestModel? data)? doRegister,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_PostEmailVerification value)
+        postEmailVerification,
     required TResult Function(_DoRegister value) doRegister,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
+    TResult? Function(_PostEmailVerification value)? postEmailVerification,
     TResult? Function(_DoRegister value)? doRegister,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_PostEmailVerification value)? postEmailVerification,
     TResult Function(_DoRegister value)? doRegister,
     required TResult orElse(),
   }) =>
@@ -75,67 +76,95 @@ class _$RegisterEventCopyWithImpl<$Res, $Val extends RegisterEvent>
 }
 
 /// @nodoc
-abstract class _$$StartedImplCopyWith<$Res> {
-  factory _$$StartedImplCopyWith(
-          _$StartedImpl value, $Res Function(_$StartedImpl) then) =
-      __$$StartedImplCopyWithImpl<$Res>;
+abstract class _$$PostEmailVerificationImplCopyWith<$Res> {
+  factory _$$PostEmailVerificationImplCopyWith(
+          _$PostEmailVerificationImpl value,
+          $Res Function(_$PostEmailVerificationImpl) then) =
+      __$$PostEmailVerificationImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String? email});
 }
 
 /// @nodoc
-class __$$StartedImplCopyWithImpl<$Res>
-    extends _$RegisterEventCopyWithImpl<$Res, _$StartedImpl>
-    implements _$$StartedImplCopyWith<$Res> {
-  __$$StartedImplCopyWithImpl(
-      _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
+class __$$PostEmailVerificationImplCopyWithImpl<$Res>
+    extends _$RegisterEventCopyWithImpl<$Res, _$PostEmailVerificationImpl>
+    implements _$$PostEmailVerificationImplCopyWith<$Res> {
+  __$$PostEmailVerificationImplCopyWithImpl(_$PostEmailVerificationImpl _value,
+      $Res Function(_$PostEmailVerificationImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? email = freezed,
+  }) {
+    return _then(_$PostEmailVerificationImpl(
+      freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$StartedImpl implements _Started {
-  const _$StartedImpl();
+class _$PostEmailVerificationImpl implements _PostEmailVerification {
+  const _$PostEmailVerificationImpl(this.email);
+
+  @override
+  final String? email;
 
   @override
   String toString() {
-    return 'RegisterEvent.started()';
+    return 'RegisterEvent.postEmailVerification(email: $email)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$StartedImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$PostEmailVerificationImpl &&
+            (identical(other.email, email) || other.email == email));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, email);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PostEmailVerificationImplCopyWith<_$PostEmailVerificationImpl>
+      get copyWith => __$$PostEmailVerificationImplCopyWithImpl<
+          _$PostEmailVerificationImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function(String? email) postEmailVerification,
     required TResult Function(RegisterRequestModel? data) doRegister,
   }) {
-    return started();
+    return postEmailVerification(email);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function(String? email)? postEmailVerification,
     TResult? Function(RegisterRequestModel? data)? doRegister,
   }) {
-    return started?.call();
+    return postEmailVerification?.call(email);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function(String? email)? postEmailVerification,
     TResult Function(RegisterRequestModel? data)? doRegister,
     required TResult orElse(),
   }) {
-    if (started != null) {
-      return started();
+    if (postEmailVerification != null) {
+      return postEmailVerification(email);
     }
     return orElse();
   }
@@ -143,37 +172,44 @@ class _$StartedImpl implements _Started {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_PostEmailVerification value)
+        postEmailVerification,
     required TResult Function(_DoRegister value) doRegister,
   }) {
-    return started(this);
+    return postEmailVerification(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
+    TResult? Function(_PostEmailVerification value)? postEmailVerification,
     TResult? Function(_DoRegister value)? doRegister,
   }) {
-    return started?.call(this);
+    return postEmailVerification?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_PostEmailVerification value)? postEmailVerification,
     TResult Function(_DoRegister value)? doRegister,
     required TResult orElse(),
   }) {
-    if (started != null) {
-      return started(this);
+    if (postEmailVerification != null) {
+      return postEmailVerification(this);
     }
     return orElse();
   }
 }
 
-abstract class _Started implements RegisterEvent {
-  const factory _Started() = _$StartedImpl;
+abstract class _PostEmailVerification implements RegisterEvent {
+  const factory _PostEmailVerification(final String? email) =
+      _$PostEmailVerificationImpl;
+
+  String? get email;
+  @JsonKey(ignore: true)
+  _$$PostEmailVerificationImplCopyWith<_$PostEmailVerificationImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -240,7 +276,7 @@ class _$DoRegisterImpl implements _DoRegister {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function(String? email) postEmailVerification,
     required TResult Function(RegisterRequestModel? data) doRegister,
   }) {
     return doRegister(data);
@@ -249,7 +285,7 @@ class _$DoRegisterImpl implements _DoRegister {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function(String? email)? postEmailVerification,
     TResult? Function(RegisterRequestModel? data)? doRegister,
   }) {
     return doRegister?.call(data);
@@ -258,7 +294,7 @@ class _$DoRegisterImpl implements _DoRegister {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function(String? email)? postEmailVerification,
     TResult Function(RegisterRequestModel? data)? doRegister,
     required TResult orElse(),
   }) {
@@ -271,7 +307,8 @@ class _$DoRegisterImpl implements _DoRegister {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_PostEmailVerification value)
+        postEmailVerification,
     required TResult Function(_DoRegister value) doRegister,
   }) {
     return doRegister(this);
@@ -280,7 +317,7 @@ class _$DoRegisterImpl implements _DoRegister {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
+    TResult? Function(_PostEmailVerification value)? postEmailVerification,
     TResult? Function(_DoRegister value)? doRegister,
   }) {
     return doRegister?.call(this);
@@ -289,7 +326,7 @@ class _$DoRegisterImpl implements _DoRegister {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_PostEmailVerification value)? postEmailVerification,
     TResult Function(_DoRegister value)? doRegister,
     required TResult orElse(),
   }) {
@@ -316,7 +353,9 @@ mixin _$RegisterState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(RegisterResponseModel? model) success,
+    required TResult Function(
+            RegisterResponseModel? model, OtpResponseModel? otpModel)
+        success,
     required TResult Function(String? message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -324,7 +363,8 @@ mixin _$RegisterState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(RegisterResponseModel? model)? success,
+    TResult? Function(RegisterResponseModel? model, OtpResponseModel? otpModel)?
+        success,
     TResult? Function(String? message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -332,7 +372,8 @@ mixin _$RegisterState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(RegisterResponseModel? model)? success,
+    TResult Function(RegisterResponseModel? model, OtpResponseModel? otpModel)?
+        success,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) =>
@@ -422,7 +463,9 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(RegisterResponseModel? model) success,
+    required TResult Function(
+            RegisterResponseModel? model, OtpResponseModel? otpModel)
+        success,
     required TResult Function(String? message) error,
   }) {
     return initial();
@@ -433,7 +476,8 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(RegisterResponseModel? model)? success,
+    TResult? Function(RegisterResponseModel? model, OtpResponseModel? otpModel)?
+        success,
     TResult? Function(String? message)? error,
   }) {
     return initial?.call();
@@ -444,7 +488,8 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(RegisterResponseModel? model)? success,
+    TResult Function(RegisterResponseModel? model, OtpResponseModel? otpModel)?
+        success,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {
@@ -536,7 +581,9 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(RegisterResponseModel? model) success,
+    required TResult Function(
+            RegisterResponseModel? model, OtpResponseModel? otpModel)
+        success,
     required TResult Function(String? message) error,
   }) {
     return loading();
@@ -547,7 +594,8 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(RegisterResponseModel? model)? success,
+    TResult? Function(RegisterResponseModel? model, OtpResponseModel? otpModel)?
+        success,
     TResult? Function(String? message)? error,
   }) {
     return loading?.call();
@@ -558,7 +606,8 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(RegisterResponseModel? model)? success,
+    TResult Function(RegisterResponseModel? model, OtpResponseModel? otpModel)?
+        success,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {
@@ -616,7 +665,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({RegisterResponseModel? model});
+  $Res call({RegisterResponseModel? model, OtpResponseModel? otpModel});
 }
 
 /// @nodoc
@@ -631,12 +680,17 @@ class __$$SuccessImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? model = freezed,
+    Object? otpModel = freezed,
   }) {
     return _then(_$SuccessImpl(
       model: freezed == model
           ? _value.model
           : model // ignore: cast_nullable_to_non_nullable
               as RegisterResponseModel?,
+      otpModel: freezed == otpModel
+          ? _value.otpModel
+          : otpModel // ignore: cast_nullable_to_non_nullable
+              as OtpResponseModel?,
     ));
   }
 }
@@ -644,14 +698,16 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl({this.model});
+  const _$SuccessImpl({this.model, this.otpModel});
 
   @override
   final RegisterResponseModel? model;
+  @override
+  final OtpResponseModel? otpModel;
 
   @override
   String toString() {
-    return 'RegisterState.success(model: $model)';
+    return 'RegisterState.success(model: $model, otpModel: $otpModel)';
   }
 
   @override
@@ -659,11 +715,13 @@ class _$SuccessImpl implements _Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            (identical(other.model, model) || other.model == model));
+            (identical(other.model, model) || other.model == model) &&
+            (identical(other.otpModel, otpModel) ||
+                other.otpModel == otpModel));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, model);
+  int get hashCode => Object.hash(runtimeType, model, otpModel);
 
   @JsonKey(ignore: true)
   @override
@@ -676,10 +734,12 @@ class _$SuccessImpl implements _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(RegisterResponseModel? model) success,
+    required TResult Function(
+            RegisterResponseModel? model, OtpResponseModel? otpModel)
+        success,
     required TResult Function(String? message) error,
   }) {
-    return success(model);
+    return success(model, otpModel);
   }
 
   @override
@@ -687,10 +747,11 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(RegisterResponseModel? model)? success,
+    TResult? Function(RegisterResponseModel? model, OtpResponseModel? otpModel)?
+        success,
     TResult? Function(String? message)? error,
   }) {
-    return success?.call(model);
+    return success?.call(model, otpModel);
   }
 
   @override
@@ -698,12 +759,13 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(RegisterResponseModel? model)? success,
+    TResult Function(RegisterResponseModel? model, OtpResponseModel? otpModel)?
+        success,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(model);
+      return success(model, otpModel);
     }
     return orElse();
   }
@@ -747,9 +809,12 @@ class _$SuccessImpl implements _Success {
 }
 
 abstract class _Success implements RegisterState {
-  const factory _Success({final RegisterResponseModel? model}) = _$SuccessImpl;
+  const factory _Success(
+      {final RegisterResponseModel? model,
+      final OtpResponseModel? otpModel}) = _$SuccessImpl;
 
   RegisterResponseModel? get model;
+  OtpResponseModel? get otpModel;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -821,7 +886,9 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(RegisterResponseModel? model) success,
+    required TResult Function(
+            RegisterResponseModel? model, OtpResponseModel? otpModel)
+        success,
     required TResult Function(String? message) error,
   }) {
     return error(message);
@@ -832,7 +899,8 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(RegisterResponseModel? model)? success,
+    TResult? Function(RegisterResponseModel? model, OtpResponseModel? otpModel)?
+        success,
     TResult? Function(String? message)? error,
   }) {
     return error?.call(message);
@@ -843,7 +911,8 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(RegisterResponseModel? model)? success,
+    TResult Function(RegisterResponseModel? model, OtpResponseModel? otpModel)?
+        success,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {
