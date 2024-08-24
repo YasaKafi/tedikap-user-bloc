@@ -92,16 +92,16 @@ class RegisterPage extends StatelessWidget {
                           backgroundColor: redMedium,
                         ));
                       },
-                      success: (model) {
+                      success: (model, otpModel) {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text(
-                            model!.message!,
+                            otpModel!.message!,
                             style: txtSecondaryTitle.copyWith(
                                 fontWeight: FontWeight.w500, color: baseColor),
                           ),
                           backgroundColor: greenMedium,
                         ));
-                        context.goNamed('dashboard', pathParameters: {'pageIndex' : '0'});
+                        context.goNamed('otp_verification', extra: {'username' : usernameController.text, 'email' : emailController.text, 'password' : passwordController.text});
                       },
                     );
                   },
@@ -137,16 +137,25 @@ class RegisterPage extends StatelessWidget {
                                 ),
                                 backgroundColor: redMedium,
                               ));
+                            } else if (passwordController.text.length < 8) {
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text(
+                                  'Password must be at least 8 characters long',
+                                  style: txtSecondaryTitle.copyWith(
+                                      fontWeight: FontWeight.w500, color: baseColor),
+                                ),
+                                backgroundColor: redMedium,
+                              ));
                             } else {
-                              final requestModel = RegisterRequestModel(
-                                name: usernameController.text,
-                                email: emailController.text,
-                                password: passwordController.text,
-                                fcmToken: GlobalVariables.deviceToken,
-                              );
+                              // final requestModel = RegisterRequestModel(
+                              //   name: usernameController.text,
+                              //   email: emailController.text,
+                              //   password: passwordController.text,
+                              //   fcmToken: GlobalVariables.deviceToken,
+                              // );
                               context
                                   .read<RegisterBloc>()
-                                  .add(RegisterEvent.doRegister(requestModel));
+                                  .add(RegisterEvent.postEmailVerification(emailController.text));
                             }
                           },
                           borderRadius: 10,

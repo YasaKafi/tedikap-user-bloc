@@ -5,6 +5,7 @@ import 'package:tedikap_user_bloc/data/datasource/order_datasource.dart';
 import 'package:tedikap_user_bloc/data/datasource/product_datasource.dart';
 import 'package:tedikap_user_bloc/data/datasource/user_datasource.dart';
 import 'package:tedikap_user_bloc/data/datasource/voucher_datasource.dart';
+import 'package:tedikap_user_bloc/presentation/initial_pages/forgot_password/bloc/forgot_password_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/login_page/bloc/login_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/otp_verification_page/bloc/otp_verification_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_page/bloc/cart_bloc.dart';
@@ -40,7 +41,10 @@ class AppProviders{
       create: (context) => LoginBloc(AuthDatasource()),
     ),
     BlocProvider<OtpVerificationBloc>(
-      create: (context) => OtpVerificationBloc(),
+      create: (context) => OtpVerificationBloc(AuthDatasource()),
+    ),
+    BlocProvider<ForgotPasswordBloc>(
+      create: (context) => ForgotPasswordBloc(),
     ),
     BlocProvider<HelpCenterBloc>(
       create: (context) => HelpCenterBloc(UserDatasource()),

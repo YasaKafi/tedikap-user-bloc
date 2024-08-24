@@ -2,6 +2,9 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tedikap_user_bloc/presentation/dashboard/dashboard_page.dart';
+import 'package:tedikap_user_bloc/presentation/initial_pages/forgot_password/view/changed_password_page.dart';
+import 'package:tedikap_user_bloc/presentation/initial_pages/forgot_password/view/otp_verification_email_page.dart';
+import 'package:tedikap_user_bloc/presentation/initial_pages/forgot_password/view/send_email_page.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/login_page/login_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/onboard_page/onboard_page_view.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/otp_verification_page/otp_verification_view_page.dart';
@@ -31,7 +34,7 @@ import '../presentation/pages/information_page/privacy_policy_page/privacy_polic
 class AppRouter {
   static final GoRouter router = GoRouter(
     navigatorKey: navigatorKey,
-    initialLocation: '/otp_verification',
+    initialLocation: '/register',
     debugLogDiagnostics: true,
     routes: [
       GoRoute(
@@ -52,7 +55,28 @@ class AppRouter {
       GoRoute(
         name: 'otp_verification',
         path: '/otp_verification',
-        builder: (context, state) => const OtpPageView(),
+        builder: (context, state) {
+          final extraData = state.extra as Map<String, dynamic>?;
+          final username = extraData?['username'] ?? '0';
+          final email = extraData?['email'] ?? '0';
+          final password = extraData?['password'] ?? '0';
+          return OtpPageView(email: email, password: password, username: username,);
+        },
+      ),
+      GoRoute(
+        name: 'otp_email_verification',
+        path: '/otp_email_verification',
+        builder: (context, state) => const SendOtpEmailPage(),
+      ),
+      GoRoute(
+        name: 'reset_password',
+        path: '/reset_password',
+        builder: (context, state) => const ResetPasswordPage(),
+      ),
+      GoRoute(
+        name: 'send_email',
+        path: '/send_email',
+        builder: (context, state) => const SendEmailPage(),
       ),
       GoRoute(
         name: 'login',
