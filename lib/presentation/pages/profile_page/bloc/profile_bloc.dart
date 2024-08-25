@@ -26,16 +26,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       if (currentState is _Loading) return;
       emit(const _Loading());
       final result = await datasource.postLogout();
-      result.fold((l) => emit(const _Error('Failed to logout')), (r) {
+      await result.fold((l) async => emit(const _Error('Failed to logout')), (r) async {
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.remove('token');
         emit(_Loaded(logModel:  r));
-      }
-      );
+      });
     });
   }
 
-  void _clearSharedPreferences() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
-  }
 
 }

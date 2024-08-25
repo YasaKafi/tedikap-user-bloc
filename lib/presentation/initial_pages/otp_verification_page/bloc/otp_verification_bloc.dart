@@ -36,11 +36,11 @@ class OtpVerificationBloc extends Bloc<OtpVerificationEvent, OtpVerificationStat
       final result = await datasource.postOtpRegister(event.email!);
       isLoadingEmailVerification = false;
       result.fold(
-              (l) async => emit(OtpVerificationState.error(message: 'Failed to get otp')),
+              (l) async => emit(OtpVerificationState.error(message: l)),
               (r) {
             emit(OtpVerificationState.success(model: null, otpModel: r));
             // Mulai ulang timer setelah OTP berhasil dikirim
-            add(OtpVerificationEvent.startTimer());
+            add(const OtpVerificationEvent.startTimer());
           }
       );
     });
@@ -49,11 +49,11 @@ class OtpVerificationBloc extends Bloc<OtpVerificationEvent, OtpVerificationStat
       _timerSubscription?.cancel();
       final completer = Completer<void>();
       _timerSubscription = Stream.periodic(const Duration(seconds: 1), (i) => i)
-          .take(2 * 60) // 5 menit
+          .take(5 * 60) // 5 minutes
           .listen((secondsPassed) {
-        emit(OtpVerificationState.timerRunning(2 * 60 - secondsPassed, isTimerRunning: true));
+        emit(OtpVerificationState.timerRunning(5 * 60 - secondsPassed, isTimerRunning: true));
       }, onDone: () {
-        emit(OtpVerificationState.timerRunning(0, isTimerRunning: false));
+        emit(const OtpVerificationState.timerRunning(0, isTimerRunning: false));
         completer.complete();
       });
       await completer.future;

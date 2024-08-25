@@ -150,7 +150,7 @@ class _SendOtpEmailPageState extends State<SendOtpEmailPage> {
                               );
                             },
                             orElse: () => Text(
-                              '02:00',
+                              '05:00',
                               style: txtPrimarySubTitle.copyWith(
                                 color: primaryColor,
                                 fontWeight: FontWeight.w600,
@@ -191,7 +191,7 @@ class _SendOtpEmailPageState extends State<SendOtpEmailPage> {
                               }
                               SharedPreferences prefs = await SharedPreferences.getInstance();
                               final token = prefs.getString('reset_token');
-                              context.goNamed('reset_password',
+                              context.pushNamed('reset_password',
                                   extra: {'email': widget.email, 'otp': otpNumberController.text, 'resetToken': token});
                             }
                           });

@@ -151,7 +151,7 @@ class _OtpPageViewState extends State<OtpPageView> {
                           );
                         },
                         orElse: () => Text(
-                          '02:00',
+                          '05:00',
                           style: txtPrimarySubTitle.copyWith(
                             color: primaryColor,
                             fontWeight: FontWeight.w600,
@@ -189,9 +189,12 @@ class _OtpPageViewState extends State<OtpPageView> {
                               ),
                               backgroundColor: greenMedium,
                             ));
+                            context.goNamed('dashboard',
+                                pathParameters: {'pageIndex': '0'});
+                          } else {
+
                           }
-                          context.goNamed('dashboard',
-                              pathParameters: {'pageIndex': '0'});
+
                         }
                       });
                 },
