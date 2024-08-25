@@ -33,11 +33,11 @@ class AuthDatasource {
           await prefs.setString('token', token);
         }
         return Right(RegisterResponseModel.fromMap(response.data));
-      } else if (response.statusCode == 400 || response.statusCode == 422) {
+      } else if (response.statusCode == 400 || response.statusCode == 422 || response.statusCode == 404) {
         final errorMessage = response.data['message'] ?? 'Failed to register null';
         return Left(errorMessage);
       } else {
-        return Left('Failed to register null ${response.statusCode}');
+        return Left('Failed to register  ${response.statusCode}');
       }
 
   }
@@ -48,6 +48,9 @@ class AuthDatasource {
       final response = await _dioInstance.postRequest(
         endpoint: TedikapApiRepository.postLogin,
         data: model.toJson(),
+        validateStatus: (status) {
+          return status != null && status < 500;
+        },
       );
       if (response.statusCode == 200) {
         final prefs = await SharedPreferences.getInstance();
@@ -71,6 +74,9 @@ class AuthDatasource {
       final response = await _dioInstance.postRequest(
         endpoint: TedikapApiRepository.postResetPassword,
         data: model.toJson(),
+        validateStatus: (status) {
+          return status != null && status < 500;
+        },
       );
       if (response.statusCode == 200) {
         return Right(ResetPasswordResponseModel.fromMap(response.data));
@@ -91,11 +97,15 @@ class AuthDatasource {
         data: {
           'email': email,
         },
+        validateStatus: (status) {
+          return status != null && status < 500;
+        },
       );
       if (response.statusCode == 200) {
         return Right(OtpResponseModel.fromMap(response.data));
       } else {
-        return const Left('Failed get OTP');
+        final errorMessage = response.data['message'] ?? 'Failed to register null';
+        return Left(errorMessage);
       }
     } catch (e) {
       return Left('get OTP: ${e.toString()}');
@@ -126,6 +136,9 @@ class AuthDatasource {
     try {
       final response = await _dioInstance.postRequest(
         endpoint: TedikapApiRepository.postOtpEmailVerification,
+        validateStatus: (status) {
+          return status != null && status < 500;
+        },
         data: {
           'email': email,
           'otp': otp,
@@ -139,8 +152,8 @@ class AuthDatasource {
         }
         return Right(VerifyOtpResponseModel.fromMap(response.data));
       } else {
-        return const Left('Failed get OTP');
-      }
+        final errorMessage = response.data['message'] ?? 'Failed to register null';
+        return Left(errorMessage);      }
     } catch (e) {
       return Left('get OTP: ${e.toString()}');
     }

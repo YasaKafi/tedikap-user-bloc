@@ -163,11 +163,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             orElse: () => _buildShimmerTextField(),
                             loading: () => _buildShimmerTextField(),
                             loaded: (user, n, o, modelEdit) {
-                              if (user?.data != null){
-                                usernameController.text = user!.data!.name!;
-                                emailController.text = user.data!.email!;
-                                phoneNumberController.text = user.data!.whatsappNumber;
-                              }
+                              Future.microtask(() {
+                                if (user?.data != null){
+                                  usernameController.text = user!.data!.name!;
+                                  emailController.text = user.data!.email!;
+                                  phoneNumberController.text = user.data?.whatsappNumber ?? '';
+                                }
+                              });
                               return CustomTextField(
                                 icon: Icon(Icons.person),
                                 hintText: 'Username',
@@ -225,7 +227,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             loaded: (user, n, o, modelEdit) {
                               return CustomTextField(
                                 icon: SvgPicture.asset(icWhatsApp, width: 26,),
-                                hintText: 'Whatsapp Number',
+                                hintText: 'whatsapp number',
                                 prefix: Text('+62 ', style: txtPrimarySubTitle.copyWith(
                                     fontWeight: FontWeight.w500, color: blackColor)),
                                 keyboardType: TextInputType.phone,

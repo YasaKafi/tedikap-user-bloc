@@ -26,21 +26,21 @@ class ForgotPasswordBloc extends Bloc<ForgotPasswordEvent, ForgotPasswordState> 
     on<_PostEmailVerificationFirst>((event, emit) async {
       emit(const ForgotPasswordState.loading());
       final result = await datasource.postOtpResetPass(event.email!);
-      result.fold((l) async => emit(ForgotPasswordState.error(message: 'Failed get otp ')), (r) => emit(ForgotPasswordState.success(otpModel: r) )
+      result.fold((l) async => emit(ForgotPasswordState.error(message: l)), (r) => emit(ForgotPasswordState.success(otpModel: r) )
       );
     });
 
     on<_VerifyOtp>((event, emit) async {
       emit(const ForgotPasswordState.loading());
       final result = await datasource.postVerifyOtp(event.email!, event.otp!);
-      result.fold((l) async => emit(ForgotPasswordState.error(message: 'Failed get otp ')), (r) => emit(ForgotPasswordState.success(verifyOtpModel: r) )
+      result.fold((l) async => emit(ForgotPasswordState.error(message: l)), (r) => emit(ForgotPasswordState.success(verifyOtpModel: r) )
       );
     });
 
     on<_PostResetPassword>((event, emit) async {
       emit(const ForgotPasswordState.loading());
       final result = await datasource.postResetPassword(event.model!);
-      result.fold((l) async => emit(ForgotPasswordState.error(message: 'Failed get otp ')), (r) => emit(ForgotPasswordState.success(resetPasswordModel: r) )
+      result.fold((l) async => emit(ForgotPasswordState.error(message: l)), (r) => emit(ForgotPasswordState.success(resetPasswordModel: r) )
       );
     });
 
@@ -50,7 +50,7 @@ class ForgotPasswordBloc extends Bloc<ForgotPasswordEvent, ForgotPasswordState> 
       final result = await datasource.postOtpResetPass(event.email!);
       isLoadingEmailVerification = false;
       result.fold(
-              (l) async => emit(ForgotPasswordState.error(message: 'Failed to get otp')),
+              (l) async => emit(ForgotPasswordState.error(message: l)),
               (r) {
             emit(ForgotPasswordState.success(otpModel: r));
             // Mulai ulang timer setelah OTP berhasil dikirim
@@ -63,9 +63,9 @@ class ForgotPasswordBloc extends Bloc<ForgotPasswordEvent, ForgotPasswordState> 
       _timerSubscription?.cancel();
       final completer = Completer<void>();
       _timerSubscription = Stream.periodic(const Duration(seconds: 1), (i) => i)
-          .take(2 * 60) // 5 menit
+          .take(5 * 60) // 5 menit
           .listen((secondsPassed) {
-        emit(ForgotPasswordState.timerRunning(2 * 60 - secondsPassed, isTimerRunning: true));
+        emit(ForgotPasswordState.timerRunning(5 * 60 - secondsPassed, isTimerRunning: true));
       }, onDone: () {
         emit(ForgotPasswordState.timerRunning(0, isTimerRunning: false));
         completer.complete();

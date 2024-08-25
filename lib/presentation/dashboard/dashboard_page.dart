@@ -45,8 +45,10 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: baseColor,
       body: _pages[_selectedIndex ?? 0],
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: baseColor,
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex ?? 0,
         unselectedLabelStyle: txtThirdSubTitle.copyWith(fontWeight: FontWeight.w600, color: primaryColor),
