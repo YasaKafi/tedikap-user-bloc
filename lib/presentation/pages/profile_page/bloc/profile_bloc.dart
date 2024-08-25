@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tedikap_user_bloc/data/models/response/current_user_response_model.dart';
 import 'package:tedikap_user_bloc/data/models/response/logout_response_model.dart';
 
@@ -25,7 +26,16 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       if (currentState is _Loading) return;
       emit(const _Loading());
       final result = await datasource.postLogout();
-      result.fold((l) => emit(const _Error('Failed to logout')), (r) => emit(_Loaded(logModel:  r)));
+      result.fold((l) => emit(const _Error('Failed to logout')), (r) {
+        emit(_Loaded(logModel:  r));
+      }
+      );
     });
   }
+
+  void _clearSharedPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+  }
+
 }

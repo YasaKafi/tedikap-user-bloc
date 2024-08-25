@@ -170,7 +170,7 @@ class UserDatasource {
       if (name != null) formData.fields.add(MapEntry('name', name));
       if (email != null) formData.fields.add(MapEntry('email', email));
       if (gender != null) formData.fields.add(MapEntry('gender', gender));
-      if (phoneNumber != null) formData.fields.add(MapEntry('whatsapp_number', '62$phoneNumber'));
+      if (phoneNumber != null) formData.fields.add(MapEntry('whatsapp_number', phoneNumber));
       if (imageFile != null) {
         formData.files.add(MapEntry(
           'avatar',

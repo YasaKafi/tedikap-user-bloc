@@ -18,6 +18,36 @@ class BoxAlertPoin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<CartBloc, CartState>(
+      builder: (context, state) {
+        return state.maybeWhen(
+            orElse: (){
+              return _buildAlertGetPoint(screenWidth: screenWidth);
+            },
+          success: (cartModel, modelQty, deleteModel, modelPostOrder,
+              modelPostPayment, orderId){
+              if (cartModel!.cart!.cartItems!.isNotEmpty) {
+                return _buildAlertGetPoint(screenWidth: screenWidth);
+              } else {
+                return const SizedBox();
+              }
+          }
+        );
+      },
+    );
+  }
+}
+
+class _buildAlertGetPoint extends StatelessWidget {
+  const _buildAlertGetPoint({
+    super.key,
+    required this.screenWidth,
+  });
+
+  final double screenWidth;
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 20),
       width: screenWidth,
@@ -54,16 +84,18 @@ class BoxAlertPoin extends StatelessWidget {
                 BlocBuilder<CartBloc, CartState>(
                   builder: (context, state) {
                     return state.maybeWhen(
-                      orElse: () => Shimmer.fromColors(
-                        baseColor: Colors.grey[300]!,
-                        highlightColor: Colors.grey[100]!,
-                        child: Container(
-                          width: 50,
-                          height: 20,
-                          color: Colors.white,
-                        ),
-                      ),
-                      success: (cartModel, modelQty, deleteModel, modelPostOrder, modelPostPayment, orderId) {
+                      orElse: () =>
+                          Shimmer.fromColors(
+                            baseColor: Colors.grey[300]!,
+                            highlightColor: Colors.grey[100]!,
+                            child: Container(
+                              width: 50,
+                              height: 20,
+                              color: Colors.white,
+                            ),
+                          ),
+                      success: (cartModel, modelQty, deleteModel,
+                          modelPostOrder, modelPostPayment, orderId) {
                         final itemPoint = cartModel?.cart;
 
                         if (itemPoint != null) {

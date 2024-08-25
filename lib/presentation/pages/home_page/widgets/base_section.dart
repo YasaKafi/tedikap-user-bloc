@@ -202,8 +202,8 @@ class _BaseSectionState extends State<BaseSection> {
                 },
                 success: (model, user, index, pointModel, statusOutletModel,
                     bannerModel, boxPromoModel) {
-                  if (boxPromoModel!.data!['1'] != null) {
-                    final promoData = boxPromoModel.data!['1']!;
+                  if (boxPromoModel?.data!['1'] != null) {
+                    final promoData = boxPromoModel!.data!['1']!;
                     return BoxPromoWidget(
                         screenWidth: widget.screenWidth,
                         title: promoData.title ?? 'No Title',

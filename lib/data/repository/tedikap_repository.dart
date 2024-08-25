@@ -47,7 +47,10 @@ class TedikapApiRepository {
   static String postLogin = '$mainUrl/api/user/login';
   static String getCurrentUser = '$mainUrl/api/user/get-user';
   static String postProfile = '$mainUrl/api/user/update-profile';
-  static String postOtpVerification = '$mainUrl/api/user/otp';
+  static String postOtpVerificationRegister = '$mainUrl/api/user/otp-register';
+  static String postOtpVerificationResetPass = '$mainUrl/api/user/otp-reset';
+  static String postOtpEmailVerification = '$mainUrl/api/user/verify-otp';
+  static String postResetPassword = '$mainUrl/api/user/reset-pw';
   static String postLogout = '$mainUrl/api/user/logout';
 
   static String putFCMToken = '$mainUrl/api/user/update-fcm-token';

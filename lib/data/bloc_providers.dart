@@ -44,7 +44,7 @@ class AppProviders{
       create: (context) => OtpVerificationBloc(AuthDatasource()),
     ),
     BlocProvider<ForgotPasswordBloc>(
-      create: (context) => ForgotPasswordBloc(),
+      create: (context) => ForgotPasswordBloc(AuthDatasource()),
     ),
     BlocProvider<HelpCenterBloc>(
       create: (context) => HelpCenterBloc(UserDatasource()),

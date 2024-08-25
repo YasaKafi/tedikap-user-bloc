@@ -22,6 +22,10 @@ class ListBoxProductMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double dpi = MediaQuery.of(context).devicePixelRatio * 170;
+    print('DPI: $dpi');
+    TextStyle textStyleTitle = dpi < 390 ? txtSecondaryTitle : txtPrimaryTitle;
+    double sizeImageProduct = dpi < 390 ? 60 : 70;
     return Container(
         margin: const EdgeInsets.only(
             left: Dimensions.marginSizeLarge,
@@ -35,8 +39,8 @@ class ListBoxProductMenu extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Container(
                 margin: const EdgeInsets.only(left: Dimensions.marginSizeSmall),
-                width: 70,
-                height: 70,
+                width: sizeImageProduct,
+                height: sizeImageProduct,
                 decoration: ShapeDecoration(
                   color: const Color(0x0C56473C),
                   shape: const RoundedRectangleBorder(
@@ -49,7 +53,7 @@ class ListBoxProductMenu extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              width: Dimensions.marginSizeLarge,
+              width: Dimensions.marginSizeDefault,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,13 +61,13 @@ class ListBoxProductMenu extends StatelessWidget {
               children: [
                 Flexible(
                     child: Text(title,
-                        style: txtPrimaryTitle.copyWith(
+                        style: textStyleTitle.copyWith(
                             fontWeight: FontWeight.w500, color: blackColor))),
                 const SizedBox(
                   height: 5,
                 ),
                 Container(
-                  width: screenWidth * 0.4,
+                  width: screenWidth * 0.38,
                   child: Text(
                     'Racikan teh spesial Tedikap dari beberapa daun teh kering pilihan terbaik.',
                     style: txtSecondarySubTitle.copyWith(
@@ -79,7 +83,7 @@ class ListBoxProductMenu extends StatelessWidget {
                     height: screenHeight,
                     child: Center(
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10,  vertical: 5),
+                        padding: const EdgeInsets.symmetric(horizontal: 8,  vertical: 5),
                         decoration: BoxDecoration(
                             color: price == 'Out of stock' ? redLight : Colors.transparent,
                             borderRadius: BorderRadius.circular(10)),

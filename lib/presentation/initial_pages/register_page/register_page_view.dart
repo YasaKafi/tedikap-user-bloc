@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tedikap_user_bloc/data/repository/global_variabel.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/register_page/bloc/register_bloc.dart';
 
 import '../../../common/constant.dart';
 import '../../../common/dimensions.dart';
 import '../../../common/theme.dart';
-import '../../../data/models/request/register_request_model.dart';
 import '../../global_components/common_button.dart';
 import '../../global_components/textfield_auth_custom.dart';
 
@@ -101,7 +99,7 @@ class RegisterPage extends StatelessWidget {
                           ),
                           backgroundColor: greenMedium,
                         ));
-                        context.goNamed('otp_verification', extra: {'username' : usernameController.text, 'email' : emailController.text, 'password' : passwordController.text});
+                        context.pushNamed('otp_verification', extra: {'username' : usernameController.text, 'email' : emailController.text, 'password' : passwordController.text});
                       },
                     );
                   },

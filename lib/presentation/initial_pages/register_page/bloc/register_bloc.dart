@@ -25,7 +25,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
     on<_PostEmailVerification>((event, emit) async {
       emit(const RegisterState.loading());
-      final result = await datasource.postOtp(event.email!);
+      final result = await datasource.postOtpRegister(event.email!);
        result.fold((l) async => emit(RegisterState.error(message: 'Failed get otp ')), (r) => emit(RegisterState.success(model: null, otpModel: r) )
       );
     });

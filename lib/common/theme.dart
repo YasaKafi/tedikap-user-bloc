@@ -36,6 +36,9 @@ const Color greytxtNote = Color(0xFFABB3BD);
 
 // ********** UPDATE TEXT STYLE  **********
 
+
+// Menentukan ukuran font berdasarkan DPI
+
 const TextStyle txtHeadingTitleAuth = TextStyle(
   fontFamily: 'Poppins',
   color: blackColor,

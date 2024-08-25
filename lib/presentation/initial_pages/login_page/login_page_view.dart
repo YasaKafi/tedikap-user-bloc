@@ -70,7 +70,7 @@ class LoginPage extends StatelessWidget {
                   const SizedBox(height: Dimensions.marginSizeSmall),
                 ],
                 TextButton(
-                    onPressed: () => {},
+                    onPressed: () => context.pushNamed('send_email'),
                     child: Text(
                       'Forgot Password ?',
                       style: txtSecondaryTitle.copyWith(
