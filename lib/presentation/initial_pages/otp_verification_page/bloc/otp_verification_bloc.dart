@@ -25,7 +25,7 @@ class OtpVerificationBloc extends Bloc<OtpVerificationEvent, OtpVerificationStat
       emit(const OtpVerificationState.loading());
       final result = await datasource.postRegister(event.data!);
       result.fold(
-              (l) async => emit(OtpVerificationState.error(message: 'Failed to login')),
+              (l) async => emit(OtpVerificationState.error(message: l)),
               (r) => emit(OtpVerificationState.success(model: r, otpModel: null))
       );
     });
@@ -33,7 +33,7 @@ class OtpVerificationBloc extends Bloc<OtpVerificationEvent, OtpVerificationStat
     on<_PostEmailVerification>((event, emit) async {
       isLoadingEmailVerification = true;
       emit(const OtpVerificationState.loading());
-      final result = await datasource.postOtp(event.email!);
+      final result = await datasource.postOtpRegister(event.email!);
       isLoadingEmailVerification = false;
       result.fold(
               (l) async => emit(OtpVerificationState.error(message: 'Failed to get otp')),

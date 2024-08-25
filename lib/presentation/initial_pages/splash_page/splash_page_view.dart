@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -21,9 +22,17 @@ class _SplashPageState extends State<SplashPage> {
     _router = GoRouter.of(context);
   }
 
+  void _clearSharedPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+  }
+
   @override
   void initState() {
     super.initState();
+    if (kReleaseMode) {
+      _clearSharedPreferences();
+    }
     _checkAuthStatus();
   }
 
@@ -31,6 +40,7 @@ class _SplashPageState extends State<SplashPage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
     final hasSeenOnboarding = prefs.getBool('hasSeenOnboarding') ?? false;
+    print('PRINT TOKEN AUTH $token');
 
     Future.delayed(const Duration(seconds: 2), () {
       if (mounted) {

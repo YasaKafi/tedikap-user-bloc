@@ -11,7 +11,7 @@ class CustomTextFieldAuth extends StatelessWidget {
   Widget build(BuildContext context) {
     // Create a ValueNotifier to manage the obscureText state
     final ValueNotifier<bool> _obscureTextNotifier = ValueNotifier<bool>(
-      title == "Enter your password" || title == "Enter your confirm password",
+      title == "Enter your password" || title == "Enter your confirm password" || title == 'Enter your new password',
     );
 
     return ValueListenableBuilder<bool>(
@@ -32,7 +32,7 @@ class CustomTextFieldAuth extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(20.0)),
               borderSide: BorderSide(width: 2, color: grey, style: BorderStyle.solid),
             ),
-            suffixIcon: (title == "Enter your password" || title == "Enter your confirm password")
+            suffixIcon: (title == "Enter your password" || title == "Enter your confirm password" || title == 'Enter your new password')
                 ? IconButton(
                     icon: Icon(
                       _obscureText ? Icons.visibility_off : Icons.visibility,

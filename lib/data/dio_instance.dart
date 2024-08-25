@@ -45,7 +45,7 @@ class DioInstance {
     return response;
   }
 
-  Future<Response> postRequest({required String endpoint, bool? isAuthorize, Object? data, Map<String, dynamic>? queryParameters, bool? isMultipart}) async {
+  Future<Response> postRequest({required String endpoint, bool? isAuthorize, Object? data, Map<String, dynamic>? queryParameters, bool? isMultipart, bool Function(int?)? validateStatus}) async {
     Response response;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
@@ -54,6 +54,7 @@ class DioInstance {
           endpoint,
           data: data,
           options: Options(
+            validateStatus: validateStatus ,
               headers: {
                 "Accept": "application/json",
                 if (isMultipart ?? false) 'Content-Type': 'multipart/form-data',

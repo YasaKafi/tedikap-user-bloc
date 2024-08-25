@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/presentation/pages/profile_page/bloc/profile_bloc.dart';
 import '../../../../../common/theme.dart';
@@ -8,6 +9,7 @@ import '../../../../common/dimensions.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -142,15 +144,18 @@ class SettingPage extends StatelessWidget {
                         ));
                       },
                       loaded: (_, logModel) {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text(
-                            logModel!.message!,
-                            style: txtSecondaryTitle.copyWith(
-                                fontWeight: FontWeight.w500, color: baseColor),
-                          ),
-                          backgroundColor: greenMedium,
-                        ));
-                        context.goNamed('login');
+                        if (logModel != null) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(
+                              logModel.message!,
+                              style: txtSecondaryTitle.copyWith(
+                                  fontWeight: FontWeight.w500, color: baseColor),
+                            ),
+                            backgroundColor: greenMedium,
+                          ));
+                          context.goNamed('login');
+                        }
+
                       },
                     );
                   },

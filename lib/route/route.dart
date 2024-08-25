@@ -34,7 +34,7 @@ import '../presentation/pages/information_page/privacy_policy_page/privacy_polic
 class AppRouter {
   static final GoRouter router = GoRouter(
     navigatorKey: navigatorKey,
-    initialLocation: '/register',
+    initialLocation: '/splash',
     debugLogDiagnostics: true,
     routes: [
       GoRoute(
@@ -66,12 +66,22 @@ class AppRouter {
       GoRoute(
         name: 'otp_email_verification',
         path: '/otp_email_verification',
-        builder: (context, state) => const SendOtpEmailPage(),
+        builder: (context, state) {
+          final extraData = state.extra as Map<String, dynamic>?;
+          final email = extraData?['email'] ?? '0';
+          return SendOtpEmailPage(email: email,);
+          },
       ),
       GoRoute(
         name: 'reset_password',
         path: '/reset_password',
-        builder: (context, state) => const ResetPasswordPage(),
+        builder: (context, state) {
+          final extraData = state.extra as Map<String, dynamic>?;
+          final email = extraData?['email'] ?? '0';
+          final otp = extraData?['otp'] ?? '0';
+          final resetToken = extraData?['resetToken'] ?? '0';
+          return ResetPasswordPage(email: email, otp: otp, resetToken: resetToken,);
+          },
       ),
       GoRoute(
         name: 'send_email',

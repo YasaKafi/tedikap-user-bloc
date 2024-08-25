@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tedikap_user_bloc/common/dimensions.dart';
 import 'package:tedikap_user_bloc/common/theme.dart';
 import 'package:tedikap_user_bloc/presentation/global_components/common_button.dart';
 import 'package:tedikap_user_bloc/presentation/global_components/textfield_auth_custom.dart';
+import 'package:tedikap_user_bloc/presentation/initial_pages/forgot_password/bloc/forgot_password_bloc.dart';
 
 class SendEmailPage extends StatefulWidget {
   const SendEmailPage({super.key});
@@ -32,11 +34,14 @@ class _SendEmailPageState extends State<SendEmailPage> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back_ios),
-                    onPressed: () {
-                      context.pop();
-                    },
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5),
+                    child: IconButton(
+                      icon: const Icon(Icons.arrow_back_ios),
+                      onPressed: () {
+                        context.pop();
+                      },
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: Dimensions.marginSizeLarge),
@@ -64,10 +69,79 @@ class _SendEmailPageState extends State<SendEmailPage> {
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: CommonButton(width: screenWidth,text: 'Submit', onPressed: (){}, padding: EdgeInsets.symmetric(vertical: 10),),
-              )
+              BlocConsumer<ForgotPasswordBloc, ForgotPasswordState>(
+                listener: (context, state) {
+                  state.maybeWhen(
+                    orElse: () {},
+                    error: (message) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(
+                          message!,
+                          style: txtSecondaryTitle.copyWith(
+                              fontWeight: FontWeight.w500, color: baseColor),
+                        ),
+                        backgroundColor: redMedium,
+                      ));
+                    },
+                    success: (resetModel, otpModel, verifyOtpModel) {
+                      if (otpModel == null) {
+                        return;
+                      }
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(
+                          otpModel.message!,
+                          style: txtSecondaryTitle.copyWith(
+                              fontWeight: FontWeight.w500, color: baseColor),
+                        ),
+                        backgroundColor: greenMedium,
+                      ));
+                      context.pushNamed('otp_email_verification', extra: {'email' : emailController.text,});
+                    },
+                  );
+                },
+                builder: (context, state) {
+                  return state.maybeWhen(
+                    orElse: () {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                        child: CommonButton(
+                          text: 'Submit',
+                          width: MediaQuery.of(context).size.width,
+                          onPressed: () {
+                            if (emailController.text.isEmpty) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text(
+                                  'Please fill email field',
+                                  style: txtSecondaryTitle.copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      color: baseColor),
+                                ),
+                                backgroundColor: redMedium,
+                              ));
+                            } else {
+
+                              context
+                                  .read<ForgotPasswordBloc>()
+                                  .add(ForgotPasswordEvent.postEmailVerification(emailController.text));
+                            }
+                          },
+                          borderRadius: 10,
+                          height: 55,
+                          fontSize: 18,
+                        ),
+                      );
+                    },
+                    loading: () {
+                      return  Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  );
+                },
+              ),
+
+
             ],
           ),
         ),

@@ -46,7 +46,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                     success: (cartModel, modelQty, deleteModel, modelPostOrder,
                         ) {
                       if(cartModel != null){
-                        if (cartModel.cart!.pointsEnough! == false) {
+                        if (cartModel.cart!.pointsEnough! == false && cartModel.cart!.cartItems!.isNotEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text(
                               'Your Point is not enough',

@@ -68,6 +68,15 @@ class _OtpPageViewState extends State<OtpPageView> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Align(
+                alignment: Alignment.topLeft,
+                child:  IconButton(
+                  icon: const Icon(Icons.arrow_back_ios),
+                  onPressed: () {
+                      context.pop();
+                  },
+                ),
+              ),
+              Align(
                 alignment: Alignment.center,
                 child: SvgPicture.asset(icLogoPrimary, width: 125),
               ),
@@ -123,7 +132,7 @@ class _OtpPageViewState extends State<OtpPageView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Kode akan hangus dalam ",
+                  Text("The code will expire in ",
                       style: txtPrimarySubTitle.copyWith(
                           fontWeight: FontWeight.w500, color: blackColor)),
                   const SizedBox(width: 3),
@@ -197,17 +206,17 @@ class _OtpPageViewState extends State<OtpPageView> {
                         backgroundColor: isTimerRunning ? primaryColor : grey,
                         width: MediaQuery.of(context).size.width,
                         onPressed: () {
-                          if (isTimerRunning == false) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(
-                                'The code will expire in',
-                                style: txtSecondaryTitle.copyWith(
-                                    fontWeight: FontWeight.w500,
-                                    color: baseColor),
-                              ),
-                              backgroundColor: redMedium,
-                            ));
-                          } else {
+                          // if (isTimerRunning == false) {
+                          //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          //     content: Text(
+                          //       'Verification code has expired',
+                          //       style: txtSecondaryTitle.copyWith(
+                          //           fontWeight: FontWeight.w500,
+                          //           color: baseColor),
+                          //     ),
+                          //     backgroundColor: redMedium,
+                          //   ));
+                          // } else {
                             if (otpNumberController.text.isNotEmpty) {
                               final requestModel = RegisterRequestModel(
                                 name: widget.username,
@@ -229,7 +238,7 @@ class _OtpPageViewState extends State<OtpPageView> {
                                 backgroundColor: redMedium,
                               ));
                             }
-                          }
+
                         },
                         borderRadius: 10,
                         height: 45,
@@ -281,7 +290,7 @@ class _OtpPageViewState extends State<OtpPageView> {
                     },
                     orElse: () {
                       return CommonButton(
-                        text: 'Verifikasi',
+                        text: 'Verify',
                         width: MediaQuery.of(context).size.width,
                         onPressed: () {
                           if (otpNumberController.text.isNotEmpty) {
@@ -383,7 +392,6 @@ class _OtpPageViewState extends State<OtpPageView> {
                         );
 
                       },
-
                       loading: (o) {
                     print(
                         'VALUE DARI LOADING KIRIM ULANG $isLoadingEmailVerification');
@@ -419,7 +427,8 @@ class _OtpPageViewState extends State<OtpPageView> {
                         },
                       );
                     }
-                  }, orElse: () {
+                  },
+                      orElse: () {
                     return CommonButton(
                       borderColor: primaryColor,
                       borderWidth: 1,

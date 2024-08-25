@@ -31,13 +31,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final TextEditingController phoneNumberController = TextEditingController();
   String gender = '';
   ValueNotifier<String> defaultImagePath = ValueNotifier<String>('');
-  bool isFirstLoad = true;
 
   @override
   void initState() {
     super.initState();
+    _clearControllers();
     context.read<EditProfileBloc>().add(const EditProfileEvent.getUser());
   }
+
+  void _clearControllers() {
+    usernameController.clear();
+    emailController.clear();
+    phoneNumberController.clear();
+  }
+
+
 
   @override
   void dispose() {
@@ -94,15 +102,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       orElse: () => const Center(child: CircularProgressIndicator()),
                       loading: () => _buildShimmerProfile(),
                       loaded: (user, o, imagePath, modelEdit) {
-                        if (isFirstLoad) {
-                          // Initialize values only on first load
-                          usernameController.text = user?.data?.name ?? '';
-                          emailController.text = user?.data?.email ?? '';
-                          phoneNumberController.text = user?.data?.whatsappNumber ?? '';
-                          gender = user?.data?.gender ?? '';
-                          defaultImagePath.value = imagePath ?? user?.data?.avatar ?? '';
-                          isFirstLoad = false;
-                        }
                         if (imagePath != null) {
                           defaultImagePath.value = imagePath;
                         }
@@ -164,6 +163,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             orElse: () => _buildShimmerTextField(),
                             loading: () => _buildShimmerTextField(),
                             loaded: (user, n, o, modelEdit) {
+                              if (user?.data != null){
+                                usernameController.text = user!.data!.name!;
+                                emailController.text = user.data!.email!;
+                                phoneNumberController.text = user.data!.whatsappNumber;
+                              }
                               return CustomTextField(
                                 icon: Icon(Icons.person),
                                 hintText: 'Username',
@@ -362,32 +366,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildProfileImage(String? imagePath, CurrentUserModel? user) {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      decoration: const BoxDecoration(shape: BoxShape.circle),
-      child: imagePath != null
-          ? ClipOval(
-        child: Image.file(
-          i.File(imagePath),
-          width: 170,
-          height: 170,
-          fit: BoxFit.cover,
-        ),
-      )
-          : user?.data?.avatar != null
-          ? ClipOval(
-        child: Image.network(
-          TedikapApiRepository.getAvatarProfile + user!.data!.avatar!,
-          width: 170,
-          height: 170,
-          fit: BoxFit.cover,
-        ),
-      )
-          : const Center(child: Text('No image available')),
     );
   }
 

@@ -56,6 +56,10 @@ class _OrderPageState extends State<OrderPage> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    double dpi = MediaQuery.of(context).devicePixelRatio * 160;
+
+    // Menentukan ukuran font berdasarkan DPI
+    TextStyle textStyle = dpi < 390 ? txtPrimarySubTitle : txtSecondaryTitle;
 
     return DefaultTabController(
       length: 2,
