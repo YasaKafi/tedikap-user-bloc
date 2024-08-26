@@ -81,12 +81,14 @@ class _BaseSectionState extends State<BaseSection> {
                       success:
                           (model, user, index, pointModel, statusOutletModel,
                           bannerModel, boxPromoModel) {
-                        if (user != null) {
+                        if (user?.data != null || statusOutletModel?.data != null) {
                           final schedulePickUp =
-                              statusOutletModel?.data?.time ?? 'No Schedule';
+                              statusOutletModel?.data!.time ?? 'No Schedule';
 
                           final statusOutlet =
-                              statusOutletModel?.data?.description ?? 'Closed';
+                              statusOutletModel?.data!.description;
+
+                          print('INI VALUE DARI $statusOutlet');
 
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,7 +106,7 @@ class _BaseSectionState extends State<BaseSection> {
                                 child: Text(
                                   _isWelcomeMessage
                                       ? 'Selamat Datang'
-                                      : statusOutlet,
+                                      : statusOutlet ?? 'No Status',
                                   key: ValueKey<bool>(_isWelcomeMessage),
                                   style: txtPrimarySubTitle.copyWith(
                                       fontWeight: FontWeight.w500,
@@ -123,7 +125,7 @@ class _BaseSectionState extends State<BaseSection> {
                                 },
                                 child: Text(
                                   _isWelcomeMessage
-                                      ? user.data!.name ?? 'No Name'
+                                      ? user!.data!.name ?? 'No Name'
                                       : schedulePickUp,
                                   key: ValueKey<bool>(_isWelcomeMessage),
                                   style: txtPrimaryTitle.copyWith(

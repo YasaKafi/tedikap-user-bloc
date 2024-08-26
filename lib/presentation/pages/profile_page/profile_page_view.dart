@@ -22,6 +22,14 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    context.read<ProfileBloc>().add(const ProfileEvent.getUser());
+  }
+
+
+
+  @override
   Widget build(BuildContext context) {
     double screenwWidth = MediaQuery.of(context).size.width;
     return Scaffold(

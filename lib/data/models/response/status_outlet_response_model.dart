@@ -21,7 +21,7 @@ class StatusOutletResponseModel {
 }
 
 class Data {
-  int? statusStore;
+  bool? statusStore;
   String? description;
   String? session;
   String? time;

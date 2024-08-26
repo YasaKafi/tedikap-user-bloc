@@ -3,7 +3,7 @@ part of 'edit_profile_bloc.dart';
 @freezed
 class EditProfileEvent with _$EditProfileEvent {
   const factory EditProfileEvent.started() = _Started;
-  const factory EditProfileEvent.doEditProfile({ String? name,
+  const factory EditProfileEvent.doEditProfile({BuildContext? context, String? name,
      String? email,
      String? gender,
     String? phoneNumber,
