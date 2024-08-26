@@ -16,9 +16,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   ProfileBloc(this.datasource) : super(const _Initial()) {
     on<_GetUser>((event, emit) async {
-      emit(const _Loading());
-      final result = await datasource.getCurrentUser();
-      result.fold((l) => emit(const _Error('Failed to get data user')), (r) => emit(_Loaded(model: r,)));
+        emit(const _Loading());
+        final result = await datasource.getCurrentUser();
+        result.fold((l) => emit(const _Error('Failed to get data user')),
+                (r) => emit(_Loaded(model: r)));
+
     });
 
     on<_DoLogout>((event, emit) async {

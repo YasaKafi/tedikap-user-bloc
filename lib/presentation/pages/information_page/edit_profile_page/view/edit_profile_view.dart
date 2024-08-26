@@ -30,6 +30,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
   String gender = '';
+  bool isFirstLoad = true;
   ValueNotifier<String> defaultImagePath = ValueNotifier<String>('');
 
   @override
@@ -44,8 +45,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
     emailController.clear();
     phoneNumberController.clear();
   }
-
-
 
   @override
   void dispose() {
@@ -63,7 +62,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.only(top: 50, bottom: 10, left: 10, right: 10),
+              padding: const EdgeInsets.only(
+                  top: 50, bottom: 10, left: 10, right: 10),
               width: MediaQuery.of(context).size.width,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -74,7 +74,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       if (Navigator.canPop(context)) {
                         context.pop();
                       } else {
-                        context.goNamed('dashboard', pathParameters: {'pageIndex': '3'});
+                        context.goNamed('dashboard',
+                            pathParameters: {'pageIndex': '3'});
                       }
                     },
                   ),
@@ -99,7 +100,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 BlocBuilder<EditProfileBloc, EditProfileState>(
                   builder: (context, state) {
                     return state.maybeWhen(
-                      orElse: () => const Center(child: CircularProgressIndicator()),
+                      orElse: () =>
+                          const Center(child: CircularProgressIndicator()),
                       loading: () => _buildShimmerProfile(),
                       loaded: (user, o, imagePath, modelEdit) {
                         if (imagePath != null) {
@@ -107,26 +109,29 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         }
                         return Container(
                           padding: const EdgeInsets.all(10),
-                          decoration: const BoxDecoration(shape: BoxShape.circle),
+                          decoration:
+                              const BoxDecoration(shape: BoxShape.circle),
                           child: imagePath != null
                               ? ClipOval(
-                            child: Image.file(
-                              i.File(imagePath),
-                              width: 170,
-                              height: 170,
-                              fit: BoxFit.cover,
-                            ),
-                          )
+                                  child: Image.file(
+                                    i.File(imagePath),
+                                    width: 170,
+                                    height: 170,
+                                    fit: BoxFit.cover,
+                                  ),
+                                )
                               : user?.data?.avatar != null
-                              ? ClipOval(
-                            child: Image.network(
-                              TedikapApiRepository.getAvatarProfile + user!.data!.avatar!,
-                              width: 170,
-                              height: 170,
-                              fit: BoxFit.cover,
-                            ),
-                          )
-                              : const Center(child: Text('No image available')),
+                                  ? ClipOval(
+                                      child: Image.network(
+                                        TedikapApiRepository.getAvatarProfile +
+                                            user!.data!.avatar!,
+                                        width: 170,
+                                        height: 170,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  : const Center(
+                                      child: Text('No image available')),
                         );
                       },
                     );
@@ -138,8 +143,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   child: EditImageButton(
                     onPressed: () {
                       context.read<EditProfileBloc>().add(
-                        const EditProfileEvent.changeImage(),
-                      );
+                            const EditProfileEvent.changeImage(),
+                          );
                     },
                   ),
                 ),
@@ -162,20 +167,26 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           return state.maybeWhen(
                             orElse: () => _buildShimmerTextField(),
                             loading: () => _buildShimmerTextField(),
-                            loaded: (user, n, o, modelEdit) {
-                              Future.microtask(() {
-                                if (user?.data != null){
-                                  usernameController.text = user!.data!.name!;
-                                  emailController.text = user.data!.email!;
-                                  phoneNumberController.text = user.data?.whatsappNumber ?? '';
-                                }
-                              });
+                            loaded: (user, n, imagePath, modelEdit) {
+                              if (isFirstLoad && user?.data != null) {
+                                // Initialize values only on first load
+                                usernameController.text = user?.data?.name ?? '';
+                                emailController.text = user?.data?.email ?? '';
+                                phoneNumberController.text = user?.data?.whatsappNumber ?? '';
+                                gender = user?.data?.gender ?? '';
+                                defaultImagePath.value = imagePath ?? user?.data?.avatar ?? '';
+                                isFirstLoad = false;
+                              }
+
                               return CustomTextField(
                                 icon: Icon(Icons.person),
                                 hintText: 'Username',
                                 keyboardType: TextInputType.text,
                                 controller: usernameController,
-                                inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))],
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[a-zA-Z]'))
+                                ],
                                 maxTextLength: 12,
                               );
                             },
@@ -191,7 +202,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         },
                       ),
                       const SizedBox(height: 30),
-
                       BlocBuilder<EditProfileBloc, EditProfileState>(
                         builder: (context, state) {
                           return state.maybeWhen(
@@ -216,9 +226,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           );
                         },
                       ),
-
                       const SizedBox(height: 30),
-
                       BlocBuilder<EditProfileBloc, EditProfileState>(
                         builder: (context, state) {
                           return state.maybeWhen(
@@ -226,28 +234,39 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             loading: () => _buildShimmerTextField(),
                             loaded: (user, n, o, modelEdit) {
                               return CustomTextField(
-                                icon: SvgPicture.asset(icWhatsApp, width: 26,),
+                                icon: SvgPicture.asset(
+                                  icWhatsApp,
+                                  width: 26,
+                                ),
                                 hintText: 'whatsapp number',
-                                prefix: Text('+62 ', style: txtPrimarySubTitle.copyWith(
-                                    fontWeight: FontWeight.w500, color: blackColor)),
+                                prefix: Text('+62 ',
+                                    style: txtPrimarySubTitle.copyWith(
+                                        fontWeight: FontWeight.w500,
+                                        color: blackColor)),
                                 keyboardType: TextInputType.phone,
                                 controller: phoneNumberController,
                                 inputFormatters: [
                                   LengthLimitingTextInputFormatter(12),
-                                  FilteringTextInputFormatter.digitsOnly, // Aturan default hanya angka
+                                  FilteringTextInputFormatter
+                                      .digitsOnly, // Aturan default hanya angka
                                 ],
                                 onChanged: (value) {
                                   if (value.startsWith('0')) {
-                                    phoneNumberController.text = value.substring(1); // Hapus '0' dari awal
-                                    phoneNumberController.selection = TextSelection.fromPosition(
-                                      TextPosition(offset: phoneNumberController.text.length),
+                                    phoneNumberController.text = value
+                                        .substring(1); // Hapus '0' dari awal
+                                    phoneNumberController.selection =
+                                        TextSelection.fromPosition(
+                                      TextPosition(
+                                          offset: phoneNumberController
+                                              .text.length),
                                     );
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(
                                           'Nomor sudah diformat untuk Indonesia, tidak perlu diawali dengan "0".',
                                           style: txtSecondaryTitle.copyWith(
-                                              fontWeight: FontWeight.w600, color: blackColor),
+                                              fontWeight: FontWeight.w600,
+                                              color: blackColor),
                                         ),
                                         backgroundColor: redMedium,
                                       ),
@@ -255,7 +274,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   }
                                 },
                               );
-
                             },
                             error: (message) => Center(
                               child: Text(
@@ -289,20 +307,23 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               content: Text(
                                 message,
                                 style: txtSecondaryTitle.copyWith(
-                                    fontWeight: FontWeight.w600, color: blackColor),
+                                    fontWeight: FontWeight.w600,
+                                    color: blackColor),
                               ),
                               backgroundColor: redMedium,
                             ),
                           );
                         },
                         loaded: (user, o, n, modelEdit) {
-                          if (modelEdit?.message == 'User updated successfully') {
+                          if (modelEdit?.message ==
+                              'User updated successfully') {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
                                   modelEdit!.message!,
                                   style: txtSecondaryTitle.copyWith(
-                                      fontWeight: FontWeight.w600, color: blackColor),
+                                      fontWeight: FontWeight.w600,
+                                      color: blackColor),
                                 ),
                                 backgroundColor: greenMedium,
                               ),
@@ -315,16 +336,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     },
                     builder: (context, state) {
                       return state.maybeWhen(
-                        orElse: () => const Center(child: CircularProgressIndicator()),
+                        orElse: () =>
+                            const Center(child: CircularProgressIndicator()),
                         loaded: (user, o, imagePath, modelEdit) => Container(
-                          margin: const EdgeInsets.only(top: Dimensions.marginSizeExtraLarge, bottom: Dimensions.marginSizeExtraLarge),
+                          margin: const EdgeInsets.only(
+                              top: Dimensions.marginSizeExtraLarge,
+                              bottom: Dimensions.marginSizeExtraLarge),
                           child: SaveButton(
                             onPressed: () {
                               if (usernameController.text.isNotEmpty &&
-                                  emailController.text.isNotEmpty && phoneNumberController.text.isNotEmpty ) {
+                                  emailController.text.isNotEmpty &&
+                                  phoneNumberController.text.isNotEmpty) {
                                 String? updatedName = usernameController.text;
                                 String? updatedEmail = emailController.text;
-                                String? updatedPhoneNumber = phoneNumberController.text;
+                                String? updatedPhoneNumber =
+                                    phoneNumberController.text;
                                 String? updatedGender = o;
 
                                 File? fileToUpload;
@@ -334,14 +360,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 }
 
                                 context.read<EditProfileBloc>().add(
-                                  EditProfileEvent.doEditProfile(
-                                    name: updatedName,
-                                    email: updatedEmail,
-                                    gender: updatedGender,
-                                    phoneNumber: updatedPhoneNumber,
-                                    imageFile: fileToUpload,
-                                  ),
-                                );
+                                      EditProfileEvent.doEditProfile(
+                                        context: context,
+                                        name: updatedName,
+                                        email: updatedEmail,
+                                        gender: updatedGender,
+                                        phoneNumber: updatedPhoneNumber,
+                                        imageFile: fileToUpload,
+                                      ),
+                                    );
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -394,6 +421,3 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 }
-
-
-
