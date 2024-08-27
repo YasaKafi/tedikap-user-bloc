@@ -14,11 +14,12 @@ class BoxHelpSupport extends StatelessWidget {
   const BoxHelpSupport({
     super.key,
     required this.screenwWidth,
-    this.waLink,
+    this.waLink, required this.textStyleCallAdmin,
   });
 
   final double screenwWidth;
   final String? waLink;
+  final TextStyle textStyleCallAdmin;
 
   Future<void> launchURL(Uri url) async {
     if (await canLaunchUrl(url)) {
@@ -181,7 +182,7 @@ class BoxHelpSupport extends StatelessWidget {
                               width: 12,
                             ),
                             Text('Tedikap Customer Service (chat only)',
-                                style: txtSecondarySubTitle.copyWith(
+                                style: textStyleCallAdmin.copyWith(
                                     fontWeight: FontWeight.w400,
                                     color: blackColor))
                           ],

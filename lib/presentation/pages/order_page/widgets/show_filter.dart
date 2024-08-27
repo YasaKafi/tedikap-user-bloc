@@ -11,9 +11,12 @@ class ShowFilter {
   final BuildContext context;
   final int? tapIndex;
   final String query;
+  final TextStyle titleDateStyle;
   final bool isMounted;
 
-  ShowFilter(this.isMounted, {
+  ShowFilter(this.isMounted,
+       {
+         required this.titleDateStyle,
     required this.context,
     required this.tapIndex,
     required this.query,
@@ -90,385 +93,9 @@ class ShowFilter {
           child: BlocBuilder<OrderBloc, OrderState>(
             builder: (context, state) {
               return state.maybeWhen(
-
                   orElse: () {
-                    String startDateText = DateFormat('yyyy-MM-dd')
-                        .format(DateTime.now().subtract(const Duration(days: 365)));
-                    String endDateText =
-                    DateFormat('yyyy-MM-dd').format(DateTime.now());
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Center(
-                              child: Container(
-                                  width: 50,
-                                  height: 6,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[300],
-                                    borderRadius: BorderRadius.circular(10),
-                                  )),
-                            ),
-                            Padding(
-                              padding:
-                              const EdgeInsets.only(top: 20, left: 20, right: 20),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Status Pesanan',
-                                    style: txtPrimaryTitle.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      color: blackColor,
-                                    ),
-                                    textAlign: TextAlign.start,
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Visibility(
-                                    visible: tapIndex == 0,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Menunggu pembayaran',
-                                          style: txtPrimarySubTitle.copyWith(
-                                            fontWeight: FontWeight.w500,
-                                            color: blackColor,
-                                          ),
-                                        ),
-                                        Checkbox(
-                                            value: true,
-                                            activeColor: primaryColor,
-                                            tristate: true,
-                                            onChanged: (newValue) {
-                                            }),
-                                      ],
-                                    ),
-                                  ),
-                                  Visibility(
-                                    visible: tapIndex == 0,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Menunguu dikonfirmasi',
-                                          style: txtPrimarySubTitle.copyWith(
-                                            fontWeight: FontWeight.w500,
-                                            color: blackColor,
-                                          ),
-                                        ),
-                                        Checkbox(
-                                            value: true,
-                                            activeColor: primaryColor,
-                                            tristate: true,
-                                            onChanged: (newValue) {
-                                            }),
-                                      ],
-                                    ),
-                                  ),
-                                  Visibility(
-                                    visible: tapIndex == 0,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Pesanan diproses',
-                                          style: txtPrimarySubTitle.copyWith(
-                                            fontWeight: FontWeight.w500,
-                                            color: blackColor,
-                                          ),
-                                        ),
-                                        Checkbox(
-                                            value: true,
-                                            activeColor: primaryColor,
-                                            tristate: true,
-                                            onChanged: (newValue) {
-                                              // context.read<NotificationBloc>().add(
-                                              //     NotificationEvent.toggleInfo(
-                                              //         newValue, newValue));
-                                            }),
-                                      ],
-                                    ),
-                                  ),
-                                  Visibility(
-                                    visible: tapIndex == 0,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Pesanan siap diambil',
-                                          style: txtPrimarySubTitle.copyWith(
-                                            fontWeight: FontWeight.w500,
-                                            color: blackColor,
-                                          ),
-                                        ),
-                                        Checkbox(
-                                            value: true,
-                                            activeColor: primaryColor,
-                                            tristate: true,
-                                            onChanged: (newValue) {
-                                              // context.read<NotificationBloc>().add(
-                                              //     NotificationEvent.toggleInfo(
-                                              //         newValue, newValue));
-                                            }),
-                                      ],
-                                    ),
-                                  ),
-                                  Visibility(
-                                    visible: tapIndex == 1,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Selesai',
-                                          style: txtPrimarySubTitle.copyWith(
-                                            fontWeight: FontWeight.w500,
-                                            color: blackColor,
-                                          ),
-                                        ),
-                                        Checkbox(
-                                            value: true,
-                                            activeColor: primaryColor,
-                                            onChanged: (newValue) {
-                                              // context.read<NotificationBloc>().add(
-                                              //     NotificationEvent.toggleInfo(
-                                              //         newValue, newValue));
-                                            }),
-                                      ],
-                                    ),
-                                  ),
-                                  Visibility(
-                                    visible: tapIndex == 1,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Dibatalkan',
-                                          style: txtPrimarySubTitle.copyWith(
-                                            fontWeight: FontWeight.w500,
-                                            color: blackColor,
-                                          ),
-                                        ),
-                                        Checkbox(
-                                            value: true,
-                                            activeColor: primaryColor,
-                                            onChanged: (newValue) {
-                                              // context.read<NotificationBloc>().add(
-                                              //     NotificationEvent.toggleVoucher(
-                                              //         newValue, newValue));
-                                            }),
-                                      ],
-                                    ),
-                                  ),
-                                  Visibility(
-                                    visible: tapIndex == 1,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Ditolak',
-                                          style: txtPrimarySubTitle.copyWith(
-                                            fontWeight: FontWeight.w500,
-                                            color: blackColor,
-                                          ),
-                                        ),
-                                        Checkbox(
-                                            value: true,
-                                            activeColor: primaryColor,
-                                            onChanged: (newValue) {
-                                              // context.read<NotificationBloc>().add(
-                                              //     NotificationEvent.toggleVoucher(
-                                              //         newValue, newValue));
-                                            }),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Text(
-                                    'Periode Pesanan',
-                                    style: txtPrimaryTitle.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      color: blackColor,
-                                    ),
-                                    textAlign: TextAlign.start,
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      InkWell(
-                                        // onTap: () =>
-                                        //     _selectDate(context, isStartDate: true),
-                                        child: Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10, vertical: 5),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                              BorderRadius.circular(10),
-                                              border: Border.all(
-                                                  color: grey, width: 1)),
-                                          margin: const EdgeInsets.only(top: 10),
-                                          child: Row(
-                                            children: [
-                                              Column(
-                                                crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Mulai',
-                                                    style: txtSecondarySubTitle
-                                                        .copyWith(
-                                                        color: blackColor,
-                                                        fontWeight:
-                                                        FontWeight.w500),
-                                                  ),
-                                                  const SizedBox(height: 5),
-                                                  Text(
-                                                    startDateText,
-                                                    style:
-                                                    txtPrimarySubTitle.copyWith(
-                                                        color: blackColor,
-                                                        fontWeight:
-                                                        FontWeight.w500),
-                                                  ),
-                                                ],
-                                              ),
-                                              const Padding(
-                                                padding:
-                                                EdgeInsets.only(left: 15),
-                                                child: Icon(
-                                                  Icons.calendar_month_outlined,
-                                                  size: 20,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      Center(
-                                        child: Container(
-                                            width:
-                                            MediaQuery.of(context).size.width *
-                                                0.15,
-                                            height: 3,
-                                            decoration: BoxDecoration(
-                                              color: Colors.grey[200],
-                                              borderRadius:
-                                              BorderRadius.circular(10),
-                                            )),
-                                      ),
-                                      InkWell(
-                                        // onTap: () =>
-                                        //     _selectDate(context, isStartDate: false),
-                                        child: Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10, vertical: 5),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                              BorderRadius.circular(10),
-                                              border: Border.all(
-                                                  color: grey, width: 1)),
-                                          child: Row(
-                                            children: [
-                                              Column(
-                                                crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Berakhir',
-                                                    style: txtSecondarySubTitle
-                                                        .copyWith(
-                                                        color: blackColor,
-                                                        fontWeight:
-                                                        FontWeight.w500),
-                                                  ),
-                                                  const SizedBox(height: 5),
-                                                  Text(
-                                                    endDateText,
-                                                    style:
-                                                    txtPrimarySubTitle.copyWith(
-                                                        color: blackColor,
-                                                        fontWeight:
-                                                        FontWeight.w500),
-                                                  ),
-                                                ],
-                                              ),
-                                              const Padding(
-                                                padding:
-                                                EdgeInsets.only(left: 15),
-                                                child: Icon(
-                                                  Icons.calendar_month_outlined,
-                                                  size: 20,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 20,
-                            horizontal: 20,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              CommonButton(
-                                padding: const EdgeInsets.symmetric(vertical: 15),
-                                width: MediaQuery.of(context).size.width * 0.4,
-                                borderColor: blackColor,
-                                borderWidth: 1,
-                                text: 'Reset',
-                                onPressed: () {
-                                  // context.read<NotificationBloc>().add(NotificationEvent.resetFilters());
-                                  Future.delayed(const Duration(seconds: 2), () {
-                                    context.pop();
-                                  });
-                                },
-                                backgroundColor: baseColor,
-                                textColor: blackColor,
-                                borderRadius: 30,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                              ),
-                              CommonButton(
-                                padding: const EdgeInsets.symmetric(vertical: 15),
-                                width: MediaQuery.of(context).size.width * 0.4,
-                                text: 'Terapkan',
-                                onPressed: () {
+                    return const SizedBox();
 
-
-                                  Navigator.pop(context);
-                                },
-                                backgroundColor: primaryColor,
-                                textColor: baseColor,
-                                borderRadius: 30,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    );
                   }, success: (model,
                   modelReward,
                   filterIndex,
@@ -484,7 +111,6 @@ class ShowFilter {
                   isPesananSelesaiReward,
                   startDateReward,
                   endDateReward) {
-
 
                 String startDateText = DateFormat('yyyy-MM-dd')
                     .format(DateTime.now().subtract(const Duration(days: 365)));
@@ -679,7 +305,7 @@ class ShowFilter {
                                                     ? startDateText
                                                     : startDateTextReward,
                                                 style:
-                                                txtPrimarySubTitle.copyWith(
+                                                titleDateStyle.copyWith(
                                                     color: blackColor,
                                                     fontWeight:
                                                     FontWeight.w500),
@@ -743,7 +369,7 @@ class ShowFilter {
                                                 filterIndex == 0 ?
                                                 endDateText : endDateTextReward,
                                                 style:
-                                                txtPrimarySubTitle.copyWith(
+                                                titleDateStyle.copyWith(
                                                     color: blackColor,
                                                     fontWeight:
                                                     FontWeight.w500),
@@ -815,108 +441,134 @@ class ShowFilter {
                             text: 'Terapkan',
                             onPressed: () {
                               if (filterIndex == 0) {
-                                if (isPesananSelesai == true &&
-                                    isPesananDibatalkan == true &&
-                                    isPesananDitolak == true) {
-                                  context.read<OrderBloc>().add(
-                                      OrderEvent.doFilterOrder(
-                                          filterIndex: filterIndex,
-                                          query: query,
-                                          statusOrder: ''));
-                                } else if (isPesananSelesai == true &&
+                                if (isPesananSelesai == false &&
                                     isPesananDibatalkan == false &&
                                     isPesananDitolak == false) {
-                                  context.read<OrderBloc>().add(
-                                      OrderEvent.doFilterOrder(
-                                          filterIndex: filterIndex,
-                                          query: query,
-                                          statusOrder: 'pesanan selesai',
-                                          startDate: startDateText,
-                                          endDate: endDateText));
-                                } else if (isPesananSelesai == false &&
-                                    isPesananDibatalkan == true &&
-                                    isPesananDitolak == false) {
-                                  context.read<OrderBloc>().add(
-                                      OrderEvent.doFilterOrder(
-                                          filterIndex: filterIndex,
-                                          query: query,
-                                          statusOrder: 'pesanan dibatalkan',
-                                          startDate: startDateText,
-                                          endDate: endDateText));
-                                } else if (isPesananSelesai == false &&
-                                    isPesananDibatalkan == false &&
-                                    isPesananDitolak == true) {
-                                  context.read<OrderBloc>().add(
-                                      OrderEvent.doFilterOrder(
-                                          filterIndex: filterIndex,
-                                          query: query,
-                                          statusOrder: 'pesanan ditolak',
-                                          startDate: startDateText,
-                                          endDate: endDateText));
-                                } else if (isPesananSelesai == true &&
-                                    isPesananDibatalkan == true &&
-                                    isPesananDitolak == false) {
-                                  context.read<OrderBloc>().add(
-                                      OrderEvent.doFilterOrder(
-                                          filterIndex: filterIndex,
-                                          query: query,
-                                          statusOrder: 'finished_canceled',
-                                          startDate: startDateText,
-                                          endDate: endDateText));
-                                } else if (isPesananSelesai == true &&
-                                    isPesananDibatalkan == false &&
-                                    isPesananDitolak == true) {
-                                  context.read<OrderBloc>().add(
-                                      OrderEvent.doFilterOrder(
-                                          filterIndex: filterIndex,
-                                          query: query,
-                                          statusOrder: 'finished_rejected',
-                                          startDate: startDateText,
-                                          endDate: endDateText));
-                                } else if (isPesananSelesai == false &&
-                                    isPesananDibatalkan == true &&
-                                    isPesananDitolak == true) {
-                                  context.read<OrderBloc>().add(
-                                      OrderEvent.doFilterOrder(
-                                          filterIndex: filterIndex,
-                                          query: query,
-                                          statusOrder: 'canceled_rejected',
-                                          startDate: startDateText,
-                                          endDate: endDateText));
+                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    content: Text(
+                                      'Harap pilih setidaknya satu status untuk filter!',
+                                      style: txtSecondaryTitle.copyWith(
+                                          fontWeight: FontWeight.w500, color: baseColor),
+                                    ),
+                                    backgroundColor: redMedium,
+                                  ));
+                                } else {
+                                  if (isPesananSelesai == true &&
+                                      isPesananDibatalkan == true &&
+                                      isPesananDitolak == true) {
+                                    context.read<OrderBloc>().add(
+                                        OrderEvent.doFilterOrder(
+                                            filterIndex: filterIndex,
+                                            query: query,
+                                            statusOrder: ''));
+                                  } else if (isPesananSelesai == true &&
+                                      isPesananDibatalkan == false &&
+                                      isPesananDitolak == false) {
+                                    context.read<OrderBloc>().add(
+                                        OrderEvent.doFilterOrder(
+                                            filterIndex: filterIndex,
+                                            query: query,
+                                            statusOrder: 'pesanan selesai',
+                                            startDate: startDateText,
+                                            endDate: endDateText));
+                                  } else if (isPesananSelesai == false &&
+                                      isPesananDibatalkan == true &&
+                                      isPesananDitolak == false) {
+                                    context.read<OrderBloc>().add(
+                                        OrderEvent.doFilterOrder(
+                                            filterIndex: filterIndex,
+                                            query: query,
+                                            statusOrder: 'pesanan dibatalkan',
+                                            startDate: startDateText,
+                                            endDate: endDateText));
+                                  } else if (isPesananSelesai == false &&
+                                      isPesananDibatalkan == false &&
+                                      isPesananDitolak == true) {
+                                    context.read<OrderBloc>().add(
+                                        OrderEvent.doFilterOrder(
+                                            filterIndex: filterIndex,
+                                            query: query,
+                                            statusOrder: 'pesanan ditolak',
+                                            startDate: startDateText,
+                                            endDate: endDateText));
+                                  } else if (isPesananSelesai == true &&
+                                      isPesananDibatalkan == true &&
+                                      isPesananDitolak == false) {
+                                    context.read<OrderBloc>().add(
+                                        OrderEvent.doFilterOrder(
+                                            filterIndex: filterIndex,
+                                            query: query,
+                                            statusOrder: 'finished_canceled',
+                                            startDate: startDateText,
+                                            endDate: endDateText));
+                                  } else if (isPesananSelesai == true &&
+                                      isPesananDibatalkan == false &&
+                                      isPesananDitolak == true) {
+                                    context.read<OrderBloc>().add(
+                                        OrderEvent.doFilterOrder(
+                                            filterIndex: filterIndex,
+                                            query: query,
+                                            statusOrder: 'finished_rejected',
+                                            startDate: startDateText,
+                                            endDate: endDateText));
+                                  } else if (isPesananSelesai == false &&
+                                      isPesananDibatalkan == true &&
+                                      isPesananDitolak == true) {
+                                    context.read<OrderBloc>().add(
+                                        OrderEvent.doFilterOrder(
+                                            filterIndex: filterIndex,
+                                            query: query,
+                                            statusOrder: 'canceled_rejected',
+                                            startDate: startDateText,
+                                            endDate: endDateText));
+                                  }
                                 }
                               } else if (filterIndex == 1) {
-                                if (isPesananSelesaiReward == true &&
+                                if (isPesananSelesaiReward == false &&
                                     isPesananDitolakReward == false) {
-                                  context.read<OrderBloc>().add(
-                                      OrderEvent.doFilterOrder(
-                                          filterIndex: filterIndex,
-                                          query: query,
-                                          statusOrder: 'pesanan selesai',
-                                          startDate: startDateTextReward,
-                                          endDate: endDateTextReward));
-                                } else if (isPesananSelesaiReward == false &&
-                                    isPesananDitolakReward == true) {
-                                  context.read<OrderBloc>().add(
-                                      OrderEvent.doFilterOrder(
-                                          filterIndex: filterIndex,
-                                          query: query,
-                                          statusOrder: 'pesanan ditolak',
-                                          startDate: startDateTextReward,
-                                          endDate: endDateTextReward));
-                                } else if (isPesananSelesaiReward == true &&
-                                    isPesananDitolakReward == true) {
-                                  context.read<OrderBloc>().add(
-                                      OrderEvent.doFilterOrder(
-                                          filterIndex: filterIndex,
-                                          query: query,
-                                          statusOrder: '',
-                                          startDate: startDateTextReward,
-                                          endDate: endDateTextReward));
+                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    content: Text(
+                                      'Harap pilih setidaknya satu status untuk filter!',
+                                      style: txtSecondaryTitle.copyWith(
+                                          fontWeight: FontWeight.w500, color: baseColor),
+                                    ),
+                                    backgroundColor: redMedium,
+                                  ));
+                                } else {
+                                  if (isPesananSelesaiReward == true &&
+                                      isPesananDitolakReward == false) {
+                                    context.read<OrderBloc>().add(
+                                        OrderEvent.doFilterOrder(
+                                            filterIndex: filterIndex,
+                                            query: query,
+                                            statusOrder: 'pesanan selesai',
+                                            startDate: startDateTextReward,
+                                            endDate: endDateTextReward));
+                                  } else if (isPesananSelesaiReward == false &&
+                                      isPesananDitolakReward == true) {
+                                    context.read<OrderBloc>().add(
+                                        OrderEvent.doFilterOrder(
+                                            filterIndex: filterIndex,
+                                            query: query,
+                                            statusOrder: 'pesanan ditolak',
+                                            startDate: startDateTextReward,
+                                            endDate: endDateTextReward));
+                                  } else if (isPesananSelesaiReward == true &&
+                                      isPesananDitolakReward == true) {
+                                    context.read<OrderBloc>().add(
+                                        OrderEvent.doFilterOrder(
+                                            filterIndex: filterIndex,
+                                            query: query,
+                                            statusOrder: '',
+                                            startDate: startDateTextReward,
+                                            endDate: endDateTextReward));
+                                  }
                                 }
                               }
 
                               Navigator.pop(context);
                             },
+
                             backgroundColor: primaryColor,
                             textColor: baseColor,
                             borderRadius: 30,

@@ -244,6 +244,7 @@ class BoxProductOrder extends StatelessWidget {
                               SizedBox(
                                 height: 10,
                               ),
+                              detailOrderItemReward.note == null ? SizedBox() :
                               Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [

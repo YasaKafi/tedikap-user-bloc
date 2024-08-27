@@ -20,6 +20,9 @@ class BoxTimelinePickup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double dpi = MediaQuery.of(context).devicePixelRatio * 160;
+    TextStyle textAddressStyle = dpi < 380 ? txtThirdSubTitle : txtSecondarySubTitle;
+
     Widget loadingCard(double width, double height) {
       double screenWidth = MediaQuery.of(context).size.width;
       return Shimmer.fromColors(
@@ -125,7 +128,7 @@ class BoxTimelinePickup extends StatelessWidget {
                               ),
                               Text(
                                 'Jalan Sukun Raya No.09, Besito, Kudus',
-                                style: txtSecondarySubTitle.copyWith(
+                                style: textAddressStyle.copyWith(
                                     fontWeight: FontWeight.w500,
                                     color: blackColor),
                               ),
