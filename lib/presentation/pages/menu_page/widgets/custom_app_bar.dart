@@ -21,6 +21,9 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double dpi = MediaQuery.of(context).devicePixelRatio * 170;
+    TextStyle textStyleTitle = dpi < 380 ? txtSecondarySubTitle : txtPrimarySubTitle;
+
     Timer? _debounce;
     searchController.addListener(() {
       if (_debounce?.isActive ?? false) _debounce?.cancel();
@@ -71,7 +74,7 @@ class CustomAppBar extends StatelessWidget {
                   focusColor: const Color.fromRGBO(246, 246, 246, 100),
                   fillColor: const Color.fromRGBO(246, 246, 246, 100),
                   hintText: 'What would you like to drink today?',
-                  hintStyle: txtPrimarySubTitle.copyWith(fontWeight: FontWeight.w500, color: grey),
+                  hintStyle: textStyleTitle.copyWith(fontWeight: FontWeight.w500, color: grey),
                 ),
               ),
             ),

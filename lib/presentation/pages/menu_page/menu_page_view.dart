@@ -64,6 +64,9 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
+    double dpi = MediaQuery.of(context).devicePixelRatio * 170;
+    TextStyle textStyleTitle = dpi < 380 ? txtThirdSubTitle : txtSecondarySubTitle;
+
     return DefaultTabController(
       length: 4,
       child: Scaffold(
@@ -131,25 +134,25 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
                         tabs: [
                           Tab(
                             child: Text('All',
-                                style: txtPrimarySubTitle.copyWith(
+                                style: textStyleTitle.copyWith(
                                     fontWeight: FontWeight.w500,
                                     color: blackColor)),
                           ),
                           Tab(
                             child: Text('Tea',
-                                style: txtPrimarySubTitle.copyWith(
+                                style: textStyleTitle.copyWith(
                                     fontWeight: FontWeight.w500,
                                     color: blackColor)),
                           ),
                           Tab(
                             child: Text('Non Tea',
-                                style: txtPrimarySubTitle.copyWith(
+                                style: textStyleTitle.copyWith(
                                     fontWeight: FontWeight.w500,
                                     color: blackColor)),
                           ),
                           Tab(
                             child: Text('Yakult',
-                                style: txtPrimarySubTitle.copyWith(
+                                style: textStyleTitle.copyWith(
                                     fontWeight: FontWeight.w500,
                                     color: blackColor)),
                           ),
@@ -194,8 +197,8 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
                     alignment: Alignment.centerLeft,
                     child: Container(
                       margin: const EdgeInsets.only(left: Dimensions.marginSizeSmall),
-                      width: 70,
-                      height: 70,
+                      width: 60,
+                      height: 60,
                       decoration: const ShapeDecoration(
                         color: grey,
                         shape: RoundedRectangleBorder(
@@ -226,7 +229,7 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
                           borderRadius: BorderRadius.circular(5),
                           color: Colors.grey,
                         ),
-                        width: screenWidth * 0.45,
+                        width: screenWidth * 0.4,
                         height: 20,
                       ),
                     ],
