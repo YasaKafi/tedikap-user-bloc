@@ -28,14 +28,17 @@ class ListBoxProductPoin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    double dpi = MediaQuery.of(context).devicePixelRatio * 160;
+    TextStyle textTitleStyle = dpi < 380 ? txtSecondaryTitle : txtPrimaryTitle;
+    double heightImage = dpi < 380 ? screenHeight * 0.17 : screenHeight * 0.2;
 
+    return SizedBox(
         width: screenWidth,
         child: Column(
           children: [
             Container(
               width: screenWidth,
-              height: screenHeight * 0.2,
+              height: heightImage,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: primaryColor,
@@ -51,7 +54,7 @@ class ListBoxProductPoin extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.only(top: 5),
                   width: screenWidth,
-                    child: Text(title, style: txtPrimaryTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor),)),
+                    child: Text(title, style: textTitleStyle.copyWith(fontWeight: FontWeight.w500, color: blackColor),)),
               ],
             ),
 

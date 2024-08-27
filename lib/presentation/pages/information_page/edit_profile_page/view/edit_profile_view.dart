@@ -31,6 +31,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final TextEditingController phoneNumberController = TextEditingController();
   String gender = '';
   bool isFirstLoad = true;
+  bool isSnackBarShown = false;
   ValueNotifier<String> defaultImagePath = ValueNotifier<String>('');
 
   @override
@@ -106,6 +107,41 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       loaded: (user, o, imagePath, modelEdit) {
                         if (imagePath != null) {
                           defaultImagePath.value = imagePath;
+                          final file = i.File(imagePath);
+                          final fileSizeInBytes = file.lengthSync();
+                          final fileSizeInMB = fileSizeInBytes / (1024 * 1024);
+
+                          print('VALUE DARI IMAGE MB $fileSizeInMB');
+                          // Cek apakah ukuran file melebihi 2MB
+                          if (fileSizeInMB > 2 && !isSnackBarShown) {
+                            // Tampilkan Snackbar hanya jika belum pernah ditampilkan
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text(
+                                  'Ukuran file gambar melebihi 2MB. Silakan pilih file lain',
+                                  style: txtSecondaryTitle.copyWith(
+                                      fontWeight: FontWeight.w500, color: baseColor),
+                                ),
+                                backgroundColor: redMedium,
+                              ));
+                            });
+                            isSnackBarShown = false;  // Tandai bahwa Snackbar sudah ditampilkan
+                            // Kembalikan widget kosong jika ukuran file terlalu besar
+                            return Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: const BoxDecoration(shape: BoxShape.circle),
+                                child: ClipOval(
+                                  child: Image.network(
+                                    TedikapApiRepository.getAvatarProfile +
+                                        user!.data!.avatar!,
+                                    width: 170,
+                                    height: 170,
+                                    fit: BoxFit.cover,
+                                  ),
+                                )
+                            );
+
+                          }
                         }
                         return Container(
                           padding: const EdgeInsets.all(10),
@@ -239,7 +275,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   icWhatsApp,
                                   width: 26,
                                 ),
-                                hintText: 'whatsapp number',
+                                hintText: 'Whatsapp Number',
                                 prefix: Text('+62 ',
                                     style: txtPrimarySubTitle.copyWith(
                                         fontWeight: FontWeight.w500,
@@ -290,14 +326,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     ],
                   ),
                   const SizedBox(height: 30),
-                  // CustomDropDown(
-                  //   gender: gender,
-                  //   onChanged: (newValue) {
-                  //     setState(() {
-                  //       gender = newValue!;
-                  //     });
-                  //   },
-                  // ),
+
                   BlocConsumer<EditProfileBloc, EditProfileState>(
                     listener: (context, state) {
                       state.maybeWhen(

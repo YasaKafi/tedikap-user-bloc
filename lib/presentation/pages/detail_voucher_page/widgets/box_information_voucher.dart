@@ -12,14 +12,12 @@ class ListBoxInformationVoucher extends StatelessWidget {
   ListBoxInformationVoucher({
     super.key,
     required this.screenWidth,
-    required this.image,
     required this.title,
     required this.subtitle,
     required this.icon,
   });
 
   final double screenWidth;
-  final String image;
   final String title;
   final String subtitle;
   final String icon;

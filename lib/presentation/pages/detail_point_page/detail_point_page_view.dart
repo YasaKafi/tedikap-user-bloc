@@ -10,6 +10,9 @@ class DetailPointPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double dpi = MediaQuery.of(context).devicePixelRatio * 170;
+    TextStyle textStyleTitle = dpi < 380 ? txtPrimarySubTitle : txtSecondaryTitle;
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -63,7 +66,7 @@ class DetailPointPage extends StatelessWidget {
                     children: [
                       Text('Pengumpulan Tedikap Poin', style:  txtPrimaryTitle.copyWith(fontWeight: FontWeight.w600, color: primaryColor)),
                       SizedBox(height: 10),
-                      Padding(padding: EdgeInsets.only(left: 10), child: Text('1. Dapatkan 1 Tedikap Poin untuk setiap transaksi sebesar Rp3.000 dan berlaku kelipatannya. Contoh: Transaksi sebesar Rp35.000 akan mendapatkan 3 Tedikap Poin; transaksi sebesar Rp51.000 akan mendapatkan 5 Tedikap Poin.', style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor))),
+                      Padding(padding: EdgeInsets.only(left: 10), child: Text('1. Dapatkan 1 Tedikap Poin untuk setiap transaksi sebesar Rp3.000 dan berlaku kelipatannya. Contoh: Transaksi sebesar Rp35.000 akan mendapatkan 3 Tedikap Poin; transaksi sebesar Rp51.000 akan mendapatkan 5 Tedikap Poin.', style: textStyleTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor))),
                       SizedBox(height: 5),
                     ],
                   ),
@@ -83,7 +86,7 @@ class DetailPointPage extends StatelessWidget {
                     children: [
                       Text('Pengumpulan Tedikap Poin', style: txtPrimaryTitle.copyWith(fontWeight: FontWeight.w600, color: primaryColor)),
                       SizedBox(height: 10),
-                      Padding(padding: EdgeInsets.only(left: 10), child: Text('1. Dapatkan 1 Tedikap Poin untuk setiap transaksi sebesar Rp3.000 dan berlaku kelipatannya. Contoh: Transaksi sebesar Rp35.000 akan mendapatkan 3 Tedikap Poin; transaksi sebesar Rp51.000 akan mendapatkan 5 Tedikap Poin.', style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor))),
+                      Padding(padding: EdgeInsets.only(left: 10), child: Text('1. Dapatkan 1 Tedikap Poin untuk setiap transaksi sebesar Rp3.000 dan berlaku kelipatannya. Contoh: Transaksi sebesar Rp35.000 akan mendapatkan 3 Tedikap Poin; transaksi sebesar Rp51.000 akan mendapatkan 5 Tedikap Poin.', style: textStyleTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor))),
                       SizedBox(height: 5),],
                   ),
 
