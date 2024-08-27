@@ -22,17 +22,14 @@ class _SplashPageState extends State<SplashPage> {
     _router = GoRouter.of(context);
   }
 
-  void _clearSharedPreferences() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
-  }
+  // void _clearSharedPreferences() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   await prefs.clear();
+  // }
 
   @override
   void initState() {
     super.initState();
-    if (kReleaseMode) {
-      _clearSharedPreferences();
-    }
     _checkAuthStatus();
   }
 

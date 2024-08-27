@@ -23,9 +23,8 @@ class ListBoxProductMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double dpi = MediaQuery.of(context).devicePixelRatio * 170;
-    print('DPI: $dpi');
-    TextStyle textStyleTitle = dpi < 390 ? txtSecondaryTitle : txtPrimaryTitle;
-    double sizeImageProduct = dpi < 390 ? 60 : 70;
+    TextStyle textStyleTitle = dpi < 380 ? txtSecondaryTitle : txtPrimaryTitle;
+    double sizeImageProduct = dpi < 380 ? 60 : 70;
     return Container(
         margin: const EdgeInsets.only(
             left: Dimensions.marginSizeLarge,

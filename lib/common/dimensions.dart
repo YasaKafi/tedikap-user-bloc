@@ -41,7 +41,7 @@ class Dimensions {
   static const double iconSizeSmall = 15.0;
   static const double iconSizeMedium = 18.0;
   static const double iconSizeDefault = 24.0;
-  static const double iconSizeKindDeafult = 20.0;
+  static const double iconSizeKindDefault = 20.0;
   static const double iconSizeLarge = 32.0;
   static const double iconSizeExtraLarge = 40.0;
 

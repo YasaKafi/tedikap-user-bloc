@@ -196,8 +196,8 @@ class ShimmerWidgetsHome {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
-                        height: Dimensions.iconSizeKindDeafult,
-                        width: Dimensions.iconSizeKindDeafult,
+                        height: Dimensions.iconSizeKindDefault,
+                        width: Dimensions.iconSizeKindDefault,
                         color: Colors.white,
                       ),
                       const SizedBox(width: 5),

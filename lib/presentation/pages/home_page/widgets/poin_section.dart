@@ -19,6 +19,8 @@ class PoinSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double dpi = MediaQuery.of(context).devicePixelRatio * 170;
+    TextStyle textStyleReedem = dpi < 380 ? txtThirdSubTitle : txtSecondarySubTitle;
     return Container(
         decoration: BoxDecoration(
             color: baseColor,
@@ -95,7 +97,7 @@ class PoinSection extends StatelessWidget {
                   Flexible(
                     child: Text(
                       'Redeem your points for exciting rewards',
-                      style: txtSecondarySubTitle.copyWith(
+                      style: textStyleReedem.copyWith(
                           fontWeight: FontWeight.w500, color: blackColor),
                     ),
                   ),

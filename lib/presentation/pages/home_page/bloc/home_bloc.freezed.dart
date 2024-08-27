@@ -20,7 +20,7 @@ mixin _$HomeEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getPoint,
-    required TResult Function() getUser,
+    required TResult Function(bool forceRefresh) getUser,
     required TResult Function(int index) changeIndex,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$HomeEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getPoint,
-    TResult? Function()? getUser,
+    TResult? Function(bool forceRefresh)? getUser,
     TResult? Function(int index)? changeIndex,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$HomeEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getPoint,
-    TResult Function()? getUser,
+    TResult Function(bool forceRefresh)? getUser,
     TResult Function(int index)? changeIndex,
     required TResult orElse(),
   }) =>
@@ -125,7 +125,7 @@ class _$StartedImpl implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getPoint,
-    required TResult Function() getUser,
+    required TResult Function(bool forceRefresh) getUser,
     required TResult Function(int index) changeIndex,
   }) {
     return started();
@@ -136,7 +136,7 @@ class _$StartedImpl implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getPoint,
-    TResult? Function()? getUser,
+    TResult? Function(bool forceRefresh)? getUser,
     TResult? Function(int index)? changeIndex,
   }) {
     return started?.call();
@@ -147,7 +147,7 @@ class _$StartedImpl implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getPoint,
-    TResult Function()? getUser,
+    TResult Function(bool forceRefresh)? getUser,
     TResult Function(int index)? changeIndex,
     required TResult orElse(),
   }) {
@@ -239,7 +239,7 @@ class _$GetPointImpl implements _GetPoint {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getPoint,
-    required TResult Function() getUser,
+    required TResult Function(bool forceRefresh) getUser,
     required TResult Function(int index) changeIndex,
   }) {
     return getPoint();
@@ -250,7 +250,7 @@ class _$GetPointImpl implements _GetPoint {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getPoint,
-    TResult? Function()? getUser,
+    TResult? Function(bool forceRefresh)? getUser,
     TResult? Function(int index)? changeIndex,
   }) {
     return getPoint?.call();
@@ -261,7 +261,7 @@ class _$GetPointImpl implements _GetPoint {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getPoint,
-    TResult Function()? getUser,
+    TResult Function(bool forceRefresh)? getUser,
     TResult Function(int index)? changeIndex,
     required TResult orElse(),
   }) {
@@ -318,6 +318,8 @@ abstract class _$$GetUserImplCopyWith<$Res> {
   factory _$$GetUserImplCopyWith(
           _$GetUserImpl value, $Res Function(_$GetUserImpl) then) =
       __$$GetUserImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool forceRefresh});
 }
 
 /// @nodoc
@@ -327,36 +329,62 @@ class __$$GetUserImplCopyWithImpl<$Res>
   __$$GetUserImplCopyWithImpl(
       _$GetUserImpl _value, $Res Function(_$GetUserImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? forceRefresh = null,
+  }) {
+    return _then(_$GetUserImpl(
+      forceRefresh: null == forceRefresh
+          ? _value.forceRefresh
+          : forceRefresh // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$GetUserImpl implements _GetUser {
-  const _$GetUserImpl();
+  const _$GetUserImpl({this.forceRefresh = false});
+
+  @override
+  @JsonKey()
+  final bool forceRefresh;
 
   @override
   String toString() {
-    return 'HomeEvent.getUser()';
+    return 'HomeEvent.getUser(forceRefresh: $forceRefresh)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$GetUserImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$GetUserImpl &&
+            (identical(other.forceRefresh, forceRefresh) ||
+                other.forceRefresh == forceRefresh));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, forceRefresh);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetUserImplCopyWith<_$GetUserImpl> get copyWith =>
+      __$$GetUserImplCopyWithImpl<_$GetUserImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getPoint,
-    required TResult Function() getUser,
+    required TResult Function(bool forceRefresh) getUser,
     required TResult Function(int index) changeIndex,
   }) {
-    return getUser();
+    return getUser(forceRefresh);
   }
 
   @override
@@ -364,10 +392,10 @@ class _$GetUserImpl implements _GetUser {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getPoint,
-    TResult? Function()? getUser,
+    TResult? Function(bool forceRefresh)? getUser,
     TResult? Function(int index)? changeIndex,
   }) {
-    return getUser?.call();
+    return getUser?.call(forceRefresh);
   }
 
   @override
@@ -375,12 +403,12 @@ class _$GetUserImpl implements _GetUser {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getPoint,
-    TResult Function()? getUser,
+    TResult Function(bool forceRefresh)? getUser,
     TResult Function(int index)? changeIndex,
     required TResult orElse(),
   }) {
     if (getUser != null) {
-      return getUser();
+      return getUser(forceRefresh);
     }
     return orElse();
   }
@@ -424,7 +452,12 @@ class _$GetUserImpl implements _GetUser {
 }
 
 abstract class _GetUser implements HomeEvent {
-  const factory _GetUser() = _$GetUserImpl;
+  const factory _GetUser({final bool forceRefresh}) = _$GetUserImpl;
+
+  bool get forceRefresh;
+  @JsonKey(ignore: true)
+  _$$GetUserImplCopyWith<_$GetUserImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -493,7 +526,7 @@ class _$ChangeIndexImpl implements _ChangeIndex {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getPoint,
-    required TResult Function() getUser,
+    required TResult Function(bool forceRefresh) getUser,
     required TResult Function(int index) changeIndex,
   }) {
     return changeIndex(index);
@@ -504,7 +537,7 @@ class _$ChangeIndexImpl implements _ChangeIndex {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getPoint,
-    TResult? Function()? getUser,
+    TResult? Function(bool forceRefresh)? getUser,
     TResult? Function(int index)? changeIndex,
   }) {
     return changeIndex?.call(index);
@@ -515,7 +548,7 @@ class _$ChangeIndexImpl implements _ChangeIndex {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getPoint,
-    TResult Function()? getUser,
+    TResult Function(bool forceRefresh)? getUser,
     TResult Function(int index)? changeIndex,
     required TResult orElse(),
   }) {

@@ -29,6 +29,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     });
 
     on<_GetUser>((event, emit) async {
+      final currentState = state;
+      // Jika forceRefresh true atau state bukan _Success, lakukan fetch
+      if (currentState is _Success && !event.forceRefresh) {
+        return;
+      }
       emit(const _Loading());
       try {
         final userResult = await datasource.getCurrentUser();
