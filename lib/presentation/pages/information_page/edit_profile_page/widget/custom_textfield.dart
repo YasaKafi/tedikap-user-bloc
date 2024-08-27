@@ -12,6 +12,7 @@ class CustomTextField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final Widget? icon;
   final Widget? prefix;
+  final bool readOnly;
   final void Function(String)? onChanged;
 
   CustomTextField({
@@ -21,7 +22,9 @@ class CustomTextField extends StatelessWidget {
     this.maxTextLength,
     this.controller,
     this.inputFormatters,
-    this.icon, this.prefix, this.onChanged,
+    this.icon, this.prefix,
+    this.onChanged,
+    this.readOnly = false,
   }) : super(key: key);
 
   @override
@@ -46,6 +49,7 @@ class CustomTextField extends StatelessWidget {
       ),
       onChanged: onChanged,
       keyboardType: keyboardType,
+      readOnly: readOnly,
     );
   }
 }

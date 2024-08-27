@@ -8,6 +8,9 @@ import '../../../../../common/dimensions.dart';
 import '../../../../../common/theme.dart';
 import '../bloc/detail_order_bloc.dart';
 
+import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
+
 class BoxKindOfPayment extends StatelessWidget {
   const BoxKindOfPayment({
     super.key,
@@ -29,33 +32,28 @@ class BoxKindOfPayment extends StatelessWidget {
         builder: (context, state) {
           return state.when(
               initial: () {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
+                return _buildShimmerEffect();
               },
               loading: () =>
-                  Center(
-                    child:
-                    CircularProgressIndicator(),
-                  ),
+                  _buildShimmerEffect(),
               success: (model, modelReward) {
                 if (model != null) {
                   final order = model.order!;
                   String? logoPayment;
 
-                  if (order.paymentChannel == 'DANA'){
+                  if (order.paymentChannel == 'DANA') {
                     logoPayment = icDana;
-                  } else if (order.paymentChannel == 'SHOPEEPAY'){
+                  } else if (order.paymentChannel == 'SHOPEEPAY') {
                     logoPayment = icShopee;
-                  } else if (order.paymentChannel == 'OVO'){
+                  } else if (order.paymentChannel == 'OVO') {
                     logoPayment = icOvo;
-                  } else if (order.paymentChannel == 'LINKAJA'){
+                  } else if (order.paymentChannel == 'LINKAJA') {
                     logoPayment = icLinkAja;
-                  } else if (order.paymentChannel == 'ASTRAPAY'){
+                  } else if (order.paymentChannel == 'ASTRAPAY') {
                     logoPayment = icAstraPay;
-                  } else if (order.paymentChannel == 'JENIUSPAY'){
+                  } else if (order.paymentChannel == 'JENIUSPAY') {
                     logoPayment = icJeniusPay;
-                  } else if (order.paymentChannel == 'QRIS'){
+                  } else if (order.paymentChannel == 'QRIS') {
                     logoPayment = icQris;
                   }
 
@@ -113,4 +111,48 @@ class BoxKindOfPayment extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildShimmerEffect() {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 150,
+            height: 20,
+            color: Colors.white,
+          ),
+          SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    width: 24,
+                    height: 24,
+                    color: Colors.white,
+                  ),
+                  SizedBox(width: 5),
+                  Container(
+                    width: 100,
+                    height: 20,
+                    color: Colors.white,
+                  ),
+                ],
+              ),
+              Container(
+                width: 80,
+                height: 20,
+                color: Colors.white,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
 }
+

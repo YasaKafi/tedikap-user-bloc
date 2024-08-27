@@ -45,6 +45,9 @@ class BoxInfoStatus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double dpi = MediaQuery.of(context).devicePixelRatio * 160;
+    TextStyle textInfoStyle = dpi < 380 ? txtThirdSubTitle : txtSecondarySubTitle;
+    TextStyle textStatusDescStyle = dpi < 380 ? txtSecondarySubTitle : txtPrimarySubTitle;
     return Container(
       decoration: BoxDecoration(
         color: baseColor,
@@ -103,7 +106,7 @@ class BoxInfoStatus extends StatelessWidget {
                           if (detailOrder != null) {
                             return Text(
                               detailOrder.statusDescription!.toLowerCase(),
-                                style: txtPrimarySubTitle.copyWith(
+                                style: textStatusDescStyle.copyWith(
                                   fontWeight: FontWeight.w500,
                                   color: grey,
                                 ),
@@ -111,7 +114,7 @@ class BoxInfoStatus extends StatelessWidget {
                           } else {
                             return Text(
                               detailOrderReward!.status!.toLowerCase(),
-                              style: txtPrimarySubTitle.copyWith(
+                              style: textStatusDescStyle.copyWith(
                                 fontWeight: FontWeight.w500,
                                 color: grey,
                               ),
@@ -138,7 +141,7 @@ class BoxInfoStatus extends StatelessWidget {
                                   if (detailOrder != null) {
                                     return Text(
                                       'ORDER ID: ${detailOrder.id}',
-                                      style: txtSecondarySubTitle.copyWith(
+                                      style: textInfoStyle.copyWith(
                                         fontWeight: FontWeight.w600,
                                         color: blackColor,
                                       ),
@@ -146,7 +149,7 @@ class BoxInfoStatus extends StatelessWidget {
                                   }
                                   return Text(
                                     'ORDER ID: ${detailOrderReward!.id}',
-                                    style: txtSecondarySubTitle.copyWith(
+                                    style: textInfoStyle.copyWith(
                                       fontWeight: FontWeight.w600,
                                       color: blackColor,
                                     ),
@@ -203,7 +206,7 @@ class BoxInfoStatus extends StatelessWidget {
                             return Text(
                               'Tanggal : ${formatDate(
                                   detailOrder.createdAt!.toString())}',
-                              style: txtSecondarySubTitle.copyWith(
+                              style: textInfoStyle.copyWith(
                                 fontWeight: FontWeight.w600,
                                 color: blackColor,
                               ),
@@ -212,7 +215,7 @@ class BoxInfoStatus extends StatelessWidget {
                           return Text(
                             'Tanggal : ${formatDate(
                                 rewardModel!.order!.createdAt!.toString())}',
-                            style: txtSecondarySubTitle.copyWith(
+                            style: textInfoStyle.copyWith(
                               fontWeight: FontWeight.w600,
                               color: blackColor,
                             ),

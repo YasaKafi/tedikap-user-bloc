@@ -57,9 +57,7 @@ class _OrderPageState extends State<OrderPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     double dpi = MediaQuery.of(context).devicePixelRatio * 160;
-
-    // Menentukan ukuran font berdasarkan DPI
-    TextStyle textStyle = dpi < 390 ? txtPrimarySubTitle : txtSecondaryTitle;
+    TextStyle textDateStyle = dpi < 380 ? txtSecondarySubTitle : txtPrimarySubTitle;
 
     return DefaultTabController(
       length: 2,
@@ -539,7 +537,7 @@ class _OrderPageState extends State<OrderPage> {
                                 alignment: Alignment.bottomCenter,
                                 child: InkWell(
                                   onTap: () {
-                                    ShowFilter showFilter = ShowFilter(context: context, tapIndex: 1, query: 'history', mounted);
+                                    ShowFilter showFilter = ShowFilter(context: context, tapIndex: 1, query: 'history', mounted, titleDateStyle: textDateStyle);
                                     showFilter.call();
                                   },
                                   child: Container(

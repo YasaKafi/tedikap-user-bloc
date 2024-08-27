@@ -87,12 +87,14 @@ class _SectionButtonState extends State<SectionButton> {
                         model.order?.status == 'pesanan diproses' ||
                         model.order?.status == 'pesanan siap diambil';
 
-                final bool isCartItemEmpty =
-                    !(model.order?.cartLength ?? false);
-                final bool isCartRewardItemEmpty =
-                    !(modelReward?.order?.cartLength ?? false);
+                bool? isModelCartNotEmpty;
 
-                print("INI HASIL BOOL CART ITEM COMMON :   $isCartItemEmpty");
+                  if (model.order != null) {
+                    isModelCartNotEmpty =
+                        model.order?.cartLength;
+                  }
+
+                print("INI HASIL BOOL CART ITEM COMMON :   $isModelCartNotEmpty");
 
                 if (isPayment) {
                   final createdAt = model.order?.createdAt!;
@@ -181,7 +183,9 @@ class _SectionButtonState extends State<SectionButton> {
                             borderColor: blackColor,
                             borderWidth: 1,
                             text: 'Bantuan',
-                            onPressed: () {},
+                            onPressed: () {
+                              launchUrl(Uri.parse(model.order!.whatsapp!));
+                            },
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 15),
                             textColor: blackColor,
@@ -196,22 +200,9 @@ class _SectionButtonState extends State<SectionButton> {
                             onPressed: () {
                               if (model.order != null ||
                                   modelReward?.order != null) {
-                                if (isCartItemEmpty == true) {
+                                if (isModelCartNotEmpty == true) {
                                   _showReorderOptions(context);
-                                } else if (!isCartItemEmpty) {
-                                  if (widget.orderId != null) {
-                                    context.read<OrderBloc>().add(
-                                        OrderEvent.postReOrder(
-                                            widget.orderId!));
-                                  } else if (widget.orderRewardId != null) {
-                                    context.read<OrderBloc>().add(
-                                        OrderEvent.postReOrderReward(
-                                            widget.orderRewardId!));
-                                  }
-                                } else if (isCartRewardItemEmpty == true) {
-                                  _showReorderOptions(context);
-
-                                } else {
+                                } else if (isModelCartNotEmpty == false) {
                                   if (widget.orderId != null) {
                                     context.read<OrderBloc>().add(
                                         OrderEvent.postReOrder(
@@ -246,10 +237,15 @@ class _SectionButtonState extends State<SectionButton> {
                         modelReward.order?.status == 'pesanan diproses' ||
                         modelReward.order?.status == 'pesanan siap diambil';
 
-                final bool isCartItemEmpty =
-                !(model?.order?.cartLength ?? false);
-                final bool isCartRewardItemEmpty =
-                !(modelReward.order?.cartLength ?? false);
+
+                bool? isModelCartRewardNotEmpty;
+
+                if (modelReward.order != null) {
+                  isModelCartRewardNotEmpty =
+                      modelReward.order?.cartLength;
+                }
+
+                print('VALUE BOOL CART ITEM REWARD : $isModelCartRewardNotEmpty');
 
                 if (statusOrderOngoing) {
                   return Container(
@@ -295,7 +291,9 @@ class _SectionButtonState extends State<SectionButton> {
                             borderColor: blackColor,
                             borderWidth: 1,
                             text: 'Bantuan',
-                            onPressed: () {},
+                            onPressed: () {
+                              launchUrl(Uri.parse(modelReward.order!.whatsapp!));
+                            },
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 15),
                             textColor: blackColor,
@@ -310,19 +308,8 @@ class _SectionButtonState extends State<SectionButton> {
                             onPressed: () {
                               if (model?.order != null ||
                                   modelReward.order != null) {
-                                if (isCartItemEmpty == true) {
-                                  _showReorderOptions(context);
-                                } else if (!isCartItemEmpty) {
-                                  if (widget.orderId != null) {
-                                    context.read<OrderBloc>().add(
-                                        OrderEvent.postReOrder(
-                                            widget.orderId!));
-                                  } else if (widget.orderRewardId != null) {
-                                    context.read<OrderBloc>().add(
-                                        OrderEvent.postReOrderReward(
-                                            widget.orderRewardId!));
-                                  }
-                                } else if (isCartRewardItemEmpty == true) {
+
+                                if (isModelCartRewardNotEmpty == true) {
                                   _showReorderOptions(context);
 
                                 } else {

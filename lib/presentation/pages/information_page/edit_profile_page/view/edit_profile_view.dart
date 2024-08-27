@@ -211,6 +211,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               return CustomTextField(
                                 icon: Icon(Icons.email),
                                 hintText: 'Email',
+                                readOnly: true,
                                 keyboardType: TextInputType.emailAddress,
                                 controller: emailController,
                               );

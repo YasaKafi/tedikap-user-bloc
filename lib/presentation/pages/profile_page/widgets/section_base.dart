@@ -22,6 +22,8 @@ class SectionBaseProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double dpi = MediaQuery.of(context).devicePixelRatio * 170;
+    TextStyle textStyleCallAdmin = dpi < 380 ? txtThirdSubTitle : txtSecondarySubTitle;
     return BlocListener<EditProfileBloc, EditProfileState>(
       listener: (context, state) {
         state.maybeWhen(
@@ -172,6 +174,7 @@ class SectionBaseProfile extends StatelessWidget {
             ),
           ),
           BoxHelpSupport(
+            textStyleCallAdmin: textStyleCallAdmin,
             screenwWidth: screenwWidth,
             waLink:
             'https://wa.me/62895395343223?text=Halo+Tedikap%2C+Saya+membutuhkan+bantuan',
