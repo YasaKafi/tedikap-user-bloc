@@ -13,6 +13,7 @@ class CustomTextField extends StatelessWidget {
   final Widget? icon;
   final Widget? prefix;
   final bool readOnly;
+  final bool enableBorder;
   final void Function(String)? onChanged;
 
   CustomTextField({
@@ -25,6 +26,7 @@ class CustomTextField extends StatelessWidget {
     this.icon, this.prefix,
     this.onChanged,
     this.readOnly = false,
+    this.enableBorder = true,
   }) : super(key: key);
 
   @override
@@ -34,11 +36,16 @@ class CustomTextField extends StatelessWidget {
       controller: controller,
       inputFormatters: inputFormatters,
       decoration: InputDecoration(
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+          borderSide: BorderSide(color: primaryColor),
+        ),
         prefix: prefix,
         icon: icon,
         hintStyle: txtPrimarySubTitle.copyWith(
             fontWeight: FontWeight.w500, color: blackColor),
         hintText: hintText,
+        enabled: enableBorder,
         focusColor: primaryColor,
         labelText: hintText,
         helperMaxLines: 2,

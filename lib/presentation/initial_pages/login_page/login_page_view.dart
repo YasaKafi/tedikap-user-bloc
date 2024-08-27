@@ -92,6 +92,7 @@ class LoginPage extends StatelessWidget {
                           ),
                           backgroundColor: redMedium,
                         ));
+                        context.read<LoginBloc>().emit(const LoginState.initial());
                       },
                       success: (model) {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -143,9 +144,7 @@ class LoginPage extends StatelessWidget {
                         loading: () {
                           return const Center(child: CircularProgressIndicator());
                         },
-                      error: (message) {
-                          return const Center(child: CircularProgressIndicator());
-                        },
+
                     );
 
                   },

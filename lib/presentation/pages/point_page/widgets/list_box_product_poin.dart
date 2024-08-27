@@ -28,9 +28,10 @@ class ListBoxProductPoin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double dpi = MediaQuery.of(context).devicePixelRatio * 160;
+    double dpi = MediaQuery.of(context).devicePixelRatio * 170;
     TextStyle textTitleStyle = dpi < 380 ? txtSecondaryTitle : txtPrimaryTitle;
     double heightImage = dpi < 380 ? screenHeight * 0.17 : screenHeight * 0.2;
+    print('DPI : $dpi');
 
     return SizedBox(
         width: screenWidth,

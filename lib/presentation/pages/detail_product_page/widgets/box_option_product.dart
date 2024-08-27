@@ -52,8 +52,8 @@ class BoxOptionProduct extends StatelessWidget {
                    note,
 
                    ){
-                 bool isSnack = modelProduct?.data?.category == 'snack';
-                  if(!isSnack){
+                 bool isMerchandise = modelProductReward?.data?.category == 'merchandise';
+                  if(!isMerchandise){
                     return Column(
                       children: [
                         BlocBuilder<DetailProductBloc, DetailProductState>(
