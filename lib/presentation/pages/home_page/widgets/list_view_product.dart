@@ -17,9 +17,10 @@ class ListViewProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    double dpi = MediaQuery.of(context).devicePixelRatio * 170;
+    double maxHeightBox = dpi < 380 ? 280 : 290;
     return Container(
-        constraints: const BoxConstraints(minHeight: 200, maxHeight: 290),
+        constraints: BoxConstraints(minHeight: 200, maxHeight: maxHeightBox),
         width: screenWidth,
         padding: const EdgeInsets.symmetric(
           vertical: Dimensions.paddingSizeSmall,

@@ -209,17 +209,17 @@ class _OtpPageViewState extends State<OtpPageView> {
                         backgroundColor: isTimerRunning ? primaryColor : grey,
                         width: MediaQuery.of(context).size.width,
                         onPressed: () {
-                          // if (isTimerRunning == false) {
-                          //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          //     content: Text(
-                          //       'Verification code has expired',
-                          //       style: txtSecondaryTitle.copyWith(
-                          //           fontWeight: FontWeight.w500,
-                          //           color: baseColor),
-                          //     ),
-                          //     backgroundColor: redMedium,
-                          //   ));
-                          // } else {
+                          if (isTimerRunning == false) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(
+                                'Verification code has expired',
+                                style: txtSecondaryTitle.copyWith(
+                                    fontWeight: FontWeight.w500,
+                                    color: baseColor),
+                              ),
+                              backgroundColor: redMedium,
+                            ));
+                          } else
                             if (otpNumberController.text.isNotEmpty) {
                               final requestModel = RegisterRequestModel(
                                 name: widget.username,

@@ -91,5 +91,5 @@ const TextStyle txtSecondarySubTitle = TextStyle(
 
 const TextStyle txtThirdSubTitle = TextStyle(
   fontFamily: 'Poppins',
-  fontSize: 10,
+  fontSize: 11,
 );

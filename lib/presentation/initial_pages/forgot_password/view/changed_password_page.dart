@@ -118,40 +118,55 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                           text: 'Reset',
                           width: MediaQuery.of(context).size.width,
                           onPressed: () {
-                            if (passwordController.text.isEmpty && confirmPasswordController.text.isEmpty) {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(SnackBar(
+                            final password = passwordController.text;
+                            final confirmPassword = confirmPasswordController.text;
+
+                            // Regular expression to check if the password contains both uppercase and lowercase letters
+                            final containsUppercase = RegExp(r'[A-Z]');
+                            final containsLowercase = RegExp(r'[a-z]');
+
+                            if (password.isEmpty && confirmPassword.isEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Text(
                                   'Please fill email field',
                                   style: txtSecondaryTitle.copyWith(
-                                      fontWeight: FontWeight.w500,
-                                      color: baseColor),
+                                      fontWeight: FontWeight.w500, color: baseColor),
                                 ),
                                 backgroundColor: redMedium,
                               ));
-                            } else if (passwordController.text != confirmPasswordController.text){
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(SnackBar(
+                            } else if (password != confirmPassword) {
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Text(
                                   'Confirm Password must be the same as the password',
                                   style: txtSecondaryTitle.copyWith(
-                                      fontWeight: FontWeight.w500,
-                                      color: baseColor),
+                                      fontWeight: FontWeight.w500, color: baseColor),
                                 ),
                                 backgroundColor: redMedium,
                               ));
-                            }  else {
+                            } else if (!containsUppercase.hasMatch(password) || !containsLowercase.hasMatch(password)) {
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text(
+                                  'Password must contain both uppercase and lowercase letters',
+                                  style: txtSecondaryTitle.copyWith(
+                                      fontWeight: FontWeight.w500, color: baseColor),
+                                ),
+                                backgroundColor: redMedium,
+                              ));
+                            } else {
                               final requestModel = ResetPasswordRequestModel(
                                 email: widget.email,
-                                password: passwordController.text,
-                                passwordConfirmation: confirmPasswordController.text,
+                                password: password,
+                                passwordConfirmation: confirmPassword,
                                 otp: widget.otp,
                                 token: widget.resetToken,
                               );
 
-                              context.read<ForgotPasswordBloc>().add(ForgotPasswordEvent.postResetPassword(requestModel));
+                              context
+                                  .read<ForgotPasswordBloc>()
+                                  .add(ForgotPasswordEvent.postResetPassword(requestModel));
                             }
                           },
+
                           borderRadius: 10,
                           height: 55,
                           fontSize: 18,

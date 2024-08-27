@@ -21,14 +21,20 @@ class ListBoxProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    double dpi = MediaQuery.of(context).devicePixelRatio * 170;
+    TextStyle textStyleTitleValidationDPI = dpi < 380 ? txtPrimarySubTitle : txtSecondaryTitle;
+    double fontSizeFav = dpi < 380 ? Dimensions.fontSizeSmall : Dimensions.fontSizeDefault;
+    double IconSizeFav = dpi < 380 ? Dimensions.iconSizeMedium : Dimensions.iconSizeKindDefault;
+    TextStyle textStyleCategory = dpi < 380 ? txtSecondarySubTitle : txtPrimarySubTitle;
+    TextStyle textStyleTitle = title.length < 13 ? txtSecondaryTitle : textStyleTitleValidationDPI;
+    double widthBox = dpi < 380 ? 140 : 160;
 
     return Container(
       margin: const EdgeInsets.only(
           left: Dimensions.marginSizeLarge,
           top: Dimensions.marginSizeSmall,
           bottom: Dimensions.marginSizeSmall),
-      width: 160,
+      width: widthBox,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.black, width: 0.1),
         shape: BoxShape.rectangle,
@@ -66,16 +72,13 @@ class ListBoxProduct extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(title,
-                          style: txtSecondaryTitle.copyWith(
+                          style: textStyleTitle.copyWith(
                               fontWeight: FontWeight.w600, color: blackColor)),
                       const SizedBox(
                         height: Dimensions.paddingSizeExtraSmall,
                       ),
-                      const SizedBox(
-                        height: Dimensions.paddingSizeExtraSmall,
-                      ),
                       Text('$category series',
-                          style: txtPrimarySubTitle.copyWith(
+                          style: textStyleCategory.copyWith(
                               fontWeight: FontWeight.w500,
                               color: Colors.grey[400])),
                       const SizedBox(
@@ -84,16 +87,16 @@ class ListBoxProduct extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.favorite,
                             color: redMedium,
-                            size: Dimensions.iconSizeKindDeafult,
+                            size: IconSizeFav,
                           ),
                           const SizedBox(width: 5),
                           Text(
                             favorite.toString(),
-                            style: const TextStyle(
-                                fontSize: Dimensions.fontSizeDefault,
+                            style: TextStyle(
+                                fontSize: fontSizeFav,
                                 fontWeight: FontWeight.bold,
                                 color: redMedium),
                           ),

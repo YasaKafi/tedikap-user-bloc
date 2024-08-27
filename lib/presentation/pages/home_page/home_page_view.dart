@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _refreshData() async {
-    context.read<HomeBloc>().add(const HomeEvent.getUser());
+    context.read<HomeBloc>().add(const HomeEvent.getUser(forceRefresh: true));
     await Future.delayed(const Duration(seconds: 1));
   }
 
