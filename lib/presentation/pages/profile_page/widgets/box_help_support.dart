@@ -74,18 +74,6 @@ class BoxHelpSupport extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  context.pushNamed('language_setting');
-                },
-                child: BoxHelper(
-                  iconPath: icGlobe,
-                  text: 'Pengaturan Bahasa',
-                ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              InkWell(
-                onTap: () {
                   context.pushNamed('terms_and_conditions');
                 },
                 child: BoxHelper(

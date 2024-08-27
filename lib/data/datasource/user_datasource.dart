@@ -154,7 +154,6 @@ class UserDatasource {
     String? phoneNumber,
     File? imageFile,
   }) async {
-    try {
       // Manually print out the request data
       print('Request Data: ');
       if (name != null) print('Name: $name');
@@ -186,16 +185,18 @@ class UserDatasource {
         data: formData,
         isMultipart: true,
         isAuthorize: true,
+        validateStatus: (status) {
+          return status != null && status < 500;
+        },
       );
 
       if (response.statusCode == 200) {
         return Right(EditProfileResponseModel.fromMap(response.data));
       } else {
-        return const Left('Failed to update profile');
+        final errorMessage = response.data['message'] ?? 'Failed to register null';
+        return Left(errorMessage);
       }
-    } catch (e) {
-      return Left('Failed to update profile: ${e.toString()}');
-    }
+
   }
 
 

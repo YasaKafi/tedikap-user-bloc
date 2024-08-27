@@ -68,6 +68,9 @@ class _PointPageState extends State<PointPage> with SingleTickerProviderStateMix
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
+    double dpi = MediaQuery.of(context).devicePixelRatio * 170;
+    TextStyle textStyleTitle = dpi < 380 ? txtThirdSubTitle : txtSecondarySubTitle;
+
     return DefaultTabController(
       length: 4,
       child: Scaffold(
@@ -147,25 +150,25 @@ class _PointPageState extends State<PointPage> with SingleTickerProviderStateMix
                   tabs: [
                     Tab(
                       child: Text('Tea',
-                          style: txtPrimarySubTitle.copyWith(
+                          style: textStyleTitle.copyWith(
                               fontWeight: FontWeight.w500,
                               color: blackColor)),
                     ),
                     Tab(
                       child: Text('Non Tea',
-                          style: txtPrimarySubTitle.copyWith(
+                          style: textStyleTitle.copyWith(
                               fontWeight: FontWeight.w500,
                               color: blackColor)),
                     ),
                     Tab(
                       child: Text('Yakult',
-                          style: txtPrimarySubTitle.copyWith(
+                          style: textStyleTitle.copyWith(
                               fontWeight: FontWeight.w500,
                               color: blackColor)),
                     ),
                     Tab(
                       child: Text('Merchandise',
-                          style: txtPrimarySubTitle.copyWith(
+                          style: textStyleTitle.copyWith(
                               fontWeight: FontWeight.w500,
                               color: blackColor)),
                     ),

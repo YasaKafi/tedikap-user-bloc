@@ -11,4 +11,5 @@ class EditProfileEvent with _$EditProfileEvent {
   const factory EditProfileEvent.getUser() = _GetUser;
   const factory EditProfileEvent.changeOption(String? newValue) = _ChangeOption;
   const factory EditProfileEvent.changeImage() = _ChangeImage;
+
 }

@@ -191,7 +191,6 @@ class DetailVoucherPage extends StatelessWidget {
                             ListBoxInformationVoucher(
                                 screenWidth: screenWidth,
                                 icon: icList,
-                                image: imgVoucher1,
                                 title: 'Syarat & Ketentuan',
                                 subtitle: 'Klik untuk melihat syarat & ketentuan'),
                             SizedBox(
@@ -207,7 +206,6 @@ class DetailVoucherPage extends StatelessWidget {
                             ListBoxInformationVoucher(
                                 screenWidth: screenWidth,
                                 icon: icLamp,
-                                image: imgVoucher1,
                                 title: 'Cara Pakai Voucher',
                                 subtitle: 'Klik untuk melihat cara pemakaian voucher'),
                             SizedBox(
