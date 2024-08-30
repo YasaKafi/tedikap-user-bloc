@@ -109,7 +109,7 @@ class BoxCheckoutDetail extends StatelessWidget {
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           10)),
-                                              child: Text('Out of stock',
+                                              child: Text('Sold out',
                                                   style: txtSecondarySubTitle
                                                       .copyWith(
                                                           fontWeight:

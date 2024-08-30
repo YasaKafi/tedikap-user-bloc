@@ -23,12 +23,12 @@ class ListBoxProductPoin extends StatelessWidget {
   final double screenHeight;
   final String image;
   final String title;
-  final int price;
+  final String price;
   final String category;
 
   @override
   Widget build(BuildContext context) {
-    double dpi = MediaQuery.of(context).devicePixelRatio * 160;
+    double dpi = MediaQuery.of(context).devicePixelRatio * 170;
     TextStyle textTitleStyle = dpi < 380 ? txtSecondaryTitle : txtPrimaryTitle;
     double heightImage = dpi < 380 ? screenHeight * 0.17 : screenHeight * 0.2;
 
@@ -57,7 +57,21 @@ class ListBoxProductPoin extends StatelessWidget {
                     child: Text(title, style: textTitleStyle.copyWith(fontWeight: FontWeight.w500, color: blackColor),)),
               ],
             ),
-
+            price == 'Sold out'
+                ?
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                padding:  EdgeInsets.symmetric(horizontal: price == 'Sold out' ? 10 : 0,  vertical: 5),
+                decoration: BoxDecoration(
+                    color: price == 'Sold out' ? redLight : Colors.transparent,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Text(price,
+                    style: txtPrimarySubTitle.copyWith(
+                        fontWeight: FontWeight.w500, color: price == 'Sold out' ? redMedium : blackColor)),
+              ),
+            )
+                :
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [

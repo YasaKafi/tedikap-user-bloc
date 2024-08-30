@@ -84,11 +84,11 @@ class ListBoxProductMenu extends StatelessWidget {
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 8,  vertical: 5),
                         decoration: BoxDecoration(
-                            color: price == 'Out of stock' ? redLight : Colors.transparent,
+                            color: price == 'Sold out' ? redLight : Colors.transparent,
                             borderRadius: BorderRadius.circular(10)),
                         child: Text(price,
-                            style: (price == 'Out of stock' ? txtSecondarySubTitle : txtPrimarySubTitle).copyWith(
-                                fontWeight: FontWeight.w500, color: price == 'Out of stock' ? redMedium : blackColor)),
+                            style: (price == 'Sold out' ? txtSecondarySubTitle : txtPrimarySubTitle).copyWith(
+                                fontWeight: FontWeight.w500, color: price == 'Sold out' ? redMedium : blackColor)),
                       ),
                     )))
           ],

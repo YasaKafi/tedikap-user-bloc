@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/data/repository/tedikap_repository.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/bloc/detail_order_bloc.dart';
 import 'package:flutter/services.dart';
+import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/widgets/qr_code_generator.dart';
 
 import '../../../../../common/dimensions.dart';
 import '../../../../../common/theme.dart';
@@ -17,6 +20,8 @@ class BoxInfoStatus extends StatelessWidget {
   }) : super(key: key);
 
   final double screenWidth;
+
+
 
   String formatDate(String dateString) {
     DateTime dateTime = DateTime.parse(dateString);
@@ -224,6 +229,28 @@ class BoxInfoStatus extends StatelessWidget {
                       );
                     },
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  BlocBuilder<DetailOrderBloc, DetailOrderState>(
+                    builder: (context, state) {
+                      return state.maybeWhen(
+                        orElse: () => loadingCard(0.5, 20),
+                        success: (model, rewardModel) {
+                          final detailOrder = model?.order;
+                          if (detailOrder != null) {
+                            return QRCodeGeneratorPage(qrData: detailOrder.id,);
+                          }
+                          return QrImageView(
+                            data: rewardModel!.order!.id.toString(),
+                            size: 70,
+                            version: QrVersions.auto,
+                          );
+                        },
+                      );
+                    },
+                  ),
+
                 ],
               ),
             ),
@@ -257,5 +284,57 @@ class BoxInfoStatus extends StatelessWidget {
         ),
       ),
     );
+  }
+  
+  _onAlertQrCode(context,
+      {String? orderId,
+        Color? bgcolor,
+        VoidCallback? onPressedSave
+        }) {
+    Alert(
+      context: context,
+      padding: const EdgeInsets.all(20),
+      style: AlertStyle(
+        animationType: AnimationType.shrink,
+        isCloseButton: false,
+        isButtonVisible: false,
+        backgroundColor: bgcolor,
+        overlayColor: Colors.black38,
+        titleStyle: txtPrimaryTitle.copyWith(
+          fontWeight: FontWeight.w600,
+          color: blackColor,
+        ),
+      ),
+      title: 'Show the QR Code to the cashier',
+      image: Container(
+        width: 200,
+        height: 200,
+        child: QrImageView(
+          data: orderId!,
+          size: 200,
+          version: QrVersions.auto,
+        ),
+      ),
+      buttons: [
+        DialogButton(
+          onPressed: () => Navigator.pop(context),
+          color: navyColor,
+          child: Text(
+            "Save",
+            style: txtPrimaryTitle.copyWith(
+                fontWeight: FontWeight.w600, color: baseColor),
+          ),
+        ),
+        DialogButton(
+            color: navyColor,
+            onPressed: (){},
+            // onPressed: onPressed,
+            child: Text(
+              "Share My Code",
+              style: txtPrimaryTitle.copyWith(
+                  fontWeight: FontWeight.w600, color: baseColor),
+            )),
+      ],
+    ).show();
   }
 }

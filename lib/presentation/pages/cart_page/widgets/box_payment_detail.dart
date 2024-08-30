@@ -62,7 +62,6 @@ class BoxPaymentDetail extends StatelessWidget {
                         ),
                         Visibility(
                           visible: itemCart.voucherId != null ? true : false,
-
                           child: const SizedBox(
                             height: 10,
                           ),

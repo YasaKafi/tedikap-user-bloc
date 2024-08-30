@@ -106,13 +106,13 @@ class ListBoxProduct extends StatelessWidget {
                     ],
                   ),
                   Container(
-                    padding:  EdgeInsets.symmetric(horizontal: price == 'Out of stock' ? 10 : 0,  vertical: 5),
+                    padding:  EdgeInsets.symmetric(horizontal: price == 'Sold out' ? 10 : 0,  vertical: 5),
                     decoration: BoxDecoration(
-                        color: price == 'Out of stock' ? redLight : Colors.transparent,
+                        color: price == 'Sold out' ? redLight : Colors.transparent,
                         borderRadius: BorderRadius.circular(10)),
                     child: Text(price,
                         style: txtPrimarySubTitle.copyWith(
-                            fontWeight: FontWeight.w500, color: price == 'Out of stock' ? redMedium : blackColor)),
+                            fontWeight: FontWeight.w500, color: price == 'Sold out' ? redMedium : blackColor)),
                   ),
                 ],
               ),

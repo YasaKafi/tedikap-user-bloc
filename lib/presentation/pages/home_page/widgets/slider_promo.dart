@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tedikap_user_bloc/data/repository/tedikap_repository.dart';
 import 'package:tedikap_user_bloc/presentation/pages/home_page/bloc/home_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/home_page/widgets/shimmer_widget_home.dart';
@@ -58,12 +59,20 @@ class CarouselSliderWidget extends StatelessWidget {
                                 items: bannerModel!.data!.map((i) {
                                   return Builder(
                                     builder: (BuildContext context) {
-                                      return Container(
-                                        width: MediaQuery.of(context).size.width,
-                                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                                        child: Image.network(
-                                          TedikapApiRepository.getImageBanner + i.image!,
-                                          fit: BoxFit.fill,
+                                      return InkWell(
+                                        onTap: (){
+                                          if (i.image != null){
+                                            context.pushNamed('voucher');
+                                          }
+
+                                        },
+                                        child: Container(
+                                          width: MediaQuery.of(context).size.width,
+                                          margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                                          child: Image.network(
+                                            TedikapApiRepository.getImageBanner + i.image!,
+                                            fit: BoxFit.fill,
+                                          ),
                                         ),
                                       );
                                     },

@@ -2,6 +2,7 @@ import 'dart:io' as i;
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -57,6 +58,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    print('VALUE BOOL DARI IS SNACKBARSHOWN $isSnackBarShown');
     return Scaffold(
       backgroundColor: baseColor,
       body: SingleChildScrollView(
@@ -107,40 +109,45 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       loaded: (user, o, imagePath, modelEdit) {
                         if (imagePath != null) {
                           defaultImagePath.value = imagePath;
-                          final file = i.File(imagePath);
-                          final fileSizeInBytes = file.lengthSync();
-                          final fileSizeInMB = fileSizeInBytes / (1024 * 1024);
-
-                          print('VALUE DARI IMAGE MB $fileSizeInMB');
-                          // Cek apakah ukuran file melebihi 2MB
-                          if (fileSizeInMB > 2 && !isSnackBarShown) {
-                            // Tampilkan Snackbar hanya jika belum pernah ditampilkan
-                            WidgetsBinding.instance.addPostFrameCallback((_) {
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text(
-                                  'Ukuran file gambar melebihi 2MB. Silakan pilih file lain',
-                                  style: txtSecondaryTitle.copyWith(
-                                      fontWeight: FontWeight.w500, color: baseColor),
-                                ),
-                                backgroundColor: redMedium,
-                              ));
-                            });
-                            isSnackBarShown = false;  // Tandai bahwa Snackbar sudah ditampilkan
-                            // Kembalikan widget kosong jika ukuran file terlalu besar
-                            return Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: const BoxDecoration(shape: BoxShape.circle),
-                                child: ClipOval(
-                                  child: Image.network(
-                                    TedikapApiRepository.getAvatarProfile +
-                                        user!.data!.avatar!,
-                                    width: 170,
-                                    height: 170,
-                                    fit: BoxFit.cover,
+                          if (!isSnackBarShown) {
+                            print(
+                                'VALUE BOOL DARI IS SNACKBARSHOWN DI DALAM IF ${!isSnackBarShown}');
+                            final file = i.File(imagePath);
+                            final fileSizeInBytes = file.lengthSync();
+                            var fileSizeInMB = fileSizeInBytes / (1024 * 1024);
+                            print('VALUE DARI IMAGE MB $fileSizeInMB');
+                            // Cek apakah ukuran file melebihi 2MB
+                            if (fileSizeInMB > 2) {
+                              // Tampilkan Snackbar hanya jika belum pernah ditampilkan
+                              SchedulerBinding.instance
+                                  .addPostFrameCallback((_) {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content: Text(
+                                    'Ukuran file gambar melebihi 2MB. Silakan pilih file lain',
+                                    style: txtSecondaryTitle.copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      color: baseColor,
+                                    ),
                                   ),
-                                )
-                            );
-
+                                  backgroundColor: redMedium,
+                                ));
+                              });
+                              isSnackBarShown = false;
+                              return Container(
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: const BoxDecoration(
+                                      shape: BoxShape.circle),
+                                  child: ClipOval(
+                                    child: Image.network(
+                                      TedikapApiRepository.getAvatarProfile +
+                                          user!.data!.avatar!,
+                                      width: 170,
+                                      height: 170,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ));
+                            }
                           }
                         }
                         return Container(
@@ -206,11 +213,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             loaded: (user, n, imagePath, modelEdit) {
                               if (isFirstLoad && user?.data != null) {
                                 // Initialize values only on first load
-                                usernameController.text = user?.data?.name ?? '';
+                                usernameController.text =
+                                    user?.data?.name ?? '';
                                 emailController.text = user?.data?.email ?? '';
-                                phoneNumberController.text = user?.data?.whatsappNumber ?? '';
+                                phoneNumberController.text =
+                                    user?.data?.whatsappNumber ?? '';
                                 gender = user?.data?.gender ?? '';
-                                defaultImagePath.value = imagePath ?? user?.data?.avatar ?? '';
+                                defaultImagePath.value =
+                                    imagePath ?? user?.data?.avatar ?? '';
                                 isFirstLoad = false;
                               }
 
@@ -248,6 +258,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 icon: Icon(Icons.email),
                                 hintText: 'Email',
                                 readOnly: true,
+                                enableBorder: false,
                                 keyboardType: TextInputType.emailAddress,
                                 controller: emailController,
                               );
@@ -326,7 +337,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     ],
                   ),
                   const SizedBox(height: 30),
-
                   BlocConsumer<EditProfileBloc, EditProfileState>(
                     listener: (context, state) {
                       state.maybeWhen(

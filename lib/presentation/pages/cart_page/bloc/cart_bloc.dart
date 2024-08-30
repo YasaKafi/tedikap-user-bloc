@@ -74,7 +74,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               final url = Uri.parse(paymentDetails.checkoutLink!);
               await launchURL(url);
             }
-
             await paymentResult.fold((l) => null, (r) async {
               emit(_Success(
                 cartModel: null,
@@ -102,7 +101,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
 
     on<_PatchQty>((event, emit) async {
-
       // Emit loading state
       emit(const _Loading());
 

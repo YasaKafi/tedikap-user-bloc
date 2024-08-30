@@ -205,6 +205,7 @@ class _PointPageState extends State<PointPage> with SingleTickerProviderStateMix
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
                 final rewardProduct = model.data![index];
+                final String priceProduct = rewardProduct.stock == true ? rewardProduct.regularPoint!.toString() : 'Sold out';
                 return InkWell(
                   onTap: () {
                     context.pushNamed('detail_product_reward', pathParameters: {
@@ -217,7 +218,7 @@ class _PointPageState extends State<PointPage> with SingleTickerProviderStateMix
                     image: rewardProduct.image!,
                     category: rewardProduct.category!,
                     title: rewardProduct.name!,
-                    price: rewardProduct.largePoint!,
+                    price: priceProduct,
                   ),
                 );
               },

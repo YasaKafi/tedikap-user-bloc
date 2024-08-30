@@ -23,6 +23,13 @@ class BoxCheckoutSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double dpi = MediaQuery.of(context).devicePixelRatio * 170;
+    TextStyle tsPriceInfo = dpi < 380 ? txtSecondarySubTitle : txtPrimarySubTitle;
+    TextStyle tsPrice = dpi < 380 ? txtPrimaryTitle : txtPrimaryHeader;
+    TextStyle tsRP = dpi < 380 ? txtThirdSubTitle : txtSecondarySubTitle;
+    TextStyle tsSelectPayment = dpi < 380 ? txtPrimarySubTitle : txtSecondaryTitle;
+    double sizeIcon = dpi < 380 ? 18 : 24;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -114,7 +121,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                         children: [
                                           Text(
                                             'Total Price',
-                                            style: txtPrimarySubTitle.copyWith(
+                                            style: tsPriceInfo.copyWith(
                                                 fontWeight: FontWeight.w500,
                                                 color: Colors.black38),
                                           ),
@@ -128,7 +135,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                               Text(
                                                 'Rp',
                                                 style:
-                                                txtSecondarySubTitle.copyWith(
+                                                tsRP.copyWith(
                                                     fontWeight: FontWeight.w500,
                                                     color: Colors.black38),
                                               ),
@@ -137,7 +144,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                               ),
                                               Text(
                                                 itemCart!.totalPrice.toString(),
-                                                style: txtPrimaryHeader.copyWith(
+                                                style: tsPrice.copyWith(
                                                     fontWeight: FontWeight.w600,
                                                     color: blackColor),
                                               )
@@ -200,8 +207,8 @@ class BoxCheckoutSummary extends StatelessWidget {
                                                 children: [
                                                   SvgPicture.asset(
                                                     icMoney,
-                                                    width: 24,
-                                                    height: 24,
+                                                    width: sizeIcon,
+                                                    height: sizeIcon,
                                                   ),
                                                   const SizedBox(
                                                     width: 10,
@@ -209,7 +216,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                                   Text(
                                                     'Select Payment',
                                                     style:
-                                                    txtSecondaryTitle.copyWith(
+                                                    tsSelectPayment.copyWith(
                                                         fontWeight:
                                                         FontWeight.w600,
                                                         color: baseColor),
@@ -323,7 +330,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                     children: [
                                       Text(
                                         'Total Price',
-                                        style: txtPrimarySubTitle.copyWith(
+                                        style: tsPriceInfo.copyWith(
                                             fontWeight: FontWeight.w500,
                                             color: Colors.black38),
                                       ),
@@ -337,7 +344,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                           Text(
                                             'Rp',
                                             style:
-                                            txtSecondarySubTitle.copyWith(
+                                            tsRP.copyWith(
                                                 fontWeight: FontWeight.w500,
                                                 color: Colors.black38),
                                           ),
@@ -346,7 +353,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                           ),
                                           Text(
                                             formattedTotal,
-                                            style: txtPrimaryHeader.copyWith(
+                                            style: tsPrice.copyWith(
                                                 fontWeight: FontWeight.w600,
                                                 color: blackColor),
                                           )
@@ -436,8 +443,8 @@ class BoxCheckoutSummary extends StatelessWidget {
                                             children: [
                                               SvgPicture.asset(
                                                 icMoney,
-                                                width: 24,
-                                                height: 24,
+                                                width: sizeIcon,
+                                                height: sizeIcon,
                                               ),
                                               const SizedBox(
                                                 width: 10,
@@ -445,7 +452,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                                               Text(
                                                 'Select Payment',
                                                 style:
-                                                txtSecondaryTitle.copyWith(
+                                                tsSelectPayment.copyWith(
                                                     fontWeight:
                                                     FontWeight.w600,
                                                     color: baseColor),

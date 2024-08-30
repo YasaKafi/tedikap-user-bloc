@@ -11,7 +11,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../common/constant.dart';
 import '../../../../common/dimensions.dart';
 import '../../../../common/theme.dart';
-import '../../../../data/repository/global_variabel.dart';
 import '../../../global_components/common_button.dart';
 import '../bloc/order_bloc.dart';
 
@@ -24,6 +23,7 @@ class ListBoxMenuStatus extends StatelessWidget {
     this.orderItems,
     this.orderItemsReward,
     required this.createdAt,
+    this.linkInvoice,
     this.orderId,
     this.orderRewardId,
     required this.waLink,
@@ -40,6 +40,7 @@ class ListBoxMenuStatus extends StatelessWidget {
   final String? orderId;
   final String? orderRewardId;
   final String waLink;
+  final String? linkInvoice;
   final String? pickUpTime;
   final double? rating;
 
@@ -70,6 +71,8 @@ class ListBoxMenuStatus extends StatelessWidget {
   Widget build(BuildContext context) {
     String titleCommonButton;
     Color backgroundColor;
+
+    print('VALUE DARI LINK INVOICE $linkInvoice');
 
     double dpi = MediaQuery.of(context).devicePixelRatio * 160;
     TextStyle textOrderIDStyle = dpi < 380 ? txtThirdSubTitle : txtSecondarySubTitle;
@@ -366,14 +369,12 @@ class ListBoxMenuStatus extends StatelessWidget {
                                           print("waLink is null");
                                         }
                                       } else {
-                                        if (GlobalVariables
-                                                .linkCheckoutGlobal !=
+                                        if (linkInvoice !=
                                             null) {
-                                          launchUrl(Uri.parse(GlobalVariables
-                                              .linkCheckoutGlobal!));
+                                          launchUrl(Uri.parse(linkInvoice!));
                                         } else {
                                           print(
-                                              "GlobalVariables.linkCheckoutGlobal is null");
+                                              "Link invoice is null");
                                         }
                                       }
                                     }
@@ -410,7 +411,7 @@ class ListBoxMenuStatus extends StatelessWidget {
                                         });
                                       } else {
                                         print(
-                                            'Order ID or Order Reward ID is null');
+                                            'Link invoice is null');
                                       }
                                     },
                                     backgroundColor: backgroundColor,

@@ -78,7 +78,7 @@ class BoxKindOfPayment extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                SvgPicture.asset(logoPayment!, width: 24,),
+                                SvgPicture.asset(logoPayment ?? '', width: 24,),
                                 SizedBox(width: 5,),
                                 Text(order.paymentChannel ?? '',
                                     style: txtPrimarySubTitle.copyWith(

@@ -100,7 +100,7 @@ class BoxCheckoutDetail extends StatelessWidget {
                                               color: redLight,
                                               borderRadius:
                                                   BorderRadius.circular(10)),
-                                          child: Text('Out of stock',
+                                          child: Text('Sold out',
                                               style:
                                                   txtSecondarySubTitle.copyWith(
                                                       fontWeight:
@@ -187,7 +187,8 @@ class BoxCheckoutDetail extends StatelessWidget {
                                         children: [
                                           InkWell(
                                             onTap: () {
-                                              productItemsCheckout.quantity! > 1 ?
+                                              productItemsCheckout.stock ==
+                                                  true && productItemsCheckout.quantity! > 1 ?
                                               context
                                                   .read<CartRewardBloc>()
                                                   .add(CartRewardEvent.patchQty(
@@ -198,7 +199,8 @@ class BoxCheckoutDetail extends StatelessWidget {
                                             },
                                             child: Icon(
                                               Icons.remove_circle_outline,
-                                              color: productItemsCheckout.quantity! > 1 ? navyColor : grey,
+                                              color: productItemsCheckout.stock ==
+                                                  true && productItemsCheckout.quantity! > 1 ? navyColor : grey,
                                               size: 28,
                                             ),
                                           ),
@@ -218,7 +220,7 @@ class BoxCheckoutDetail extends StatelessWidget {
                                           InkWell(
                                             onTap: () {
                                               productItemsCheckout.stock ==
-                                                  true ?
+                                                  true && productItemsCheckout.quantity! < 99 ?
                                               context
                                                   .read<CartRewardBloc>()
                                                   .add(CartRewardEvent.patchQty(
@@ -230,7 +232,7 @@ class BoxCheckoutDetail extends StatelessWidget {
                                             child:  Icon(
                                               Icons.add_circle,
                                               color: productItemsCheckout.stock ==
-                                                  true ? navyColor : grey,
+                                                  true &&  productItemsCheckout.quantity! < 99 ? navyColor : grey,
                                               size: 28,
                                             ),
                                           ),

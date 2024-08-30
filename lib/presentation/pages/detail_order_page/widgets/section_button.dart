@@ -82,6 +82,7 @@ class _SectionButtonState extends State<SectionButton> {
             success: (model, modelReward) {
               if (model != null && model.order != null) {
                 final isPayment = model.order?.paymentChannel == null;
+                final isLinkInvoice = model.order?.linkInvoice;
                 final bool statusOrderOngoing =
                     model.order?.status == 'menunggu konfirmasi' ||
                         model.order?.status == 'pesanan diproses' ||
@@ -94,9 +95,9 @@ class _SectionButtonState extends State<SectionButton> {
                         model.order?.cartLength;
                   }
 
-                print("INI HASIL BOOL CART ITEM COMMON :   $isModelCartNotEmpty");
-
                 if (isPayment) {
+
+                  print('VALUE DARI IS PAYMENT $isPayment');
                   final createdAt = model.order?.createdAt!;
                   final expiredAt = model.order?.expiresAt!;
                   if (_remainingTime == Duration.zero &&
@@ -123,10 +124,9 @@ class _SectionButtonState extends State<SectionButton> {
                         onPressed: _timerEnded
                             ? null
                             : () async {
-                                if (GlobalVariables.linkCheckoutGlobal !=
-                                    null) {
+                                if (isLinkInvoice != null) {
                                   await launchUrl(Uri.parse(
-                                      GlobalVariables.linkCheckoutGlobal!));
+                                      isLinkInvoice));
                                 }
                               },
                         padding: const EdgeInsets.symmetric(

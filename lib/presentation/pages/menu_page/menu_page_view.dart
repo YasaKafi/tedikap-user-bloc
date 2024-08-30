@@ -275,7 +275,7 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
                   symbol: 'Rp',
                   decimalDigits: 0, // Tidak ada digit desimal
                 ).format(int.parse(itemProduct.regularPrice.toString()));
-                final String priceProduct = itemProduct.stock == true ? formattedPrice : 'Out of stock';
+                final String priceProduct = itemProduct.stock == true ? formattedPrice : 'Sold out';
                 if (model.data != null) {
                   return InkWell(
                     onTap: () {

@@ -3,11 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:tedikap_user_bloc/data/models/response/detail_history_order_reward_response_model.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/bloc/detail_order_bloc.dart';
 
 import '../../../../../common/constant.dart';
 import '../../../../../common/dimensions.dart';
 import '../../../../../common/theme.dart';
+import '../../../../data/models/response/cart_item_reward_response_model.dart';
 import '../../../../data/repository/tedikap_repository.dart';
 
 class BoxProductOrder extends StatelessWidget {
@@ -17,6 +19,23 @@ class BoxProductOrder extends StatelessWidget {
   });
 
   final double screenWidth;
+
+  String _buildProductDescription(OrderRewardItem item) {
+    List<String> details = [];
+    if (item.temperatur != null) {
+      details.add('${item.temperatur} temp');
+    }
+    if (item.size != null) {
+      details.add('${item.size} size');
+    }
+    if (item.ice != null) {
+      details.add('${item.ice} ice');
+    }
+    if (item.sugar != null) {
+      details.add('${item.sugar} sugar');
+    }
+    return details.join(', ');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -227,15 +246,15 @@ class BoxProductOrder extends StatelessWidget {
                                             style: txtSecondaryTitle.copyWith(
                                                 fontWeight: FontWeight.w600,
                                                 color: blackColor)),
-                                        Text(
-                                            ' ${detailOrderItemReward
-                                                .temperatur} temp, ${detailOrderItemReward
-                                                .size} size, ${detailOrderItemReward
-                                                .ice} ice, ${detailOrderItemReward
-                                                .sugar} sugar',
+                                        Visibility(
+                                          visible: detailOrderItemReward.temperatur != null || detailOrderItemReward.size != null || detailOrderItemReward.ice != null || detailOrderItemReward.sugar != null,
+                                          child: Text(
+                                            _buildProductDescription(detailOrderItemReward),
                                             style: txtPrimarySubTitle.copyWith(
                                                 fontWeight: FontWeight.w500,
-                                                color: Colors.black38)),
+                                                color: Colors.black38),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   )

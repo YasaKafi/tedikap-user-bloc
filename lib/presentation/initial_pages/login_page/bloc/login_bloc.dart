@@ -15,7 +15,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<_DoLogin>((event, emit) async {
       emit(const LoginState.loading());
       final result = await datasource.postLogin(event.data!);
-      result.fold((l)  => emit(LoginState.error(message: 'Failed to login')), (r) => emit(LoginState.success(model: r))
+      result.fold((l)  => emit(LoginState.error(message: l)), (r) => emit(LoginState.success(model: r))
       );
     });
 

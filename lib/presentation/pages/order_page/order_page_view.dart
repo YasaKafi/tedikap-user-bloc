@@ -196,10 +196,14 @@ class _OrderPageState extends State<OrderPage> {
                                                 ).format(int.parse(order.totalPrice!
                                                     .toString()));
 
+                                                print('VALUE DARI LINK INVOICE ${order.linkInvoice}');
+
+
                                                 return ListBoxMenuStatus(
                                                   rating: order.rating ?? 0,
                                                   waLink: order.whatsapp!,
                                                   status: order.status!,
+                                                  linkInvoice: order.linkInvoice!,
                                                   totalItem: order
                                                       .orderItems!.length
                                                       .toString(),
@@ -474,6 +478,7 @@ class _OrderPageState extends State<OrderPage> {
                                                         String formattedDate = DateFormat('d MMMM yyyy • HH.mm').format(date);
                                                         return formattedDate;
                                                       }
+
 
                                                       return ListBoxMenuStatus(
                                                         pickUpTime: formatDate(order.updatedAt.toString()),
