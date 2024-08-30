@@ -4,6 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -66,19 +67,23 @@ class NotificationService {
   }
 
   void firebaseInit(BuildContext context) {
-    FirebaseMessaging.onMessage.listen((message) {
+    FirebaseMessaging.onMessage.listen((message) async {
       RemoteNotification? notification = message.notification;
 
       print("Notification title: ${notification!.title}");
       print("Notification body: ${notification.body}");
       print("Data: ${message.data.toString()}");
+      print("Data MAP Route: ${message..data['route']}");
+      print("Data MAP Order ID: ${message.data['order_id']}");
 
       // For IoS
       if (Platform.isIOS) {
         forgroundMessage();
       }
 
-      if (Platform.isAndroid) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      final token = prefs.getString('token');
+      if (Platform.isAndroid && token != null) {
         initLocalNotifications(context, message);
         showNotification(message);
       }
@@ -100,7 +105,7 @@ class NotificationService {
     });
   }
 
-  void handleMessage(BuildContext context, RemoteMessage message) {
+  Future<void> handleMessage(BuildContext context, RemoteMessage message) async {
     print('In handleMessage function');
 
     // Parse the route from the message data
@@ -108,43 +113,49 @@ class NotificationService {
     final orderId = message.data['order_id'];
 
     print('Route: $route');
+    print('ORDER ID : $orderId');
 
-    if (route != null) {
-      switch (route) {
-        case 'detail_order_common':
-          navigatorKey.currentState?.context.goNamed(
-            'detail_order_common',
-            pathParameters: {'orderId': '$orderId'},
-            extra: {'message': message},
-          );
-          break;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+    if (token != null) {
+      if (route != null) {
+        switch (route) {
+          case 'detail_order_common':
+            navigatorKey.currentState?.context.goNamed(
+              'detail_order_common',
+              pathParameters: {'orderId': '$orderId'},
+              extra: {'message': message},
+            );
+            break;
 
-        case 'detail_order_reward':
-          navigatorKey.currentState?.context.goNamed(
-            'detail_order_reward',
-            pathParameters: {'orderRewardId': '$orderId'},
-            extra: {'message': message},
-          );
-          break;
-        case 'notification':
-          navigatorKey.currentState?.context.goNamed(
-            'notification',
-            extra: {'message': message},
-          );
-          break;
-        case 'voucher':
-          navigatorKey.currentState?.context.goNamed(
-            'voucher',
-            extra: {'isNotification': true},
-          );
-          break;
-        default:
-          print('Unknown route: $route');
-          break;
+          case 'detail_order_reward':
+            navigatorKey.currentState?.context.goNamed(
+              'detail_order_reward',
+              pathParameters: {'orderRewardId': '$orderId'},
+              extra: {'message': message},
+            );
+            break;
+          case 'notification':
+            navigatorKey.currentState?.context.goNamed(
+              'notification',
+              extra: {'message': message},
+            );
+            break;
+          case 'voucher':
+            navigatorKey.currentState?.context.goNamed(
+              'voucher',
+              extra: {'isNotification': true},
+            );
+            break;
+          default:
+            print('Unknown route: $route');
+            break;
+        }
+      } else {
+        print('No route found in the message data');
       }
-    } else {
-      print('No route found in the message data');
     }
+
   }
 
   Future<void> showNotification(RemoteMessage message) async {

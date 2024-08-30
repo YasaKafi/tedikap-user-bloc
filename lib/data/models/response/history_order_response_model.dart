@@ -38,12 +38,14 @@ class Order {
   String? status;
   String? statusDescription;
   String? whatsapp;
+  String? whatsappUser;
   String? orderType;
   String? schedulePickup;
   String? iconStatus;
   String? paymentChannel;
   bool? cartLength;
-  double? rating;
+  dynamic rating;
+  String? linkInvoice;
   DateTime? createdAt;
   DateTime? updatedAt;
   DateTime? expiresAt;
@@ -63,12 +65,14 @@ class Order {
     this.status,
     this.statusDescription,
     this.whatsapp,
+    this.whatsappUser,
     this.orderType,
     this.schedulePickup,
     this.iconStatus,
     this.paymentChannel,
     this.cartLength,
     this.rating,
+    this.linkInvoice,
     this.createdAt,
     this.updatedAt,
     this.expiresAt,
@@ -93,12 +97,14 @@ class Order {
     status: json["status"],
     statusDescription: json["status_description"],
     whatsapp: json["whatsapp"],
+    whatsappUser: json["whatsapp_user"],
     orderType: json["order_type"],
     schedulePickup: json["schedule_pickup"],
     iconStatus: json["icon_status"],
     paymentChannel: json["payment_channel"],
     cartLength: json["cart_length"],
-    rating: json["rating"]?.toDouble(),
+    rating: json["rating"],
+    linkInvoice: json["link_invoice"],
     createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
     updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
     expiresAt: json["expires_at"] == null ? null : DateTime.parse(json["expires_at"]),
@@ -119,12 +125,14 @@ class Order {
     "status": status,
     "status_description": statusDescription,
     "whatsapp": whatsapp,
+    "whatsapp_user": whatsappUser,
     "order_type": orderType,
     "schedule_pickup": schedulePickup,
     "icon_status": iconStatus,
     "payment_channel": paymentChannel,
     "cart_length": cartLength,
     "rating": rating,
+    "link_invoice": linkInvoice,
     "created_at": createdAt?.toIso8601String(),
     "updated_at": updatedAt?.toIso8601String(),
     "expires_at": expiresAt?.toIso8601String(),

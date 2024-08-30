@@ -46,7 +46,8 @@ class VoucherCard extends StatelessWidget {
       children: [
         InkWell(
           onTap: () {
-            context.goNamed('detail_voucher', pathParameters: {
+            isFromCart == true ? null :
+            context.pushNamed('detail_voucher', pathParameters: {
               'voucherId': item.id!.toString(),
             });
           },
@@ -126,10 +127,13 @@ class VoucherCard extends StatelessWidget {
                                   ),
                                 ),
                                 const SizedBox(width: 10),
-                                const Icon(
-                                  Icons.info_outline_rounded,
-                                  size: 22,
-                                  color: blackColor,
+                                Visibility(
+                                  visible: isFromCart ? false : true,
+                                  child: const Icon(
+                                    Icons.info_outline_rounded,
+                                    size: 22,
+                                    color: blackColor,
+                                  ),
                                 ),
                               ],
                             ),

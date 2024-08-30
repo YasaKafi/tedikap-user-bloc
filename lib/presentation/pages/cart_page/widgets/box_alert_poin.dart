@@ -18,6 +18,7 @@ class BoxAlertPoin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return BlocBuilder<CartBloc, CartState>(
       builder: (context, state) {
         return state.maybeWhen(
@@ -26,11 +27,14 @@ class BoxAlertPoin extends StatelessWidget {
             },
           success: (cartModel, modelQty, deleteModel, modelPostOrder,
               modelPostPayment, orderId){
-              if (cartModel!.cart!.cartItems!.isNotEmpty) {
-                return _buildAlertGetPoint(screenWidth: screenWidth);
-              } else {
-                return const SizedBox();
+              if (cartModel?.cart != null){
+                if (cartModel!.cart!.cartItems!.isNotEmpty) {
+                  return _buildAlertGetPoint(screenWidth: screenWidth);
+                } else {
+                  return const SizedBox();
+                }
               }
+              return const SizedBox();
           }
         );
       },
@@ -48,6 +52,8 @@ class _buildAlertGetPoint extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double dpi = MediaQuery.of(context).devicePixelRatio * 170;
+    TextStyle tsAlertPoint = dpi < 380 ? txtThirdSubTitle : txtSecondarySubTitle;
     return Container(
       margin: const EdgeInsets.only(top: 20),
       width: screenWidth,
@@ -73,7 +79,7 @@ class _buildAlertGetPoint extends StatelessWidget {
               children: [
                 Text(
                   'Kamu berpotensi mendapatkan',
-                  style: txtSecondarySubTitle.copyWith(
+                  style: tsAlertPoint.copyWith(
                     fontWeight: FontWeight.w400,
                     color: blackColor,
                   ),
@@ -102,7 +108,7 @@ class _buildAlertGetPoint extends StatelessWidget {
                           return Flexible(
                             child: Text(
                               '${itemPoint.rewardPoint} Point',
-                              style: txtSecondarySubTitle.copyWith(
+                              style: tsAlertPoint.copyWith(
                                 fontWeight: FontWeight.w500,
                                 color: blackColor,
                               ),

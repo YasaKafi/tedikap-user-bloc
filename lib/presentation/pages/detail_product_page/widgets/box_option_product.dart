@@ -397,7 +397,7 @@ class BoxOptionProduct extends StatelessWidget {
                       ],
                     );
                   } else {
-                    return Container();
+                    return const SizedBox();
                   }
 
                }

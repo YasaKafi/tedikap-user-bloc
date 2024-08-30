@@ -337,7 +337,7 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
 
     on<_Increment>((event, emit) {
       final currentState = state;
-      if (currentState is _Success) {
+      if (currentState is _Success && currentState.quantityCount < 99) {
         emit(currentState.copyWith(
           quantityCount: currentState.quantityCount + 1,
             modelPostFavorite: null

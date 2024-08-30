@@ -42,6 +42,7 @@ class Order {
   String? schedulePickup;
   String? iconStatus;
   String? paymentChannel;
+  String? linkInvoice;
   bool? cartLength;
   DateTime? createdAt;
   DateTime? updatedAt;
@@ -66,6 +67,7 @@ class Order {
     this.schedulePickup,
     this.iconStatus,
     this.paymentChannel,
+    this.linkInvoice,
     this.cartLength,
     this.createdAt,
     this.updatedAt,
@@ -95,6 +97,7 @@ class Order {
     schedulePickup: json["schedule_pickup"],
     iconStatus: json["icon_status"],
     paymentChannel: json["payment_channel"],
+    linkInvoice: json["link_invoice"],
     cartLength: json["cart_length"],
     createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
     updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
@@ -120,6 +123,7 @@ class Order {
     "schedule_pickup": schedulePickup,
     "icon_status": iconStatus,
     "payment_channel": paymentChannel,
+    "link_invoice": linkInvoice,
     "cart_length": cartLength,
     "created_at": createdAt?.toIso8601String(),
     "updated_at": updatedAt?.toIso8601String(),

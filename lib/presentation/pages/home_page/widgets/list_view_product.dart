@@ -56,7 +56,7 @@ class ListViewProduct extends StatelessWidget {
                         symbol: 'Rp',
                         decimalDigits: 0, // Tidak ada digit desimal
                       ).format(int.parse(bestSeller.regularPrice.toString()));
-                      final String priceProduct = bestSeller.stock == true ? formattedPrice : 'Out of stock';
+                      final String priceProduct = bestSeller.stock == true ? formattedPrice : 'Sold out';
                       return InkWell(
                         onTap: () {
                           context.pushNamed('detail_product_common',

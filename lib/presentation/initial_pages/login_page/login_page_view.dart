@@ -34,6 +34,7 @@ class LoginPage extends StatelessWidget {
       },
     ];
     return Scaffold(
+      backgroundColor: baseColor,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: SingleChildScrollView(

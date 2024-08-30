@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/data/models/request/post_cart_request_model.dart';
 import 'package:tedikap_user_bloc/data/models/request/post_cart_reward_request_model.dart';
@@ -154,10 +155,10 @@ class BoxBottomPrice extends StatelessWidget {
 
                   String txtButton;
 
-                  if (cartItemId != null || cartItemRewardId != null) {
+                  if (itemStock == false) {
+                    txtButton = 'Sold out';
+                  } else if (cartItemId != null || cartItemRewardId != null){
                     txtButton = 'Update Cart';
-                  } else if (itemStock == false){
-                    txtButton = 'Out of Stock';
                   } else {
                     txtButton = 'Add to Cart';
                   }
@@ -173,6 +174,11 @@ class BoxBottomPrice extends StatelessWidget {
                   }
                   totalPrice = itemPrice * qty;
 
+                  final formattedPrice = NumberFormat.currency(
+                    locale: 'id_ID',
+                    symbol: '',
+                    decimalDigits: 0, // Tidak ada digit desimal
+                  ).format(int.parse(totalPrice.toString()));
 
                   return Column(
                     children: [
@@ -193,7 +199,7 @@ class BoxBottomPrice extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 5),
                                   Text(
-                                    totalPrice.toString(),
+                                    formattedPrice,
                                     style: txtPrimaryHeader.copyWith(
                                         fontWeight: FontWeight.w600,
                                         color: blackColor),
@@ -210,7 +216,7 @@ class BoxBottomPrice extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 5),
                                   Text(
-                                    'Poin',
+                                    'Point',
                                     style: txtSecondarySubTitle.copyWith(
                                         fontWeight: FontWeight.w500,
                                         color: Colors.black38),
@@ -249,7 +255,7 @@ class BoxBottomPrice extends StatelessWidget {
                                   Icons.add_circle,
                                   size: 28,
                                 ),
-                                color: navyColor,
+                                color: qty != 99 ? navyColor : grey,
                               ),
                             ],
                           ),
