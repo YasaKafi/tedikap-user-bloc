@@ -27,6 +27,8 @@ class Cart {
   String? schedulePickup;
   String? session1;
   String? session2;
+  String? endSession1;
+  String? endSession2;
   bool? pointsEnough;
   bool? isPhone;
   List<CartItem>? cartItems;
@@ -38,6 +40,8 @@ class Cart {
     this.schedulePickup,
     this.session1,
     this.session2,
+    this.endSession1,
+    this.endSession2,
     this.pointsEnough,
     this.isPhone,
     this.cartItems,
@@ -54,6 +58,8 @@ class Cart {
     schedulePickup: json["schedule_pickup"],
     session1: json["session_1"],
     session2: json["session_2"],
+    endSession1: json["endSession_1"],
+    endSession2: json["endSession_2"],
     pointsEnough: json["points_enough"],
     isPhone: json["is_phone"],
     cartItems: json["cart_items"] == null ? [] : List<CartItem>.from(json["cart_items"]!.map((x) => CartItem.fromMap(x))),
@@ -66,6 +72,8 @@ class Cart {
     "schedule_pickup": schedulePickup,
     "session_1": session1,
     "session_2": session2,
+    "endSession_1": endSession1,
+    "endSession_2": endSession2,
     "points_enough": pointsEnough,
     "is_phone": isPhone,
     "cart_items": cartItems == null ? [] : List<dynamic>.from(cartItems!.map((x) => x.toMap())),

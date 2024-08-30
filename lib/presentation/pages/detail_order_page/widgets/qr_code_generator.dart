@@ -110,12 +110,16 @@ class _QRCodeGeneratorPageState extends State<QRCodeGeneratorPage> {
       title: 'Show the QR Code to the cashier',
       image: RepaintBoundary(
         key: globalKey,
-        child: QrImageView(
-          data: orderId!,
-          size: 200,
-          version: QrVersions.auto,
-          backgroundColor: Colors.white,
-          gapless: true,
+        child: Container(
+          width: 200,
+          height: 200,
+          child: QrImageView(
+            data: orderId!,
+            size: 200,
+            version: QrVersions.auto,
+            backgroundColor: Colors.white,
+            gapless: true,
+          ),
         ),
       ),
       buttons: [
