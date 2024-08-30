@@ -239,12 +239,16 @@ class BoxInfoStatus extends StatelessWidget {
                         success: (model, rewardModel) {
                           final detailOrder = model?.order;
                           if (detailOrder != null) {
-                            return QRCodeGeneratorPage(qrData: detailOrder.id,);
+                            bool statusOrder = detailOrder.status == 'pesanan siap diambil';
+                            return Visibility(
+                              visible: statusOrder,
+                                child: QRCodeGeneratorPage(qrData: detailOrder.id,)
+                            );
                           }
-                          return QrImageView(
-                            data: rewardModel!.order!.id.toString(),
-                            size: 70,
-                            version: QrVersions.auto,
+                          bool statusOrder = rewardModel?.order!.status == 'pesanan siap diambil';
+                          return Visibility(
+                              visible: statusOrder,
+                              child: QRCodeGeneratorPage(qrData: rewardModel!.order!.id,)
                           );
                         },
                       );

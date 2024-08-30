@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_page/bloc/cart_bloc.dart';
 
@@ -146,23 +147,38 @@ class BoxEstimationPickup extends StatelessWidget {
                                                 success: (cartModel, modelQty,
                                                     deleteModel, modelPostOrder,
                                                     modelPostPayment, orderId){
-                                                    if (cartModel?.cart != null) {
-                                                      final session1 = cartModel?.cart!.session1;
-                                                      final session2 = cartModel?.cart!.session2;
-                                                  _onAlertButtonsPressed(context,
-                                                      title: 'Pick-Up Schedule Information',
-                                                      desc: "The pick-up schedule in this application is divided into 2 sessions: \n \n• Session 1 : $session1 \n• Session 2 : $session2 \n \nIf you place an order before 09:20, your order will be included in Session 1. If the order is placed after 09:20, it will be included in Session 2.",
-                                                      titleStyle:
-                                                      txtSecondaryHeader.copyWith(
-                                                        fontWeight: FontWeight.w600,
-                                                        color: blackColor,
-                                                      ),
-                                                      descStyle:
-                                                      txtPrimarySubTitle.copyWith(
-                                                          fontWeight:
-                                                          FontWeight.w500,
-                                                          color: blackColor));
-                                                }
+                                                  if (cartModel?.cart != null) {
+                                                    final session1 = cartModel?.cart!.session1;
+                                                    final session2 = cartModel?.cart!.session2;
+                                                    final endOrder1 = cartModel?.cart!.endSession1;
+                                                    final endOrder2 = cartModel?.cart!.endSession2;
+
+                                                    // Pastikan format waktu sesuai dengan HH.mm
+                                                    if (endOrder1 != null && endOrder2 != null) {
+                                                      try {
+                                                        // Konversi endOrder1 menjadi DateTime dan tambahkan 1 menit
+                                                        DateTime parsedEndOrder1 = DateFormat("HH.mm").parse(endOrder1);
+                                                        String endOrder1PlusOne = DateFormat("HH.mm").format(parsedEndOrder1.add(Duration(minutes: 1)));
+
+                                                        _onAlertButtonsPressed(
+                                                          context,
+                                                          title: 'Pick-Up Schedule Information',
+                                                          desc:
+                                                          "Jadwal pick-up di aplikasi ini terbagi menjadi dua sesi: \n \n• Sesi 1 : $session1 \n• Sesi 2 : $session2 \n \nSedangkan, jadwal untuk melakukan order diatur sebagai berikut:  \n \n• Order untuk Sesi 1: Bisa dilakukan sejak toko dibuka hingga pukul $endOrder1. Pesanan yang dilakukan dalam rentang waktu ini akan masuk ke dalam Sesi 1 \n \n• Order untuk Sesi 2: Bisa dilakukan mulai pukul $endOrder1PlusOne hingga pukul $endOrder2. Pesanan yang masuk dalam rentang waktu ini akan dimasukkan ke dalam Sesi 2. \n \nPerlu diketahui bahwa pesanan tidak akan diterima lagi setelah pukul $endOrder2, karena toko sudah ditutup.",
+                                                          titleStyle: txtSecondaryHeader.copyWith(
+                                                            fontWeight: FontWeight.w600,
+                                                            color: blackColor,
+                                                          ),
+                                                          descStyle: txtPrimarySubTitle.copyWith(
+                                                            fontWeight: FontWeight.w500,
+                                                            color: blackColor,
+                                                          ),
+                                                        );
+                                                      } catch (e) {
+                                                        print('Error parsing time: $e');
+                                                      }
+                                                    }
+                                                  }
                                                   }
                                               );
 

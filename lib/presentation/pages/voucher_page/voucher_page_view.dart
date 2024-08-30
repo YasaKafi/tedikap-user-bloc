@@ -146,7 +146,11 @@ class _VoucherPageState extends State<VoucherPage> {
                       success: (modelVoucher, modelCart, modelApplyRemove,
                           isUseVoucher, ) {
                         if (modelVoucher!.activeVouchers!.isEmpty) {
-                          return _buildEmptyVoucherState(context);
+                          return Container(
+                            width: screenWidth,
+                              height: screenHeight * 0.7,
+                              child: _buildEmptyVoucherState(context)
+                          );
                         } else {
                           final itemVoucher = modelVoucher.activeVouchers;
                           return Column(

@@ -107,28 +107,6 @@ class SettingPage extends StatelessWidget {
                 ),
                 const Divider(),
                 const SizedBox(height: 20),
-                InkWell(
-                  onTap: () {},
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.cancel_outlined,
-                        size: 24,
-                        color: blackColor,
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        'Hapus Akun',
-                        style: txtSecondaryTitle.copyWith(
-                            fontWeight: FontWeight.w500, color: blackColor),
-                      ),
-                    ],
-                  ),
-                ),
-                const Divider(),
-                const SizedBox(height: 20),
                 BlocConsumer<ProfileBloc, ProfileState>(
                   listener: (context, state) {
                     state.maybeWhen(
