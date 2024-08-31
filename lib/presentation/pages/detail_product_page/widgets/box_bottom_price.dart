@@ -358,9 +358,7 @@ class BoxBottomPrice extends StatelessWidget {
                     ],
                   );
                 },
-                error: (message) => Center(
-                  child: Text(message!),
-                ),
+                error: (message) => buildLoadingShimmer(screenWidth),
               );
             },
           ),

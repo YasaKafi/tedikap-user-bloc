@@ -198,12 +198,11 @@ class _OrderPageState extends State<OrderPage> {
 
                                                 print('VALUE DARI LINK INVOICE ${order.linkInvoice}');
 
-
                                                 return ListBoxMenuStatus(
                                                   rating: order.rating ?? 0,
                                                   waLink: order.whatsapp!,
                                                   status: order.status!,
-                                                  linkInvoice: order.linkInvoice!,
+                                                  linkInvoice: order.linkInvoice,
                                                   totalItem: order
                                                       .orderItems!.length
                                                       .toString(),

@@ -146,9 +146,8 @@ class BoxInfoProduct extends StatelessWidget {
                       ],
                     );
                   },
-                  error: (message) => Center(
-                    child: Text(message!),
-                  ),
+                  error: (message) => buildLoadingShimmer(),
+
                 );
               },
             ),

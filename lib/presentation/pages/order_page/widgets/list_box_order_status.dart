@@ -342,13 +342,16 @@ class ListBoxMenuStatus extends StatelessWidget {
                                               status == 'pesanan siap diambil';
 
                                       if (isOrderStatusForReorder) {
-                                        if (isModelCartNotEmpty != null &&
-                                            isModelCartNotEmpty) {
+                                        if ((isModelCartNotEmpty != null &&
+                                            isModelCartNotEmpty) && orderId != null) {
+                                          print('VALUE DARI IS MODEL CART NOT EMPTY : $isModelCartNotEmpty');
                                           _showReorderOptions(
                                               context, backgroundColor);
-                                        } else if (isModelCartRewardNotEmpty !=
+                                        } else if ((isModelCartRewardNotEmpty !=
                                                 null &&
-                                            isModelCartRewardNotEmpty) {
+                                            isModelCartRewardNotEmpty) && orderRewardId != null) {
+                                          print('VALUE DARI IS MODEL CART REWARD NOT EMPTY : $isModelCartRewardNotEmpty');
+
                                           _showReorderOptions(
                                               context, backgroundColor);
                                         } else {
@@ -371,7 +374,7 @@ class ListBoxMenuStatus extends StatelessWidget {
                                       } else {
                                         if (linkInvoice !=
                                             null) {
-                                          launchUrl(Uri.parse(linkInvoice!));
+                                          launchUrl(Uri.parse(linkInvoice ?? ''));
                                         } else {
                                           print(
                                               "Link invoice is null");

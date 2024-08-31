@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: AppProviders().providers,
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData.light(),
         routeInformationParser: AppRouter.router.routeInformationParser,
         routerDelegate: AppRouter.router.routerDelegate,

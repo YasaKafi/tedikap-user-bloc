@@ -202,9 +202,7 @@ class _DetailProductPageState extends State<DetailProductPage> {
                                 : Container(width: 24),
                           );
                         },
-                        error: (message) => Center(
-                          child: Text(message!),
-                        ),
+                        error: (message) => buildLoadingShimmer(),
                       );
                     },
                   ),
