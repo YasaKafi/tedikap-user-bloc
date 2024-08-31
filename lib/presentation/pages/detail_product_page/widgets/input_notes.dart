@@ -130,9 +130,7 @@ class InputNotes extends StatelessWidget {
                             ),
                           );
                         },
-                        error: (message) => Center(
-                          child: Text(message!),
-                        ),
+                        error: (message) => buildLoadingShimmer(context),
                       );
                     },
                   ),
