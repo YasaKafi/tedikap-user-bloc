@@ -31,9 +31,11 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
 
     // Listen to tab changes
     _tabController.addListener(() {
-      if (_tabController.indexIsChanging) return; // To avoid triggering when the tab is still changing
+      if (searchController.text.isEmpty) {
 
-      switch (_tabController.index) {
+        if (_tabController.indexIsChanging) return; // To avoid triggering when the tab is still changing
+
+        switch (_tabController.index) {
         case 0:
           context.read<MenuBloc>().add(MenuEvent.getFilterSearch(searchController.text));
           break;
@@ -46,6 +48,9 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
         case 3:
           context.read<MenuBloc>().add(const MenuEvent.getFilterCategory('yakult'));
           break;
+      }
+      } else { // Jika mode pencarian aktif
+        _tabController.index = 0; // Tetap di tab 'All'
       }
     });
 
@@ -112,23 +117,23 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
                         labelColor: blackColor,
                         unselectedLabelColor: grey,
                         onTap: (index) {
-                          switch (index) {
-                            case 0:
-                              context.read<MenuBloc>().add(
-                                  MenuEvent.getFilterSearch(searchController.text));
-                              break;
-                            case 1:
-                              context.read<MenuBloc>().add(
-                                  const MenuEvent.getFilterCategory('tea'));
-                              break;
-                            case 2:
-                              context.read<MenuBloc>().add(
-                                  const MenuEvent.getFilterCategory('nontea'));
-                              break;
-                            case 3:
-                              context.read<MenuBloc>().add(
-                                  const MenuEvent.getFilterCategory('yakult'));
-                              break;
+                          if (searchController.text.isEmpty) { // Jika mode pencarian tidak aktif
+                            switch (index) {
+                              case 0:
+                                context.read<MenuBloc>().add(MenuEvent.getFilterSearch(searchController.text));
+                                break;
+                              case 1:
+                                context.read<MenuBloc>().add(const MenuEvent.getFilterCategory('tea'));
+                                break;
+                              case 2:
+                                context.read<MenuBloc>().add(const MenuEvent.getFilterCategory('nontea'));
+                                break;
+                              case 3:
+                                context.read<MenuBloc>().add(const MenuEvent.getFilterCategory('yakult'));
+                                break;
+                            }
+                          } else { // Jika mode pencarian aktif
+                            _tabController.index = 0; // Tetap di tab 'All'
                           }
                         },
                         tabs: [
@@ -163,6 +168,7 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
                 ),
                 Expanded(
                   child: TabBarView(
+                    physics:searchController.text.isEmpty ? AlwaysScrollableScrollPhysics() : NeverScrollableScrollPhysics(),
                     controller: _tabController,
                     children: [
                       buildProductList(searchController.text),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:pinput/pinput.dart';
 import 'package:tedikap_user_bloc/common/constant.dart';
 import 'package:tedikap_user_bloc/common/theme.dart';
@@ -253,8 +254,17 @@ class _OtpPageViewState extends State<OtpPageView> {
                       print(
                           'VALUE DARI LOADING ${!isLoadingEmailVerification}');
                       if (!isLoadingEmailVerification) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
+                        return CommonButton(
+                          onPressed: () {},
+                          borderRadius: 10,
+                          height: 55,
+                          width: MediaQuery.of(context).size.width,
+                          fontSize: 18,
+                          widget: LoadingAnimationWidget.staggeredDotsWave(
+                            color: baseColor,
+                            size: 45,
+                          ),
+                          text: '',
                         );
                       } else {
                         return CommonButton(
@@ -400,8 +410,18 @@ class _OtpPageViewState extends State<OtpPageView> {
                         'VALUE DARI LOADING KIRIM ULANG $isLoadingEmailVerification');
 
                     if (isLoadingEmailVerification) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
+                      return CommonButton(
+                        borderColor: primaryColor,
+                        borderWidth: 1,
+                        backgroundColor: baseColor,
+                        text: "Resend New OTP",
+                        textColor: primaryColor,
+                        width: MediaQuery.of(context).size.width,
+                        onPressed: (){},
+                        widget: LoadingAnimationWidget.staggeredDotsWave(
+                          color: primaryColor,
+                          size: 30,
+                        ),
                       );
                     } else {
                       return CommonButton(

@@ -92,7 +92,13 @@ class VoucherCard extends StatelessWidget {
                             ),
                             Positioned.fill(
                               child: Container(
-                                color: isEligible ? null : grey.withOpacity(0.7),
+                                decoration: BoxDecoration(
+                                  color: isEligible ? null : grey.withOpacity(0.7),
+                                  borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(18),
+                                    topLeft: Radius.circular(18),
+                                  ),
+                                ),
                               ),
                             ),
                           ],

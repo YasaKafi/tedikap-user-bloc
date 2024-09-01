@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:tedikap_user_bloc/common/dimensions.dart';
 import 'package:tedikap_user_bloc/common/theme.dart';
 import 'package:tedikap_user_bloc/data/models/request/reset_password_request_model.dart';
@@ -174,8 +175,20 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       );
                     },
                     loading: () {
-                      return  Center(
-                        child: CircularProgressIndicator(),
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                        child: CommonButton(
+                          text: 'Reset',
+                          width: MediaQuery.of(context).size.width,
+                          onPressed: () {},
+                          borderRadius: 10,
+                          height: 55,
+                          fontSize: 18,
+                          widget: LoadingAnimationWidget.staggeredDotsWave(
+                            color: baseColor,
+                            size: 40,
+                          ),
+                        ),
                       );
                     },
                   );

@@ -18,6 +18,7 @@ class CommonButton extends StatelessWidget {
     this.padding,
     this.borderColor,
     this.borderWidth,
+    this.widget,
   });
 
   final String text;
@@ -33,6 +34,7 @@ class CommonButton extends StatelessWidget {
   final EdgeInsets? padding;
   final Color? borderColor;
   final double? borderWidth;
+  final Widget? widget;
 
   @override
   Widget build(BuildContext context) {
@@ -55,13 +57,16 @@ class CommonButton extends StatelessWidget {
           bottom: 8.0,
         ), // Use only padding, default values provided
       ),
-      child: Text(
-        text,
-        style: style ??
-            txtButton.copyWith(
-              fontWeight: fontWeight ?? FontWeight.w600,
-              color: textColor ?? baseColor,
-              fontSize: fontSize ?? 16,
+      child: Center(
+        child: widget ??
+            Text(
+              text,
+              style: style ??
+                  TextStyle(
+                    color: textColor ?? Colors.white,
+                    fontSize: fontSize ?? 16,
+                    fontWeight: fontWeight ?? FontWeight.w600,
+                  ),
             ),
       ),
     );

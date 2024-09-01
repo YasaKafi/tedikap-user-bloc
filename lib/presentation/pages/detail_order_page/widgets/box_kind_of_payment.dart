@@ -95,10 +95,10 @@ class BoxKindOfPayment extends StatelessWidget {
                       ],
                     );
                   } else {
-                    return Center();
+                    return SizedBox();
                   }
                 } else if (modelReward != null) {
-                  return Center();
+                  return SizedBox();
                 } else {
                   return Center(child: Text('No data available'),);
                 }

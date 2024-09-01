@@ -74,6 +74,8 @@ class BoxInformationPoin extends StatelessWidget {
                         );
                       }, success: (productModel, userPointModel) {
                         if (userPointModel?.data != null) {
+                          print('VALUE IS POINT FETCHED ${context.read<PointBloc>().isPointFetched }');
+
                           final point = userPointModel?.data?.point!;
                           return Text(
                             '$point Point',

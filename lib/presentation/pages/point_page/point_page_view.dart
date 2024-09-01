@@ -22,11 +22,14 @@ class PointPage extends StatefulWidget {
 
 class _PointPageState extends State<PointPage> with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  late PointBloc _pointBloc;
 
 
   @override
   void initState() {
     super.initState();
+    _pointBloc = context.read<PointBloc>();
+    _pointBloc.isPointFetched = false;
     _tabController = TabController(length: 4, vsync: this);
 
     // Listen to tab changes

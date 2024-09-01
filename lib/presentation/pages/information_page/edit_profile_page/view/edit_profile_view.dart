@@ -227,6 +227,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               return CustomTextField(
                                 icon: Icon(Icons.person),
                                 hintText: 'Username',
+                                labelText: 'Username',
                                 keyboardType: TextInputType.text,
                                 controller: usernameController,
                                 inputFormatters: [
@@ -257,6 +258,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               return CustomTextField(
                                 icon: Icon(Icons.email),
                                 hintText: 'Email',
+                                labelText: 'Email',
                                 readOnly: true,
                                 enableBorder: false,
                                 keyboardType: TextInputType.emailAddress,
@@ -286,7 +288,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   icWhatsApp,
                                   width: 26,
                                 ),
-                                hintText: 'Whatsapp Number',
+                                hintText: '895xxx',
+                                // labelText: 'WhatsApp Number',
                                 prefix: Text('+62 ',
                                     style: txtPrimarySubTitle.copyWith(
                                         fontWeight: FontWeight.w500,
