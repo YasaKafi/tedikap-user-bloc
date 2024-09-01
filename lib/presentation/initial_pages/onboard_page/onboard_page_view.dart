@@ -46,9 +46,10 @@ class OnboardPage extends StatelessWidget {
                             },
                             child: Text(
                               'Skip',
-                              style: txtSecondaryTitle.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  color: blackColor),
+                              style: txtPrimarySubTitle.copyWith(
+                                decoration: TextDecoration.underline,
+                                  fontWeight: FontWeight.w500,
+                                  color: blackColor, ),
                             ));
                       },
                       listener: (context, state) {

@@ -84,7 +84,7 @@ class DetailPointPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Pengumpulan Tedikap Poin', style: txtPrimaryTitle.copyWith(fontWeight: FontWeight.w600, color: primaryColor)),
+                      Text('Penukaran Tedikap Poin', style: txtPrimaryTitle.copyWith(fontWeight: FontWeight.w600, color: primaryColor)),
                       SizedBox(height: 10),
                       Padding(padding: EdgeInsets.only(left: 10), child: Text('1. Dapatkan 1 Tedikap Poin untuk setiap transaksi sebesar Rp3.000 dan berlaku kelipatannya. Contoh: Transaksi sebesar Rp35.000 akan mendapatkan 3 Tedikap Poin; transaksi sebesar Rp51.000 akan mendapatkan 5 Tedikap Poin.', style: textStyleTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor))),
                       SizedBox(height: 5),],

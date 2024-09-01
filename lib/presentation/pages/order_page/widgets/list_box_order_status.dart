@@ -49,13 +49,13 @@ class ListBoxMenuStatus extends StatelessWidget {
     Duration difference = DateTime.now().difference(createdTime);
 
     if (difference.inMinutes < 1) {
-      return 'Just now';
+      return 'Baru saja';
     } else if (difference.inMinutes < 60) {
-      return '${difference.inMinutes} minutes ago';
+      return '${difference.inMinutes} menit yang lalu';
     } else if (difference.inHours < 24) {
-      return '${difference.inHours} hours ago';
+      return '${difference.inHours} jam yang lalu';
     } else {
-      return '${difference.inDays} days ago';
+      return '${difference.inDays} hari yang lalu';
     }
   }
 

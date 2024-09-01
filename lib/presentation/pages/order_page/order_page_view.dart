@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:tedikap_user_bloc/common/constant.dart';
 import 'package:tedikap_user_bloc/presentation/pages/order_page/bloc/order_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/order_page/widgets/empty_state.dart';
@@ -126,7 +127,11 @@ class _OrderPageState extends State<OrderPage> {
                   physics: NeverScrollableScrollPhysics(),
                   children: [
                     Tab(
-                      child: RefreshIndicator(
+                      child: LiquidPullToRefresh(
+                        backgroundColor: baseColor,
+                        color: primaryColor,
+                        borderWidth: 2,
+                        showChildOpacityTransition: false,
                         onRefresh: () async {
                           // Call your refresh method here
                           await _refreshDataOngoing(context);
@@ -245,7 +250,11 @@ class _OrderPageState extends State<OrderPage> {
                       ),
                     ),
                     Tab(
-                      child: RefreshIndicator(
+                      child: LiquidPullToRefresh(
+                        backgroundColor: baseColor,
+                        color: primaryColor,
+                        borderWidth: 2,
+                        showChildOpacityTransition: false,
                         onRefresh: () async {
                           // Call your refresh method here
                           await _refreshDataHistory(context);

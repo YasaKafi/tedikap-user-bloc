@@ -62,7 +62,7 @@ class BoxOptionProduct extends StatelessWidget {
                               initial: () => const Center(
                                 child: CircularProgressIndicator(),
                               ),
-                              loading: () => const Center(
+                              loading: (isPostCartLoading, model, modelReward) => const Center(
                                 child: CircularProgressIndicator(),
                               ),
                               success: (
@@ -146,7 +146,7 @@ class BoxOptionProduct extends StatelessWidget {
                               initial: () => const Center(
                                 child: CircularProgressIndicator(),
                               ),
-                              loading: () => const Center(
+                              loading: (isPostCartLoading, model, modelReward) => const Center(
                                 child: CircularProgressIndicator(),
                               ),
                               success: (
@@ -235,7 +235,7 @@ class BoxOptionProduct extends StatelessWidget {
                                 initial: () => const Center(
                                   child: CircularProgressIndicator(),
                                 ),
-                                loading: () => const Center(
+                                loading: (isPostCartLoading, model, modelReward) => const Center(
                                   child: CircularProgressIndicator(),
                                 ),
                                 success: (
@@ -319,7 +319,7 @@ class BoxOptionProduct extends StatelessWidget {
                               initial: () => const Center(
                                 child: CircularProgressIndicator(),
                               ),
-                              loading: () => const Center(
+                              loading: (isPostCartLoading, model, modelReward) => const Center(
                                 child: CircularProgressIndicator(),
                               ),
                               success: (

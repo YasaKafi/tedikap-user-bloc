@@ -57,7 +57,7 @@ class _NotificationPageState extends State<NotificationPage> {
           data: Theme.of(context).copyWith(
             colorScheme: const ColorScheme.light(
               primary: primaryColor, // header background color
-              onPrimary: baseColor, // header text color
+              onPrimary: primaryColor, // header text color
               onSurface: blackColor, // body text color
             ),
             textButtonTheme: TextButtonThemeData(
@@ -273,6 +273,7 @@ class _NotificationPageState extends State<NotificationPage> {
                       return const SizedBox();
                     }, success: (model, isInfo, isVoucher, startDate, endDate) {
                       print('INI BOOL IS INFO  $isInfo');
+                      print('VALUE STATE NOW  $state');
                       String startDateText = DateFormat('yyyy-MM-dd')
                           .format(DateTime.now().subtract(const Duration(days: 365)));
                       String endDateText =
@@ -482,6 +483,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                 width: MediaQuery.of(context).size.width * 0.4,
                                 text: 'Terapkan',
                                 onPressed: () {
+                                  print('VALUE DARI START DATE : $startDateText DAN END DATE : $endDateText');
                                   if (isInfo == false && isVoucher == false) {
                                     context.read<NotificationBloc>().add(
                                         NotificationEvent.getFilterNotification(

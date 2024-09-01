@@ -46,6 +46,7 @@ class RegisterPage extends StatelessWidget {
     ];
 
     return Scaffold(
+      backgroundColor: baseColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -72,8 +73,12 @@ class RegisterPage extends StatelessWidget {
                   CustomTextFieldAuth(
                     key: UniqueKey(),
                     title: field['hint'],
+                    maxLength: field['label'] == 'Username' ? 12 : null,
                     controller: field['controller'],
                   ),
+                  field['label'] == 'Username'
+                      ? const SizedBox(height: 0)
+                      :
                   const SizedBox(height: Dimensions.marginSizeLarge),
                 ],
                 BlocConsumer<RegisterBloc, RegisterState>(
@@ -110,6 +115,9 @@ class RegisterPage extends StatelessWidget {
                           text: 'Register',
                           width: MediaQuery.of(context).size.width,
                           onPressed: () {
+                            final containsUppercase = RegExp(r'[A-Z]');
+                            final containsLowercase = RegExp(r'[a-z]');
+
                             if (usernameController.text.isEmpty ||
                                 emailController.text.isEmpty ||
                                 passwordController.text.isEmpty ||
@@ -118,6 +126,17 @@ class RegisterPage extends StatelessWidget {
                                   .showSnackBar(SnackBar(
                                 content: Text(
                                   'Please fill all fields',
+                                  style: txtSecondaryTitle.copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      color: baseColor),
+                                ),
+                                backgroundColor: redMedium,
+                              ));
+                            } else if (!containsUppercase.hasMatch(passwordController.text) || !containsLowercase.hasMatch(passwordController.text)){
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text(
+                                  'Password must contain both uppercase and lowercase letters',
                                   style: txtSecondaryTitle.copyWith(
                                       fontWeight: FontWeight.w500,
                                       color: baseColor),
@@ -145,12 +164,6 @@ class RegisterPage extends StatelessWidget {
                                 backgroundColor: redMedium,
                               ));
                             } else {
-                              // final requestModel = RegisterRequestModel(
-                              //   name: usernameController.text,
-                              //   email: emailController.text,
-                              //   password: passwordController.text,
-                              //   fcmToken: GlobalVariables.deviceToken,
-                              // );
                               context
                                   .read<RegisterBloc>()
                                   .add(RegisterEvent.postEmailVerification(emailController.text));

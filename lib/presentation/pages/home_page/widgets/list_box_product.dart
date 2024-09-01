@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tedikap_user_bloc/data/repository/tedikap_repository.dart';
 import '../../../../common/dimensions.dart';
 import '../../../../common/theme.dart';
+import '../../../../data/models/response/most_like_product_response_model.dart';
 
 class ListBoxProduct extends StatelessWidget {
   const ListBoxProduct({
@@ -10,7 +11,7 @@ class ListBoxProduct extends StatelessWidget {
     required this.title,
     required this.favorite,
     required this.price,
-    required this.category,
+    required this.category, required this.lastItem,
   });
 
   final String image;
@@ -18,6 +19,7 @@ class ListBoxProduct extends StatelessWidget {
   final String category;
   final int favorite;
   final String price;
+  final bool lastItem;
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +29,16 @@ class ListBoxProduct extends StatelessWidget {
     double IconSizeFav = dpi < 380 ? Dimensions.iconSizeMedium : Dimensions.iconSizeKindDefault;
     TextStyle textStyleCategory = dpi < 380 ? txtSecondarySubTitle : txtPrimarySubTitle;
     TextStyle textStyleTitle = title.length < 13 ? txtSecondaryTitle : textStyleTitleValidationDPI;
-    double widthBox = dpi < 380 ? 140 : 160;
+    double widthBox = dpi < 380 ? 160 : 180;
 
     return Container(
-      margin: const EdgeInsets.only(
+      margin:  EdgeInsets.only(
           left: Dimensions.marginSizeLarge,
           top: Dimensions.marginSizeSmall,
-          bottom: Dimensions.marginSizeSmall),
+          bottom: Dimensions.marginSizeSmall,
+        right: lastItem ? Dimensions.marginSizeLarge : 0
+        ,
+      ),
       width: widthBox,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.black, width: 0.1),
@@ -56,7 +61,7 @@ class ListBoxProduct extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             child: Image.network(
               TedikapApiRepository.getImage + image,
-              height: 100,
+              height: 120,
               width: double.infinity,
               fit: BoxFit.cover,
             ),

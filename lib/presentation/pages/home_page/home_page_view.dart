@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:tedikap_user_bloc/presentation/pages/home_page/widgets/base_section.dart';
 import 'package:tedikap_user_bloc/presentation/pages/home_page/widgets/poin_section.dart';
 
@@ -31,7 +32,11 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       backgroundColor: baseColor,
-      body: RefreshIndicator(
+      body: LiquidPullToRefresh(
+        backgroundColor: baseColor,
+        color: primaryColor,
+        borderWidth: 2,
+        showChildOpacityTransition: false,
         onRefresh: _refreshData,
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(), // Ensures scrolling is always possible

@@ -66,8 +66,9 @@ class BoxInformationPoin extends StatelessWidget {
                   BlocBuilder<PointBloc, PointState>(
                     builder: (context, state) {
                       return state.maybeWhen(orElse: () {
+
                         return Text(
-                          'Memuat..',
+                          context.read<PointBloc>().isPointFetched ? '${context.read<PointBloc>().pointUser} Point'  :'Memuat..',
                           style: txtPrimaryHeader.copyWith(
                               fontWeight: FontWeight.w600, color: primaryColor),
                         );

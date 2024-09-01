@@ -4,8 +4,9 @@ import '../../../common/theme.dart';
 
 class CustomTextFieldAuth extends StatelessWidget {
   final String title;
+  final int? maxLength;
   final TextEditingController? controller;
-  const CustomTextFieldAuth({super.key, required this.title, this.controller});
+  const CustomTextFieldAuth({super.key, required this.title, this.controller, this.maxLength});
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +19,16 @@ class CustomTextFieldAuth extends StatelessWidget {
       valueListenable: _obscureTextNotifier,
       builder: (context, _obscureText, child) {
         return TextField(
+          maxLength: maxLength,
           controller: controller,
           style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w600, color: blackColor),
           obscureText: _obscureText,
           decoration: InputDecoration(
             hintText: title,
-            hintStyle: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w600, color: grey),
+            hintStyle: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w400, color: grey),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0)),
-              borderSide: BorderSide(width: 2, color: primaryColor, style: BorderStyle.solid),
+              borderSide: BorderSide(width: 1, color: primaryColor, style: BorderStyle.solid),
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0)),

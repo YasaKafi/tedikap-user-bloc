@@ -7,7 +7,7 @@ import 'package:tedikap_user_bloc/presentation/global_components/error_state.dar
 import 'package:tedikap_user_bloc/presentation/pages/voucher_page/bloc/voucher_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/voucher_page/widgets/alert_box_voucher.dart';
 import 'package:tedikap_user_bloc/presentation/pages/voucher_page/widgets/shimmer_voucher.dart';
-import 'package:tedikap_user_bloc/presentation/pages/voucher_page/widgets/voucher_box.dart';
+import 'package:tedikap_user_bloc/presentation/pages/voucher_page/widgets/voucher_card.dart';
 
 import '../../../common/constant.dart';
 import '../../../common/dimensions.dart';

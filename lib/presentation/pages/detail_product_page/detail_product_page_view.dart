@@ -148,7 +148,7 @@ class _DetailProductPageState extends State<DetailProductPage> {
                     builder: (context, state) {
                       return state.when(
                         initial: () => buildLoadingShimmer(),
-                        loading: () => buildLoadingShimmer(),
+                        loading: (isPostCartLoading, model, modelReward) => buildLoadingShimmer(),
                         success: (
                             modelProduct,
                             modelProductReward,

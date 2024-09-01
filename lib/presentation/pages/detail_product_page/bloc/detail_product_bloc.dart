@@ -165,7 +165,14 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
     });
 
     on<_PostCart>((event, emit) async {
-      emit(const _Loading());
+      final currentState = state;
+      if (currentState is _Success) {
+        emit(DetailProductState.loading(
+          isPostCartLoading: true,
+          model: currentState.model,
+          modelReward: currentState.modelReward
+        ));
+      }
       try {
         final result = await cartDatasource.postCart(event.model!);
         result.fold(
@@ -189,7 +196,14 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
     });
 
     on<_UpdateCart>((event, emit) async {
-      emit(const _Loading());
+      final currentState = state;
+      if (currentState is _Success) {
+        emit(DetailProductState.loading(
+            isPostCartLoading: true,
+            model: currentState.model,
+            modelReward: currentState.modelReward
+        ));
+      }
       try {
         final result = await cartDatasource.updateCart(event.model!, event.id!);
         result.fold(
@@ -237,8 +251,14 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
     });
 
     on<_PostCartReward>((event, emit) async {
-      emit(const _Loading());
-      try {
+      final currentState = state;
+      if (currentState is _Success) {
+        emit(DetailProductState.loading(
+            isPostCartLoading: true,
+            model: currentState.model,
+            modelReward: currentState.modelReward
+        ));
+      }      try {
         final result = await cartDatasource.postCartReward(event.model!);
         result.fold(
               (l) => emit(_Error(message: l)),
