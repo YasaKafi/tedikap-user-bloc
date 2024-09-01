@@ -136,63 +136,86 @@ class BoxInfoStatus extends StatelessWidget {
                     children: [
                       BlocBuilder<DetailOrderBloc, DetailOrderState>(
                         builder: (context, state) {
-                          return Row(
-                            children: [
-                              state.maybeWhen(
-                                orElse: () => loadingCard(0.5, 20),
+                          return InkWell(
+                            onTap: () {
+                              final orderId = state.maybeWhen(
                                 success: (model, rewardModel) {
                                   final detailOrder = model?.order;
                                   final detailOrderReward = rewardModel?.order;
                                   if (detailOrder != null) {
+                                    return detailOrder.id;
+                                  } else {
+                                    return detailOrderReward!.id;
+                                  }
+                                },
+                                orElse: () => null,
+                              );
+
+                              if (orderId != null) {
+                                copyToClipboard(orderId);
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('Order ID copied to clipboard')),
+                                );
+                              }
+                            },
+                            child: Row(
+                              children: [
+                                state.maybeWhen(
+                                  orElse: () => loadingCard(0.5, 20),
+                                  success: (model, rewardModel) {
+                                    final detailOrder = model?.order;
+                                    final detailOrderReward = rewardModel?.order;
+                                    if (detailOrder != null) {
+                                      return Text(
+                                        'ORDER ID: ${detailOrder.id}',
+                                        style: textInfoStyle.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          color: blackColor,
+                                        ),
+                                      );
+                                    }
                                     return Text(
-                                      'ORDER ID: ${detailOrder.id}',
+                                      'ORDER ID: ${detailOrderReward!.id}',
                                       style: textInfoStyle.copyWith(
                                         fontWeight: FontWeight.w600,
                                         color: blackColor,
                                       ),
                                     );
-                                  }
-                                  return Text(
-                                    'ORDER ID: ${detailOrderReward!.id}',
-                                    style: textInfoStyle.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      color: blackColor,
-                                    ),
-                                  );
-                                },
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  final orderId = state.maybeWhen(
-                                    success: (model, rewardModel) {
-                                      final detailOrder = model?.order;
-                                      final detailOrderReward = rewardModel?.order;
-                                      if (detailOrder != null) {
-                                        return detailOrder.id;
-                                      } else {
-                                        return detailOrderReward!.id;
-                                      }
-                                    },
-                                    orElse: () => null,
-                                  );
-
-                                  if (orderId != null) {
-                                    copyToClipboard(orderId);
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text('Order ID copied to clipboard')),
-                                    );
-                                  }
-                                },
-                                child: Icon(
-                                  Icons.copy,
-                                  size: 14,
-                                  weight: 50,
+                                  },
                                 ),
-                              ),
-                            ],
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    final orderId = state.maybeWhen(
+                                      success: (model, rewardModel) {
+                                        final detailOrder = model?.order;
+                                        final detailOrderReward = rewardModel?.order;
+                                        if (detailOrder != null) {
+                                          return detailOrder.id;
+                                        } else {
+                                          return detailOrderReward!.id;
+                                        }
+                                      },
+                                      orElse: () => null,
+                                    );
+
+                                    if (orderId != null) {
+                                      copyToClipboard(orderId);
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text('Order ID copied to clipboard')),
+                                      );
+                                    }
+                                  },
+                                  child: Icon(
+                                    Icons.copy,
+                                    size: 14,
+                                    weight: 50,
+                                  ),
+                                ),
+                              ],
+                            ),
                           );
                         },
                       ),

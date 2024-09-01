@@ -126,7 +126,7 @@ class _DetailProductPageState extends State<DetailProductPage> {
                           if (itemIsLiked == 'Liked') {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(
-                                'Successfully added from my favorite!',
+                                'Successfully added to my favorite!',
                                 style: txtSecondaryTitle.copyWith(
                                     fontWeight: FontWeight.w500, color: baseColor),
                               ),

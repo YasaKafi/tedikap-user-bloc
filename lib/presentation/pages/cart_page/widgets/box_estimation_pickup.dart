@@ -147,6 +147,7 @@ class BoxEstimationPickup extends StatelessWidget {
                                                 success: (cartModel, modelQty,
                                                     deleteModel, modelPostOrder,
                                                     modelPostPayment, orderId){
+
                                                   if (cartModel?.cart != null) {
                                                     final session1 = cartModel?.cart!.session1;
                                                     final session2 = cartModel?.cart!.session2;

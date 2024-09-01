@@ -108,6 +108,69 @@ class _SectionButtonState extends State<SectionButton> {
                   final seconds = _remainingTime.inSeconds.remainder(60);
                   final timerText =
                       'Lanjutkan Pembayaran ($minutes:${seconds.toString().padLeft(2, '0')})';
+                  if(_timerEnded == true){
+                    return Container(
+                      width: screenWidth,
+                      padding: EdgeInsets.all(Dimensions.paddingSizeLarge),
+                      decoration: BoxDecoration(
+                        color: baseColor,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CommonButton(
+                              width: screenWidth * 0.4,
+                              borderColor: blackColor,
+                              borderWidth: 1,
+                              text: 'Bantuan',
+                              onPressed: () {
+                                launchUrl(Uri.parse(model.order!.whatsapp!));
+                              },
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 15),
+                              textColor: blackColor,
+                              backgroundColor: baseColor,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                              borderRadius: 30,
+                            ),
+                            CommonButton(
+                              width: screenWidth * 0.4,
+                              text: 'Pesan Ulang',
+                              onPressed: () {
+                                if (model.order != null ||
+                                    modelReward?.order != null) {
+                                  if (isModelCartNotEmpty == true) {
+                                    _showReorderOptions(context);
+                                  } else if (isModelCartNotEmpty == false) {
+                                    if (widget.orderId != null) {
+                                      context.read<OrderBloc>().add(
+                                          OrderEvent.postReOrder(
+                                              widget.orderId!));
+                                    } else if (widget.orderRewardId != null) {
+                                      context.read<OrderBloc>().add(
+                                          OrderEvent.postReOrderReward(
+                                              widget.orderRewardId!));
+                                    }
+                                  }
+                                }
+                              },
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 15),
+                              textColor: baseColor,
+                              backgroundColor: primaryColor,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                              borderRadius: 30,
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+
+                  } else {
                   return Container(
                     width: screenWidth,
                     padding: EdgeInsets.all(Dimensions.paddingSizeLarge),
@@ -139,6 +202,7 @@ class _SectionButtonState extends State<SectionButton> {
                       ),
                     ),
                   );
+                  }
                 } else if (statusOrderOngoing) {
                   return Container(
                     width: screenWidth,

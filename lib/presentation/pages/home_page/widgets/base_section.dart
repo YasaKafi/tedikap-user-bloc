@@ -91,7 +91,6 @@ class _BaseSectionState extends State<BaseSection> {
                           final greetings =
                               statusOutletModel?.data!.greetings;
 
-                          print('INI VALUE DARI $statusOutlet');
 
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

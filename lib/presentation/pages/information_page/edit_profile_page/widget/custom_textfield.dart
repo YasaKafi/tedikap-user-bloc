@@ -6,6 +6,7 @@ import '../../../../../common/theme.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hintText;
+  final String? labelText;
   final TextInputType keyboardType;
   final int? maxTextLength;
   final TextEditingController? controller;
@@ -27,6 +28,7 @@ class CustomTextField extends StatelessWidget {
     this.onChanged,
     this.readOnly = false,
     this.enableBorder = true,
+    this.labelText,
   }) : super(key: key);
 
   @override
@@ -47,7 +49,7 @@ class CustomTextField extends StatelessWidget {
         hintText: hintText,
         enabled: enableBorder,
         focusColor: primaryColor,
-        labelText: hintText,
+        labelText: labelText,
         helperMaxLines: 2,
         errorMaxLines: 2,
         border: OutlineInputBorder(

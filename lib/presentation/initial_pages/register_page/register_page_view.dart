@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/register_page/bloc/register_bloc.dart';
 
 import '../../../common/constant.dart';
@@ -175,8 +176,17 @@ class RegisterPage extends StatelessWidget {
                         );
                       },
                       loading: () {
-                        return const Center(
-                          child: CircularProgressIndicator(),
+                        return CommonButton(
+                          onPressed: () {},
+                          borderRadius: 10,
+                          height: 55,
+                          width: MediaQuery.of(context).size.width,
+                          fontSize: 18,
+                          widget: LoadingAnimationWidget.staggeredDotsWave(
+                            color: baseColor,
+                            size: 45,
+                          ),
+                          text: '',
                         );
                       },
                     );
