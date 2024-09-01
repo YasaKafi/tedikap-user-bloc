@@ -88,6 +88,9 @@ class _BaseSectionState extends State<BaseSection> {
                           final statusOutlet =
                               statusOutletModel?.data!.description;
 
+                          final greetings =
+                              statusOutletModel?.data!.greetings;
+
                           print('INI VALUE DARI $statusOutlet');
 
                           return Column(
@@ -105,7 +108,7 @@ class _BaseSectionState extends State<BaseSection> {
                                 },
                                 child: Text(
                                   _isWelcomeMessage
-                                      ? 'Selamat Datang'
+                                      ? greetings ??  'Selamat Datang'
                                       : statusOutlet ?? 'No Status',
                                   key: ValueKey<bool>(_isWelcomeMessage),
                                   style: txtPrimarySubTitle.copyWith(
@@ -231,7 +234,7 @@ class _BaseSectionState extends State<BaseSection> {
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Most Favorite Menu',
+                'Menu Terfavorit',
                 style: txtSecondaryHeader.copyWith(
                     fontWeight: FontWeight.w600, color: blackColor),
               ),
@@ -270,38 +273,38 @@ class _BaseSectionState extends State<BaseSection> {
             );
           },
         ),
-        BlocBuilder<HomeBloc, HomeState>(
-          builder: (context, state) {
-            return InkWell(
-              onTap: () {
-                state.maybeWhen(
-                    orElse: (){},
-                  success: (model, user, index, pointModel, statusOutletModel,
-                      bannerModel, boxPromoModel){
-                      if (user?.data != null){
-                        launchURL(Uri.parse(user!.data!.whatsappService!));
-                      }
-                  }
-
-                );
-              },
-              child: Container(
-                width: widget.screenWidth,
-                padding: const EdgeInsets.symmetric(
-                    vertical: Dimensions.paddingSizeSmall,
-                    horizontal: Dimensions.paddingSizeLarge),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image.asset(
-                    bannerCallCenter,
-                    width: double.infinity,
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-            );
-          },
-        ),
+        // BlocBuilder<HomeBloc, HomeState>(
+        //   builder: (context, state) {
+        //     return InkWell(
+        //       onTap: () {
+        //         state.maybeWhen(
+        //             orElse: (){},
+        //           success: (model, user, index, pointModel, statusOutletModel,
+        //               bannerModel, boxPromoModel){
+        //               if (user?.data != null){
+        //                 launchURL(Uri.parse(user!.data!.whatsappService!));
+        //               }
+        //           }
+        //
+        //         );
+        //       },
+        //       child: Container(
+        //         width: widget.screenWidth,
+        //         padding: const EdgeInsets.symmetric(
+        //             vertical: Dimensions.paddingSizeSmall,
+        //             horizontal: Dimensions.paddingSizeLarge),
+        //         child: ClipRRect(
+        //           borderRadius: BorderRadius.circular(12),
+        //           child: Image.asset(
+        //             bannerCallCenter,
+        //             width: double.infinity,
+        //             fit: BoxFit.fill,
+        //           ),
+        //         ),
+        //       ),
+        //     );
+        //   },
+        // ),
       ],
     );
   }

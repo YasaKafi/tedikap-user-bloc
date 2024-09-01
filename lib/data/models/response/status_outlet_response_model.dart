@@ -25,12 +25,14 @@ class Data {
   String? description;
   String? session;
   String? time;
+  String? greetings;
 
   Data({
     this.statusStore,
     this.description,
     this.session,
     this.time,
+    this.greetings,
   });
 
   factory Data.fromJson(String str) => Data.fromMap(json.decode(str));
@@ -42,6 +44,7 @@ class Data {
     description: json["description"],
     session: json["session"],
     time: json["time"],
+    greetings: json["greetings"],
   );
 
   Map<String, dynamic> toMap() => {
@@ -49,5 +52,6 @@ class Data {
     "description": description,
     "session": session,
     "time": time,
+    "greetings": greetings,
   };
 }

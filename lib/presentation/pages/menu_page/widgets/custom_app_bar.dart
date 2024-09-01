@@ -73,7 +73,7 @@ class CustomAppBar extends StatelessWidget {
                       : const Icon(Icons.search, color: Color.fromRGBO(0, 0, 0, 100)),
                   focusColor: const Color.fromRGBO(246, 246, 246, 100),
                   fillColor: const Color.fromRGBO(246, 246, 246, 100),
-                  hintText: 'What would you like to drink today?',
+                  hintText: 'Anda ingin minum apa hari ini?',
                   hintStyle: textStyleTitle.copyWith(fontWeight: FontWeight.w500, color: grey),
                 ),
               ),

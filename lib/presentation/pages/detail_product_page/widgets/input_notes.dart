@@ -79,7 +79,7 @@ class InputNotes extends StatelessWidget {
                     builder: (context, state) {
                       return state.when(
                         initial: () => buildLoadingShimmer(context),
-                        loading: () => buildLoadingShimmer(context),
+                        loading: (isPostCartLoading, model, modelReward) => buildLoadingShimmer(context),
                         success: (
                           modelProduct,
                           modelProductReward,
@@ -119,6 +119,10 @@ class InputNotes extends StatelessWidget {
                             style: txtPrimarySubTitle.copyWith(
                                 fontWeight: FontWeight.w500, color: blackColor),
                             decoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5),
+                                borderSide: const BorderSide(color: primaryColor),
+                              ),
                               hintText: 'Add notes here..',
                               hintStyle: txtPrimarySubTitle.copyWith(
                                   fontWeight: FontWeight.w500,

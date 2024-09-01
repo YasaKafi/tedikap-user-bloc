@@ -52,7 +52,7 @@ class _PointPageState extends State<PointPage> with SingleTickerProviderStateMix
     _fetchInitialData();
   }
 
-  void _fetchInitialData() {
+  void _fetchInitialData() async {
     context.read<PointBloc>().add(const PointEvent.getFilterCategory('tea'));
   }
 

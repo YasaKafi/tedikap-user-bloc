@@ -247,7 +247,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           );
                         },
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 20),
                       BlocBuilder<EditProfileBloc, EditProfileState>(
                         builder: (context, state) {
                           return state.maybeWhen(
@@ -296,7 +296,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 inputFormatters: [
                                   LengthLimitingTextInputFormatter(12),
                                   FilteringTextInputFormatter
-                                      .digitsOnly, // Aturan default hanya angka
+                                      .digitsOnly,
                                 ],
                                 onChanged: (value) {
                                   if (value.startsWith('0')) {

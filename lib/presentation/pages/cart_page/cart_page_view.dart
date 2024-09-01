@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_page/widgets/box_alert_poin.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_page/widgets/box_checkout_detail.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_page/widgets/box_estimation_pickup.dart';
@@ -82,7 +83,11 @@ class _CartPageState extends State<CartPage> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          RefreshIndicator(
+          LiquidPullToRefresh(
+            backgroundColor: baseColor,
+            color: primaryColor,
+            borderWidth: 2,
+            showChildOpacityTransition: false,
             onRefresh: _refreshData,
             child: SingleChildScrollView(
               child: Container(

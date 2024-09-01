@@ -50,6 +50,7 @@ class ListViewProduct extends StatelessWidget {
                     itemCount: model.data!.length,
                     itemBuilder: (context, index) {
                       final bestSeller = model.data![index];
+                      final lastItem = model.data!.last == bestSeller ? true : false;
 
                       final formattedPrice = NumberFormat.currency(
                         locale: 'id_ID',
@@ -59,12 +60,14 @@ class ListViewProduct extends StatelessWidget {
                       final String priceProduct = bestSeller.stock == true ? formattedPrice : 'Sold out';
                       return InkWell(
                         onTap: () {
+                          print('VALUE LAST : $lastItem');
                           context.pushNamed('detail_product_common',
                               pathParameters: {
                                 'productId': bestSeller.id!.toString()
                               });
                         },
                         child: ListBoxProduct(
+                          lastItem: lastItem,
                           image: bestSeller.image!,
                           favorite: bestSeller.favoritesCount!,
                           category: bestSeller.category!,

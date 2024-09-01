@@ -11,7 +11,6 @@ import '../../../../common/theme.dart';
 import '../../../../data/repository/tedikap_repository.dart';
 import '../bloc/voucher_bloc.dart';
 
-
 class VoucherCard extends StatelessWidget {
   final ActiveVoucher item;
   final bool isCurrentlyUsedVoucher;
@@ -19,7 +18,8 @@ class VoucherCard extends StatelessWidget {
   final double screenWidth;
   final bool isFromCart;
 
-  const VoucherCard({super.key,
+  const VoucherCard({
+    super.key,
     required this.item,
     required this.isCurrentlyUsedVoucher,
     required this.isEligible,
@@ -46,10 +46,11 @@ class VoucherCard extends StatelessWidget {
       children: [
         InkWell(
           onTap: () {
-            isFromCart == true ? null :
-            context.pushNamed('detail_voucher', pathParameters: {
-              'voucherId': item.id!.toString(),
-            });
+            isFromCart == true
+                ? null
+                : context.pushNamed('detail_voucher', pathParameters: {
+                    'voucherId': item.id!.toString(),
+                  });
           },
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -69,19 +70,32 @@ class VoucherCard extends StatelessWidget {
                   children: [
                     Stack(
                       children: [
-                        SizedBox(
-                          width: screenWidth,
-                          child: ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                              topRight: Radius.circular(18),
-                              topLeft: Radius.circular(18),
+                        Stack(
+                          children: [
+                            SizedBox(
+                              width: screenWidth,
+                              child: ClipRRect(
+                                borderRadius: const BorderRadius.only(
+                                  topRight: Radius.circular(18),
+                                  topLeft: Radius.circular(18),
+                                ),
+                                child:
+                                    Image.network(
+                                      TedikapApiRepository.getImagePromo +
+                                          item.image!,
+                                      height: 120,
+                                      fit: BoxFit.cover,
+                                    ),
+
+
+                              ),
                             ),
-                            child: Image.network(
-                              TedikapApiRepository.getImagePromo + item.image!,
-                              height: 120,
-                              fit: BoxFit.cover,
+                            Positioned.fill(
+                              child: Container(
+                                color: isEligible ? null : grey.withOpacity(0.7),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                         Visibility(
                           visible: isCurrentlyUsedVoucher,
@@ -209,29 +223,43 @@ class VoucherCard extends StatelessWidget {
                             style: txtSecondarySubTitle.copyWith(
                                 fontWeight: FontWeight.w500, color: blackColor),
                           ),
-                          Visibility(
-                            visible: isEligible,
-                            child: InkWell(
-                              onTap: () {
+                          InkWell(
+                            onTap: () {
+                              if (isEligible == false) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Voucher tidak dapat digunakan!',
+                                      style: txtSecondaryTitle.copyWith(
+                                          fontWeight: FontWeight.w500,
+                                          color: baseColor),
+                                    ),
+                                    backgroundColor: redMedium,
+                                  ),
+                                );
+                                return;
+                              } else {
                                 isCurrentlyUsedVoucher
-                                    ? context.read<VoucherBloc>().add(
-                                    VoucherEvent.removeVoucher(item.id))
-                                    : context.read<VoucherBloc>().add(
-                                    VoucherEvent.applyVoucher(item.id));
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: primaryColor,
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 5),
-                                child: Text(
-                                  isCurrentlyUsedVoucher ? 'Disuse' : 'Use',
-                                  style: txtPrimarySubTitle.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      color: baseColor),
-                                ),
+                                  ? context
+                                      .read<VoucherBloc>()
+                                      .add(VoucherEvent.removeVoucher(item.id))
+                                  : context
+                                      .read<VoucherBloc>()
+                                      .add(VoucherEvent.applyVoucher(item.id));
+                              }
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: isEligible ? primaryColor : grey,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 5),
+                              child: Text(
+                                isCurrentlyUsedVoucher ? 'Unused' : 'Use',
+                                style: txtPrimarySubTitle.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: baseColor),
                               ),
                             ),
                           ),

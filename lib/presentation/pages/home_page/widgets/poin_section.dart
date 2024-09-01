@@ -64,12 +64,12 @@ class PoinSection extends StatelessWidget {
                             if (pointModel?.data != null){
                               final itemPoint = pointModel?.data?.point!;
                               return Text(
-                                '$itemPoint Point',
+                                '$itemPoint Poin',
                                 style: txtSecondaryTitle.copyWith(
                                     fontWeight: FontWeight.w500, color: blackColor),
                               );
                             } else {
-                              return Text('0 Point',
+                              return Text('0 Poin',
                                 style: txtSecondaryTitle.copyWith(
                                     fontWeight: FontWeight.w500, color: blackColor),
                               );
@@ -96,7 +96,7 @@ class PoinSection extends StatelessWidget {
                 children: [
                   Flexible(
                     child: Text(
-                      'Redeem your points for exciting rewards',
+                      'Tukarkan poinmu dengan hadiah menarik',
                       style: textStyleReedem.copyWith(
                           fontWeight: FontWeight.w500, color: blackColor),
                     ),

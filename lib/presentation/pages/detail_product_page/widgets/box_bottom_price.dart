@@ -120,7 +120,7 @@ class BoxBottomPrice extends StatelessWidget {
             builder: (context, state) {
               return state.when(
                 initial: () => buildLoadingShimmer(screenWidth),
-                loading: () => buildLoadingShimmer(screenWidth),
+                loading: (isPostCartLoading, model, modelReward) => buildLoadingShimmer(screenWidth),
                 success: (
                     modelProduct,
                     modelProductReward,

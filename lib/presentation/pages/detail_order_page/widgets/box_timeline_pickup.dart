@@ -109,7 +109,7 @@ class BoxTimelinePickup extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Outlet Location',
+                                'Lokasi Outlet',
                                 style: txtPrimarySubTitle.copyWith(
                                     fontWeight: FontWeight.w500,
                                     color: blackColor),
@@ -141,7 +141,7 @@ class BoxTimelinePickup extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Pick Up Time',
+                                'Waktu Pick Up',
                                 style: txtPrimarySubTitle.copyWith(
                                     fontWeight: FontWeight.w500,
                                     color: blackColor),

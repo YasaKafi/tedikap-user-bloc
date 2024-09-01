@@ -32,7 +32,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-
+      maxLength: maxTextLength,
       controller: controller,
       inputFormatters: inputFormatters,
       decoration: InputDecoration(
@@ -43,7 +43,7 @@ class CustomTextField extends StatelessWidget {
         prefix: prefix,
         icon: icon,
         hintStyle: txtPrimarySubTitle.copyWith(
-            fontWeight: FontWeight.w500, color: blackColor),
+            fontWeight: FontWeight.w400, color: grey),
         hintText: hintText,
         enabled: enableBorder,
         focusColor: primaryColor,
