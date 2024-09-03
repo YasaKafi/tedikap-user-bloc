@@ -170,7 +170,14 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
         emit(DetailProductState.loading(
           isPostCartLoading: true,
           model: currentState.model,
-          modelReward: currentState.modelReward
+          modelReward: currentState.modelReward,
+            note: currentState.note,
+            quantityCount: currentState.quantityCount,
+            selectedIce: currentState.selectedIce,
+            selectedSize: currentState.selectedSize,
+            selectedSugar: currentState.selectedSugar,
+            selectedTemp: currentState.selectedTemp,
+            totalPrice: currentState.totalPrice
         ));
       }
       try {
@@ -201,7 +208,14 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
         emit(DetailProductState.loading(
             isPostCartLoading: true,
             model: currentState.model,
-            modelReward: currentState.modelReward
+            modelReward: currentState.modelReward,
+            note: currentState.note,
+            quantityCount: currentState.quantityCount,
+            selectedIce: currentState.selectedIce,
+            selectedSize: currentState.selectedSize,
+            selectedSugar: currentState.selectedSugar,
+            selectedTemp: currentState.selectedTemp,
+            totalPrice: currentState.totalPrice
         ));
       }
       try {
@@ -282,8 +296,19 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
 
     on<_PostFavorite>((event, emit) async {
       final currentState = state;
-      if (currentState is _Success)  {
-        emit(const _Loading());
+      if (currentState is _Success) {
+        emit(DetailProductState.loading(
+            model: currentState.model,
+            isPostFavorite: true,
+            modelReward: currentState.modelReward,
+          note: currentState.note,
+          quantityCount: currentState.quantityCount,
+          selectedIce: currentState.selectedIce,
+          selectedSize: currentState.selectedSize,
+          selectedSugar: currentState.selectedSugar,
+          selectedTemp: currentState.selectedTemp,
+          totalPrice: currentState.totalPrice
+        ));
         try {
           final response = await favoriteDatasource.postFavoriteProduct(event.productId!);
           await response.fold(

@@ -41,8 +41,9 @@ class BoxInfoProduct extends StatelessWidget {
               builder: (context, state) {
                 return state.when(
                   initial: () => buildLoadingShimmer(),
-                  loading: (isPostCartLoading, model, modelReward) {
-                    if (isPostCartLoading) {
+                  loading: (isPostCartLoading, isPostFavorite, model, modelReward, selectedTemp, selectedSize, selectedIce,selectedSugar, qty , totalPrice, note, modelCart,
+                      modelCartReward) {
+                    if (isPostCartLoading || isPostFavorite) {
                       if (model != null || modelReward != null) {
                         return _buildProductDetailContent(state, model, modelReward);
                       }

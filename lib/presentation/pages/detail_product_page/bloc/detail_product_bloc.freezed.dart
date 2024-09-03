@@ -3877,8 +3877,18 @@ mixin _$DetailProductState {
     required TResult Function() initial,
     required TResult Function(
             bool isPostCartLoading,
+            bool isPostFavorite,
             DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)
+            DetailProductRewardResponseModel? modelReward,
+            String selectedTemp,
+            String selectedSize,
+            String selectedIce,
+            String selectedSugar,
+            int quantityCount,
+            int totalPrice,
+            String note,
+            CartItemResponseModel? modelCartItem,
+            CartItemRewardResponseModel? modelCartItemReward)
         loading,
     required TResult Function(
             DetailProductResponseModel? model,
@@ -3909,8 +3919,20 @@ mixin _$DetailProductState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(bool isPostCartLoading, DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)?
+    TResult? Function(
+            bool isPostCartLoading,
+            bool isPostFavorite,
+            DetailProductResponseModel? model,
+            DetailProductRewardResponseModel? modelReward,
+            String selectedTemp,
+            String selectedSize,
+            String selectedIce,
+            String selectedSugar,
+            int quantityCount,
+            int totalPrice,
+            String note,
+            CartItemResponseModel? modelCartItem,
+            CartItemRewardResponseModel? modelCartItemReward)?
         loading,
     TResult? Function(
             DetailProductResponseModel? model,
@@ -3941,8 +3963,20 @@ mixin _$DetailProductState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isPostCartLoading, DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)?
+    TResult Function(
+            bool isPostCartLoading,
+            bool isPostFavorite,
+            DetailProductResponseModel? model,
+            DetailProductRewardResponseModel? modelReward,
+            String selectedTemp,
+            String selectedSize,
+            String selectedIce,
+            String selectedSugar,
+            int quantityCount,
+            int totalPrice,
+            String note,
+            CartItemResponseModel? modelCartItem,
+            CartItemRewardResponseModel? modelCartItemReward)?
         loading,
     TResult Function(
             DetailProductResponseModel? model,
@@ -4057,8 +4091,18 @@ class _$InitialImpl implements _Initial {
     required TResult Function() initial,
     required TResult Function(
             bool isPostCartLoading,
+            bool isPostFavorite,
             DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)
+            DetailProductRewardResponseModel? modelReward,
+            String selectedTemp,
+            String selectedSize,
+            String selectedIce,
+            String selectedSugar,
+            int quantityCount,
+            int totalPrice,
+            String note,
+            CartItemResponseModel? modelCartItem,
+            CartItemRewardResponseModel? modelCartItemReward)
         loading,
     required TResult Function(
             DetailProductResponseModel? model,
@@ -4092,8 +4136,20 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(bool isPostCartLoading, DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)?
+    TResult? Function(
+            bool isPostCartLoading,
+            bool isPostFavorite,
+            DetailProductResponseModel? model,
+            DetailProductRewardResponseModel? modelReward,
+            String selectedTemp,
+            String selectedSize,
+            String selectedIce,
+            String selectedSugar,
+            int quantityCount,
+            int totalPrice,
+            String note,
+            CartItemResponseModel? modelCartItem,
+            CartItemRewardResponseModel? modelCartItemReward)?
         loading,
     TResult? Function(
             DetailProductResponseModel? model,
@@ -4127,8 +4183,20 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isPostCartLoading, DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)?
+    TResult Function(
+            bool isPostCartLoading,
+            bool isPostFavorite,
+            DetailProductResponseModel? model,
+            DetailProductRewardResponseModel? modelReward,
+            String selectedTemp,
+            String selectedSize,
+            String selectedIce,
+            String selectedSugar,
+            int quantityCount,
+            int totalPrice,
+            String note,
+            CartItemResponseModel? modelCartItem,
+            CartItemRewardResponseModel? modelCartItemReward)?
         loading,
     TResult Function(
             DetailProductResponseModel? model,
@@ -4212,8 +4280,18 @@ abstract class _$$LoadingImplCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isPostCartLoading,
+      bool isPostFavorite,
       DetailProductResponseModel? model,
-      DetailProductRewardResponseModel? modelReward});
+      DetailProductRewardResponseModel? modelReward,
+      String selectedTemp,
+      String selectedSize,
+      String selectedIce,
+      String selectedSugar,
+      int quantityCount,
+      int totalPrice,
+      String note,
+      CartItemResponseModel? modelCartItem,
+      CartItemRewardResponseModel? modelCartItemReward});
 }
 
 /// @nodoc
@@ -4228,13 +4306,27 @@ class __$$LoadingImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isPostCartLoading = null,
+    Object? isPostFavorite = null,
     Object? model = freezed,
     Object? modelReward = freezed,
+    Object? selectedTemp = null,
+    Object? selectedSize = null,
+    Object? selectedIce = null,
+    Object? selectedSugar = null,
+    Object? quantityCount = null,
+    Object? totalPrice = null,
+    Object? note = null,
+    Object? modelCartItem = freezed,
+    Object? modelCartItemReward = freezed,
   }) {
     return _then(_$LoadingImpl(
       isPostCartLoading: null == isPostCartLoading
           ? _value.isPostCartLoading
           : isPostCartLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPostFavorite: null == isPostFavorite
+          ? _value.isPostFavorite
+          : isPostFavorite // ignore: cast_nullable_to_non_nullable
               as bool,
       model: freezed == model
           ? _value.model
@@ -4244,6 +4336,42 @@ class __$$LoadingImplCopyWithImpl<$Res>
           ? _value.modelReward
           : modelReward // ignore: cast_nullable_to_non_nullable
               as DetailProductRewardResponseModel?,
+      selectedTemp: null == selectedTemp
+          ? _value.selectedTemp
+          : selectedTemp // ignore: cast_nullable_to_non_nullable
+              as String,
+      selectedSize: null == selectedSize
+          ? _value.selectedSize
+          : selectedSize // ignore: cast_nullable_to_non_nullable
+              as String,
+      selectedIce: null == selectedIce
+          ? _value.selectedIce
+          : selectedIce // ignore: cast_nullable_to_non_nullable
+              as String,
+      selectedSugar: null == selectedSugar
+          ? _value.selectedSugar
+          : selectedSugar // ignore: cast_nullable_to_non_nullable
+              as String,
+      quantityCount: null == quantityCount
+          ? _value.quantityCount
+          : quantityCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalPrice: null == totalPrice
+          ? _value.totalPrice
+          : totalPrice // ignore: cast_nullable_to_non_nullable
+              as int,
+      note: null == note
+          ? _value.note
+          : note // ignore: cast_nullable_to_non_nullable
+              as String,
+      modelCartItem: freezed == modelCartItem
+          ? _value.modelCartItem
+          : modelCartItem // ignore: cast_nullable_to_non_nullable
+              as CartItemResponseModel?,
+      modelCartItemReward: freezed == modelCartItemReward
+          ? _value.modelCartItemReward
+          : modelCartItemReward // ignore: cast_nullable_to_non_nullable
+              as CartItemRewardResponseModel?,
     ));
   }
 }
@@ -4252,19 +4380,59 @@ class __$$LoadingImplCopyWithImpl<$Res>
 
 class _$LoadingImpl implements _Loading {
   const _$LoadingImpl(
-      {this.isPostCartLoading = false, this.model, this.modelReward});
+      {this.isPostCartLoading = false,
+      this.isPostFavorite = false,
+      this.model,
+      this.modelReward,
+      this.selectedTemp = 'ice',
+      this.selectedSize = 'regular',
+      this.selectedIce = 'normal',
+      this.selectedSugar = 'normal',
+      this.quantityCount = 1,
+      this.totalPrice = 0,
+      this.note = '',
+      this.modelCartItem,
+      this.modelCartItemReward});
 
   @override
   @JsonKey()
   final bool isPostCartLoading;
   @override
+  @JsonKey()
+  final bool isPostFavorite;
+  @override
   final DetailProductResponseModel? model;
   @override
   final DetailProductRewardResponseModel? modelReward;
+  @override
+  @JsonKey()
+  final String selectedTemp;
+  @override
+  @JsonKey()
+  final String selectedSize;
+  @override
+  @JsonKey()
+  final String selectedIce;
+  @override
+  @JsonKey()
+  final String selectedSugar;
+  @override
+  @JsonKey()
+  final int quantityCount;
+  @override
+  @JsonKey()
+  final int totalPrice;
+  @override
+  @JsonKey()
+  final String note;
+  @override
+  final CartItemResponseModel? modelCartItem;
+  @override
+  final CartItemRewardResponseModel? modelCartItemReward;
 
   @override
   String toString() {
-    return 'DetailProductState.loading(isPostCartLoading: $isPostCartLoading, model: $model, modelReward: $modelReward)';
+    return 'DetailProductState.loading(isPostCartLoading: $isPostCartLoading, isPostFavorite: $isPostFavorite, model: $model, modelReward: $modelReward, selectedTemp: $selectedTemp, selectedSize: $selectedSize, selectedIce: $selectedIce, selectedSugar: $selectedSugar, quantityCount: $quantityCount, totalPrice: $totalPrice, note: $note, modelCartItem: $modelCartItem, modelCartItemReward: $modelCartItemReward)';
   }
 
   @override
@@ -4274,14 +4442,46 @@ class _$LoadingImpl implements _Loading {
             other is _$LoadingImpl &&
             (identical(other.isPostCartLoading, isPostCartLoading) ||
                 other.isPostCartLoading == isPostCartLoading) &&
+            (identical(other.isPostFavorite, isPostFavorite) ||
+                other.isPostFavorite == isPostFavorite) &&
             (identical(other.model, model) || other.model == model) &&
             (identical(other.modelReward, modelReward) ||
-                other.modelReward == modelReward));
+                other.modelReward == modelReward) &&
+            (identical(other.selectedTemp, selectedTemp) ||
+                other.selectedTemp == selectedTemp) &&
+            (identical(other.selectedSize, selectedSize) ||
+                other.selectedSize == selectedSize) &&
+            (identical(other.selectedIce, selectedIce) ||
+                other.selectedIce == selectedIce) &&
+            (identical(other.selectedSugar, selectedSugar) ||
+                other.selectedSugar == selectedSugar) &&
+            (identical(other.quantityCount, quantityCount) ||
+                other.quantityCount == quantityCount) &&
+            (identical(other.totalPrice, totalPrice) ||
+                other.totalPrice == totalPrice) &&
+            (identical(other.note, note) || other.note == note) &&
+            (identical(other.modelCartItem, modelCartItem) ||
+                other.modelCartItem == modelCartItem) &&
+            (identical(other.modelCartItemReward, modelCartItemReward) ||
+                other.modelCartItemReward == modelCartItemReward));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isPostCartLoading, model, modelReward);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isPostCartLoading,
+      isPostFavorite,
+      model,
+      modelReward,
+      selectedTemp,
+      selectedSize,
+      selectedIce,
+      selectedSugar,
+      quantityCount,
+      totalPrice,
+      note,
+      modelCartItem,
+      modelCartItemReward);
 
   @JsonKey(ignore: true)
   @override
@@ -4295,8 +4495,18 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() initial,
     required TResult Function(
             bool isPostCartLoading,
+            bool isPostFavorite,
             DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)
+            DetailProductRewardResponseModel? modelReward,
+            String selectedTemp,
+            String selectedSize,
+            String selectedIce,
+            String selectedSugar,
+            int quantityCount,
+            int totalPrice,
+            String note,
+            CartItemResponseModel? modelCartItem,
+            CartItemRewardResponseModel? modelCartItemReward)
         loading,
     required TResult Function(
             DetailProductResponseModel? model,
@@ -4323,15 +4533,40 @@ class _$LoadingImpl implements _Loading {
         success,
     required TResult Function(String? message) error,
   }) {
-    return loading(isPostCartLoading, model, modelReward);
+    return loading(
+        isPostCartLoading,
+        isPostFavorite,
+        model,
+        modelReward,
+        selectedTemp,
+        selectedSize,
+        selectedIce,
+        selectedSugar,
+        quantityCount,
+        totalPrice,
+        note,
+        modelCartItem,
+        modelCartItemReward);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(bool isPostCartLoading, DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)?
+    TResult? Function(
+            bool isPostCartLoading,
+            bool isPostFavorite,
+            DetailProductResponseModel? model,
+            DetailProductRewardResponseModel? modelReward,
+            String selectedTemp,
+            String selectedSize,
+            String selectedIce,
+            String selectedSugar,
+            int quantityCount,
+            int totalPrice,
+            String note,
+            CartItemResponseModel? modelCartItem,
+            CartItemRewardResponseModel? modelCartItemReward)?
         loading,
     TResult? Function(
             DetailProductResponseModel? model,
@@ -4358,15 +4593,40 @@ class _$LoadingImpl implements _Loading {
         success,
     TResult? Function(String? message)? error,
   }) {
-    return loading?.call(isPostCartLoading, model, modelReward);
+    return loading?.call(
+        isPostCartLoading,
+        isPostFavorite,
+        model,
+        modelReward,
+        selectedTemp,
+        selectedSize,
+        selectedIce,
+        selectedSugar,
+        quantityCount,
+        totalPrice,
+        note,
+        modelCartItem,
+        modelCartItemReward);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isPostCartLoading, DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)?
+    TResult Function(
+            bool isPostCartLoading,
+            bool isPostFavorite,
+            DetailProductResponseModel? model,
+            DetailProductRewardResponseModel? modelReward,
+            String selectedTemp,
+            String selectedSize,
+            String selectedIce,
+            String selectedSugar,
+            int quantityCount,
+            int totalPrice,
+            String note,
+            CartItemResponseModel? modelCartItem,
+            CartItemRewardResponseModel? modelCartItemReward)?
         loading,
     TResult Function(
             DetailProductResponseModel? model,
@@ -4395,7 +4655,20 @@ class _$LoadingImpl implements _Loading {
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(isPostCartLoading, model, modelReward);
+      return loading(
+          isPostCartLoading,
+          isPostFavorite,
+          model,
+          modelReward,
+          selectedTemp,
+          selectedSize,
+          selectedIce,
+          selectedSugar,
+          quantityCount,
+          totalPrice,
+          note,
+          modelCartItem,
+          modelCartItemReward);
     }
     return orElse();
   }
@@ -4441,12 +4714,32 @@ class _$LoadingImpl implements _Loading {
 abstract class _Loading implements DetailProductState {
   const factory _Loading(
       {final bool isPostCartLoading,
+      final bool isPostFavorite,
       final DetailProductResponseModel? model,
-      final DetailProductRewardResponseModel? modelReward}) = _$LoadingImpl;
+      final DetailProductRewardResponseModel? modelReward,
+      final String selectedTemp,
+      final String selectedSize,
+      final String selectedIce,
+      final String selectedSugar,
+      final int quantityCount,
+      final int totalPrice,
+      final String note,
+      final CartItemResponseModel? modelCartItem,
+      final CartItemRewardResponseModel? modelCartItemReward}) = _$LoadingImpl;
 
   bool get isPostCartLoading;
+  bool get isPostFavorite;
   DetailProductResponseModel? get model;
   DetailProductRewardResponseModel? get modelReward;
+  String get selectedTemp;
+  String get selectedSize;
+  String get selectedIce;
+  String get selectedSugar;
+  int get quantityCount;
+  int get totalPrice;
+  String get note;
+  CartItemResponseModel? get modelCartItem;
+  CartItemRewardResponseModel? get modelCartItemReward;
   @JsonKey(ignore: true)
   _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -4774,8 +5067,18 @@ class _$SuccessImpl implements _Success {
     required TResult Function() initial,
     required TResult Function(
             bool isPostCartLoading,
+            bool isPostFavorite,
             DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)
+            DetailProductRewardResponseModel? modelReward,
+            String selectedTemp,
+            String selectedSize,
+            String selectedIce,
+            String selectedSugar,
+            int quantityCount,
+            int totalPrice,
+            String note,
+            CartItemResponseModel? modelCartItem,
+            CartItemRewardResponseModel? modelCartItemReward)
         loading,
     required TResult Function(
             DetailProductResponseModel? model,
@@ -4830,8 +5133,20 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(bool isPostCartLoading, DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)?
+    TResult? Function(
+            bool isPostCartLoading,
+            bool isPostFavorite,
+            DetailProductResponseModel? model,
+            DetailProductRewardResponseModel? modelReward,
+            String selectedTemp,
+            String selectedSize,
+            String selectedIce,
+            String selectedSugar,
+            int quantityCount,
+            int totalPrice,
+            String note,
+            CartItemResponseModel? modelCartItem,
+            CartItemRewardResponseModel? modelCartItemReward)?
         loading,
     TResult? Function(
             DetailProductResponseModel? model,
@@ -4886,8 +5201,20 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isPostCartLoading, DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)?
+    TResult Function(
+            bool isPostCartLoading,
+            bool isPostFavorite,
+            DetailProductResponseModel? model,
+            DetailProductRewardResponseModel? modelReward,
+            String selectedTemp,
+            String selectedSize,
+            String selectedIce,
+            String selectedSugar,
+            int quantityCount,
+            int totalPrice,
+            String note,
+            CartItemResponseModel? modelCartItem,
+            CartItemRewardResponseModel? modelCartItemReward)?
         loading,
     TResult Function(
             DetailProductResponseModel? model,
@@ -5097,8 +5424,18 @@ class _$ErrorImpl implements _Error {
     required TResult Function() initial,
     required TResult Function(
             bool isPostCartLoading,
+            bool isPostFavorite,
             DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)
+            DetailProductRewardResponseModel? modelReward,
+            String selectedTemp,
+            String selectedSize,
+            String selectedIce,
+            String selectedSugar,
+            int quantityCount,
+            int totalPrice,
+            String note,
+            CartItemResponseModel? modelCartItem,
+            CartItemRewardResponseModel? modelCartItemReward)
         loading,
     required TResult Function(
             DetailProductResponseModel? model,
@@ -5132,8 +5469,20 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(bool isPostCartLoading, DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)?
+    TResult? Function(
+            bool isPostCartLoading,
+            bool isPostFavorite,
+            DetailProductResponseModel? model,
+            DetailProductRewardResponseModel? modelReward,
+            String selectedTemp,
+            String selectedSize,
+            String selectedIce,
+            String selectedSugar,
+            int quantityCount,
+            int totalPrice,
+            String note,
+            CartItemResponseModel? modelCartItem,
+            CartItemRewardResponseModel? modelCartItemReward)?
         loading,
     TResult? Function(
             DetailProductResponseModel? model,
@@ -5167,8 +5516,20 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isPostCartLoading, DetailProductResponseModel? model,
-            DetailProductRewardResponseModel? modelReward)?
+    TResult Function(
+            bool isPostCartLoading,
+            bool isPostFavorite,
+            DetailProductResponseModel? model,
+            DetailProductRewardResponseModel? modelReward,
+            String selectedTemp,
+            String selectedSize,
+            String selectedIce,
+            String selectedSugar,
+            int quantityCount,
+            int totalPrice,
+            String note,
+            CartItemResponseModel? modelCartItem,
+            CartItemRewardResponseModel? modelCartItemReward)?
         loading,
     TResult Function(
             DetailProductResponseModel? model,

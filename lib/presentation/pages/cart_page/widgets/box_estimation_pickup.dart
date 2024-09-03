@@ -154,12 +154,14 @@ class BoxEstimationPickup extends StatelessWidget {
                                                     final endOrder1 = cartModel?.cart!.endSession1;
                                                     final endOrder2 = cartModel?.cart!.endSession2;
 
+                                                    print('VALUE END ORDER 1 : $endOrder1');
+
                                                     // Pastikan format waktu sesuai dengan HH.mm
                                                     if (endOrder1 != null && endOrder2 != null) {
                                                       try {
                                                         // Konversi endOrder1 menjadi DateTime dan tambahkan 1 menit
-                                                        DateTime parsedEndOrder1 = DateFormat("HH.mm").parse(endOrder1);
-                                                        String endOrder1PlusOne = DateFormat("HH.mm").format(parsedEndOrder1.add(Duration(minutes: 1)));
+                                                        DateTime parsedEndOrder1 = DateFormat("HH:mm").parse(endOrder1);
+                                                        String endOrder1PlusOne = DateFormat("HH:mm").format(parsedEndOrder1.add(Duration(minutes: 1)));
 
                                                         _onAlertButtonsPressed(
                                                           context,
