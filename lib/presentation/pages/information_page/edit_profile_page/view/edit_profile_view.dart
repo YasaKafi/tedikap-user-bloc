@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/common/constant.dart';
 import 'package:tedikap_user_bloc/data/models/response/current_user_response_model.dart';
@@ -20,7 +21,11 @@ import '../widget/editimage_button.dart';
 import '../widget/save_button.dart';
 
 class EditProfilePage extends StatefulWidget {
-  const EditProfilePage({super.key});
+  const EditProfilePage(
+      {super.key, required this.isFromProfile, required this.isFromCart});
+
+  final bool isFromProfile;
+  final bool isFromCart;
 
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
@@ -59,6 +64,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     print('VALUE BOOL DARI IS SNACKBARSHOWN $isSnackBarShown');
+    print('VALUE BOOL DARI IS FROM CART ${widget.isFromCart}');
+    print('VALUE BOOL DARI IS FROM PROFILE ${widget.isFromProfile}');
     return Scaffold(
       backgroundColor: baseColor,
       body: SingleChildScrollView(
@@ -101,11 +108,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
             Stack(
               children: [
                 BlocBuilder<EditProfileBloc, EditProfileState>(
+                  buildWhen: (previous, current) => true,
                   builder: (context, state) {
                     return state.maybeWhen(
                       orElse: () =>
                           const Center(child: CircularProgressIndicator()),
-                      loading: () => _buildShimmerProfile(),
+                      loading: (isPostEditProfile, modelUser, imagePath) {
+                        if (isPostEditProfile == true) {
+                          if (modelUser != null || imagePath != null) {
+                            return buildContainerAvatar(imagePath, modelUser);
+                          }
+                        }
+                        return _buildShimmerProfile();
+                      },
                       loaded: (user, o, imagePath, modelEdit) {
                         if (imagePath != null) {
                           defaultImagePath.value = imagePath;
@@ -150,32 +165,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             }
                           }
                         }
-                        return Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration:
-                              const BoxDecoration(shape: BoxShape.circle),
-                          child: imagePath != null
-                              ? ClipOval(
-                                  child: Image.file(
-                                    i.File(imagePath),
-                                    width: 170,
-                                    height: 170,
-                                    fit: BoxFit.cover,
-                                  ),
-                                )
-                              : user?.data?.avatar != null
-                                  ? ClipOval(
-                                      child: Image.network(
-                                        TedikapApiRepository.getAvatarProfile +
-                                            user!.data!.avatar!,
-                                        width: 170,
-                                        height: 170,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    )
-                                  : const Center(
-                                      child: Text('No image available')),
-                        );
+                        return buildContainerAvatar(imagePath, user);
                       },
                     );
                   },
@@ -184,10 +174,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   right: 0,
                   top: 10,
                   child: EditImageButton(
+                    disableChange: widget.isFromCart,
                     onPressed: () {
-                      context.read<EditProfileBloc>().add(
-                            const EditProfileEvent.changeImage(),
-                          );
+                      widget.isFromCart == true
+                          ? null
+                          : context.read<EditProfileBloc>().add(
+                                const EditProfileEvent.changeImage(),
+                              );
                     },
                   ),
                 ),
@@ -209,7 +202,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         builder: (context, state) {
                           return state.maybeWhen(
                             orElse: () => _buildShimmerTextField(),
-                            loading: () => _buildShimmerTextField(),
+                            loading: (isPostEditProfile, modelUser, imagePath) {
+                              if (isPostEditProfile) {
+                                return buildCustomTextFieldUsername();
+                              }
+
+                              return _buildShimmerTextField();
+                            },
                             loaded: (user, n, imagePath, modelEdit) {
                               if (isFirstLoad && user?.data != null) {
                                 // Initialize values only on first load
@@ -224,18 +223,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 isFirstLoad = false;
                               }
 
-                              return CustomTextField(
-                                icon: Icon(Icons.person),
-                                hintText: 'Username',
-                                labelText: 'Username',
-                                keyboardType: TextInputType.text,
-                                controller: usernameController,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                      RegExp(r'[a-zA-Z]'))
-                                ],
-                                maxTextLength: 12,
-                              );
+                              return buildCustomTextFieldUsername();
                             },
                             error: (message) => Center(
                               child: Text(
@@ -253,17 +241,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         builder: (context, state) {
                           return state.maybeWhen(
                             orElse: () => _buildShimmerTextField(),
-                            loading: () => _buildShimmerTextField(),
+                            loading: (isPostEditProfile, modelUser, imagePath) {
+                              if (isPostEditProfile) {
+                                return buildCustomTextFieldEmail();
+                              }
+                              return _buildShimmerTextField();
+                            },
                             loaded: (user, n, o, modelEdit) {
-                              return CustomTextField(
-                                icon: Icon(Icons.email),
-                                hintText: 'Email',
-                                labelText: 'Email',
-                                readOnly: true,
-                                enableBorder: false,
-                                keyboardType: TextInputType.emailAddress,
-                                controller: emailController,
-                              );
+                              return buildCustomTextFieldEmail();
                             },
                             error: (message) => Center(
                               child: Text(
@@ -281,50 +266,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         builder: (context, state) {
                           return state.maybeWhen(
                             orElse: () => _buildShimmerTextField(),
-                            loading: () => _buildShimmerTextField(),
+                            loading: (isPostEditProfile, modelUser, imagePath) {
+                              if (isPostEditProfile) {
+                                return buildCustomTextFieldWhatsApp(context);
+                              }
+                              return _buildShimmerTextField();
+                            },
                             loaded: (user, n, o, modelEdit) {
-                              return CustomTextField(
-                                icon: SvgPicture.asset(
-                                  icWhatsApp,
-                                  width: 26,
-                                ),
-                                hintText: '895xxx',
-                                // labelText: 'WhatsApp Number',
-                                prefix: Text('+62 ',
-                                    style: txtPrimarySubTitle.copyWith(
-                                        fontWeight: FontWeight.w500,
-                                        color: blackColor)),
-                                keyboardType: TextInputType.phone,
-                                controller: phoneNumberController,
-                                inputFormatters: [
-                                  LengthLimitingTextInputFormatter(12),
-                                  FilteringTextInputFormatter
-                                      .digitsOnly,
-                                ],
-                                onChanged: (value) {
-                                  if (value.startsWith('0')) {
-                                    phoneNumberController.text = value
-                                        .substring(1); // Hapus '0' dari awal
-                                    phoneNumberController.selection =
-                                        TextSelection.fromPosition(
-                                      TextPosition(
-                                          offset: phoneNumberController
-                                              .text.length),
-                                    );
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          'Nomor sudah diformat untuk Indonesia, tidak perlu diawali dengan "0".',
-                                          style: txtSecondaryTitle.copyWith(
-                                              fontWeight: FontWeight.w600,
-                                              color: blackColor),
-                                        ),
-                                        backgroundColor: redMedium,
-                                      ),
-                                    );
-                                  }
-                                },
-                              );
+                              return buildCustomTextFieldWhatsApp(context);
                             },
                             error: (message) => Center(
                               child: Text(
@@ -387,8 +336,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               bottom: Dimensions.marginSizeExtraLarge),
                           child: SaveButton(
                             onPressed: () {
-                              if (usernameController.text.isNotEmpty &&
-                                  emailController.text.isNotEmpty &&
+                              if (usernameController.text.isNotEmpty ||
+                                  emailController.text.isNotEmpty ||
                                   phoneNumberController.text.isNotEmpty) {
                                 String? updatedName = usernameController.text;
                                 String? updatedEmail = emailController.text;
@@ -412,23 +361,26 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                         imageFile: fileToUpload,
                                       ),
                                     );
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      'Please fill in all fields',
-                                      style: txtSecondaryTitle.copyWith(
-                                          fontWeight: FontWeight.w600,
-                                          color: blackColor),
-                                    ),
-                                    backgroundColor: redMedium,
-                                  ),
-                                );
                               }
                             },
                           ),
                         ),
-                        loading: () => Center(child: _buildShimmerTextField()),
+                        loading: (isPostEditProfile, modelUser, imagePath) =>
+                            isPostEditProfile
+                                ? Container(
+                                    margin: const EdgeInsets.only(
+                                        top: Dimensions.marginSizeExtraLarge,
+                                        bottom:
+                                            Dimensions.marginSizeExtraLarge),
+                                    child: SaveButton(
+                                      onPressed: () {},
+                                      widget: LoadingAnimationWidget
+                                          .staggeredDotsWave(
+                                        color: baseColor,
+                                        size: 30,
+                                      ),
+                                    ))
+                                : Center(child: _buildShimmerTextField()),
                       );
                     },
                   ),
@@ -438,6 +390,112 @@ class _EditProfilePageState extends State<EditProfilePage> {
           ],
         ),
       ),
+    );
+  }
+
+  CustomTextField buildCustomTextFieldEmail() {
+    return CustomTextField(
+      icon: Icon(Icons.email),
+      hintText: 'Email',
+      labelText: 'Email',
+      readOnly: true,
+      enableBorder: false,
+      keyboardType: TextInputType.emailAddress,
+      controller: emailController,
+    );
+  }
+
+  CustomTextField buildCustomTextFieldWhatsApp(BuildContext context) {
+    return CustomTextField(
+      icon: SvgPicture.asset(
+        icWhatsApp,
+        width: 26,
+      ),
+      hintText: '895xxx',
+      labelText: 'WhatsApp Number',
+      prefix: Text('+62 ',
+          style: txtPrimarySubTitle.copyWith(
+              fontWeight: FontWeight.w500, color: blackColor)),
+      keyboardType: TextInputType.phone,
+      controller: phoneNumberController,
+      inputFormatters: [
+        LengthLimitingTextInputFormatter(12),
+        FilteringTextInputFormatter.digitsOnly,
+      ],
+      onChanged: (value) {
+        if (value.startsWith('0')) {
+          phoneNumberController.text =
+              value.substring(1); // Hapus '0' dari awal
+          phoneNumberController.selection = TextSelection.fromPosition(
+            TextPosition(offset: phoneNumberController.text.length),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'Nomor sudah diformat untuk Indonesia, tidak perlu diawali dengan "0".',
+                style: txtSecondaryTitle.copyWith(
+                    fontWeight: FontWeight.w600, color: blackColor),
+              ),
+              backgroundColor: redMedium,
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  CustomTextField buildCustomTextFieldUsername() {
+    return CustomTextField(
+      icon: Icon(Icons.person),
+      hintText: 'Username',
+      labelText: 'Username',
+      readOnly: widget.isFromCart == true ? true : false,
+      keyboardType: TextInputType.text,
+      enableBorder: widget.isFromCart == true ? false : true,
+      controller: usernameController,
+      inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))],
+      maxTextLength: 12,
+    );
+  }
+
+  Container buildContainerAvatar(String? imagePath, CurrentUserModel? user) {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: const BoxDecoration(shape: BoxShape.circle),
+      child: imagePath != null
+          ? ClipOval(
+              child: Image.file(
+                i.File(imagePath),
+                width: 170,
+                height: 170,
+                fit: BoxFit.cover,
+              ),
+            )
+          : user?.data?.avatar != null
+              ? Stack(
+                  children: [
+                    ClipOval(
+                      child: Image.network(
+                        TedikapApiRepository.getAvatarProfile +
+                            user!.data!.avatar!,
+                        width: 170,
+                        height: 170,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Positioned.fill(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: widget.isFromProfile == true
+                              ? null
+                              : grey.withOpacity(0.7),
+                          borderRadius: BorderRadius.all(Radius.circular(170)),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              : const Center(child: Text('No image available')),
     );
   }
 

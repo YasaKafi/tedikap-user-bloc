@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:tedikap_user_bloc/presentation/pages/home_page/bloc/home_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/profile_page/bloc/profile_bloc.dart';
 import '../../../../../common/theme.dart';
 import '../../../../common/dimensions.dart';
@@ -142,6 +143,7 @@ class SettingPage extends StatelessWidget {
                       orElse: () {
                         return InkWell(
                           onTap: () {
+                            context.read<HomeBloc>().add(const HomeEvent.reset());
                             context.read<ProfileBloc>().add(const ProfileEvent.doLogout());
                           },
                           child: Row(

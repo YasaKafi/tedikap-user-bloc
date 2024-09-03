@@ -5,6 +5,7 @@ import 'package:tedikap_user_bloc/data/models/response/current_user_response_mod
 import 'package:tedikap_user_bloc/data/models/response/logout_response_model.dart';
 
 import '../../../../data/datasource/user_datasource.dart';
+import '../../home_page/bloc/home_bloc.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';

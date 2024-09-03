@@ -159,7 +159,7 @@ class UserDatasource {
       if (name != null) print('Name: $name');
       if (email != null) print('Email: $email');
       if (gender != null) print('Gender: $gender');
-      if (phoneNumber != null) print('Gender: $phoneNumber');
+      if (phoneNumber != null) print('No Hp: $phoneNumber');
       if (imageFile != null) {
         print('Avatar: ${imageFile.path.split('/').last}');
       }

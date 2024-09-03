@@ -22,7 +22,7 @@ class CustomDropDown extends StatelessWidget {
           orElse: () {
             return  Center(child:_buildShimmerTextField());
           },
-          loading: () {
+          loading: (isPostEditProfile, modelUser, imagePath) {
             return  Center(child:_buildShimmerTextField());
           },
           loaded: (_, selectedOption, n, modelEdit) {

@@ -72,6 +72,7 @@ class _PointPageState extends State<PointPage> with SingleTickerProviderStateMix
     double screenHeight = MediaQuery.of(context).size.height;
 
     double dpi = MediaQuery.of(context).devicePixelRatio * 170;
+    print('DPI NOW $dpi');
     TextStyle textStyleTitle = dpi < 380 ? txtThirdSubTitle : txtSecondarySubTitle;
 
     return DefaultTabController(

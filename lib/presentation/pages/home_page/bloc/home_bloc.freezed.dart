@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$HomeEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function() reset,
     required TResult Function() getPoint,
     required TResult Function(bool forceRefresh) getUser,
     required TResult Function(int index) changeIndex,
@@ -26,7 +26,7 @@ mixin _$HomeEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function()? reset,
     TResult? Function()? getPoint,
     TResult? Function(bool forceRefresh)? getUser,
     TResult? Function(int index)? changeIndex,
@@ -34,7 +34,7 @@ mixin _$HomeEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function()? reset,
     TResult Function()? getPoint,
     TResult Function(bool forceRefresh)? getUser,
     TResult Function(int index)? changeIndex,
@@ -43,7 +43,7 @@ mixin _$HomeEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_Reset value) reset,
     required TResult Function(_GetPoint value) getPoint,
     required TResult Function(_GetUser value) getUser,
     required TResult Function(_ChangeIndex value) changeIndex,
@@ -51,7 +51,7 @@ mixin _$HomeEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
+    TResult? Function(_Reset value)? reset,
     TResult? Function(_GetPoint value)? getPoint,
     TResult? Function(_GetUser value)? getUser,
     TResult? Function(_ChangeIndex value)? changeIndex,
@@ -59,7 +59,7 @@ mixin _$HomeEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_Reset value)? reset,
     TResult Function(_GetPoint value)? getPoint,
     TResult Function(_GetUser value)? getUser,
     TResult Function(_ChangeIndex value)? changeIndex,
@@ -86,35 +86,35 @@ class _$HomeEventCopyWithImpl<$Res, $Val extends HomeEvent>
 }
 
 /// @nodoc
-abstract class _$$StartedImplCopyWith<$Res> {
-  factory _$$StartedImplCopyWith(
-          _$StartedImpl value, $Res Function(_$StartedImpl) then) =
-      __$$StartedImplCopyWithImpl<$Res>;
+abstract class _$$ResetImplCopyWith<$Res> {
+  factory _$$ResetImplCopyWith(
+          _$ResetImpl value, $Res Function(_$ResetImpl) then) =
+      __$$ResetImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$StartedImplCopyWithImpl<$Res>
-    extends _$HomeEventCopyWithImpl<$Res, _$StartedImpl>
-    implements _$$StartedImplCopyWith<$Res> {
-  __$$StartedImplCopyWithImpl(
-      _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
+class __$$ResetImplCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res, _$ResetImpl>
+    implements _$$ResetImplCopyWith<$Res> {
+  __$$ResetImplCopyWithImpl(
+      _$ResetImpl _value, $Res Function(_$ResetImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$StartedImpl implements _Started {
-  const _$StartedImpl();
+class _$ResetImpl implements _Reset {
+  const _$ResetImpl();
 
   @override
   String toString() {
-    return 'HomeEvent.started()';
+    return 'HomeEvent.reset()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$StartedImpl);
+        (other.runtimeType == runtimeType && other is _$ResetImpl);
   }
 
   @override
@@ -123,36 +123,36 @@ class _$StartedImpl implements _Started {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function() reset,
     required TResult Function() getPoint,
     required TResult Function(bool forceRefresh) getUser,
     required TResult Function(int index) changeIndex,
   }) {
-    return started();
+    return reset();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function()? reset,
     TResult? Function()? getPoint,
     TResult? Function(bool forceRefresh)? getUser,
     TResult? Function(int index)? changeIndex,
   }) {
-    return started?.call();
+    return reset?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function()? reset,
     TResult Function()? getPoint,
     TResult Function(bool forceRefresh)? getUser,
     TResult Function(int index)? changeIndex,
     required TResult orElse(),
   }) {
-    if (started != null) {
-      return started();
+    if (reset != null) {
+      return reset();
     }
     return orElse();
   }
@@ -160,43 +160,43 @@ class _$StartedImpl implements _Started {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_Reset value) reset,
     required TResult Function(_GetPoint value) getPoint,
     required TResult Function(_GetUser value) getUser,
     required TResult Function(_ChangeIndex value) changeIndex,
   }) {
-    return started(this);
+    return reset(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
+    TResult? Function(_Reset value)? reset,
     TResult? Function(_GetPoint value)? getPoint,
     TResult? Function(_GetUser value)? getUser,
     TResult? Function(_ChangeIndex value)? changeIndex,
   }) {
-    return started?.call(this);
+    return reset?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_Reset value)? reset,
     TResult Function(_GetPoint value)? getPoint,
     TResult Function(_GetUser value)? getUser,
     TResult Function(_ChangeIndex value)? changeIndex,
     required TResult orElse(),
   }) {
-    if (started != null) {
-      return started(this);
+    if (reset != null) {
+      return reset(this);
     }
     return orElse();
   }
 }
 
-abstract class _Started implements HomeEvent {
-  const factory _Started() = _$StartedImpl;
+abstract class _Reset implements HomeEvent {
+  const factory _Reset() = _$ResetImpl;
 }
 
 /// @nodoc
@@ -237,7 +237,7 @@ class _$GetPointImpl implements _GetPoint {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function() reset,
     required TResult Function() getPoint,
     required TResult Function(bool forceRefresh) getUser,
     required TResult Function(int index) changeIndex,
@@ -248,7 +248,7 @@ class _$GetPointImpl implements _GetPoint {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function()? reset,
     TResult? Function()? getPoint,
     TResult? Function(bool forceRefresh)? getUser,
     TResult? Function(int index)? changeIndex,
@@ -259,7 +259,7 @@ class _$GetPointImpl implements _GetPoint {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function()? reset,
     TResult Function()? getPoint,
     TResult Function(bool forceRefresh)? getUser,
     TResult Function(int index)? changeIndex,
@@ -274,7 +274,7 @@ class _$GetPointImpl implements _GetPoint {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_Reset value) reset,
     required TResult Function(_GetPoint value) getPoint,
     required TResult Function(_GetUser value) getUser,
     required TResult Function(_ChangeIndex value) changeIndex,
@@ -285,7 +285,7 @@ class _$GetPointImpl implements _GetPoint {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
+    TResult? Function(_Reset value)? reset,
     TResult? Function(_GetPoint value)? getPoint,
     TResult? Function(_GetUser value)? getUser,
     TResult? Function(_ChangeIndex value)? changeIndex,
@@ -296,7 +296,7 @@ class _$GetPointImpl implements _GetPoint {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_Reset value)? reset,
     TResult Function(_GetPoint value)? getPoint,
     TResult Function(_GetUser value)? getUser,
     TResult Function(_ChangeIndex value)? changeIndex,
@@ -379,7 +379,7 @@ class _$GetUserImpl implements _GetUser {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function() reset,
     required TResult Function() getPoint,
     required TResult Function(bool forceRefresh) getUser,
     required TResult Function(int index) changeIndex,
@@ -390,7 +390,7 @@ class _$GetUserImpl implements _GetUser {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function()? reset,
     TResult? Function()? getPoint,
     TResult? Function(bool forceRefresh)? getUser,
     TResult? Function(int index)? changeIndex,
@@ -401,7 +401,7 @@ class _$GetUserImpl implements _GetUser {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function()? reset,
     TResult Function()? getPoint,
     TResult Function(bool forceRefresh)? getUser,
     TResult Function(int index)? changeIndex,
@@ -416,7 +416,7 @@ class _$GetUserImpl implements _GetUser {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_Reset value) reset,
     required TResult Function(_GetPoint value) getPoint,
     required TResult Function(_GetUser value) getUser,
     required TResult Function(_ChangeIndex value) changeIndex,
@@ -427,7 +427,7 @@ class _$GetUserImpl implements _GetUser {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
+    TResult? Function(_Reset value)? reset,
     TResult? Function(_GetPoint value)? getPoint,
     TResult? Function(_GetUser value)? getUser,
     TResult? Function(_ChangeIndex value)? changeIndex,
@@ -438,7 +438,7 @@ class _$GetUserImpl implements _GetUser {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_Reset value)? reset,
     TResult Function(_GetPoint value)? getPoint,
     TResult Function(_GetUser value)? getUser,
     TResult Function(_ChangeIndex value)? changeIndex,
@@ -524,7 +524,7 @@ class _$ChangeIndexImpl implements _ChangeIndex {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function() reset,
     required TResult Function() getPoint,
     required TResult Function(bool forceRefresh) getUser,
     required TResult Function(int index) changeIndex,
@@ -535,7 +535,7 @@ class _$ChangeIndexImpl implements _ChangeIndex {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function()? reset,
     TResult? Function()? getPoint,
     TResult? Function(bool forceRefresh)? getUser,
     TResult? Function(int index)? changeIndex,
@@ -546,7 +546,7 @@ class _$ChangeIndexImpl implements _ChangeIndex {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function()? reset,
     TResult Function()? getPoint,
     TResult Function(bool forceRefresh)? getUser,
     TResult Function(int index)? changeIndex,
@@ -561,7 +561,7 @@ class _$ChangeIndexImpl implements _ChangeIndex {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_Reset value) reset,
     required TResult Function(_GetPoint value) getPoint,
     required TResult Function(_GetUser value) getUser,
     required TResult Function(_ChangeIndex value) changeIndex,
@@ -572,7 +572,7 @@ class _$ChangeIndexImpl implements _ChangeIndex {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
+    TResult? Function(_Reset value)? reset,
     TResult? Function(_GetPoint value)? getPoint,
     TResult? Function(_GetUser value)? getUser,
     TResult? Function(_ChangeIndex value)? changeIndex,
@@ -583,7 +583,7 @@ class _$ChangeIndexImpl implements _ChangeIndex {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_Reset value)? reset,
     TResult Function(_GetPoint value)? getPoint,
     TResult Function(_GetUser value)? getUser,
     TResult Function(_ChangeIndex value)? changeIndex,

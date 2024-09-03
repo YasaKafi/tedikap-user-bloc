@@ -50,6 +50,8 @@ class CustomTextField extends StatelessWidget {
         enabled: enableBorder,
         focusColor: primaryColor,
         labelText: labelText,
+        labelStyle: txtPrimarySubTitle.copyWith(
+            fontWeight: FontWeight.w400, color: Colors.black54) ,
         helperMaxLines: 2,
         errorMaxLines: 2,
         border: OutlineInputBorder(

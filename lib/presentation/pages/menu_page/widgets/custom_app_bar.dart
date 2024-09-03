@@ -24,17 +24,6 @@ class CustomAppBar extends StatelessWidget {
     double dpi = MediaQuery.of(context).devicePixelRatio * 170;
     TextStyle textStyleTitle = dpi < 380 ? txtSecondarySubTitle : txtPrimarySubTitle;
 
-    Timer? _debounce;
-    searchController.addListener(() {
-      if (_debounce?.isActive ?? false) _debounce?.cancel();
-      _debounce = Timer(const Duration(milliseconds: 500), () {
-        if (searchController.text.isEmpty) {
-          onClearSearch();
-        } else {
-          onSearch(searchController.text);
-        }
-      });
-    });
 
     return SafeArea(
       child: Container(
@@ -57,6 +46,13 @@ class CustomAppBar extends StatelessWidget {
                   borderRadius: BorderRadius.circular(35)),
               width: screenWidth * 0.9,
               child: TextField(
+                onSubmitted: (value) {
+                  if (value.isEmpty) {
+                    onClearSearch();
+                  } else {
+                    onSearch(value);
+                  }
+                },
                 textAlignVertical: TextAlignVertical.center,
                 controller: searchController,
                 style: txtPrimarySubTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor),
