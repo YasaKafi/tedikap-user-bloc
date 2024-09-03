@@ -18,6 +18,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final UserDatasource datasource;
   final ProductDatasource productDatasource;
 
+  bool isPointFetched = false;
+  int pointUser = 0;
+  UserPointResponseModel? cachedPoints;
+
   HomeBloc({required this.datasource, required this.productDatasource})
       : super(const HomeState.initial()) {
 

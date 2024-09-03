@@ -24,7 +24,6 @@ class _PointPageState extends State<PointPage> with SingleTickerProviderStateMix
   late TabController _tabController;
   late PointBloc _pointBloc;
 
-
   @override
   void initState() {
     super.initState();

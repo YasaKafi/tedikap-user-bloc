@@ -17,12 +17,33 @@ class InputNotes extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<DetailProductBloc, DetailProductState>(
         builder: (context, state) {
-      return state.maybeWhen(orElse: () {
+      return state.maybeWhen(
+        loading: (isPostCartLoading,
+            isPostFavorite,
+            model,
+            modelProductReward,
+            selectedTemp,
+            selectedSize,
+            selectedIce,
+            selectedSugar,
+            qty,
+            totalPrice,
+            note,
+            modelCart,
+            modelCartReward
+            ){
+          if (isPostFavorite || isPostCartLoading){
+            return buildColumnBoxInput();
+          }
+          return buildLoadingShimmer(context);
+        },
+          orElse: () {
         if (isFirstLoad == true) {
           return buildLoadingShimmer(context);
         } else {
-          return Container();
-        }
+          return const SizedBox();
+
+      }
       }, success: (modelProduct,
           modelProductReward,
           modelCartPost,
@@ -44,107 +65,77 @@ class InputNotes extends StatelessWidget {
           qty,
           totalPrice,
           note) {
+        if (isFirstLoad!) {
+          if (modelCartItem != null) {
+            notesController.text = note;
+            isFirstLoad = false;
+          } else if (modelCartItemReward != null) {
+            notesController.text = note;
+            isFirstLoad = false;
+          }
+        }
+
         bool isMerchandise =
             modelProductReward?.data?.category == 'merchandise';
         if (isMerchandise) {
-          return Container();
+          return const SizedBox();
         }
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(Dimensions.paddingSizeLarge),
-              decoration: BoxDecoration(
-                color: baseColor,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Text('Notes',
-                          style: txtSecondaryTitle.copyWith(
-                              fontWeight: FontWeight.w600, color: blackColor)),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Text('(Optional)',
-                          style: txtPrimarySubTitle.copyWith(
-                              fontWeight: FontWeight.w500, color: blackColor)),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  BlocBuilder<DetailProductBloc, DetailProductState>(
-                    builder: (context, state) {
-                      return state.when(
-                        initial: () => buildLoadingShimmer(context),
-                        loading: (isPostCartLoading, model, modelReward) => buildLoadingShimmer(context),
-                        success: (
-                          modelProduct,
-                          modelProductReward,
-                          modelCartPost,
-                          modelCartPostReward,
-                          modelCartItem,
-                          modelCartUpdate,
-                          modelCartItemReward,
-                          modelCartRewardUpdate,
-                          modelPostFavorite,
-                          modelFavorite,
-                          isTempSelected,
-                          selectedTemp,
-                          isSizeSelected,
-                          selectedSize,
-                          isIceSelected,
-                          selectedIce,
-                          isSugarSelected,
-                          selectedSugar,
-                          qty,
-                          totalPrice,
-                          note,
-                        ) {
-                          if (isFirstLoad!) {
-                            if (modelCartItem != null) {
-                              notesController.text = note;
-                              isFirstLoad = false;
-                            } else if (modelCartItemReward != null) {
-                              notesController.text = note;
-                              isFirstLoad = false;
-                            }
-                          }
-
-                          return TextFormField(
-                            controller: notesController,
-                            maxLength: 50,
-                            style: txtPrimarySubTitle.copyWith(
-                                fontWeight: FontWeight.w500, color: blackColor),
-                            decoration: InputDecoration(
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5),
-                                borderSide: const BorderSide(color: primaryColor),
-                              ),
-                              hintText: 'Add notes here..',
-                              hintStyle: txtPrimarySubTitle.copyWith(
-                                  fontWeight: FontWeight.w500,
-                                  color: blackColor),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5),
-                                borderSide: const BorderSide(color: grey),
-                              ),
-                            ),
-                          );
-                        },
-                        error: (message) => buildLoadingShimmer(context),
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ],
-        );
+        return buildColumnBoxInput();
       });
     });
+  }
+
+  Column buildColumnBoxInput() {
+    return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(Dimensions.paddingSizeLarge),
+            decoration: BoxDecoration(
+              color: baseColor,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text('Notes',
+                        style: txtSecondaryTitle.copyWith(
+                            fontWeight: FontWeight.w600, color: blackColor)),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text('(Optional)',
+                        style: txtPrimarySubTitle.copyWith(
+                            fontWeight: FontWeight.w500, color: blackColor)),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                TextFormField(
+                  controller: notesController,
+                  maxLength: 50,
+                  style: txtPrimarySubTitle.copyWith(
+                      fontWeight: FontWeight.w500, color: blackColor),
+                  decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: const BorderSide(color: primaryColor),
+                    ),
+                    hintText: 'Add notes here..',
+                    hintStyle: txtPrimarySubTitle.copyWith(
+                        fontWeight: FontWeight.w500, color: blackColor),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: const BorderSide(color: grey),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
   }
 
   Widget buildLoadingShimmer(BuildContext context) {

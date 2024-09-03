@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:tedikap_user_bloc/data/models/response/cart_item_response_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/cart_item_reward_response_model.dart';
+import 'package:tedikap_user_bloc/data/models/response/detail_product_response_model.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_product_page/widgets/box_bottom_price.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_product_page/widgets/box_info_product.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_product_page/widgets/box_option_product.dart';
@@ -41,13 +44,19 @@ class _DetailProductPageState extends State<DetailProductPage> {
     notesController = TextEditingController();
 
     if (widget.cartItemId != null) {
-      context.read<DetailProductBloc>().add(DetailProductEvent.getDetailItemCart(widget.cartItemId!));
+      context
+          .read<DetailProductBloc>()
+          .add(DetailProductEvent.getDetailItemCart(widget.cartItemId!));
     } else if (widget.cartItemRewardId != null) {
-      context.read<DetailProductBloc>().add(DetailProductEvent.getDetailItemCartReward(widget.cartItemRewardId!));
+      context.read<DetailProductBloc>().add(
+          DetailProductEvent.getDetailItemCartReward(widget.cartItemRewardId!));
     } else if (widget.productId != null) {
-      context.read<DetailProductBloc>().add(DetailProductEvent.getDetailProduct(widget.productId!));
+      context
+          .read<DetailProductBloc>()
+          .add(DetailProductEvent.getDetailProduct(widget.productId!));
     } else if (widget.productRewardId != null) {
-      context.read<DetailProductBloc>().add(DetailProductEvent.getDetailProductReward(widget.productRewardId!));
+      context.read<DetailProductBloc>().add(
+          DetailProductEvent.getDetailProductReward(widget.productRewardId!));
     }
   }
 
@@ -70,7 +79,8 @@ class _DetailProductPageState extends State<DetailProductPage> {
           decoration: const BoxDecoration(
             color: baseColor50,
           ),
-          padding: const EdgeInsets.only(top: 30, bottom: 10, left: 10, right: 10),
+          padding:
+              const EdgeInsets.only(top: 30, bottom: 10, left: 10, right: 10),
           width: MediaQuery.of(context).size.width,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -100,35 +110,36 @@ class _DetailProductPageState extends State<DetailProductPage> {
                       state.maybeWhen(
                         orElse: () {},
                         success: (
-                            modelProduct,
-                            modelProductReward,
-                            modelCartPost,
-                            modelCartPostReward,
-                            modelCartItem,
-                            modelCartUpdate,
-                            modelCartItemReward,
-                            modelCartRewardUpdate,
-                            modelPostFavorite,
-                            modelFavorite,
-                            isTempSelected,
-                            selectedTemp,
-                            isSizeSelected,
-                            selectedSize,
-                            isIceSelected,
-                            selectedIce,
-                            isSugarSelected,
-                            selectedSugar,
-                            qty,
-                            totalPrice,
-                            note,
-                            ) {
+                          modelProduct,
+                          modelProductReward,
+                          modelCartPost,
+                          modelCartPostReward,
+                          modelCartItem,
+                          modelCartUpdate,
+                          modelCartItemReward,
+                          modelCartRewardUpdate,
+                          modelPostFavorite,
+                          modelFavorite,
+                          isTempSelected,
+                          selectedTemp,
+                          isSizeSelected,
+                          selectedSize,
+                          isIceSelected,
+                          selectedIce,
+                          isSugarSelected,
+                          selectedSugar,
+                          qty,
+                          totalPrice,
+                          note,
+                        ) {
                           final itemIsLiked = modelPostFavorite?.message;
                           if (itemIsLiked == 'Liked') {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(
                                 'Successfully added to my favorite!',
                                 style: txtSecondaryTitle.copyWith(
-                                    fontWeight: FontWeight.w500, color: baseColor),
+                                    fontWeight: FontWeight.w500,
+                                    color: baseColor),
                               ),
                               backgroundColor: greenMedium,
                             ));
@@ -137,7 +148,8 @@ class _DetailProductPageState extends State<DetailProductPage> {
                               content: Text(
                                 'Successfully removed from my favorite!',
                                 style: txtSecondaryTitle.copyWith(
-                                    fontWeight: FontWeight.w500, color: baseColor),
+                                    fontWeight: FontWeight.w500,
+                                    color: baseColor),
                               ),
                               backgroundColor: redMedium,
                             ));
@@ -148,59 +160,50 @@ class _DetailProductPageState extends State<DetailProductPage> {
                     builder: (context, state) {
                       return state.when(
                         initial: () => buildLoadingShimmer(),
-                        loading: (isPostCartLoading, model, modelReward) => buildLoadingShimmer(),
-                        success: (
+                        loading: (isPostCartLoading,
+                            isPostFavorite,
                             modelProduct,
                             modelProductReward,
-                            modelCartPost,
-                            modelCartPostReward,
-                            modelCartItem,
-                            modelCartUpdate,
-                            modelCartItemReward,
-                            modelCartRewardUpdate,
-                            modelPostFavorite,
-                            modelFavorite,
-                            isTempSelected,
                             selectedTemp,
-                            isSizeSelected,
                             selectedSize,
-                            isIceSelected,
                             selectedIce,
-                            isSugarSelected,
                             selectedSugar,
                             qty,
                             totalPrice,
                             note,
-                            ) {
-                          return InkWell(
-                            onTap: () {
-                              if (widget.productId != null) {
-                                context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(widget.productId!));
-                              } else if (widget.productRewardId != null) {
-                                context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(widget.productRewardId!));
-                              } else if (widget.cartItemId != null) {
-                                context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(modelCartItem!.cartItem!.productId!));
-                              } else if (widget.cartItemRewardId != null) {
-                                context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(modelCartItemReward!.cartItem!.productId!));
-                              }
-                            },
-                            child: (widget.productRewardId == null && widget.cartItemRewardId == null)
-                                ? Container(
-                              padding: const EdgeInsets.only(right: 10),
-                              child: (modelProduct?.data?.isLiked ?? false) == false
-                                  ? SvgPicture.asset(
-                                icHeart,
-                                width: 24,
-                                height: 24,
-                              )
-                                  : SvgPicture.asset(
-                                icHeartActive,
-                                width: 24,
-                                height: 24,
-                              ),
-                            )
-                                : Container(width: 24),
-                          );
+                            modelCartItem,
+                            modelCartItemReward) {
+                          if (isPostCartLoading) {
+                            return buildInkWellFavorite(context, modelCartItem,
+                                modelCartItemReward, modelProduct);
+                          }
+                          return buildLoadingShimmer();
+                        },
+                        success: (
+                          modelProduct,
+                          modelProductReward,
+                          modelCartPost,
+                          modelCartPostReward,
+                          modelCartItem,
+                          modelCartUpdate,
+                          modelCartItemReward,
+                          modelCartRewardUpdate,
+                          modelPostFavorite,
+                          modelFavorite,
+                          isTempSelected,
+                          selectedTemp,
+                          isSizeSelected,
+                          selectedSize,
+                          isIceSelected,
+                          selectedIce,
+                          isSugarSelected,
+                          selectedSugar,
+                          qty,
+                          totalPrice,
+                          note,
+                        ) {
+                          return buildInkWellFavorite(context, modelCartItem,
+                              modelCartItemReward, modelProduct);
                         },
                         error: (message) => buildLoadingShimmer(),
                       );
@@ -233,7 +236,8 @@ class _DetailProductPageState extends State<DetailProductPage> {
                       const BoxOptionProduct(),
                       const SizedBox(height: 20),
                       InputNotes(
-                        notesController: notesController, isFirstLoad: isFirstLoad,
+                        notesController: notesController,
+                        isFirstLoad: isFirstLoad,
                       ),
                       const SizedBox(height: 120),
                     ],
@@ -256,6 +260,48 @@ class _DetailProductPageState extends State<DetailProductPage> {
     );
   }
 
+  InkWell buildInkWellFavorite(
+      BuildContext context,
+      CartItemResponseModel? modelCartItem,
+      CartItemRewardResponseModel? modelCartItemReward,
+      DetailProductResponseModel? modelProduct) {
+    return InkWell(
+      onTap: () {
+        if (widget.productId != null) {
+          context
+              .read<DetailProductBloc>()
+              .add(DetailProductEvent.postFavorite(widget.productId!));
+        } else if (widget.productRewardId != null) {
+          context
+              .read<DetailProductBloc>()
+              .add(DetailProductEvent.postFavorite(widget.productRewardId!));
+        } else if (widget.cartItemId != null) {
+          context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(
+              modelCartItem!.cartItem!.productId!));
+        } else if (widget.cartItemRewardId != null) {
+          context.read<DetailProductBloc>().add(DetailProductEvent.postFavorite(
+              modelCartItemReward!.cartItem!.productId!));
+        }
+      },
+      child: (widget.productRewardId == null && widget.cartItemRewardId == null)
+          ? Container(
+              padding: const EdgeInsets.only(right: 10),
+              child: (modelProduct?.data?.isLiked ?? false) == false
+                  ? SvgPicture.asset(
+                      icHeart,
+                      width: 24,
+                      height: 24,
+                    )
+                  : SvgPicture.asset(
+                      icHeartActive,
+                      width: 24,
+                      height: 24,
+                    ),
+            )
+          : Container(width: 24),
+    );
+  }
+
   Widget buildLoadingShimmer() {
     return Shimmer.fromColors(
       baseColor: Colors.grey[300]!,
@@ -271,5 +317,3 @@ class _DetailProductPageState extends State<DetailProductPage> {
     );
   }
 }
-
-
