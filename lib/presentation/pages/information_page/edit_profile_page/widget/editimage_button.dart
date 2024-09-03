@@ -6,8 +6,9 @@ import '../../../../../common/theme.dart';
 
 class EditImageButton extends StatelessWidget {
   final VoidCallback onPressed;
+  final bool? disableChange;
 
-  const EditImageButton({super.key, required this.onPressed});
+  const EditImageButton({super.key, required this.onPressed, this.disableChange = false});
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +17,9 @@ class EditImageButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         shape: const CircleBorder(),
         padding: const  EdgeInsets.all(10),
-        backgroundColor: primaryColor,
+        backgroundColor: disableChange == false ? primaryColor : grey,
       ),
-      child: const Icon(Icons.edit, color: Colors.black),
+      child: const  Icon(Icons.edit, color: blackColor),
     );
   }
 }

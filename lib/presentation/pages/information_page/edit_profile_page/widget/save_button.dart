@@ -4,8 +4,9 @@ import '../../../../../common/theme.dart';
 
 class SaveButton extends StatelessWidget {
   final VoidCallback onPressed;
+  final Widget? widget;
 
-  const SaveButton({super.key, required this.onPressed});
+  const SaveButton({super.key, required this.onPressed,  this.widget});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class SaveButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         child: Center(
-          child: Text(
+          child: widget ?? Text(
             'Simpan',
             style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w600, color: baseColor),
           ),

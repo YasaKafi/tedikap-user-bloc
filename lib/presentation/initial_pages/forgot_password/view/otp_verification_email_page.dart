@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:pinput/pinput.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tedikap_user_bloc/common/dimensions.dart';
 import 'package:tedikap_user_bloc/common/theme.dart';
 import 'package:tedikap_user_bloc/presentation/global_components/common_button.dart';
 import 'package:tedikap_user_bloc/presentation/initial_pages/forgot_password/bloc/forgot_password_bloc.dart';
@@ -363,22 +362,10 @@ class _SendOtpEmailPageState extends State<SendOtpEmailPage> {
                               textColor: primaryColor,
                               width: MediaQuery.of(context).size.width,
                               onPressed: () {
-                                if (widget.email != null) {
-                                  context.read<ForgotPasswordBloc>().add(
-                                      ForgotPasswordEvent.postEmailVerification(
-                                          widget.email));
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                    content: Text(
-                                      'Email is empty or null',
-                                      style: txtSecondaryTitle.copyWith(
-                                          fontWeight: FontWeight.w500,
-                                          color: baseColor),
-                                    ),
-                                    backgroundColor: redMedium,
-                                  ));
-                                }
-                              },
+                                context.read<ForgotPasswordBloc>().add(
+                                    ForgotPasswordEvent.postEmailVerification(
+                                        widget.email));
+                                                            },
                             );
 
                           },
@@ -409,22 +396,10 @@ class _SendOtpEmailPageState extends State<SendOtpEmailPage> {
                                 textColor: primaryColor,
                                 width: MediaQuery.of(context).size.width,
                                 onPressed: () {
-                                  if (widget.email != null) {
-                                    context.read<ForgotPasswordBloc>().add(
-                                        ForgotPasswordEvent.postEmailVerification(
-                                            widget.email));
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                      content: Text(
-                                        'Email is empty or null',
-                                        style: txtSecondaryTitle.copyWith(
-                                            fontWeight: FontWeight.w500,
-                                            color: baseColor),
-                                      ),
-                                      backgroundColor: redMedium,
-                                    ));
-                                  }
-                                },
+                                  context.read<ForgotPasswordBloc>().add(
+                                      ForgotPasswordEvent.postEmailVerification(
+                                          widget.email));
+                                                                },
                               );
                             }
                           },
@@ -437,22 +412,10 @@ class _SendOtpEmailPageState extends State<SendOtpEmailPage> {
                               textColor: primaryColor,
                               width: MediaQuery.of(context).size.width,
                               onPressed: () {
-                                if (widget.email != null) {
-                                  context.read<ForgotPasswordBloc>().add(
-                                      ForgotPasswordEvent.postEmailVerification(
-                                          widget.email));
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                    content: Text(
-                                      'Email is empty or null',
-                                      style: txtSecondaryTitle.copyWith(
-                                          fontWeight: FontWeight.w500,
-                                          color: baseColor),
-                                    ),
-                                    backgroundColor: redMedium,
-                                  ));
-                                }
-                              },
+                                context.read<ForgotPasswordBloc>().add(
+                                    ForgotPasswordEvent.postEmailVerification(
+                                        widget.email));
+                                                            },
                             );
                           });
                     },

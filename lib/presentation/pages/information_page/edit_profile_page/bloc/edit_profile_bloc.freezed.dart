@@ -864,7 +864,9 @@ mixin _$EditProfileState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function(
+            bool isPostEditProfile, CurrentUserModel? user, String? imagePath)
+        loading,
     required TResult Function(CurrentUserModel? user, String? selectedOption,
             String? imagePath, EditProfileResponseModel? modelEdit)
         loaded,
@@ -874,7 +876,9 @@ mixin _$EditProfileState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
+    TResult? Function(
+            bool isPostEditProfile, CurrentUserModel? user, String? imagePath)?
+        loading,
     TResult? Function(CurrentUserModel? user, String? selectedOption,
             String? imagePath, EditProfileResponseModel? modelEdit)?
         loaded,
@@ -884,7 +888,9 @@ mixin _$EditProfileState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(
+            bool isPostEditProfile, CurrentUserModel? user, String? imagePath)?
+        loading,
     TResult Function(CurrentUserModel? user, String? selectedOption,
             String? imagePath, EditProfileResponseModel? modelEdit)?
         loaded,
@@ -976,7 +982,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function(
+            bool isPostEditProfile, CurrentUserModel? user, String? imagePath)
+        loading,
     required TResult Function(CurrentUserModel? user, String? selectedOption,
             String? imagePath, EditProfileResponseModel? modelEdit)
         loaded,
@@ -989,7 +997,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
+    TResult? Function(
+            bool isPostEditProfile, CurrentUserModel? user, String? imagePath)?
+        loading,
     TResult? Function(CurrentUserModel? user, String? selectedOption,
             String? imagePath, EditProfileResponseModel? modelEdit)?
         loaded,
@@ -1002,7 +1012,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(
+            bool isPostEditProfile, CurrentUserModel? user, String? imagePath)?
+        loading,
     TResult Function(CurrentUserModel? user, String? selectedOption,
             String? imagePath, EditProfileResponseModel? modelEdit)?
         loaded,
@@ -1062,6 +1074,9 @@ abstract class _$$LoadingImplCopyWith<$Res> {
   factory _$$LoadingImplCopyWith(
           _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
       __$$LoadingImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {bool isPostEditProfile, CurrentUserModel? user, String? imagePath});
 }
 
 /// @nodoc
@@ -1071,58 +1086,109 @@ class __$$LoadingImplCopyWithImpl<$Res>
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isPostEditProfile = null,
+    Object? user = freezed,
+    Object? imagePath = freezed,
+  }) {
+    return _then(_$LoadingImpl(
+      isPostEditProfile: null == isPostEditProfile
+          ? _value.isPostEditProfile
+          : isPostEditProfile // ignore: cast_nullable_to_non_nullable
+              as bool,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as CurrentUserModel?,
+      imagePath: freezed == imagePath
+          ? _value.imagePath
+          : imagePath // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$LoadingImpl implements _Loading {
-  const _$LoadingImpl();
+  const _$LoadingImpl(
+      {this.isPostEditProfile = false, this.user, this.imagePath});
+
+  @override
+  @JsonKey()
+  final bool isPostEditProfile;
+  @override
+  final CurrentUserModel? user;
+  @override
+  final String? imagePath;
 
   @override
   String toString() {
-    return 'EditProfileState.loading()';
+    return 'EditProfileState.loading(isPostEditProfile: $isPostEditProfile, user: $user, imagePath: $imagePath)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadingImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$LoadingImpl &&
+            (identical(other.isPostEditProfile, isPostEditProfile) ||
+                other.isPostEditProfile == isPostEditProfile) &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.imagePath, imagePath) ||
+                other.imagePath == imagePath));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, isPostEditProfile, user, imagePath);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
+      __$$LoadingImplCopyWithImpl<_$LoadingImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function(
+            bool isPostEditProfile, CurrentUserModel? user, String? imagePath)
+        loading,
     required TResult Function(CurrentUserModel? user, String? selectedOption,
             String? imagePath, EditProfileResponseModel? modelEdit)
         loaded,
     required TResult Function(String message) error,
   }) {
-    return loading();
+    return loading(isPostEditProfile, user, imagePath);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
+    TResult? Function(
+            bool isPostEditProfile, CurrentUserModel? user, String? imagePath)?
+        loading,
     TResult? Function(CurrentUserModel? user, String? selectedOption,
             String? imagePath, EditProfileResponseModel? modelEdit)?
         loaded,
     TResult? Function(String message)? error,
   }) {
-    return loading?.call();
+    return loading?.call(isPostEditProfile, user, imagePath);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(
+            bool isPostEditProfile, CurrentUserModel? user, String? imagePath)?
+        loading,
     TResult Function(CurrentUserModel? user, String? selectedOption,
             String? imagePath, EditProfileResponseModel? modelEdit)?
         loaded,
@@ -1130,7 +1196,7 @@ class _$LoadingImpl implements _Loading {
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading();
+      return loading(isPostEditProfile, user, imagePath);
     }
     return orElse();
   }
@@ -1174,7 +1240,17 @@ class _$LoadingImpl implements _Loading {
 }
 
 abstract class _Loading implements EditProfileState {
-  const factory _Loading() = _$LoadingImpl;
+  const factory _Loading(
+      {final bool isPostEditProfile,
+      final CurrentUserModel? user,
+      final String? imagePath}) = _$LoadingImpl;
+
+  bool get isPostEditProfile;
+  CurrentUserModel? get user;
+  String? get imagePath;
+  @JsonKey(ignore: true)
+  _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1275,7 +1351,9 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function(
+            bool isPostEditProfile, CurrentUserModel? user, String? imagePath)
+        loading,
     required TResult Function(CurrentUserModel? user, String? selectedOption,
             String? imagePath, EditProfileResponseModel? modelEdit)
         loaded,
@@ -1288,7 +1366,9 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
+    TResult? Function(
+            bool isPostEditProfile, CurrentUserModel? user, String? imagePath)?
+        loading,
     TResult? Function(CurrentUserModel? user, String? selectedOption,
             String? imagePath, EditProfileResponseModel? modelEdit)?
         loaded,
@@ -1301,7 +1381,9 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(
+            bool isPostEditProfile, CurrentUserModel? user, String? imagePath)?
+        loading,
     TResult Function(CurrentUserModel? user, String? selectedOption,
             String? imagePath, EditProfileResponseModel? modelEdit)?
         loaded,
@@ -1433,7 +1515,9 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function(
+            bool isPostEditProfile, CurrentUserModel? user, String? imagePath)
+        loading,
     required TResult Function(CurrentUserModel? user, String? selectedOption,
             String? imagePath, EditProfileResponseModel? modelEdit)
         loaded,
@@ -1446,7 +1530,9 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
+    TResult? Function(
+            bool isPostEditProfile, CurrentUserModel? user, String? imagePath)?
+        loading,
     TResult? Function(CurrentUserModel? user, String? selectedOption,
             String? imagePath, EditProfileResponseModel? modelEdit)?
         loaded,
@@ -1459,7 +1545,9 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(
+            bool isPostEditProfile, CurrentUserModel? user, String? imagePath)?
+        loading,
     TResult Function(CurrentUserModel? user, String? selectedOption,
             String? imagePath, EditProfileResponseModel? modelEdit)?
         loaded,

@@ -194,7 +194,6 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   );
                 },
               ),
-
             ],
           ),
         ),

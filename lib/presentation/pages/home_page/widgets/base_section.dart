@@ -85,6 +85,22 @@ class _BaseSectionState extends State<BaseSection> {
                           final schedulePickUp =
                               statusOutletModel?.data!.time ?? 'No Schedule';
 
+                          TextStyle tsShcedulePickUpstyle = schedulePickUp == 'Toko akan kembali buka besok' ? txtPrimarySubTitle.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: baseColor)
+                              : txtPrimaryTitle.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: baseColor
+                          );
+
+                          TextStyle tsStatusOutletstyle = schedulePickUp == 'Toko Buka Untuk Pick Up Sesi 1' ? txtSecondarySubTitle.copyWith(
+                              fontWeight: FontWeight.w500,
+                              color: baseColor)
+                              : txtPrimarySubTitle.copyWith(
+                              fontWeight: FontWeight.w500,
+                              color: baseColor
+                          );
+
                           final statusOutlet =
                               statusOutletModel?.data!.description;
 
@@ -110,9 +126,9 @@ class _BaseSectionState extends State<BaseSection> {
                                       ? greetings ??  'Selamat Datang'
                                       : statusOutlet ?? 'No Status',
                                   key: ValueKey<bool>(_isWelcomeMessage),
-                                  style: txtPrimarySubTitle.copyWith(
+                                  style: _isWelcomeMessage ? txtPrimarySubTitle.copyWith(
                                       fontWeight: FontWeight.w500,
-                                      color: baseColor),
+                                      color: baseColor) : tsStatusOutletstyle
                                 ),
                               ),
                               const SizedBox(height: 4),
@@ -130,9 +146,10 @@ class _BaseSectionState extends State<BaseSection> {
                                       ? user!.data!.name ?? 'No Name'
                                       : schedulePickUp,
                                   key: ValueKey<bool>(_isWelcomeMessage),
-                                  style: txtPrimaryTitle.copyWith(
+                                  style: _isWelcomeMessage ? txtPrimaryTitle.copyWith(
                                       fontWeight: FontWeight.w600,
-                                      color: baseColor),
+                                      color: baseColor
+                                  ) : tsShcedulePickUpstyle,
                                 ),
                               ),
                             ],

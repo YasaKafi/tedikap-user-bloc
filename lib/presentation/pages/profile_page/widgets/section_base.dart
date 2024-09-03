@@ -23,6 +23,7 @@ class SectionBaseProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double dpi = MediaQuery.of(context).devicePixelRatio * 170;
+    print('DPI NOW $dpi');
     TextStyle textStyleCallAdmin = dpi < 380 ? txtThirdSubTitle : txtSecondarySubTitle;
     return BlocListener<EditProfileBloc, EditProfileState>(
       listener: (context, state) {
@@ -104,7 +105,7 @@ class SectionBaseProfile extends StatelessWidget {
                                   InkWell(
                                     onTap: () {
                                       context.pushReplacementNamed(
-                                          'edit_profile');
+                                          'edit_profile', extra: {'isFromProfile' : true});
                                     },
                                     child: CircleAvatar(
                                       radius: 28,

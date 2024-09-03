@@ -129,7 +129,12 @@ class AppRouter {
       GoRoute(
         name: 'edit_profile',
         path: '/edit_profile',
-        builder: (context, state) => const EditProfilePage(),
+        builder: (context, state) {
+          final extraData = state.extra as Map<String, bool>?;
+          final isFromCart = extraData?['isFromCart'] ?? false;
+          final isFromProfile = extraData?['isFromProfile'] ?? false;
+          return EditProfilePage(isFromCart:isFromCart , isFromProfile:isFromProfile ,);
+        },
       ),
       GoRoute(
         name: 'detail_point',
@@ -153,7 +158,7 @@ class AppRouter {
           final extraData = state.extra as Map<String, String?>?;
           final orderId = extraData?['orderId'] ?? '0';
           final orderRewardId = extraData?['orderRewardId'] ?? '0';
-          final pickUpTime = extraData?['pickUpTime']?? '0';
+          // final pickUpTime = extraData?['pickUpTime']?? '0';
           return RateAndReviewSheet(orderId: orderId, orderRewardId: orderRewardId, pickUpTime: 'haloo',);
         }
       ),

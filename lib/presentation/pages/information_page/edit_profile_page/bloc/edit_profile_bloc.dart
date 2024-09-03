@@ -61,12 +61,20 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
     // });
 
     on<_DoEditProfile>((event, emit) async {
-      emit(const _Loading());
+      final currentState = state;
+      if (currentState is _Loaded) {
+        emit( _Loading(
+          user: currentState.user,
+            imagePath: currentState.imagePath,
+            isPostEditProfile: true
+        ));
+      }
+
       final result = await datasource.updateCurrentUser(
         email: event.email,
         gender: event.gender,
         name: event.name,
-        phoneNumber: event.phoneNumber,
+        phoneNumber: event.phoneNumber ?? '',
         imageFile: event.imageFile,
       );
        result.fold(

@@ -28,6 +28,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       }
     });
 
+    on<_Reset>((event, emit) {
+      emit(const _Initial());
+    });
+
     on<_GetUser>((event, emit) async {
       final currentState = state;
       // Jika forceRefresh true atau state bukan _Success, lakukan fetch

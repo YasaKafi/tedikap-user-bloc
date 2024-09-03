@@ -73,11 +73,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-flutter_icons:
-  android: "launcher_icon"
-  ios: true
-  image_path: "assets/image/tedikap_logoo.png"
-  min_sdk_android: 21
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -87,6 +83,12 @@ flutter_icons:
   flutter_lints: ^3.0.0
   build_runner: ^2.4.11
   freezed: ^2.5.2
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/image/tedikap_logoo.png"
+  min_sdk_android: 21
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

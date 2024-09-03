@@ -529,7 +529,7 @@ class BoxCheckoutSummary extends StatelessWidget {
             color: navyColor,
             onPressed: (){
               Navigator.of(context).pop(); // Menutup dialog
-              context.pushNamed('edit_profile');
+              context.pushNamed('edit_profile', extra: {'isFromCart' : true});
             },
             child: Text(
               "Edit Profile",
