@@ -41,92 +41,101 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        flexibleSpace: Container(
-          height: screenHeight,
-          decoration: const BoxDecoration(
-            color: baseColor50,
-          ),
-          padding: const EdgeInsets.only(top: 30, bottom: 10, left: 10, right: 10),
-          width: MediaQuery.of(context).size.width,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(
-                icon: const Icon(Icons.arrow_back_ios),
-                onPressed: () {
-                  if (Navigator.canPop(context)) {
-                    context.pop();
-                  } else {
-                    context.goNamed('dashboard', pathParameters: {'pageIndex': '0'});
-                  }
-                },
-              ),
-              Text(
-                'My Cart',
-                style: txtSecondaryHeader.copyWith(fontWeight: FontWeight.w600, color: blackColor),
-              ),
-              Container(
-                width: 40,
-                height: 5,
-                decoration: const BoxDecoration(
-                  color: Colors.transparent,
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        print('onPopInvoked didPop? $didPop');
+        if (didPop == false) {
+          context.goNamed('dashboard', pathParameters: {'pageIndex': '0'});
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          flexibleSpace: Container(
+            height: screenHeight,
+            decoration: const BoxDecoration(
+              color: baseColor50,
+            ),
+            padding: const EdgeInsets.only(top: 30, bottom: 10, left: 10, right: 10),
+            width: MediaQuery.of(context).size.width,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.arrow_back_ios),
+                  onPressed: () {
+                    if (Navigator.canPop(context)) {
+                      context.pop();
+                    } else {
+                      context.goNamed('dashboard', pathParameters: {'pageIndex': '0'});
+                    }
+                  },
                 ),
-              )
-            ],
+                Text(
+                  'My Cart',
+                  style: txtSecondaryHeader.copyWith(fontWeight: FontWeight.w600, color: blackColor),
+                ),
+                Container(
+                  width: 40,
+                  height: 5,
+                  decoration: const BoxDecoration(
+                    color: Colors.transparent,
+                  ),
+                )
+              ],
+            ),
           ),
         ),
-      ),
-      backgroundColor: baseColor50,
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          LiquidPullToRefresh(
-            backgroundColor: baseColor,
-            color: primaryColor,
-            borderWidth: 2,
-            showChildOpacityTransition: false,
-            onRefresh: _refreshData,
-            child: SingleChildScrollView(
-              child: Container(
-                margin: const EdgeInsets.only(bottom: 200),
-                child: Padding(
-                  padding: const EdgeInsets.all(Dimensions.paddingSizeLarge),
-                  child: Align(
-                    alignment: Alignment.topCenter,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Column(
-                          children: [
-                            BoxEstimationPickup(screenWidth: screenWidth, schedule: widget.schedulePickUp,),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            BoxCheckoutDetail(screenWidth: screenWidth),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            BoxPaymentDetail(screenWidth: screenWidth),
-                            BoxAlertPoin(screenWidth: screenWidth),
-                          ],
-                        ),
-                      ],
+        backgroundColor: baseColor50,
+        body: Stack(
+          fit: StackFit.expand,
+          children: [
+            LiquidPullToRefresh(
+              backgroundColor: baseColor,
+              color: primaryColor,
+              borderWidth: 2,
+              showChildOpacityTransition: false,
+              onRefresh: _refreshData,
+              child: SingleChildScrollView(
+                child: Container(
+                  margin: const EdgeInsets.only(bottom: 200),
+                  child: Padding(
+                    padding: const EdgeInsets.all(Dimensions.paddingSizeLarge),
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Column(
+                            children: [
+                              BoxEstimationPickup(screenWidth: screenWidth, schedule: widget.schedulePickUp,),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              BoxCheckoutDetail(screenWidth: screenWidth),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              BoxPaymentDetail(screenWidth: screenWidth),
+                              BoxAlertPoin(screenWidth: screenWidth),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: BoxCheckoutSummary(screenWidth: screenWidth),
-          )
-        ],
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: BoxCheckoutSummary(screenWidth: screenWidth),
+            )
+          ],
+        ),
       ),
     );
   }

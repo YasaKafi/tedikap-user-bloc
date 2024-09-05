@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tedikap_user_bloc/common/theme.dart';
 import 'package:tedikap_user_bloc/data/bloc_providers.dart';
 import 'package:tedikap_user_bloc/firebase/notification_service.dart';
 import 'package:tedikap_user_bloc/route/route.dart';
@@ -13,7 +15,7 @@ void main() async {
     name: 'tedikap-messaging',
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  deviceOrientation();
 
   runApp(const MyApp());
 }

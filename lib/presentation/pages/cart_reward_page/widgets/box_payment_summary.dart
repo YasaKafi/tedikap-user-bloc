@@ -65,7 +65,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                 builder: (context, state) {
                   return state.when(
                     initial: () => _buildShimmerEffect(context),
-                    loading: () => _buildShimmerEffect(context),
+                    loading: (isPatchQTyLoading, cartModel) => _buildShimmerEffect(context),
                     success: (cartModel, modelQty, deleteModel, modelPostOrder,
                         ) {
                       if (cartModel != null) {
@@ -282,28 +282,31 @@ class BoxCheckoutSummary extends StatelessWidget {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return Dialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(0),
-          ),
-          insetPadding: EdgeInsets.zero,
-          backgroundColor: baseColor,
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            alignment: Alignment.center,
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(navyColor),
-                  ),
-                  const SizedBox(height: 20,),
-                  Text('Harap tunggu...', style: txtSecondaryTitle.copyWith(
-                      fontWeight: FontWeight.w600, color: blackColor),),
-                ],
+        return PopScope(
+          canPop: false,
+          child: Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(0),
+            ),
+            insetPadding: EdgeInsets.zero,
+            backgroundColor: baseColor,
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              alignment: Alignment.center,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(navyColor),
+                    ),
+                    const SizedBox(height: 20,),
+                    Text('Harap tunggu...', style: txtSecondaryTitle.copyWith(
+                        fontWeight: FontWeight.w600, color: blackColor),),
+                  ],
+                ),
               ),
             ),
           ),

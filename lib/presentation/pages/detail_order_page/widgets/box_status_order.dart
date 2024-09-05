@@ -25,7 +25,7 @@ class BoxInfoStatus extends StatelessWidget {
 
   String formatDate(String dateString) {
     DateTime dateTime = DateTime.parse(dateString);
-    String formattedDate = DateFormat('dd MMM yyyy | HH.mm').format(dateTime);
+    String formattedDate = DateFormat('dd MMMM yyyy | HH.mm').format(dateTime);
     return formattedDate;
   }
 
@@ -311,57 +311,5 @@ class BoxInfoStatus extends StatelessWidget {
         ),
       ),
     );
-  }
-  
-  _onAlertQrCode(context,
-      {String? orderId,
-        Color? bgcolor,
-        VoidCallback? onPressedSave
-        }) {
-    Alert(
-      context: context,
-      padding: const EdgeInsets.all(20),
-      style: AlertStyle(
-        animationType: AnimationType.shrink,
-        isCloseButton: false,
-        isButtonVisible: false,
-        backgroundColor: bgcolor,
-        overlayColor: Colors.black38,
-        titleStyle: txtPrimaryTitle.copyWith(
-          fontWeight: FontWeight.w600,
-          color: blackColor,
-        ),
-      ),
-      title: 'Show the QR Code to the cashier',
-      image: Container(
-        width: 200,
-        height: 200,
-        child: QrImageView(
-          data: orderId!,
-          size: 200,
-          version: QrVersions.auto,
-        ),
-      ),
-      buttons: [
-        DialogButton(
-          onPressed: () => Navigator.pop(context),
-          color: navyColor,
-          child: Text(
-            "Save",
-            style: txtPrimaryTitle.copyWith(
-                fontWeight: FontWeight.w600, color: baseColor),
-          ),
-        ),
-        DialogButton(
-            color: navyColor,
-            onPressed: (){},
-            // onPressed: onPressed,
-            child: Text(
-              "Share My Code",
-              style: txtPrimaryTitle.copyWith(
-                  fontWeight: FontWeight.w600, color: baseColor),
-            )),
-      ],
-    ).show();
   }
 }

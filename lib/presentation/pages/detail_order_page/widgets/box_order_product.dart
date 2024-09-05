@@ -226,11 +226,20 @@ class BoxProductOrder extends StatelessWidget {
                               Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Image.network(
-                                    TedikapApiRepository.getImageRewardProduct + detailOrderItemReward.productImage!,
-                                    width: 80,
-                                    height: 80,
+                                  Container(
+                                    width: 70,
+                                    height: 70,
+                                    decoration: ShapeDecoration(
+                                      color: const Color(0x0C56473C),
+                                      shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(Radius.circular(12))),
+                                      image: DecorationImage(
+                                        image: NetworkImage(TedikapApiRepository.getImageRewardProduct + detailOrderItemReward.productImage!),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
                                   ),
+
                                   SizedBox(
                                     width: 15,
                                   ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/common/theme.dart';
 import 'package:tedikap_user_bloc/data/repository/global_variabel.dart';
@@ -381,10 +382,13 @@ class _SectionButtonState extends State<SectionButton> {
                                     context.read<OrderBloc>().add(
                                         OrderEvent.postReOrder(
                                             widget.orderId!));
+                                    context.goNamed('cart_common');
                                   } else if (widget.orderRewardId != null) {
                                     context.read<OrderBloc>().add(
                                         OrderEvent.postReOrderReward(
                                             widget.orderRewardId!));
+                                    context.goNamed('cart_reward');
+
                                   }
                                 }
                               }

@@ -101,20 +101,26 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
 
     on<_PatchQty>((event, emit) async {
-      // Emit loading state
-      emit(const _Loading());
+      final currentState = state;
 
-      final result =
-      await cartDatasource.patchQty(event.action!, event.cartItem!);
-      await result.fold(
-            (l) async => emit(const _Error(message: 'Failed to access data order')),
-            (r) async {
-          final updatedCart = await cartDatasource.getCart();
-          final resultUpdatedCart = updatedCart.fold((l) => null, (success) => success);
+      if (currentState is _Success){
+        emit(_Loading(
+          cartModel: currentState.cartModel,
+          isPatchQTyLoading: true
+        ));
 
-          emit(_Success(cartModel: resultUpdatedCart, patchQtyModel: r, deleteModel: null, modelPostOrder: null, modelPostPayment: null, orderId: ''));
-        },
-      );
+        final result =
+        await cartDatasource.patchQty(event.action!, event.cartItem!);
+        await result.fold(
+              (l) async => emit(const _Error(message: 'Failed to access data order')),
+              (r) async {
+            final updatedCart = await cartDatasource.getCart();
+            final resultUpdatedCart = updatedCart.fold((l) => null, (success) => success);
+
+            emit(_Success(cartModel: resultUpdatedCart, patchQtyModel: r, deleteModel: null, modelPostOrder: null, modelPostPayment: null, orderId: ''));
+          },
+        );
+      }
     });
 
 

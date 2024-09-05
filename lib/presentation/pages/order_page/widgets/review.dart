@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/data/models/request/post_review_request_model.dart';
 
@@ -148,7 +149,22 @@ class RateAndReviewSheet extends StatelessWidget {
                       builder: (context, state){
                         return state.maybeWhen(
                             orElse: (){
-                              return const Center(child: CircularProgressIndicator(),);
+                              return Center(child: CommonButton(
+                                width: double.infinity,
+                                padding:
+                                const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                                widget: LoadingAnimationWidget.staggeredDotsWave(
+                                  color: baseColor,
+                                  size: 27,
+                                ),
+                                backgroundColor: primaryColor,
+                                textColor: baseColor,
+                                borderRadius: 30,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                onPressed: () {  },
+                                text: '',
+                              ),);
                             },
                           success: (model,
                               modelReward,
