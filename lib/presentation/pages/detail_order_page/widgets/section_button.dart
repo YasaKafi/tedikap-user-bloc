@@ -45,12 +45,10 @@ class _SectionButtonState extends State<SectionButton> {
     // To get the total minutes as an int
     final int totalMinutes = durationDifference.inMinutes;
 
-    print('MENIT : $totalMinutes');
-
     final endTime = createdAt.add(Duration(minutes: totalMinutes));
     _remainingTime = endTime.difference(DateTime.now());
 
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         final now = DateTime.now();
         if (now.isBefore(endTime)) {
@@ -97,8 +95,6 @@ class _SectionButtonState extends State<SectionButton> {
                   }
 
                 if (isPayment) {
-
-                  print('VALUE DARI IS PAYMENT $isPayment');
                   final createdAt = model.order?.createdAt!;
                   final expiredAt = model.order?.expiresAt!;
                   if (_remainingTime == Duration.zero &&
@@ -112,7 +108,7 @@ class _SectionButtonState extends State<SectionButton> {
                   if(_timerEnded == true){
                     return Container(
                       width: screenWidth,
-                      padding: EdgeInsets.all(Dimensions.paddingSizeLarge),
+                      padding: const EdgeInsets.all(Dimensions.paddingSizeLarge),
                       decoration: BoxDecoration(
                         color: baseColor,
                         borderRadius: BorderRadius.circular(15),
@@ -174,7 +170,7 @@ class _SectionButtonState extends State<SectionButton> {
                   } else {
                   return Container(
                     width: screenWidth,
-                    padding: EdgeInsets.all(Dimensions.paddingSizeLarge),
+                    padding: const EdgeInsets.all(Dimensions.paddingSizeLarge),
                     decoration: BoxDecoration(
                       color: baseColor,
                       borderRadius: BorderRadius.circular(15),
@@ -207,7 +203,7 @@ class _SectionButtonState extends State<SectionButton> {
                 } else if (statusOrderOngoing) {
                   return Container(
                     width: screenWidth,
-                    padding: EdgeInsets.all(Dimensions.paddingSizeLarge),
+                    padding: const EdgeInsets.all(Dimensions.paddingSizeLarge),
                     decoration: BoxDecoration(
                       color: baseColor,
                       borderRadius: BorderRadius.circular(15),
@@ -234,7 +230,7 @@ class _SectionButtonState extends State<SectionButton> {
                 } else {
                   return Container(
                     width: screenWidth,
-                    padding: EdgeInsets.all(Dimensions.paddingSizeLarge),
+                    padding: const EdgeInsets.all(Dimensions.paddingSizeLarge),
                     decoration: BoxDecoration(
                       color: baseColor,
                       borderRadius: BorderRadius.circular(15),
@@ -295,7 +291,6 @@ class _SectionButtonState extends State<SectionButton> {
                 }
 
               } else if (modelReward != null && modelReward.order != null) {
-                print("Else block triggered");
 
                 final bool statusOrderOngoing =
                     modelReward.order?.status == 'menunggu konfirmasi' ||
@@ -310,12 +305,10 @@ class _SectionButtonState extends State<SectionButton> {
                       modelReward.order?.cartLength;
                 }
 
-                print('VALUE BOOL CART ITEM REWARD : $isModelCartRewardNotEmpty');
-
                 if (statusOrderOngoing) {
                   return Container(
                     width: screenWidth,
-                    padding: EdgeInsets.all(Dimensions.paddingSizeLarge),
+                    padding: const EdgeInsets.all(Dimensions.paddingSizeLarge),
                     decoration: BoxDecoration(
                       color: baseColor,
                       borderRadius: BorderRadius.circular(15),
@@ -342,7 +335,7 @@ class _SectionButtonState extends State<SectionButton> {
                 } else {
                   return Container(
                     width: screenWidth,
-                    padding: EdgeInsets.all(Dimensions.paddingSizeLarge),
+                    padding: const EdgeInsets.all(Dimensions.paddingSizeLarge),
                     decoration: BoxDecoration(
                       color: baseColor,
                       borderRadius: BorderRadius.circular(15),
@@ -436,17 +429,17 @@ class _SectionButtonState extends State<SectionButton> {
   ) {
     showModalBottomSheet(
       context: context,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
       ),
       builder: (BuildContext context) {
         return Container(
           width: double.infinity,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: baseColor,
             borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
           ),
-          padding: EdgeInsets.only(top: 10.0),
+          padding: const EdgeInsets.only(top: 10.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -460,7 +453,7 @@ class _SectionButtonState extends State<SectionButton> {
                     )),
               ),
               Padding(
-                padding: EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
                     SvgPicture.asset(
@@ -474,7 +467,7 @@ class _SectionButtonState extends State<SectionButton> {
                         color: blackColor,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Text(
                       'Keranjang anda sudah terisi dengan produk lain. Pesan ulang akan mengganti isi keranjang anda.',
                       style: txtSecondarySubTitle.copyWith(
@@ -483,12 +476,12 @@ class _SectionButtonState extends State<SectionButton> {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CommonButton(
-                          padding: EdgeInsets.symmetric(vertical: 15),
+                          padding: const EdgeInsets.symmetric(vertical: 15),
                           width: MediaQuery.of(context).size.width * 0.4,
                           borderColor: blackColor,
                           borderWidth: 1,
@@ -503,7 +496,7 @@ class _SectionButtonState extends State<SectionButton> {
                           fontWeight: FontWeight.w400,
                         ),
                         CommonButton(
-                          padding: EdgeInsets.symmetric(vertical: 15),
+                          padding: const EdgeInsets.symmetric(vertical: 15),
                           width: MediaQuery.of(context).size.width * 0.4,
                           text: 'Pesan Ulang',
                           onPressed: () {

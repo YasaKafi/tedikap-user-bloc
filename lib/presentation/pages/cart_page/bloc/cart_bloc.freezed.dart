@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CartEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function() refreshState,
     required TResult Function() getCart,
     required TResult Function(int? cartItem, String? action) patchQty,
     required TResult Function(int? cartItem) deleteItem,
@@ -30,7 +30,7 @@ mixin _$CartEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function()? refreshState,
     TResult? Function()? getCart,
     TResult? Function(int? cartItem, String? action)? patchQty,
     TResult? Function(int? cartItem)? deleteItem,
@@ -42,7 +42,7 @@ mixin _$CartEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function()? refreshState,
     TResult Function()? getCart,
     TResult Function(int? cartItem, String? action)? patchQty,
     TResult Function(int? cartItem)? deleteItem,
@@ -55,7 +55,7 @@ mixin _$CartEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_RefreshState value) refreshState,
     required TResult Function(_GetCart value) getCart,
     required TResult Function(_PatchQty value) patchQty,
     required TResult Function(_DeleteItem value) deleteItem,
@@ -65,7 +65,7 @@ mixin _$CartEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
+    TResult? Function(_RefreshState value)? refreshState,
     TResult? Function(_GetCart value)? getCart,
     TResult? Function(_PatchQty value)? patchQty,
     TResult? Function(_DeleteItem value)? deleteItem,
@@ -75,7 +75,7 @@ mixin _$CartEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_RefreshState value)? refreshState,
     TResult Function(_GetCart value)? getCart,
     TResult Function(_PatchQty value)? patchQty,
     TResult Function(_DeleteItem value)? deleteItem,
@@ -104,35 +104,35 @@ class _$CartEventCopyWithImpl<$Res, $Val extends CartEvent>
 }
 
 /// @nodoc
-abstract class _$$StartedImplCopyWith<$Res> {
-  factory _$$StartedImplCopyWith(
-          _$StartedImpl value, $Res Function(_$StartedImpl) then) =
-      __$$StartedImplCopyWithImpl<$Res>;
+abstract class _$$RefreshStateImplCopyWith<$Res> {
+  factory _$$RefreshStateImplCopyWith(
+          _$RefreshStateImpl value, $Res Function(_$RefreshStateImpl) then) =
+      __$$RefreshStateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$StartedImplCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$StartedImpl>
-    implements _$$StartedImplCopyWith<$Res> {
-  __$$StartedImplCopyWithImpl(
-      _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
+class __$$RefreshStateImplCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$RefreshStateImpl>
+    implements _$$RefreshStateImplCopyWith<$Res> {
+  __$$RefreshStateImplCopyWithImpl(
+      _$RefreshStateImpl _value, $Res Function(_$RefreshStateImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$StartedImpl implements _Started {
-  const _$StartedImpl();
+class _$RefreshStateImpl implements _RefreshState {
+  const _$RefreshStateImpl();
 
   @override
   String toString() {
-    return 'CartEvent.started()';
+    return 'CartEvent.refreshState()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$StartedImpl);
+        (other.runtimeType == runtimeType && other is _$RefreshStateImpl);
   }
 
   @override
@@ -141,7 +141,7 @@ class _$StartedImpl implements _Started {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function() refreshState,
     required TResult Function() getCart,
     required TResult Function(int? cartItem, String? action) patchQty,
     required TResult Function(int? cartItem) deleteItem,
@@ -150,13 +150,13 @@ class _$StartedImpl implements _Started {
         postOrder,
     required TResult Function(String? cartId) postPayment,
   }) {
-    return started();
+    return refreshState();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function()? refreshState,
     TResult? Function()? getCart,
     TResult? Function(int? cartItem, String? action)? patchQty,
     TResult? Function(int? cartItem)? deleteItem,
@@ -165,13 +165,13 @@ class _$StartedImpl implements _Started {
         postOrder,
     TResult? Function(String? cartId)? postPayment,
   }) {
-    return started?.call();
+    return refreshState?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function()? refreshState,
     TResult Function()? getCart,
     TResult Function(int? cartItem, String? action)? patchQty,
     TResult Function(int? cartItem)? deleteItem,
@@ -181,8 +181,8 @@ class _$StartedImpl implements _Started {
     TResult Function(String? cartId)? postPayment,
     required TResult orElse(),
   }) {
-    if (started != null) {
-      return started();
+    if (refreshState != null) {
+      return refreshState();
     }
     return orElse();
   }
@@ -190,33 +190,33 @@ class _$StartedImpl implements _Started {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_RefreshState value) refreshState,
     required TResult Function(_GetCart value) getCart,
     required TResult Function(_PatchQty value) patchQty,
     required TResult Function(_DeleteItem value) deleteItem,
     required TResult Function(_PostOrder value) postOrder,
     required TResult Function(_PostPayment value) postPayment,
   }) {
-    return started(this);
+    return refreshState(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
+    TResult? Function(_RefreshState value)? refreshState,
     TResult? Function(_GetCart value)? getCart,
     TResult? Function(_PatchQty value)? patchQty,
     TResult? Function(_DeleteItem value)? deleteItem,
     TResult? Function(_PostOrder value)? postOrder,
     TResult? Function(_PostPayment value)? postPayment,
   }) {
-    return started?.call(this);
+    return refreshState?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_RefreshState value)? refreshState,
     TResult Function(_GetCart value)? getCart,
     TResult Function(_PatchQty value)? patchQty,
     TResult Function(_DeleteItem value)? deleteItem,
@@ -224,15 +224,15 @@ class _$StartedImpl implements _Started {
     TResult Function(_PostPayment value)? postPayment,
     required TResult orElse(),
   }) {
-    if (started != null) {
-      return started(this);
+    if (refreshState != null) {
+      return refreshState(this);
     }
     return orElse();
   }
 }
 
-abstract class _Started implements CartEvent {
-  const factory _Started() = _$StartedImpl;
+abstract class _RefreshState implements CartEvent {
+  const factory _RefreshState() = _$RefreshStateImpl;
 }
 
 /// @nodoc
@@ -273,7 +273,7 @@ class _$GetCartImpl implements _GetCart {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function() refreshState,
     required TResult Function() getCart,
     required TResult Function(int? cartItem, String? action) patchQty,
     required TResult Function(int? cartItem) deleteItem,
@@ -288,7 +288,7 @@ class _$GetCartImpl implements _GetCart {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function()? refreshState,
     TResult? Function()? getCart,
     TResult? Function(int? cartItem, String? action)? patchQty,
     TResult? Function(int? cartItem)? deleteItem,
@@ -303,7 +303,7 @@ class _$GetCartImpl implements _GetCart {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function()? refreshState,
     TResult Function()? getCart,
     TResult Function(int? cartItem, String? action)? patchQty,
     TResult Function(int? cartItem)? deleteItem,
@@ -322,7 +322,7 @@ class _$GetCartImpl implements _GetCart {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_RefreshState value) refreshState,
     required TResult Function(_GetCart value) getCart,
     required TResult Function(_PatchQty value) patchQty,
     required TResult Function(_DeleteItem value) deleteItem,
@@ -335,7 +335,7 @@ class _$GetCartImpl implements _GetCart {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
+    TResult? Function(_RefreshState value)? refreshState,
     TResult? Function(_GetCart value)? getCart,
     TResult? Function(_PatchQty value)? patchQty,
     TResult? Function(_DeleteItem value)? deleteItem,
@@ -348,7 +348,7 @@ class _$GetCartImpl implements _GetCart {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_RefreshState value)? refreshState,
     TResult Function(_GetCart value)? getCart,
     TResult Function(_PatchQty value)? patchQty,
     TResult Function(_DeleteItem value)? deleteItem,
@@ -440,7 +440,7 @@ class _$PatchQtyImpl implements _PatchQty {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function() refreshState,
     required TResult Function() getCart,
     required TResult Function(int? cartItem, String? action) patchQty,
     required TResult Function(int? cartItem) deleteItem,
@@ -455,7 +455,7 @@ class _$PatchQtyImpl implements _PatchQty {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function()? refreshState,
     TResult? Function()? getCart,
     TResult? Function(int? cartItem, String? action)? patchQty,
     TResult? Function(int? cartItem)? deleteItem,
@@ -470,7 +470,7 @@ class _$PatchQtyImpl implements _PatchQty {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function()? refreshState,
     TResult Function()? getCart,
     TResult Function(int? cartItem, String? action)? patchQty,
     TResult Function(int? cartItem)? deleteItem,
@@ -489,7 +489,7 @@ class _$PatchQtyImpl implements _PatchQty {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_RefreshState value) refreshState,
     required TResult Function(_GetCart value) getCart,
     required TResult Function(_PatchQty value) patchQty,
     required TResult Function(_DeleteItem value) deleteItem,
@@ -502,7 +502,7 @@ class _$PatchQtyImpl implements _PatchQty {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
+    TResult? Function(_RefreshState value)? refreshState,
     TResult? Function(_GetCart value)? getCart,
     TResult? Function(_PatchQty value)? patchQty,
     TResult? Function(_DeleteItem value)? deleteItem,
@@ -515,7 +515,7 @@ class _$PatchQtyImpl implements _PatchQty {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_RefreshState value)? refreshState,
     TResult Function(_GetCart value)? getCart,
     TResult Function(_PatchQty value)? patchQty,
     TResult Function(_DeleteItem value)? deleteItem,
@@ -607,7 +607,7 @@ class _$DeleteItemImpl implements _DeleteItem {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function() refreshState,
     required TResult Function() getCart,
     required TResult Function(int? cartItem, String? action) patchQty,
     required TResult Function(int? cartItem) deleteItem,
@@ -622,7 +622,7 @@ class _$DeleteItemImpl implements _DeleteItem {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function()? refreshState,
     TResult? Function()? getCart,
     TResult? Function(int? cartItem, String? action)? patchQty,
     TResult? Function(int? cartItem)? deleteItem,
@@ -637,7 +637,7 @@ class _$DeleteItemImpl implements _DeleteItem {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function()? refreshState,
     TResult Function()? getCart,
     TResult Function(int? cartItem, String? action)? patchQty,
     TResult Function(int? cartItem)? deleteItem,
@@ -656,7 +656,7 @@ class _$DeleteItemImpl implements _DeleteItem {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_RefreshState value) refreshState,
     required TResult Function(_GetCart value) getCart,
     required TResult Function(_PatchQty value) patchQty,
     required TResult Function(_DeleteItem value) deleteItem,
@@ -669,7 +669,7 @@ class _$DeleteItemImpl implements _DeleteItem {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
+    TResult? Function(_RefreshState value)? refreshState,
     TResult? Function(_GetCart value)? getCart,
     TResult? Function(_PatchQty value)? patchQty,
     TResult? Function(_DeleteItem value)? deleteItem,
@@ -682,7 +682,7 @@ class _$DeleteItemImpl implements _DeleteItem {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_RefreshState value)? refreshState,
     TResult Function(_GetCart value)? getCart,
     TResult Function(_PatchQty value)? patchQty,
     TResult Function(_DeleteItem value)? deleteItem,
@@ -783,7 +783,7 @@ class _$PostOrderImpl implements _PostOrder {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function() refreshState,
     required TResult Function() getCart,
     required TResult Function(int? cartItem, String? action) patchQty,
     required TResult Function(int? cartItem) deleteItem,
@@ -798,7 +798,7 @@ class _$PostOrderImpl implements _PostOrder {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function()? refreshState,
     TResult? Function()? getCart,
     TResult? Function(int? cartItem, String? action)? patchQty,
     TResult? Function(int? cartItem)? deleteItem,
@@ -813,7 +813,7 @@ class _$PostOrderImpl implements _PostOrder {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function()? refreshState,
     TResult Function()? getCart,
     TResult Function(int? cartItem, String? action)? patchQty,
     TResult Function(int? cartItem)? deleteItem,
@@ -832,7 +832,7 @@ class _$PostOrderImpl implements _PostOrder {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_RefreshState value) refreshState,
     required TResult Function(_GetCart value) getCart,
     required TResult Function(_PatchQty value) patchQty,
     required TResult Function(_DeleteItem value) deleteItem,
@@ -845,7 +845,7 @@ class _$PostOrderImpl implements _PostOrder {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
+    TResult? Function(_RefreshState value)? refreshState,
     TResult? Function(_GetCart value)? getCart,
     TResult? Function(_PatchQty value)? patchQty,
     TResult? Function(_DeleteItem value)? deleteItem,
@@ -858,7 +858,7 @@ class _$PostOrderImpl implements _PostOrder {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_RefreshState value)? refreshState,
     TResult Function(_GetCart value)? getCart,
     TResult Function(_PatchQty value)? patchQty,
     TResult Function(_DeleteItem value)? deleteItem,
@@ -950,7 +950,7 @@ class _$PostPaymentImpl implements _PostPayment {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function() refreshState,
     required TResult Function() getCart,
     required TResult Function(int? cartItem, String? action) patchQty,
     required TResult Function(int? cartItem) deleteItem,
@@ -965,7 +965,7 @@ class _$PostPaymentImpl implements _PostPayment {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function()? refreshState,
     TResult? Function()? getCart,
     TResult? Function(int? cartItem, String? action)? patchQty,
     TResult? Function(int? cartItem)? deleteItem,
@@ -980,7 +980,7 @@ class _$PostPaymentImpl implements _PostPayment {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function()? refreshState,
     TResult Function()? getCart,
     TResult Function(int? cartItem, String? action)? patchQty,
     TResult Function(int? cartItem)? deleteItem,
@@ -999,7 +999,7 @@ class _$PostPaymentImpl implements _PostPayment {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_RefreshState value) refreshState,
     required TResult Function(_GetCart value) getCart,
     required TResult Function(_PatchQty value) patchQty,
     required TResult Function(_DeleteItem value) deleteItem,
@@ -1012,7 +1012,7 @@ class _$PostPaymentImpl implements _PostPayment {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
+    TResult? Function(_RefreshState value)? refreshState,
     TResult? Function(_GetCart value)? getCart,
     TResult? Function(_PatchQty value)? patchQty,
     TResult? Function(_DeleteItem value)? deleteItem,
@@ -1025,7 +1025,7 @@ class _$PostPaymentImpl implements _PostPayment {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_RefreshState value)? refreshState,
     TResult Function(_GetCart value)? getCart,
     TResult Function(_PatchQty value)? patchQty,
     TResult Function(_DeleteItem value)? deleteItem,

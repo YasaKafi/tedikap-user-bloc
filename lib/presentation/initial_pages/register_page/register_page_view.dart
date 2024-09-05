@@ -74,6 +74,9 @@ class RegisterPage extends StatelessWidget {
                   CustomTextFieldAuth(
                     key: UniqueKey(),
                     title: field['hint'],
+                    keyboardType: field['label'] == 'Email'
+                        ? TextInputType.emailAddress
+                        : TextInputType.text,
                     maxLength: field['label'] == 'Username' ? 12 : null,
                     controller: field['controller'],
                   ),
@@ -184,7 +187,7 @@ class RegisterPage extends StatelessWidget {
                           fontSize: 18,
                           widget: LoadingAnimationWidget.staggeredDotsWave(
                             color: baseColor,
-                            size: 45,
+                            size: 40,
                           ),
                           text: '',
                         );

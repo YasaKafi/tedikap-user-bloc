@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +10,9 @@ import '../../../../../common/theme.dart';
 
 class BoxTimelinePickup extends StatelessWidget {
   const BoxTimelinePickup({
-    Key? key,
+    super.key,
     required this.screenWidth,
-  }) : super(key: key);
+  });
 
   final double screenWidth;
 
@@ -46,7 +44,7 @@ class BoxTimelinePickup extends StatelessWidget {
       ),
       width: screenWidth,
       child: Padding(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
             horizontal: Dimensions.paddingSizeLarge,
             vertical: Dimensions.paddingSizeLarge),
         child: Column(
@@ -58,13 +56,13 @@ class BoxTimelinePickup extends StatelessWidget {
               style: txtPrimaryTitle.copyWith(
                   fontWeight: FontWeight.w600, color: blackColor),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Container(
+                SizedBox(
                   width: screenWidth,
                   child: Row(
                     children: [
@@ -76,17 +74,17 @@ class BoxTimelinePickup extends StatelessWidget {
                             height: 32,
                             width: 32,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
-                          DottedDivider(
+                          const DottedDivider(
                             color: primaryColor,
                             dashWidth: 6,
                             dashSpace: 8,
                             thickness: 2,
                             height: 60,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
                           SvgPicture.asset(
@@ -96,7 +94,7 @@ class BoxTimelinePickup extends StatelessWidget {
                           )
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Column(
@@ -114,7 +112,7 @@ class BoxTimelinePickup extends StatelessWidget {
                                     fontWeight: FontWeight.w500,
                                     color: blackColor),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 3,
                               ),
                               Text(
@@ -123,7 +121,7 @@ class BoxTimelinePickup extends StatelessWidget {
                                     fontWeight: FontWeight.w600,
                                     color: blackColor),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 1,
                               ),
                               Text(
@@ -134,7 +132,7 @@ class BoxTimelinePickup extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 30,
                           ),
                           Column(
@@ -146,14 +144,14 @@ class BoxTimelinePickup extends StatelessWidget {
                                     fontWeight: FontWeight.w500,
                                     color: blackColor),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 3,
                               ),
                               BlocBuilder<DetailOrderBloc, DetailOrderState>(
                                 builder: (context, state) {
                                   return state.when(
                                       initial: () {
-                                        return Center(
+                                        return const Center(
                                           child: CircularProgressIndicator(),
                                         );
                                       },
@@ -176,7 +174,7 @@ class BoxTimelinePickup extends StatelessWidget {
                                                 color: blackColor),
                                           );
                                         } else {
-                                          return Center(
+                                          return const Center(
                                             child: Text('No data available'),
                                           );
                                         }
@@ -210,17 +208,17 @@ class DottedDivider extends StatelessWidget {
   final double dashSpace;
 
   const DottedDivider({
-    Key? key,
+    super.key,
     this.height = 1,
     this.thickness = 1,
     this.color = Colors.black,
     this.dashWidth = 3,
     this.dashSpace = 2,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: height,
       child: CustomPaint(
         painter: _DottedLinePainter(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:tedikap_user_bloc/presentation/global_components/empty_state.dart';
 import 'package:tedikap_user_bloc/presentation/global_components/error_state.dart';
 import 'package:tedikap_user_bloc/presentation/pages/voucher_page/bloc/voucher_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/voucher_page/widgets/alert_box_voucher.dart';
@@ -145,25 +145,28 @@ class _VoucherPageState extends State<VoucherPage> {
                       ),
                       success: (modelVoucher, modelCart, modelApplyRemove,
                           isUseVoucher, ) {
-                        if (modelVoucher!.activeVouchers!.isEmpty) {
-                          return Container(
-                            width: screenWidth,
-                              height: screenHeight * 0.7,
-                              child: _buildEmptyVoucherState(context)
-                          );
-                        } else {
-                          final itemVoucher = modelVoucher.activeVouchers;
-                          return Column(
-                            children: List.generate(itemVoucher!.length, (index) {
-                              final item = itemVoucher[index];
-                              voucherLength = itemVoucher.length;
-                              bool? isCurrentlyUsedVoucher = item.isUsed! && widget.isFromCart! ? true : false;
-                              bool isEligible = item.isEligible == false || widget.isFromCart == false ? false : true;
+                        if (modelVoucher != null){
+                          if (modelVoucher.activeVouchers!.isEmpty) {
+                            return SizedBox(
+                                width: screenWidth,
+                                height: screenHeight * 0.7,
+                                child: EmptyStateWidgetStatic.buildEmptyState(context, title: 'No Vouchers Available', desc: 'You currently do not have any vouchers. Discover exciting offers and discounts to earn vouchers.', icon: icSearchEmpty,  widthIcon: screenWidth * 0.5, widthBox: screenWidth * 0.8 )
+                            );
+                          } else {
+                            final itemVoucher = modelVoucher.activeVouchers;
+                            return Column(
+                              children: List.generate(itemVoucher!.length, (index) {
+                                final item = itemVoucher[index];
+                                voucherLength = itemVoucher.length;
+                                bool? isCurrentlyUsedVoucher = item.isUsed! && widget.isFromCart! ? true : false;
+                                bool isEligible = item.isEligible == false || widget.isFromCart == false ? false : true;
 
-                              return VoucherCard(item: item, isCurrentlyUsedVoucher: isCurrentlyUsedVoucher, isEligible: isEligible, screenWidth: screenWidth, isFromCart: widget.isFromCart!);
-                            }),
-                          );
+                                return VoucherCard(item: item, isCurrentlyUsedVoucher: isCurrentlyUsedVoucher, isEligible: isEligible, screenWidth: screenWidth, isFromCart: widget.isFromCart!);
+                              }),
+                            );
+                          }
                         }
+                        return const SizedBox();
                       },
                       error: (message) => Container( padding: const EdgeInsets.only(top: 80),child: ErrorWidgetStatic.buildErrorState(context, message!)),
                     );
@@ -177,43 +180,6 @@ class _VoucherPageState extends State<VoucherPage> {
     );
   }
 
-  Widget _buildEmptyVoucherState(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SvgPicture.asset(icSearchEmpty, width: screenWidth * 0.5),
-          const SizedBox(height: 10),
-          SizedBox(
-            width: screenWidth * 0.8,
-            child: Column(
-              children: [
-                Text(
-                  'No Vouchers Available',
-                  style: txtPrimaryTitle.copyWith(
-                    fontWeight: FontWeight.w500,
-                    color: blackColor,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  'You currently do not have any vouchers. Discover exciting offers and discounts to earn vouchers.',
-                  style: txtSecondarySubTitle.copyWith(
-                    fontWeight: FontWeight.w400,
-                    color: blackColor,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
 
 

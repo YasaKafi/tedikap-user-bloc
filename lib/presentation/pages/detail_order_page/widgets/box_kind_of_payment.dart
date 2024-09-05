@@ -8,7 +8,6 @@ import '../../../../../common/dimensions.dart';
 import '../../../../../common/theme.dart';
 import '../bloc/detail_order_bloc.dart';
 
-import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 class BoxKindOfPayment extends StatelessWidget {
@@ -23,7 +22,7 @@ class BoxKindOfPayment extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: screenWidth,
-      padding: EdgeInsets.all(Dimensions.paddingSizeLarge),
+      padding: const EdgeInsets.all(Dimensions.paddingSizeLarge),
       decoration: BoxDecoration(
         color: baseColor,
         borderRadius: BorderRadius.circular(15),
@@ -70,7 +69,7 @@ class BoxKindOfPayment extends StatelessWidget {
                         Text('Metode Pembayaran',
                             style: txtPrimaryTitle.copyWith(
                                 fontWeight: FontWeight.w600, color: blackColor)),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Row(
@@ -79,7 +78,7 @@ class BoxKindOfPayment extends StatelessWidget {
                             Row(
                               children: [
                                 SvgPicture.asset(logoPayment ?? '', width: 24,),
-                                SizedBox(width: 5,),
+                                const SizedBox(width: 5,),
                                 Text(order.paymentChannel ?? '',
                                     style: txtPrimarySubTitle.copyWith(
                                         fontWeight: FontWeight.w500,
@@ -95,12 +94,12 @@ class BoxKindOfPayment extends StatelessWidget {
                       ],
                     );
                   } else {
-                    return SizedBox();
+                    return const SizedBox();
                   }
                 } else if (modelReward != null) {
-                  return SizedBox();
+                  return const SizedBox();
                 } else {
-                  return Center(child: Text('No data available'),);
+                  return const Center(child: Text('No data available'),);
                 }
               },
               error: (message) =>
@@ -124,7 +123,7 @@ class BoxKindOfPayment extends StatelessWidget {
             height: 20,
             color: Colors.white,
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -135,7 +134,7 @@ class BoxKindOfPayment extends StatelessWidget {
                     height: 24,
                     color: Colors.white,
                   ),
-                  SizedBox(width: 5),
+                  const SizedBox(width: 5),
                   Container(
                     width: 100,
                     height: 20,

@@ -262,7 +262,7 @@ class _OtpPageViewState extends State<OtpPageView> {
                           fontSize: 18,
                           widget: LoadingAnimationWidget.staggeredDotsWave(
                             color: baseColor,
-                            size: 45,
+                            size: 40,
                           ),
                           text: '',
                         );

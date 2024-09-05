@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/presentation/global_components/alert_dialog.dart';
+import 'package:tedikap_user_bloc/presentation/global_components/empty_state.dart';
 import 'package:tedikap_user_bloc/presentation/global_components/error_state.dart';
 import 'package:tedikap_user_bloc/presentation/pages/menu_page/bloc/menu_bloc.dart';
 
@@ -198,7 +198,7 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
                   ),
                   Expanded(
                     child: TabBarView(
-                      physics:searchController.text.isEmpty ? AlwaysScrollableScrollPhysics() : NeverScrollableScrollPhysics(),
+                      physics:searchController.text.isEmpty ? const AlwaysScrollableScrollPhysics() : const NeverScrollableScrollPhysics(),
                       controller: _tabController,
                       children: [
                         buildProductList(searchController.text),
@@ -218,6 +218,7 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
   }
 
   Widget buildProductList(String query) {
+    final double screenWidth = MediaQuery.of(context).size.width;
     return BlocBuilder<MenuBloc, MenuState>(
       builder: (context, state) {
         Shimmer? loadingCard() {
@@ -301,7 +302,7 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
           ),
           success: (model, isSearching) {
             if (isSearching && model!.data!.isEmpty) {
-              return _buildEmptySearchState(context, query);
+              return  EmptyStateWidgetStatic.buildEmptyState(context, title: 'Product not found', desc: 'We could not find a match for "$query". Please try another search.', icon: icSearchEmpty, widthIcon:  screenWidth * 0.5, widthBox:  screenWidth * 0.8,);
             }
             return ListView.builder(
               itemCount: model!.data!.length,
@@ -341,47 +342,10 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
             },
           ),
           error: (message) => ErrorWidgetStatic.buildErrorState(context, message!),
-          empty: () => _buildEmptySearchState(context, query),
+          empty: () => EmptyStateWidgetStatic.buildEmptyState(context, title: 'Product not found', desc: 'We could not find a match for "$query". Please try another search.', icon: icSearchEmpty, widthIcon:  screenWidth * 0.5, widthBox:  screenWidth * 0.8,),
         );
       },
     );
   }
 
-  Widget _buildEmptySearchState(BuildContext context, String productName) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SvgPicture.asset(icSearchEmpty, width: screenWidth * 0.5),
-          const SizedBox(height: 10),
-          SizedBox(
-            width: screenWidth * 0.8,
-            child: Column(
-              children: [
-                Text(
-                  'Product not found',
-                  style: txtPrimaryTitle.copyWith(
-                    fontWeight: FontWeight.w500,
-                    color: blackColor,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  'We could not find a match for "$productName". Please try another search.',
-                  style: txtSecondarySubTitle.copyWith(
-                    fontWeight: FontWeight.w400,
-                    color: blackColor,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }

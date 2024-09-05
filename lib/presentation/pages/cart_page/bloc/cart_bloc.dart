@@ -33,6 +33,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       required this.productDatasource,
       required this.orderDatasource})
       : super(const CartState.initial()) {
+
+    on<_RefreshState>((event, emit) {
+      emit(const CartState.initial());
+    });
+
     on<_GetCart>((event, emit) async {
       emit(const _Loading());
       final result = await cartDatasource.getCart();

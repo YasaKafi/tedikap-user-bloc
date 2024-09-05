@@ -367,7 +367,6 @@ class BoxCheckoutSummary extends StatelessWidget {
                                     children: [
                                       InkWell(
                                         onTap: () {
-                                          print('VALUE DARI STOCK $isStockItemEmpty');
                                           if (!isCartItemEmpty) {
                                             if (isStockItemEmpty) {
                                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -575,7 +574,6 @@ class BoxCheckoutSummary extends StatelessWidget {
       },
     );
   }
-
 
   Widget _buildShimmerEffect(BuildContext context) {
     return Shimmer.fromColors(

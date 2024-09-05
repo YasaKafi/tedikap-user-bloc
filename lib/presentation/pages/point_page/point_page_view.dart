@@ -71,7 +71,6 @@ class _PointPageState extends State<PointPage> with SingleTickerProviderStateMix
     double screenHeight = MediaQuery.of(context).size.height;
 
     double dpi = MediaQuery.of(context).devicePixelRatio * 170;
-    print('DPI NOW $dpi');
     TextStyle textStyleTitle = dpi < 380 ? txtThirdSubTitle : txtSecondarySubTitle;
 
     return DefaultTabController(
@@ -125,7 +124,7 @@ class _PointPageState extends State<PointPage> with SingleTickerProviderStateMix
                 height: 30,
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 20),
+                margin: const EdgeInsets.only(bottom: 20),
                 width: screenWidth,
                 child: TabBar(
                   controller: _tabController,
@@ -199,7 +198,6 @@ class _PointPageState extends State<PointPage> with SingleTickerProviderStateMix
   Widget buildTabGridViewProduct(double screenHeight, double screenWidth) {
     return BlocBuilder<PointBloc, PointState>(
       builder: (context, state) {
-        print('CURRENT STATE: $state');
         return state.when(
           initial: () => buildShimmer(screenHeight, screenWidth),
           success: (model, pointModel, ) {

@@ -6,7 +6,8 @@ class CustomTextFieldAuth extends StatelessWidget {
   final String title;
   final int? maxLength;
   final TextEditingController? controller;
-  const CustomTextFieldAuth({super.key, required this.title, this.controller, this.maxLength});
+  final TextInputType? keyboardType;
+  const CustomTextFieldAuth({super.key, required this.title, this.controller, this.maxLength, this.keyboardType});
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,7 @@ class CustomTextFieldAuth extends StatelessWidget {
         return TextField(
           maxLength: maxLength,
           controller: controller,
+          keyboardType: keyboardType ?? TextInputType.text,
           style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w600, color: blackColor),
           obscureText: _obscureText,
           decoration: InputDecoration(

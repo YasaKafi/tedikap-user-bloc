@@ -68,6 +68,9 @@ class LoginPage extends StatelessWidget {
                     key: UniqueKey(),
                     title: field['hint'],
                     controller: field['controller'],
+                    keyboardType: field['label'] == 'Email'
+                        ? TextInputType.emailAddress
+                        : TextInputType.text,
                   ),
                   const SizedBox(height: Dimensions.marginSizeSmall),
                 ],
@@ -153,7 +156,7 @@ class LoginPage extends StatelessWidget {
                             fontSize: 18,
                             widget: LoadingAnimationWidget.staggeredDotsWave(
                               color: baseColor,
-                              size: 45,
+                              size: 40,
                             ),
                           );
                         },

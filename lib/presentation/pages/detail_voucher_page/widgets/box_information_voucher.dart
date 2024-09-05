@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../common/dimensions.dart';
@@ -9,7 +7,7 @@ import 'custom_bottom_sheet_information_voucher.dart';
 
 
 class ListBoxInformationVoucher extends StatelessWidget {
-  ListBoxInformationVoucher({
+  const ListBoxInformationVoucher({
     super.key,
     required this.screenWidth,
     required this.title,
@@ -32,7 +30,7 @@ class ListBoxInformationVoucher extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
+          SizedBox(
               width: screenWidth,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -40,34 +38,29 @@ class ListBoxInformationVoucher extends StatelessWidget {
                   Row(
                     children: [
                       SvgPicture.asset(icon, height: 32, width: 32,),
-                      SizedBox(
+                      const SizedBox(
                         width: Dimensions.marginSizeLarge,
                       ),
                       Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Flexible(child: Text(title, style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w600, color: blackColor))),
-                                SizedBox(
-                                  height: 3,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Flexible(child: Text(title, style: txtSecondaryTitle.copyWith(fontWeight: FontWeight.w600, color: blackColor))),
+                              const SizedBox(
+                                height: 3,
+                              ),
+                              Text(subtitle, style: txtSecondarySubTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor90),
                                 ),
-                                Container(
-
-                                  child: Text(subtitle, style: txtSecondarySubTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor90),
-                                    ),
-                                ),
-                              ],
-                            ),
+                            ],
                           ),
                         ],
                       ),
                     ],
                   ),
-                  Icon(Icons.arrow_forward_ios, size: 20, color: grey,)
+                  const Icon(Icons.arrow_forward_ios, size: 20, color: grey,)
                 ],
               )),
         ],
@@ -77,7 +70,7 @@ class ListBoxInformationVoucher extends StatelessWidget {
 
   void _showCustomBottomSheet(BuildContext context) {
     showModalBottomSheet(
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
@@ -85,7 +78,7 @@ class ListBoxInformationVoucher extends StatelessWidget {
       ),
       context: context,
       builder: (BuildContext context) {
-        return CustomBottomSheetInformationVoucher(
+        return const CustomBottomSheetInformationVoucher(
           title: 'Syarat & Ketentuan Voucher',
           contentList: ['1. This is the content of the custom bottom sheet.','2. This is the content of the custom bottom sheet', '3. This is the content of the custom bottom sheet' ],
         );

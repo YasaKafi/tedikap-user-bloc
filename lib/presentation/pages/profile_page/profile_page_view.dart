@@ -10,7 +10,7 @@ import 'bloc/profile_bloc.dart';
 
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({super.key});
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -37,7 +37,6 @@ class _ProfilePageState extends State<ProfilePage> {
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) async {
-        print('onPopInvoked didPop? $didPop');
         if (didPop == false) {
           final shouldPop = await onShowAlertDialog(
             context,

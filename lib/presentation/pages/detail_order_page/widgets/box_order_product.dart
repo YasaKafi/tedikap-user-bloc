@@ -9,7 +9,6 @@ import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/bloc/deta
 import '../../../../../common/constant.dart';
 import '../../../../../common/dimensions.dart';
 import '../../../../../common/theme.dart';
-import '../../../../data/models/response/cart_item_reward_response_model.dart';
 import '../../../../data/repository/tedikap_repository.dart';
 
 class BoxProductOrder extends StatelessWidget {
@@ -61,13 +60,13 @@ class BoxProductOrder extends StatelessWidget {
       ),
       width: screenWidth,
       child: Padding(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: Dimensions.paddingSizeLarge,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Text(
@@ -75,7 +74,7 @@ class BoxProductOrder extends StatelessWidget {
               style: txtPrimaryTitle.copyWith(
                   fontWeight: FontWeight.w600, color: blackColor),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             BlocBuilder<DetailOrderBloc, DetailOrderState>(
@@ -119,7 +118,7 @@ class BoxProductOrder extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 15,
                                     ),
                                     Expanded(
@@ -148,18 +147,18 @@ class BoxProductOrder extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              detailOrderItem.note == null ? SizedBox() :
+                              detailOrderItem.note == null ? const SizedBox() :
                               Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Container(
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       color: greybgNote,
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(8)),
                                     ),
                                     width: screenWidth,
-                                    padding: EdgeInsets.symmetric(
+                                    padding: const EdgeInsets.symmetric(
                                         vertical: Dimensions.paddingSizeDefault,
                                         horizontal: Dimensions
                                             .paddingSizeDefault),
@@ -172,7 +171,7 @@ class BoxProductOrder extends StatelessWidget {
                                           width: 18,
                                           height: 18,
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 10,
                                         ),
                                         Expanded(
@@ -189,7 +188,7 @@ class BoxProductOrder extends StatelessWidget {
                                   )
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 15,
                               ),
                               Row(
@@ -206,7 +205,7 @@ class BoxProductOrder extends StatelessWidget {
                                           color: blackColor)),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                             ],
@@ -240,7 +239,7 @@ class BoxProductOrder extends StatelessWidget {
                                     ),
                                   ),
 
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 15,
                                   ),
                                   Expanded(
@@ -269,21 +268,21 @@ class BoxProductOrder extends StatelessWidget {
                                   )
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
-                              detailOrderItemReward.note == null ? SizedBox() :
+                              detailOrderItemReward.note == null ? const SizedBox() :
                               Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Container(
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       color: greybgNote,
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(8)),
                                     ),
                                     width: screenWidth,
-                                    padding: EdgeInsets.symmetric(
+                                    padding: const EdgeInsets.symmetric(
                                         vertical: Dimensions.paddingSizeDefault,
                                         horizontal: Dimensions
                                             .paddingSizeDefault),
@@ -296,7 +295,7 @@ class BoxProductOrder extends StatelessWidget {
                                           width: 18,
                                           height: 18,
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 10,
                                         ),
                                         Expanded(
@@ -313,7 +312,7 @@ class BoxProductOrder extends StatelessWidget {
                                   )
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               Row(
@@ -336,7 +335,7 @@ class BoxProductOrder extends StatelessWidget {
                                           color: blackColor)),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                             ],
@@ -344,7 +343,7 @@ class BoxProductOrder extends StatelessWidget {
                         }),
                       );
                     } else {
-                      return Center(child: Text('No data available'));
+                      return const Center(child: Text('No data available'));
                     }
                   },
                   error: (message) => Center(child: Text(message!)),

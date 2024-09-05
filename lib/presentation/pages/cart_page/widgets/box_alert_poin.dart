@@ -44,7 +44,6 @@ class BoxAlertPoin extends StatelessWidget {
 
 class _buildAlertGetPoint extends StatelessWidget {
   const _buildAlertGetPoint({
-    super.key,
     required this.screenWidth,
   });
 

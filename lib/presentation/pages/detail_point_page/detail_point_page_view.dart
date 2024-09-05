@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../../common/theme.dart';
 
 class DetailPointPage extends StatelessWidget {
-  const DetailPointPage({Key? key}) : super(key: key);
+  const DetailPointPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -59,15 +59,15 @@ class DetailPointPage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   width: screenWidth,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('Pengumpulan Tedikap Poin', style:  txtPrimaryTitle.copyWith(fontWeight: FontWeight.w600, color: primaryColor)),
-                      SizedBox(height: 10),
-                      Padding(padding: EdgeInsets.only(left: 10), child: Text('1. Dapatkan 1 Tedikap Poin untuk setiap transaksi sebesar Rp3.000 dan berlaku kelipatannya. Contoh: Transaksi sebesar Rp35.000 akan mendapatkan 3 Tedikap Poin; transaksi sebesar Rp51.000 akan mendapatkan 5 Tedikap Poin.', style: textStyleTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor))),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 10),
+                      Padding(padding: const EdgeInsets.only(left: 10), child: Text('1. Dapatkan 1 Tedikap Poin untuk setiap transaksi sebesar Rp3.000 dan berlaku kelipatannya. Contoh: Transaksi sebesar Rp35.000 akan mendapatkan 3 Tedikap Poin; transaksi sebesar Rp51.000 akan mendapatkan 5 Tedikap Poin.', style: textStyleTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor))),
+                      const SizedBox(height: 5),
                     ],
                   ),
 
@@ -79,15 +79,15 @@ class DetailPointPage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   width: screenWidth,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('Penukaran Tedikap Poin', style: txtPrimaryTitle.copyWith(fontWeight: FontWeight.w600, color: primaryColor)),
-                      SizedBox(height: 10),
-                      Padding(padding: EdgeInsets.only(left: 10), child: Text('1. Dapatkan 1 Tedikap Poin untuk setiap transaksi sebesar Rp3.000 dan berlaku kelipatannya. Contoh: Transaksi sebesar Rp35.000 akan mendapatkan 3 Tedikap Poin; transaksi sebesar Rp51.000 akan mendapatkan 5 Tedikap Poin.', style: textStyleTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor))),
-                      SizedBox(height: 5),],
+                      const SizedBox(height: 10),
+                      Padding(padding: const EdgeInsets.only(left: 10), child: Text('1. Dapatkan 1 Tedikap Poin untuk setiap transaksi sebesar Rp3.000 dan berlaku kelipatannya. Contoh: Transaksi sebesar Rp35.000 akan mendapatkan 3 Tedikap Poin; transaksi sebesar Rp51.000 akan mendapatkan 5 Tedikap Poin.', style: textStyleTitle.copyWith(fontWeight: FontWeight.w500, color: blackColor))),
+                      const SizedBox(height: 5),],
                   ),
 
 

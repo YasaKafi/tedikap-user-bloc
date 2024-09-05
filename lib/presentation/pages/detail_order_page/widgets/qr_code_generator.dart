@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:path_provider/path_provider.dart';
@@ -15,9 +13,9 @@ import 'package:share_plus/share_plus.dart';
 
 class QRCodeGeneratorPage extends StatefulWidget {
 
-  String? qrData;
+  final String? qrData;
 
-  QRCodeGeneratorPage({super.key, required this.qrData});
+  const QRCodeGeneratorPage({super.key, required this.qrData});
   @override
   _QRCodeGeneratorPageState createState() => _QRCodeGeneratorPageState();
 }
@@ -27,7 +25,7 @@ class _QRCodeGeneratorPageState extends State<QRCodeGeneratorPage> {
   // Data QR Anda
   Color baseColor = Colors.white;
   Color blackColor = Colors.black;
-  TextStyle txtPrimaryTitle = TextStyle(fontSize: 16, fontWeight: FontWeight.w600);
+  TextStyle txtPrimaryTitle = const TextStyle(fontSize: 16, fontWeight: FontWeight.w600);
 
   Future<void> _captureAndSaveQRCode() async {
     try {
@@ -49,12 +47,12 @@ class _QRCodeGeneratorPageState extends State<QRCodeGeneratorPage> {
         final result = await ImageGallerySaver.saveImage(pngBytes);
         if (result != null && result["isSuccess"]) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("QR Code successfully saved to gallery!")),
+            const SnackBar(content: Text("QR Code successfully saved to gallery!")),
           );
         }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Storage permission not granted")),
+          const SnackBar(content: Text("Storage permission not granted")),
         );
       }
 
@@ -110,7 +108,7 @@ class _QRCodeGeneratorPageState extends State<QRCodeGeneratorPage> {
       title: 'Show the QR Code to the cashier',
       image: RepaintBoundary(
         key: globalKey,
-        child: Container(
+        child: SizedBox(
           width: 200,
           height: 200,
           child: QrImageView(

@@ -272,8 +272,6 @@ class _NotificationPageState extends State<NotificationPage> {
                         orElse: () {
                       return const SizedBox();
                     }, success: (model, isInfo, isVoucher, startDate, endDate) {
-                      print('INI BOOL IS INFO  $isInfo');
-                      print('VALUE STATE NOW  $state');
                       String startDateText = DateFormat('yyyy-MM-dd')
                           .format(DateTime.now().subtract(const Duration(days: 365)));
                       String endDateText =

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
-import 'package:qr_flutter/qr_flutter.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/data/repository/tedikap_repository.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/bloc/detail_order_bloc.dart';
@@ -15,9 +13,9 @@ import '../../../../../common/theme.dart';
 
 class BoxInfoStatus extends StatelessWidget {
   const BoxInfoStatus({
-    Key? key,
+    super.key,
     required this.screenWidth,
-  }) : super(key: key);
+  });
 
   final double screenWidth;
 
@@ -60,7 +58,7 @@ class BoxInfoStatus extends StatelessWidget {
       ),
       width: screenWidth,
       child: Padding(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: Dimensions.paddingSizeLarge,
           vertical: Dimensions.paddingSizeDefault,
         ),
@@ -98,7 +96,7 @@ class BoxInfoStatus extends StatelessWidget {
                       );
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   BlocBuilder<DetailOrderBloc, DetailOrderState>(
@@ -129,7 +127,7 @@ class BoxInfoStatus extends StatelessWidget {
                       );
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
@@ -154,7 +152,7 @@ class BoxInfoStatus extends StatelessWidget {
                               if (orderId != null) {
                                 copyToClipboard(orderId);
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text('Order ID copied to clipboard')),
+                                  const SnackBar(content: Text('Order ID copied to clipboard')),
                                 );
                               }
                             },
@@ -183,7 +181,7 @@ class BoxInfoStatus extends StatelessWidget {
                                     );
                                   },
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 5,
                                 ),
                                 InkWell(
@@ -204,11 +202,11 @@ class BoxInfoStatus extends StatelessWidget {
                                     if (orderId != null) {
                                       copyToClipboard(orderId);
                                       ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text('Order ID copied to clipboard')),
+                                        const SnackBar(content: Text('Order ID copied to clipboard')),
                                       );
                                     }
                                   },
-                                  child: Icon(
+                                  child: const Icon(
                                     Icons.copy,
                                     size: 14,
                                     weight: 50,
@@ -221,7 +219,7 @@ class BoxInfoStatus extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   BlocBuilder<DetailOrderBloc, DetailOrderState>(
@@ -252,7 +250,7 @@ class BoxInfoStatus extends StatelessWidget {
                       );
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   BlocBuilder<DetailOrderBloc, DetailOrderState>(
