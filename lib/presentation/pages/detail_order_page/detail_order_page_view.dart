@@ -18,7 +18,7 @@ class DetailOrderPage extends StatefulWidget {
   final String? orderRewardId;
   final String? linkCheckout;
 
-  DetailOrderPage({Key? key, this.orderId, this.orderRewardId, this.linkCheckout}) : super(key: key);
+  const DetailOrderPage({super.key, this.orderId, this.orderRewardId, this.linkCheckout});
 
   @override
   _DetailOrderPageState createState() => _DetailOrderPageState();
@@ -131,17 +131,17 @@ class _DetailOrderPageState extends State<DetailOrderPage> with WidgetsBindingOb
                 child: Column(
                   children: [
                     BoxInfoStatus(screenWidth: screenWidth),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     BoxTimelinePickup(screenWidth: screenWidth),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     BoxProductOrder(screenWidth: screenWidth),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     BoxPaymentDetailOrder(screenWidth: screenWidth),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Visibility(
                       visible: widget.orderRewardId == null,
                         child: BoxKindOfPayment(screenWidth: screenWidth)),
-                    SizedBox(height: 80),
+                    const SizedBox(height: 80),
                   ],
                 ),
               ),

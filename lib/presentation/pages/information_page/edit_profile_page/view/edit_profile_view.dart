@@ -11,6 +11,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tedikap_user_bloc/common/constant.dart';
 import 'package:tedikap_user_bloc/data/models/response/current_user_response_model.dart';
+import 'package:tedikap_user_bloc/presentation/pages/cart_page/bloc/cart_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/information_page/edit_profile_page/bloc/edit_profile_bloc.dart';
 
 import '../../../../../common/dimensions.dart';
@@ -369,6 +370,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                           imageFile: fileToUpload,
                                         ),
                                       );
+                                  // context.read<CartBloc>().add(
+                                  //       const CartEvent.refreshState(),
+                                  //     );
                                 }
                               },
                             ),

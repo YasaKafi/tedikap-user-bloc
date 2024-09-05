@@ -80,7 +80,7 @@ class BoxInfoProduct extends StatelessWidget {
                       return _buildProductDetailContent(state, modelProduct, modelProductReward);
 
                     }
-                    return SizedBox();
+                    return const SizedBox();
                   },
                   error: (message) => buildLoadingShimmer(),
 

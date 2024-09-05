@@ -7,14 +7,14 @@ class CustomBottomSheetInformationVoucher extends StatelessWidget {
   final List<String> contentList;
   final String title;
 
-  CustomBottomSheetInformationVoucher({required this.title, required this.contentList});
+  const CustomBottomSheetInformationVoucher({super.key, required this.title, required this.contentList});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.symmetric(vertical: Dimensions.paddingSizeLarge, horizontal: Dimensions.paddingSizeLarge),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.symmetric(vertical: Dimensions.paddingSizeLarge, horizontal: Dimensions.paddingSizeLarge),
+      decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -26,7 +26,7 @@ class CustomBottomSheetInformationVoucher extends StatelessWidget {
             title,
             style: txtPrimaryTitle.copyWith(fontWeight: FontWeight.w600, color: blackColor),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Column(
             children: List.generate(contentList.length, (index) {
               return Text(

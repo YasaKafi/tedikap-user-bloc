@@ -112,7 +112,7 @@ class BoxCheckoutDetail extends StatelessWidget {
                                               icLogoPrimary,
                                               width: 24,
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 5,
                                             ),
                                             Text(

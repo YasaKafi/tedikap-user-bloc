@@ -14,7 +14,7 @@ import '../../../common/theme.dart';
 import '../voucher_page/widgets/alert_box_voucher.dart';
 
 class DetailVoucherPage extends StatelessWidget {
-  DetailVoucherPage({Key? key, this.voucherId}) : super(key: key);
+  const DetailVoucherPage({super.key, this.voucherId});
 
   final int? voucherId;
 
@@ -92,7 +92,7 @@ class DetailVoucherPage extends StatelessWidget {
                   ).format(int.parse(voucher.maxDiscount.toString()));
         
                   return Container(
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                         horizontal: Dimensions.paddingSizeLarge,
                         vertical: Dimensions.paddingSizeLarge),
                     width: screenWidth,
@@ -107,7 +107,7 @@ class DetailVoucherPage extends StatelessWidget {
                               mainAxisSize: MainAxisSize.min,
                               children: [AlertBox(screenWidth: screenWidth,)],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: Dimensions.marginSizeLarge,
                             ),
                             Column(
@@ -122,17 +122,17 @@ class DetailVoucherPage extends StatelessWidget {
                                   width: screenWidth,
                                   child: Column(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         width: screenWidth,
                                         child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(20),
                                             child: Image.network(
                                               TedikapApiRepository.getImagePromo + voucher.image!,
                                               height: 150,
                                               fit: BoxFit.fill,
-                                            ),
-                                            borderRadius: BorderRadius.circular(20)),
+                                            )),
                                       ),
-                                      SizedBox(height: 20),
+                                      const SizedBox(height: 20),
                                       Container(
                                         alignment: Alignment.centerLeft,
                                         width: screenWidth,
@@ -144,7 +144,7 @@ class DetailVoucherPage extends StatelessWidget {
                                         ),
                                       ),
                                       Container(
-                                        margin: EdgeInsets.only(top: 5),
+                                        margin: const EdgeInsets.only(top: 5),
                                         alignment: Alignment.centerLeft,
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -173,9 +173,9 @@ class DetailVoucherPage extends StatelessWidget {
                                         ),
                                       ),
                                       Container(
-                                        margin: EdgeInsets.only(top: 30, bottom: 10),
+                                        margin: const EdgeInsets.only(top: 30, bottom: 10),
                                         width: screenWidth,
-                                        child: Text('Expire pada ${formattedDate}',
+                                        child: Text('Expire pada $formattedDate',
                                             style: txtSecondarySubTitle.copyWith(
                                                 fontWeight: FontWeight.w600,
                                                 color: blackColor)),
@@ -185,7 +185,7 @@ class DetailVoucherPage extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                             ),
                             ListBoxInformationVoucher(
@@ -193,14 +193,14 @@ class DetailVoucherPage extends StatelessWidget {
                                 icon: icList,
                                 title: 'Syarat & Ketentuan',
                                 subtitle: 'Klik untuk melihat syarat & ketentuan'),
-                            SizedBox(
+                            const SizedBox(
                               height: 15,
                             ),
-                            Divider(
+                            const Divider(
                               height: 1,
                               color: grey,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 15,
                             ),
                             ListBoxInformationVoucher(
@@ -208,27 +208,27 @@ class DetailVoucherPage extends StatelessWidget {
                                 icon: icLamp,
                                 title: 'Cara Pakai Voucher',
                                 subtitle: 'Klik untuk melihat cara pemakaian voucher'),
-                            SizedBox(
+                            const SizedBox(
                               height: 15,
                             ),
-                            Divider(
+                            const Divider(
                               height: 1,
                               color: grey,
                             ),
         
-                            SizedBox(
+                            const SizedBox(
                               height: 15,
                             ),
                           ],
                         ),
                         CommonButton(width: screenWidth ,text: 'Pesan Sekarang', onPressed: (){
                           context.goNamed('dashboard', pathParameters: {'pageIndex': '1'});
-                        }, padding: EdgeInsets.symmetric(vertical: 15),)
+                        }, padding: const EdgeInsets.symmetric(vertical: 15),)
                       ],
                     ),
                   );
                 } else {
-                  return Center(child: Text('data detail not available'));
+                  return const Center(child: Text('data detail not available'));
                 }
               },
               error: (message) => Center(child: Text(message!)),

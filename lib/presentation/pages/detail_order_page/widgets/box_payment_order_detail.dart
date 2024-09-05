@@ -19,7 +19,7 @@ class BoxPaymentDetailOrder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: screenWidth,
-      padding: EdgeInsets.all(Dimensions.paddingSizeLarge),
+      padding: const EdgeInsets.all(Dimensions.paddingSizeLarge),
       decoration: BoxDecoration(
         color: baseColor,
         borderRadius: BorderRadius.circular(15),
@@ -29,7 +29,7 @@ class BoxPaymentDetailOrder extends StatelessWidget {
         children: [
           Text('Ringkasan Pembayaran', style: txtPrimaryTitle.copyWith(
               fontWeight: FontWeight.w600, color: blackColor)),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -71,7 +71,7 @@ class BoxPaymentDetailOrder extends StatelessWidget {
                         return Text('${order.totalPoint} Point', style: txtPrimarySubTitle.copyWith(
                             fontWeight: FontWeight.w500, color: blackColor));
                       } else {
-                        return Text('No data available');
+                        return const Text('No data available');
                       }
                     },
                     error: (message) => Text(message!),
@@ -80,7 +80,7 @@ class BoxPaymentDetailOrder extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           BlocBuilder<DetailOrderBloc, DetailOrderState>(
             builder: (context, state) {
               return state.when(
@@ -117,7 +117,7 @@ class BoxPaymentDetailOrder extends StatelessWidget {
                         children: [
                           Text('Diskon', style: txtPrimarySubTitle.copyWith(
                               fontWeight: FontWeight.w500, color: redMedium)),
-                          Text('- ${formattedDiscountCommon}', style: txtPrimarySubTitle.copyWith(
+                          Text('- $formattedDiscountCommon', style: txtPrimarySubTitle.copyWith(
                               fontWeight: FontWeight.w500, color: redMedium)),
                         ],
                       ),
@@ -130,9 +130,9 @@ class BoxPaymentDetailOrder extends StatelessWidget {
               );
             },
           ),
-          SizedBox(height: 20),
-          Divider(height: 1, color: grey),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
+          const Divider(height: 1, color: grey),
+          const SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -174,7 +174,7 @@ class BoxPaymentDetailOrder extends StatelessWidget {
                         return Text('${order.totalPoint} Point', style: txtPrimarySubTitle.copyWith(
                             fontWeight: FontWeight.w600, color: blackColor));
                       } else {
-                        return Text('No data available');
+                        return const Text('No data available');
                       }
                     },
                     error: (message) => Text(message!),

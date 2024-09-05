@@ -94,7 +94,7 @@ class VoucherCard extends StatelessWidget {
                               child: Container(
                                 decoration: BoxDecoration(
                                   color: isEligible ? null : grey.withOpacity(0.7),
-                                  borderRadius: BorderRadius.only(
+                                  borderRadius: const BorderRadius.only(
                                     topRight: Radius.circular(18),
                                     topLeft: Radius.circular(18),
                                   ),
@@ -256,7 +256,7 @@ class VoucherCard extends StatelessWidget {
                             },
                             child: Container(
                               decoration: BoxDecoration(
-                                color: isEligible ? primaryColor : grey,
+                                color: isEligible   ? primaryColor : grey,
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               padding: const EdgeInsets.symmetric(

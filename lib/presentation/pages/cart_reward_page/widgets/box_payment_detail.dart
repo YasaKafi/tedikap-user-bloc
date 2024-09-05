@@ -54,8 +54,8 @@ class BoxPaymentDetail extends StatelessWidget {
                               Row(
                                 children: [
                                   SvgPicture.asset(icLogoPrimary, width: 18,),
-                                  SizedBox(width: 5,),
-                                  Text('${itemCart!.totalPoints.toString()}',
+                                  const SizedBox(width: 5,),
+                                  Text(itemCart!.totalPoints.toString(),
                                       style: txtPrimarySubTitle.copyWith(
                                           fontWeight: FontWeight.w500, color: blackColor)),
                                 ],
@@ -82,7 +82,7 @@ class BoxPaymentDetail extends StatelessWidget {
                               Row(
                                 children: [
                                   SvgPicture.asset(icLogoPrimary, width: 18,),
-                                  SizedBox(width: 5,),
+                                  const SizedBox(width: 5,),
                                   Text('${itemCart.totalPoints}',
                                       style: txtPrimarySubTitle.copyWith(
                                           fontWeight: FontWeight.w600, color: blackColor)),

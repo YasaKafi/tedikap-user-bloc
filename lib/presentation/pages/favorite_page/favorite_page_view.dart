@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:tedikap_user_bloc/presentation/global_components/empty_state.dart';
+import 'package:tedikap_user_bloc/presentation/global_components/error_state.dart';
 import 'package:tedikap_user_bloc/presentation/pages/favorite_page/bloc/favorite_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/favorite_page/widgets/list_box_product_favorite.dart';
 
@@ -183,7 +184,7 @@ class _FavoritePageState extends State<FavoritePage> {
               success: (modelPost, modelFavorite) {
                 final itemFavorite = modelFavorite?.data;
                 if (itemFavorite == null || itemFavorite.isEmpty) {
-                  return _buildEmptyOrderState(context);
+                  return EmptyStateWidgetStatic.buildEmptyState(context, title: 'Nothing is in your wishlist', desc: 'Your wishlist is currently empty', icon: icFavoriteEmpty,);
                 } else {
                   return ListView.builder(
                     itemCount: itemFavorite.length,
@@ -213,7 +214,7 @@ class _FavoritePageState extends State<FavoritePage> {
                   );
                 }
               },
-              error: (message) => _buildErrorState(context, message!),
+              error: (message) =>  ErrorWidgetStatic.buildErrorState(context, message!),
             );
           },
         ),
@@ -221,67 +222,5 @@ class _FavoritePageState extends State<FavoritePage> {
     );
   }
 
-  Widget _buildErrorState(BuildContext context, String message) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SvgPicture.asset(icServerError, width: screenWidth * 0.5),
-          const SizedBox(height: 10),
-          SizedBox(
-            width: screenWidth * 0.7,
-            child: Text(
-              message,
-              style: txtPrimaryTitle.copyWith(
-                fontWeight: FontWeight.w500,
-                color: blackColor,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildEmptyOrderState(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SvgPicture.asset(icFavoriteEmpty, width: screenWidth * 0.5),
-          const SizedBox(height: 10),
-          SizedBox(
-            width: screenWidth * 0.8,
-            child: Column(
-              children: [
-                Text(
-                  'Nothing is in your wishlist',
-                  style: txtPrimaryTitle.copyWith(
-                    fontWeight: FontWeight.w500,
-                    color: blackColor,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  'Your wishlist is currently empty',
-                  style: txtSecondarySubTitle.copyWith(
-                    fontWeight: FontWeight.w400,
-                    color: blackColor,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
 

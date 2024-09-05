@@ -85,7 +85,7 @@ class BoxProductCheckout extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        item.note == null ? SizedBox() :
+        item.note == null ? const SizedBox() :
         Column(
           mainAxisSize: MainAxisSize.min,
           children: [

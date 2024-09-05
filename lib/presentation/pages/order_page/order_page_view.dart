@@ -42,7 +42,7 @@ class _OrderPageState extends State<OrderPage> {
     context
         .read<OrderBloc>()
         .add(const OrderEvent.getAllFilterOrder('history', '', '', ''));
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
 
   }
 
@@ -50,9 +50,8 @@ class _OrderPageState extends State<OrderPage> {
     context
         .read<OrderBloc>()
         .add(const OrderEvent.getAllFilterOrder('ongoing', '', '', ''));
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
   }
-
 
 
   @override
@@ -67,7 +66,6 @@ class _OrderPageState extends State<OrderPage> {
       child: PopScope(
         canPop: false,
         onPopInvoked: (didPop) async {
-          print('onPopInvoked didPop? $didPop');
           if (didPop == false) {
             final shouldPop = await onShowAlertDialog(
               context,
@@ -154,7 +152,7 @@ class _OrderPageState extends State<OrderPage> {
                 ),
                 Expanded(
                   child: TabBarView(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     children: [
                       Tab(
                         child: LiquidPullToRefresh(
@@ -163,7 +161,6 @@ class _OrderPageState extends State<OrderPage> {
                           borderWidth: 2,
                           showChildOpacityTransition: false,
                           onRefresh: () async {
-                            // Call your refresh method here
                             await _refreshDataOngoing(context);
                           },
                           child: Column(
@@ -204,11 +201,11 @@ class _OrderPageState extends State<OrderPage> {
                                           endDateReward) {
                                         if ((model?.orders == null ||
                                                 model?.orders?.isEmpty == true) && filterIndex == 0) {
-                                          return EmptyOrderWidget();
+                                          return const EmptyOrderWidget();
                                         } else if ((modelReward?.orders == null ||
                                             modelReward?.orders?.isEmpty ==
                                                 true) && filterIndex == 1) {
-                                          return EmptyOrderWidget();
+                                          return const EmptyOrderWidget();
 
                                         } else {
                                           return Expanded(
@@ -231,7 +228,6 @@ class _OrderPageState extends State<OrderPage> {
                                                   ).format(int.parse(order.totalPrice!
                                                       .toString()));
 
-                                                  print('VALUE DARI LINK INVOICE ${order.linkInvoice}');
 
                                                   return ListBoxMenuStatus(
                                                     rating: order.rating ?? 0,
@@ -286,7 +282,6 @@ class _OrderPageState extends State<OrderPage> {
                           borderWidth: 2,
                           showChildOpacityTransition: false,
                           onRefresh: () async {
-                            // Call your refresh method here
                             await _refreshDataHistory(context);
                           },
                           child: Stack(
@@ -321,7 +316,7 @@ class _OrderPageState extends State<OrderPage> {
                                         String startDateText =
                                             DateFormat('yyyy-MM-dd').format(
                                                 DateTime.now()
-                                                    .subtract(Duration(days: 365)));
+                                                    .subtract(const Duration(days: 365)));
                                         String endDateText =
                                             DateFormat('yyyy-MM-dd')
                                                 .format(DateTime.now());
@@ -329,7 +324,7 @@ class _OrderPageState extends State<OrderPage> {
                                         String startDateRewardText =
                                             DateFormat('yyyy-MM-dd').format(
                                                 DateTime.now()
-                                                    .subtract(Duration(days: 365)));
+                                                    .subtract(const Duration(days: 365)));
                                         String endDateRewardText =
                                             DateFormat('yyyy-MM-dd')
                                                 .format(DateTime.now());
@@ -405,7 +400,6 @@ class _OrderPageState extends State<OrderPage> {
                                   ),
                                   BlocListener<OrderBloc, OrderState>(
                                     listener: (context, state) {
-                                      print('Current state: $state');
                                       state.maybeWhen(
                                           orElse: () {},
                                           success: (model,
@@ -586,7 +580,7 @@ class _OrderPageState extends State<OrderPage> {
                                     child: Container(
                                       width: 80,
                                       height: 40,
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal: 8, vertical: 4),
                                       decoration: BoxDecoration(
                                           color: primaryColor,
@@ -596,7 +590,7 @@ class _OrderPageState extends State<OrderPage> {
                                           Container(
                                               width: 20,
                                               height: 20,
-                                              padding: EdgeInsets.symmetric(
+                                              padding: const EdgeInsets.symmetric(
                                                   horizontal: 3, vertical: 3),
                                               decoration: BoxDecoration(
                                                   color: baseColor,
@@ -608,7 +602,7 @@ class _OrderPageState extends State<OrderPage> {
                                                 height: 18,
                                                 color: primaryColor,
                                               )),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 7,
                                           ),
                                           Text(

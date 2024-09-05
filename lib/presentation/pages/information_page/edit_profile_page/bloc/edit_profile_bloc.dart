@@ -29,36 +29,6 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
       );
     });
 
-    // on<_DoEditProfile>((event, emit) async {
-    //   emit(const _Loading());
-    //   final result = await datasource.updateCurrentUser(
-    //     email: event.email,
-    //     gender: event.gender,
-    //     name: event.name,
-    //     phoneNumber: event.phoneNumber,
-    //     imageFile: event.imageFile,
-    //   );
-    //   await result.fold(
-    //         (l) async => emit(_Error(l)),
-    //         (r) async {
-    //       final resultGetUser = await datasource.getCurrentUser();
-    //       final getCurrentUser = resultGetUser.fold((l) => null, (success) => success);
-    //
-    //       if (getCurrentUser != null) {
-    //         emit(_Loaded(
-    //           user: getCurrentUser,
-    //           selectedOption: getCurrentUser.data!.gender!,
-    //           imagePath: null,
-    //           modelEdit: r,
-    //         ));
-    //
-    //         event.context!.read<ProfileBloc>().add(const ProfileEvent.getUser());
-    //       } else {
-    //         emit(const _Error('Failed to get updated user data'));
-    //       }
-    //     },
-    //   );
-    // });
 
     on<_DoEditProfile>((event, emit) async {
       final currentState = state;

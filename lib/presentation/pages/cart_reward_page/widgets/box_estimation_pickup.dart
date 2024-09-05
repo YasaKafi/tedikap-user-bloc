@@ -152,7 +152,7 @@ class BoxEstimationPickup extends StatelessWidget {
 
                                                       // Konversi endOrder1 menjadi DateTime dan tambahkan 1 menit
                                                       DateTime parsedEndOrder1 = DateFormat("HH.mm").parse(endOrder1!);
-                                                      String endOrder1PlusOne = DateFormat("HH.mm").format(parsedEndOrder1.add(Duration(minutes: 1)));
+                                                      String endOrder1PlusOne = DateFormat("HH.mm").format(parsedEndOrder1.add(const Duration(minutes: 1)));
 
                                                       _onAlertButtonsPressed(context,
                                                           title: 'Pick-Up Schedule Information',
