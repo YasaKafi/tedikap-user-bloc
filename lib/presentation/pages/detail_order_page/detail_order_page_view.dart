@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/bloc/detail_order_bloc.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/widgets/box_kind_of_payment.dart';
 import 'package:tedikap_user_bloc/presentation/pages/detail_order_page/widgets/box_order_product.dart';
@@ -118,8 +119,11 @@ class _DetailOrderPageState extends State<DetailOrderPage> with WidgetsBindingOb
       ),
       body: Stack(
         children: [
-          RefreshIndicator(
+          LiquidPullToRefresh(
+            backgroundColor: baseColor,
             color: primaryColor,
+            borderWidth: 2,
+            showChildOpacityTransition: false,
             onRefresh: _refreshData,
             child: SingleChildScrollView(
               child: Padding(

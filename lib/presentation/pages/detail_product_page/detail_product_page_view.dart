@@ -177,6 +177,9 @@ class _DetailProductPageState extends State<DetailProductPage> {
                             return buildInkWellFavorite(context, modelCartItem,
                                 modelCartItemReward, modelProduct);
                           }
+                          if (widget.cartItemRewardId != null || widget.productRewardId != null ){
+                            return const SizedBox();
+                          }
                           return buildLoadingShimmer();
                         },
                         success: (

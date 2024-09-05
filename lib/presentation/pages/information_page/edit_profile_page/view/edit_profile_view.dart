@@ -66,328 +66,337 @@ class _EditProfilePageState extends State<EditProfilePage> {
     print('VALUE BOOL DARI IS SNACKBARSHOWN $isSnackBarShown');
     print('VALUE BOOL DARI IS FROM CART ${widget.isFromCart}');
     print('VALUE BOOL DARI IS FROM PROFILE ${widget.isFromProfile}');
-    return Scaffold(
-      backgroundColor: baseColor,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.only(
-                  top: 50, bottom: 10, left: 10, right: 10),
-              width: MediaQuery.of(context).size.width,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back_ios),
-                    onPressed: () {
-                      if (Navigator.canPop(context)) {
-                        context.pop();
-                      } else {
-                        context.goNamed('dashboard',
-                            pathParameters: {'pageIndex': '3'});
-                      }
-                    },
-                  ),
-                  Text(
-                    'Edit Profile',
-                    style: txtSecondaryHeader.copyWith(
-                        fontWeight: FontWeight.w600, color: blackColor),
-                  ),
-                  Container(
-                    width: 40,
-                    height: 5,
-                    decoration: const BoxDecoration(
-                      color: Colors.transparent,
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        print('onPopInvoked didPop? $didPop');
+        if (didPop == false) {
+          context.goNamed('dashboard', pathParameters: {'pageIndex': '3'});
+        }
+      },
+      child: Scaffold(
+        backgroundColor: baseColor,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.only(
+                    top: 50, bottom: 10, left: 10, right: 10),
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.arrow_back_ios),
+                      onPressed: () {
+                        if (Navigator.canPop(context)) {
+                          context.pop();
+                        } else {
+                          context.goNamed('dashboard',
+                              pathParameters: {'pageIndex': '3'});
+                        }
+                      },
                     ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 30),
-            Stack(
-              children: [
-                BlocBuilder<EditProfileBloc, EditProfileState>(
-                  buildWhen: (previous, current) => true,
-                  builder: (context, state) {
-                    return state.maybeWhen(
-                      orElse: () =>
-                          const Center(child: CircularProgressIndicator()),
-                      loading: (isPostEditProfile, modelUser, imagePath) {
-                        if (isPostEditProfile == true) {
-                          if (modelUser != null || imagePath != null) {
-                            return buildContainerAvatar(imagePath, modelUser);
-                          }
-                        }
-                        return _buildShimmerProfile();
-                      },
-                      loaded: (user, o, imagePath, modelEdit) {
-                        if (imagePath != null) {
-                          defaultImagePath.value = imagePath;
-                          if (!isSnackBarShown) {
-                            print(
-                                'VALUE BOOL DARI IS SNACKBARSHOWN DI DALAM IF ${!isSnackBarShown}');
-                            final file = i.File(imagePath);
-                            final fileSizeInBytes = file.lengthSync();
-                            var fileSizeInMB = fileSizeInBytes / (1024 * 1024);
-                            print('VALUE DARI IMAGE MB $fileSizeInMB');
-                            // Cek apakah ukuran file melebihi 2MB
-                            if (fileSizeInMB > 2) {
-                              // Tampilkan Snackbar hanya jika belum pernah ditampilkan
-                              SchedulerBinding.instance
-                                  .addPostFrameCallback((_) {
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(SnackBar(
-                                  content: Text(
-                                    'Ukuran file gambar melebihi 2MB. Silakan pilih file lain',
-                                    style: txtSecondaryTitle.copyWith(
-                                      fontWeight: FontWeight.w500,
-                                      color: baseColor,
-                                    ),
-                                  ),
-                                  backgroundColor: redMedium,
-                                ));
-                              });
-                              isSnackBarShown = false;
-                              return Container(
-                                  padding: const EdgeInsets.all(10),
-                                  decoration: const BoxDecoration(
-                                      shape: BoxShape.circle),
-                                  child: ClipOval(
-                                    child: Image.network(
-                                      TedikapApiRepository.getAvatarProfile +
-                                          user!.data!.avatar!,
-                                      width: 170,
-                                      height: 170,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ));
-                            }
-                          }
-                        }
-                        return buildContainerAvatar(imagePath, user);
-                      },
-                    );
-                  },
+                    Text(
+                      'Edit Profile',
+                      style: txtSecondaryHeader.copyWith(
+                          fontWeight: FontWeight.w600, color: blackColor),
+                    ),
+                    Container(
+                      width: 40,
+                      height: 5,
+                      decoration: const BoxDecoration(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                  ],
                 ),
-                Positioned(
-                  right: 0,
-                  top: 10,
-                  child: EditImageButton(
-                    disableChange: widget.isFromCart,
-                    onPressed: () {
-                      widget.isFromCart == true
-                          ? null
-                          : context.read<EditProfileBloc>().add(
-                                const EditProfileEvent.changeImage(),
-                              );
-                    },
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 30),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: Dimensions.marginSizeLarge,
-                right: Dimensions.marginSizeLarge,
-                top: 20,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              const SizedBox(height: 30),
+              Stack(
                 children: [
-                  Column(
-                    children: [
-                      BlocBuilder<EditProfileBloc, EditProfileState>(
-                        builder: (context, state) {
-                          return state.maybeWhen(
-                            orElse: () => _buildShimmerTextField(),
-                            loading: (isPostEditProfile, modelUser, imagePath) {
-                              if (isPostEditProfile) {
-                                return buildCustomTextFieldUsername();
-                              }
-
-                              return _buildShimmerTextField();
-                            },
-                            loaded: (user, n, imagePath, modelEdit) {
-                              if (isFirstLoad && user?.data != null) {
-                                // Initialize values only on first load
-                                usernameController.text =
-                                    user?.data?.name ?? '';
-                                emailController.text = user?.data?.email ?? '';
-                                phoneNumberController.text =
-                                    user?.data?.whatsappNumber ?? '';
-                                gender = user?.data?.gender ?? '';
-                                defaultImagePath.value =
-                                    imagePath ?? user?.data?.avatar ?? '';
-                                isFirstLoad = false;
-                              }
-
-                              return buildCustomTextFieldUsername();
-                            },
-                            error: (message) => Center(
-                              child: Text(
-                                message,
-                                style: txtSecondaryTitle.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    color: blackColor),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 20),
-                      BlocBuilder<EditProfileBloc, EditProfileState>(
-                        builder: (context, state) {
-                          return state.maybeWhen(
-                            orElse: () => _buildShimmerTextField(),
-                            loading: (isPostEditProfile, modelUser, imagePath) {
-                              if (isPostEditProfile) {
-                                return buildCustomTextFieldEmail();
-                              }
-                              return _buildShimmerTextField();
-                            },
-                            loaded: (user, n, o, modelEdit) {
-                              return buildCustomTextFieldEmail();
-                            },
-                            error: (message) => Center(
-                              child: Text(
-                                message,
-                                style: txtSecondaryTitle.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    color: blackColor),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 30),
-                      BlocBuilder<EditProfileBloc, EditProfileState>(
-                        builder: (context, state) {
-                          return state.maybeWhen(
-                            orElse: () => _buildShimmerTextField(),
-                            loading: (isPostEditProfile, modelUser, imagePath) {
-                              if (isPostEditProfile) {
-                                return buildCustomTextFieldWhatsApp(context);
-                              }
-                              return _buildShimmerTextField();
-                            },
-                            loaded: (user, n, o, modelEdit) {
-                              return buildCustomTextFieldWhatsApp(context);
-                            },
-                            error: (message) => Center(
-                              child: Text(
-                                message,
-                                style: txtSecondaryTitle.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    color: blackColor),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 30),
-                  BlocConsumer<EditProfileBloc, EditProfileState>(
-                    listener: (context, state) {
-                      state.maybeWhen(
-                        orElse: () {},
-                        error: (message) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                message,
-                                style: txtSecondaryTitle.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    color: blackColor),
-                              ),
-                              backgroundColor: redMedium,
-                            ),
-                          );
-                        },
-                        loaded: (user, o, n, modelEdit) {
-                          if (modelEdit?.message ==
-                              'User updated successfully') {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  modelEdit!.message!,
-                                  style: txtSecondaryTitle.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      color: blackColor),
-                                ),
-                                backgroundColor: greenMedium,
-                              ),
-                            );
-                            context.pushReplacementNamed('dashboard',
-                                pathParameters: {'pageIndex': '3'});
-                          }
-                        },
-                      );
-                    },
+                  BlocBuilder<EditProfileBloc, EditProfileState>(
+                    buildWhen: (previous, current) => true,
                     builder: (context, state) {
                       return state.maybeWhen(
                         orElse: () =>
                             const Center(child: CircularProgressIndicator()),
-                        loaded: (user, o, imagePath, modelEdit) => Container(
-                          margin: const EdgeInsets.only(
-                              top: Dimensions.marginSizeExtraLarge,
-                              bottom: Dimensions.marginSizeExtraLarge),
-                          child: SaveButton(
-                            onPressed: () {
-                              if (usernameController.text.isNotEmpty ||
-                                  emailController.text.isNotEmpty ||
-                                  phoneNumberController.text.isNotEmpty) {
-                                String? updatedName = usernameController.text;
-                                String? updatedEmail = emailController.text;
-                                String? updatedPhoneNumber =
-                                    phoneNumberController.text;
-                                String? updatedGender = o;
-
-                                File? fileToUpload;
-                                if (defaultImagePath.value.isNotEmpty &&
-                                    defaultImagePath.value.contains('/')) {
-                                  fileToUpload = File(defaultImagePath.value);
-                                }
-
-                                context.read<EditProfileBloc>().add(
-                                      EditProfileEvent.doEditProfile(
-                                        context: context,
-                                        name: updatedName,
-                                        email: updatedEmail,
-                                        gender: updatedGender,
-                                        phoneNumber: updatedPhoneNumber,
-                                        imageFile: fileToUpload,
-                                      ),
-                                    );
-                              }
-                            },
-                          ),
-                        ),
-                        loading: (isPostEditProfile, modelUser, imagePath) =>
-                            isPostEditProfile
-                                ? Container(
-                                    margin: const EdgeInsets.only(
-                                        top: Dimensions.marginSizeExtraLarge,
-                                        bottom:
-                                            Dimensions.marginSizeExtraLarge),
-                                    child: SaveButton(
-                                      onPressed: () {},
-                                      widget: LoadingAnimationWidget
-                                          .staggeredDotsWave(
+                        loading: (isPostEditProfile, modelUser, imagePath) {
+                          if (isPostEditProfile == true) {
+                            if (modelUser != null || imagePath != null) {
+                              return buildContainerAvatar(imagePath, modelUser);
+                            }
+                          }
+                          return _buildShimmerProfile();
+                        },
+                        loaded: (user, o, imagePath, modelEdit) {
+                          if (imagePath != null) {
+                            defaultImagePath.value = imagePath;
+                            if (!isSnackBarShown) {
+                              print(
+                                  'VALUE BOOL DARI IS SNACKBARSHOWN DI DALAM IF ${!isSnackBarShown}');
+                              final file = i.File(imagePath);
+                              final fileSizeInBytes = file.lengthSync();
+                              var fileSizeInMB = fileSizeInBytes / (1024 * 1024);
+                              print('VALUE DARI IMAGE MB $fileSizeInMB');
+                              // Cek apakah ukuran file melebihi 2MB
+                              if (fileSizeInMB > 2) {
+                                // Tampilkan Snackbar hanya jika belum pernah ditampilkan
+                                SchedulerBinding.instance
+                                    .addPostFrameCallback((_) {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                    content: Text(
+                                      'Ukuran file gambar melebihi 2MB. Silakan pilih file lain',
+                                      style: txtSecondaryTitle.copyWith(
+                                        fontWeight: FontWeight.w500,
                                         color: baseColor,
-                                        size: 30,
                                       ),
-                                    ))
-                                : Center(child: _buildShimmerTextField()),
+                                    ),
+                                    backgroundColor: redMedium,
+                                  ));
+                                });
+                                isSnackBarShown = false;
+                                return Container(
+                                    padding: const EdgeInsets.all(10),
+                                    decoration: const BoxDecoration(
+                                        shape: BoxShape.circle),
+                                    child: ClipOval(
+                                      child: Image.network(
+                                        TedikapApiRepository.getAvatarProfile +
+                                            user!.data!.avatar!,
+                                        width: 170,
+                                        height: 170,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ));
+                              }
+                            }
+                          }
+                          return buildContainerAvatar(imagePath, user);
+                        },
                       );
                     },
                   ),
+                  Positioned(
+                    right: 0,
+                    top: 10,
+                    child: EditImageButton(
+                      disableChange: widget.isFromCart,
+                      onPressed: () {
+                        widget.isFromCart == true
+                            ? null
+                            : context.read<EditProfileBloc>().add(
+                                  const EditProfileEvent.changeImage(),
+                                );
+                      },
+                    ),
+                  ),
                 ],
               ),
-            ),
-          ],
+              const SizedBox(height: 30),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: Dimensions.marginSizeLarge,
+                  right: Dimensions.marginSizeLarge,
+                  top: 20,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      children: [
+                        BlocBuilder<EditProfileBloc, EditProfileState>(
+                          builder: (context, state) {
+                            return state.maybeWhen(
+                              orElse: () => _buildShimmerTextField(),
+                              loading: (isPostEditProfile, modelUser, imagePath) {
+                                if (isPostEditProfile) {
+                                  return buildCustomTextFieldUsername();
+                                }
+
+                                return _buildShimmerTextField();
+                              },
+                              loaded: (user, n, imagePath, modelEdit) {
+                                if (isFirstLoad && user?.data != null) {
+                                  // Initialize values only on first load
+                                  usernameController.text =
+                                      user?.data?.name ?? '';
+                                  emailController.text = user?.data?.email ?? '';
+                                  phoneNumberController.text =
+                                      user?.data?.whatsappNumber ?? '';
+                                  gender = user?.data?.gender ?? '';
+                                  defaultImagePath.value =
+                                      imagePath ?? user?.data?.avatar ?? '';
+                                  isFirstLoad = false;
+                                }
+
+                                return buildCustomTextFieldUsername();
+                              },
+                              error: (message) => Center(
+                                child: Text(
+                                  message,
+                                  style: txtSecondaryTitle.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: blackColor),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 20),
+                        BlocBuilder<EditProfileBloc, EditProfileState>(
+                          builder: (context, state) {
+                            return state.maybeWhen(
+                              orElse: () => _buildShimmerTextField(),
+                              loading: (isPostEditProfile, modelUser, imagePath) {
+                                if (isPostEditProfile) {
+                                  return buildCustomTextFieldEmail();
+                                }
+                                return _buildShimmerTextField();
+                              },
+                              loaded: (user, n, o, modelEdit) {
+                                return buildCustomTextFieldEmail();
+                              },
+                              error: (message) => Center(
+                                child: Text(
+                                  message,
+                                  style: txtSecondaryTitle.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: blackColor),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 30),
+                        BlocBuilder<EditProfileBloc, EditProfileState>(
+                          builder: (context, state) {
+                            return state.maybeWhen(
+                              orElse: () => _buildShimmerTextField(),
+                              loading: (isPostEditProfile, modelUser, imagePath) {
+                                if (isPostEditProfile) {
+                                  return buildCustomTextFieldWhatsApp(context);
+                                }
+                                return _buildShimmerTextField();
+                              },
+                              loaded: (user, n, o, modelEdit) {
+                                return buildCustomTextFieldWhatsApp(context);
+                              },
+                              error: (message) => Center(
+                                child: Text(
+                                  message,
+                                  style: txtSecondaryTitle.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: blackColor),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 30),
+                    BlocConsumer<EditProfileBloc, EditProfileState>(
+                      listener: (context, state) {
+                        state.maybeWhen(
+                          orElse: () {},
+                          error: (message) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  message,
+                                  style: txtSecondaryTitle.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: blackColor),
+                                ),
+                                backgroundColor: redMedium,
+                              ),
+                            );
+                          },
+                          loaded: (user, o, n, modelEdit) {
+                            if (modelEdit?.message ==
+                                'User updated successfully') {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    modelEdit!.message!,
+                                    style: txtSecondaryTitle.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                        color: blackColor),
+                                  ),
+                                  backgroundColor: greenMedium,
+                                ),
+                              );
+                              context.pushReplacementNamed('dashboard',
+                                  pathParameters: {'pageIndex': '3'});
+                            }
+                          },
+                        );
+                      },
+                      builder: (context, state) {
+                        return state.maybeWhen(
+                          orElse: () =>
+                              const Center(child: CircularProgressIndicator()),
+                          loaded: (user, o, imagePath, modelEdit) => Container(
+                            margin: const EdgeInsets.only(
+                                top: Dimensions.marginSizeExtraLarge,
+                                bottom: Dimensions.marginSizeExtraLarge),
+                            child: SaveButton(
+                              onPressed: () {
+                                if (usernameController.text.isNotEmpty ||
+                                    emailController.text.isNotEmpty ||
+                                    phoneNumberController.text.isNotEmpty) {
+                                  String? updatedName = usernameController.text;
+                                  String? updatedEmail = emailController.text;
+                                  String? updatedPhoneNumber =
+                                      phoneNumberController.text;
+                                  String? updatedGender = o;
+
+                                  File? fileToUpload;
+                                  if (defaultImagePath.value.isNotEmpty &&
+                                      defaultImagePath.value.contains('/')) {
+                                    fileToUpload = File(defaultImagePath.value);
+                                  }
+
+                                  context.read<EditProfileBloc>().add(
+                                        EditProfileEvent.doEditProfile(
+                                          context: context,
+                                          name: updatedName,
+                                          email: updatedEmail,
+                                          gender: updatedGender,
+                                          phoneNumber: updatedPhoneNumber,
+                                          imageFile: fileToUpload,
+                                        ),
+                                      );
+                                }
+                              },
+                            ),
+                          ),
+                          loading: (isPostEditProfile, modelUser, imagePath) =>
+                              isPostEditProfile
+                                  ? Container(
+                                      margin: const EdgeInsets.only(
+                                          top: Dimensions.marginSizeExtraLarge,
+                                          bottom:
+                                              Dimensions.marginSizeExtraLarge),
+                                      child: SaveButton(
+                                        onPressed: () {},
+                                        widget: LoadingAnimationWidget
+                                            .staggeredDotsWave(
+                                          color: baseColor,
+                                          size: 30,
+                                        ),
+                                      ))
+                                  : Center(child: _buildShimmerTextField()),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

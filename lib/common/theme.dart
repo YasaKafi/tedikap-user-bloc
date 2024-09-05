@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 String images = 'assets/image/';
 String svgImages = 'assets/svg/';
@@ -34,10 +35,16 @@ const Color greyWarning = Color(0xFFEBEBEB);
 const Color greybgNote = Color(0xFFF8F8F9);
 const Color greytxtNote = Color(0xFFABB3BD);
 
+
+
+// ********** UPDATE SYSTEM **********
+void deviceOrientation() {
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
+}
+
 // ********** UPDATE TEXT STYLE  **********
-
-
-// Menentukan ukuran font berdasarkan DPI
 
 const TextStyle txtHeadingTitleAuth = TextStyle(
   fontFamily: 'Poppins',

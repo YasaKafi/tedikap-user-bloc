@@ -213,7 +213,19 @@ class BoxEstimationPickup extends StatelessWidget {
                                             );
                                           }
                                         },
-                                        loading: () {
+                                        loading: (isPatchQTyLoading, cartModel) {
+                                          if (isPatchQTyLoading){
+                                            final itemCart = cartModel?.cart
+                                                ?.schedulePickup;
+                                            if (itemCart != null) {
+                                              return Text(
+                                                itemCart,
+                                                style: txtPrimaryTitle.copyWith(
+                                                    fontWeight: FontWeight.w600,
+                                                    color: blackColor),
+                                              );
+                                            }
+                                          }
                                           return Text(
                                             'Loading...',
                                             style: txtPrimaryTitle.copyWith(

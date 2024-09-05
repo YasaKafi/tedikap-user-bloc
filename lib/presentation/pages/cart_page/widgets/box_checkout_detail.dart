@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:tedikap_user_bloc/data/models/response/cart_response_model.dart';
 import 'package:tedikap_user_bloc/presentation/pages/cart_page/bloc/cart_bloc.dart';
 
 import '../../../../../common/dimensions.dart';
@@ -69,7 +70,16 @@ class BoxCheckoutDetail extends StatelessWidget {
               builder: (context, state) {
                 return state.when(
                   initial: () => buildShimmer(),
-                  loading: () => buildShimmer(),
+                  loading: (isPatchQTyLoading, cartModel) {
+                    // if (isPatchQTyLoading){
+                    //   if(cartModel != null && cartModel.cart != null){
+                    //     final itemCart = cartModel.cart!;
+                    //     return buildColumnBocCheckout(itemCart);
+                    //   }
+                    //
+                    // }
+                    return buildShimmer();
+                  },
                   success: (cartModel, modelQty, deleteModel, modelPostOrder,
                       modelPostPayment, orderId) {
                     if (cartModel == null || cartModel.cart == null) {
@@ -78,199 +88,7 @@ class BoxCheckoutDetail extends StatelessWidget {
                       return _buildEmptyCartState(context, screenWidth);
                     } else {
                       final itemCart = cartModel.cart!;
-                      return Column(
-                        children:
-                            List.generate(itemCart.cartItems!.length, (index) {
-                          var productItemsCheckout = itemCart.cartItems![index];
-                          final formattedTotalPriceItem =
-                              CurrencyFormatter.formatToCurrency(
-                                  productItemsCheckout.totalPrice!);
-
-                          return Column(
-                            children: [
-                              BoxProductCheckout(
-                                item: productItemsCheckout,
-                                screenWidth: screenWidth,
-                              ),
-                              BlocBuilder<CartBloc, CartState>(
-                                builder: (context, state) {
-                                  return Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      productItemsCheckout.stock == false
-                                          ? Container(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 10,
-                                                      vertical: 5),
-                                              decoration: BoxDecoration(
-                                                  color: redLight,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10)),
-                                              child: Text('Sold out',
-                                                  style: txtSecondarySubTitle
-                                                      .copyWith(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: redMedium)))
-                                          : Text(
-                                              formattedTotalPriceItem,
-                                              style: txtPrimaryTitle.copyWith(
-                                                  fontWeight: FontWeight.w600,
-                                                  color: blackColor),
-                                            ),
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          InkWell(
-                                            onTap: () {
-                                              context.goNamed(
-                                                'detail_product_common',
-                                                extra: productItemsCheckout.id!
-                                                    .toString(),
-                                                pathParameters: {
-                                                  'productId':
-                                                      productItemsCheckout
-                                                          .productId!
-                                                          .toString()
-                                                },
-                                              );
-                                            },
-                                            child: const Icon(
-                                              Icons.mode_edit_outlined,
-                                              size: 28,
-                                              color: navyColor,
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              _onAlertButtonsPressed(context,
-                                                  title: 'Hapus Item',
-                                                  titleStyle:
-                                                      txtPrimaryTitle.copyWith(
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color: blackColor),
-                                                  desc:
-                                                      'Apakah anda yakin ingin menghapus item ini?',
-                                                  descStyle: txtPrimarySubTitle
-                                                      .copyWith(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          color: blackColor),
-                                                  bgcolor: baseColor,
-                                                  onPressed: () {
-                                                context.read<CartBloc>().add(
-                                                    CartEvent.deleteItem(
-                                                        cartItem:
-                                                            productItemsCheckout
-                                                                .id));
-                                                Navigator.pop(context);
-                                              });
-                                            },
-                                            child: const Icon(
-                                              Icons.delete_forever_outlined,
-                                              size: 28,
-                                              color: navyColor,
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          Row(
-                                            children: [
-                                              InkWell(
-                                                onTap: () {
-                                                  productItemsCheckout.quantity! > 1 ?
-                                                  context.read<CartBloc>().add(
-                                                      CartEvent.patchQty(
-                                                          cartItem:
-                                                              productItemsCheckout
-                                                                  .id,
-                                                          action: 'decrement')) : null;
-                                                },
-                                                child:  Icon(
-                                                  Icons.remove_circle_outline,
-                                                  color: productItemsCheckout.quantity! > 1 ? navyColor : grey,
-                                                  size: 28,
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text(
-                                                productItemsCheckout.quantity
-                                                    .toString(),
-                                                style:
-                                                    txtSecondaryTitle.copyWith(
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        color: productItemsCheckout.stock ==
-                                                            true ? blackColor : grey),
-                                              ),
-                                              const SizedBox(
-                                                width: 10,
-                                              ),
-                                              InkWell(
-                                                onTap: () {
-                                                  productItemsCheckout.stock ==
-                                                          true
-                                                      ? context
-                                                          .read<CartBloc>()
-                                                          .add(CartEvent.patchQty(
-                                                              cartItem:
-                                                                  productItemsCheckout
-                                                                      .id,
-                                                              action:
-                                                                  'increment'))
-                                                      : null;
-                                                  productItemsCheckout.stock ==
-                                                          true
-                                                      ? Future.delayed(
-                                                          const Duration(
-                                                              milliseconds:
-                                                                  500),
-                                                          () => context
-                                                              .read<CartBloc>()
-                                                              .add(const CartEvent
-                                                                  .getCart()))
-                                                      : null;
-                                                },
-                                                child: Icon(
-                                                  Icons.add_circle,
-                                                  color: productItemsCheckout.stock ==
-                                                      true ? navyColor : grey,
-                                                  size: 28,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              const DottedDivider(
-                                color: grey,
-                                dashWidth: 8,
-                                dashSpace: 4,
-                                thickness: 2,
-                                width: double.infinity,
-                              ),
-                            ],
-                          );
-                        }),
-                      );
+                      return buildColumnBocCheckout(itemCart);
                     }
                   },
                   error: (message) => _buildErrorState(context, message!),
@@ -280,6 +98,165 @@ class BoxCheckoutDetail extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Column buildColumnBocCheckout(Cart itemCart) {
+    return Column(
+      children: List.generate(itemCart.cartItems!.length, (index) {
+        var productItemsCheckout = itemCart.cartItems![index];
+        final formattedTotalPriceItem = CurrencyFormatter.formatToCurrency(
+            productItemsCheckout.totalPrice!);
+
+        return Column(
+          children: [
+            BoxProductCheckout(
+              item: productItemsCheckout,
+              screenWidth: screenWidth,
+            ),
+            BlocBuilder<CartBloc, CartState>(
+              builder: (context, state) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    productItemsCheckout.stock == false
+                        ? Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 5),
+                            decoration: BoxDecoration(
+                                color: redLight,
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Text('Sold out',
+                                style: txtSecondarySubTitle.copyWith(
+                                    fontWeight: FontWeight.w500,
+                                    color: redMedium)))
+                        : Text(
+                            formattedTotalPriceItem,
+                            style: txtPrimaryTitle.copyWith(
+                                fontWeight: FontWeight.w600, color: blackColor),
+                          ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            context.goNamed(
+                              'detail_product_common',
+                              extra: productItemsCheckout.id!.toString(),
+                              pathParameters: {
+                                'productId':
+                                    productItemsCheckout.productId!.toString()
+                              },
+                            );
+                          },
+                          child: const Icon(
+                            Icons.mode_edit_outlined,
+                            size: 28,
+                            color: navyColor,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            _onAlertButtonsPressed(context,
+                                title: 'Hapus Item',
+                                titleStyle: txtPrimaryTitle.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: blackColor),
+                                desc:
+                                    'Apakah anda yakin ingin menghapus item ini?',
+                                descStyle: txtPrimarySubTitle.copyWith(
+                                    fontWeight: FontWeight.w400,
+                                    color: blackColor),
+                                bgcolor: baseColor, onPressed: () {
+                              context.read<CartBloc>().add(CartEvent.deleteItem(
+                                  cartItem: productItemsCheckout.id));
+                              Navigator.pop(context);
+                            });
+                          },
+                          child: const Icon(
+                            Icons.delete_forever_outlined,
+                            size: 28,
+                            color: navyColor,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                productItemsCheckout.quantity! > 1
+                                    ? context.read<CartBloc>().add(
+                                        CartEvent.patchQty(
+                                            cartItem: productItemsCheckout.id,
+                                            action: 'decrement'))
+                                    : null;
+                              },
+                              child: Icon(
+                                Icons.remove_circle_outline,
+                                color: productItemsCheckout.quantity! > 1
+                                    ? navyColor
+                                    : grey,
+                                size: 28,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              productItemsCheckout.quantity.toString(),
+                              style: txtSecondaryTitle.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: productItemsCheckout.stock == true
+                                      ? blackColor
+                                      : grey),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                productItemsCheckout.stock == true
+                                    ? context.read<CartBloc>().add(
+                                        CartEvent.patchQty(
+                                            cartItem: productItemsCheckout.id,
+                                            action: 'increment'))
+                                    : null;
+
+                              },
+                              child: Icon(
+                                Icons.add_circle,
+                                color: productItemsCheckout.stock == true
+                                    ? navyColor
+                                    : grey,
+                                size: 28,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                );
+              },
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const DottedDivider(
+              color: grey,
+              dashWidth: 8,
+              dashSpace: 4,
+              thickness: 2,
+              width: double.infinity,
+            ),
+          ],
+        );
+      }),
     );
   }
 

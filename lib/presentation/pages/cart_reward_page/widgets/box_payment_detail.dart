@@ -38,7 +38,7 @@ class BoxPaymentDetail extends StatelessWidget {
             builder: (context, state) {
               return state.when(
                   initial: () => buildShimmer(),
-                  loading: () => buildShimmer(),
+                  loading: (isPatchQTyLoading, cartModel) => buildShimmer(),
                   success: (cartModel,  modelQty, deleteModel, modelPostOrder, ){
                     if(cartModel != null){
                       final itemCart = cartModel.cart;

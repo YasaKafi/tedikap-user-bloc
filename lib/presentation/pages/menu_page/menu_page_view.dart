@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:tedikap_user_bloc/presentation/global_components/alert_dialog.dart';
 import 'package:tedikap_user_bloc/presentation/global_components/error_state.dart';
 import 'package:tedikap_user_bloc/presentation/pages/menu_page/bloc/menu_bloc.dart';
 
@@ -74,113 +76,142 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
 
     return DefaultTabController(
       length: 4,
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          elevation: 0,
-          flexibleSpace: BlocBuilder<MenuBloc, MenuState>(
+      child: PopScope(
+        canPop: false,
+        onPopInvoked: (didPop) async {
+          print('onPopInvoked didPop? $didPop');
+          if (didPop == false) {
+            final shouldPop = await onShowAlertDialog(
+              context,
+              title: 'Are you sure?',
+              desc: 'Do you want to exit the app?',
+              textBtn1: 'Cancel',
+              textBtn2: 'Exit',
+              bgColorBtn1: navyColor,
+              bgColorBtn2: redMedium,
+              titleStyle: txtPrimaryTitle.copyWith(
+                fontWeight: FontWeight.w600,
+                color: blackColor,
+              ),
+              descStyle: txtSecondarySubTitle.copyWith(
+                fontWeight: FontWeight.w400,
+                color: blackColor,
+              ),
+              icon: null,
+              onPressed: () => SystemNavigator.pop(),
+              bgColor: baseColor,
+            );
+            return shouldPop; // Return the result of the dialog
+          }
+        },
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            elevation: 0,
+            flexibleSpace: BlocBuilder<MenuBloc, MenuState>(
+              builder: (context, state) {
+                return CustomAppBar(
+                  screenHeight: screenHeight,
+                  screenWidth: screenWidth,
+                  onSearch: (query) {
+                    if (query.isNotEmpty) {
+                      context.read<MenuBloc>().add(MenuEvent.getFilterSearch(query));
+                    }
+                  },
+                  onClearSearch: () {
+                    context.read<MenuBloc>().add(const MenuEvent.getProduct());
+                  },
+                  searchController: searchController,
+                );
+              },
+            ),
+          ),
+          body: BlocBuilder<MenuBloc, MenuState>(
             builder: (context, state) {
-              return CustomAppBar(
-                screenHeight: screenHeight,
-                screenWidth: screenWidth,
-                onSearch: (query) {
-                  if (query.isNotEmpty) {
-                    context.read<MenuBloc>().add(MenuEvent.getFilterSearch(query));
-                  }
-                },
-                onClearSearch: () {
-                  context.read<MenuBloc>().add(const MenuEvent.getProduct());
-                },
-                searchController: searchController,
+              return Column(
+                children: [
+                  Container(
+                    height: screenHeight * 0.05,
+                    width: screenWidth,
+                    margin: const EdgeInsets.only(top: Dimensions.marginSizeSmall),
+                    child: BlocBuilder<MenuBloc, MenuState>(
+                      builder: (context, state) {
+                        return TabBar(
+                          controller: _tabController,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: Dimensions.paddingSizeLarge,
+                          ),
+                          dividerHeight: 2,
+                          dividerColor: grey,
+                          indicatorColor: blackColor,
+                          labelColor: blackColor,
+                          unselectedLabelColor: grey,
+                          onTap: (index) {
+                            if (searchController.text.isEmpty) { // Jika mode pencarian tidak aktif
+                              switch (index) {
+                                case 0:
+                                  context.read<MenuBloc>().add(MenuEvent.getFilterSearch(searchController.text));
+                                  break;
+                                case 1:
+                                  context.read<MenuBloc>().add(const MenuEvent.getFilterCategory('tea'));
+                                  break;
+                                case 2:
+                                  context.read<MenuBloc>().add(const MenuEvent.getFilterCategory('nontea'));
+                                  break;
+                                case 3:
+                                  context.read<MenuBloc>().add(const MenuEvent.getFilterCategory('yakult'));
+                                  break;
+                              }
+                            } else { // Jika mode pencarian aktif
+                              _tabController.index = 0; // Tetap di tab 'All'
+                            }
+                          },
+                          tabs: [
+                            Tab(
+                              child: Text('All',
+                                  style: textStyleTitle.copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      color: blackColor)),
+                            ),
+                            Tab(
+                              child: Text('Tea',
+                                  style: textStyleTitle.copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      color: blackColor)),
+                            ),
+                            Tab(
+                              child: Text('Non Tea',
+                                  style: textStyleTitle.copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      color: blackColor)),
+                            ),
+                            Tab(
+                              child: Text('Yakult',
+                                  style: textStyleTitle.copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      color: blackColor)),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child: TabBarView(
+                      physics:searchController.text.isEmpty ? AlwaysScrollableScrollPhysics() : NeverScrollableScrollPhysics(),
+                      controller: _tabController,
+                      children: [
+                        buildProductList(searchController.text),
+                        buildProductList(searchController.text),
+                        buildProductList(searchController.text),
+                        buildProductList(searchController.text),
+                      ],
+                    ),
+                  ),
+                ],
               );
             },
           ),
-        ),
-        body: BlocBuilder<MenuBloc, MenuState>(
-          builder: (context, state) {
-            return Column(
-              children: [
-                Container(
-                  height: screenHeight * 0.05,
-                  width: screenWidth,
-                  margin: const EdgeInsets.only(top: Dimensions.marginSizeSmall),
-                  child: BlocBuilder<MenuBloc, MenuState>(
-                    builder: (context, state) {
-                      return TabBar(
-                        controller: _tabController,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: Dimensions.paddingSizeLarge,
-                        ),
-                        dividerHeight: 2,
-                        dividerColor: grey,
-                        indicatorColor: blackColor,
-                        labelColor: blackColor,
-                        unselectedLabelColor: grey,
-                        onTap: (index) {
-                          if (searchController.text.isEmpty) { // Jika mode pencarian tidak aktif
-                            switch (index) {
-                              case 0:
-                                context.read<MenuBloc>().add(MenuEvent.getFilterSearch(searchController.text));
-                                break;
-                              case 1:
-                                context.read<MenuBloc>().add(const MenuEvent.getFilterCategory('tea'));
-                                break;
-                              case 2:
-                                context.read<MenuBloc>().add(const MenuEvent.getFilterCategory('nontea'));
-                                break;
-                              case 3:
-                                context.read<MenuBloc>().add(const MenuEvent.getFilterCategory('yakult'));
-                                break;
-                            }
-                          } else { // Jika mode pencarian aktif
-                            _tabController.index = 0; // Tetap di tab 'All'
-                          }
-                        },
-                        tabs: [
-                          Tab(
-                            child: Text('All',
-                                style: textStyleTitle.copyWith(
-                                    fontWeight: FontWeight.w500,
-                                    color: blackColor)),
-                          ),
-                          Tab(
-                            child: Text('Tea',
-                                style: textStyleTitle.copyWith(
-                                    fontWeight: FontWeight.w500,
-                                    color: blackColor)),
-                          ),
-                          Tab(
-                            child: Text('Non Tea',
-                                style: textStyleTitle.copyWith(
-                                    fontWeight: FontWeight.w500,
-                                    color: blackColor)),
-                          ),
-                          Tab(
-                            child: Text('Yakult',
-                                style: textStyleTitle.copyWith(
-                                    fontWeight: FontWeight.w500,
-                                    color: blackColor)),
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-                ),
-                Expanded(
-                  child: TabBarView(
-                    physics:searchController.text.isEmpty ? AlwaysScrollableScrollPhysics() : NeverScrollableScrollPhysics(),
-                    controller: _tabController,
-                    children: [
-                      buildProductList(searchController.text),
-                      buildProductList(searchController.text),
-                      buildProductList(searchController.text),
-                      buildProductList(searchController.text),
-                    ],
-                  ),
-                ),
-              ],
-            );
-          },
         ),
       ),
     );

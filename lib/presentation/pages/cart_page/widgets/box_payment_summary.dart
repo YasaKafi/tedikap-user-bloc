@@ -104,7 +104,7 @@ class BoxCheckoutSummary extends StatelessWidget {
                           builder: (context, state) {
                             return state.when(
                               initial: () => _buildShimmerEffect(context),
-                              loading: () => _buildShimmerEffect(context),
+                              loading: (isPatchQTyLoading, cartModel) => _buildShimmerEffect(context),
                               success: (cartModel, modelQty, deleteModel,
                                   modelPostOrder, modelPostPayment, orderId) {
                                 final itemCart = cartModel?.cart;
@@ -304,10 +304,11 @@ class BoxCheckoutSummary extends StatelessWidget {
                       builder: (context, state) {
                         return state.when(
                           initial: () => _buildShimmerEffect(context),
-                          loading: () => _buildShimmerEffect(context),
+                          loading: (isPatchQTyLoading, cartModel) {
+                            return _buildShimmerEffect(context);
+                          },
                           success: (cartModel, modelQty, deleteModel,
                               modelPostOrder, modelPostPayment, orderId) {
-
 
                             if (cartModel != null) {
                               final itemCart = cartModel.cart;

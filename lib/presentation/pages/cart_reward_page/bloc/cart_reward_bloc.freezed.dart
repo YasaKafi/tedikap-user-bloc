@@ -833,7 +833,9 @@ mixin _$CartRewardState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function(
+            bool isPatchQTyLoading, CartRewardResponseModel? cartModel)
+        loading,
     required TResult Function(
             CartRewardResponseModel? cartModel,
             PatchQtyResponseModel? patchQtyModel,
@@ -846,7 +848,9 @@ mixin _$CartRewardState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
+    TResult? Function(
+            bool isPatchQTyLoading, CartRewardResponseModel? cartModel)?
+        loading,
     TResult? Function(
             CartRewardResponseModel? cartModel,
             PatchQtyResponseModel? patchQtyModel,
@@ -859,7 +863,9 @@ mixin _$CartRewardState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(
+            bool isPatchQTyLoading, CartRewardResponseModel? cartModel)?
+        loading,
     TResult Function(
             CartRewardResponseModel? cartModel,
             PatchQtyResponseModel? patchQtyModel,
@@ -954,7 +960,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function(
+            bool isPatchQTyLoading, CartRewardResponseModel? cartModel)
+        loading,
     required TResult Function(
             CartRewardResponseModel? cartModel,
             PatchQtyResponseModel? patchQtyModel,
@@ -970,7 +978,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
+    TResult? Function(
+            bool isPatchQTyLoading, CartRewardResponseModel? cartModel)?
+        loading,
     TResult? Function(
             CartRewardResponseModel? cartModel,
             PatchQtyResponseModel? patchQtyModel,
@@ -986,7 +996,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(
+            bool isPatchQTyLoading, CartRewardResponseModel? cartModel)?
+        loading,
     TResult Function(
             CartRewardResponseModel? cartModel,
             PatchQtyResponseModel? patchQtyModel,
@@ -1049,6 +1061,8 @@ abstract class _$$LoadingImplCopyWith<$Res> {
   factory _$$LoadingImplCopyWith(
           _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
       __$$LoadingImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isPatchQTyLoading, CartRewardResponseModel? cartModel});
 }
 
 /// @nodoc
@@ -1058,32 +1072,69 @@ class __$$LoadingImplCopyWithImpl<$Res>
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isPatchQTyLoading = null,
+    Object? cartModel = freezed,
+  }) {
+    return _then(_$LoadingImpl(
+      isPatchQTyLoading: null == isPatchQTyLoading
+          ? _value.isPatchQTyLoading
+          : isPatchQTyLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      cartModel: freezed == cartModel
+          ? _value.cartModel
+          : cartModel // ignore: cast_nullable_to_non_nullable
+              as CartRewardResponseModel?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$LoadingImpl implements _Loading {
-  const _$LoadingImpl();
+  const _$LoadingImpl({this.isPatchQTyLoading = false, this.cartModel});
+
+  @override
+  @JsonKey()
+  final bool isPatchQTyLoading;
+  @override
+  final CartRewardResponseModel? cartModel;
 
   @override
   String toString() {
-    return 'CartRewardState.loading()';
+    return 'CartRewardState.loading(isPatchQTyLoading: $isPatchQTyLoading, cartModel: $cartModel)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadingImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$LoadingImpl &&
+            (identical(other.isPatchQTyLoading, isPatchQTyLoading) ||
+                other.isPatchQTyLoading == isPatchQTyLoading) &&
+            (identical(other.cartModel, cartModel) ||
+                other.cartModel == cartModel));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, isPatchQTyLoading, cartModel);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
+      __$$LoadingImplCopyWithImpl<_$LoadingImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function(
+            bool isPatchQTyLoading, CartRewardResponseModel? cartModel)
+        loading,
     required TResult Function(
             CartRewardResponseModel? cartModel,
             PatchQtyResponseModel? patchQtyModel,
@@ -1092,14 +1143,16 @@ class _$LoadingImpl implements _Loading {
         success,
     required TResult Function(String? message) error,
   }) {
-    return loading();
+    return loading(isPatchQTyLoading, cartModel);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
+    TResult? Function(
+            bool isPatchQTyLoading, CartRewardResponseModel? cartModel)?
+        loading,
     TResult? Function(
             CartRewardResponseModel? cartModel,
             PatchQtyResponseModel? patchQtyModel,
@@ -1108,14 +1161,16 @@ class _$LoadingImpl implements _Loading {
         success,
     TResult? Function(String? message)? error,
   }) {
-    return loading?.call();
+    return loading?.call(isPatchQTyLoading, cartModel);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(
+            bool isPatchQTyLoading, CartRewardResponseModel? cartModel)?
+        loading,
     TResult Function(
             CartRewardResponseModel? cartModel,
             PatchQtyResponseModel? patchQtyModel,
@@ -1126,7 +1181,7 @@ class _$LoadingImpl implements _Loading {
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading();
+      return loading(isPatchQTyLoading, cartModel);
     }
     return orElse();
   }
@@ -1170,7 +1225,15 @@ class _$LoadingImpl implements _Loading {
 }
 
 abstract class _Loading implements CartRewardState {
-  const factory _Loading() = _$LoadingImpl;
+  const factory _Loading(
+      {final bool isPatchQTyLoading,
+      final CartRewardResponseModel? cartModel}) = _$LoadingImpl;
+
+  bool get isPatchQTyLoading;
+  CartRewardResponseModel? get cartModel;
+  @JsonKey(ignore: true)
+  _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1275,7 +1338,9 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function(
+            bool isPatchQTyLoading, CartRewardResponseModel? cartModel)
+        loading,
     required TResult Function(
             CartRewardResponseModel? cartModel,
             PatchQtyResponseModel? patchQtyModel,
@@ -1291,7 +1356,9 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
+    TResult? Function(
+            bool isPatchQTyLoading, CartRewardResponseModel? cartModel)?
+        loading,
     TResult? Function(
             CartRewardResponseModel? cartModel,
             PatchQtyResponseModel? patchQtyModel,
@@ -1307,7 +1374,9 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(
+            bool isPatchQTyLoading, CartRewardResponseModel? cartModel)?
+        loading,
     TResult Function(
             CartRewardResponseModel? cartModel,
             PatchQtyResponseModel? patchQtyModel,
@@ -1443,7 +1512,9 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function(
+            bool isPatchQTyLoading, CartRewardResponseModel? cartModel)
+        loading,
     required TResult Function(
             CartRewardResponseModel? cartModel,
             PatchQtyResponseModel? patchQtyModel,
@@ -1459,7 +1530,9 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
+    TResult? Function(
+            bool isPatchQTyLoading, CartRewardResponseModel? cartModel)?
+        loading,
     TResult? Function(
             CartRewardResponseModel? cartModel,
             PatchQtyResponseModel? patchQtyModel,
@@ -1475,7 +1548,9 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(
+            bool isPatchQTyLoading, CartRewardResponseModel? cartModel)?
+        loading,
     TResult Function(
             CartRewardResponseModel? cartModel,
             PatchQtyResponseModel? patchQtyModel,

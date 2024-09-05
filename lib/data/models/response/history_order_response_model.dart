@@ -44,7 +44,7 @@ class Order {
   String? iconStatus;
   String? paymentChannel;
   bool? cartLength;
-  dynamic rating;
+  double? rating;
   String? linkInvoice;
   DateTime? createdAt;
   DateTime? updatedAt;
